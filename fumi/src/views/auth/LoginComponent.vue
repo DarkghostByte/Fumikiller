@@ -29,21 +29,21 @@
 .btnInicio{
     background-color: black; 
     border-radius: 45px; 
-    width:250px; 
-    height:90px; 
+    width:240px; 
+    height:80px; 
     color:aliceblue; 
-    font-size:55px; 
+    font-size:50px; 
     text-align: center;
     border: none;    
     transition: 2s;
 }
 .btnInicio:hover{
-    background-color:#fc5310;
+    background-color:#0F0F88;
     align-items: center;
     transform: scale(1.1);
     text-align: center;
-    height: 95px;
-    width: 255px;
+    height: 85px;
+    width: 245px;
     border: 1px,solid,black;
 }
 </style>
