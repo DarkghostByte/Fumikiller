@@ -1,32 +1,57 @@
 <template>
-    <div class="DivAzul">
+    
+    <div class="flex justify-center items-center h-screen bg-neutral-950">
+        <div class="w-1/2">
+            <div class="DivAzul">
+                <div class="DivNaranja">
+                    <h1 style="margin-top:15%;font-size: 60px; ">FUMI-KILLE'R</h1>
+                    <button class="btnInicio">INICIO</button>
+                </div>
+            </div>   
+            
+            
+        </div>
+    </div>
+
+
+
+
+<!--
+
+    <div class="w-10 h-10" style="background-color: black;">
+       
+        <div class="DivAzul">
+            <div class="DivNaranja">
+                <h1 style="margin-top:15%;font-size: 60px; ">FUMI-KILLE'R</h1>
+                <button class="btnInicio">INICIO</button>
+            </div>
+        </div>   
         
     </div>
-    <div class="DivNaranja">
-        <h1 style="margin-top:35%;font-size: 60px; ">FUMI-KILLE'R</h1>
-        <button class="btnInicio">INICIO</button>
-    </div>
+       -->
+    
+    
 </template>
 
 <style>
 .DivAzul{
-    margin-left:300px; 
-    margin-top: 30px; 
+    margin-left: -10%; 
+    margin-top: 2%; 
     border-radius: 25px;
-    width: 45%; height:90vh; 
+    width: 100%; height:90vh; 
     background-color:#0F0F88; 
 }
 .DivNaranja{
     position:absolute; 
     text-align: center; 
-    margin-left:625px; 
-    margin-top: -661px; 
+    margin-left: 20%;  
     border-radius: 25px; 
-    width: 600PX; height:90vh; 
+    width: 40%; height:90vh; 
     background-color:#FD5902; 
 
 }
 .btnInicio{
+    margin-top: 15%;
     background-color: black; 
     border-radius: 45px; 
     width:240px; 
