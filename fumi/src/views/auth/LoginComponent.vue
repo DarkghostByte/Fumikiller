@@ -5,7 +5,7 @@
             <div class="DivAzul">
                 <img v-bind:src="url+'img/logofk.png'" class="imgFk">               
                 <div class="DivNaranja">
-                    <h1 style="margin-top:15%;font-size: 60px; ">FUMI-KILLE'R</h1>
+                    <h1 style="margin-top:25%;font-size: 60px; ">FUMI-KILLE'R</h1>
                     <button class="btnInicio">INICIO</button>
                 </div>
             </div>   
@@ -20,7 +20,7 @@
 <!--
 
     <div class="w-10 h-10" style="background-color: black;">
-       
+
         <div class="DivAzul">
             <div class="DivNaranja">
                 <h1 style="margin-top:15%;font-size: 60px; ">FUMI-KILLE'R</h1>
@@ -29,13 +29,12 @@
         </div>   
         
     </div>
-       -->
-    
-    
+-->
 </template>
 
 <style>
 .DivAzul{
+    justify-content: center;
     margin-left: -10%; 
     margin-top: 2%; 
     border-radius: 25px;
@@ -52,7 +51,7 @@
 
 }
 .btnInicio{
-    margin-top: 15%;
+    margin-top: 10%;
     background-color: black; 
     border-radius: 45px; 
     width:220px; 
@@ -78,6 +77,7 @@
     height:470px; 
     position:absolute;
     margin-top: 5%;
+    margin-left: .7%;
 }
 </style>
 
