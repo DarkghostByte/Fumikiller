@@ -1,6 +1,6 @@
 <template>
     
-    <div class="flex justify-center items-center h-screen bg-neutral-950">
+    <div class="flex justify-center items-center h-screen bg-gray-200">
         <div class="w-1/2">
             <div class="DivAzul">
                 <img v-bind:src="url+'img/logofk.png'" class="imgFk">               
@@ -61,7 +61,7 @@
     font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     border: none;    
-    transition: 2s;
+    transition: 1s;
 }
 .btnInicio:hover{
     background-color:#0F0F88;
@@ -73,8 +73,8 @@
     border: 1px,solid,black;
 }
 .imgFk{
-    width:280px; 
-    height:470px; 
+    width:260px; 
+    height:450px; 
     position:absolute;
     margin-top: 5%;
     margin-left: .7%;
