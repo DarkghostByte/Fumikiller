@@ -45,6 +45,12 @@
                         @click="handleDelete()"
                         ><i class="fa fa-trash" aria-hidden="true"></i></el-button
                       >
+                      <el-button style="color:black"
+                        size="small"
+                        type="danger"
+                        @click="handleDelete()"
+                        >Ver Orden</el-button
+                      >
                     </template>
                   </el-table-column>
             </el-table>
