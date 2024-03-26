@@ -4,6 +4,7 @@ import LoginComponent from '@/views/auth/LoginComponent.vue'
 const adminRoutes = [
     {path: 'home', component: () => import('@/views/admin/home/AdminHomeComponent.vue')},
     {path: 'clients', component: () => import('@/views/admin/clients/AdminClientsComponent.vue')},
+    {path: 'clients/add-clients', component: () => import('@/views/admin/clients/AdminAddClientsComponent.vue')},
     {path: 'works', component: () => import('@/views/admin/works/AdminWorksComponent.vue')},
 ]
 
