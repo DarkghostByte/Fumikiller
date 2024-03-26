@@ -33,144 +33,144 @@
 
 
     </div>
-        <!-- TABLE DATA -->
-
+        <!-- TABLE INSERT -->
+        <!-- Primera Fila -->
         <div class="flex">
           <el-form :model="form" label-width="auto" style="max-width: 100%">
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-7">Nombres:</p>
+              <p class="px-20 ml-12 ">Apellido Paterno:</p>
+              <p class="px-5">Apellido Materno:</p>
+              <p class="px-20 pr-5">Nombre Comercial:</p>
+            </div>
+            
             <div class="flex">
-              <el-form-item label="Nombres: ">
-                <el-input v-model="form.name" 
+              <el-form-item >
+                <el-input v-model="form.name" class="px-5" 
                 placeholder="Ingresa sus nombres"/>
               </el-form-item>
-              <el-form-item label="Apellido paterno: ">
-                <el-input v-model="form.lastname1" 
-                placeholder="Ingresa su primer apellido"/>
+              <el-form-item >
+                <el-input v-model="form.lastname1" class="px-5"
+                placeholder="Ingresa su apellido paterno"/>
               </el-form-item>
-              <el-form-item label="Apellido materno: ">
-                <el-input v-model="form.lastname2" 
-                placeholder="Ingresa su segundo apellido"/>
+              <el-form-item >
+                <el-input v-model="form.lastname2" class="px-5"
+                placeholder="Ingresa su apellido materno"/>
               </el-form-item>
+              <el-form-item >
+                <el-input v-model="form.comercio" class="px-5"
+                placeholder="Ingresa el nombre del comercio"/>
+              </el-form-item>
+
+
             </div>
-
-            <el-form-item label="Nombre comercial: "
-            style="width: 50%">
-              <el-input v-model="form.comercio" 
-              placeholder="Ingresa el nombre del comercio"/>
-            </el-form-item>
-
-            <p>Domicilio</p>
-            <div class="flex">
-              <el-form-item label="Tipo de calle: ">
-                <el-input v-model="form.name" 
-                placeholder="Tipo de calle"/>
+            <!-- Segunda Fila -->
+            <p class="px-5">Domicilio:</p>
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-7">Tipo de Calle:</p>
+              <p class="px-12 ml-12 ">Domicilio:</p>
+              <p class="px-28 pr-">Codigo Postal:</p>
+              <p class="pr-5">Colonia:</p>
+            </div>
+            <div class="flex px-5" style="">
+              <el-select v-model="form.call" placeholder="Tipo de calle" class="w-20" style="width: 180px;" >
+                <el-option label="Av." value="Av." />
+                <el-option label="Calle" value="Calle" />
+                <el-option label="Callejón" value="Callejon" />
+              </el-select>
+              <el-form-item >
+                <el-input v-model="form.name1" class="px-10"
+                placeholder="Ingresa el domicilio"/>
               </el-form-item>
-              <el-form-item label="Domicilio: "
-              style="width: 60%">
-                <el-input v-model="form.name1" 
-                placeholder="Ingresa la colonia"/>
-              </el-form-item>
-              <el-form-item label="Codigo postal: ">
-                <el-input v-model="form.name" 
+              <el-form-item >
+                <el-input v-model="form.codpostal" class=""
                 placeholder="Ingresa el codigo postal"/>
               </el-form-item>
-            </div>
-            <div class="flex">
-              <el-form-item label="Colonia: "
-              style="width: 50%">
-                <el-select v-model="form.col" placeholder="Selecciona la  colonia">
+              <el-form-item >
+                <el-select v-model="form.col" placeholder="Selecciona la  colonia" class="px-10" style="width: 265px;" >
                   <el-option label="Primera de mayo" value="primerademayo" />
                   <el-option label="Madero" value="madero" />
                 </el-select>
               </el-form-item>
-              <el-form-item label="Cuidad: "
-              style="width: 50%">
+            </div>
+
+            <!-- Tercera Fila -->
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-7">Ciudad:</p>
+              <p class="px-24 ml-12 ">Tipo de lugar:</p>
+            </div>
+            <div class="flex">
+              <el-form-item class="px-5" style="width: 25%">
                 <el-select v-model="form.cui" placeholder="Selecciona la cuidad">
                   <el-option label="Nuevo Casas Grande" value="ncg" />
                   <el-option label="Casas Grandes" value="cg" />
                 </el-select>
               </el-form-item>
-              <el-form-item label="Tipo de lugar: "
-              style="width: 50%">
+              <el-form-item class="px-2" style="width: 25%">
                 <el-select v-model="form.lug" placeholder="Selecciona el tipo de lugar">
                   <el-option label="Restaurante" value="restaurante" />
                   <el-option label="Bodega" value="bodega" />
                 </el-select>
               </el-form-item>
             </div>
-
-            <el-form-item label="Descripcion: ">
-              <el-input v-model="form.desc" type="textarea" 
-              placeholder="Agrega una descripcion"/>
-            </el-form-item>
-
-            <el-form-item label="Como llegar: ">
-              <el-input v-model="form.lleg" type="textarea" 
-              placeholder="Agrega como llegar al domicilio"/>
-            </el-form-item>
-
+            <!-- Descripción Fila -->
+            <div class="px-5" > 
+              <p>Descripción:</p>
+              <el-form-item class="pt-4" >
+                <el-input v-model="form.desc" type="textarea" 
+                placeholder="Agrega una descripcion"/>
+              </el-form-item>
+            </div>
+            
+            <!-- Como llegar Fila -->
+            <div class="px-5">
+              <p>Como llegar:</p>
+              <el-form-item class="pt-5" >
+                <el-input v-model="form.lleg" type="textarea" 
+                placeholder="Agrega como llegar al domicilio"/>
+              </el-form-item>
+            </div>
+            
+            <!-- Sexta Fila -->
+            <p class="px-5">Domicilio:</p>
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-7">Numero de Celular:</p>
+              <p class="px-12">Numero Fijo:</p>
+            </div>
             <div class="flex">
-              <el-form-item label="Numero de celular: ">
+              <el-form-item class="px-5">
                 <el-input v-model="form.phone1" 
                 placeholder="Celular"/>
               </el-form-item>
-              <el-form-item label="Numero fijo: ">
+              <el-form-item class="px-3" >
                 <el-input v-model="form.phone2" 
                 placeholder="Celular"/>
               </el-form-item>
             </div>
 
+            <!-- Septima Fila -->
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-7">Forma de contacto:</p>
+              <p class="px-12">Especificar:</p>
+            </div>
+
             <div class="flex">
-              <el-form-item label="Forma de contacto: "
-              style="width: 30%">
-                <el-select v-model="form.contac" placeholder="Selecciona la  forma de contacto">
+              <el-form-item class="px-5" style="width: 25%">
+                <el-select v-model="form.contac" placeholder="Selecciona la  forma de contacto" class="">
                   <el-option label="Facebook" value="facebook" />
                   <el-option label="Barda" value="barda" />
                 </el-select>
               </el-form-item>
-              <el-form-item label="Especificar: ">
+              <el-form-item >
                 <el-input v-model="form.espe" 
-                placeholder="Especifica"/>
+                placeholder="Especificar"/>
               </el-form-item>
             </div>
             
-            <el-form-item>
-              <el-button type="success" @click="onSubmit" round plain>Crear</el-button>
-              <el-button type="success" round>Success</el-button>
-            </el-form-item>
-
-            <div class="mb-4">
-              <el-button>Default</el-button>
-              <el-button type="primary">Primary</el-button>
-              <el-button type="success">Success</el-button>
-              <el-button type="info">Info</el-button>
-              <el-button type="warning">Warning</el-button>
-              <el-button type="danger">Danger</el-button>
+            <div style="display:flex; justify-content: center;" class="">
+              <el-button class="w-40 h-16 mt-5" style="background-color:#0B1821; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
             </div>
-            <div class="mb-4">
-              <el-button round>Round</el-button>
-              <el-button type="primary" round>Primary</el-button>
-              <el-button type="success" round>Success</el-button>
-              <el-button type="info" round>Info</el-button>
-              <el-button type="warning" round>Warning</el-button>
-              <el-button type="danger" round>Danger</el-button>
-            </div>
-            <div class="mb-4">
-              <el-button plain>Plain</el-button>
-              <el-button type="primary" plain>Primary</el-button>
-              <el-button type="success" plain>Success</el-button>
-              <el-button type="info" plain>Info</el-button>
-              <el-button type="warning" plain>Warning</el-button>
-              <el-button type="danger" plain>Danger</el-button>
-            </div>
-            <div>
-              <el-button color="#626aef" :dark="isDark">Default</el-button>
-              <el-button color="#626aef" :dark="isDark" plain>Plain</el-button>
-          
-              <el-button color="#626aef" :dark="isDark" disabled>Disabled</el-button>
-              <el-button color="#626aef" :dark="isDark" disabled plain
-                >Disabled Plain</el-button
-              >
-            </div>
+            
           </el-form>
         </div>
         <!-- END TABLE DATA -->
@@ -190,6 +190,8 @@
                 lastname2:'',
                 comercio:'',
                 col:'',
+                call:'',
+                codpostal:'',
                 cui:'',
                 lug:'',
                 desc:'',
