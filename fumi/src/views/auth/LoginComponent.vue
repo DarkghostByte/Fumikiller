@@ -6,7 +6,7 @@
                 <img v-bind:src="url+'img/logofk.png'" class="imgFk">               
                 <div class="DivNaranja">
                     <h1 style="margin-top:25%;font-size: 60px; ">FUMI-KILLE'R</h1>
-                    <button class="btnInicio">INICIO</button>
+                    <router-link to="/admin/home" class="btnInicio">INICIO</router-link>
                 </div>
             </div>   
             
@@ -54,11 +54,10 @@
     margin-top: 10%;
     background-color: black; 
     border-radius: 45px; 
-    width:220px; 
-    height:75px; 
+    width:270px; 
+    height:9px; 
     color:aliceblue; 
     font-size:40px; 
-    font-family: Arial, Helvetica, sans-serif;
     text-align: center;
     border: none;    
     transition: 1s;
