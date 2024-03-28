@@ -7,6 +7,7 @@ const adminRoutes = [
     {path: 'clients/add-clients', component: () => import('@/views/admin/clients/AdminAddClientsComponent.vue')},
     {path: 'works', component: () => import('@/views/admin/works/AdminWorksComponent.vue')},
     {path: 'works/add-works', component: () => import('@/views/admin/works/AdminAddWorksComponent.vue')},
+    {path: 'works/complete-works', component: () => import('@/views/admin/works/AdminCompleteWorksComponent.vue')},
 
 ]
 

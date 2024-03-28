@@ -41,12 +41,14 @@
 
             <el-table-column label="">
               <template #default>
-                <el-button style="color:black"
+                <router-link to="/admin/works/complete-works" >
+                  <el-button style="color:black"
                   size="small"
-                  type="success"
+                  type="warning"
                   @click="handleDelete()"
-                  ><span class="material-symbols-outlined">visibility</span></el-button
+                  ><span class="material-symbols-outlined">priority</span></el-button
                 >
+                </router-link>
               </template>
             </el-table-column>
 
