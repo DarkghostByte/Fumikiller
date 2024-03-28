@@ -31,151 +31,134 @@
         </div>
         <!-- TABLE DATA -->
 
-        <div class="flex">
+        <div class="flex ml-5">
           <el-form :model="form" label-width="auto" style="max-width: 100%">
             
             <p>Cliente</p>
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-12">Nombre Comercial:</p>
+              <p class="px-20 pr-10">Nombres:</p>
+              <p class="px-20 ml-12 ">Apellido Paterno:</p>
+              <p class="px-5">Apellido Materno:</p>
+            </div>
 
-            <el-form-item label="Nombre comercial: "
-            style="width: 50%">
-              <el-input v-model="form.comercio" 
-              placeholder="Ingresa el nombre del comercio"/>
-            </el-form-item>
-
+            <!-- Primera Fila -->  
             <div class="flex">
-              <el-form-item label="Nombres: ">
+              <el-form-item class="ml-5" style="width: 25%">
+                <el-input v-model="form.comercio" 
+                placeholder="Ingresa el nombre del comercio"/>
+              </el-form-item>
+              <el-form-item class="px-8">
                 <el-input v-model="form.name" 
                 placeholder="Ingresa sus nombres"/>
               </el-form-item>
-              <el-form-item label="Apellido paterno: ">
+              <el-form-item class="px-6">
                 <el-input v-model="form.lastname1" 
                 placeholder="Ingresa su primer apellido"/>
               </el-form-item>
-              <el-form-item label="Apellido materno: ">
+              <el-form-item class="px-5">
                 <el-input v-model="form.lastname2" 
                 placeholder="Ingresa su segundo apellido"/>
               </el-form-item>
             </div>
 
-            
-
+            <!-- Segunda Fila --> 
             <p>Problematica</p>
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-8">Plaga #1:</p>
+              <p class="px-36 pr-7">Plaga #2:</p>
+            </div>
 
-            <div class="flex">
-              <el-form-item label="Plaga#1: "
-              style="width: 50%">
-                <el-select v-model="form.plaga1" placeholder="Selecciona la  colonia">
+            <div class="flex" style="width:100%;">
+              <el-form-item class="px-5" style="width: 25%" >
+                <el-select v-model="form.plaga1" placeholder="Selecciona la plaga" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                 </el-select>
               </el-form-item>
-              <el-form-item label="Plaga#2: "
-              style="width: 50%">
-                <el-select v-model="form.plaga2" placeholder="Selecciona la cuidad">
+              <el-form-item class="px-5" style="width: 25%" >
+                <el-select v-model="form.plaga1" placeholder="Selecciona la plaga" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                 </el-select>
               </el-form-item>
             </div>
 
+
+            <!-- Tercera Fila --> 
             <p>Fechas</p>
-
-            <el-form-item label="Fecha de orden">
-              <el-col :span="11">
-                <el-date-picker
-                  v-model="form.date1"
-                  type="date"
-                  placeholder="Orden"
-                  style="width: 50%"
-                />
-              </el-col>
-            </el-form-item>
-
-            <el-form-item label=" Fecha de asistencia">
-              <el-col :span="11">
-                <el-date-picker
-                  v-model="form.date2"
-                  type="date"
-                  placeholder="Orden"
-                  style="width: 50%"
-                />
-              </el-col>
-            </el-form-item>
-
-            <el-form-item label="De hora">
-              <el-col :span="11">
-                <el-time-picker
-                  v-model="form.date3"
-                  placeholder="Hora"
-                  style="width: 50%"
-                />
-              </el-col>
-            </el-form-item>
-
-            <el-form-item label="A hora">
-              <el-col :span="11">
-                <el-time-picker
-                  v-model="form.date4"
-                  placeholder="Hora"
-                  style="width: 50%"
-                />
-              </el-col>
-            </el-form-item>
-
-            <el-form-item label="Extra...">
-              <el-checkbox-group v-model="form.type">
-                <el-checkbox value="Presupuesto" name="type">
-                  Presupuesto
-                </el-checkbox>
-                <el-checkbox value="Fumigar" name="type">
-                  Fumigar
-                </el-checkbox>
-                <el-checkbox value="Garantia" name="type">
-                  Garantia
-                </el-checkbox>
-                <el-checkbox value="Cortesia" name="type">
-                  Cortesia
-                </el-checkbox>
-              </el-checkbox-group>
-            </el-form-item>
-            
-            <el-form-item>
-              <el-button type="success" @click="onSubmit" round plain>Crear</el-button>
-              <el-button type="success" round>Success</el-button>
-            </el-form-item>
-
-            <div class="mb-4">
-              <el-button>Default</el-button>
-              <el-button type="primary">Primary</el-button>
-              <el-button type="success">Success</el-button>
-              <el-button type="info">Info</el-button>
-              <el-button type="warning">Warning</el-button>
-              <el-button type="danger">Danger</el-button>
+            <div style="display:flex" class="m-2"   >
+              <p class="px-4 pr-12">Fecha de orden:</p>
+              <p class="px-20 pr-7">Fecha para asistir:</p>
+              <p class="px-5 ml-12 ">De hora:</p>
+              <p class="px-40">A hora:</p>
             </div>
-            <div class="mb-4">
-              <el-button round>Round</el-button>
-              <el-button type="primary" round>Primary</el-button>
-              <el-button type="success" round>Success</el-button>
-              <el-button type="info" round>Info</el-button>
-              <el-button type="warning" round>Warning</el-button>
-              <el-button type="danger" round>Danger</el-button>
+            <div class="flex">
+              <el-form-item class="px-5" style="width: 25%">
+                <el-col :span="11">
+                  <el-date-picker
+                    v-model="form.date1"
+                    type="date"
+                    placeholder="Orden"
+                    
+                  />
+                </el-col>
+              </el-form-item>
+  
+              <el-form-item class="ml-5" style="width: 25%" >
+                <el-col :span="11">
+                  <el-date-picker
+                    v-model="form.date2"
+                    type="date"
+                    placeholder="Orden"
+                    
+                  />
+                </el-col>
+              </el-form-item>
+  
+              <el-form-item  style="width: 25%">
+                <el-col :span="11">
+                  <el-time-picker
+                    v-model="form.date3"
+                    placeholder="Hora"
+                    
+                  />
+                </el-col>
+              </el-form-item>
+  
+              <el-form-item style="width: 25%">
+                <el-col :span="11">
+                  <el-time-picker
+                    v-model="form.date4"
+                    placeholder="Hora"
+                    
+                  />
+                </el-col>
+              </el-form-item>
             </div>
-            <div class="mb-4">
-              <el-button plain>Plain</el-button>
-              <el-button type="primary" plain>Primary</el-button>
-              <el-button type="success" plain>Success</el-button>
-              <el-button type="info" plain>Info</el-button>
-              <el-button type="warning" plain>Warning</el-button>
-              <el-button type="danger" plain>Danger</el-button>
+
+            <!-- Cuarta Fila --> 
+            <div class="flex justify-start px-16">
+              <el-form-item >
+                <el-checkbox-group v-model="form.type">
+                  <el-checkbox value="Presupuesto" name="type">
+                    Presupuesto
+                  </el-checkbox>
+                  <el-checkbox value="Fumigar" name="type">
+                    Fumigar
+                  </el-checkbox>
+                  <el-checkbox value="Garantia" name="type">
+                    Garantia
+                  </el-checkbox>
+                  <el-checkbox value="Cortesia" name="type">
+                    Cortesia
+                  </el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
             </div>
-            <div>
-              <el-button color="#626aef" :dark="isDark">Default</el-button>
-              <el-button color="#626aef" :dark="isDark" plain>Plain</el-button>
-          
-              <el-button color="#626aef" :dark="isDark" disabled>Disabled</el-button>
-              <el-button color="#626aef" :dark="isDark" disabled plain
-                >Disabled Plain</el-button
-              >
+
+            <div style="display:flex; justify-content: center;" class="">
+              <el-button class="w-40 h-16 mt-5" style="background-color:#0B1821; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
             </div>
           </el-form>
         </div>
