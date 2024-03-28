@@ -3,9 +3,6 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
-        <div class="mr-6">
-          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Clientes</h1>
-        </div>
         <div class="flex flex-wrap items-start justify-end mb-3">
 
           <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
@@ -28,7 +25,14 @@
           </router-link>
 
         </div>
+
+
     </div>
+
+    <div class="mr-6">
+      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Clientes</h1>
+    </div>
+    
         <!-- TABLE DATA -->
         <div class="flex">
             <el-table

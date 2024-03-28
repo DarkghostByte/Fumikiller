@@ -4,7 +4,7 @@
             Todos los derechos reservados</a> 
             
             <a href="https://tailwindcss.com/" class="text-teal-400 hover:underline">TEST</a> 
-            PaquiArt
+            Fumi-kille'r
       </section>
 </template>
 <script>
