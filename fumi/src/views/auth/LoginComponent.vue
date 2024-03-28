@@ -6,7 +6,15 @@
                 <img v-bind:src="url+'img/logofk.png'" class="imgFk">               
                 <div class="DivNaranja">
                     <h1 style="margin-top:25%;font-size: 60px; ">FUMI-KILLE'R</h1>
-                    <router-link to="/admin/home" class="btnInicio">INICIO</router-link>
+                    
+                    <router-link to="/admin/home">
+                        <button class="btnInicio">
+                            Inicio
+                        </button>
+                    </router-link>
+
+                    
+                    
                 </div>
             </div>   
             
@@ -53,14 +61,14 @@
 .btnInicio{
     margin-top: 10%;
     background-color: black; 
-    border-radius: 45px; 
+    border-radius: 50px; 
     width:270px; 
-    height:9px; 
+    height:90px; 
     color:aliceblue; 
     font-size:40px; 
     text-align: center;
     border: none;    
-    transition: 1s;
+    transition: .5s;
 }
 .btnInicio:hover{
     background-color:#0F0F88;
