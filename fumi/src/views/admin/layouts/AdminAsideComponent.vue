@@ -1,10 +1,8 @@
 <template>
     <aside class="hidden sm:flex sm:flex-col">
         <a href="#" class="inline-flex items-center justify-center h-20 w-20 bg-orange-600 hover:bg-blue-800 focus:bg-blue-600">
-          <svg fill="none" viewBox="0 0 64 64" class="h-12 w-12">
-            <title>Company logo</title>
-            <path d="M32 14.2c-8 0-12.9 4-14.9 11.9 3-4 6.4-5.6 10.4-4.5 2.3.6 4 2.3 5.7 4 2.9 3 6.3 6.4 13.7 6.4 7.9 0 12.9-4 14.8-11.9-3 4-6.4 5.5-10.3 4.4-2.3-.5-4-2.2-5.7-4-3-3-6.3-6.3-13.7-6.3zM17.1 32C9.2 32 4.2 36 2.3 43.9c3-4 6.4-5.5 10.3-4.4 2.3.5 4 2.2 5.7 4 3 3 6.3 6.3 13.7 6.3 8 0 12.9-4 14.9-11.9-3 4-6.4 5.6-10.4 4.5-2.3-.6-4-2.3-5.7-4-2.9-3-6.3-6.4-13.7-6.4z" fill="#fff"/>
-          </svg>
+          <img v-bind:src="url+'img/logofk.png'">
+          
         </a>
         <div class="flex-grow flex flex-col justify-between text-gray-900 bg-orange-600">
           <nav class="flex flex-col mx-4 my-6 space-y-4">
@@ -20,9 +18,31 @@
               <span class="sr-only">Clientes</span>
               <span class="material-symbols-outlined">bug_report</span>
             </router-link>
-            <router-link to="/admin/clients" class="inline-flex items-center justify-center py-3 text-blue-800 bg-white rounded-lg">
-              <span class="sr-only">Clientes</span>
-              <span class="material-symbols-outlined">group</span>
+            <router-link to="/admin/calendar" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+              <span class="sr-only">Agenda</span>
+              <span class="material-symbols-outlined">calendar_clock</span>
+            </router-link>
+            <router-link to="/admin/certificate" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+              <span class="sr-only">Certificados</span>
+              <span class="material-symbols-outlined">verified</span>
+            </router-link>
+            <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+              <span class="sr-only">Bitacora</span>
+              <span class="material-symbols-outlined">library_books</span>
+            </router-link>
+            <router-link to="/admin/payments" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+              <span class="sr-only">Gastos</span>
+              <span class="material-symbols-outlined">payments</span>
+            </router-link>
+            <router-link to="/admin/administration" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+              <span class="sr-only">Administracion</span>
+              <span class="material-symbols-outlined">shield_person</span>
+            </router-link>
+
+
+            <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 text-blue-800 bg-white rounded-lg">
+              <span class="sr-only">Bitacora</span>
+              <span class="material-symbols-outlined">payments</span>
             </router-link>
             <a to="clients" class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
               <span class="sr-only">Messages</span>
@@ -51,6 +71,9 @@
 </template>
 <script>
     export default{
-        name:'AdminAsideComponent'
+        name:'AdminAsideComponent',
+        data:()=>({
+            url:process.env.VUE_APP_ROOT_ASSETS,
+        }),
     }
 </script>
