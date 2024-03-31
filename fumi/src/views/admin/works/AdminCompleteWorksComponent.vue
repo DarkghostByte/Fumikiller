@@ -22,44 +22,40 @@
         <div class="flex ml-5">
           <el-form :model="form" label-width="auto" style="max-width: 100%">
             
-            <p>Cliente</p>
+            <p>Fumigador</p>
             <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-12">Nombre Comercial:</p>
-              <p class="px-20 pr-10">Nombres:</p>
-              <p class="px-20 ml-12 ">Apellido Paterno:</p>
-              <p class="px-5">Apellido Materno:</p>
+              <p class="px-4 pr-12">Responsable</p>
+              <p class="px-12 ml-12 ">Ayudante</p>
             </div>
 
             <!-- Primera Fila -->  
             <div class="flex">
-              <el-form-item class="ml-5" style="width: 25%">
-                <el-input v-model="form.comercio" 
-                placeholder="Ingresa el nombre del comercio"/>
+              <el-form-item class="px-5" style="width: 25%" >
+                <el-select v-model="form.fumigadorRes" placeholder="Selecciona el fumigador" >
+                  <el-option label="Juan" value="juan" />
+                  <el-option label="Pepe" value="pepe" />
+                  <el-option label="Jesus" value="jesus" />
+                </el-select>
               </el-form-item>
-              <el-form-item class="px-8">
-                <el-input v-model="form.name" 
-                placeholder="Ingresa sus nombres"/>
-              </el-form-item>
-              <el-form-item class="px-6">
-                <el-input v-model="form.lastname1" 
-                placeholder="Ingresa su primer apellido"/>
-              </el-form-item>
-              <el-form-item class="px-5">
-                <el-input v-model="form.lastname2" 
-                placeholder="Ingresa su segundo apellido"/>
+              <el-form-item class="px-5" style="width: 25%" >
+                <el-select v-model="form.fumigadorAyu" placeholder="Selecciona ayudante" >
+                  <el-option label="Juan" value="juan" />
+                  <el-option label="Pepe" value="pepe" />
+                  <el-option label="Jesus" value="jesus" />
+                </el-select>
               </el-form-item>
             </div>
 
             <!-- Segunda Fila --> 
-            <p>Problematica</p>
+            <p>Producto interno</p>
             <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-8">Plaga #1:</p>
-              <p class="px-36 pr-7">Plaga #2:</p>
+              <p class="px-4 pr-8">Producto #1:</p>
+              <p class="px-28 pr-7">Producto #2:</p>
             </div>
 
             <div class="flex" style="width:100%;">
               <el-form-item class="px-5" style="width: 25%" >
-                <el-select v-model="form.plaga1" placeholder="Selecciona la plaga" >
+                <el-select v-model="form.productoInt1" placeholder="Selecciona el pruducto" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                   <el-option label="Chinches" value="chinches" />
@@ -71,7 +67,41 @@
                 </el-select>
               </el-form-item>
               <el-form-item class="px-5" style="width: 25%" >
-                <el-select v-model="form.plaga2" placeholder="Selecciona la plaga" >
+                <el-select v-model="form.productoInt2" placeholder="Selecciona el pruducto" >
+                  <el-option label="Cucarachas" value="cucarachas" />
+                  <el-option label="Pulgas" value="pulgas" />
+                  <el-option label="Chinches" value="chinches" />
+                  <el-option label="Cucaracha de cocina" value="cucaracha de cocina" />
+                  <el-option label="Garrapatas" value="garrapatas" />
+                  <el-option label="Palomillas" value="palomillas" />
+                  <el-option label="Roedores" value="roedores" />
+                  <el-option label="Hormigas" value="hormigas" />
+                </el-select>
+              </el-form-item>
+            </div>
+
+            <!-- Tercera Fila --> 
+            <p>Producto externo</p>
+            <div style="display:flex" class="m-2"  >
+              <p class="px-4 pr-8">Producto #1:</p>
+              <p class="px-28 pr-7">Producto #2:</p>
+            </div>
+
+            <div class="flex" style="width:100%;">
+              <el-form-item class="px-5" style="width: 25%" >
+                <el-select v-model="form.productoExt1" placeholder="Selecciona el pruducto" >
+                  <el-option label="Cucarachas" value="cucarachas" />
+                  <el-option label="Pulgas" value="pulgas" />
+                  <el-option label="Chinches" value="chinches" />
+                  <el-option label="Cucaracha de cocina" value="cucaracha de cocina" />
+                  <el-option label="Garrapatas" value="garrapatas" />
+                  <el-option label="Palomillas" value="palomillas" />
+                  <el-option label="Roedores" value="roedores" />
+                  <el-option label="Hormigas" value="hormigas" />
+                </el-select>
+              </el-form-item>
+              <el-form-item class="px-5" style="width: 25%" >
+                <el-select v-model="form.productoExt2" placeholder="Selecciona el pruducto" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                   <el-option label="Chinches" value="chinches" />
@@ -85,13 +115,13 @@
             </div>
 
 
-            <!-- Tercera Fila --> 
-            <p>Fechas</p>
+            <!-- Cuarta Fila --> 
+            <p>Recomendaciones</p>
             <div style="display:flex" class="m-2"   >
-              <p class="px-4 pr-12">Fecha de orden:</p>
-              <p class="px-20 pr-7">Fecha para asistir:</p>
-              <p class="px-5 ml-12 ">De hora:</p>
-              <p class="px-40">A hora:</p>
+              <p class="px-4 pr-12">No tapear:</p>
+              <p class="px-28">No ingresar:</p>
+              <p class="px-20 ml-12 ">Otra dosis:</p>
+              <p class="px-40">:</p>
             </div>
             <div class="flex">
               <el-form-item class="px-5" style="width: 25%">
@@ -105,7 +135,7 @@
                 </el-col>
               </el-form-item>
   
-              <el-form-item class="ml-5" style="width: 25%" >
+              <el-form-item class="" style="width: 25%" >
                 <el-col :span="11">
                   <el-date-picker
                     v-model="form.date2"
@@ -137,21 +167,22 @@
               </el-form-item>
             </div>
 
-            <!-- Cuarta Fila --> 
+            <!-- Quinta Fila --> 
+            <p>Requiere de:</p>
             <div class="flex justify-start px-16">
               <el-form-item >
-                <el-checkbox-group v-model="form.type">
-                  <el-checkbox value="Presupuesto" name="type">
-                    Presupuesto
+                <el-checkbox-group v-model="form.requiere">
+                  <el-checkbox value="Factura" name="type">
+                    Factura
                   </el-checkbox>
-                  <el-checkbox value="Fumigar" name="type">
-                    Fumigar
+                  <el-checkbox value="Certificado" name="type">
+                    Certificado
                   </el-checkbox>
-                  <el-checkbox value="Garantia" name="type">
-                    Garantia
+                  <el-checkbox value="Remision" name="type">
+                    Remision
                   </el-checkbox>
-                  <el-checkbox value="Cortesia" name="type">
-                    Cortesia
+                  <el-checkbox value="Nada" name="type">
+                    Nada
                   </el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
@@ -174,12 +205,12 @@
           data:()=>({
                 tableData:[],
                 form:{
-                name:'',
-                lastname1:'',
-                lastname2:'',
-                comercio:'',
-                plaga1:'',
-                plaga2:'',
+                  fumigadorRes:'',
+                  fumigadorAyu:'',
+                  productoInt1:'',
+                  productoInt2:'',
+                  productoExt1:'',
+                  productoExt2:'',
                 date1:'',
                 date2:'',
                 date3:'',
