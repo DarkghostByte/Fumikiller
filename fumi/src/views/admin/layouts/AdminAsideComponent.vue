@@ -6,35 +6,35 @@
         </a>
         <div class="flex-grow flex flex-col justify-between text-gray-900 bg-orange-600">
           <nav class="flex flex-col mx-4 my-6 space-y-4">
-            <router-link to="/admin/home" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/home" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Home</span>
               <span class="material-symbols-outlined">home</span>
             </router-link>
-            <router-link to="/admin/clients" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/clients" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Clientes</span>
               <span class="material-symbols-outlined">group</span>
             </router-link>
-            <router-link to="/admin/works" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/works" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Clientes</span>
               <span class="material-symbols-outlined">bug_report</span>
             </router-link>
-            <router-link to="/admin/calendar" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/calendar" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Agenda</span>
               <span class="material-symbols-outlined">calendar_clock</span>
             </router-link>
-            <router-link to="/admin/certificate" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/certificate" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Certificados</span>
               <span class="material-symbols-outlined">verified</span>
             </router-link>
-            <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Bitacora</span>
               <span class="material-symbols-outlined">library_books</span>
             </router-link>
-            <router-link to="/admin/payments" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/payments" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Gastos</span>
               <span class="material-symbols-outlined">payments</span>
             </router-link>
-            <router-link to="/admin/administration" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-800 focus:text-gray-400 focus:bg-gray-700 rounded-lg">
+            <router-link to="/admin/administration" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Administracion</span>
               <span class="material-symbols-outlined">shield_person</span>
             </router-link>
