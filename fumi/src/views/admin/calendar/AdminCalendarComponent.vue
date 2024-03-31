@@ -52,10 +52,10 @@
               </template>
             </el-table-column>
 
-                <el-table-column prop="nameCliente" label="Nombre"  sortable width="160" />
-                <el-table-column prop="lastnameCliente1" label="Apellido Paterno"  sortable width="160" />
+                <el-table-column prop="nameCliente" label="Nombre"  sortable width="120" />
+                <el-table-column prop="lastnameCliente1" label="Apellido Paterno"  sortable width="155" />
                 <el-table-column prop="lastnameCliente2" label="Apellido Materno"  sortable width="160" />
-                <el-table-column prop="direccionCliente" label="Dirección" sortable width="160" />
+                <el-table-column prop="direccionCliente" label="Dirección" sortable width="130" />
                 <el-table-column prop="numTelefono" label="Celular" sortable width="160"  />
                 <el-table-column prop="fechaAsistencia" label="Fecha para asistir" sortable width="160"  />
                 <el-table-column label="">

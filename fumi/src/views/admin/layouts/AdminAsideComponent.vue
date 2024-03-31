@@ -1,6 +1,6 @@
 <template>
     <aside class="hidden sm:flex sm:flex-col">
-        <a href="#" class="inline-flex items-center justify-center h-20 w-20 bg-orange-600 hover:bg-blue-800 focus:bg-blue-600">
+        <a href="#" class="inline-flex items-center justify-center h-20 w-30 bg-orange-600 hover:bg-blue-800 focus:bg-blue-600">
           <img v-bind:src="url+'img/logofk.png'" class="flex items-center justify-center h-20">
           
         </a>
@@ -9,34 +9,42 @@
             <router-link to="/admin/home" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Home</span>
               <span class="material-symbols-outlined">home</span>
+              <p class="px-2">Inicio</p>
             </router-link>
             <router-link to="/admin/clients" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Clientes</span>
               <span class="material-symbols-outlined">group</span>
+              <p class="px-2">Clientes</p>
             </router-link>
             <router-link to="/admin/works" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
-              <span class="sr-only">Clientes</span>
+              <span class="sr-only">Ordenes de trabajo</span>
               <span class="material-symbols-outlined">bug_report</span>
+              <p class="px-2">Ordenes</p>
             </router-link>
             <router-link to="/admin/calendar" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Agenda</span>
               <span class="material-symbols-outlined">calendar_clock</span>
+              <p class="px-2">Agenda</p>
             </router-link>
             <router-link to="/admin/certificate" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Certificados</span>
               <span class="material-symbols-outlined">verified</span>
+              <p class="px-2">Certificados</p>
             </router-link>
             <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Bitacora</span>
               <span class="material-symbols-outlined">library_books</span>
+              <p class="px-2">Bitacora</p>
             </router-link>
             <router-link to="/admin/payments" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Gastos</span>
               <span class="material-symbols-outlined">payments</span>
+              <p class="px-2">Gastos</p>
             </router-link>
             <router-link to="/admin/administration" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-lg">
               <span class="sr-only">Administracion</span>
               <span class="material-symbols-outlined">shield_person</span>
+              <p class="px-2">Admin</p>
             </router-link>
 
 

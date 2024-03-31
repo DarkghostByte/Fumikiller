@@ -51,12 +51,12 @@
               </template>
             </el-table-column>
 
-                <el-table-column prop="apCliente" label="Apellido Paterno" sortable width="160"  />
+                <el-table-column prop="apCliente" label="Apellido Paterno" sortable width="155"  />
                 <el-table-column prop="amCliente" label="Apellido Materno"  sortable width="160"/>
-                <el-table-column prop="nameCliente" label="Nombres"  sortable width="160"/>
+                <el-table-column prop="nameCliente" label="Nombres"  sortable width="110"/>
                 <el-table-column prop="address" label="Dirección" sortable width="160" />
                 <el-table-column prop="numCelu" label="Numero Celular"  sortable width="160" />
-                <el-table-column prop="numTel" label="Numero Fijo"  sortable width="160" />
+                <el-table-column prop="numTel" label="Numero Fijo"  sortable width="130" />
                 
                 <el-table-column label="">
                     <template #default>

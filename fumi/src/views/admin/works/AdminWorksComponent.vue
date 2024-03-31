@@ -52,11 +52,11 @@
               </template>
             </el-table-column>
 
-                <el-table-column prop="nameCliente" label="Nombre del Cliente"  sortable width="180" />
-                <el-table-column prop="nameComercial" label="Nombre Comercial"  sortable width="180" />
+                <el-table-column prop="nameCliente" label="Nombre del Cliente"  sortable width="175" />
+                <el-table-column prop="nameComercial" label="Nombre Comercial"  sortable width="170" />
                 <el-table-column prop="fumi" label="Fumigador"  sortable width="120" />
-                <el-table-column prop="direccionCliente" label="Dirección" sortable width="160" />
-                <el-table-column prop="fechaOrden" label="Fecha de Orden" sortable width="160"  />
+                <el-table-column prop="direccionCliente" label="Dirección" sortable width="120" />
+                <el-table-column prop="fechaOrden" label="Fecha de Orden" sortable width="150"  />
                 <el-table-column prop="fechaAsistencia" label="Fecha de asistencia" sortable width="170"  />
                 <el-table-column label="">
                     <template #default>
