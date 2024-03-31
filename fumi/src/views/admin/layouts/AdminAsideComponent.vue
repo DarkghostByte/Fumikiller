@@ -1,7 +1,7 @@
 <template>
     <aside class="hidden sm:flex sm:flex-col">
         <a href="#" class="inline-flex items-center justify-center h-20 w-20 bg-orange-600 hover:bg-blue-800 focus:bg-blue-600">
-          <img v-bind:src="url+'img/logofk.png'">
+          <img v-bind:src="url+'img/logofk.png'" class="flex items-center justify-center h-20">
           
         </a>
         <div class="flex-grow flex flex-col justify-between text-gray-900 bg-orange-600">
