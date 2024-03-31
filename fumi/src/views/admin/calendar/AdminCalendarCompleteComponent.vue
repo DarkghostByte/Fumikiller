@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="mr-6">
-          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda por realizadas</h1>
+          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda de ordenes de trabajo realizadas</h1>
         </div>
 
         
@@ -44,29 +44,21 @@
                 <router-link to="" >
                   <el-button style="color:black"
                   size="small"
-                  type="warning"
+                  type="success"
                   @click="handleDelete()"
-                  ><span class="material-symbols-outlined">done</span></el-button
+                  ><span class="material-symbols-outlined">visibility</span></el-button
                 >
                 </router-link>
               </template>
             </el-table-column>
 
-                <el-table-column prop="nameCliente" label="Nombre"  sortable width="160" />
+                <el-table-column prop="nameCliente" label="Nombre"  sortable width="120" />
                 <el-table-column prop="lastnameCliente1" label="Apellido Paterno"  sortable width="160" />
                 <el-table-column prop="lastnameCliente2" label="Apellido Materno"  sortable width="160" />
                 <el-table-column prop="direccionCliente" label="Dirección" sortable width="160" />
+                <el-table-column prop="folioCliente" label="Folio" sortable width="120"  />
                 <el-table-column prop="numTelefono" label="Celular" sortable width="160"  />
-                <el-table-column prop="fechaAsistencia" label="Fecha para asistir" sortable width="160"  />
-                <el-table-column label="">
-                    <template #default>
-                      <el-button style="color:black"
-                        size="small"
-                        type="danger"
-                        @click="handleDelete()"
-                        ><span class="material-symbols-outlined">delete</span></el-button>
-                    </template>
-                  </el-table-column>
+                <el-table-column prop="fechaAsistencia" label="Fecha de asistencia" sortable width="180"  />
             </el-table>
         </div>
         <!-- END TABLE DATA -->
@@ -88,6 +80,7 @@
                     lastnameCliente1:'Peña',
                     lastnameCliente2:'Mora',
                     direccionCliente:'No. 189, Grove St, Los Angeles',
+                    folioCliente:'A-00001',
                     numTelefono:'6361111111',
                     fechaAsistencia: '2024-03-24',
                 },
@@ -96,6 +89,7 @@
                     lastnameCliente1:'Chavez',
                     lastnameCliente2:'Chavez',
                     direccionCliente:'No. 189, Grove St, Los Angeles',
+                    folioCliente:'A-00002',
                     numTelefono:'6362222222',
                     fechaAsistencia: '2024-03-24',
                 }
