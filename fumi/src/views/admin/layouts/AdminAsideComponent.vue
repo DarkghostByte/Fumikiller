@@ -1,6 +1,6 @@
 <template>
     <aside class="hidden sm:flex sm:flex-col">
-        <a href="#" class="inline-flex items-center justify-center h-20 w-30 bg-orange-600 hover:bg-blue-800 focus:bg-blue-600">
+        <a href="#" class="inline-flex items-center justify-center h-20 w-30 bg-orange-600 hover:bg-blue-800 focus:bg-blue-800">
           <img v-bind:src="url+'img/logofk.png'" class="flex items-center justify-center h-20">
           
         </a>
