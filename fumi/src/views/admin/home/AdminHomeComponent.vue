@@ -89,7 +89,7 @@
       <el-table-column prop="clienteHome" label="Cliente" sortable width="155"  />
       <el-table-column prop="facturaHome" label="Factura"  sortable width="160"/>
       <el-table-column prop="costoHome" label="Costo"  sortable width="110"/>
-      <el-table-column prop="fechaFacturacion" label="Fecha de facturacion" sortable width="160" />
+      <el-table-column prop="fechaFacturacion" label="Fecha de facturacion" sortable width="180" />
       <el-table-column prop="fechaPago" label="Fecha de pago"  sortable width="160" />
       
       <el-table-column label="">

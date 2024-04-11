@@ -19,12 +19,6 @@
             Nuevo Cliente
           </router-link>
 
-          <router-link to="/admin/clients/edit-clients" class="inline-flex px-5 py-3 text-white bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-600 rounded-md ml-6 mb-3" style="color:black">
-            <i class="fa fa-pencil" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>                
-            Editar Cliente
-          </router-link>
-
         </div>
 
     </div>

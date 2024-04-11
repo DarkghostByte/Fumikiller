@@ -17,12 +17,6 @@
               margin-left: -5px; margin-right:10px;"></i>                
               Nueva Orden
             </router-link>
-  
-            <router-link to="/admin/works/edit-works" class="inline-flex px-5 py-3 text-white bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-600 rounded-md ml-6 mb-3" style="color:black">
-              <i class="fa fa-pencil" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>                
-              Editar Orden
-            </router-link>
             
           </div>
         </div>
@@ -44,7 +38,7 @@
                 <router-link to="/admin/works/complete-works" >
                   <el-button style="color:black"
                   size="small"
-                  type="warning"
+                  type="success"
                   @click="handleDelete()"
                   ><span class="material-symbols-outlined">priority</span></el-button
                 >
@@ -58,6 +52,21 @@
                 <el-table-column prop="direccionCliente" label="Dirección" sortable width="120" />
                 <el-table-column prop="fechaOrden" label="Fecha de Orden" sortable width="150"  />
                 <el-table-column prop="fechaAsistencia" label="Fecha de asistencia" sortable width="170"  />
+                
+                <el-table-column label="">
+                  <template #default>
+                    <router-link to="/admin/works/edit-works" >
+                      <el-button style="color:black"
+                      size="small"
+                      type="warning"
+                      @click="handleDelete()"
+                      ><span class="material-symbols-outlined">edit</span></el-button
+                    >
+                    </router-link>
+                  </template>
+                </el-table-column>
+    
+
                 <el-table-column label="">
                     <template #default>
                       <el-button style="color:black"
