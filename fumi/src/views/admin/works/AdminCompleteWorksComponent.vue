@@ -25,7 +25,7 @@
             <p>Fumigador</p>
             <div style="display:flex" class="m-2"  >
               <p class="px-4 pr-12">Responsable</p>
-              <p class="px-12 ml-12 ">Ayudante</p>
+              <p class="px-20 ml-12 ">Ayudante</p>
             </div>
 
             <!-- Primera Fila -->  
@@ -50,7 +50,7 @@
             <p>Producto interno</p>
             <div style="display:flex" class="m-2"  >
               <p class="px-4 pr-8">Producto #1:</p>
-              <p class="px-28 pr-7">Producto #2:</p>
+              <p class="px-36 pr-7">Producto #2:</p>
             </div>
 
             <div class="flex" style="width:100%;">
@@ -84,7 +84,7 @@
             <p>Producto externo</p>
             <div style="display:flex" class="m-2"  >
               <p class="px-4 pr-8">Producto #1:</p>
-              <p class="px-28 pr-7">Producto #2:</p>
+              <p class="px-36 pr-7">Producto #2:</p>
             </div>
 
             <div class="flex" style="width:100%;">
@@ -119,9 +119,9 @@
             <p>Recomendaciones</p>
             <div style="display:flex" class="m-2"   >
               <p class="px-4 pr-12">No tapear:</p>
-              <p class="px-28">No ingresar:</p>
-              <p class="px-20 ml-12 ">Otra dosis:</p>
-              <p class="px-40">:</p>
+              <p class="px-32 ml-6">No ingresar:</p>
+              <p class="px-12 ">Otra dosis:</p>
+              <p class="px-36">Hora:</p>
             </div>
             <div class="flex">
               <el-form-item class="px-5" style="width: 25%">
@@ -135,10 +135,21 @@
                 </el-col>
               </el-form-item>
   
-              <el-form-item class="" style="width: 25%" >
+              <el-form-item class="px-6" style="width: 25%" >
+                <el-col :span="11">
+                  <el-time-picker
+                    v-model="form.date2"
+                    
+                    placeholder="Orden"
+                    
+                  />
+                </el-col>
+              </el-form-item>
+  
+              <el-form-item class="px-6" style="width: 25%">
                 <el-col :span="11">
                   <el-date-picker
-                    v-model="form.date2"
+                    v-model="form.date3"
                     type="date"
                     placeholder="Orden"
                     
@@ -146,17 +157,7 @@
                 </el-col>
               </el-form-item>
   
-              <el-form-item  style="width: 25%">
-                <el-col :span="11">
-                  <el-time-picker
-                    v-model="form.date3"
-                    placeholder="Hora"
-                    
-                  />
-                </el-col>
-              </el-form-item>
-  
-              <el-form-item style="width: 25%">
+              <el-form-item class="px-6" style="width: 25%">
                 <el-col :span="11">
                   <el-time-picker
                     v-model="form.date4"
@@ -189,7 +190,7 @@
             </div>
 
             <div style="display:flex; justify-content: center;" class="">
-              <el-button class="w-40 h-16 mt-5" style="background-color:#0B1821; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
+              <el-button class="w-40 h-16 mt-5" style="background-color:#11639c; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
             </div>
           </el-form>
         </div>

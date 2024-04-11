@@ -168,8 +168,8 @@
               </el-form-item>
             </div>
             
-            <div style="display:flex; justify-content: center;" class="">
-              <el-button class="w-40 h-16 mt-5" style="background-color:#0B1821; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
+            <div style="color:white; display:flex; justify-content: center;" class="white">
+              <el-button class="w-40 h-16 mt-5" style="color:white; background-color:#11639c; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
             </div>
             
           </el-form>
