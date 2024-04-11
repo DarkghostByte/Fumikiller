@@ -70,7 +70,7 @@
                         <el-button style="color:black"
                         size="small"
                         type="danger"
-                        @click="handleDelete()"
+                        @click="dialogVisible = true"
                         ><span class="material-symbols-outlined">delete</span></el-button
                         >
                     </template>
@@ -78,6 +78,33 @@
             </el-table>
         </div>
         <!-- END TABLE DATA -->
+
+        <!-- MODAL -->
+
+        <el-dialog
+        v-model="dialogVisible"
+        title="Deseas eliminar al siguente cliente"
+        width="400">
+
+        <div class="h-72 overflow-scroll">
+          Datos del cliente
+          <br><br>
+          Nombre:
+        </div>
+        
+        <template #footer>
+            <div class="dialog-footer">
+            <el-button @click="dialogVisible = false">Cancelar</el-button>
+            <el-button type="primary" @click="handleDelete()">
+                Confirmar
+            </el-button>
+            </div>
+        </template>
+        </el-dialog>
+
+        <!-- END MODAL -->
+
+
     </div>
   
   </template>
@@ -88,7 +115,8 @@
           name:'AdminHomeComponent',
           
           data:()=>({
-                tableData:[],
+            dialogVisible: false,
+            tableData:[],
           }),
           mounted(){
             this.tableData = [{
