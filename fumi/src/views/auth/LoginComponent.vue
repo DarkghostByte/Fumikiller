@@ -1,5 +1,6 @@
 <template>
     
+    
     <div class="flex justify-center items-center h-screen bg-gray-200">
         <div class="w-1/2">
             <div class="DivAzul">

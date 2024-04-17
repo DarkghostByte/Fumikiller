@@ -6,17 +6,11 @@
       
         <div class="flex flex-wrap items-start justify-end ">
 
-          <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+          <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-red-400 hover:bg-red-700 focus:bg-red-800 rounded-md ml-6 mb-3"
           style="color:black">
-            <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px;
+            <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
-            Consultar Cliente
-          </router-link>
-
-          <router-link to="/admin/clients/add-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-            <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>                
-            Nuevo Cliente
+            Devolver
           </router-link>
 
         </div>
@@ -24,7 +18,7 @@
     </div>
 
     <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Clientes</h1>
+      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Modificar cliente</h1>
     </div>
 
 
@@ -127,7 +121,7 @@
             </div>
             
             <!-- Sexta Fila -->
-            <p class="px-5">Contacto:</p>
+            <p class="px-5">Domicilio:</p>
             <div style="display:flex" class="m-2"  >
               <p class="px-4 pr-7">Numero de Celular:</p>
               <p class="px-12">Numero Fijo:</p>
@@ -197,9 +191,6 @@
                 espe:'',
             },
           }),
-          mounted(){
-            
-          },
           methods:{
             handleEdit(){},
             handleDelete(){},

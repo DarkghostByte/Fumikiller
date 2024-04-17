@@ -39,7 +39,7 @@
                 <el-button style="color:black"
                   size="small"
                   type="success"
-                  @click="handleDelete()"
+                  @click="dialogVisibleView = true"
                   ><span class="material-symbols-outlined">visibility</span></el-button
                 >
               </template>
@@ -79,7 +79,7 @@
         </div>
         <!-- END TABLE DATA -->
 
-        <!-- MODAL -->
+        <!-- MODAL 1 -->
 
         <el-dialog
         v-model="dialogVisible"
@@ -89,20 +89,80 @@
         <div class="h-72 overflow-scroll">
           Datos del cliente
           <br><br>
-          Nombre:
+          Nombre: Datos de la base de datos (Nombre y apellidos)
+          <br><br>
+          Direccion: Datos de la base de datos (Direccion)
+          <br><br>
+          Telefono: Datos de la base de datos (Numero de telefono)
+          <br><br>
         </div>
         
         <template #footer>
             <div class="dialog-footer">
-            <el-button @click="dialogVisible = false">Cancelar</el-button>
-            <el-button type="primary" @click="handleDelete()">
+            <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
+            <el-button type="danger" @click="handleDelete()">
                 Confirmar
             </el-button>
             </div>
         </template>
         </el-dialog>
 
-        <!-- END MODAL -->
+        <!-- END MODAL 1 -->
+
+        
+        <!-- MODAL 2 -->
+
+        <el-dialog
+        v-model="dialogVisibleView"
+        title="Datos acerca del cliente"
+        width="600">
+
+        <div class="h-72 overflow-scroll">
+
+          <p style="font-size: 18px;">Datos del cliente</p>
+          Nombre: Nombre
+          <br>
+          Apellido Paterno: Apellido Paterno
+          <br>
+          Apellido Materno: Apellido Materno
+          <br>
+          Nombre comercial: Nombre comercial
+          <br><br>
+
+          <p style="font-size: 18px;">Direccion</p>
+          Tipo de calle: Tipo de calle
+          <br>
+          Domicilio: Domicilio
+          <br>
+          Codigo postal: Codigo postal
+          <br>
+          Colonia: Colonia
+          <br>
+          Tipo de lugar: Tipo de lugar
+          <br><br>
+
+          
+          <p style="font-size: 18px;">Ubicacion</p>
+          Descripcion: Descripcion
+          <br>
+          Como llegar: Como llegar
+          <br><br>
+
+          <p style="font-size: 18px;">Contacto</p>
+          Numero de celular: Numero de celular
+          <br>
+          Numero fijo: Numero fijo
+          <br><br>
+        </div>
+        
+        <template #footer>
+            <div class="dialog-footer">
+            <el-button type="success" @click="dialogVisibleView = false">Listo</el-button>
+            </div>
+        </template>
+        </el-dialog>
+
+        <!-- END MODAL 2 -->
 
 
     </div>
@@ -116,6 +176,7 @@
           
           data:()=>({
             dialogVisible: false,
+            dialogVisibleView: false,
             tableData:[],
           }),
           mounted(){

@@ -80,7 +80,7 @@
   >
   <el-table-column class="" label="Estado">
     <template #default>
-      <button class="mr-5 px-5 h-3 w-3" style="background-color:red; border-radius: 15px;;">
+      <button class="ml-5 px-5 h-3 w-3" style="background-color:red; border-radius: 15px;">
 
       </button>
     </template>
@@ -114,7 +114,7 @@
           mounted(){
             this.tableData = [{
                     clienteHome: 'Ferreteria',
-                    facturaHome:'A0000-0',
+                    facturaHome:'A0000-1',
                     costoHome: '$45.99',
                     fechaFacturacion: '00/00/0000',
                     fechaPago:'00/00/0000',
@@ -122,21 +122,21 @@
                 },
                 {
                   clienteHome: 'Restaurante',
-                    facturaHome:'A0000-0',
+                    facturaHome:'A0000-2',
                     costoHome: '$45.99',
                     fechaFacturacion: '00/00/0000',
                     fechaPago:'00/00/0000',
                 },
                 {
                   clienteHome: 'Tienda Comercial',
-                    facturaHome:'A0000-0',
+                    facturaHome:'A0000-3',
                     costoHome: '$45.99',
                     fechaFacturacion: '00/00/0000',
                     fechaPago:'00/00/0000',
                 },
                 {
                   clienteHome: 'Local',
-                    facturaHome:'A0000-0',
+                    facturaHome:'A0000-4',
                     costoHome: '$45.99',
                     fechaFacturacion: '00/00/0000',
                     fechaPago:'00/00/0000',
