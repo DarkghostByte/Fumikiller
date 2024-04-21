@@ -43,15 +43,27 @@
                   ><span class="material-symbols-outlined">visibility</span></el-button
                 >
               </template>
+
+              
+            </el-table-column>
+            <el-table-column label="">
+              <template #default>
+                
+                <el-button style="color:black"
+                  size="small"
+                  type="success"
+                  @click="dialogVisibleView = true"
+                  ><span class="material-symbols-outlined">lab_profile</span></el-button
+                >
+              </template>
             </el-table-column>
 
-                <el-table-column prop="apCliente" label="Apellido Paterno" sortable width="155"  />
-                <el-table-column prop="amCliente" label="Apellido Materno"  sortable width="160"/>
+                <el-table-column prop="apCliente" label="Apellidos" sortable width="155" />
                 <el-table-column prop="nameCliente" label="Nombres"  sortable width="110"/>
+                <el-table-column prop="ciudad" label="Ciudad"  sortable width="160"/>                
                 <el-table-column prop="address" label="Dirección" sortable width="160" />
                 <el-table-column prop="numCelu" label="Numero Celular"  sortable width="160" />
                 <el-table-column prop="numTel" label="Numero Fijo"  sortable width="130" />
-                
                 <el-table-column label="">
                   <template #default>
                     <router-link to="/admin/clients/edit-clients">
@@ -181,32 +193,36 @@
           }),
           mounted(){
             this.tableData = [{
-                    apCliente: 'Peña',
-                    amCliente:'Mora',
+                    apCliente: 'Peña Mora',
+                    amCliente:'',
+                    ciudad:'Nuevo Casas Grandes',
                     nameCliente: 'Luis Angel',
                     address: 'No. 189, Grove St, Los Angeles',
                     numCelu:'6361306641',
                     numTel:'636130664',
                 },
                 {
-                    apCliente: 'Chavez',
-                    amCliente:'Chavez',
+                    apCliente: 'Chavez Chavez',
+                    amCliente:'',
+                    ciudad:'Nuevo Casas Grandes',
                     nameCliente: 'Jesus Liadeo',
                     address: 'No. 189, Grove St, Los Angeles',
                     numCelu:'636125070',
                     numTel:'636125070',
                 },
                 {
-                    apCliente: 'Mozqueda',
-                    amCliente:'Gomez',
+                    apCliente: 'Mozqueda Gomez',
+                    amCliente:'',
+                    ciudad:'Nuevo Casas Grandes',
                     nameCliente: 'Emiliano',
                     address: 'No. 189, Grove St, Los Angeles',
                     numCelu:'6361224988',
                     numTel:'6361224988',
                 },
                 {
-                    apCliente: 'Madrid',
-                    amCliente:'Holguin',
+                    apCliente: 'Madrid Holguin',
+                    amCliente:'',
+                    ciudad:'Nuevo Casas Grandes',
                     nameCliente: 'Alan Saul',
                     address: 'No. 189, Grove St, Los Angeles',
                     numCelu:'6361024108',

@@ -27,7 +27,7 @@
           </div>
         </div>
         <div class="mr-6">
-          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda por realizadas</h1>
+          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda por realizar</h1>
         </div>
 
         
@@ -39,6 +39,7 @@
                 style="width: 100%"
             >
 
+            <!-- 
             <el-table-column label="">
               <template #default>
                 <router-link to="" >
@@ -47,6 +48,22 @@
                   type="warning"
                   @click="handleDelete()"
                   ><span class="material-symbols-outlined">done</span></el-button
+                >
+                </router-link>
+              </template>
+            </el-table-column>
+            
+          -->
+            
+
+            <el-table-column label="terminar">
+              <template #default>
+                <router-link to="/admin/works/complete-works" >
+                  <el-button style="color:black"
+                  size="small"
+                  type="success"
+                  @click="handleDelete()"
+                  ><span class="material-symbols-outlined">priority</span></el-button
                 >
                 </router-link>
               </template>

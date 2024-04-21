@@ -12,10 +12,15 @@
             Devolver
           </router-link>
 
+          
+
           </div>
         </div>
         <div class="mr-6">
           <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Completar orden de trabajo</h1>
+        </div>
+        <div class="px-5x text-2xl mb-8" style="margin-top: -30px; ">
+          <label for="">Nombre del cliente</label>
         </div>
         <!-- TABLE DATA -->
 

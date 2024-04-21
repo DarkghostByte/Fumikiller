@@ -86,7 +86,10 @@ nav{
   justify-content: end;  
   width: 50px;
   font-size: 0px;
-  transition-duration: 0.5s ease-in all;
+  
+}
+nav.span{
+  margin-left: 15px;
 }
 
 span{
@@ -98,9 +101,9 @@ nav:hover{
   font-size: 15px;
   width: 150px;
   color: black;
+  transition: .75s;   
   
 } 
-
 
 </style>
 

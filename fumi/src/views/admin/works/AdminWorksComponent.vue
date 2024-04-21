@@ -32,21 +32,7 @@
                 :default-sort="{ prop: 'name', order: 'descending' }"
                 style="width: 100%"
             >
-
-            <el-table-column label="">
-              <template #default>
-                <router-link to="/admin/works/complete-works" >
-                  <el-button style="color:black"
-                  size="small"
-                  type="success"
-                  @click="handleDelete()"
-                  ><span class="material-symbols-outlined">priority</span></el-button
-                >
-                </router-link>
-              </template>
-            </el-table-column>
-
-                <el-table-column prop="nameCliente" label="Nombre del Cliente"  sortable width="175" />
+                <el-table-column prop="nameCliente" label="Nombre del Cliente"  sortable width="175"  />
                 <el-table-column prop="nameComercial" label="Nombre Comercial"  sortable width="170" />
                 <el-table-column prop="fumi" label="Fumigador"  sortable width="120" />
                 <el-table-column prop="direccionCliente" label="Dirección" sortable width="120" />
