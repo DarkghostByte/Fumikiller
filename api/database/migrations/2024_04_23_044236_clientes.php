@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('lastname1');
             $table->string('lastname2');
             $table->string('tradename');
-            $table->string('home')->unique();
+            $table->string('street');
+            $table->string('home');
             $table->string('cp');
             $table->string('cologne');
             $table->string('city');
@@ -30,7 +31,7 @@ return new class extends Migration
             $table->string('specify');
             $table->timestamps();
 
-            $table->timestamp('email_verified_at')->nullable();
+            /*$table->timestamp('email_verified_at')->nullable()->unique();*/
         });
     }
 
@@ -39,6 +40,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('clientes');
     }
 };
