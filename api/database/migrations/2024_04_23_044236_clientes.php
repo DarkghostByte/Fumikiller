@@ -11,7 +11,27 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('clientes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->string('lastname1');
+            $table->string('lastname2');
+            $table->string('tradename');
+            $table->string('home')->unique();
+            $table->string('cp');
+            $table->string('cologne');
+            $table->string('city');
+            $table->string('type_of_place');
+            $table->string('description');
+            $table->string('how_to_get');
+            $table->string('cell_phone');
+            $table->string('number_fixed_number');
+            $table->string('contact_form');
+            $table->string('specify');
+            $table->timestamps();
+
+            $table->timestamp('email_verified_at')->nullable();
+        });
     }
 
     /**
