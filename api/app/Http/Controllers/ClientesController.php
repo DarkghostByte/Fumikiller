@@ -34,13 +34,17 @@ class ClientesController extends Controller
             'name' => 'required|min:3',
             'lastname1' => 'required|min:3',
             'lastname2' => 'required|min:3',
+            'tradename' => 'min:3',
             'street' => 'required|min:3',
             'home' => 'required|min:3',
             'cp' => 'required|min:5',
             'cologne' => 'required|min:3',
             'city' => 'required|min:3',
             'type_of_place' => 'required|min:3',
+            'description' => 'min:3',
+            'how_to_get' => 'min:3',
             'cell_phone' => 'required|min:10',
+            'number_fixed_number' => 'min:3',
             'contact_form' => 'required|min:3',
             'specify' => 'required|min:3',
         ]);
@@ -55,17 +59,17 @@ class ClientesController extends Controller
             $data->name = $request->name;
             $data->lastname1 = $request->lastname1;
             $data->lastname2 = $request->lastname2;
-            $data->tradename = 'Ninguno...';
+            $data->tradename = $request->tradename;
             $data->street = $request->street;            
             $data->home = $request->home;
             $data->cp = $request->cp;            
             $data->cologne = $request->cologne;
             $data->city = $request->city;            
             $data->type_of_place = $request->type_of_place;
-            $data->description = 'Ninguno...';
-            $data->how_to_get = 'Ninguno...';
+            $data->description = $request->description;
+            $data->how_to_get = $request->how_to_get;
             $data->cell_phone = $request->cell_phone;
-            $data->number_fixed_number = 'Ninguno...';            
+            $data->number_fixed_number = $request->number_fixed_number;          
             $data->contact_form = $request->contact_form;
             $data->specify = $request->specify;
             $data->save();
