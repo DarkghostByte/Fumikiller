@@ -32,5 +32,23 @@ class ClientesSeeder extends Seeder
             'contact_form'=>'Facebook',
             'specify'=>'Publicacion',
         ]);  
+        DB::table('clientes')->insert([
+            'name'=>'Luis Angel',
+            'lastname1'=>'Peña',
+            'lastname2'=>'Mora',
+            'tradename'=>'Ez-Biker',
+            'street'=>'calle',
+            'home'=>'Francisco I. Madero #707',
+            'cp'=>'31807',
+            'cologne'=>'Madero',
+            'city'=>'Nuevo Casas Grandes',
+            'type_of_place'=>'Comercio',
+            'description'=>'Tienda negra con naranja',
+            'how_to_get'=>'A 5 calles de una escuela por la principal',
+            'cell_phone'=>'6361255070',
+            'number_fixed_number'=>'6361255070',
+            'contact_form'=>'Facebook',
+            'specify'=>'Publicacion',
+        ]);  
     }
 }

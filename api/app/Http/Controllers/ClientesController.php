@@ -29,13 +29,20 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        /*
+        
         $reglas = Validator::make($request->all(),[
             'name' => 'required|min:3',
-            'price' => 'required|numeric',
-            'id_category' => 'required',
-            'img' => 'required',
-            'description' => 'required|min:3',
+            'lastname1' => 'required|min:3',
+            'lastname2' => 'required|min:3',
+            'street' => 'required|min:3',
+            'home' => 'required|min:3',
+            'cp' => 'required|min:5',
+            'cologne' => 'required|min:3',
+            'city' => 'required|min:3',
+            'type_of_place' => 'required|min:3',
+            'cell_phone' => 'required|min:10',
+            'contact_form' => 'required|min:3',
+            'specify' => 'required|min:3',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -44,19 +51,31 @@ class ClientesController extends Controller
                 'error' => $reglas->errors()
             ],201);
         }else{
-            $data = new Product();
+            $data = new Cliente();
             $data->name = $request->name;
-            $data->price = $request->price;
-            $data->img = $request->img;
-            $data->id_category= $request->id_category;
-            $data->description=$request->description;
+            $data->lastname1 = $request->lastname1;
+            $data->lastname2 = $request->lastname2;
+            $data->tradename = 'Ninguno...';
+            $data->street = $request->street;            
+            $data->home = $request->home;
+            $data->cp = $request->cp;            
+            $data->cologne = $request->cologne;
+            $data->city = $request->city;            
+            $data->type_of_place = $request->type_of_place;
+            $data->description = 'Ninguno...';
+            $data->how_to_get = 'Ninguno...';
+            $data->cell_phone = $request->cell_phone;
+            $data->number_fixed_number = 'Ninguno...';            
+            $data->contact_form = $request->contact_form;
+            $data->specify = $request->specify;
             $data->save();
 
             return response()->json([
                 'status'=>'success'
             ]);
-            */
+            
         }
+    }
 
     public function sendEmail($token,$name)
     {
