@@ -57,9 +57,15 @@
                 >
               </template>
             </el-table-column>
-                <el-table-column prop="lastname1" label="Apellidos" sortable width="155" />
-                <el-table-column prop="lastname2" label="Apellidos" sortable width="155" />
+                <el-table-column prop="lastname1" label="Apellidos" sortable width="125" />
+                <el-table-column prop="lastname2" label="Apellidos" sortable width="125" />
                 <el-table-column prop="name" label="Nombres"  sortable width="110"/>
+                <el-table-column prop="city" label="Ciudad"  sortable width="155"/>                
+                <el-table-column prop="home" label="Dirección" sortable width="160" />
+                <el-table-column prop="cell_phone" label="Numero Celular"  sortable width="150" />
+                <el-table-column prop="number_fixed_number" label="Numero Fijo"  sortable width="140" />
+
+
 
 
 
