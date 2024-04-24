@@ -57,13 +57,20 @@
                 >
               </template>
             </el-table-column>
+                <el-table-column prop="lastname1" label="Apellidos" sortable width="155" />
+                <el-table-column prop="lastname2" label="Apellidos" sortable width="155" />
+                <el-table-column prop="name" label="Nombres"  sortable width="110"/>
 
+
+
+                <!-- 
                 <el-table-column prop="apCliente" label="Apellidos" sortable width="155" />
                 <el-table-column prop="nameCliente" label="Nombres"  sortable width="110"/>
                 <el-table-column prop="ciudad" label="Ciudad"  sortable width="160"/>                
                 <el-table-column prop="address" label="Dirección" sortable width="160" />
                 <el-table-column prop="numCelu" label="Numero Celular"  sortable width="160" />
                 <el-table-column prop="numTel" label="Numero Fijo"  sortable width="130" />
+                -->
                 <el-table-column label="">
                   <template #default>
                     <router-link to="/admin/clients/edit-clients">
@@ -182,53 +189,32 @@
   </template>
   
   <script>
-    
+      import axios from 'axios';
       export default {
           name:'AdminHomeComponent',
-          
+          /*
+            data:()=>({
+                tableData:[],
+                url:process.env.VUE_APP_ROOT_ASSETS,
+          }),
+          mounted(){
+            this.tableData = []
+            axios.get('products').then(res=>{
+              this.tableData=res.data.data
+            })
+          },
+          */
           data:()=>({
             dialogVisible: false,
             dialogVisibleView: false,
+            url:process.env.VUE_APP_ROOT_ASSETS,
             tableData:[],
           }),
           mounted(){
-            this.tableData = [{
-                    apCliente: 'Peña Mora',
-                    amCliente:'',
-                    ciudad:'Nuevo Casas Grandes',
-                    nameCliente: 'Luis Angel',
-                    address: 'No. 189, Grove St, Los Angeles',
-                    numCelu:'6361306641',
-                    numTel:'636130664',
-                },
-                {
-                    apCliente: 'Chavez Chavez',
-                    amCliente:'',
-                    ciudad:'Nuevo Casas Grandes',
-                    nameCliente: 'Jesus Liadeo',
-                    address: 'No. 189, Grove St, Los Angeles',
-                    numCelu:'636125070',
-                    numTel:'636125070',
-                },
-                {
-                    apCliente: 'Mozqueda Gomez',
-                    amCliente:'',
-                    ciudad:'Nuevo Casas Grandes',
-                    nameCliente: 'Emiliano',
-                    address: 'No. 189, Grove St, Los Angeles',
-                    numCelu:'6361224988',
-                    numTel:'6361224988',
-                },
-                {
-                    apCliente: 'Madrid Holguin',
-                    amCliente:'',
-                    ciudad:'Nuevo Casas Grandes',
-                    nameCliente: 'Alan Saul',
-                    address: 'No. 189, Grove St, Los Angeles',
-                    numCelu:'6361024108',
-                    numTel:'6361024108',
-                },
-            ]
+            this.tableData = []
+            axios.get('clientes').then(res=>{
+              this.tableData=res.data.data
+            })
           },
           methods:{
             handleEdit(){},
