@@ -35,11 +35,11 @@
                 style="width: 100%"
             >
             <el-table-column label="">
-              <template #default>
+              <template #default="scope">
                 <el-button style="color:black"
                   size="small"
                   type="success"
-                  @click="dialogVisibleView = true"
+                  @click="seleccionar(scope.row)"
                   ><span class="material-symbols-outlined">visibility</span></el-button
                 >
               </template>
@@ -47,12 +47,12 @@
               
             </el-table-column>
             <el-table-column label="">
-              <template #default>
+              <template #default="scope">
                 
                 <el-button style="color:black"
                   size="small"
                   type="success"
-                  @click="dialogVisibleView = true"
+                  @click="seleccionar(scope.row)"
                   ><span class="material-symbols-outlined">lab_profile</span></el-button
                 >
               </template>
@@ -145,38 +145,38 @@
         <div class="h-72 overflow-scroll">
 
           <p style="font-size: 18px;">Datos del cliente</p>
-          Nombre: Nombre
+          Nombre: {{ selectedItem.name }}
           <br>
-          Apellido Paterno: Apellido Paterno
+          Apellido Paterno: {{ selectedItem.lastname1 }}
           <br>
-          Apellido Materno: Apellido Materno
+          Apellido Materno: {{ selectedItem.lastname2 }}
           <br>
-          Nombre comercial: Nombre comercial
+          Nombre comercial: {{ selectedItem.tradename }}
           <br><br>
 
           <p style="font-size: 18px;">Direccion</p>
-          Tipo de calle: Tipo de calle
+          Tipo de calle: {{ selectedItem.home }}
           <br>
-          Domicilio: Domicilio
+          Domicilio: {{ selectedItem.cp }}
           <br>
-          Codigo postal: Codigo postal
+          Codigo postal: {{ selectedItem.cologne }}
           <br>
-          Colonia: Colonia
+          Colonia: {{ selectedItem.city }}
           <br>
-          Tipo de lugar: Tipo de lugar
+          Tipo de lugar: {{ selectedItem.type_of_place }}
           <br><br>
 
           
           <p style="font-size: 18px;">Ubicacion</p>
-          Descripcion: Descripcion
+          Descripcion: {{ selectedItem.description }}
           <br>
-          Como llegar: Como llegar
+          Como llegar: {{ selectedItem.how_to_get }}
           <br><br>
 
           <p style="font-size: 18px;">Contacto</p>
-          Numero de celular: Numero de celular
+          Numero de celular: {{ selectedItem.cell_phone }}
           <br>
-          Numero fijo: Numero fijo
+          Numero fijo: {{ selectedItem.number_fixed_number }}
           <br><br>
         </div>
         
@@ -215,6 +215,7 @@
             dialogVisibleView: false,
             url:process.env.VUE_APP_ROOT_ASSETS,
             tableData:[],
+            selectedItem:null
           }),
           mounted(){
             this.tableData = []
@@ -225,6 +226,11 @@
           methods:{
             handleEdit(){},
             handleDelete(){},
+            seleccionar(row){
+            console.log(row)
+            this.selectedItem=row
+            this.dialogVisibleView=true
+            },
           }
       }
   </script>
