@@ -26,32 +26,38 @@
         <!-- TABLE DATA -->
 
         <div class="flex ml-5">
-          <el-form :model="form" label-width="auto" style="max-width: 100%">
+          <el-form 
+          :model="form" 
+          label-width="auto" 
+          style="max-width: 100%"
+          :label-position="'top'">
             
             <p>Cliente</p>
+            <!--
             <div style="display:flex" class="m-2"  >
               <p class="px-4 pr-12">Nombre Comercial:</p>
               <p class="px-20 pr-10">Nombres:</p>
               <p class="px-20 ml-12 ">Apellido Paterno:</p>
               <p class="px-5">Apellido Materno:</p>
             </div>
+            -->
 
             <!-- Primera Fila -->  
             <div class="flex">
-              <el-form-item class="ml-5" style="width: 25%">
-                <el-input v-model="form.comercio" 
+              <el-form-item prop="name" label="Nombre del comercio:" class="ml-5 px-10" style="width: 25%">
+                <el-input v-model="form.comercio" class="px-1" 
                 placeholder="Ingresa el nombre del comercio"/>
               </el-form-item>
-              <el-form-item class="px-8">
-                <el-input v-model="form.name" 
+              <el-form-item prop="name" label="Nombres:" class="px-8">
+                <el-input v-model="form.name" class="px-1" 
                 placeholder="Ingresa sus nombres"/>
               </el-form-item>
-              <el-form-item class="px-6">
-                <el-input v-model="form.lastname1" 
+              <el-form-item prop="name" label="Apellido paterno:" class="px-6">
+                <el-input v-model="form.lastname1" class="px-1" 
                 placeholder="Ingresa su primer apellido"/>
               </el-form-item>
-              <el-form-item class="px-5">
-                <el-input v-model="form.lastname2" 
+              <el-form-item prop="name" label="Apellido materno:" class="px-5">
+                <el-input v-model="form.lastname2" class="px-1" 
                 placeholder="Ingresa su segundo apellido"/>
               </el-form-item>
             </div>

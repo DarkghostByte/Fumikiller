@@ -57,9 +57,9 @@
                 >
               </template>
             </el-table-column>
+                <el-table-column prop="name" label="Nombres"  sortable width="110"/>
                 <el-table-column prop="lastname1" label="Apellidos" sortable width="125" />
                 <el-table-column prop="lastname2" label="Apellidos" sortable width="125" />
-                <el-table-column prop="name" label="Nombres"  sortable width="110"/>
                 <el-table-column prop="city" label="Ciudad"  sortable width="155"/>                
                 <el-table-column prop="home" label="Dirección" sortable width="160" />
                 <el-table-column prop="cell_phone" label="Numero Celular"  sortable width="150" />
@@ -91,11 +91,11 @@
                 </el-table-column>
 
                 <el-table-column label="">
-                    <template #default>
+                    <template #default="scope">
                         <el-button style="color:black"
                         size="small"
                         type="danger"
-                        @click="dialogVisible = true"
+                        @click="eliminar(scope.row)"
                         ><span class="material-symbols-outlined">delete</span></el-button
                         >
                     </template>
@@ -114,11 +114,11 @@
         <div class="h-72 overflow-scroll">
           Datos del cliente
           <br><br>
-          Nombre: Datos de la base de datos (Nombre y apellidos)
+          Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
           <br><br>
-          Direccion: Datos de la base de datos (Direccion)
+          Direccion: {{ selectedItem.city }}, {{ selectedItem.cologne }}, {{ selectedItem.home }}, {{ selectedItem.cp }}
           <br><br>
-          Telefono: Datos de la base de datos (Numero de telefono)
+          Telefono: Datos de la base de datos {{ selectedItem.cell_phone }}
           <br><br>
         </div>
         
@@ -226,6 +226,11 @@
           methods:{
             handleEdit(){},
             handleDelete(){},
+            eliminar(row){
+              console.log(row)
+              this.selectedItem=row
+              this.dialogVisible=true
+            },
             seleccionar(row){
             console.log(row)
             this.selectedItem=row
