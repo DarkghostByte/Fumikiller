@@ -10,7 +10,7 @@
           style="color:black">
             <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
-            Consultar Cliente
+            Consultar Clientes
           </router-link>
 
           <router-link to="/admin/clients/add-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
@@ -49,20 +49,20 @@
             -->
             <p class="px-5">Datos del cliente:</p>
             <div class="flex">
-              <el-form-item prop="name" label="Nombres:" class="px-10">
+              <el-form-item prop="name" label="Nombres:" class="px-2" style="width: 240px;">
                 <el-input v-model="form1.name" class="px-1" 
                 placeholder="Ingresa sus nombres"/>
               </el-form-item>
-              <el-form-item prop="lastname1" label="Apellidos Paterno:" class="px-10">
+              <el-form-item prop="lastname1" label="Apellidos Paterno:" class="px-5">
                 <el-input v-model="form1.lastname1" class="px-1"
                 placeholder="Ingresa su apellido paterno"/>
               </el-form-item>
-              <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-10">
+              <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-5">
                 <el-input v-model="form1.lastname2" class="px-1"
                 placeholder="Ingresa su apellido materno"/>
               </el-form-item>
               <el-form-item prop="tradename" label="Nombre Comercial:" class="px-10">
-                <el-input v-model="form1.tradename" class="px-1"
+                <el-input v-model="form1.tradename" class=""
                 placeholder="Ingresa el nombre del comercio"/>
               </el-form-item>
             </div>
@@ -79,30 +79,25 @@
             </div>
             -->
             <div class="flex">
-              <el-form-item prop="street" label="Tipo de calle:" class="px-10">
-                <el-select v-model="form1.street" placeholder="Tipo de calle" class="w-20" style="width: 180px;">
+              <el-form-item prop="street" label="Tipo de calle:" class="px-2">
+                <el-select v-model="form1.street" placeholder="Tipo de calle" class=" px-1" style="width: 223px;">
                   <el-option label="Av." value="Av." />
                   <el-option label="Calle" value="Calle" />
                   <el-option label="Callejón" value="Callejon" />
                 </el-select>
               </el-form-item>
               
-              <el-form-item prop="home" label="Domicilio:" class="px-10">
+              <el-form-item prop="home" label="Domicilio:" class=" px-7" style="width: 350px;" >
                 <el-input v-model="form1.home" class="px-1"
                 placeholder="Ingresa el domicilio"/>
               </el-form-item>
 
-              <el-form-item prop="cp" label="Codigo postal:" class="px-10">
+              <el-form-item prop="cp" label="Codigo postal:" class="px-4">
                 <el-input v-model="form1.cp" class="px-1"
                 placeholder="Ingresa el codigo postal"/>
               </el-form-item>
 
-              <el-form-item prop="cologne" label="Colonia:" class="px-10">
-                <el-select v-model="form1.cologne" placeholder="Selecciona la  colonia" class="px-1" style="width: 265px;" >
-                  <el-option label="Primera de mayo" value="primerademayo" />
-                  <el-option label="Madero" value="madero" />
-                </el-select>
-              </el-form-item>
+              
             </div>
 
             <!-- Tercera Fila -->
@@ -113,7 +108,13 @@
             </div>
             -->
             <div class="flex">
-              <el-form-item prop="city" label="Cuidad:" class="px-10" style="width: 25%">
+              <el-form-item prop="cologne" label="Colonia:" class="px-3">
+                <el-select v-model="form1.cologne" placeholder="Selecciona la  colonia" class="px-1" style="width: 220px;" >
+                  <el-option label="Primera de mayo" value="primerademayo" />
+                  <el-option label="Madero" value="madero" />
+                </el-select>
+              </el-form-item>
+              <el-form-item prop="city" label="Cuidad:" class="px-7" style="width: 25%">
                 <el-select v-model="form1.city" placeholder="Selecciona la cuidad">
                   <el-option label="Nuevo Casas Grandes" value="ncg" />
                   <el-option label="Casas Grandes" value="cg" />
@@ -131,8 +132,8 @@
             <div class="px-5" > 
               <br>
               <p>Datos del domicilio:</p>
-              <el-form-item prop="description" label="Decripcion:"  class="pt-4 px-10" >
-                <el-input v-model="form1.description" type="textarea" 
+              <el-form-item prop="description" label="Decripcion:"  class="pt-4 px-10"  >
+                <el-input v-model="form1.description" type="textarea" style="height:50px;"
                 placeholder="Agrega una descripcion"/>
               </el-form-item>
               <el-form-item prop="how_to_get" label="Como llegar:" class="pt-5 px-10" >
@@ -176,13 +177,13 @@
                   <el-option label="Barda" value="barda" />
                 </el-select>
               </el-form-item>
-              <el-form-item prop="specify" label="Especificar:" class="px-10">
+              <el-form-item prop="specify" label="Especificar:" class="px-16">
                 <el-input v-model="form1.specify" 
                 placeholder="Especificar"/>
               </el-form-item>
             </div>
                         
-            <div style="color:white; display:flex; justify-content: center;" >
+            <div style="color:white; display:flex; justify-content: center; transition:10s;" >
               <router-link to="/admin/clients">
                 <el-button @click="submitForm(formRef)" 
                 class="w-40 h-16 mt-5" 

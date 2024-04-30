@@ -43,3 +43,32 @@ return new class extends Migration
         Schema::dropIfExists('clientes');
     }
 };
+
+//Falto esto
+// class pedido Extends Model
+//{
+//private $fillable=!['address','code','country','state'];    
+//}
+
+
+//Lo tienes mal puñeton
+// class ProductoPediro extends Model
+//{
+//use HasFactory;    
+//private $table='productos_pedidos';
+//private $filleabel= ['id_pedido','id_producto', 'cantidad', 'precio']; 
+//}
+
+
+//lO VAS A OCUPAR SEGUN TU
+//public function store(Request  $request)
+//{
+//add Pedido
+//$validacion = request->validate([
+    //'address'=>'required|3:
+    //'code'=>'required|5:
+    //'country'=>'required|5:
+    //'state'=>'required|3:
+    //'phone'=>'required|10:
+    //'reference'=>'required|10:
+//}

@@ -85,8 +85,7 @@
 nav{ 
   justify-content: end;  
   width: 50px;
-  font-size: 0px;
-  
+  font-size: 0px; 
 }
 nav.span{
   margin-left: 15px;
