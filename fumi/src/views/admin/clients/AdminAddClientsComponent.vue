@@ -132,12 +132,12 @@
             <div class="px-5" > 
               <br>
               <p>Datos del domicilio:</p>
-              <el-form-item prop="description" label="Decripcion:"  class="pt-4 px-10"  >
-                <el-input v-model="form1.description" type="textarea" style="height:50px;"
+              <el-form-item prop="description" label="Decripcion:"  class="pt-4 px-10">
+                <el-input v-model="form1.description" type="textarea" maxlength="100"  show-word-limit
                 placeholder="Agrega una descripcion"/>
               </el-form-item>
-              <el-form-item prop="how_to_get" label="Como llegar:" class="pt-5 px-10" >
-                <el-input v-model="form1.how_to_get" type="textarea" 
+              <el-form-item prop="how_to_get" label="Como llegar:" class="pt-5 px-10">
+                <el-input v-model="form1.how_to_get" type="textarea"  maxlength="100"  show-word-limit
                 placeholder="Agrega como llegar al domicilio"/>
               </el-form-item>
             </div>
@@ -182,7 +182,20 @@
                 placeholder="Especificar"/>
               </el-form-item>
             </div>
-                        
+
+            <br>
+            <p class="px-5">Contratacion:</p>
+            <div class="flex">
+              <el-form-item prop="recruitment_data" label="Tipo de contratacion:" class="px-10">
+                <el-checkbox-group v-model="form1.recruitment_data">
+                  <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
+                  <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
+                  <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
+                  <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+            </div>
+
             <div style="color:white; display:flex; justify-content: center; transition:10s;" >
               <router-link to="/admin/clients">
                 <el-button @click="submitForm(formRef)" 
@@ -226,6 +239,7 @@
                 number_fixed_number: '6360000000',
                 contact_form:'Radio',
                 specify:'En la estacion 104.9',
+                recruitment_data: []
             },
             rules:{
               

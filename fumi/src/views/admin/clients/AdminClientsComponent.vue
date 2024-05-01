@@ -178,6 +178,11 @@
           <br>
           Numero fijo: {{ selectedItem.number_fixed_number }}
           <br><br>
+
+          <p style="font-size: 18px;">Contacto</p>
+          Tipo de contratacion: {{ selectedItem.recruitment_data }}
+          <br><br>
+
         </div>
         
         <template #footer>

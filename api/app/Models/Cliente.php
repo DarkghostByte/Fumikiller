@@ -26,5 +26,6 @@ class Cliente extends Model
         'number_fixed_number',
         'contact_form',
         'specify',
+        'recruitment_data',
     ];
 }

@@ -29,6 +29,7 @@ return new class extends Migration
             $table->string('number_fixed_number');
             $table->string('contact_form');
             $table->string('specify');
+            $table->string('recruitment_data');
             $table->timestamps();
 
             /*$table->timestamp('email_verified_at')->nullable()->unique();*/

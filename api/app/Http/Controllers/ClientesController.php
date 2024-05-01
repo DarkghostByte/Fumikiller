@@ -47,6 +47,7 @@ class ClientesController extends Controller
             'number_fixed_number' => 'min:3',
             'contact_form' => 'required|min:3',
             'specify' => 'required|min:3',
+            'recruitment_data' => 'required|array|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -72,6 +73,7 @@ class ClientesController extends Controller
             $data->number_fixed_number = $request->number_fixed_number;          
             $data->contact_form = $request->contact_form;
             $data->specify = $request->specify;
+            $data->recruitment_data = json_encode($request->recruitment_data);
             $data->save();
 
             return response()->json([
