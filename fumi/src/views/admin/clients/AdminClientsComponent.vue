@@ -108,7 +108,7 @@
         <el-dialog
         v-model="dialogVisible"
         title="Deseas eliminar al siguente cliente"
-        width="400">
+        width="1200">
 
         <div class="h-72 overflow-scroll">
           Datos del cliente
@@ -139,12 +139,13 @@
         <el-dialog
         v-model="dialogVisibleView"
         title="Datos acerca del cliente"
-        width="600">
+        width="1500"
+        height="1000">
 
-        <div class="h-72 overflow-scroll">
+        <div class="h-72 overflow-scroll" style="font-size: 20px;">
 
-          <p style="font-size: 18px;">Datos del cliente</p>
-          Nombre: {{ selectedItem.name }}
+          <p style="font-size: 80px;">Datos del cliente</p>
+          Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
           <br>
           Apellido Paterno: {{ selectedItem.lastname1 }}
           <br>
