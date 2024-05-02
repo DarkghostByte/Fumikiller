@@ -33,6 +33,7 @@
                 :data="tableData"
                 :default-sort="{ prop: 'name', order: 'descending' }"
                 style="width: 100%"
+                stripe 
             >
             <el-table-column label="">
               <template #default="scope">
@@ -43,47 +44,45 @@
                   ><span class="material-symbols-outlined">visibility</span></el-button
                 >
               </template>
-
-              
             </el-table-column>
+
             <el-table-column label="">
               <template #default="scope">
-                
                 <el-button style="color:black"
                   size="small"
                   type="success"
                   @click="seleccionar(scope.row)"
+                  disabled
                   ><span class="material-symbols-outlined">lab_profile</span></el-button
                 >
               </template>
             </el-table-column>
+
+            <el-table-column label="">
+              <template #default="scope">
+                <router-link :to="'/admin/works/add-works/'+scope.row.id">
+                  <el-button style="color:black"
+                    size="small"
+                    type="warning"
+                    @click="handleEdit()"
+                    ><span class="material-symbols-outlined">bug_report</span></el-button>
+                </router-link>
+              </template>
+            </el-table-column>
+
                 <el-table-column prop="name" label="Nombres"  sortable width="110"/>
-                <el-table-column prop="lastname1" label="Apellidos" sortable width="125" />
-                <el-table-column prop="lastname2" label="Apellidos" sortable width="125" />
-                <el-table-column prop="city" label="Ciudad"  sortable width="155"/>                
-                <el-table-column prop="home" label="Dirección" sortable width="160" />
+                <el-table-column prop="lastname1" label="Apellidos" sortable width="120" />
+                <el-table-column prop="city" label="Ciudad"  sortable width="140"/>                
+                <el-table-column prop="home" label="Dirección" sortable width="150" />
+                <el-table-column prop="cp" label="Codigo Postal"  sortable width="145" />
                 <el-table-column prop="cell_phone" label="Numero Celular"  sortable width="150" />
-                <el-table-column prop="number_fixed_number" label="Numero Fijo"  sortable width="140" />
-
-
-
-
-
-                <!-- 
-                <el-table-column prop="apCliente" label="Apellidos" sortable width="155" />
-                <el-table-column prop="nameCliente" label="Nombres"  sortable width="110"/>
-                <el-table-column prop="ciudad" label="Ciudad"  sortable width="160"/>                
-                <el-table-column prop="address" label="Dirección" sortable width="160" />
-                <el-table-column prop="numCelu" label="Numero Celular"  sortable width="160" />
-                <el-table-column prop="numTel" label="Numero Fijo"  sortable width="130" />
-                -->
                 <el-table-column label="">
-                  <template #default>
-                    <router-link to="/admin/clients/edit-clients">
+                  <template #default="scope">
+                    <router-link :to="'/admin/clients/edit-clients/'+scope.row.id">
                       <el-button style="color:black"
                         size="small"
                         type="warning"
-                        @click="handleDelete()"
+                        @click="handleEdit()"
                         ><span class="material-symbols-outlined">edit</span></el-button
                       >
                     </router-link>
@@ -202,35 +201,33 @@
   <script>
       import axios from 'axios';
       export default {
-          name:'AdminHomeComponent',
-          /*
-            data:()=>({
-                tableData:[],
-                url:process.env.VUE_APP_ROOT_ASSETS,
-          }),
-          mounted(){
-            this.tableData = []
-            axios.get('products').then(res=>{
-              this.tableData=res.data.data
-            })
-          },
-          */
+          name:'AdminClientsComponent',
           data:()=>({
             dialogVisible: false,
             dialogVisibleView: false,
             url:process.env.VUE_APP_ROOT_ASSETS,
             tableData:[],
-            selectedItem:null
+            selectedItem: null
           }),
           mounted(){
-            this.tableData = []
+            this.refresh()
+          },
+          methods:{
+            refresh(){
+              this.tableData = []
             axios.get('clientes').then(res=>{
               this.tableData=res.data.data
             })
-          },
-          methods:{
-            handleEdit(){},
-            handleDelete(){},
+            },
+            handleEdit(){
+            },
+            handleDelete(){
+              axios.delete('clientes/'+this.selectedItem.id).then(res=>{
+              console.log(res)
+              this.refresh()
+              this.dialogVisible=false
+            })
+            },
             eliminar(row){
               console.log(row)
               this.selectedItem=row

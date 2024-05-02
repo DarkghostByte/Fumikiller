@@ -12,6 +12,15 @@
       
       </div>
     </div>
+
+
+      <el-carousel :interval="0" type="card" height="200px">
+        <el-carousel-item v-for="item in 4" :key="item">
+          <h3 text="2xl" justify="center">{{ item }}</h3>
+        </el-carousel-item>
+      </el-carousel>
+
+
     <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
       <div class="flex items-center p-8 bg-white shadow rounded-lg">
         <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
@@ -106,7 +115,7 @@
 <script>
   
   export default {
-          name:'AdminComponent',
+          name:'AdminHomeComponent',
           
           data:()=>({
                 tableData:[],
@@ -149,3 +158,21 @@
           }
       }
 </script>
+
+<style>
+.el-carousel__item h3 {
+  color: #475669;
+  opacity: 0.75;
+  line-height: 200px;
+  margin: 0;
+  text-align: center;
+}
+
+.el-carousel__item:nth-child(2n) {
+  background-color: #99a9bf;
+}
+
+.el-carousel__item:nth-child(2n + 1) {
+  background-color: #d3dce6;
+}
+</style>

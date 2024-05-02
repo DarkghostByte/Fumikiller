@@ -39,14 +39,7 @@
           :rules="rules"
           :label-position="'top'">
 
-          <!--
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-7">Nombres:</p>
-              <p class="px-20 ml-12 ">Apellido Paterno:</p>
-              <p class="px-5">Apellido Materno:</p>
-              <p class="px-20 pr-5">Nombre Comercial:</p>
-            </div>
-            -->
+            <!--  Primera Fila -->
             <p class="px-5">Datos del cliente:</p>
             <div class="flex">
               <el-form-item prop="name" label="Nombres:" class="px-2" style="width: 240px;">
@@ -70,14 +63,6 @@
             <!-- Segunda Fila -->
             <br>
             <p class="px-5">Domicilio:</p>
-            <!--
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-7">Tipo de Calle:</p>
-              <p class="px-12 ml-12 ">Domicilio:</p>
-              <p class="px-28 pr-">Codigo Postal:</p>
-              <p class="pr-5">Colonia:</p>
-            </div>
-            -->
             <div class="flex">
               <el-form-item prop="street" label="Tipo de calle:" class="px-2">
                 <el-select v-model="form1.street" placeholder="Tipo de calle" class=" px-1" style="width: 223px;">
@@ -101,12 +86,6 @@
             </div>
 
             <!-- Tercera Fila -->
-            <!--
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-7">Ciudad:</p>
-              <p class="px-24 ml-12 ">Tipo de lugar:</p>
-            </div>
-            -->
             <div class="flex">
               <el-form-item prop="cologne" label="Colonia:" class="px-3">
                 <el-select v-model="form1.cologne" placeholder="Selecciona la  colonia" class="px-1" style="width: 220px;" >
@@ -116,8 +95,8 @@
               </el-form-item>
               <el-form-item prop="city" label="Cuidad:" class="px-7" style="width: 25%">
                 <el-select v-model="form1.city" placeholder="Selecciona la cuidad">
-                  <el-option label="Nuevo Casas Grandes" value="ncg" />
-                  <el-option label="Casas Grandes" value="cg" />
+                  <el-option label="Nuevo Casas Grandes" value="Nuevo Casas Grandes" />
+                  <el-option label="Casas Grandes" value="Casas Grandes" />
                 </el-select>
               </el-form-item>
               <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-4" style="width: 25%">
@@ -145,12 +124,6 @@
             <!-- Sexta Fila -->
             <br>
             <p class="px-5">Contacto:</p>
-            <!--
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-7">Numero de Celular:</p>
-              <p class="px-12">Numero Fijo:</p>
-            </div>
-            -->
             <div class="flex">
               <el-form-item prop="cell_phone" label="Numero de celular:" class="px-10">
                 <el-input v-model="form1.cell_phone" 
@@ -163,13 +136,6 @@
             </div>
 
             <!-- Septima Fila -->
-            <!--
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-7">Forma de contacto:</p>
-              <p class="px-12">Especificar:</p>
-            </div>
-            -->
-            
             <div class="flex">
               <el-form-item prop="contact_form" label="Forma de contacto:" class="px-10" style="width: 25%">
                 <el-select v-model="form1.contact_form" placeholder="Selecciona la  forma de contacto" class="">
@@ -183,6 +149,7 @@
               </el-form-item>
             </div>
 
+            <!-- Octava fila -->
             <br>
             <p class="px-5">Contratacion:</p>
             <div class="flex">
@@ -302,15 +269,21 @@
             
         }),
           mounted(){
-            
+            this.refresh()
           },
           methods:{
             errorUpload(error){
               console.log(error)
             },
-
+            refresh(){
+              this.tableData = []
+            axios.get('clientes').then(res=>{
+              this.tableData=res.data.data
+            })
+            },
             successUpload(response){
                 console.log(response)
+                this.refresh()
                 axios.post('clientes',this.form1).then(response=>{
                     console.log(response)
                     ElNotification({

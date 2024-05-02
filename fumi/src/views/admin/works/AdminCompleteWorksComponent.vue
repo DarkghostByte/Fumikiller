@@ -169,7 +169,17 @@
                     placeholder="Hora"
                     
                   />
+
                 </el-col>
+              </el-form-item>
+              
+            </div>
+
+            <p>Pago:</p>
+            <div class="flex justfy-start px-16">
+              <el-form-item prop="name" label="Se cobro:" class="px-2" style="width: 240px;">
+                <el-input v-model="form.price" class="px-1" 
+                placeholder="Ingresa el monto" type="number"/>
               </el-form-item>
             </div>
 
@@ -221,6 +231,7 @@
                 date2:'',
                 date3:'',
                 date4:'',
+                price:'',
                 type: [],
             },
           }),

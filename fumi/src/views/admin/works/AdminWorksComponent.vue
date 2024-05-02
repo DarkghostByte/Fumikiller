@@ -5,17 +5,11 @@
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start" >
           <div class="flex flex-wrap items-start justify-end ">
 
-            <router-link to="/admin/works" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+            <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
             style="color:black">
               <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px;
               margin-left: -5px; margin-right:10px;"></i>                
-              Consultar Orden
-            </router-link>
-  
-            <router-link to="/admin/works/add-works" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-              <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>                
-              Nueva Orden
+              Ver Clientes
             </router-link>
             
           </div>
@@ -118,3 +112,5 @@
           }
       }
   </script>
+
+

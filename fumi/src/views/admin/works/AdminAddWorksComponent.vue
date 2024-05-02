@@ -5,17 +5,11 @@
         <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start" >
           <div class="flex flex-wrap items-start justify-end ">
 
-          <router-link to="/admin/works" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+            <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-red-400 hover:bg-red-700 focus:bg-red-800 rounded-md ml-6 mb-3"
           style="color:black">
-            <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px;
+            <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
-            Consultar Orden
-          </router-link>
-
-          <router-link to="/admin/works/add-works" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-            <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>                
-            Nueva Orden
+            Devolver
           </router-link>
 
           </div>
@@ -45,20 +39,24 @@
             <!-- Primera Fila -->  
             <div class="flex">
               <el-form-item prop="name" label="Nombre del comercio:" class="ml-5 px-10" style="width: 25%">
-                <el-input v-model="form.comercio" class="px-1" 
-                placeholder="Ingresa el nombre del comercio"/>
+                <el-input v-model="form.tradename" class="px-1" 
+                placeholder="Ingresa el nombre del comercio"
+                disabled/>
               </el-form-item>
               <el-form-item prop="name" label="Nombres:" class="px-8">
                 <el-input v-model="form.name" class="px-1" 
-                placeholder="Ingresa sus nombres"/>
+                placeholder="Ingresa sus nombres"
+                disabled/>
               </el-form-item>
               <el-form-item prop="name" label="Apellido paterno:" class="px-6">
                 <el-input v-model="form.lastname1" class="px-1" 
-                placeholder="Ingresa su primer apellido"/>
+                placeholder="Ingresa su primer apellido"
+                disabled/>
               </el-form-item>
               <el-form-item prop="name" label="Apellido materno:" class="px-5">
                 <el-input v-model="form.lastname2" class="px-1" 
-                placeholder="Ingresa su segundo apellido"/>
+                placeholder="Ingresa su segundo apellido"
+                disabled/>
               </el-form-item>
             </div>
 
@@ -180,8 +178,11 @@
   </template>
   
   <script>
+      import { ElNotification } from 'element-plus';
+      import {useRoute} from 'vue-router';
+      import axios from 'axios';
       export default {
-          name:'AdminHomeComponent',
+          name:'AdminAddWorksComponent',
           
           data:()=>({
                 tableData:[],
@@ -200,11 +201,72 @@
             },
           }),
           mounted(){
-            
+            this.refresh()
+            const route = useRoute()
+            this.id = route .params.id
+            axios.get('clientes/'+this.id).then(res=>{
+              console.log(res)
+              let datos = res.data.data
+              this.form.name = datos.name
+              this.form.lastname1 = datos.lastname1
+              this.form.lastname2 = datos.lastname2
+              this.form.tradename = datos.tradename
+              this.form.street = datos.street
+              this.form.home = datos.home
+              this.form.cp = datos.cp
+              this.form.cologne = datos.cologne
+              this.form.city = datos.city
+              this.form.type_of_place = datos.type_of_place
+              this.form.description = datos.description
+              this.form.how_to_get = datos.how_to_get
+              this.form.cell_phone = datos.cell_phone
+              this.form.number_fixed_number = datos.number_fixed_number
+            })          
           },
           methods:{
-            handleEdit(){},
-            handleDelete(){},
-          }
+            errorUpload(error){
+              console.log(error)
+            },
+            refresh(){
+              this.tableData = []
+            axios.get('clientes').then(res=>{
+              this.tableData=res.data.data
+            })
+            },
+            successUpload(response){
+                console.log(response)
+                this.refresh()
+                axios.post('clientes',this.form1).then(response=>{
+                    console.log(response)
+                    ElNotification({
+                        title:'Alerta',
+                        message:'Registro insertado correctamente',
+                        type:'success'
+                    })
+                }).catch(error=>{
+                    console.log(error)
+                    ElNotification({
+                        title:'Error',
+                        message:'Favor de llenar los campos',
+                        type:'error'
+                    })
+                })
+            },
+
+            submitForm(){
+                this.$refs.formRef.validate( (valid,fields)=>{
+                    if(valid){
+                        console.log(fields);
+                        this.successUpload();
+                    }else{
+                        ElNotification({
+                            title:'Error',
+                            message:'Favor de llenar los campos',
+                            type:'error'
+                        })
+                    }
+                } )
+            }
+        }
       }
   </script>
