@@ -13,71 +13,68 @@
       </div>
     </div>
 
+    <!-- v-for="item in 4" :key="item"-->
 
-      <el-carousel :interval="0" type="card" height="200px">
-        <el-carousel-item v-for="item in 4" :key="item">
-          <h3 text="2xl" justify="center">{{ item }}</h3>
+      <el-carousel type="card" height="200px" class="m-5 border-radius:5 gb-gray  " >
+        <el-carousel-item class=" h-auto">
+          <div style="justify-content:center;" class="h-auto flex items-center p-8  shadow rounded-lg">
+            <div class="inline-flex flex-shrink-0 items-center justify-center items-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+              </svg>
+            </div>
+            <div  class="justify-center items-center">
+              <span class="block text-gray-500">Creditos</span>
+              <span class="block text-2xl font-bold">$0.00</span>
+              <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
+            </div>
+          </div>
         </el-carousel-item>
-      </el-carousel>
-
-
-    <section class="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
-      <div class="flex items-center p-8 bg-white shadow rounded-lg">
-        <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-          <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-          </svg>
-        </div>
-        <div>
-          <span class="block text-gray-500">Creditos</span>
-          <span class="block text-2xl font-bold">$0.00</span>
-          <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
-          
-          
-          
-        </div>
-      </div>
-      <div class="flex items-center p-8 bg-white shadow rounded-lg">
-        <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
-          <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-          </svg>
-        </div>
-        <div>
-          <span class="block text-gray-500">Venta Sin Facturas</span>
-          <span class="block text-2xl font-bold">$0.00</span>
-          <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
-          
-        </div>
-      </div>
-      <div class="flex items-center p-8 bg-white shadow rounded-lg">
-        <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
-          <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-          </svg>
-        </div>
-        <div>
-          <span class="block text-gray-500">Venta Por Facturas</span>
-          <span class="block text-2xl font-bold">$0.00</span>
-          <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
-          
-        </div>
-      </div>
-      <div class="flex items-center p-8 bg-white shadow rounded-lg">
-        <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-          <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-          </svg>
-        </div>
-        <div>
-          <span class="block text-gray-500">Otro Apartado</span>
-          <span class="block text-2xl font-bold">$0.00</span>
-          <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
-          
-        </div>
-      </div>
-    </section>   
-    
+        <el-carousel-item class="h-auto">
+          <div style="justify-content:center;" class="flex items-center p-8  shadow rounded-lg">
+            <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+              </svg>
+            </div>
+            <div>
+              <span class="block text-gray-500">Venta Sin Facturas</span>
+              <span class="block text-2xl font-bold">$0.00</span>
+              <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
+            </div>
+          </div>
+        </el-carousel-item>
+        <el-carousel-item class=" h-auto">
+          <div style="justify-content:center;" class="flex items-center p-8 shadow rounded-lg">
+            <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
+              </svg>
+            </div>
+            <div>
+              <span class="block text-gray-500">Venta Por Facturas</span>
+              <span class="block text-2xl font-bold">$0.00</span>
+              <router-link to="/admin/clients" class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
+              
+            </div>
+          </div>
+        </el-carousel-item>
+        <el-carousel-item class=" h-auto">
+          <div style="justify-content:center;" class="flex items-center p-8  shadow rounded-lg">
+            <div class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
+              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+              </svg>
+            </div>
+            <div>
+              <span class="block text-gray-500">Otro Apartado</span>
+              <span class="block text-2xl font-bold">$0.00</span>
+              <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
+              
+            </div>
+          </div>
+        </el-carousel-item>
+      </el-carousel >    
     <!-- END FILE -->
   </div>
 <!-- TABLE DATA -->
@@ -169,10 +166,20 @@
 }
 
 .el-carousel__item:nth-child(2n) {
-  background-color: #99a9bf;
+  border-radius: 10px;
+  background-color: white;
+  
 }
 
-.el-carousel__item:nth-child(2n + 1) {
-  background-color: #d3dce6;
+.el-carousel__item:nth-child(2n+1) {
+  border-radius: 10px;
+  background-color: rgb(255, 255, 255);
+
+
+}
+.el-carousel__button:nth-child(2n+1){
+  height: 3px;
+  width: 45px;
+  background-color: rgb(234, 88, 12) ;
 }
 </style>

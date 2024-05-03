@@ -31,7 +31,7 @@ class ClientesSeeder extends Seeder
             'number_fixed_number'=>'6361255070',
             'contact_form'=>'Facebook',
             'specify'=>'Publicacion',
-            'recruitment_data'=>'Presupuesto',
+            'recruitment_data'=>['Presupuesto'],
         ]);  
         DB::table('clientes')->insert([
             'name'=>'Luis Angel',
@@ -50,7 +50,7 @@ class ClientesSeeder extends Seeder
             'number_fixed_number'=>'6361255070',
             'contact_form'=>'Facebook',
             'specify'=>'Publicacion',
-            'recruitment_data'=>'Presupuesto',
+        'recruitment_data'=>['Presupuesto'],
         ]);  
     }
 }
