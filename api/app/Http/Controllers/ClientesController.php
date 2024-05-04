@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use Validator;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ClientesController extends Controller
 {
@@ -86,6 +87,12 @@ class ClientesController extends Controller
     public function sendEmail($token,$name)
     {
         //
+    }
+
+    public function generarPDF(){
+        $name="jose";
+        $pdf = Pdf::loadView('reports.reporte',[]);
+        return $pdf->stream();
     }
 
     /**
