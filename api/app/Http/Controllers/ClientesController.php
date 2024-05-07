@@ -88,10 +88,18 @@ class ClientesController extends Controller
     {
         //
     }
+    
+    //PDF Orden de trabajo
+    //public function generarPDF(){
+    //    $name="jose";
+    //    $pdf = Pdf::loadView('reports.reporte',[]);
+    //    return $pdf->stream();
+    //}
 
+    //PDF Certificado
     public function generarPDF(){
         $name="jose";
-        $pdf = Pdf::loadView('reports.reporte',[]);
+        $pdf = Pdf::loadView('reports.repoCer',[]);
         return $pdf->stream();
     }
 
