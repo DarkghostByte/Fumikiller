@@ -98,8 +98,29 @@ class ClientesController extends Controller
 
     //PDF Certificado
     public function generarPDF(){
-        $name="jose";
-        $pdf = Pdf::loadView('reports.repoCer',[]);
+       
+        /* Imagen Del Logo */
+        $path = public_path('img/logofk.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64');
+        $pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+    public function generarPDF1(){
+       
+        /* Imagen Del Logo */
+        $path = public_path('img/logofk.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64');
+        $pdf = Pdf::loadView('reports.repoCerCopy',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
 
@@ -108,6 +129,9 @@ class ClientesController extends Controller
      */
     public function show(string $id)
     {
+
+        //Va todo lo que Liadeo tomo en fotos
+
         $data = Cliente::find($id);
         return response()->json([
             'status'=>'success',

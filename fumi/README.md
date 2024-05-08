@@ -30,5 +30,8 @@ npm i
 &&
 npm update -g vue/cli
 
+### Libreria del DomPDF
+composer require barryvdh/laravel-dompdf 
+
 
 

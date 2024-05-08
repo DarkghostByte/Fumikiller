@@ -51,12 +51,29 @@
                 <el-button style="color:black"
                   size="small"
                   type="success"
-                  @click="seleccionar(scope.row)"
-                  disabled
-                  ><span class="material-symbols-outlined">lab_profile</span></el-button
-                >
+                  @click="pdf(scope.row)">
+                  <a :href="url+'api/factura/'+scope.row.id" target="_blank">
+                    <span class="material-symbols-outlined">lab_profile</span>
+                  </a>
+                </el-button>
+
               </template>
             </el-table-column>
+
+            <!--
+            <el-table-column label="">
+              <template #default="scope">
+                <el-button style="color:black"
+                  size="small"
+                  type="success"
+                  @click="pdf(scope.row)">
+                  <a :href="url+'api/factura1/'+scope.row.id" target="_blank">
+                    <span class="material-symbols-outlined">lab_profile</span>
+                  </a>
+                </el-button>
+              </template>
+            </el-table-column>
+            -->
 
             <el-table-column label="">
               <template #default="scope">
@@ -71,7 +88,11 @@
             </el-table-column>
 
                 <el-table-column prop="name" label="Nombres"  sortable width="110"/>
-                <el-table-column prop="lastname1" label="Apellidos" sortable width="120" />
+                <el-table-column label="Apellidos" sortable width="180">
+                  <template #default="scope">
+                    {{ scope.row.lastname1+' '+scope.row.lastname2 }}
+                  </template>
+                </el-table-column>
                 <el-table-column prop="city" label="Ciudad"  sortable width="140"/>                
                 <el-table-column prop="home" label="Dirección" sortable width="150" />
                 <el-table-column prop="cp" label="Codigo Postal"  sortable width="145" />
@@ -207,6 +228,7 @@
             dialogVisible: false,
             dialogVisibleView: false,
             url:process.env.VUE_APP_ROOT_ASSETS,
+            urlApi:process.env.VUE_APP_ROOT_API,
             tableData:[],
             selectedItem: null
           }),
@@ -238,6 +260,10 @@
             console.log(row)
             this.selectedItem=row
             this.dialogVisibleView=true
+            },
+            pdf(row){
+            console.log(row)
+            this.selectedItem=row
             },
           }
       }

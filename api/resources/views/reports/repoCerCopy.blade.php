@@ -9,23 +9,34 @@
         <title>PDF Clientes</title>
     </head>
 <body >
-<img src="{{ $base64 }}" alt="">
-    <div class="divLogo">
-        <h3>Sistema de Fumigaciones Urbanas</h3> 
-        <div >
-            <h3 class="letrasFlex">Certificado de aplicacion</h3>
-            <div class="noOT">
-                <h4>LicenCia Sanitaria 04-08A095</h4>
-            </div>
-        </div>
+
     
-    </div>
     
     
     <header>    
         
     </header>
     <main> 
+        <div class="row">
+            <!-- IMAGEN -->
+            <div class="col">
+                <img src="{{ $base64 }}" alt="">
+            </div>
+            <!-- DATOS EMPRESA -->
+            <div class="col">
+                <h2>Hola</h2>
+                <h3>Como</h3>
+                <h4>Estan</h4>
+            </div>
+            <!-- DATOS CERTIFICADO -->
+            <div class="col">
+                <h1 style="color:#212e8f">1</h1>
+            </div>
+            <div class="col">
+                <h1 style="color:#212e8f">1</h1>
+            </div>
+        </div>
+        <!--
         <div class="fondLimitador"></div>
         <table>
             <th>Fecha </th>
@@ -85,6 +96,7 @@
             <th> Nuevo Casas Grandes, Chihu. </th>
             <th> C.P. 31704</th>
         </table>
+    -->
 
 
         
@@ -95,96 +107,25 @@
 
 <style>
     body{
-        width: 100%;
+        color:#212122;
     }
     h1{
-        text-alaing:center;
+        font-size: 12;
     }
     img{
-        margin-top:30px;
         height:100px;
         width: 75px;
-        border: 10px,solid, black;
     }
-    .renDiv{
-        border-bottom: 1px solid black;
+    .row{
+        width: 100%;
+        background-color: yellow;
+    }
+    .col{
+        background-color: blue;
+        width: 25%;
+        float: left;
+    }
 
-    }
-    .delimitador{
-        border: 1px solid black;
-        width: 75%;
-    }
-    .dInAc{
-        height: 35px;
-        margin:20px;
-        background-color:#104e85 ;
-        color:white;
-        text-aling:center;       
-    }
-    .tblAg{
-        position:absolute;
-        
-    }
-    p{
-        text-align:center;
-        font-size:18pt;    
-    }
-    .agnAct{
-        
-    }
-    .footDiv{
-        margin:20px;
-        border-bottom:2px solid black;
-    }
-    
-    .fondLimitador{
-        position: absolute;
-        background-color:transparent;
-        height:275px;
-        width: 60px;;
-        left:95%;
-    }
-    .divLogo {
-        position: absolute;
-        
-    }
-    .letrasFlex{
-        position:relative; 
-        display: flex;
-        justify-content: space-between;
-    }
-    .noOT{
-        margin-top:-40px;
-        margin-left: 35px;
-    }
-    .button {
-        background-color: white;
-        border: 1px solid black;
-        color: white;
-        padding: 7px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 4px;
-    }
-    .button5 {
-        border-radius: 50%;
-    }
-    .btnCir{
-        position:absolute;
-        left:15%;
-    }
-    .pr{
-        margin-top:20px;
-    }
-    footer{
-        position:absolute;
-        left:20%;
-    }
-    th{
-        font-size:15px;
-        font-weight: normal;
-    }
 
 </style>
 </html>

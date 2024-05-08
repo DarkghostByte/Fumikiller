@@ -18,5 +18,8 @@ use App\Http\Controllers\ClientesController;
 
 Route::resource('clientes', ClientesController::class);
 
-Route::get('/p',[ClientesController::class,'generarPDF']);
+Route::get('/factura/{id}',[ClientesController::class,'generarPDF']);
+Route::get('/factura1/{id}',[ClientesController::class,'generarPDF1']);
+
+
 
