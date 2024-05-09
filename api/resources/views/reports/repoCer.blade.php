@@ -29,51 +29,84 @@
         <div class="fondLimitador"></div>
         <table>
             <th>Fecha </th>
-            
-            
-            
-        </table>
-        <div class="renDiv">
+            <th class="renDivTh">
+            <div class="renDiv">
             </div>
+            </th>            
+        </table>
+            
         <table>
             <th>Nombre</th>
-            <th> ________________________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <table>
             <th>Tel.</th>
-            <th> _____________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
             <th> Domicilio:</th>
-            <th> ______________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <table>
-            <th> _______________________________________________ </th>
+        <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <table>
             <th>Colinia</th>
-            <th> ___________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
             <th>C.P.</th>
-            <th> __________________ </th>
+            <<th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <table>
             <th>Ciudad</th>
-            <th> ___________________________ </th>            
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th>             
             <th> Estado</th>
-            <th> ___________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <div class="dInAc">
             <p>Producto Utilizado (Agente activo)</p>
         </div>
         <table>
             <th>Interior</th>
-            <th> ___________________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <table class="">
             <th>Exterior</th>
-            <th> ___________________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <table>
             <th>Observaciones</th>
-            <th> _____________________________ </th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
         </table>
         <div class="footDiv">
 
@@ -96,6 +129,7 @@
 <style>
     body{
         width: 100%;
+        
     }
     h1{
         text-alaing:center;
@@ -104,15 +138,25 @@
         margin-top:30px;
         height:100px;
         width: 75px;
-        border: 10px,solid, black;
+    }
+    table{
+        width: 100%;
+        font-size:20px;
+        margin-top:10px;
+    }
+    .renDivTh{
+        width: 100%;
     }
     .renDiv{
         border-bottom: 1px solid black;
-
+        height:15px;
+        width: 100%;
+        margin-top:3px;
     }
     .delimitador{
         border: 1px solid black;
-        width: 75%;
+        width: 100%;
+        height:99%;
     }
     .dInAc{
         height: 35px;
@@ -127,14 +171,14 @@
     }
     p{
         text-align:center;
-        font-size:18pt;    
+        font-size:20pt;    
     }
     .agnAct{
         
     }
     .footDiv{
         margin:20px;
-        border-bottom:2px solid black;
+        border-bottom:2px solid grey;
     }
     
     .fondLimitador{
@@ -182,8 +226,9 @@
         left:20%;
     }
     th{
-        font-size:15px;
+        font-size:20px;
         font-weight: normal;
+        
     }
 
 </style>

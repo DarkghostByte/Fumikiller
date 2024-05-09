@@ -52,7 +52,7 @@
                   size="small"
                   type="success"
                   @click="pdf(scope.row)">
-                  <a :href="url+'api/factura/'+scope.row.id" target="_blank">
+                  <a :href="url+'api/orden/'+scope.row.id" target="_blank">
                     <span class="material-symbols-outlined">lab_profile</span>
                   </a>
                 </el-button>
@@ -60,20 +60,19 @@
               </template>
             </el-table-column>
 
-            <!--
+            
             <el-table-column label="">
               <template #default="scope">
                 <el-button style="color:black"
                   size="small"
                   type="success"
                   @click="pdf(scope.row)">
-                  <a :href="url+'api/factura1/'+scope.row.id" target="_blank">
+                  <a :href="url+'api/certificado/'+scope.row.id" target="_blank">
                     <span class="material-symbols-outlined">lab_profile</span>
                   </a>
                 </el-button>
               </template>
             </el-table-column>
-            -->
 
             <el-table-column label="">
               <template #default="scope">

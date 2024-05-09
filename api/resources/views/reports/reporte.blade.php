@@ -6,7 +6,7 @@
     <title>PDF Clientes</title>
 </head>
 <body >
-<img src="../public/img/logofk.png" alt="">
+<img src="{{ $base64 }}" alt="">
     <div class="divLogo">
         <h3>Sistema de Fumigaciones Urbanas</h3> 
         <div >
@@ -26,41 +26,53 @@
         <div class="fondLimitador"></div>
         <table>
             <th>Fecha de Orden </th>
-            <th> _____________________________ </th>
+            <div class="renDiv">
+            </div>
             <th> Fecha Programada</th>
-            <th> _________________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Nombre Comercial</th>
-            <th> ________________________________________ </th>
+            <div class="renDiv">
+            </div>
             <th> Hora:</th>
-            <th> ____________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Nombre Personal</th>
-            <th> _________________________________________ </th>
+            <div class="renDiv">
+            </div>
             <th> Telefono:</th>
-            <th> __________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Domicilio</th>
-            <th> _______________________________________________ </th>
+            <div class="renDiv">
+            </div>
             <th> Colonia:</th>
-            <th> ___________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Localización</th>
-            <th> ________________________________________________________________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Tipo de lugar a fumigar</th>
-            <th> _________________________ </th>
+            <div class="renDiv">
+            </div>
             <th> Tipo de plagas:</th>
-            <th> _______________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Observaciones</th>
-            <th> ____________________________________________________________________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table class="btnCir">
             <th ><button class="button button5"> </button>
@@ -76,16 +88,20 @@
         </table>
         <table class="pr">
             <th>Fecha Ultima Fumigacion</th>
-            <th> ______________________________________________________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
             <th>Forma de Contacto</th>
-            <th> _____________________________ </th>
+            <div class="renDiv">
+            </div>
             <th> Pasado a bitacora:</th>
-            <th> _____________________________ </th>
+            <div class="renDiv">
+            </div>
         </table>
         <table>
-            <th> ______________________________________________________________________________________________</th>
+        <div class="renDiv">
+            </div>
         </table>
         <table class="footer">
             <th class="footer">Calle del Abeto 2201</th>
@@ -149,6 +165,7 @@
 .btnCir{
     position:absolute;
     left:15%;
+    justify-content: space-between;
 }
 .pr{
     margin-top:20px;
