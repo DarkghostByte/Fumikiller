@@ -19,7 +19,7 @@ use App\Http\Controllers\ClientesController;
 Route::resource('clientes', ClientesController::class);
 
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
-Route::get('/factura1/{id}',[ClientesController::class,'generarPDF1']);
+Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden/{id}',[ClientesController::class,'generarOrden']);
 
 

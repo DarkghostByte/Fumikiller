@@ -120,7 +120,7 @@ class ClientesController extends Controller
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
-    public function generarPDF1(){
+    public function generarPDFRem(){
         /* Imagen Del Logo */
         $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
