@@ -111,7 +111,6 @@ class ClientesController extends Controller
         return $pdf->stream();
     }
     public function generarPDF1(){
-       
         /* Imagen Del Logo */
         $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
