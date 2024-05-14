@@ -12,7 +12,7 @@
             Consultar Cliente
           </router-link>
 
-          <router-link to="/admin/clients/add-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
+          <router-link to="/admin/clients/agregarComercio-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
             <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
             Nuevo Cliente
@@ -160,12 +160,12 @@
         v-model="dialogVisibleView"
         title="Datos acerca del cliente"
         width="1500"
-        height="1000">
+        height="400">
 
         <div class="h-72 overflow-scroll" style="font-size: 20px;">
 
-          <p style="font-size: 80px;">Datos del cliente</p>
-          Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
+          <p style="font-size: 45px;">Datos del cliente</p>
+          Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }} {{ selectedItem.numAddress }}
           <br>
           Apellido Paterno: {{ selectedItem.lastname1 }}
           <br>

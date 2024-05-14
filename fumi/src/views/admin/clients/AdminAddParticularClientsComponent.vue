@@ -31,7 +31,7 @@
     </div>
 
     <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Comercio</h1>
+      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Particular</h1>
     </div>
 
 
@@ -60,10 +60,6 @@
               <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-5">
                 <el-input v-model="form1.lastname2" class="px-1"
                 placeholder="Ingresa su apellido materno"/>
-              </el-form-item>
-              <el-form-item prop="tradename" label="Nombre Comercial:" class="px-10">
-                <el-input v-model="form1.tradename" class=""
-                placeholder="Ingresa el nombre del comercio"/>
               </el-form-item>
             </div>
 
@@ -113,8 +109,7 @@
               </el-form-item>
               <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 25%">
                 <el-select v-model="form1.type_of_place" placeholder="Selecciona el tipo de lugar">
-                  <el-option label="Restaurante" value="restaurante" />
-                  <el-option label="Bodega" value="bodega" />
+                  <el-option label="Casa" value="Casa" />
                 </el-select>
               </el-form-item>
             </div>
@@ -137,11 +132,11 @@
             <br>
             <p class="px-5">Contacto:</p>
             <div class="flex">
-              <el-form-item prop="cell_phone" label="Numero de celular:" class="px-10" style="width: 25%">
+              <el-form-item prop="cell_phone" label="Numero de celular:" class="px-10" style="width: 25%" >
                 <el-input v-model="form1.cell_phone" 
                 placeholder="Celular"/>
               </el-form-item>
-              <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-10" style="width: 25%">
+              <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-10" style="width: 25%" >
                 <el-input v-model="form1.number_fixed_number" 
                 placeholder="Celular"/>
               </el-form-item>
@@ -206,14 +201,14 @@
                 name:'Emiliano',
                 lastname1:'Mosqueda',
                 lastname2:'Gamez',
-                tradename:'ShopEmi',
+                tradename:'Particular',
                 street:'Calle',
                 home:'Juan Quezada #1258',
                 numAddress:'100',
                 cp:'11111',
                 cologne:'Dublan',
                 city:'Nuevo Casas Grandes',
-                type_of_place:'Comercio',
+                type_of_place:'Casa',
                 description:'Comercio de dos pisos, contraesquina de un gimnasio',
                 how_to_get:'A dos calles del gimnasio municipal',
                 cell_phone: '6363333333',

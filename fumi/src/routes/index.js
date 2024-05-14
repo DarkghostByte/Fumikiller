@@ -5,7 +5,8 @@ const adminRoutes = [
     {path: 'home', component: () => import('@/views/admin/home/AdminHomeComponent.vue')},
 
     {path: 'clients', component: () => import('@/views/admin/clients/AdminClientsComponent.vue')},
-    {path: 'clients/add-clients', component: () => import('@/views/admin/clients/AdminAddClientsComponent.vue')},
+    {path: 'clients/agregarComercio-clients', component: () => import('@/views/admin/clients/AdminAddClientsComponent.vue')},
+    {path: 'clients/agregarParticular-clients', component: () => import('@/views/admin/clients/AdminAddParticularClientsComponent.vue')},
     {path: 'clients/edit-clients/:id', component: () => import('@/views/admin/clients/AdminEditClientsComponent.vue')},
 
     {path: 'works', component: () => import('@/views/admin/works/AdminWorksComponent.vue')},

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('tradename');
             $table->string('street');
             $table->string('home');
+            $table->string('numAddress');
             $table->string('cp');
             $table->string('cologne');
             $table->string('city');

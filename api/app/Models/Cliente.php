@@ -16,6 +16,7 @@ class Cliente extends Model
         'tradename',
         'street',
         'home',
+        'numAddress',
         'cp',
         'cologne',
         'city',

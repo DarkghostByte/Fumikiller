@@ -38,6 +38,7 @@ class ClientesController extends Controller
             'tradename' => 'min:3',
             'street' => 'required|min:3',
             'home' => 'required|min:3',
+            'numAddress' => 'required|min:3',
             'cp' => 'required|min:5',
             'cologne' => 'required|min:3',
             'city' => 'required|min:3',
@@ -48,7 +49,7 @@ class ClientesController extends Controller
             'number_fixed_number' => 'min:3',
             'contact_form' => 'required|min:3',
             'specify' => 'required|min:3',
-            'recruitment_data' => 'required|array|min:1',
+            'recruitment_data' => 'array|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -64,6 +65,7 @@ class ClientesController extends Controller
             $data->tradename = $request->tradename;
             $data->street = $request->street;            
             $data->home = $request->home;
+            $data->numAddress = $request->numAddress;
             $data->cp = $request->cp;            
             $data->cologne = $request->cologne;
             $data->city = $request->city;            

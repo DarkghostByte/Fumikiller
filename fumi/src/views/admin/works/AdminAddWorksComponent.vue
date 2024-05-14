@@ -109,8 +109,7 @@
                   <el-date-picker
                     v-model="form.date1"
                     type="date"
-                    placeholder="Orden"
-                    
+                    placeholder="Orden" 
                   />
                 </el-col>
               </el-form-item>
@@ -128,20 +127,26 @@
   
               <el-form-item  style="width: 25%">
                 <el-col :span="11">
-                  <el-time-picker
+                  <el-time-select
                     v-model="form.date3"
-                    placeholder="Hora"
-                    
+                    style="width: 240px"
+                    start="08:30"
+                    step="00:15"
+                    end="18:30"
+                    placeholder="Seleccionar hora"
                   />
                 </el-col>
               </el-form-item>
   
               <el-form-item style="width: 25%">
                 <el-col :span="11">
-                  <el-time-picker
+                  <el-time-select
                     v-model="form.date4"
-                    placeholder="Hora"
-                    
+                    style="width: 240px"
+                    start="08:30"
+                    step="00:15"
+                    end="18:30"
+                    placeholder="Seleccionar hora"
                   />
                 </el-col>
               </el-form-item>
