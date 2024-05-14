@@ -204,6 +204,21 @@
               </el-form-item>
             </div>
 
+                        <!-- FILA DE INFORMACION -->
+                        <p>Requiere de:</p>
+                        <div class="flex">
+                          <el-form-item prop="info" label="" class="px-10">
+                            <el-checkbox-group v-model="form.requiere">
+                              <el-checkbox label="Credito" value="Credito"></el-checkbox>
+                              <el-checkbox label="Pagado" value="Pagado"></el-checkbox>
+                              <el-checkbox label="Bitacora" value="Bitacora"></el-checkbox>
+                              <el-checkbox label="Agendar" value="Agendar"></el-checkbox>
+                              <el-checkbox label="Cancelar" value="Cancelar"></el-checkbox>
+                              <el-checkbox label="Ellos hablan" value="Ellos hablan"></el-checkbox>
+                            </el-checkbox-group>
+                          </el-form-item>
+                        </div>
+
             <div style="display:flex; justify-content: center;" class="">
               <el-button class="w-40 h-16 mt-5" style="background-color:#11639c; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
             </div>

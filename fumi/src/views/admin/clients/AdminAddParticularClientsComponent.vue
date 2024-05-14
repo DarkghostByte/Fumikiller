@@ -15,13 +15,13 @@
 
           <router-link to="/admin/clients/agregarComercio-clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
           style="color:black">
-            <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px;
+            <i class="fa fa-shop" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
             Comercio
           </router-link>
 
           <router-link to="/admin/clients/agregarParticular-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-            <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px;
+            <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
             Particular
           </router-link>

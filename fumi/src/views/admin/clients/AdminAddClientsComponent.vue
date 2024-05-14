@@ -15,13 +15,13 @@
 
           <router-link to="/admin/clients/agregarComercio-clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
           style="color:black">
-            <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px;
+            <i class="fa fa-shop" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
             Comercio
           </router-link>
 
           <router-link to="/admin/clients/agregarParticular-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-            <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px;
+            <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>                
             Particular
           </router-link>
@@ -36,7 +36,8 @@
 
 
         <!-- TABLE INSERT -->
-        <!-- Primera Fila -->
+
+        <!-- DATOS DEL LA TABLA -->
         <div class="flex">
           <el-form 
           :model="form1" 
@@ -46,7 +47,7 @@
           :rules="rules"
           :label-position="'top'">
 
-            <!--  Primera Fila -->
+            <!--  FILA DATOS DEL CLIENTE -->
             <p class="px-5">Datos del cliente:</p>
             <div class="flex">
               <el-form-item prop="name" label="Nombres:" class="px-2" style="width: 240px;">
@@ -208,7 +209,7 @@
                 lastname2:'Gamez',
                 tradename:'ShopEmi',
                 street:'Calle',
-                home:'Juan Quezada #1258',
+                home:'Juan Quezada',
                 numAddress:'100',
                 cp:'11111',
                 cologne:'Dublan',

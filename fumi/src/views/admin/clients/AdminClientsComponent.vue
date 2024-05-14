@@ -94,7 +94,7 @@
                 </el-table-column>
                 <el-table-column prop="city" label="Ciudad"  sortable width="140"/>                
                 <el-table-column prop="home" label="Dirección" sortable width="150" />
-                <el-table-column prop="cp" label="Codigo Postal"  sortable width="145" />
+                <el-table-column prop="numAddress" label="Numero de domicilio"  sortable width="145" />
                 <el-table-column prop="cell_phone" label="Numero Celular"  sortable width="150" />
                 <el-table-column label="">
                   <template #default="scope">
@@ -164,42 +164,32 @@
 
         <div class="h-72 overflow-scroll" style="font-size: 20px;">
 
-          <p style="font-size: 45px;">Datos del cliente</p>
-          Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }} {{ selectedItem.numAddress }}
-          <br>
-          Apellido Paterno: {{ selectedItem.lastname1 }}
-          <br>
-          Apellido Materno: {{ selectedItem.lastname2 }}
+          <p style="font-size: 22px;">Datos del cliente</p>
+          Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
           <br>
           Nombre comercial: {{ selectedItem.tradename }}
           <br><br>
 
-          <p style="font-size: 18px;">Direccion</p>
-          Tipo de calle: {{ selectedItem.home }}
-          <br>
-          Domicilio: {{ selectedItem.cp }}
-          <br>
-          Codigo postal: {{ selectedItem.cologne }}
-          <br>
-          Colonia: {{ selectedItem.city }}
+          <p style="font-size: 22px;">Datos del domicilio</p>
+          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, C.P. #{{ selectedItem.cp }}, {{ selectedItem.cologne }}, {{ selectedItem.city }}
           <br>
           Tipo de lugar: {{ selectedItem.type_of_place }}
           <br><br>
 
           
-          <p style="font-size: 18px;">Ubicacion</p>
-          Descripcion: {{ selectedItem.description }}
+          <p style="font-size: 22px;">Datos de la ubicacion</p>
+          Como llegar: {{ selectedItem.how_to_get }} 
           <br>
-          Como llegar: {{ selectedItem.how_to_get }}
+          Descripcion: {{ selectedItem.description }}
           <br><br>
 
-          <p style="font-size: 18px;">Contacto</p>
+          <p style="font-size: 22px;">Contacto</p>
           Numero de celular: {{ selectedItem.cell_phone }}
           <br>
           Numero fijo: {{ selectedItem.number_fixed_number }}
           <br><br>
 
-          <p style="font-size: 18px;">Contacto</p>
+          <p style="font-size: 22px;">Contacto</p>
           Tipo de contratacion: {{ selectedItem.recruitment_data }}
           <br><br>
 

@@ -17,8 +17,8 @@
         <div class="mr-6">
           <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Ordenes de trabajo</h1>
         </div>
-        <!-- TABLE DATA -->
 
+        <!-- TABLE DATA -->
         <div class="flex ml-5">
           <el-form 
           :model="form" 
@@ -26,19 +26,10 @@
           style="max-width: 100%"
           :label-position="'top'">
             
+            <!-- DATOS DE LA FILA DE CLIENTES -->  
             <p>Cliente</p>
-            <!--
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-12">Nombre Comercial:</p>
-              <p class="px-20 pr-10">Nombres:</p>
-              <p class="px-20 ml-12 ">Apellido Paterno:</p>
-              <p class="px-5">Apellido Materno:</p>
-            </div>
-            -->
-
-            <!-- Primera Fila -->  
             <div class="flex">
-              <el-form-item prop="name" label="Nombre del comercio:" class="ml-5 px-10" style="width: 25%">
+              <el-form-item prop="name" label="Nombre del comercio:" class="px-10" style="width: 25%">
                 <el-input v-model="form.tradename" class="px-1" 
                 placeholder="Ingresa el nombre del comercio"
                 disabled/>
@@ -60,15 +51,10 @@
               </el-form-item>
             </div>
 
-            <!-- Segunda Fila --> 
+            <!-- FILA DE LAS PLAGAS (PROBLEMATICA) --> 
             <p>Problematica</p>
-            <div style="display:flex" class="m-2"  >
-              <p class="px-4 pr-8">Plaga #1:</p>
-              <p class="px-36 pr-7">Plaga #2:</p>
-            </div>
-
             <div class="flex" style="width:100%;">
-              <el-form-item class="px-5" style="width: 25%" >
+              <el-form-item prop="problema1" class="px-10" label="Tipo de plaga #1" style="width: 25%" >
                 <el-select v-model="form.plaga1" placeholder="Selecciona la plaga" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
@@ -80,8 +66,8 @@
                   <el-option label="Hormigas" value="hormigas" />
                 </el-select>
               </el-form-item>
-              <el-form-item class="px-5" style="width: 25%" >
-                <el-select v-model="form.plaga2" placeholder="Selecciona la plaga" >
+              <el-form-item class="px-8" label="Tipo de plaga #2" style="width: 25%" >
+                <el-select prop="problema2" v-model="form.plaga2" placeholder="Selecciona la plaga" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                   <el-option label="Chinches" value="chinches" />
@@ -95,16 +81,10 @@
             </div>
 
 
-            <!-- Tercera Fila --> 
+            <!-- FILA DE FECHAS --> 
             <p>Fechas</p>
-            <div style="display:flex" class="m-2"   >
-              <p class="px-4 pr-12">Fecha de orden:</p>
-              <p class="px-20 pr-7">Fecha para asistir:</p>
-              <p class="px-5 ml-12 ">De hora:</p>
-              <p class="px-40">A hora:</p>
-            </div>
             <div class="flex">
-              <el-form-item class="px-5" style="width: 25%">
+              <el-form-item prop="dateOrden" class="px-10" label="Fecha de orden:" style="width: 250px">
                 <el-col :span="11">
                   <el-date-picker
                     v-model="form.date1"
@@ -114,7 +94,7 @@
                 </el-col>
               </el-form-item>
   
-              <el-form-item class="ml-5" style="width: 25%" >
+              <el-form-item prop="dateAsistir" class="px-10" label="Fecha para asistir:" style="width: 250px" >
                 <el-col :span="11">
                   <el-date-picker
                     v-model="form.date2"
@@ -124,56 +104,63 @@
                   />
                 </el-col>
               </el-form-item>
-  
-              <el-form-item  style="width: 25%">
+
+              <el-form-item prop="timeInicial" class="px-10" label="De hora:">
                 <el-col :span="11">
                   <el-time-select
                     v-model="form.date3"
-                    style="width: 240px"
+                    style="width: 220px"
                     start="08:30"
                     step="00:15"
-                    end="18:30"
+                    end="20:30"
                     placeholder="Seleccionar hora"
                   />
                 </el-col>
               </el-form-item>
   
-              <el-form-item style="width: 25%">
+              <el-form-item prop="timeFinal" class="px-10" label="A hora:">
                 <el-col :span="11">
                   <el-time-select
                     v-model="form.date4"
-                    style="width: 240px"
+                    style="width: 220px"
                     start="08:30"
                     step="00:15"
-                    end="18:30"
+                    end="20:30"
                     placeholder="Seleccionar hora"
                   />
                 </el-col>
               </el-form-item>
             </div>
 
-            <!-- Cuarta Fila --> 
-            <div class="flex justify-start px-16">
-              <el-form-item >
-                <el-checkbox-group v-model="form.type">
-                  <el-checkbox value="Presupuesto" name="type">
-                    Presupuesto
-                  </el-checkbox>
-                  <el-checkbox value="Fumigar" name="type">
-                    Fumigar
-                  </el-checkbox>
-                  <el-checkbox value="Garantia" name="type">
-                    Garantia
-                  </el-checkbox>
-                  <el-checkbox value="Cortesia" name="type">
-                    Cortesia
-                  </el-checkbox>
+            <!-- FILA DE TIPO DE CONTRATACION -->
+            <p >Contratacion:</p>
+            <div class="flex">
+              <el-form-item prop="recruitment_data" label="" class="px-10">
+                <el-checkbox-group v-model="form.recruitment_data">
+                  <el-checkbox label="Nada" value="Nada"></el-checkbox>
+                  <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
+                  <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
+                  <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
+                  <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
+                </el-checkbox-group>
+              </el-form-item>
+            </div>
+
+            <!-- FILA DE REQUIERE DE -->
+            <p>Requiere de:</p>
+            <div class="flex">
+              <el-form-item prop="requiere" label="" class="px-10">
+                <el-checkbox-group v-model="form.requiere">
+                  <el-checkbox label="Nada" value="Nada"></el-checkbox>
+                  <el-checkbox label="Factura" value="Factura"></el-checkbox>
+                  <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
+                  <el-checkbox label="Remision" value="Remision"></el-checkbox>
                 </el-checkbox-group>
               </el-form-item>
             </div>
 
             <div style="display:flex; justify-content: center;" class="">
-              <el-button class="w-40 h-16 mt-5" style=" color:white;  background-color:#11639c; border-radius:40px; font-size:25px;" type="info" round>Crear</el-button>
+              <el-button style="width:100px; height:55px; color:white;  background-color:#11639c; border-radius:40px; font-size:20px;" type="info" round>Crear</el-button>
             </div>
           </el-form>
         </div>
@@ -202,7 +189,8 @@
                 date2:'',
                 date3:'',
                 date4:'',
-                type: [],
+                recruitment_data: [],
+                requiere:[],
             },
           }),
           mounted(){
