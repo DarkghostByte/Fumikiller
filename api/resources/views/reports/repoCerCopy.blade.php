@@ -2,7 +2,7 @@
 <html lang="en">
 
 
-    <div class=delimitador>
+    <div class="delimitador">
         <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,10 +13,8 @@
     <div class="divLogo">
         <h3>Sistema de Fumigaciones Urbanas</h3> 
         <div >
-            <h3 class="letrasFlex">Certificado de aplicacion</h3>
-            <div class="noOT">
-                <h4>LicenCia Sanitaria 04-08A095</h4>
-            </div>
+            <h2 class="letrasFlex">REMISION</h2>
+            
         </div>
     
     </div>
@@ -25,91 +23,93 @@
     <header>    
         
     </header>
+
     <main> 
         <div class="fondLimitador"></div>
         <table>
-            <th>Fecha </th>
+            <th class="clth1">Razon Social</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv1">
             </div>
-            </th>            
+            </th>  
         </table>
             
         <table>
-            <th>Nombre</th>
+            <th class="clth">Nombre</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th>  
+        </table>
+        <table>
+            <th>Domicilio</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
+            <th> Ciudad</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
         <table>
-            <th>Tel.</th>
+            <th>Colonia</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
-            <th> Domicilio:</th>
-            <th class="renDivTh">
+            <th>Telefono1:</th>
+            <<th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
-        </table>
-        <table>
-        <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th>Colinia</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-            <th>C.P.</th>
+            <th>Telefono2:</th>
             <<th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
         <table>
-            <th>Ciudad</th>
+            <th class="clth1">Tipo de lugar </th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv1">
             </div>
-            </th>             
-            <th> Estado</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
+            </th>  
         </table>
-        <div class="dInAc">
-            <p>Producto Utilizado (Agente activo)</p>
-        </div>
-        <table>
-            <th>Interior</th>
+        
+        <table class="btnCir">
+            <th class="clth11">Require de:</th>
+            <th ><button class="button button5"> </button>
+            <th > Certificado</th>
+            <th class="nmM">Numero:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
+            <th>Importe</th>
+            <<th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th>
+            
         </table>
         <table class="">
-            <th>Exterior</th>
+            <th>Observaciones:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
-            </th> 
-        </table>
-        <table>
-            <th>Observaciones</th>
+            </th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
-            </th> 
+            </th>
+            
         </table>
-        <div class="footDiv">
 
+
+
+        <div class="footDiv">
         </div>
         <table class="footer">
             <th class="footer">Calle del Abeto 2201</th>
@@ -118,6 +118,7 @@
             <th> Nuevo Casas Grandes, Chihu. </th>
             <th> C.P. 31704</th>
         </table>
+        
 
 
         
@@ -127,6 +128,31 @@
 </body>
 
 <style>
+    .nmM{
+        padding-left:50px;
+    }
+    .delimitador{
+        width: 100%;
+    }
+    .renDivTh{
+        width: 100%;
+    }
+    .renDiv{
+        border-bottom: 1px solid black;
+        height:15px;
+        width:100%;
+    }.renDiv1{
+        
+        border-bottom: 1px solid black;
+        height:15px;
+        width:100%;
+        margin-left:-5px;
+    }.clth1{
+        left:-10%;
+        width: 9%;
+    }.clth11{
+        width: 40%;
+    }
     body{
         width: 100%;
         
@@ -140,23 +166,8 @@
         width: 75px;
     }
     table{
-        width: 100%;
-        font-size:20px;
-        margin-top:10px;
-    }
-    .renDivTh{
-        width: 100%;
-    }
-    .renDiv{
-        border-bottom: 1px solid black;
-        height:15px;
-        width: 100%;
-        margin-top:3px;
-    }
-    .delimitador{
-        border: 1px solid black;
-        width: 100%;
-        height:99%;
+        width:100%;
+        font-size:15pt;
     }
     .dInAc{
         height: 35px;
@@ -169,16 +180,11 @@
         position:absolute;
         
     }
-    p{
-        text-align:center;
-        font-size:20pt;    
-    }
-    .agnAct{
-        
-    }
     .footDiv{
         margin:20px;
-        border-bottom:2px solid grey;
+        border-bottom:4px solid grey;
+        margin-top:15px;
+        
     }
     
     .fondLimitador{
@@ -192,44 +198,47 @@
         position: absolute;
         
     }
-    .letrasFlex{
-        position:relative; 
-        display: flex;
-        justify-content: space-between;
-    }
     .noOT{
-        margin-top:-40px;
-        margin-left: 35px;
+        margin-top:-22px;
+        margin-left:150px;
+        border:1px solid black;
     }
-    .button {
+
+    
+    footer{
+        position:absolute;
+        left:20%;
+        
+    }
+    th{
+        float: left;
+        font-size:15px;
+        font-weight: normal;
+        width: auto;
+    }
+.button {
         background-color: white;
         border: 1px solid black;
         color: white;
         padding: 7px;
         text-align: center;
         text-decoration: none;
-        display: inline-block;
         font-size: 4px;
-    }
-    .button5 {
-        border-radius: 50%;
-    }
-    .btnCir{
-        position:absolute;
-        left:15%;
-    }
-    .pr{
-        margin-top:20px;
-    }
-    footer{
-        position:absolute;
-        left:20%;
-    }
-    th{
-        font-size:20px;
-        font-weight: normal;
-        
-    }
+    }  
+.button5 {
+    border-radius: 50%;
+    margin-left:-40px;    
+    background-color:blue;
+}
+.btnCir{
+    font-size:15px;
+    font-weight: normal;
+    width: 90%;
+
+}
+.pr{
+    margin-top:20px;
+}
 
 </style>
 </html>
