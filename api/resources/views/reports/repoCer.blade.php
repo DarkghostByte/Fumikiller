@@ -28,7 +28,7 @@
     <main> 
         <div class="fondLimitador"></div>
         <table>
-            <th>Fecha </th>
+            <th>Fecha</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -127,6 +127,15 @@
 </body>
 
 <style>
+    .renDivTh{
+        width: 100%;
+    }
+    .renDiv{
+        border-bottom: 1px solid black;
+        height:15px;
+        width: 100%;
+        margin-top:3px;
+    }
     body{
         width: 100%;
         
@@ -144,15 +153,7 @@
         font-size:20px;
         margin-top:10px;
     }
-    .renDivTh{
-        width: 100%;
-    }
-    .renDiv{
-        border-bottom: 1px solid black;
-        height:15px;
-        width: 100%;
-        margin-top:3px;
-    }
+    
     .delimitador{
         border: 1px solid black;
         width: 100%;
