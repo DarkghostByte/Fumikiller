@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ClientesController;
+use App\Http\Controllers\OrdensController;
+
 
 
 /*
@@ -17,10 +19,11 @@ use App\Http\Controllers\ClientesController;
 */
 
 Route::resource('clientes', ClientesController::class);
+Route::resource('orden', OrdensController::class);
 
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
-Route::get('/orden/{id}',[ClientesController::class,'generarOrden']);
+Route::get('/orden1/{id}',[ClientesController::class,'generarOrden']);
 
 
 

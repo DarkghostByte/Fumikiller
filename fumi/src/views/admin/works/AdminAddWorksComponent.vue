@@ -24,7 +24,9 @@
           :model="form" 
           label-width="auto" 
           style="max-width: 100%"
-          :label-position="'top'">
+          :label-position="'top'"
+          ref="formRef" 
+          :rules="rules">
             
             <!-- DATOS DE LA FILA DE CLIENTES -->  
             <p>Cliente</p>
@@ -49,13 +51,18 @@
                 placeholder="Ingresa su segundo apellido"
                 disabled/>
               </el-form-item>
+              <el-form-item prop="name" label="Apellido materno:" class="px-5">
+                <el-input v-model="form.id" class="px-1" 
+                placeholder="Ingresa su segundo apellido"
+                disabled/>
+              </el-form-item>
             </div>
 
             <!-- FILA DE LAS PLAGAS (PROBLEMATICA) --> 
             <p>Problematica</p>
             <div class="flex" style="width:100%;">
               <el-form-item prop="problema1" class="px-10" label="Tipo de plaga #1" style="width: 25%" >
-                <el-select v-model="form.plaga1" placeholder="Selecciona la plaga" >
+                <el-select v-model="form.plague1" placeholder="Selecciona la plaga" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                   <el-option label="Chinches" value="chinches" />
@@ -67,7 +74,7 @@
                 </el-select>
               </el-form-item>
               <el-form-item class="px-8" label="Tipo de plaga #2" style="width: 25%" >
-                <el-select prop="problema2" v-model="form.plaga2" placeholder="Selecciona la plaga" >
+                <el-select prop="problema2" v-model="form.plague2" placeholder="Selecciona la plaga" >
                   <el-option label="Cucarachas" value="cucarachas" />
                   <el-option label="Pulgas" value="pulgas" />
                   <el-option label="Chinches" value="chinches" />
@@ -90,6 +97,8 @@
                     v-model="form.date1"
                     type="date"
                     placeholder="Orden" 
+                    format="YYYY/MM/DD"
+                    value-format="YYYY-MM-DD"
                   />
                 </el-col>
               </el-form-item>
@@ -100,7 +109,8 @@
                     v-model="form.date2"
                     type="date"
                     placeholder="Orden"
-                    
+                    format="YYYY/MM/DD"
+                    value-format="YYYY-MM-DD"
                   />
                 </el-col>
               </el-form-item>
@@ -108,11 +118,12 @@
               <el-form-item prop="timeInicial" class="px-10" label="De hora:">
                 <el-col :span="11">
                   <el-time-select
-                    v-model="form.date3"
+                    v-model="form.time1"
                     style="width: 220px"
                     start="08:30"
                     step="00:15"
                     end="20:30"
+                    format="hh:mm A"
                     placeholder="Seleccionar hora"
                   />
                 </el-col>
@@ -121,11 +132,12 @@
               <el-form-item prop="timeFinal" class="px-10" label="A hora:">
                 <el-col :span="11">
                   <el-time-select
-                    v-model="form.date4"
+                    v-model="form.time2"
                     style="width: 220px"
                     start="08:30"
                     step="00:15"
                     end="20:30"
+                    format="hh:mm A"
                     placeholder="Seleccionar hora"
                   />
                 </el-col>
@@ -136,7 +148,7 @@
             <p >Contratacion:</p>
             <div class="flex">
               <el-form-item prop="recruitment_data" label="" class="px-10">
-                <el-checkbox-group v-model="form.recruitment_data">
+                <el-checkbox-group v-model="form.hiring">
                   <el-checkbox label="Nada" value="Nada"></el-checkbox>
                   <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
                   <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
@@ -150,7 +162,7 @@
             <p>Requiere de:</p>
             <div class="flex">
               <el-form-item prop="requiere" label="" class="px-10">
-                <el-checkbox-group v-model="form.requiere">
+                <el-checkbox-group v-model="form.requires">
                   <el-checkbox label="Nada" value="Nada"></el-checkbox>
                   <el-checkbox label="Factura" value="Factura"></el-checkbox>
                   <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
@@ -159,8 +171,14 @@
               </el-form-item>
             </div>
 
-            <div style="display:flex; justify-content: center;" class="">
-              <el-button style="width:100px; height:55px; color:white;  background-color:#11639c; border-radius:40px; font-size:20px;" type="info" round>Crear</el-button>
+            <div style="color:white; display:flex; justify-content: center; transition:10s;" >
+              <router-link to="/admin/works">
+                <el-button @click="submitForm(formRef)" 
+                class="w-40 h-16 mt-5" 
+                style="color:white; background-color:#11639c; border-radius:40px; font-size:25px;" 
+                type="info" 
+                round>Crear</el-button>
+              </router-link>
             </div>
           </el-form>
         </div>
@@ -175,23 +193,60 @@
       import axios from 'axios';
       export default {
           name:'AdminAddWorksComponent',
-          
           data:()=>({
                 tableData:[],
+                formRef:undefined,
+                uploadRef:undefined,
+                url:process.env.VUE_APP_ROOT_ASSETS,
+                urlApi:process.env.VUE_APP_ROOT_API,
                 form:{
                 name:'',
                 lastname1:'',
                 lastname2:'',
-                comercio:'',
-                plaga1:'',
-                plaga2:'',
-                date1:'',
-                date2:'',
-                date3:'',
-                date4:'',
-                recruitment_data: [],
-                requiere:[],
+                id_cliente:'',
+                plague1:'Cucharachas',
+                plague2:'Hormigas',
+                date1:'2024-05-16',
+                date2:'2024-05-17',
+                time1:'08:30',
+                time2:'09:00',
+                hiring: ['Nada'],
+                requires:['Nada']
             },
+            rules:{
+              plague1:[
+                  { required:true, message:'El nombre es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'Longitud debería ser 3 a 100',trigger:'blur'  }
+              ],
+              plague2:[
+                  { required:true, message:'El apellido paterno es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'Longitud debería ser 3 a 100',trigger:'blur'  }
+              ],
+              date1:[
+                  { required:true, message:'El apellido materno es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'Longitud debería ser 3 a 100',trigger:'blur'  }
+              ],
+              date2:[
+                  { required:true, message:'El apellido materno es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'Longitud debería ser 3 a 100',trigger:'blur'  }
+              ],
+              time1:[
+                  { required:true, message:'El domilicio es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'Longitud debería ser 3 a 100',trigger:'blur'  }
+              ],
+              time2:[
+                  { required:true, message:'El numero de domilicio es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'Longitud debería ser 3 a 100',trigger:'blur'  }
+              ],
+              hiring:[
+                  { required:true, message:'El codigo postal es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'La longitud debería ser de 5 digitos',trigger:'blur'  }
+              ],
+              requires:[
+                  { required:true, message:'El codigo postal es requerido', trigger:'blur'},
+                  { min:3, max: 100, message:'La longitud debería ser de 5 digitos',trigger:'blur'  }
+              ],
+          }
           }),
           mounted(){
             this.refresh()
@@ -200,20 +255,12 @@
             axios.get('clientes/'+this.id).then(res=>{
               console.log(res)
               let datos = res.data.data
+              const clienteData = res.data.data;
+              this.form.id_cliente = clienteData.id;
               this.form.name = datos.name
               this.form.lastname1 = datos.lastname1
               this.form.lastname2 = datos.lastname2
               this.form.tradename = datos.tradename
-              this.form.street = datos.street
-              this.form.home = datos.home
-              this.form.cp = datos.cp
-              this.form.cologne = datos.cologne
-              this.form.city = datos.city
-              this.form.type_of_place = datos.type_of_place
-              this.form.description = datos.description
-              this.form.how_to_get = datos.how_to_get
-              this.form.cell_phone = datos.cell_phone
-              this.form.number_fixed_number = datos.number_fixed_number
             })          
           },
           methods:{
@@ -222,14 +269,14 @@
             },
             refresh(){
               this.tableData = []
-            axios.get('clientes').then(res=>{
+              axios.get('orden').then(res=>{
               this.tableData=res.data.data
             })
             },
             successUpload(response){
                 console.log(response)
                 this.refresh()
-                axios.post('clientes',this.form1).then(response=>{
+                axios.post('orden',this.form).then(response=>{
                     console.log(response)
                     ElNotification({
                         title:'Alerta',

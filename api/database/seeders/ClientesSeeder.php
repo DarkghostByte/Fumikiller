@@ -9,11 +9,9 @@ use Illuminate\Database\Seeder;
 
 class ClientesSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
+
     public function run(): void
-    {
+    {/*
         DB::table('clientes')->insert([
             'name'=>'Jesus Liadeo',
             'lastname1'=>'Chavez',
@@ -52,5 +50,6 @@ class ClientesSeeder extends Seeder
             'specify'=>'Publicacion',
         'recruitment_data'=>['Presupuesto'],
         ]);  
+        */
     }
 }

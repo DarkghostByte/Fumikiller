@@ -26,12 +26,28 @@
                 :default-sort="{ prop: 'name', order: 'descending' }"
                 style="width: 100%"
             >
-                <el-table-column prop="nameCliente" label="Nombre del Cliente"  sortable width="175"  />
-                <el-table-column prop="nameComercial" label="Nombre Comercial"  sortable width="170" />
-                <el-table-column prop="fumi" label="Fumigador"  sortable width="120" />
-                <el-table-column prop="direccionCliente" label="Dirección" sortable width="120" />
-                <el-table-column prop="fechaOrden" label="Fecha de Orden" sortable width="150"  />
-                <el-table-column prop="fechaAsistencia" label="Fecha de asistencia" sortable width="170"  />
+            <el-table-column label="">
+              <template #default="scope">
+                <el-button style="color:black"
+                  size="small"
+                  type="success"
+                  @click="pdf(scope.row)">
+                  <a :href="url+'api/orden1/'+scope.row.id" target="_blank">
+                    <span class="material-symbols-outlined">lab_profile</span>
+                  </a>
+                </el-button>
+
+              </template>
+            </el-table-column>
+                <el-table-column label="Nombre" sortable width="200">
+                  <template #default="scope">
+                    {{ scope.row.name+' '+scope.row.lastname1+' '+scope.row.lastname2 }}
+                  </template>
+                </el-table-column>
+                <el-table-column prop="date1" label="Fecha de orden"  sortable width="130" />
+                <el-table-column prop="date2" label="Fecha de asistencia" sortable width="130" />
+                <el-table-column prop="time1" label="De" sortable width="130"  />
+                <el-table-column prop="time2" label="A" sortable width="130"  />
                 
                 <el-table-column label="">
                   <template #default>
@@ -64,53 +80,28 @@
   </template>
   
   <script>
-  
+      import axios from 'axios';
       export default {
-          name:'AdminHomeComponent',
-          
+          name:'AdminWorksComponent',
           data:()=>({
-                tableData:[],
+            url:process.env.VUE_APP_ROOT_ASSETS,
+            urlApi:process.env.API,
+            tableData:[],
           }),
           mounted(){
-            this.tableData = [{
-                    nameCliente:'Luis Angel Peña Mora',
-                    nameComercial:"La Pepa",
-                    fumi:"Juan Carlos",
-                    direccionCliente:'No. 189, Grove St, Los Angeles',
-                    fechaOrden: '2024-03-24',
-                    fechaAsistencia: '2024-03-24',
-                },
-                {
-                    nameCliente:'Luis Angel Peña Mora',
-                    nameComercial:"La Pepa",
-                    fumi:"Juan Carlos",
-                    direccionCliente:'No. 189, Grove St, Los Angeles',
-                    fechaOrden: '2024-03-24',
-                    fechaAsistencia: '2024-03-24',
-                },
-                {
-                    nameCliente:'Luis Angel Peña Mora',
-                    nameComercial:"La Pepa",
-                    fumi:"Juan Carlos",
-                    direccionCliente:'No. 189, Grove St, Los Angeles',
-                    fechaOrden: '2024-03-24',
-                    fechaAsistencia: '2024-03-24',
-                },
-                {
-                    nameCliente:'Luis Angel Peña Mora',
-                    nameComercial:"La Pepa",
-                    fumi:"Juan Carlos",
-                    direccionCliente:'No. 189, Grove St, Los Angeles',
-                    fechaOrden: '2024-03-24',
-                    fechaAsistencia: '2024-03-24',
-                },
-            ]
+            this.refresh()
           },
           methods:{
-            handleEdit(){},
-            handleDelete(){},
+            refresh(){
+              this.tableData = []
+              axios.get('orden').then(res=>{
+                this.tableData=res.data.data
+              })
+            },
+            pdf(row){
+            console.log(row)
+            this.selectedItem=row
+            },
           }
       }
   </script>
-
-

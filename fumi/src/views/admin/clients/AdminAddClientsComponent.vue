@@ -285,7 +285,6 @@
                     { min:3, max: 100, message:'Longitud debería ser 3 a 500',trigger:'blur'  }
                 ],
             }
-            
         }),
           mounted(){
             this.refresh()

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cliente;
+use App\Models\Orden;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -98,6 +99,12 @@ class ClientesController extends Controller
         if (!$cliente) {
             return abort(404);
         }
+        
+        $orden = Orden::find($id);
+
+        if (!$orden) {
+            return abort(404);
+        }
         //PDF Orden de trabajo
         /* Imagen Del Logo */
         $path = public_path('img/logofk.png');
@@ -106,7 +113,7 @@ class ClientesController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64','cliente');
+        $pdf_data = compact('base64','cliente','orden');
         $pdf = Pdf::loadView('reports.reporte',$pdf_data);
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
@@ -145,9 +152,6 @@ class ClientesController extends Controller
      */
     public function show(string $id)
     {
-
-        //Va todo lo que Liadeo tomo en fotos
-
         $data = Cliente::find($id);
         return response()->json([
             'status'=>'success',
