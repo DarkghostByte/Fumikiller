@@ -110,6 +110,8 @@
               <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 25%">
                 <el-select v-model="form1.type_of_place" placeholder="Selecciona el tipo de lugar">
                   <el-option label="Casa" value="Casa" />
+                  <el-option label="Departamento" value="Departamento" />
+
                 </el-select>
               </el-form-item>
             </div>
@@ -198,23 +200,23 @@
             url:process.env.VUE_APP_ROOT_ASSETS,
             urlApi:process.env.VUE_APP_ROOT_API,
             form1:{
-                name:'Emiliano',
-                lastname1:'Mosqueda',
-                lastname2:'Gamez',
+                name:'',
+                lastname1:'',
+                lastname2:'',
                 tradename:'Particular',
-                street:'Calle',
-                home:'Juan Quezada #1258',
-                numAddress:'100',
-                cp:'11111',
-                cologne:'Dublan',
-                city:'Nuevo Casas Grandes',
-                type_of_place:'Casa',
-                description:'Comercio de dos pisos, contraesquina de un gimnasio',
-                how_to_get:'A dos calles del gimnasio municipal',
-                cell_phone: '6363333333',
-                number_fixed_number: '6360000000',
-                contact_form:'Radio',
-                specify:'En la estacion 104.9',
+                street:'',
+                home:'',
+                numAddress:'',
+                cp:'',
+                cologne:'',
+                city:'',
+                type_of_place:'',
+                description:'',
+                how_to_get:'',
+                cell_phone: '',
+                number_fixed_number: '',
+                contact_form:'',
+                specify:'',
                 recruitment_data: ['Nada']
             },
             rules:{
