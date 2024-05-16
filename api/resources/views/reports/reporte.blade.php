@@ -31,11 +31,13 @@
             <th>FechaOrden:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $orden->date1 }}
             </div>
             </th>  
             <th>FechaProgramada:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $orden->date2 }}
             </div>
             </th>           
         </table>
@@ -50,6 +52,7 @@
             <th>Hora:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $orden->time1}}
             </div>
             </th>
         </table>
@@ -170,6 +173,7 @@
             <th class="clth1">Forma de contacto:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $cliente->contact_form }}
             </div>
             </th>  
             <th class="clth1">Pasado a bitacora:</th>

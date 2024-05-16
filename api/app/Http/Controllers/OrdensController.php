@@ -137,19 +137,4 @@ class OrdensController extends Controller
             'status'=>'success'
         ]);
     }
-
-    public function generarOrden($id){
-        //Datos de la base de datos
-        $orden = Orden::find($id);
-
-        if (!$orden) {
-            return abort(404);
-        }
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('orden');
-        $pdf = Pdf::loadView('reports.reporte',$pdf_data);
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
-    }
 }
