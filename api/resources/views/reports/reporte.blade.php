@@ -15,7 +15,6 @@
         <div >
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
-                
             </div>
         </div>
     
@@ -29,12 +28,12 @@
     <main> 
         <div class="fondLimitador"></div>
         <table>
-            <th>Fecha:Orden</th>
+            <th>FechaOrden:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th>  
-            <th>Fecha:Programada</th>
+            <th>FechaProgramada:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -45,6 +44,7 @@
             <th>Nombre:Comercial</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
@@ -57,11 +57,13 @@
             <th>Nombre:Personal</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->name }} {{ $cliente->lastname1 }} {{ $cliente->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->cell_phone }}
             </div>
             </th> 
         </table>
@@ -69,11 +71,13 @@
             <th>Domicilio:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->street }} {{ $cliente->home }} #{{ $cliente->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->cologne }} #{{ $cliente->cp }}
             </div>
             </th> 
         </table>
@@ -81,6 +85,7 @@
             <th>Localizacion:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->city }}
             </div>
             </th>
         </table>
@@ -88,6 +93,7 @@
             <th>Lugar:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->type_of_place }}
             </div>
             </th>
             <th>Plagas:</th>

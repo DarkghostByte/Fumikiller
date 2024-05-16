@@ -91,9 +91,14 @@ class ClientesController extends Controller
         //
     }
 
-    public function generarOrden(){
+    public function generarOrden($id){
+        //Datos de la base de datos
+        $cliente = Cliente::find($id);
 
-         //PDF Orden de trabajo
+        if (!$cliente) {
+            return abort(404);
+        }
+        //PDF Orden de trabajo
         /* Imagen Del Logo */
         $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -101,7 +106,7 @@ class ClientesController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
+        $pdf_data = compact('base64','cliente');
         $pdf = Pdf::loadView('reports.reporte',$pdf_data);
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
