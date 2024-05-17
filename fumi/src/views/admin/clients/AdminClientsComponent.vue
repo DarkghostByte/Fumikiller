@@ -228,7 +228,7 @@
           methods:{
             refresh(){
               this.tableData = []
-            axios.get('clientes').then(res=>{
+              axios.get('clientes').then(res=>{
               this.tableData=res.data.data
             })
             },

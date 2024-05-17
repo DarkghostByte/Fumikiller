@@ -51,11 +51,6 @@
                 placeholder="Ingresa su segundo apellido"
                 disabled/>
               </el-form-item>
-              <el-form-item prop="name" label="Apellido materno:" class="px-5">
-                <el-input v-model="form.id" class="px-1" 
-                placeholder="Ingresa su segundo apellido"
-                disabled/>
-              </el-form-item>
             </div>
 
             <!-- FILA DE LAS PLAGAS (PROBLEMATICA) --> 
@@ -97,8 +92,8 @@
                     v-model="form.date1"
                     type="date"
                     placeholder="Orden" 
-                    format="YYYY/MM/DD"
-                    value-format="YYYY-MM-DD"
+                    format="DD/MM/YYYY"
+                    value-format="DD-MM-YYYY"
                   />
                 </el-col>
               </el-form-item>
@@ -109,8 +104,8 @@
                     v-model="form.date2"
                     type="date"
                     placeholder="Orden"
-                    format="YYYY/MM/DD"
-                    value-format="YYYY-MM-DD"
+                    format="DD/MM/YYYY"
+                    value-format="DD-MM-YYYY"
                   />
                 </el-col>
               </el-form-item>

@@ -25,6 +25,7 @@
                 :data="tableData"
                 :default-sort="{ prop: 'name', order: 'descending' }"
                 style="width: 100%"
+                stripe
             >
             <el-table-column label="">
               <template #default="scope">
@@ -32,7 +33,7 @@
                   size="small"
                   type="success"
                   @click="pdf(scope.row)">
-                  <a :href="url+'api/orden1/'+scope.row.id" target="_blank">
+                  <a :href="url+'api/orden-de-trabajo/'+scope.row.id_cliente+'/'+scope.row.id" target="_blank">
                     <span class="material-symbols-outlined">lab_profile</span>
                   </a>
                 </el-button>
@@ -48,30 +49,32 @@
                 <el-table-column prop="date2" label="Fecha de asistencia" sortable width="130" />
                 <el-table-column prop="time1" label="De" sortable width="130"  />
                 <el-table-column prop="time2" label="A" sortable width="130"  />
-                
+                <!--
                 <el-table-column label="">
                   <template #default>
                     <router-link to="/admin/works/edit-works" >
                       <el-button style="color:black"
                       size="small"
                       type="warning"
-                      @click="handleDelete()"
+                      @click="a()"
                       ><span class="material-symbols-outlined">edit</span></el-button
                     >
                     </router-link>
                   </template>
                 </el-table-column>
+                -->
     
 
                 <el-table-column label="">
-                    <template #default>
+                  <template #default="scope">
                       <el-button style="color:black"
-                        size="small"
-                        type="danger"
-                        @click="handleDelete()"
-                        ><span class="material-symbols-outlined">delete</span></el-button>
-                    </template>
-                  </el-table-column>
+                      size="small"
+                      type="danger"
+                      @click="eliminarOrden(scope.row)"
+                      ><span class="material-symbols-outlined">delete</span></el-button
+                      >
+                  </template>
+                </el-table-column>
             </el-table>
         </div>
         <!-- END TABLE DATA -->
@@ -87,6 +90,7 @@
             url:process.env.VUE_APP_ROOT_ASSETS,
             urlApi:process.env.API,
             tableData:[],
+            selectedItem: null
           }),
           mounted(){
             this.refresh()
@@ -101,7 +105,15 @@
             pdf(row){
             console.log(row)
             this.selectedItem=row
+            this.selectedItem = null
             },
+            eliminarOrden(row) {
+              axios.delete('orden/' + row.id).then(res => {
+              console.log(res);
+              this.refresh();
+              });
+            }
+            
           }
       }
   </script>

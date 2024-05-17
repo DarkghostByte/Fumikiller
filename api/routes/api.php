@@ -23,7 +23,7 @@ Route::resource('orden', OrdensController::class);
 
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
-Route::get('/orden1/{id}',[ClientesController::class,'generarOrden']);
+Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
 
 
 

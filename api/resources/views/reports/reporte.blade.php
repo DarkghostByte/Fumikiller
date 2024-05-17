@@ -15,6 +15,7 @@
         <div >
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
+                {{ $cliente->id }}
             </div>
         </div>
     
@@ -52,7 +53,7 @@
             <th>Hora:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->time1}}
+                {{ $orden->time1}} A {{ $orden->time2 }}
             </div>
             </th>
         </table>
@@ -88,7 +89,7 @@
             <th>Localizacion:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->city }}
+                {{ $cliente->how_to_get }}
             </div>
             </th>
         </table>
@@ -110,6 +111,7 @@
             <th>Observaciones:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $cliente->description }}
             </div>
             </th> 
         </table>
@@ -203,6 +205,9 @@
 </body>
 
 <style>
+    .delimitador{
+        border: 1px solid black;
+    }
     .renDivTh{
         width: 100%;
     }
@@ -281,8 +286,6 @@
         font-weight: normal;
         width: auto;
     }
-
-}
 .button {
         background-color: white;
         border: 1px solid black;

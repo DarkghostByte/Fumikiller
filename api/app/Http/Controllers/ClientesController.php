@@ -92,16 +92,14 @@ class ClientesController extends Controller
         //
     }
 
-    public function generarOrden($id){
+    public function generarOrden($id,$id_cliente){
         //Datos de la base de datos
         $cliente = Cliente::find($id);
-
         if (!$cliente) {
             return abort(404);
         }
-        
-        $orden = Orden::find($id);
-
+        //DATOS DE LA BASE DE DATOS DE LAS ORDENES
+        $orden = Orden::find($id_cliente);
         if (!$orden) {
             return abort(404);
         }
@@ -114,7 +112,8 @@ class ClientesController extends Controller
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
         $pdf_data = compact('base64','cliente','orden');
-        $pdf = Pdf::loadView('reports.reporte',$pdf_data);
+        $pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
@@ -133,6 +132,7 @@ class ClientesController extends Controller
         $pdf = Pdf::loadView('reports.repoCer',$pdf_data);
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
+        return $pdf->download('invoice.pdf');
     }
     public function generarPDFRem(){
         /* Imagen Del Logo */
