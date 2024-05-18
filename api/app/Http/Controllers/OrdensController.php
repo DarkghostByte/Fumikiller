@@ -11,7 +11,8 @@ class OrdensController extends Controller
 {
     public function index()
     {
-        $data = Orden::select(['orden.*','clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename'
+        $data = Orden::select(['orden.*','clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename',
+        'clientes.home','clientes.numAddress','clientes.cp','clientes.cologne','clientes.city'
         ])->join('clientes','orden.id_cliente','=','clientes.id')
         ->orderBy('orden.id','DESC')
         ->get();

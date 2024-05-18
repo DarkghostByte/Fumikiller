@@ -86,16 +86,19 @@
                 </router-link>
               </template>
             </el-table-column>
-
-                <el-table-column prop="name" label="Nombres"  sortable width="110"/>
-                <el-table-column label="Apellidos" sortable width="180">
+                <el-table-column prop="name" label="Nombres"  sortable width="120"/>
+                <el-table-column label="Apellidos" sortable width="140">
                   <template #default="scope">
                     {{ scope.row.lastname1+' '+scope.row.lastname2 }}
                   </template>
                 </el-table-column>
-                <el-table-column prop="city" label="Ciudad"  sortable width="140"/>                
+                <el-table-column prop="city" label="Ciudad"  sortable width="160"/>                
                 <el-table-column prop="home" label="Dirección" sortable width="150" />
-                <el-table-column prop="numAddress" label="Numero de domicilio"  sortable width="145" />
+                <el-table-column label="Num. de domicilio" sortable width="165">
+                  <template #default="scope">
+                    {{ '#'+scope.row.numAddress }}
+                  </template>
+                </el-table-column>
                 <el-table-column prop="cell_phone" label="Numero Celular"  sortable width="150" />
                 <el-table-column label="">
                   <template #default="scope">
@@ -172,7 +175,7 @@
           <br><br>
 
           <p style="font-size: 22px;">Datos del domicilio</p>
-          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, C.P. #{{ selectedItem.cp }}, {{ selectedItem.cologne }}, {{ selectedItem.city }}
+          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.cologne }} #{{ selectedItem.cp }}, {{ selectedItem.city }}
           <br>
           Tipo de lugar: {{ selectedItem.type_of_place }}
           <br><br>

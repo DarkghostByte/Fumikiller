@@ -256,6 +256,8 @@
               this.form.lastname1 = datos.lastname1
               this.form.lastname2 = datos.lastname2
               this.form.tradename = datos.tradename
+              this.form.home = datos.home
+              this.form.numAddress = datos.numAddress
             })          
           },
           methods:{

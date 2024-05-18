@@ -214,7 +214,7 @@
                 description:'',
                 how_to_get:'',
                 cell_phone: '',
-                number_fixed_number: '',
+                number_fixed_number: 'Ninguno',
                 contact_form:'',
                 specify:'',
                 recruitment_data: ['Nada']
@@ -267,10 +267,6 @@
                 ],
                 cell_phone:[
                     { required:true, message:'El numero de celular es requerido', trigger:'blur'},
-                    { min:10, max: 13, message:'Longitud debería ser 10 a 13',trigger:'blur'  }
-                ],
-                number_fixed_number:[
-                    { required:true, message:'El numero fijo es requerido', trigger:'blur'},
                     { min:10, max: 13, message:'Longitud debería ser 10 a 13',trigger:'blur'  }
                 ],
                 contact_form:[
