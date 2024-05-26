@@ -9,11 +9,138 @@
         <title>PDF Ordenes</title>
     </head>
 <body >
-<img src="{{ $base64 }}" alt="">
-    <div class="divLogo">
-        <h3>Sistema de Fumigaciones Urbanas</h3> 
+<table class="tblDia" >
+    <h5 class="txtDia">DIA</h5>
+    <h5 class="txtDia1">01-mar-24</h5>
+</table>
+<img class="membre" src="{{ $base64 }}" alt="">
+    
+    <div class="meminfo">
+        
         <div >
-            <h2 class="letrasFlex">REMISION</h2>
+            <h2 class="letrasFlex" class="letrasFlex">REMISION</h2>
+        </div>
+    </div>
+    <header>    
+        
+    </header>
+
+    <main> 
+        <div class="fondLimitador"></div>
+        <table>
+            <th class="clth1">RAZON SOCIAL:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th>  
+        </table>
+            
+        <table>
+            <th class="clth">NOMBRE:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th>  
+        </table>
+        <table>
+            <th>DOMICILIO:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
+            <th> CIUDAD:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
+        </table>
+        <table>
+            <th class="clth11">COLONIA:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th> 
+            <th class="clth11">TELEFONO:</th>
+            <<th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th> 
+            <th class="clth11">CELULAR:</th>
+            <<th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th> 
+        </table>
+        <table>
+            <th class="clth1">TIPO DE LUGAR:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th>  
+        </table>
+        <div >
+        <table class="btnCir">
+            
+            <th class="clth118">REQUIERE DE:</th>
+            <div class="btntxt"></div>
+            <th class="clth22" > Certificado</th>
+            <th class="btnrd"><button class="button button5"> </button>
+            <th class="clth114">NUMERO:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th> 
+            <th class="clth113">IMPORTE:</th>
+            <th class="renDivTh">
+            <div class="renDiv13">
+            </div>
+            </th>
+            
+        </table>
+
+        </div>
+        
+        <table class="">
+            <th>OBSERVACIONES:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+            </div>
+            </th>            
+        </table>
+
+        <div class="ctr">
+            <h5 class="tipo">ORIGINAL CLIENTE</h5>
+        </div>
+
+        <div class="footDiv">
+        </div>
+        <table class="footer">
+            <th class="footer">Calle del Abeto No.2201</th>
+            <th> Col. Alamedas </th>
+            <th> C.P. 31704</th>
+            <th> Nuevo Casas Grandes, Chihu. </th>
+            <th> Tel.636-694-65-15</th>
+            
+            
+        </table>
+        
+
+
+        
+    </main>
+    </div>
+    <div class="separacion"></div>
+    
+</body>
+<body >
+<table class="tblDia" >
+    <h5 class="txtDia">DIA</h5>
+    <h5 class="txtDia1">01-mar-24</h5>
+</table>
+<img class="membre" src="{{ $base64 }}" alt="">
+    <div class="meminfo">
+        <div >
+            <h2 class="letrasFlex" class="letrasFlex">REMISION</h2>
             
         </div>
     
@@ -27,7 +154,7 @@
     <main> 
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth1">Razon Social</th>
+            <th class="clth1">RAZON SOCIAL:</th>
             <th class="renDivTh">
             <div class="renDiv1">
             </div>
@@ -35,99 +162,176 @@
         </table>
             
         <table>
-            <th class="clth">Nombre</th>
+            <th class="clth">NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv1">
             </div>
             </th>  
         </table>
         <table>
-            <th>Domicilio</th>
+            <th>DOMICILIO:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
-            <th> Ciudad</th>
+            <th> CIUDAD:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
         <table>
-            <th>Colonia</th>
+            <th class="clth11">COLONIA:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv1">
             </div>
             </th> 
-            <th>Telefono1:</th>
+            <th class="clth11">TELEFONO:</th>
             <<th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv1">
             </div>
             </th> 
-            <th>Telefono2:</th>
+            <th class="clth11">CELULAR:</th>
             <<th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv1">
             </div>
             </th> 
         </table>
         <table>
-            <th class="clth1">Tipo de lugar </th>
+            <th class="clth1">TIPO DE LUGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
             </div>
             </th>  
         </table>
-        
+        <div >
         <table class="btnCir">
-            <th class="clth11">Require de:</th>
-            <th ><button class="button button5"> </button>
-            <th > Certificado</th>
-            <th class="nmM">Numero:</th>
+            
+            <th class="clth118">REQUIERE DE:</th>
+            <div class="btntxt"></div>
+            <th class="clth22" > Certificado</th>
+            <th class="btnrd"><button class="button button5"> </button>
+            <th class="clth114">NUMERO:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
-            <th>Importe</th>
-            <<th class="renDivTh">
-            <div class="renDiv">
+            <th class="clth113">IMPORTE:</th>
+            <th class="renDivTh">
+            <div class="renDiv13">
             </div>
             </th>
             
         </table>
+
+        </div>
+        
         <table class="">
-            <th>Observaciones:</th>
+            <th>OBSERVACIONES:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
-            </th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th>
-            
+            </th>            
         </table>
 
-
+        <div class="ctr">
+            <h5 class="tipo">COPIA</h5>
+        </div>
 
         <div class="footDiv">
         </div>
         <table class="footer">
-            <th class="footer">Calle del Abeto 2201</th>
+            <th class="footer">Calle del Abeto No.2201</th>
             <th> Col. Alamedas </th>
-            <th> Tel.636-694-65-15</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
             <th> C.P. 31704</th>
+            <th> Nuevo Casas Grandes, Chihu. </th>
+            <th> Tel.636-694-65-15</th>
         </table>
-        
-
-
-        
     </main>
     </div>
     
 </body>
 
 <style>
+    .txtDia{
+        justify-content: center;
+        text-align: center;
+        justify-content: center;
+        width: 38px;;
+        margin-top:-20px;
+        margin-left:75%;
+        border: 1px solid black;
+    }
+    .txtDia1{
+        justify-content: center;
+        text-align: center;
+        justify-content: center;
+        width: 100px;
+        position:absolute;
+        margin-top:-49px;
+        margin-left:80%;
+        border: 1px solid black;
+    }
+    .txtBDDia{
+        left:80%;
+    }.tblDia{
+        position:absolute;
+        justify-content:end;
+    }
+    .separacion{
+        margin-top: 40px;
+        border-top:2px solid black;
+        padding-bottom:40px;
+    }
+    .ctr{
+        justify-content: center;
+    }
+    .tipo{
+        justify-content: center;
+        text-align: center;
+        justify-content: center;
+        margin-left:75%;
+        margin-top: 5px;
+        height:27px;
+        width: 150px;
+        border:1px solid black;
+    }
+    .clth118{
+        width:63.7%;
+    }
+    .btnrd{
+        position:absolute;
+        margin-left: 10%;
+    }
+    .clth22{
+        width:85%;
+    }
+    .clth114{
+        width: 30%;
+        
+    }
+    .clth113{
+        weight:30%;
+    }
+    .clth1{
+        width: 21%;
+    }
+    .letrasflex{
+        left: 20px;
+    }
+    .meminfo{
+        text-align: center;
+        position: absolute;
+        margin-left: -42%;
+        margin-top:11%;
+        
+    }
+    .membre{
+        margin-top:40px;
+        padding-left: 10%;
+        height:12%;
+        width: 80%;
+    }    
     .nmM{
         padding-left:50px;
     }
@@ -141,17 +345,21 @@
         border-bottom: 1px solid black;
         height:15px;
         width:100%;
-    }.renDiv1{
+    }
+    .renDiv13{
+        border-bottom: 1px solid black;
+        height:15px;
+        width:210%;        
+
+    }
+    .renDiv1{
         
         border-bottom: 1px solid black;
         height:15px;
         width:100%;
         margin-left:-5px;
-    }.clth1{
-        left:-10%;
-        width: 9%;
     }.clth11{
-        width: 40%;
+        width: 50%;
     }
     body{
         width: 100%;
@@ -234,6 +442,8 @@
     font-size:15px;
     font-weight: normal;
     width: 90%;
+    
+    
 
 }
 .pr{

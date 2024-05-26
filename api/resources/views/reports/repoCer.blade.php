@@ -9,26 +9,19 @@
         <title>PDF Ordenes</title>
     </head>
 <body >
-<img src="{{ $base64 }}" alt="">
-    <div class="divLogo">
-        <h3>Sistema de Fumigaciones Urbanas</h3> 
-        <div >
-            <h3 class="letrasFlex">Certificado de aplicacion</h3>
-            <div class="noOT">
-                <h4>LicenCia Sanitaria 04-08A095</h4>
-            </div>
-        </div>
-    
-    </div>
-    
-    
+<img class="membre" src="{{ $base64 }}" alt="">
+        <div class="meminfo">
+            <h5 >CALLE ABETO 2201 COL. ALAMEDAS</h5>
+            <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
+        </div>     
+        <h2 class="cerapli">CERTIFICADO DE APLICACION</h2>
     <header>    
         
     </header>
     <main> 
         <div class="fondLimitador"></div>
         <table>
-            <th>Fecha</th>
+            <th>FECHA:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -36,19 +29,19 @@
         </table>
             
         <table>
-            <th>Nombre</th>
+            <th>NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
         <table>
-            <th>Tel.</th>
+            <th>TEL.</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
-            <th> Domicilio:</th>
+            <th> DOMICILIO:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -61,7 +54,7 @@
             </th> 
         </table>
         <table>
-            <th>Colinia</th>
+            <th>COLONIA:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -73,60 +66,133 @@
             </th> 
         </table>
         <table>
-            <th>Ciudad</th>
+            <th>CIUDAD:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th>             
-            <th> Estado</th>
+            <th> ESTADO:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
+        <table>
+            <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+            </div>
+            </th>             
+            </th> 
+        </table>
         <div class="dInAc">
-            <p>Producto Utilizado (Agente activo)</p>
+            <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
         </div>
         <table>
-            <th>Interior</th>
+            <th>INTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
         <table class="">
-            <th>Exterior</th>
+            <th>EXTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
             </th> 
         </table>
         <table>
-            <th>Observaciones</th>
+            <th>OBSERVACIONES:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-            </div>
+            
+                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante, <br> la basura tapada y evitar la humedad.</h5>                
+            
             </th> 
         </table>
         <div class="footDiv">
 
         </div>
-        <table class="footer">
-            <th class="footer">Calle del Abeto 2201</th>
-            <th> Col. Alamedas </th>
-            <th> Tel.636-694-65-15</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
-            <th> C.P. 31704</th>
+        <table class="">
+            <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
+            <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
+            <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
+            <h5 class="idCert">
+                No.                
+            </h5>
+            
+            </th> 
         </table>
 
-
         
+
     </main>
     </div>
     
 </body>
 
 <style>
+    .clth11{
+        width: 66%;
+    }
+    .renDiv1{ 
+        border-bottom: 1px solid black;
+        height:15px;
+        width:100%;
+        margin-left:-5px;
+        margin-top:4px;
+    }
+    .cerapli{
+        color:#eb590c;
+        position:absolute;
+        margin-left:-62%;
+        margin-top:18%;
+    }
+    .mgntp{
+        margin-top: -20px;
+    }
+    .meminfo{
+        text-align: center;
+        position: absolute;
+        margin-left: -55%;
+        margin-top:11%;
+    }
+    .membre{
+        margin-top:40px;
+        padding-left: 10%;
+        height:12%;
+        width: 80%;
+    }
+    .txtfin1{
+        padding-left:15px;
+        font-size: 20px;
+        margin-top:-17px;
+        color:red;
+    }
+    .txtfin{
+        padding-left:15px;
+        font-size: 20px;
+        margin-top:-17px;
+        color:#104e85;
+    }
+    .flexId{
+        
+        display:flex;
+    }
+    .idCert{
+        margin-left:45%;
+        margin-top:-60px;
+        height:25px;
+        width: 100px;
+        border:1px solid black;
+        color: red;
+    }
+    .txtObser{
+        font-size: 16px;
+        margin-top:0px;
+        text-align: justify;
+        text-decoration: underline;
+    }
     .renDivTh{
         width: 100%;
     }
@@ -179,6 +245,7 @@
     }
     .footDiv{
         margin:20px;
+        margin-top:-10px;
         border-bottom:2px solid grey;
     }
     
@@ -224,6 +291,7 @@
     }
     footer{
         position:absolute;
+        margin-top:40px;
         left:20%;
     }
     th{
