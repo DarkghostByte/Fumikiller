@@ -101,8 +101,8 @@
                   <el-option label="Madero" value="madero" />
                 </el-select>
               </el-form-item>
-              <el-form-item prop="city" label="Cuidad:" class="px-7" style="width: 350px;">
-                <el-select v-model="form1.city" placeholder="Selecciona la cuidad">
+              <el-form-item prop="city" label="Ciudad:" class="px-7" style="width: 350px;">
+                <el-select v-model="form1.city" placeholder="Selecciona la ciudad">
                   <el-option label="Nuevo Casas Grandes" value="Nuevo Casas Grandes" />
                   <el-option label="Casas Grandes" value="Casas Grandes" />
                 </el-select>

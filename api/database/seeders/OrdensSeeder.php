@@ -11,7 +11,7 @@ class OrdensSeeder extends Seeder
 {
 
     public function run(): void
-    {
+    {/*
         DB::table('ordens')->insert([
             'id_cliente'=>'1',
             'plague1'=>'2',
@@ -23,5 +23,5 @@ class OrdensSeeder extends Seeder
             'hiring'=>'8',
             'requires'=>'9',
         ]);  
-    }
+    */}
 }
