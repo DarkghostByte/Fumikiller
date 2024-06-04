@@ -12,7 +12,10 @@ class ClientesController extends Controller
 {
     public function index()
     {
-        $data = Cliente::all();
+        $data = Cliente::select(['clientes.*','ciudades.ciudad','ciudades.estado'
+        ])->join('ciudades','clientes.id_city','=','ciudades.id')
+        ->orderBy('clientes.id','DESC')
+        ->get();
         return response()->json([
             'status'=>'success',
             'data'=>$data
@@ -42,7 +45,7 @@ class ClientesController extends Controller
             'numAddress' => 'required|min:1',
             'cp' => 'required|min:1|max:5',
             'cologne' => 'required|min:1',
-            'city' => 'required|min:1',
+            'id_city' => 'required|min:1',
             'type_of_place' => 'required|min:1',
             'description' => 'min:1|max:200',
             'how_to_get' => 'min:1|max:200',
@@ -69,7 +72,7 @@ class ClientesController extends Controller
             $data->numAddress = $request->numAddress;
             $data->cp = $request->cp;            
             $data->cologne = $request->cologne;
-            $data->city = $request->city;            
+            $data->id_city = $request->id_city;            
             $data->type_of_place = $request->type_of_place;
             $data->description = $request->description;
             $data->how_to_get = $request->how_to_get;

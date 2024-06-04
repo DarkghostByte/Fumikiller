@@ -22,7 +22,8 @@ return new class extends Migration
             $table->string('numAddress');
             $table->string('cp');
             $table->string('cologne');
-            $table->string('city');
+            $table->integer('id_city')->unsigned();
+            $table->foreign("id_city")->references('id')->on('ciudades');
             $table->string('type_of_place');
             $table->string('description');
             $table->string('how_to_get');

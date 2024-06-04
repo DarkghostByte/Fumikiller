@@ -18,7 +18,7 @@ class Cliente extends Model
         'numAddress',
         'cp',
         'cologne',
-        'city',
+        'id_city',
         'type_of_place',
         'description',
         'how_to_get',
