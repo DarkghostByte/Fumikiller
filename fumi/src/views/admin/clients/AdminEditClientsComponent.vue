@@ -140,11 +140,9 @@
         </div>
 
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
-          <router-link to="/admin/clients">
-            <el-button @click="updateDatos(formRef)" class="w-40 h-16 mt-5"
-              style="color:white; background-color:#11639c; border-radius:40px; font-size:25px;" type="info"
-              round>Modificar</el-button>
-          </router-link>
+          <el-form-item>
+            <el-button type="primary" @click="updateDatos">Modificar</el-button>
+          </el-form-item>
         </div>
       </el-form>
     </div>
@@ -156,10 +154,10 @@
 <script>
 import { useRoute } from 'vue-router';
 import { ElNotification } from 'element-plus';
-import axios from 'axios'
+import axios from 'axios';
+
 export default {
   name: 'AdminEditClientComponent',
-
   data: () => ({
     formRef: undefined,
     uploadRef: undefined,
@@ -182,8 +180,6 @@ export default {
       how_to_get: '',
       cell_phone: '',
       number_fixed_number: 'Ninguno',
-      contact_form: '',
-      specify: '',
       recruitment_data: ['Nada']
     },
     id: 0,
@@ -201,7 +197,7 @@ export default {
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
       street: [
-        { required: true, message: 'El tipo de calle es requerido', trigger: 'blur' },
+        { required: true, message: 'El tipo de calle es requerido', trigger: 'blur' }
       ],
       home: [
         { required: true, message: 'El domicilio es requerido', trigger: 'blur' },
@@ -216,13 +212,13 @@ export default {
         { min: 5, max: 5, message: 'La longitud debería ser de 5 dígitos', trigger: 'blur' }
       ],
       cologne: [
-        { required: true, message: 'La colonia es requerida', trigger: 'blur' },
+        { required: true, message: 'La colonia es requerida', trigger: 'blur' }
       ],
       id_city: [
-        { required: true, message: 'La ciudad es requerida', trigger: 'blur' },
+        { required: true, message: 'La ciudad es requerida', trigger: 'blur' }
       ],
       type_of_place: [
-        { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' },
+        { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' }
       ],
       description: [
         { required: true, message: 'La descripción es requerida', trigger: 'blur' },
@@ -236,12 +232,8 @@ export default {
         { required: true, message: 'El número de celular es requerido', trigger: 'blur' },
         { min: 10, max: 13, message: 'Longitud debería ser 10 a 13', trigger: 'blur' }
       ],
-      contact_form: [
-        { required: true, message: 'La forma de contacto es requerida', trigger: 'blur' },
-      ],
-      specify: [
-        { required: true, message: 'Especificar es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      recruitment_data: [
+        { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
       ],
     }
   }),
@@ -253,11 +245,13 @@ export default {
       })
     },
     successUpload(response) {
-      console.log('Datos enviados:', this.form);
+      console.log('Datos enviados:', this.form)
       console.log(response)
       this.refresh()
       axios.patch('clientes/' + this.id, this.form).then(response => {
+        console.log('Form submitted successfully:', response.data)
         console.log(response)
+        this.$router.push('/admin/clients');
         ElNotification({
           title: 'Alerta',
           message: 'Registro insertado correctamente',
@@ -276,13 +270,15 @@ export default {
       this.$refs.formRef.validate((valid, fields) => {
         if (valid) {
           console.log(fields);
-          this.successUpload(this.form);
+          this.successUpload();
         } else {
+          console.log('Validation failed');
           ElNotification({
             title: 'Error',
             message: 'Favor de llenar los campos',
             type: 'error'
-          });
+          })
+          return false;
         }
       });
     },
