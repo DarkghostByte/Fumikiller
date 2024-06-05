@@ -103,14 +103,9 @@
           </el-form-item>
           <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
             <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad">
-              <el-option
-                v-for="ciudad in ciudades"
-                :key="ciudad.id"
-                :label="ciudad.ciudad"
-                :value="ciudad.id"
-              />
+              <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
-          </el-form-item>      
+          </el-form-item>
           <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 25%">
             <el-select v-model="form1.type_of_place" placeholder="Selecciona el tipo de lugar">
               <el-option label="Restaurante" value="restaurante" />
@@ -192,7 +187,7 @@ import { ElNotification } from 'element-plus';
 import axios from 'axios';
 
 export default {
-  name: 'AdminHomeComponent',
+  name: 'AdminAddClientsComponent',
   data: () => ({
     formRef: undefined,
     uploadRef: undefined,
@@ -285,57 +280,55 @@ export default {
     errorUpload(error) {
       console.log(error);
     },
-    refresh(){
+    refresh() {
       this.tableData = [];
       axios.get('clientes').then(res => {
         this.tableData = res.data.data;
       });
     },
-    successUpload(response){
-                console.log(response)
-                this.refresh()
-                axios.post('clientes',this.form1).then(response=>{
-                    console.log(response)
-                    ElNotification({
-                        title:'Alerta',
-                        message:'Registro insertado correctamente',
-                        type:'success'
-                    })
-                }).catch(error=>{
-                    console.log(error)
-                    ElNotification({
-                        title:'Error',
-                        message:'Favor de llenar los campos',
-                        type:'error'
-                    })
-                })
-            },
-
-            submitForm(){
-                this.$refs.formRef.validate( (valid,fields)=>{
-                    if(valid){
-                        console.log(fields);
-                        this.successUpload();
-                    }else{
-                        ElNotification({
-                            title:'Error',
-                            message:'Favor de llenar los campos',
-                            type:'error'
-                        })
-                    }
-                } )
-            },
+    successUpload(response) {
+      console.log(response)
+      this.refresh()
+      axios.post('clientes', this.form1).then(response => {
+        console.log(response)
+        ElNotification({
+          title: 'Alerta',
+          message: 'Registro insertado correctamente',
+          type: 'success'
+        })
+      }).catch(error => {
+        console.log(error)
+        ElNotification({
+          title: 'Error',
+          message: 'Favor de llenar los campos',
+          type: 'error'
+        })
+      })
+    },
+    submitForm() {
+      this.$refs.formRef.validate((valid, fields) => {
+        if (valid) {
+          console.log(fields);
+          this.successUpload();
+        } else {
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          })
+        }
+      })
+    },
     fetchCiudades() {
-        axios.get('verCiudades')
-            .then(response => {
-                console.log('Ciudades:', response.data);
-                this.ciudades = response.data;
-            })
-            .catch(error => {
-                console.error('Error fetching ciudades:', error);
-            });
+      axios.get('verCiudades')
+        .then(response => {
+          console.log('Ciudades:', response.data);
+          this.ciudades = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching ciudades:', error);
+        });
     },
   }
 }
 </script>
-
