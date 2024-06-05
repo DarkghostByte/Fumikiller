@@ -59,7 +59,7 @@
                 {{ scope.row.cologne+' #'+scope.row.cp }}
               </template>
             </el-table-column>
-            <el-table-column prop="city" label="Ciudad"  sortable width="170" />
+            <el-table-column prop="id_city" label="Ciudad"  sortable width="170" />
             <el-table-column prop="date1" label="Fecha de orden"  sortable width="150" />
             <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
             <el-table-column prop="time1" label="De" sortable width="100"  />

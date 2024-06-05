@@ -14,7 +14,7 @@
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.
-                {{ $cliente->id }}
+                {{ $orden->id }}
             </div>
         </div>
     
@@ -101,7 +101,7 @@
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $cliente->city }}
+            {{ $cliente->id_city }}
             </div>
             </th>
             <th>Plagas:</th>
@@ -219,7 +219,7 @@
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.
-                {{ $cliente->id }}
+                {{ $orden->id }}
             </div>
         </div>
     
@@ -308,7 +308,7 @@
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $cliente->city }}
+            {{ $cliente->id_city }}
             </div>
             </th> 
             <th>Plagas:</th>
