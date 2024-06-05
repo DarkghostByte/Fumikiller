@@ -64,7 +64,7 @@ class OrdensController extends Controller
         $reglas = Validator::make($request->all(),[
             'id_cliente' => 'min:1',
             'plague1' => 'required|min:1',
-            'plague2' => 'min:1',
+            'plague2' => '',
             'date1' => 'required|min:1',
             'date2' => 'required|min:1',
             'time1' => 'required|min:1',

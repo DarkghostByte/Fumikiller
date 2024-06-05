@@ -256,7 +256,7 @@ export default {
       console.log('Datos enviados:', this.form);
       console.log(response)
       this.refresh()
-      axios.patch(`clientes/${this.id}`, this.form).then(response => {
+      axios.patch('clientes/' + this.id, this.form).then(response => {
         console.log(response)
         ElNotification({
           title: 'Alerta',

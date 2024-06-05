@@ -269,6 +269,9 @@ export default {
         { required: true, message: 'Especificar es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
+      recruitment_data: [
+        { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
+      ],
     }
   }),
   mounted() {

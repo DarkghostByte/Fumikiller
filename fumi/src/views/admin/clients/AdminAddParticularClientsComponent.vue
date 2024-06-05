@@ -268,6 +268,9 @@ export default {
         { required: true, message: 'Especificar es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 500', trigger: 'blur' }
       ],
+      recruitment_data: [
+        { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
+      ],
     }
 
   }),
@@ -322,40 +325,9 @@ export default {
         }
       })
     },
-    /*
-    submitForm() {
-      this.$refs.formRef.validate((valid) => {
-        if (valid) {
-          axios.post('clientes', this.form1)
-            .then(response => {
-              console.log('Form submitted successfully:', response.data);
-              this.$router.push('/admin/clients');
-              ElNotification({
-                title: 'Alerta',
-                message: 'Registro insertado correctamente',
-                type: 'success'
-              })
-            })
-            .catch(error => {
-              console.error('Error submitting form:', error);
-              ElNotification({
-                title: 'Error',
-                message: 'Favor de llenar los campos',
-                type: 'error'
-              })
-            });
-        } else {
-          console.log('Validation failed');
-          ElNotification({
-            title: 'Error',
-            message: 'Favor de llenar los campos',
-            type: 'error'
-          });
-          return false;
-        }
-      });
+    resetForm() {
+      this.$refs.formRef.resetFields();
     },
-    */
     fetchCiudades() {
       axios.get('verCiudades')
         .then(response => {
