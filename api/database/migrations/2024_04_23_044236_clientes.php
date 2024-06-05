@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('street');
             $table->string('home');
             $table->string('numAddress');
-            $table->string('cp');
-            $table->string('cologne');
+            $table->integer('id_colonia')->unsigned();
+            $table->foreign("id_colonia")->references('id')->on('colonia');
             $table->integer('id_city')->unsigned();
             $table->foreign("id_city")->references('id')->on('ciudades');
             $table->string('type_of_place');

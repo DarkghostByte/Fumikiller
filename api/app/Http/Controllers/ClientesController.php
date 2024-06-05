@@ -12,16 +12,20 @@ use Barryvdh\DomPDF\Facade\Pdf;
 class ClientesController extends Controller
 {
     public function index()
-    {
-        $data = Cliente::select(['clientes.*','ciudades.ciudad','ciudades.estado'
-        ])->join('ciudades','clientes.id_city','=','ciudades.id')
-        ->orderBy('clientes.id','DESC')
+{
+    $data = Cliente::select(['clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia',
+    'colonias.codigoPostal'])
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->orderBy('clientes.id', 'DESC')
         ->get();
-        return response()->json([
-            'status'=>'success',
-            'data'=>$data
-        ]);
-    }
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $data
+    ]);
+}
+
     /**
      * Show the form for creating a new resource.
      */
@@ -43,8 +47,7 @@ class ClientesController extends Controller
             'street' => 'required|min:1',
             'home' => 'required|min:1',
             'numAddress' => 'required|min:1',
-            'cp' => 'required|min:1|max:5',
-            'cologne' => 'required|min:1',
+            'id_colonia' => 'required|exists:colonias,id',
             'id_city' => 'required|exists:ciudades,id',
             'type_of_place' => 'required|min:1',
             'description' => 'min:1|max:200',
@@ -71,8 +74,7 @@ class ClientesController extends Controller
             $data->street = $request->street;
             $data->home = $request->home;
             $data->numAddress = $request->numAddress;
-            $data->cp = $request->cp;
-            $data->cologne = $request->cologne;
+            $data->id_colonia = $request->id_colonia;
             $data->id_city = $request->id_city;
             $data->type_of_place = $request->type_of_place;
             $data->description = $request->description;
@@ -186,8 +188,7 @@ class ClientesController extends Controller
             'street' => 'required|min:1',
             'home' => 'required|min:1',
             'numAddress' => 'required|min:1',
-            'cp' => 'required|min:1|max:5',
-            'cologne' => 'required|min:1',
+            'id_colonia' => 'required|min:1',
             'id_city' => 'required|exists:ciudades,id',
             'type_of_place' => 'required|min:1',
             'description' => 'min:1|max:200',

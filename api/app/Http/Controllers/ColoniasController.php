@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Ciudad;
+use App\Models\Colonia;
 use Validator;
 
-class CiudadesController extends Controller
+class ColoniasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $data = Ciudad ::all();
+        $data = Colonia ::all();
         return response()->json([
             'status'=>'success',
             'data'=>$data
@@ -35,8 +35,8 @@ class CiudadesController extends Controller
     {
         
         $reglas = Validator::make($request->all(),[
-            'ciudad' => 'required|min:1',
-            'estado' => 'required|min:1',
+            'colonia' => 'required|min:1',
+            'codigoPostal' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -45,9 +45,9 @@ class CiudadesController extends Controller
                 'error' => $reglas->errors()
             ],201);
         }else{
-            $data = new Ciudad();
-            $data->ciudad = $request->ciudad;
-            $data->estado = $request->estado;
+            $data = new Colonia();
+            $data->colonia = $request->colonia;
+            $data->codigoPostal = $request->codigoPostal;
             $data->save();
 
             return response()->json([
@@ -86,7 +86,7 @@ class CiudadesController extends Controller
      */
     public function destroy(string $id)
     {
-        $data = Ciudad::find($id);
+        $data = Colonia::find($id);
         if($data != null){
             $data -> delete();
         } return response()->json([
