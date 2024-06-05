@@ -166,11 +166,12 @@
         </div>
 
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
-          <router-link to="/admin/clients">
-            <el-button @click="submitForm(formRef)" class="w-40 h-16 mt-5"
-              style="color:white; background-color:#11639c; border-radius:40px; font-size:25px;" type="info"
-              round>Crear</el-button>
-          </router-link>
+          <div style="color:white; display:flex; justify-content: center; transition:10s;">
+            <el-form-item>
+              <el-button type="primary" @click="submitForm">Guardar</el-button>
+              <el-button @click="resetForm">Reset</el-button>
+            </el-form-item>
+          </div>
         </div>
       </el-form>
     </div>
@@ -288,7 +289,9 @@ export default {
       console.log(response)
       this.refresh()
       axios.post('clientes', this.form1).then(response => {
+        console.log('Form submitted successfully:', response.data)
         console.log(response)
+        this.$router.push('/admin/clients');
         ElNotification({
           title: 'Alerta',
           message: 'Registro insertado correctamente',
@@ -309,14 +312,50 @@ export default {
           console.log(fields);
           this.successUpload();
         } else {
+          console.log('Validation failed');
           ElNotification({
             title: 'Error',
             message: 'Favor de llenar los campos',
             type: 'error'
           })
+          return false;
         }
       })
     },
+    /*
+    submitForm() {
+      this.$refs.formRef.validate((valid) => {
+        if (valid) {
+          axios.post('clientes', this.form1)
+            .then(response => {
+              console.log('Form submitted successfully:', response.data);
+              this.$router.push('/admin/clients');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro insertado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.error('Error submitting form:', error);
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de llenar los campos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          });
+          return false;
+        }
+      });
+    },
+    */
     fetchCiudades() {
       axios.get('verCiudades')
         .then(response => {

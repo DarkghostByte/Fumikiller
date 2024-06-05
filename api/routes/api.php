@@ -29,3 +29,6 @@ Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'gen
 
 //VERCIUDADES
 Route::get('/verCiudades',[ClientesController::class,'verCiudades']);
+
+//RUTA PARA LA MODIFICACION
+//Route::patch('clientes/{id}', [ClientesController::class, 'update']);

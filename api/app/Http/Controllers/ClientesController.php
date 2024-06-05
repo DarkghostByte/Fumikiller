@@ -177,9 +177,47 @@ class ClientesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        
-        
+        $cliente = Cliente::find($id);
+        $reglas = Validator::make($request->all(), [
+            'name' => 'required|min:1',
+            'lastname1' => 'required|min:1',
+            'lastname2' => 'required|min:1',
+            'tradename' => 'min:1',
+            'street' => 'required|min:1',
+            'home' => 'required|min:1',
+            'numAddress' => 'required|min:1',
+            'cp' => 'required|min:1|max:5',
+            'cologne' => 'required|min:1',
+            'id_city' => 'required|exists:ciudades,id',
+            'type_of_place' => 'required|min:1',
+            'description' => 'min:1|max:200',
+            'how_to_get' => 'min:1|max:200',
+            'cell_phone' => 'required|min:10|max:13',
+            'number_fixed_number' => 'min:1',
+            'recruitment_data' => 'array|min:1',
+        ]);
+        if (!$cliente) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Cliente no encontrado'
+            ], 404);
+        }
+        if ($reglas->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Error de validación',
+                'errors' => $reglas->errors()
+            ], 400);
+        }
+        $cliente->fill($request->all());
+        $cliente->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Cliente actualizado correctamente',
+            'data' => $cliente
+        ]);
     }
+    
 
     /**
      * Remove the specified resource from storage.
