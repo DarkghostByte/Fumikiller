@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Orden;
+use App\Models\Ciudad;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -34,8 +35,7 @@ class ClientesController extends Controller
      */
     public function store(Request $request)
     {
-        
-        $reglas = Validator::make($request->all(),[
+        $reglas = Validator::make($request->all(), [
             'name' => 'required|min:1',
             'lastname1' => 'required|min:1',
             'lastname2' => 'required|min:1',
@@ -45,48 +45,49 @@ class ClientesController extends Controller
             'numAddress' => 'required|min:1',
             'cp' => 'required|min:1|max:5',
             'cologne' => 'required|min:1',
-            'id_city' => 'required|min:1',
+            'id_city' => 'required|exists:ciudades,id',
             'type_of_place' => 'required|min:1',
             'description' => 'min:1|max:200',
             'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',
-            'number_fixed_number' => 'min:10|max:13',
+            'number_fixed_number' => 'min:1',
             'contact_form' => 'required|min:1',
             'specify' => 'required|min:1',
             'recruitment_data' => 'array|min:1',
         ]);
-        if( $reglas -> fails()){
+
+        if ($reglas->fails()) {
             return response()->json([
-                'status'=>'failed',
-                'message'=> 'Validation Error',
+                'status' => 'failed',
+                'message' => 'Validation Error',
                 'error' => $reglas->errors()
-            ],201);
-        }else{
+            ], 201);
+        } else {
             $data = new Cliente();
             $data->name = $request->name;
             $data->lastname1 = $request->lastname1;
             $data->lastname2 = $request->lastname2;
             $data->tradename = $request->tradename;
-            $data->street = $request->street;            
+            $data->street = $request->street;
             $data->home = $request->home;
             $data->numAddress = $request->numAddress;
-            $data->cp = $request->cp;            
+            $data->cp = $request->cp;
             $data->cologne = $request->cologne;
-            $data->id_city = $request->id_city;            
+            $data->id_city = $request->id_city;
             $data->type_of_place = $request->type_of_place;
             $data->description = $request->description;
             $data->how_to_get = $request->how_to_get;
             $data->cell_phone = $request->cell_phone;
-            $data->number_fixed_number = $request->number_fixed_number;          
+            $data->number_fixed_number = $request->number_fixed_number;
             $data->contact_form = $request->contact_form;
             $data->specify = $request->specify;
             $data->recruitment_data = json_encode($request->recruitment_data);
             $data->save();
 
             return response()->json([
-                'status'=>'success'
+                'status' => 'success',
+                'data' => $data
             ]);
-            
         }
     }
 
@@ -205,5 +206,11 @@ class ClientesController extends Controller
         return response()->json(['error' => 'No se propocionó ningun archivo'],
         400);
         */
+    }
+
+    public function verCiudades()
+    {
+        $ciudades = Ciudad::all();
+        return response()->json($ciudades);
     }
 }

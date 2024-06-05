@@ -6,9 +6,6 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\OrdensController;
 use App\Http\Controllers\CiudadesController;
 
-
-
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,5 +27,5 @@ Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
 
-
-
+//VERCIUDADES
+Route::get('/verCiudades',[ClientesController::class,'verCiudades']);

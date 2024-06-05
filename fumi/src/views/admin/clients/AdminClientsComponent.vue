@@ -92,7 +92,7 @@
                     {{ scope.row.lastname1+' '+scope.row.lastname2 }}
                   </template>
                 </el-table-column>
-                <el-table-column prop="city" label="Ciudad"  sortable width="160"/>                
+                <el-table-column prop="ciudad" label="Ciudad"  sortable width="160"/>                
                 <el-table-column prop="home" label="Dirección" sortable width="150" />
                 <el-table-column label="Num. de domicilio" sortable width="165">
                   <template #default="scope">
@@ -139,7 +139,7 @@
           <br><br>
           Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
           <br><br>
-          Direccion: {{ selectedItem.city }}, {{ selectedItem.cologne }}, {{ selectedItem.home }}, {{ selectedItem.cp }}
+          Direccion: {{ selectedItem.ciudad }}, {{ selectedItem.cologne }}, {{ selectedItem.home }}, {{ selectedItem.cp }}
           <br><br>
           Telefono: Datos de la base de datos {{ selectedItem.cell_phone }}
           <br><br>
@@ -175,7 +175,7 @@
           <br><br>
 
           <p style="font-size: 22px;">Datos del domicilio</p>
-          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.cologne }} #{{ selectedItem.cp }}, {{ selectedItem.city }}
+          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.cologne }} #{{ selectedItem.cp }}, {{ selectedItem.ciudad }}
           <br>
           Tipo de lugar: {{ selectedItem.type_of_place }}
           <br><br>
