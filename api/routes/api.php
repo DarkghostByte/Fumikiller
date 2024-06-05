@@ -29,8 +29,9 @@ Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
 
-//VERCIUDADES
+//VER OPCIONES
 Route::get('/verCiudades',[ClientesController::class,'verCiudades']);
+Route::get('/verColonia',[ClientesController::class,'verColonia']);
 
 //RUTA PARA LA MODIFICACION
-//Route::patch('clientes/{id}', [ClientesController::class, 'update']);
+//Route::patch('clientes/{id}', [ClientesController::class, 'update']);verColonia

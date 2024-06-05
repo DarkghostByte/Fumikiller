@@ -86,19 +86,13 @@
               type="number" />
           </el-form-item>
 
-          <el-form-item prop="cp" label="Codigo postal:" class="px-4">
-            <el-input v-model="form1.cp" class="px-1" placeholder="Ingresa el codigo postal" />
-          </el-form-item>
-
-
         </div>
 
         <!-- Tercera Fila -->
         <div class="flex">
-          <el-form-item prop="cologne" label="Colonia:" class="px-2">
-            <el-select v-model="form1.cologne" placeholder="Selecciona la  colonia" class="px-1" style="width: 220px;">
-              <el-option label="Primera de mayo" value="primerademayo" />
-              <el-option label="Madero" value="madero" />
+          <el-form-item prop="id_colonia" label="Colonia:" class="px-2" style="width: 220px;">
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la ciudad">
+              <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
             </el-select>
           </el-form-item>
           <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
@@ -193,6 +187,7 @@ export default {
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
+    colonias: [],
     form1: {
       name: '',
       lastname1: '',
@@ -201,8 +196,7 @@ export default {
       street: '',
       home: '',
       numAddress: '',
-      cp: '',
-      cologne: '',
+      id_colonia: '',
       id_city: '',
       type_of_place: '',
       description: '',
@@ -237,11 +231,7 @@ export default {
         { required: true, message: 'El número de domicilio es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
-      cp: [
-        { required: true, message: 'El código postal es requerido', trigger: 'blur' },
-        { min: 5, max: 5, message: 'La longitud debería ser de 5 dígitos', trigger: 'blur' }
-      ],
-      cologne: [
+      id_colonia: [
         { required: true, message: 'La colonia es requerida', trigger: 'blur' },
       ],
       id_city: [
@@ -277,6 +267,7 @@ export default {
   mounted() {
     this.refresh();
     this.fetchCiudades();
+    this.fetchColonias();
   },
   methods: {
     errorUpload(error) {
@@ -332,6 +323,16 @@ export default {
         })
         .catch(error => {
           console.error('Error fetching ciudades:', error);
+        });
+    },
+    fetchColonias() {
+      axios.get('verColonia')
+        .then(response => {
+          console.log('Colonia:', response.data);
+          this.colonias = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching colonias:', error);
         });
     },
   }

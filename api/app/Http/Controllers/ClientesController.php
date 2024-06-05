@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Orden;
 use App\Models\Ciudad;
+use App\Models\Colonia;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -251,5 +252,11 @@ class ClientesController extends Controller
     {
         $ciudades = Ciudad::all();
         return response()->json($ciudades);
+    }
+
+    public function verColonia()
+    {
+        $colonias = Colonia::all();
+        return response()->json($colonias);
     }
 }

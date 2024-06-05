@@ -139,7 +139,7 @@
           <br><br>
           Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
           <br><br>
-          Direccion: {{ selectedItem.ciudad }}, {{ selectedItem.cologne }}, {{ selectedItem.home }}, {{ selectedItem.cp }}
+          Direccion: {{ selectedItem.ciudad }}, {{ selectedItem.colonia }}, {{ selectedItem.home }}, {{ selectedItem.codigoPostal }}
           <br><br>
           Telefono: Datos de la base de datos {{ selectedItem.cell_phone }}
           <br><br>
@@ -175,7 +175,7 @@
           <br><br>
 
           <p style="font-size: 22px;">Datos del domicilio</p>
-          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.cologne }} #{{ selectedItem.cp }}, {{ selectedItem.ciudad }}
+          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
           <br>
           Tipo de lugar: {{ selectedItem.type_of_place }}
           <br><br>
