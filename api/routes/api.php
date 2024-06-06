@@ -6,6 +6,7 @@ use App\Http\Controllers\ClientesController;
 use App\Http\Controllers\OrdensController;
 use App\Http\Controllers\CiudadesController;
 use App\Http\Controllers\ColoniasController;
+use App\Http\Controllers\CompletarOrdenesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::resource('clientes', ClientesController::class);
 Route::resource('orden', OrdensController::class);
 Route::resource('ciudades', CiudadesController::class);
 Route::resource('colonias', ColoniasController::class);
+Route::resource('completarOrden', CompletarOrdenesController::class);
 
 //RUTAS PARA PDF
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);

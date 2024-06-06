@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Ordenes de trabajo</h1>
+      <h1 class="py-6 px-2 text-4xl font-semibold mb-2">Ordenes de trabajo</h1>
     </div>
     <!-- TABLE DATA -->
     <div class="flex ml-5">
@@ -26,23 +26,23 @@
         <!-- DATOS DE LA FILA DE CLIENTES -->
         <p>Cliente</p>
         <div class="flex">
-          <el-form-item prop="name" label="Nombre del comercio:" class="px-10" style="width: 25%">
-            <el-input v-model="form.tradename" class="px-1"
+          <el-form-item prop="name" label="Nombre del comercio:" class="px-2">
+            <el-input v-model="form.tradename" class="px-1" style="width: 220px;"
               placeholder="Ingresa el nombre del comercio"
               disabled/>
           </el-form-item>
-          <el-form-item prop="name" label="Nombres:" class="px-8">
-            <el-input v-model="form.name" class="px-1"
+          <el-form-item prop="name" label="Nombres:" class="px-7">
+            <el-input v-model="form.name" class="px-1" style="width: 220px;"
               placeholder="Ingresa sus nombres"
               disabled/>
           </el-form-item>
-          <el-form-item prop="name" label="Apellido paterno:" class="px-6">
-            <el-input v-model="form.lastname1" class="px-1"
+          <el-form-item prop="name" label="Apellido paterno:" class="px-7">
+            <el-input v-model="form.lastname1" class="px-1" style="width: 220px;"
               placeholder="Ingresa su primer apellido"
               disabled/>
           </el-form-item>
-          <el-form-item prop="name" label="Apellido materno:" class="px-5">
-            <el-input v-model="form.lastname2" class="px-1"
+          <el-form-item prop="name" label="Apellido materno:" class="px-7">
+            <el-input v-model="form.lastname2" class="px-1" style="width: 220px;"
               placeholder="Ingresa su segundo apellido"
               disabled/>
           </el-form-item>
@@ -50,8 +50,8 @@
         <!-- FILA DE LAS PLAGAS (PROBLEMATICA) -->
         <p>Problematica</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="plague1" class="px-10" label="Tipo de plaga #1" style="width: 25%">
-            <el-select v-model="form.plague1" placeholder="Selecciona la plaga">
+          <el-form-item prop="plague1" class="px-2" label="Tipo de plaga #1" >
+            <el-select v-model="form.plague1" placeholder="Selecciona la plaga" style="width: 220px">
               <el-option label="Cucarachas" value="Cucarachas" />
               <el-option label="Pulgas" value="Pulgas" />
               <el-option label="Chinches" value="Chinches" />
@@ -62,9 +62,9 @@
               <el-option label="Hormigas" value="Hormigas" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="plague2" class="px-8" label="Tipo de plaga #2" style="width: 25%">
-            <el-select v-model="form.plague2" placeholder="Selecciona la plaga">
-              <el-option label="Nada" value="" />
+          <el-form-item prop="plague2" class="px-7" label="Tipo de plaga #2">
+            <el-select v-model="form.plague2" placeholder="Selecciona la plaga" style="width: 220px">
+              <el-option label="Nada" value="solamente" />
               <el-option label="Cucarachas" value="y Cucarachas" />
               <el-option label="Pulgas" value="y Pulgas" />
               <el-option label="Chinches" value="y Chinches" />
@@ -79,8 +79,8 @@
         <!-- FILA DE FECHAS -->
         <p>Fechas</p>
         <div class="flex">
-          <el-form-item prop="date1" class="px-10" label="Fecha de orden:" style="width: 250px">
-            <el-col :span="11">
+          <el-form-item prop="date1" class="px-2" label="Fecha de orden:">
+            <el-col :span="11" style="width: 220px">
               <el-date-picker
                 v-model="form.date1"
                 type="date"
@@ -90,8 +90,8 @@
               />
             </el-col>
           </el-form-item>
-          <el-form-item prop="date2" class="px-10" label="Fecha para asistir:" style="width: 250px">
-            <el-col :span="11">
+          <el-form-item prop="date2" class="px-7" label="Fecha para asistir:">
+            <el-col :span="11" style="width: 220px">
               <el-date-picker
                 v-model="form.date2"
                 type="date"
@@ -101,8 +101,8 @@
               />
             </el-col>
           </el-form-item>
-          <el-form-item prop="time1" class="px-10" label="De hora:">
-            <el-col :span="11">
+          <el-form-item prop="time1" class="px-7" label="De hora:">
+            <el-col :span="11" style="width: 220px">
               <el-time-select
                 v-model="form.time1"
                 style="width: 220px"
@@ -114,8 +114,8 @@
               />
             </el-col>
           </el-form-item>
-          <el-form-item prop="time2" class="px-10" label="A hora:">
-            <el-col :span="11">
+          <el-form-item prop="time2" class="px-7" label="A hora:">
+            <el-col :span="11" style="width: 220px">
               <el-time-select
                 v-model="form.time2"
                 style="width: 220px"
@@ -178,17 +178,14 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     form: {
       name: '',
-      lastname1: '',
-      lastname2: '',
-      id_cliente: '',
       plague1: '',
       plague2: 'Nada',
       date1: '',
       date2: '',
       time1: '',
       time2: '',
-      hiring: ['Nada'],
-      requires: ['Nada']
+      hiring: [],
+      requires: []
     },
     rules: {
       plague1: [

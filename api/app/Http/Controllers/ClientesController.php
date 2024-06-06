@@ -99,9 +99,14 @@ class ClientesController extends Controller
         //
     }
 
-    public function generarOrden($id,$id_cliente){
+    public function generarOrden($id,$id_cliente){        
+        // Obtener datos del cliente junto con ciudad y colonia
+        $cliente = Cliente::select('clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia', 'colonias.codigoPostal')
+            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+            ->where('clientes.id', $id)
+            ->first();
         //Datos de la base de datos
-        $cliente = Cliente::find($id);
         if (!$cliente) {
             return abort(404);
         }

@@ -79,7 +79,7 @@
             <th>Colonia:</th>
             <<th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->cologne }} #{{ $cliente->cp }}
+                {{ $cliente->colonia }} #{{ $cliente->codigoPostal }}
             </div>
             </th> 
         </table>
@@ -101,7 +101,7 @@
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $cliente->id_city }}
+            {{ $cliente->ciudad }}
             </div>
             </th>
             <th>Plagas:</th>
@@ -308,7 +308,7 @@
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $cliente->id_city }}
+            {{ $cliente->ciudad }}
             </div>
             </th> 
             <th>Plagas:</th>

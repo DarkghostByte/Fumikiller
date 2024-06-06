@@ -37,7 +37,7 @@
     </div>
 
     <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Particular</h1>
+      <h1 class="py-6 px-2 text-4xl font-semibold mb-2">Particular</h1>
     </div>
 
 
@@ -62,7 +62,6 @@
         </div>
 
         <!-- Segunda Fila -->
-        <br>
         <p class="px-5">Domicilio:</p>
         <div class="flex">
           <el-form-item prop="street" label="Tipo de calle:" class="px-2">
@@ -86,8 +85,8 @@
 
         <!-- Tercera Fila -->
         <div class="flex">
-          <el-form-item prop="id_colonia" label="Colonia:" class="px-2" style="width: 220px;">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la ciudad">
+          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la ciudad" class=" px-1" style="width: 220px;">
               <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
             </el-select>
           </el-form-item>
@@ -96,56 +95,48 @@
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 25%">
+          <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 350px;">
             <el-select v-model="form1.type_of_place" placeholder="Selecciona el tipo de lugar">
-              <el-option label="Casa" value="Casa" />
-              <el-option label="Departamento" value="Departamento" />
-
+              <el-option label="Restaurante" value="restaurante" />
+              <el-option label="Bodega" value="bodega" />
             </el-select>
           </el-form-item>
         </div>
 
         <!-- Datos del domicilio Fila -->
         <div class="px-5">
-          <br>
           <p>Datos del domicilio:</p>
-          <el-form-item prop="how_to_get" label="Como llegar:" class="pt-5 px-10">
+          <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-2">
             <el-input v-model="form1.how_to_get" type="textarea" maxlength="200" show-word-limit
               placeholder="Agrega como llegar al domicilio" />
           </el-form-item>
-          <el-form-item prop="description" label="Decripcion:" class="pt-4 px-10">
+          <el-form-item prop="description" label="Descripcion:" class="pt-2 px-2">
             <el-input v-model="form1.description" type="textarea" maxlength="200" show-word-limit
               placeholder="Agrega una descripcion" />
           </el-form-item>
         </div>
 
         <!-- Sexta Fila -->
-        <br>
         <p class="px-5">Contacto:</p>
         <div class="flex">
-          <el-form-item prop="cell_phone" label="Numero de celular:" class="px-10" style="width: 25%">
-            <el-input v-model="form1.cell_phone" placeholder="Celular" />
+          <el-form-item prop="cell_phone" label="Numero de celular:" class="px-2">
+            <el-input v-model="form1.cell_phone" placeholder="Celular" style="width: 220px;"/>
           </el-form-item>
-          <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-10" style="width: 25%">
-            <el-input v-model="form1.number_fixed_number" placeholder="Celular" />
+          <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-7">
+            <el-input v-model="form1.number_fixed_number" placeholder="Celular" style="width: 220px;"/>
           </el-form-item>
-        </div>
-
-        <!-- Septima Fila -->
-        <div class="flex">
-          <el-form-item prop="contact_form" label="Forma de contacto:" class="px-10" style="width: 25%">
-            <el-select v-model="form1.contact_form" placeholder="Selecciona la  forma de contacto" class="">
+          <el-form-item prop="contact_form" label="Forma de contacto:" class="px-2">
+            <el-select v-model="form1.contact_form" placeholder="Selecciona la  forma de contacto" style="width: 220px;">
               <el-option label="Facebook" value="facebook" />
               <el-option label="Barda" value="barda" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="specify" label="Especificar:" class="px-10" style="width: 25%">
-            <el-input v-model="form1.specify" placeholder="Especificar" />
+          <el-form-item prop="specify" label="Especificar:" class="px-7">
+            <el-input v-model="form1.specify" placeholder="Especificar" style="width: 220px;"/>
           </el-form-item>
         </div>
 
-        <!-- Octava fila -->
-        <br>
+        <!-- Septima fila -->
         <p class="px-5">Contratacion:</p>
         <div class="flex">
           <el-form-item prop="recruitment_data" label="Tipo de contratacion:" class="px-10">
@@ -203,7 +194,7 @@ export default {
       number_fixed_number: 'Ninguno',
       contact_form: '',
       specify: '',
-      recruitment_data: ['Nada']
+      recruitment_data: []
     },
     rules: {
 

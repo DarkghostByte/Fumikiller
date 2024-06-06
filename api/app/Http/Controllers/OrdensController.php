@@ -11,15 +11,31 @@ class OrdensController extends Controller
 {
     public function index()
     {
-        $data = Orden::select(['orden.*','clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename',
-        'clientes.home','clientes.numAddress','clientes.cp','clientes.cologne','clientes.id_city'
-        ])->join('clientes','orden.id_cliente','=','clientes.id')
-        ->orderBy('orden.id','DESC')
-        ->get();
+        $data = Orden::select([
+                'orden.*',
+                'clientes.name',
+                'clientes.lastname1',
+                'clientes.lastname2',
+                'clientes.tradename',
+                'clientes.home',
+                'clientes.numAddress',
+                'clientes.id_colonia',
+                'clientes.id_city',
+                'colonias.colonia',
+                'colonias.codigoPostal',
+                'ciudades.ciudad'
+            ])
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->orderBy('orden.id', 'DESC')
+            ->get();
+
         return response()->json([
-            'status'=>'success',
-            'data'=>$data
+            'status' => 'success',
+            'data' => $data
         ]);
+    }
         /*
     $data = Orden::select(['orden.*','clientes.name','clientes.lastname1','clientes.lastname2'
     ])->join('clientes','orden.id_cliente','=','clientes.id')
@@ -46,7 +62,6 @@ class OrdensController extends Controller
         ]);
 
         */
-    }
 
     /**
      * Show the form for creating a new resource.

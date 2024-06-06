@@ -1,0 +1,40 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('completarOrdenes', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('responsable');
+            $table->string('ayudante');
+            $table->string('productoInt1');
+            $table->string('productoInt2');
+            $table->string('productoExt1');
+            $table->string('productoExt2');
+            $table->string('noTrapear');
+            $table->string('noIngresar');
+            $table->string('otraDosis');
+            $table->string('hora');
+            $table->decimal('pago');
+            $table->string('requiere1');
+            $table->string('requiere2');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('completarOrdenes');
+    }
+};

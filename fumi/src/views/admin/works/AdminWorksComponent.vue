@@ -56,10 +56,10 @@
             </el-table-column>
             <el-table-column label="Colonia" sortable width="150">
               <template #default="scope">
-                {{ scope.row.cologne+' #'+scope.row.cp }}
+                {{ scope.row.colonia+' #'+scope.row.codigoPostal }}
               </template>
             </el-table-column>
-            <el-table-column prop="id_city" label="Ciudad"  sortable width="170" />
+            <el-table-column prop="ciudad" label="Ciudad"  sortable width="170" />
             <el-table-column prop="date1" label="Fecha de orden"  sortable width="150" />
             <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
             <el-table-column prop="time1" label="De" sortable width="100"  />
@@ -107,7 +107,7 @@
             <br>
             Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
             <br>
-            Direccion: {{ selectedItem.city }}, {{ selectedItem.cologne }} #{{ selectedItem.cp }}, {{ selectedItem.home }} #{{ selectedItem.numAddress }}
+            Direccion: {{ selectedItem.city }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.home }} #{{ selectedItem.numAddress }}
             <br>
             Dia de la orden: {{ selectedItem.date1 }}
             <br>
