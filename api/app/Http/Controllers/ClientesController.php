@@ -199,7 +199,7 @@ class ClientesController extends Controller
             'numAddress' => 'required|min:1',
             'id_colonia' => 'required|min:1',
             'id_city' => 'required|exists:ciudades,id',
-            'type_of_place' => 'required|min:1',
+            'id_comercio' => 'required|exists:comercios,id',
             'description' => 'min:1|max:200',
             'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',

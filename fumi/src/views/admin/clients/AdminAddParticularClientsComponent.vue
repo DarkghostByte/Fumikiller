@@ -95,10 +95,9 @@
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 350px;">
-            <el-select v-model="form1.type_of_place" placeholder="Selecciona el tipo de lugar">
-              <el-option label="Restaurante" value="restaurante" />
-              <el-option label="Bodega" value="bodega" />
+          <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-7" style="width: 350px;">
+            <el-select v-model="form1.id_comercio" placeholder="Selecciona el tipo de comercio:">
+              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio" :value="comercio.id" />
             </el-select>
           </el-form-item>
         </div>
@@ -177,6 +176,7 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
+    comercios: [],
     form1: {
       name: '',
       lastname1: '',
@@ -187,7 +187,7 @@ export default {
       numAddress: '',
       id_colonia: '',
       id_city: '',
-      type_of_place: '',
+      id_comercio: '',
       description: '',
       how_to_get: '',
       cell_phone: '',
@@ -227,8 +227,8 @@ export default {
       id_city: [
         { required: true, message: 'La colonia es requerido', trigger: 'blur' },
       ],
-      type_of_place: [
-        { required: true, message: 'La colonia es requerido', trigger: 'blur' },
+      id_comercio: [
+        { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' },
       ],
       description: [
         { required: true, message: 'La descripcion es requerido', trigger: 'blur' },
@@ -259,6 +259,8 @@ export default {
     this.refresh();
     this.fetchCiudades();
     this.fetchColonias();
+    this.fetchComercios();
+
   },
   methods: {
     errorUpload(error) {
@@ -328,6 +330,16 @@ export default {
         })
         .catch(error => {
           console.error('Error fetching colonias:', error);
+        });
+    },
+    fetchComercios() {
+      axios.get('verComercio')
+        .then(response => {
+          console.log('Comercio:', response.data);
+          this.comercios = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching comercios:', error);
         });
     },
   }

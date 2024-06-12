@@ -82,10 +82,9 @@
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="type_of_place" label="Tipo de comercio:" class="px-7" style="width: 350px;">
-            <el-select v-model="form.type_of_place" placeholder="Selecciona el tipo de lugar">
-              <el-option label="Restaurante" value="restaurante" />
-              <el-option label="Bodega" value="bodega" />
+          <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-7" style="width: 350px;">
+            <el-select v-model="form.id_comercio" placeholder="Selecciona el tipo de comercio:">
+              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio" :value="comercio.id" />
             </el-select>
           </el-form-item>
         </div>
@@ -155,6 +154,7 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
+    comercios: [],
     form: {
       name: '',
       lastname1: '',
@@ -165,7 +165,7 @@ export default {
       numAddress: '',
       id_colonia: '',
       id_city: '',
-      type_of_place: '',
+      id_comercio: '',
       description: '',
       how_to_get: '',
       cell_phone: '',
@@ -203,7 +203,7 @@ export default {
       id_city: [
         { required: true, message: 'La ciudad es requerida', trigger: 'blur' }
       ],
-      type_of_place: [
+      id_comercio: [
         { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' }
       ],
       description: [
@@ -288,11 +288,22 @@ export default {
           console.error('Error fetching colonias:', error);
         });
     },
+    fetchComercios() {
+      axios.get('verComercio')
+        .then(response => {
+          console.log('Comercio:', response.data);
+          this.comercios = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching comercios:', error);
+        });
+    },
   },
   mounted() {
     this.refresh();
     this.fetchCiudades();
     this.fetchColonias();
+    this.fetchComercios();
     const route = useRoute();
     this.id = route.params.id;
     axios.get(`clientes/${this.id}`).then(res => {
@@ -308,7 +319,7 @@ export default {
         this.form.numAddress = datos.numAddress || '';
         this.form.id_colonia = datos.id_colonia || '';
         this.form.id_city = datos.id_city || '';
-        this.form.type_of_place = datos.type_of_place || '';
+        this.form.id_comercio = datos.id_comercio || '';
         this.form.description = datos.description || '';
         this.form.how_to_get = datos.how_to_get || '';
         this.form.cell_phone = datos.cell_phone || '';
