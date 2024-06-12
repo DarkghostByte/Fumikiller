@@ -177,7 +177,7 @@
           <p style="font-size: 22px;">Datos del domicilio</p>
           Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
           <br>
-          Tipo de lugar: {{ selectedItem.type_of_place }}
+          Tipo de lugar: {{ selectedItem.comercio }}
           <br><br>
 
           

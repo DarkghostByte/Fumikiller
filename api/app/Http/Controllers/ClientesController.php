@@ -7,6 +7,7 @@ use App\Models\Cliente;
 use App\Models\Orden;
 use App\Models\Ciudad;
 use App\Models\Colonia;
+use App\Models\Comercio;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -15,9 +16,10 @@ class ClientesController extends Controller
     public function index()
 {
     $data = Cliente::select(['clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia',
-    'colonias.codigoPostal'])
+    'colonias.codigoPostal', 'comercios.comercio'])
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->orderBy('clientes.id', 'DESC')
         ->get();
 
@@ -50,7 +52,7 @@ class ClientesController extends Controller
             'numAddress' => 'required|min:1',
             'id_colonia' => 'required|exists:colonias,id',
             'id_city' => 'required|exists:ciudades,id',
-            'type_of_place' => 'required|min:1',
+            'id_comercio' => 'required|exists:comercios,id',
             'description' => 'min:1|max:200',
             'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',
@@ -77,7 +79,7 @@ class ClientesController extends Controller
             $data->numAddress = $request->numAddress;
             $data->id_colonia = $request->id_colonia;
             $data->id_city = $request->id_city;
-            $data->type_of_place = $request->type_of_place;
+            $data->id_comercio = $request->id_comercio;
             $data->description = $request->description;
             $data->how_to_get = $request->how_to_get;
             $data->cell_phone = $request->cell_phone;
@@ -101,9 +103,10 @@ class ClientesController extends Controller
 
     public function generarOrden($id,$id_cliente){        
         // Obtener datos del cliente junto con ciudad y colonia
-        $cliente = Cliente::select('clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia', 'colonias.codigoPostal')
+        $cliente = Cliente::select('clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia', 'colonias.codigoPostal', 'comercios.comercio')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
             ->where('clientes.id', $id)
             ->first();
         //Datos de la base de datos
@@ -263,5 +266,11 @@ class ClientesController extends Controller
     {
         $colonias = Colonia::all();
         return response()->json($colonias);
+    }
+
+    public function verComercio()
+    {
+        $comercios = Comercio::all();
+        return response()->json($comercios);
     }
 }

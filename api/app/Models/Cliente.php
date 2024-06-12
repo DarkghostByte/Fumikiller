@@ -18,7 +18,7 @@ class Cliente extends Model
         'numAddress',
         'id_colonia',
         'id_city',
-        'type_of_place',
+        'id_comercio',
         'description',
         'how_to_get',
         'cell_phone',
