@@ -65,14 +65,14 @@
           <el-form-item prop="plague2" class="px-7" label="Tipo de plaga #2">
             <el-select v-model="form.plague2" placeholder="Selecciona la plaga" style="width: 220px">
               <el-option label="Nada" value="solamente" />
-              <el-option label="Cucarachas" value="y Cucarachas" />
-              <el-option label="Pulgas" value="y Pulgas" />
-              <el-option label="Chinches" value="y Chinches" />
-              <el-option label="Cucaracha de cocina" value="y Cucaracha de cocina" />
-              <el-option label="Garrapatas" value="y Garrapatas" />
-              <el-option label="Palomillas" value="y Palomillas" />
-              <el-option label="Roedores" value="y Roedores" />
-              <el-option label="Hormigas" value="y Hormigas" />
+              <el-option label="Cucarachas" value="Cucarachas" />
+              <el-option label="Pulgas" value="Pulgas" />
+              <el-option label="Chinches" value="Chinches" />
+              <el-option label="Cucaracha de cocina" value="Cucaracha de cocina" />
+              <el-option label="Garrapatas" value="Garrapatas" />
+              <el-option label="Palomillas" value="Palomillas" />
+              <el-option label="Roedores" value="Roedores" />
+              <el-option label="Hormigas" value="Hormigas" />
             </el-select>
           </el-form-item>
         </div>

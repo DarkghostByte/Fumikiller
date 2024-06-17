@@ -16,7 +16,7 @@ const adminRoutes = [
     {path: 'calendar', component: () => import('@/views/admin/calendar/AdminCalendarComponent.vue')},
     {path: 'calendar/complete', component: () => import('@/views/admin/calendar/AdminCalendarCompleteComponent.vue')},
 
-
+    {path: 'admin', component: () => import('@/views/admin/admin/AdminAdminComponent.vue')},
 
 ]
 

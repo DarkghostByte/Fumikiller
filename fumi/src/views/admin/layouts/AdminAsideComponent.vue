@@ -43,7 +43,7 @@
               <span class="material-symbols-outlined">payments</span>
               <p id="HTxt" class="px-2">Gastos</p>
             </router-link>
-            <router-link to="/admin/administration" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
+            <router-link to="/admin/admin" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
               <span class="sr-only">Administracion</span>
               <span class="material-symbols-outlined">shield_person</span>
               <p id="HTxt" class="px-2">Admin</p>

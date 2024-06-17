@@ -107,7 +107,7 @@
             <th>Plagas:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->plague1 }} {{ $orden->plague2 }}
+                {{ $orden->plague1 }} y {{ $orden->plague2 }}
             </div>
             </th> 
         </table>
@@ -151,7 +151,7 @@
             <div class="renDiv">
             </div>
             </th>
-            <th>$Contizacion</th>
+            <th>$Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -314,7 +314,7 @@
             <th>Plagas:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->plague1 }} {{ $orden->plague2 }}
+                {{ $orden->plague1 }} y {{ $orden->plague2 }}
             </div>
             </th> 
         </table>
@@ -358,7 +358,7 @@
             <div class="renDiv">
             </div>
             </th>
-            <th>$Contizacion</th>
+            <th>$Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>

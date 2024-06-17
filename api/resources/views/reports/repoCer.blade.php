@@ -14,7 +14,8 @@
             <h5 >CALLE ABETO 2201 COL. ALAMEDAS</h5>
             <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
         </div>     
-        <h2 class="cerapli">CERTIFICADO DE APLICACION</h2>
+        <h2 class="cerapli">CERTIFICADO DE APLICACION<p>Licencia Sanitaria 04-08A095</h2>
+        
     <header>    
         
     </header>
