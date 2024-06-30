@@ -14,7 +14,9 @@ class CompletarOrdenSeeder extends Seeder
      */
     public function run(): void
     {
+        /*
         DB::table('completarOrdenes')->insert([
+            'id_orden'=>'1',
             'responsable'=>'Luis Angel Peña Mora',
             'ayudante'=>'Nadien',
             'productoInt1'=>'Simon',
@@ -29,5 +31,6 @@ class CompletarOrdenSeeder extends Seeder
             'requiere1'=>'Nada',
             'requiere2'=>'Nada',
         ]);  
+        */
     }
 }

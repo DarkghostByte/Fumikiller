@@ -9,7 +9,7 @@
     <div  class="flex flex-wrap items-start justify-start">
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px; text-align: center; ;">
+          style="color:black; width:300px; height:100px; font-size:22px; text-align: center; ;">
             <i class="fa-solid fa-city" aria-hidden="true" style="margin-top: 10%;
             margin-left: -5px; margin-right:10px; font-size:20px;"></i>                
             <h2>Ciudades</h2>
@@ -17,7 +17,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px;">
+          style="color:black; width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Colonias</h2>
@@ -25,7 +25,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-orange-400 hover:bg-orange-600 focus:bg-orange-700 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px;">
+          style="color:black; width:300px; height:100px; font-size:22px;">
           <i class="fa-solid fa-apartment"></i>
             <i class="fa-solid fa-school-flag" aria-hidden="true" style="height:15px; margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
@@ -35,7 +35,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-purple-400 hover:bg-purple-600 focus:bg-purple-700 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px;">
+          style="color:black; width:300px; height:100px; font-size:22px;">
             <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Empleados</h2>
@@ -43,7 +43,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-600 focus:bg-blue-700 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px;">
+          style="color:black; width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-bug" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Problematicas</h2>
@@ -51,7 +51,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px;">
+          style="color:black; width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house-chimney-user" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Productos Internos</h2>
@@ -59,7 +59,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-orange-400 hover:bg-orange-600 focus:bg-orange-700 rounded-md ml-6 mb-3" 
-          style="color:black; width:300px; height:100px; font-size:20px;">
+          style="color:black; width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house-circle-xmark" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Productos Externos</h2>

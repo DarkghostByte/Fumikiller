@@ -13,11 +13,19 @@ class CompletarOrdenesController extends Controller
      */
     public function index()
     {
-        $data = CompletarOrden ::all();
-        return response()->json([
-            'status'=>'success',
-            'data'=>$data
-        ]);
+        $data = CompletarOrden::select(['completarordenes.*', 'orden.plague1','clientes.name',
+        'clientes.lastname1',
+        'clientes.lastname2',
+        'clientes.tradename',])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->orderBy('completarordenes.id', 'DESC')
+        ->get();
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $data
+    ]);
     }
 
     /**
@@ -34,6 +42,7 @@ class CompletarOrdenesController extends Controller
     public function store(Request $request)
     {
         $reglas = Validator::make($request->all(),[
+            'id_orden' => 'required|min:1',
             'responsable' => 'required|min:1',
             'ayudante' => 'min:1',
             'productoInt1' => 'required|min:1',
@@ -56,6 +65,7 @@ class CompletarOrdenesController extends Controller
             ],201);
         }else{
             $data = new CompletarOrden();
+            $data->id_orden = $request->id_orden;
             $data->responsable = $request->responsable;
             $data->ayudante = $request->ayudante;
             $data->productoInt1 = $request->productoInt1;

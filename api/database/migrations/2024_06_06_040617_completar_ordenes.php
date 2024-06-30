@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('completarOrdenes', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('id_orden')->unsigned();
+            $table->foreign("id_orden")->references('id')->on('orden');
             $table->string('responsable');
             $table->string('ayudante');
             $table->string('productoInt1');

@@ -49,33 +49,26 @@
                 {{ scope.row.name+' '+scope.row.lastname1+' '+scope.row.lastname2 }}
               </template>
             </el-table-column>
-            <el-table-column label="Direccion" sortable width="200">
+            <el-table-column label="Direccion" sortable width="220">
               <template #default="scope">
-                {{ scope.row.home+' #'+scope.row.numAddress }}
+                {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
               </template>
             </el-table-column>
-            <el-table-column label="Colonia" sortable width="150">
-              <template #default="scope">
-                {{ scope.row.colonia+' #'+scope.row.codigoPostal }}
-              </template>
-            </el-table-column>
-            <el-table-column prop="ciudad" label="Ciudad"  sortable width="170" />
             <el-table-column prop="date1" label="Fecha de orden"  sortable width="150" />
             <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
-            <el-table-column prop="time1" label="De" sortable width="100"  />
-            <el-table-column prop="time2" label="A" sortable width="100"  />
+            <el-table-column prop="time1" label="De" sortable width="90"  />
+            <el-table-column prop="time2" label="A" sortable width="90"  />
             <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
             <!--BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
             <el-table-column label="">
-              <template #default>
-                <router-link to="/admin/works/complete-works" >
+              <template #default="scope">
+                <router-link :to="'/admin/works/complete-works/'+scope.row.id">
                   <el-button style="color:black"
                     size="small"
-                    type="success"
-                    @click="completarOrden()">
-                      <span class="material-symbols-outlined">priority</span>
-                  </el-button>
+                    type="warning"
+                    @click="completarOrden()"
+                    ><span class="material-symbols-outlined">priority</span></el-button>
                 </router-link>
               </template>
             </el-table-column>

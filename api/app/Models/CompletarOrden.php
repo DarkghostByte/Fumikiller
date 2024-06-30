@@ -11,6 +11,7 @@ class CompletarOrden extends Model
     protected $table= "completarOrdenes";
 
     protected $fillable = [
+        'id_orden',
         'responsable',
         'ayudante',
         'productoInt1',
