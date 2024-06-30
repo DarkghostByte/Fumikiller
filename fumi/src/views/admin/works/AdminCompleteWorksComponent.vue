@@ -22,183 +22,178 @@
     <div class="mr-6">
       <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Completar orden de trabajo</h1>
     </div>
-    <div class="px-5x text-2xl mb-8" style="margin-top: -30px; ">
-      <label for="">Nombre del cliente</label>
-    </div>
     <!-- TABLE DATA -->
-
     <div class="flex ml-5">
-      <el-form :model="form" label-width="auto" style="max-width: 100%">
+      <el-form
+        :model="form"
+        label-width="auto"
+        style="max-width: 100%"
+        :label-position="'top'"
+        ref="formRef"
+        :rules="rules">
+        <!-- DATOS DE LA FILA DE CLIENTES -->
         <p>Cliente</p>
         <div class="flex">
           <el-form-item prop="name" label="Nombre del cliente:" class="px-2">
             <el-input v-model="form.name" class="px-1" style="width: 220px;"
               disabled/>
           </el-form-item>
+          <el-form-item prop="lastname1" label="Apellido paterno:" class="px-2">
+            <el-input v-model="form.lastname1" class="px-1" style="width: 220px;"
+              disabled/>
+          </el-form-item>
+          <el-form-item prop="lastname2" label="Apellido materno:" class="px-2">
+            <el-input v-model="form.lastname2" class="px-1" style="width: 220px;"
+              disabled/>
+          </el-form-item>
+          <el-form-item prop="tradename" label="Nombre comercial:" class="px-2">
+            <el-input v-model="form.tradename" class="px-1" style="width: 220px;"
+              disabled/>
+          </el-form-item>
         </div>
-
-        <p>Fumigador</p>
-        <div style="display:flex" class="m-2">
-          <p class="px-4 pr-12">Responsable</p>
-          <p class="px-20 ml-12 ">Ayudante</p>
-        </div>
-
-        <!-- Primera Fila -->
-        <div class="flex">
-          <el-form-item class="px-5" style="width: 25%">
-            <el-select v-model="form.fumigadorRes" placeholder="Selecciona el fumigador">
+        <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
+        <p>Empleados</p>
+        <div class="flex" style="width:100%;">
+          <el-form-item prop="fumigadorRes" class="px-2" label="Responsable" >
+            <el-select v-model="form.fumigadorRes" placeholder="Selecciona el fumigador" style="width: 220px">
               <el-option label="Juan" value="juan" />
               <el-option label="Pepe" value="pepe" />
               <el-option label="Jesus" value="jesus" />
             </el-select>
           </el-form-item>
-          <el-form-item class="px-5" style="width: 25%">
-            <el-select v-model="form.fumigadorAyu" placeholder="Selecciona ayudante">
+          <el-form-item prop="fumigadorAyu" class="px-2" label="Ayudante" >
+            <el-select v-model="form.fumigadorAyu" placeholder="Selecciona el fumigador" style="width: 220px">
               <el-option label="Juan" value="juan" />
               <el-option label="Pepe" value="pepe" />
               <el-option label="Jesus" value="jesus" />
             </el-select>
           </el-form-item>
         </div>
-
-        <!-- Segunda Fila -->
-        <p>Producto interno</p>
-        <div style="display:flex" class="m-2">
-          <p class="px-4 pr-8">Producto #1:</p>
-          <p class="px-36 pr-7">Producto #2:</p>
-        </div>
-
+        <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
+        <p>Productos internos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item class="px-5" style="width: 25%">
-            <el-select v-model="form.productoInt1" placeholder="Selecciona el pruducto">
-              <el-option label="Cucarachas" value="cucarachas" />
-              <el-option label="Pulgas" value="pulgas" />
-              <el-option label="Chinches" value="chinches" />
-              <el-option label="Cucaracha de cocina" value="cucaracha de cocina" />
-              <el-option label="Garrapatas" value="garrapatas" />
-              <el-option label="Palomillas" value="palomillas" />
-              <el-option label="Roedores" value="roedores" />
-              <el-option label="Hormigas" value="hormigas" />
+          <el-form-item prop="productoInt1" class="px-2" label="Producto interno #1" >
+            <el-select v-model="form.productoInt1" placeholder="Selecciona el producto" style="width: 220px">
+              <el-option label="Sipermetrina" value="Sipermetrina" />
+              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
+              <el-option label="Deltametrina" value="Deltametrina" />
+              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
+              <el-option label="Piretrina natural" value="Piretrina natural" />
+              <el-option label="Carbendamezin" value="Carbendamezin" />
+              <el-option label="Cumin pasta" value="Cumin pasta" />
+              <el-option label="Siege" value="Siege" />
             </el-select>
           </el-form-item>
-          <el-form-item class="px-5" style="width: 25%">
-            <el-select v-model="form.productoInt2" placeholder="Selecciona el pruducto">
-              <el-option label="Cucarachas" value="cucarachas" />
-              <el-option label="Pulgas" value="pulgas" />
-              <el-option label="Chinches" value="chinches" />
-              <el-option label="Cucaracha de cocina" value="cucaracha de cocina" />
-              <el-option label="Garrapatas" value="garrapatas" />
-              <el-option label="Palomillas" value="palomillas" />
-              <el-option label="Roedores" value="roedores" />
-              <el-option label="Hormigas" value="hormigas" />
+          <el-form-item prop="productoInt2" class="px-2" label="Producto interno #2" >
+            <el-select v-model="form.productoInt2" placeholder="Selecciona el producto" style="width: 220px">
+              <el-option label="Sipermetrina" value="Sipermetrina" />
+              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
+              <el-option label="Deltametrina" value="Deltametrina" />
+              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
+              <el-option label="Piretrina natural" value="Piretrina natural" />
+              <el-option label="Carbendamezin" value="Carbendamezin" />
+              <el-option label="Cumin pasta" value="Cumin pasta" />
+              <el-option label="Siege" value="Siege" />
             </el-select>
           </el-form-item>
         </div>
-
-        <!-- Tercera Fila -->
-        <p>Producto externo</p>
-        <div style="display:flex" class="m-2">
-          <p class="px-4 pr-8">Producto #1:</p>
-          <p class="px-36 pr-7">Producto #2:</p>
-        </div>
-
+        <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
+        <p>Productos externos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item class="px-5" style="width: 25%">
-            <el-select v-model="form.productoExt1" placeholder="Selecciona el pruducto">
-              <el-option label="Cucarachas" value="cucarachas" />
-              <el-option label="Pulgas" value="pulgas" />
-              <el-option label="Chinches" value="chinches" />
-              <el-option label="Cucaracha de cocina" value="cucaracha de cocina" />
-              <el-option label="Garrapatas" value="garrapatas" />
-              <el-option label="Palomillas" value="palomillas" />
-              <el-option label="Roedores" value="roedores" />
-              <el-option label="Hormigas" value="hormigas" />
+          <el-form-item prop="productoExt1" class="px-2" label="Producto externo #1" >
+            <el-select v-model="form.productoExt1" placeholder="Selecciona el producto" style="width: 220px">
+              <el-option label="Sipermetrina" value="Sipermetrina" />
+              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
+              <el-option label="Deltametrina" value="Deltametrina" />
+              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
+              <el-option label="Piretrina natural" value="Piretrina natural" />
+              <el-option label="Carbendamezin" value="Carbendamezin" />
+              <el-option label="Cumin pasta" value="Cumin pasta" />
+              <el-option label="Siege" value="Siege" />
             </el-select>
           </el-form-item>
-          <el-form-item class="px-5" style="width: 25%">
-            <el-select v-model="form.productoExt2" placeholder="Selecciona el pruducto">
-              <el-option label="Cucarachas" value="cucarachas" />
-              <el-option label="Pulgas" value="pulgas" />
-              <el-option label="Chinches" value="chinches" />
-              <el-option label="Cucaracha de cocina" value="cucaracha de cocina" />
-              <el-option label="Garrapatas" value="garrapatas" />
-              <el-option label="Palomillas" value="palomillas" />
-              <el-option label="Roedores" value="roedores" />
-              <el-option label="Hormigas" value="hormigas" />
+          <el-form-item prop="productoExt2" class="px-2" label="Producto externo #2" >
+            <el-select v-model="form.productoExt2" placeholder="Selecciona el producto" style="width: 220px">
+              <el-option label="Sipermetrina" value="Sipermetrina" />
+              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
+              <el-option label="Deltametrina" value="Deltametrina" />
+              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
+              <el-option label="Piretrina natural" value="Piretrina natural" />
+              <el-option label="Carbendamezin" value="Carbendamezin" />
+              <el-option label="Cumin pasta" value="Cumin pasta" />
+              <el-option label="Siege" value="Siege" />
             </el-select>
           </el-form-item>
         </div>
-
-
-        <!-- Cuarta Fila -->
+        <!-- FILA DE RECOMENDACIONES -->
         <p>Recomendaciones</p>
-        <div style="display:flex" class="m-2">
-          <p class="px-4 pr-12">No tapear:</p>
-          <p class="px-32 ml-6">No ingresar:</p>
-          <p class="px-12 ">Otra dosis:</p>
-          <p class="px-36">Hora:</p>
-        </div>
         <div class="flex">
-          <el-form-item class="px-5" style="width: 25%">
-            <el-col :span="11">
-              <el-date-picker v-model="form.date1" type="date" placeholder="Orden" />
+          <el-form-item prop="date1" class="px-2" label="No trapear:">
+            <el-col :span="11" style="width: 220px">
+              <el-date-picker
+                v-model="form.date1"
+                type="date"
+                placeholder="No trapear:"
+                format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY"
+              />
             </el-col>
           </el-form-item>
-
-          <el-form-item class="px-6" style="width: 25%">
-            <el-col :span="11">
-              <el-time-picker v-model="form.date2" placeholder="Orden" />
+          <el-form-item prop="time1" class="px-7" label="No ingresar:">
+            <el-col :span="11" style="width: 220px">
+              <el-time-select
+                v-model="form.time1"
+                style="width: 220px"
+                start="00:00"
+                step="01:00"
+                end="23:59"
+                format="hh:mm A"
+                placeholder="Seleccionar hora"
+              />
             </el-col>
           </el-form-item>
-
-          <el-form-item class="px-6" style="width: 25%">
-            <el-col :span="11">
-              <el-date-picker v-model="form.date3" type="date" placeholder="Orden" />
+          <el-form-item prop="date2" class="px-2" label="Otra dosis:">
+            <el-col :span="11" style="width: 220px">
+              <el-date-picker
+                v-model="form.date2"
+                type="date"
+                placeholder="Otra dosis:"
+                format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY"
+              />
             </el-col>
           </el-form-item>
-
-          <el-form-item class="px-6" style="width: 25%">
-            <el-col :span="11">
-              <el-time-picker v-model="form.date4" placeholder="Hora" />
-
+          <el-form-item prop="time2" class="px-7" label="Hora:">
+            <el-col :span="11" style="width: 220px">
+              <el-time-select
+                v-model="form.time2"
+                style="width: 220px"
+                start="00:00"
+                step="00:15"
+                end="23:59"
+                format="hh:mm A"
+                placeholder="Seleccionar hora"
+              />
             </el-col>
           </el-form-item>
-
         </div>
-
-        <p>Pago:</p>
-        <div class="flex justfy-start px-16">
-          <el-form-item prop="price" label="Se cobro:" class="px-2" style="width: 240px;">
-            <el-input v-model="form.price" class="px-1" placeholder="Ingresa el monto" type="number" />
-          </el-form-item>
-        </div>
-
-        <!-- Quinta Fila -->
+        <!-- FILA DE REQUIERE DE -->
         <p>Requiere de:</p>
-        <div class="flex justify-start px-16">
-          <el-form-item>
-            <el-checkbox-group v-model="form.requiere">
-              <el-checkbox value="Factura" name="type">
-                Factura
-              </el-checkbox>
-              <el-checkbox value="Certificado" name="type">
-                Certificado
-              </el-checkbox>
-              <el-checkbox value="Remision" name="type">
-                Remision
-              </el-checkbox>
-              <el-checkbox value="Nada" name="type">
-                Nada
-              </el-checkbox>
+        <div class="flex">
+          <el-form-item prop="hiring" label="" class="px-10">
+            <el-checkbox-group v-model="form.hiring">
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
+              <el-checkbox label="Factura" value="Factura"></el-checkbox>
+              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
+              <el-checkbox label="Remision" value="Remision"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </div>
-
-        <!-- FILA DE INFORMACION -->
-        <p>Requiere de:</p>
+        <!-- FILA DE DATO -->
+        <p>Datos:</p>
         <div class="flex">
-          <el-form-item prop="info" label="" class="px-10">
-            <el-checkbox-group v-model="form.requiere">
+          <el-form-item prop="requires" label="" class="px-10">
+            <el-checkbox-group v-model="form.requires" label="Requiere de">
               <el-checkbox label="Credito" value="Credito"></el-checkbox>
               <el-checkbox label="Pagado" value="Pagado"></el-checkbox>
               <el-checkbox label="Bitacora" value="Bitacora"></el-checkbox>
@@ -208,10 +203,18 @@
             </el-checkbox-group>
           </el-form-item>
         </div>
+        <!-- FILA DE PAGO -->
+        <p>Pago:</p>
+        <div class="flex">
+          <el-form-item prop="price" label="Se cobro:" class="px-2" style="width: 240px;">
+            <el-input v-model="form.price" class="px-1" placeholder="Ingresa el monto" type="number"/>
+          </el-form-item>
+        </div>
 
-        <div style="display:flex; justify-content: center;" class="">
-          <el-button class="w-40 h-16 mt-5" style="background-color:#11639c; border-radius:40px; font-size:25px;"
-            type="info" round>Crear</el-button>
+        <div style="color:white; display:flex; justify-content: center; transition:10s;">
+          <el-form-item>
+            <el-button type="primary" @click="submitForm">Guardar</el-button>
+          </el-form-item>
         </div>
       </el-form>
     </div>
@@ -230,19 +233,19 @@ export default {
   data: () => ({
     tableData: [],
     form: {
-      name:'',
-      fumigadorRes: '',
-      fumigadorAyu: '',
+      responsable:'',
+      ayudante: '',
       productoInt1: '',
       productoInt2: '',
       productoExt1: '',
       productoExt2: '',
-      date1: '',
-      date2: '',
-      date3: '',
-      date4: '',
-      price: '',
-      type: [],
+      noTrapear: '',
+      noIngresar: '',
+      otraDosis: '',
+      hora: '',
+      pago: '',
+      requiere1: '',
+      requiere2: [],
     },
   }),
   mounted() {
@@ -266,6 +269,9 @@ export default {
         const clienteData = res.data.data;
         this.form.id_cliente = clienteData.id;
         this.form.name = datos.name;
+        this.form.lastname1 = datos.lastname1;
+        this.form.lastname2 = datos.lastname2;
+        this.form.tradename = datos.tradename;
 
       })
     },
