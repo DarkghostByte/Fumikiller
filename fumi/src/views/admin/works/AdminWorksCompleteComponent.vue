@@ -13,7 +13,7 @@
               Ver Ordenes
             </router-link>
 
-            <router-link to="/admin/worksComplete"
+            <router-link to="/admin/works"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3"
           style="color:black">
           <i class="fa fa-clipboard-check" aria-hidden="true" style="margin-top: 5px;
@@ -25,7 +25,7 @@
           </div>
         </div>
         <div class="mr-6">
-          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Ordenes de trabajo</h1>
+          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Ordenes completas</h1>
         </div>
 
         <!-- TABLE DATA -->
@@ -57,30 +57,30 @@
                 {{ scope.row.name+' '+scope.row.lastname1+' '+scope.row.lastname2 }}
               </template>
             </el-table-column>
-            <el-table-column label="Direccion" sortable width="220">
+            <el-table-column label="Direccion" sortable width="250">
               <template #default="scope">
                 {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
               </template>
             </el-table-column>
-            <el-table-column prop="date1" label="Fecha de orden"  sortable width="150" />
-            <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
-            <el-table-column prop="time1" label="De" sortable width="90"  />
-            <el-table-column prop="time2" label="A" sortable width="90"  />
+            <el-table-column prop="pago" label="Monto"  sortable width="150" />
+            <el-table-column prop="requiere3" label="Datos" sortable width="170" />
+            <el-table-column prop="responsable" label="Responsable" sortable width="130"  />
             <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
-            <!--BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
+            <!--BOTON PARA EDITAR LA ORDEN DE TRABAJO-->
             <el-table-column label="">
               <template #default="scope">
-                <router-link :to="'/admin/works/complete-works/'+scope.row.id">
+                <router-link :to="'/admin/works/edit-workComplete/'+scope.row.id">
                   <el-button style="color:black"
                     size="small"
                     type="warning"
-                    @click="completarOrden()"
-                    ><span class="material-symbols-outlined">priority</span></el-button>
+                    @click="handleEdit()"
+                    ><span class="material-symbols-outlined">edit</span></el-button
+                  >
                 </router-link>
               </template>
             </el-table-column>
-            <!--FIN DEL BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
+            <!--FIN DEL BOTON PARA EDITAR LA ORDEN DE TRABAJO-->
 
             <!--BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
             <el-table-column label="">
@@ -129,6 +129,45 @@
           </template>
         </el-dialog>
         <!-- FIN DEL DIALOGO PARA ELIMINAR -->
+
+        <!-- MODAL 2 -->
+
+        <el-dialog
+        v-model="dialogVisibleView"
+        title="Datos acerca del cliente"
+        width="800"
+        height="500">
+
+        <div class="h-72 overflow-scroll" style="font-size: 20px;">
+
+          <p style="font-size: 22px;">Datos del cliente</p>
+          Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
+          <br>
+          Nombre comercial: {{ selectedItem.tradename }}
+          <br><br>
+
+          <p style="font-size: 22px;">Datos del domicilio</p>
+          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+          <br><br>
+
+          Monto: ${{ selectedItem.pago }} 
+          <br>
+          Se pago?: {{ selectedItem.requiere3 }}
+          <br><br>
+
+        </div>
+        
+        <template #footer>
+            <div class="dialog-footer">
+              <el-button type="info" @click="handleEdit()">
+                Modificar
+            </el-button>
+            <el-button type="danger" @click="dialogVisibleView = false">Cancelar</el-button>
+            </div>
+        </template>
+        </el-dialog>
+
+        <!-- END MODAL 2 -->
         
     </div>
   </template>
@@ -136,12 +175,13 @@
   <script>
       import axios from 'axios';
       export default {
-          name:'AdminWorksComponent',
+          name:'AdminWorksCompleteComponent',
           data:()=>({
             url:process.env.VUE_APP_ROOT_ASSETS,
             urlApi:process.env.API,
             tableData:[],
             selectedItem: null,
+            dialogVisibleView: false,
             dialogVisible: false,
           }),
           mounted(){
@@ -150,7 +190,7 @@
           methods:{
             refresh(){
               this.tableData = []
-              axios.get('orden').then(res=>{
+              axios.get('completarOrden').then(res=>{
                 this.tableData=res.data.data
               })
             },
@@ -160,7 +200,7 @@
             this.selectedItem = null
             },
             confimarBaja(){
-              axios.delete('orden/'+this.selectedItem.id).then(res=>{
+              axios.delete('completarOrden/'+this.selectedItem.id).then(res=>{
               console.log(res)
               this.refresh()
               this.dialogVisible=false
@@ -172,6 +212,13 @@
               this.dialogVisible=true
             },
             completarOrden(){},
+            datos(row){
+            console.log(row)
+            this.selectedItem=row
+            this.dialogVisibleView=true
+            },
+            handleEdit(){
+            },
           }
       }
   </script>

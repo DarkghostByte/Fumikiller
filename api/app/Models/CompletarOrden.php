@@ -25,6 +25,7 @@ class CompletarOrden extends Model
         'pago',
         'requiere1',
         'requiere2',
+        'requiere3',
     ];
 }
 

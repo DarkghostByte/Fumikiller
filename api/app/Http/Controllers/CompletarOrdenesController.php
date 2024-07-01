@@ -16,9 +16,18 @@ class CompletarOrdenesController extends Controller
         $data = CompletarOrden::select(['completarordenes.*', 'orden.plague1','clientes.name',
         'clientes.lastname1',
         'clientes.lastname2',
-        'clientes.tradename',])
+        'clientes.tradename',
+        'clientes.home',
+        'clientes.numAddress',
+        'clientes.id_colonia',
+        'clientes.id_city',
+        'colonias.colonia',
+        'colonias.codigoPostal',
+        'ciudades.ciudad'])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -44,25 +53,26 @@ class CompletarOrdenesController extends Controller
         $reglas = Validator::make($request->all(),[
             'id_orden' => 'required|min:1',
             'responsable' => 'required|min:1',
-            'ayudante' => 'min:1',
+            'ayudante' => '',
             'productoInt1' => 'required|min:1',
-            'productoInt2' => 'min:1',
+            'productoInt2' => '',
             'productoExt1' => 'required|min:1',
-            'productoExt2' => 'min:1',
-            'noTrapear' => 'min:1',
-            'noIngresar' => 'min:1',
-            'otraDosis' => 'min:1',
-            'hora' => 'min:1',
-            'pago' => 'numeric',
-            'requiere1' => 'required|min:1',
-            'requiere2' => 'required|min:1',
+            'productoExt2' => '',
+            'noTrapear' => 'required|min:1',
+            'noIngresar' => 'required|min:1',
+            'otraDosis' => 'required|min:1',
+            'hora' => 'required|min:1',
+            'pago' => 'required|numeric',
+            'requiere1' => 'array|min:1',
+            'requiere2' => 'array|min:1',
+            'requiere3' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
                 'status'=>'failed',
                 'message'=> 'Validation Error',
                 'error' => $reglas->errors()
-            ],201);
+            ],422);
         }else{
             $data = new CompletarOrden();
             $data->id_orden = $request->id_orden;
@@ -77,8 +87,9 @@ class CompletarOrdenesController extends Controller
             $data->otraDosis = $request->otraDosis;
             $data->hora = $request->hora;
             $data->pago = $request->pago;
-            $data->requiere1 = $request->requiere1;
-            $data->requiere2 = $request->requiere2;
+            $data->requiere1 = json_encode($request->requiere1);
+            $data->requiere2 = json_encode($request->requiere2);
+            $data->requiere3 = $request->requiere3;
             $data->save();
 
             return response()->json([
@@ -93,7 +104,13 @@ class CompletarOrdenesController extends Controller
      */
     public function show(string $id)
     {
-        //
+        {
+            $data = CompletarOrden::find($id);
+            return response()->json([
+                'status'=>'success',
+                'data'=>$data
+            ]);
+        }
     }
 
     /**
@@ -109,7 +126,43 @@ class CompletarOrdenesController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $completarOrden = CompletarOrden::find($id);
+        $reglas = Validator::make($request->all(), [
+            'responsable' => 'required|min:1',
+            'ayudante' => '',
+            'productoInt1' => 'required|min:1',
+            'productoInt2' => '',
+            'productoExt1' => 'required|min:1',
+            'productoExt2' => '',
+            'noTrapear' => 'required|min:1',
+            'noIngresar' => 'required|min:1',
+            'otraDosis' => 'required|min:1',
+            'hora' => 'required|min:1',
+            'pago' => 'required|numeric',
+            'requiere1' => 'array|min:1',
+            'requiere2' => 'array|min:1',
+            'requiere3' => 'required|min:1',
+        ]);
+        if (!$completarOrden) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Cliente no encontrado'
+            ], 404);
+        }
+        if ($reglas->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Error de validación',
+                'errors' => $reglas->errors()
+            ], 400);
+        }
+        $completarOrden->fill($request->all());
+        $completarOrden->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'La orden se actualizo correctamente',
+            'data' => $completarOrden
+        ]);
     }
 
     /**

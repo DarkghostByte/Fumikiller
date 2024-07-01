@@ -8,10 +8,11 @@ const adminRoutes = [
     {path: 'clients/agregarComercio-clients', component: () => import('@/views/admin/clients/AdminAddClientsComponent.vue')},
     {path: 'clients/agregarParticular-clients', component: () => import('@/views/admin/clients/AdminAddParticularClientsComponent.vue')},
     {path: 'clients/edit-clients/:id', component: () => import('@/views/admin/clients/AdminEditClientsComponent.vue')},
-
     {path: 'works', component: () => import('@/views/admin/works/AdminWorksComponent.vue')},
+    {path: 'worksComplete', component: () => import('@/views/admin/works/AdminWorksCompleteComponent.vue')},
     {path: 'works/add-works/:id', component: () => import('@/views/admin/works/AdminAddWorksComponent.vue')},
     {path: 'works/complete-works/:id', component: () => import('@/views/admin/works/AdminCompleteWorksComponent.vue')},
+    {path: 'works/edit-workComplete/:id', component: () => import('@/views/admin/works/AdminEditWorksComplete.vue')},
 
     {path: 'calendar', component: () => import('@/views/admin/calendar/AdminCalendarComponent.vue')},
     {path: 'calendar/complete', component: () => import('@/views/admin/calendar/AdminCalendarCompleteComponent.vue')},

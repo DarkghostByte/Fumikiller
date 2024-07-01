@@ -28,6 +28,7 @@ return new class extends Migration
             $table->decimal('pago');
             $table->string('requiere1');
             $table->string('requiere2');
+            $table->string('requiere3');
             $table->timestamps();
         });
     }

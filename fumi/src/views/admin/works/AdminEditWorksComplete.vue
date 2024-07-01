@@ -5,9 +5,10 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
+
       <div class="flex flex-wrap items-start justify-end ">
 
-        <router-link to="/admin/works"
+        <router-link to="/admin/worksComplete"
           class="inline-flex px-5 py-3 text-white bg-red-400 hover:bg-red-700 focus:bg-red-800 rounded-md ml-6 mb-3"
           style="color:black">
           <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px;
@@ -15,13 +16,16 @@
           Devolver
         </router-link>
 
-
-
       </div>
+
     </div>
+
     <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Completar orden de trabajo</h1>
+      <h1 class="py-6 px-2 text-4xl font-semibold mb-2">Modificar cliente</h1>
     </div>
+
+
+    <!-- TABLE INSERT -->
     <!-- TABLE DATA -->
     <div class="flex ml-5">
       <el-form
@@ -31,26 +35,6 @@
         :label-position="'top'"
         ref="formRef"
         :rules="rules">
-        <!-- DATOS DE LA FILA DE CLIENTES -->
-        <p>Cliente</p>
-        <div class="flex">
-          <el-form-item prop="name" label="Nombre del cliente:" class="px-2">
-            <el-input v-model="form.name" class="px-1" style="width: 220px;"
-              disabled/>
-          </el-form-item>
-          <el-form-item prop="lastname1" label="Apellido paterno:" class="px-2">
-            <el-input v-model="form.lastname1" class="px-1" style="width: 220px;"
-              disabled/>
-          </el-form-item>
-          <el-form-item prop="lastname2" label="Apellido materno:" class="px-2">
-            <el-input v-model="form.lastname2" class="px-1" style="width: 220px;"
-              disabled/>
-          </el-form-item>
-          <el-form-item prop="tradename" label="Nombre comercial:" class="px-2">
-            <el-input v-model="form.tradename" class="px-1" style="width: 220px;"
-              disabled/>
-          </el-form-item>
-        </div>
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
         <p>Empleados</p>
         <div class="flex" style="width:100%;">
@@ -177,31 +161,6 @@
             </el-col>
           </el-form-item>
         </div>
-        <!-- FILA DE REQUIERE DE -->
-        <p>Requiere de:</p>
-        <div class="flex">
-          <el-form-item prop="requiere1" label="" class="px-10">
-            <el-checkbox-group v-model="form.requiere1">
-              <el-checkbox label="Nada" value="Nada"></el-checkbox>
-              <el-checkbox label="Factura" value="Factura"></el-checkbox>
-              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
-              <el-checkbox label="Remision" value="Remision"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </div>
-        <!-- FILA DE DATO -->
-        <p>Datos:</p>
-        <div class="flex">
-          <el-form-item prop="requiere2" label="" class="px-10">
-            <el-checkbox-group v-model="form.requiere2" label="Requiere de">
-              <el-checkbox label="Credito" value="Credito"></el-checkbox>
-              <el-checkbox label="Bitacora" value="Bitacora"></el-checkbox>
-              <el-checkbox label="Agendar" value="Agendar"></el-checkbox>
-              <el-checkbox label="Cancelar" value="Cancelar"></el-checkbox>
-              <el-checkbox label="Ellos hablan" value="Ellos hablan"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </div>
         <!-- FILA DE PAGO -->
         <p>Pago:</p>
         <div class="flex">
@@ -218,7 +177,7 @@
 
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
           <el-form-item>
-            <el-button type="primary" @click="submitForm">Guardar</el-button>
+            <el-button type="primary" @click="updateDatos">Modificar</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -229,14 +188,13 @@
 </template>
 
 <script>
-import { ElNotification } from 'element-plus';
 import { useRoute } from 'vue-router';
+import { ElNotification } from 'element-plus';
 import axios from 'axios';
-export default {
-  name: 'AdminCompleteWorksComponent',
 
+export default {
+  name: 'AdminEditClientComponent',
   data: () => ({
-    tableData: [],
     formRef: undefined,
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
@@ -253,10 +211,9 @@ export default {
       otraDosis: '',
       hora: '',
       pago: '',
-      requiere1: [],
-      requiere2: [],
       requiere3: [],
     },
+    id: 0,
     rules: {
       responsable: [
         { required: true, message: 'El responsable es requerido', trigger: 'blur' },
@@ -279,12 +236,6 @@ export default {
       hora: [
         { required: true, message: 'La hora deberia ser requerida', trigger: 'blur' },
       ],
-      requiere1: [
-        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
-      ],
-      requiere2: [
-        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
-      ],
       requiere3: [
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
@@ -293,77 +244,75 @@ export default {
         { min: 1, max: 10, message: 'Longitud debería ser 1 a 10', trigger: 'blur' }
       ],
     }
-  }),  
-  mounted() {
-      this.refresh();
-      const route = useRoute();
-      this.id = route.params.id;
-      axios.get('orden/' + this.id).then(res => {
-        console.log(res);
-        let datos = res.data.data;
-        const ordenData = res.data.data;
-        this.form.id_orden = ordenData.id;
-        this.form.plague1 = datos.plague1;
-        this.form.plague2 = datos.plague2;
-        this.form.id_cliente = datos.id_cliente;
-        this.form.name = datos.name;
-
-      });
-      axios.get('clientes/' + this.id).then(res => {
-        console.log(res);
-        let datos = res.data.data;
-        const clienteData = res.data.data;
-        this.form.id_cliente = clienteData.id;
-        this.form.name = datos.name;
-        this.form.lastname1 = datos.lastname1;
-        this.form.lastname2 = datos.lastname2;
-        this.form.tradename = datos.tradename;
-
-      })
-    },
-    
-    methods: {
-    errorUpload(error) {
-      console.log(error);
-    },
+  }),
+  methods: {
     refresh() {
-      this.tableData = [];
-      axios.get('orden').then(res => {
-        this.tableData = res.data.data;
+      this.tableData = []
+      axios.get('completarOrden').then(res => {
+        this.tableData = res.data.data
       })
     },
-    submitForm() {
-      this.$refs.formRef.validate((valid) => {
+    successUpload(response) {
+      console.log('Datos enviados:', this.form)
+      console.log(response)
+      this.refresh()
+      axios.patch('completarOrden/' + this.id, this.form).then(response => {
+        console.log('Form submitted successfully:', response.data)
+        console.log(response)
+        this.$router.push('/admin/worksComplete');
+        ElNotification({
+          title: 'Alerta',
+          message: 'Registro insertado correctamente',
+          type: 'success'
+        })
+      }).catch(error => {
+        console.log(error)
+        ElNotification({
+          title: 'Error',
+          message: 'Favor de llenar los campos',
+          type: 'error'
+        })
+      })
+    },
+    updateDatos() {
+      this.$refs.formRef.validate((valid, fields) => {
         if (valid) {
-          axios.post('completarOrden', this.form)
-            .then(response => {
-              console.log('Form submitted successfully:', response.data);
-              this.$router.push('/admin/worksComplete');
-              ElNotification({
-                title: 'Alerta',
-                message: 'Registro insertado correctamente',
-                type: 'success'
-              })
-            })
-            .catch(error => {
-              console.error('Error submitting form:', error);
-              ElNotification({
-                title: 'Error',
-                message: 'Favor de llenar los campos',
-                type: 'error'
-              })
-            });
+          console.log(fields);
+          this.successUpload();
         } else {
           console.log('Validation failed');
           ElNotification({
             title: 'Error',
             message: 'Favor de llenar los campos',
             type: 'error'
-          });
+          })
           return false;
         }
       });
     },
+  },
+  mounted() {
+    this.refresh();
+    const route = useRoute();
+    this.id = route.params.id;
+    axios.get(`completarOrden/${this.id}`).then(res => {
+      console.log(res);
+      let datos = res.data.data;
+      if (datos) {
+        this.form.responsable = datos.responsable || '';
+        this.form.ayudante = datos.ayudante || '';
+        this.form.productoInt1 = datos.productoInt1 || '';
+        this.form.productoInt2 = datos.productoInt2 || '';
+        this.form.productoExt1 = datos.productoExt1 || '';
+        this.form.productoExt2 = datos.productoExt2 || '';
+        this.form.noTrapear = datos.noTrapear || '';
+        this.form.noIngresar = datos.noIngresar || '';
+        this.form.otraDosis = datos.otraDosis || '';
+        this.form.hora = datos.hora || '';
+        this.form.pago = datos.pago || '';
+        this.form.requiere3 = datos.requiere3 || '';
+      }
+    });
   }
 }
 </script>
