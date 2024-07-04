@@ -73,7 +73,7 @@
         <!-- Tercera Fila -->
         <div class="flex">
           <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form.id_colonia" placeholder="Selecciona la ciudad" class=" px-1" style="width: 220px;">
+            <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
               <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
             </el-select>
           </el-form-item>

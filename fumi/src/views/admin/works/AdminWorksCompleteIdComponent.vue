@@ -6,14 +6,12 @@
       <div class="flex flex-wrap items-start justify-end ">
 
         <!--RUTAS ENTRES VISTAS-->
-        <router-link to="/admin/works" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3" style="color:black">
-          <i class="fa fa-bookmark" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-          Ver Ordenes
-        </router-link>
-
-        <router-link to="/admin/worksComplete" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3" style="color:black">
-          <i class="fa fa-clipboard-check" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-          Ver ordenes completas
+        <router-link to="/admin/clients"
+          class="inline-flex px-5 py-3 text-white bg-red-400 hover:bg-red-700 focus:bg-red-800 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px;
+            margin-left: -5px; margin-right:10px;"></i>
+          Devolver
         </router-link>
         <!--FIN DE RUTAS ENTRES VISTAS-->
 

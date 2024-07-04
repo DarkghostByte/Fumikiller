@@ -295,10 +295,12 @@ export default {
     }
   }),  
   mounted() {
-      this.refresh();
-      const route = useRoute();
-      this.id = route.params.id;
-      axios.get('orden/' + this.id).then(res => {
+  this.refresh();
+  const route = useRoute();
+  if (route.params && route.params.id) {
+    this.id = route.params.id;
+    axios.get('orden/' + this.id).then(res => {
+      if (res.data && res.data.data) {
         console.log(res);
         let datos = res.data.data;
         const ordenData = res.data.data;
@@ -307,9 +309,15 @@ export default {
         this.form.plague2 = datos.plague2;
         this.form.id_cliente = datos.id_cliente;
         this.form.name = datos.name;
+      } else {
+        console.error('Response data is undefined or null');
+      }
+    }).catch(error => {
+      console.error('Error fetching orden data:', error);
+    });
 
-      });
-      axios.get('clientes/' + this.id).then(res => {
+    axios.get('clientes/' + this.id).then(res => {
+      if (res.data && res.data.data) {
         console.log(res);
         let datos = res.data.data;
         const clienteData = res.data.data;
@@ -318,9 +326,17 @@ export default {
         this.form.lastname1 = datos.lastname1;
         this.form.lastname2 = datos.lastname2;
         this.form.tradename = datos.tradename;
+      } else {
+        console.error('Response data is undefined or null');
+      }
+    }).catch(error => {
+      console.error('Error fetching clientes data:', error);
+    });
+  } else {
+    console.error('route.params.id is undefined');
+  }
+},
 
-      })
-    },
     
     methods: {
     errorUpload(error) {

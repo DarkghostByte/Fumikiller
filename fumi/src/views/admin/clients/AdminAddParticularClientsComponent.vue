@@ -86,18 +86,13 @@
         <!-- Tercera Fila -->
         <div class="flex">
           <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la ciudad" class=" px-1" style="width: 220px;">
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
               <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
             </el-select>
           </el-form-item>
           <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
             <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad">
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-7" style="width: 350px;">
-            <el-select v-model="form1.id_comercio" placeholder="Selecciona el tipo de comercio:">
-              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio" :value="comercio.id" />
             </el-select>
           </el-form-item>
         </div>
@@ -176,7 +171,6 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
-    comercios: [],
     form1: {
       name: '',
       lastname1: '',
@@ -187,7 +181,7 @@ export default {
       numAddress: '',
       id_colonia: '',
       id_city: '',
-      id_comercio: '',
+      id_comercio: '1',
       description: '',
       how_to_get: '',
       cell_phone: '',
@@ -225,10 +219,7 @@ export default {
         { required: true, message: 'La colonia es requerido', trigger: 'blur' },
       ],
       id_city: [
-        { required: true, message: 'La colonia es requerido', trigger: 'blur' },
-      ],
-      id_comercio: [
-        { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' },
+        { required: true, message: 'La ciudad es requerido', trigger: 'blur' },
       ],
       description: [
         { required: true, message: 'La descripcion es requerido', trigger: 'blur' },
@@ -259,8 +250,6 @@ export default {
     this.refresh();
     this.fetchCiudades();
     this.fetchColonias();
-    this.fetchComercios();
-
   },
   methods: {
     errorUpload(error) {
@@ -330,16 +319,6 @@ export default {
         })
         .catch(error => {
           console.error('Error fetching colonias:', error);
-        });
-    },
-    fetchComercios() {
-      axios.get('verComercio')
-        .then(response => {
-          console.log('Comercio:', response.data);
-          this.comercios = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching comercios:', error);
         });
     },
   }

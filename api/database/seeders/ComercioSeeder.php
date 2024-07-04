@@ -15,6 +15,9 @@ class ComercioSeeder extends Seeder
     public function run(): void
     {
         DB::table('comercios')->insert([
+            'comercio'=>'Casa',
+        ]);
+        DB::table('comercios')->insert([
             'comercio'=>'Abarrotes',
         ]);
         DB::table('comercios')->insert([
