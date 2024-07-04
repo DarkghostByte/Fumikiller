@@ -242,6 +242,7 @@ export default {
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     form: {
+      id_orden: '',
       responsable:'',
       ayudante: 'No aplica',
       productoInt1: '',
@@ -256,6 +257,10 @@ export default {
       requiere1: [],
       requiere2: [],
       requiere3: [],
+      name: '',
+      lastname1: '',
+      lastname2: '',
+      tradename: ''
     },
     rules: {
       responsable: [
@@ -300,53 +305,43 @@ export default {
   if (route.params && route.params.id) {
     this.id = route.params.id;
     axios.get('orden/' + this.id).then(res => {
+      console.log('Orden Response:', res.data);
       if (res.data && res.data.data) {
-        console.log(res);
         let datos = res.data.data;
-        const ordenData = res.data.data;
-        this.form.id_orden = ordenData.id;
-        this.form.plague1 = datos.plague1;
-        this.form.plague2 = datos.plague2;
-        this.form.id_cliente = datos.id_cliente;
-        this.form.name = datos.name;
+        console.log('Datos Cliente:', datos.cliente); // Verifica aquí los datos del cliente
+        this.form.id_orden = datos.id;
+        if (datos.cliente) {
+          this.form.name = datos.cliente.name || '';
+          this.form.lastname1 = datos.cliente.lastname1 || '';
+          this.form.lastname2 = datos.cliente.lastname2 || '';
+          this.form.tradename = datos.cliente.tradename || '';
+        }
       } else {
         console.error('Response data is undefined or null');
+        ElNotification({
+          title: 'Error',
+          message: 'No se pudo recuperar la información de la orden',
+          type: 'error'
+        });
       }
     }).catch(error => {
       console.error('Error fetching orden data:', error);
-    });
-
-    axios.get('clientes/' + this.id).then(res => {
-      if (res.data && res.data.data) {
-        console.log(res);
-        let datos = res.data.data;
-        const clienteData = res.data.data;
-        this.form.id_cliente = clienteData.id;
-        this.form.name = datos.name;
-        this.form.lastname1 = datos.lastname1;
-        this.form.lastname2 = datos.lastname2;
-        this.form.tradename = datos.tradename;
-      } else {
-        console.error('Response data is undefined or null');
-      }
-    }).catch(error => {
-      console.error('Error fetching clientes data:', error);
+      ElNotification({
+        title: 'Error',
+        message: 'Error al recuperar la información de la orden',
+        type: 'error'
+      });
     });
   } else {
     console.error('route.params.id is undefined');
   }
 },
 
-    
-    methods: {
-    errorUpload(error) {
-      console.log(error);
-    },
+  methods: {
     refresh() {
-      this.tableData = [];
       axios.get('orden').then(res => {
         this.tableData = res.data.data;
-      })
+      });
     },
     submitForm() {
       this.$refs.formRef.validate((valid) => {
@@ -356,18 +351,18 @@ export default {
               console.log('Form submitted successfully:', response.data);
               this.$router.push('/admin/worksComplete');
               ElNotification({
-                title: 'Alerta',
+                title: 'Éxito',
                 message: 'Registro insertado correctamente',
                 type: 'success'
-              })
+              });
             })
             .catch(error => {
-              console.error('Error submitting form:', error);
+              console.error('Error submitting form:', error.response ? error.response.data : error.message);
               ElNotification({
                 title: 'Error',
-                message: 'Favor de llenar los campos',
+                message: error.response && error.response.data ? error.response.data.message : 'Favor de llenar los campos correctamente',
                 type: 'error'
-              })
+              });
             });
         } else {
           console.log('Validation failed');
@@ -379,7 +374,7 @@ export default {
           return false;
         }
       });
-    },
+    }
   }
-}
+};
 </script>

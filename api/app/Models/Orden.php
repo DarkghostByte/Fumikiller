@@ -21,4 +21,9 @@ class Orden extends Model
         'hiring',
         'requires',
     ];
+
+    public function cliente()
+    {
+        return $this->belongsTo(Cliente::class, 'id_cliente');
+    }
 }

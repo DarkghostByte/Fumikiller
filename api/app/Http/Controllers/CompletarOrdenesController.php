@@ -11,9 +11,15 @@ class CompletarOrdenesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $data = CompletarOrden::select(['completarordenes.*', 'orden.plague1','clientes.name',
+    public function index(Request $request)
+{
+    $id_cliente = $request->query('id_cliente');
+
+    $query = CompletarOrden::select([
+        'completarordenes.*',
+        'orden.plague1',
+        'orden.id_cliente',
+        'clientes.name',
         'clientes.lastname1',
         'clientes.lastname2',
         'clientes.tradename',
@@ -23,19 +29,25 @@ class CompletarOrdenesController extends Controller
         'clientes.id_city',
         'colonias.colonia',
         'colonias.codigoPostal',
-        'ciudades.ciudad'])
-        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->orderBy('completarordenes.id', 'DESC')
-        ->get();
+        'ciudades.ciudad'
+    ])
+    ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+    ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+    ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+    ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id');
+
+    if ($id_cliente) {
+        $query->where('orden.id_cliente', $id_cliente);
+    }
+
+    $data = $query->orderBy('completarordenes.id', 'DESC')->get();
 
     return response()->json([
         'status' => 'success',
         'data' => $data
     ]);
-    }
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -103,15 +115,24 @@ class CompletarOrdenesController extends Controller
      * Display the specified resource.
      */
     public function show(string $id)
-    {
-        {
-            $data = CompletarOrden::find($id);
-            return response()->json([
-                'status'=>'success',
-                'data'=>$data
-            ]);
-        }
-    }
+{
+    $data = CompletarOrden::select(['completarordenes.*', 
+    'orden.plague1',
+    'clientes.name',
+    'clientes.lastname1',
+    'clientes.lastname2',
+    'clientes.tradename'])
+    ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+    ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+    ->where('completarordenes.id', $id)
+    ->first();
+
+    return response()->json([
+        'status'=>'success',
+        'data'=>$data
+    ]);
+}
+
 
     /**
      * Show the form for editing the specified resource.

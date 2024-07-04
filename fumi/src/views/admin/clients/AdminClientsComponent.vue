@@ -1,17 +1,25 @@
 <template>
   <!-- Importar Iconos-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
       <div class="flex flex-wrap items-start justify-end ">
 
-        <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3" style="color:black">
-          <i class="fa fa-search" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-          Consultar Cliente
+        <router-link to="/admin/works"
+          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-bookmark" aria-hidden="true"
+            style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+          Consultar Ordenes
         </router-link>
 
-        <router-link to="/admin/clients/agregarComercio-clients" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-          <i class="fa fa-plus-circle" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+        <router-link to="/admin/clients/agregarComercio-clients"
+          class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-plus-circle" aria-hidden="true"
+            style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
           Nuevo Cliente
         </router-link>
 
@@ -24,87 +32,69 @@
 
     <!-- Campo de búsqueda -->
     <div class="mb-4">
-      <el-input placeholder="Buscar por nombre, apellidos, cuidad, direccion, numero de casa, numero de telefono o ID del cliente" v-model="searchQuery" @input="filterData"></el-input>
+      <el-input
+        placeholder="Buscar por nombre, apellidos, cuidad, direccion, numero de casa, numero de telefono o ID del cliente"
+        v-model="searchQuery" @input="filterData"></el-input>
     </div>
 
     <!-- TABLE DATA -->
     <div class="flex">
-      <el-table
-        :data="filteredData"
-        :default-sort="{ prop: 'name', order: 'descending' }"
-        style="width: 100%"
-        stripe
-      >
+      <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
         <el-table-column label="">
           <template #default="scope">
-            <el-button style="color:black"
-              size="small"
-              type="success"
-              @click="seleccionar(scope.row)"
-            ><span class="material-symbols-outlined">visibility</span></el-button>
+            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
+                class="material-symbols-outlined">visibility</span></el-button>
           </template>
         </el-table-column>
 
         <el-table-column label="">
           <template #default="scope">
-            <router-link :to="'/admin/works/add-works/'+scope.row.id">
-              <el-button style="color:black"
-                size="small"
-                type="warning"
-                @click="handleEdit()"
-              ><span class="material-symbols-outlined">bug_report</span></el-button>
+            <router-link :to="'/admin/works/add-works/' + scope.row.id">
+              <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
+                  class="material-symbols-outlined">bug_report</span></el-button>
             </router-link>
           </template>
         </el-table-column>
 
         <el-table-column label="">
           <template #default="scope">
-            <el-button style="color:black"
-              size="small"
-              type="info"
-              @click="historia(scope.row)"
-            ><span class="material-symbols-outlined">auto_stories</span></el-button>
+            <el-button style="color:black" size="small" type="info" @click="historia(scope.row)"><span
+                class="material-symbols-outlined">auto_stories</span></el-button>
           </template>
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
 
-        <el-table-column prop="name" label="Nombres" sortable width="120"/>
+        <el-table-column prop="name" label="Nombres" sortable width="120" />
         <el-table-column label="Apellidos" sortable width="140">
           <template #default="scope">
             {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column prop="ciudad" label="Ciudad" sortable width="160"/>
-        <el-table-column prop="home" label="Dirección" sortable width="150"/>
+        <el-table-column prop="ciudad" label="Ciudad" sortable width="160" />
+        <el-table-column prop="home" label="Dirección" sortable width="150" />
         <el-table-column label="Num. de domicilio" sortable width="165">
           <template #default="scope">
             {{ '#' + scope.row.numAddress }}
           </template>
         </el-table-column>
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable width="150"/>
+        <el-table-column prop="cell_phone" label="Numero Celular" sortable width="150" />
 
         <!-- Botones de acción -->
         <el-table-column label="">
           <template #default="scope">
             <router-link :to="'/admin/clients/edit-clients/' + scope.row.id">
-              <el-button style="color:black"
-                size="small"
-                type="warning"
-                @click="handleEdit()"
-              ><span class="material-symbols-outlined">edit</span></el-button>
+              <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
+                  class="material-symbols-outlined">edit</span></el-button>
             </router-link>
           </template>
         </el-table-column>
 
         <el-table-column label="">
           <template #default="scope">
-            <el-button style="color:black"
-              size="small"
-              type="danger"
-              @click="eliminar(scope.row)"
-            ><span class="material-symbols-outlined">delete</span></el-button>
+            <el-button style="color:black" size="small" type="danger" @click="eliminar(scope.row)"><span
+                class="material-symbols-outlined">delete</span></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -118,7 +108,8 @@
         <br><br>
         Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
         <br><br>
-        Direccion: {{ selectedItem.ciudad }}, {{ selectedItem.colonia }}, {{ selectedItem.home }}, {{ selectedItem.codigoPostal }}
+        Direccion: {{ selectedItem.ciudad }}, {{ selectedItem.colonia }}, {{ selectedItem.home }}, {{
+          selectedItem.codigoPostal }}
         <br><br>
         Telefono: Datos de la base de datos {{ selectedItem.cell_phone }}
         <br><br>
@@ -143,7 +134,9 @@
         Nombre comercial: {{ selectedItem.tradename }}
         <br><br>
         <p style="font-size: 22px;">Datos del domicilio</p>
-        Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+        Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{
+          selectedItem.colonia
+        }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
         <br>
         Tipo de lugar: {{ selectedItem.comercio }}
         <br><br>
@@ -196,7 +189,7 @@ export default {
         this.filteredData = this.tableData;
       });
     },
-    handleEdit() {},
+    handleEdit() { },
     handleDelete() {
       axios.delete('clientes/' + this.selectedItem.id).then(res => {
         console.log(res);
@@ -225,13 +218,13 @@ export default {
     filterData() {
       this.filteredData = this.tableData.filter(client => {
         return client.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               client.id.toString().includes(this.searchQuery) ||
-               client.lastname1.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               client.lastname2.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               client.ciudad.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               client.numAddress.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               client.home.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-               client.cell_phone.toLowerCase().includes(this.searchQuery.toLowerCase());
+          client.id.toString().includes(this.searchQuery) ||
+          client.lastname1.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          client.lastname2.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          client.ciudad.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          client.numAddress.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          client.home.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          client.cell_phone.toLowerCase().includes(this.searchQuery.toLowerCase());
       });
     }
   }

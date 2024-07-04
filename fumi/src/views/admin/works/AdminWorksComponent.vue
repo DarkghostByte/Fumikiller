@@ -8,15 +8,21 @@
       <div class="flex flex-wrap items-start justify-end ">
 
         <!--RUTAS ENTRES VISTAS-->
-        <router-link to="/admin/works"
-          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-bookmark" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>
-          Ver Ordenes
-        </router-link>
+        <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+            style="color:black">
+              <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
+              margin-left: -5px; margin-right:10px;"></i>                
+              Ver Clientes
+            </router-link>
 
-        <router-link to="/admin/worksComplete"
+            <router-link to="/admin/works" class="inline-flex px-5 py-3 text-white bg-emerald-400 hover:bg-emerald-700 focus:bg-emerald-800 rounded-md ml-6 mb-3"
+            style="color:black">
+              <i class="fa fa-bookmark" aria-hidden="true" style="margin-top: 5px;
+              margin-left: -5px; margin-right:10px;"></i>                
+              Ver Ordenes
+            </router-link>
+
+            <router-link to="/admin/worksComplete"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3"
           style="color:black">
           <i class="fa fa-clipboard-check" aria-hidden="true" style="margin-top: 5px;
@@ -161,7 +167,7 @@ export default {
     completarOrden(row) {
       if (row && row.id) {
         console.log(row);
-        this.$router.push({ path: `/admin/works/complete-works/${row.id_cliente}` });
+        this.$router.push({ path: `/admin/works/complete-works/${row.id}` });
       } else {
         console.error('Row is undefined or does not have an id:', row);
       }

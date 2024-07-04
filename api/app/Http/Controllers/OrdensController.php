@@ -116,14 +116,16 @@ class OrdensController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        $data = Orden::find($id);
-        return response()->json([
-            'status'=>'success',
-            'data'=>$data
-        ]);
+    public function show($id)
+{
+    $orden = Orden::with('cliente')->find($id);
+
+    if (!$orden) {
+        return response()->json(['message' => 'Orden no encontrada'], 404);
     }
+
+    return response()->json(['data' => $orden], 200);
+}
 
     /**
      * Show the form for editing the specified resource.
