@@ -82,26 +82,27 @@
 
 
 <style>
-nav{ 
-  justify-content: end;  
+nav { 
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   width: 50px;
-  font-size: 0px; 
+  font-size: 0; 
 }
 nav.span{
   margin-left: 15px;
 }
 
-span{
-  color:black;
-  position: center;
+span {
+  color: black;
+  display: inline-block;
 }
 
-nav:hover{
+nav:hover {
   font-size: 15px;
   width: 150px;
   color: black;
-  transition: .75s;   
-  
+  transition: width 0.75s, font-size 0.75s;   
 } 
 
 </style>

@@ -13,7 +13,7 @@
               Ver Ordenes
             </router-link>
 
-            <router-link to="/admin/works"
+            <router-link to="/admin/worksComplete"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3"
           style="color:black">
           <i class="fa fa-clipboard-check" aria-hidden="true" style="margin-top: 5px;

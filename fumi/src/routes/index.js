@@ -10,6 +10,7 @@ const adminRoutes = [
     {path: 'clients/edit-clients/:id', component: () => import('@/views/admin/clients/AdminEditClientsComponent.vue')},
     {path: 'works', component: () => import('@/views/admin/works/AdminWorksComponent.vue')},
     {path: 'worksComplete', component: () => import('@/views/admin/works/AdminWorksCompleteComponent.vue')},
+    {path: 'worksComplete/:id', component: () => import('@/views/admin/works/AdminWorksCompleteIdComponent.vue')},
     {path: 'works/add-works/:id', component: () => import('@/views/admin/works/AdminAddWorksComponent.vue')},
     {path: 'works/complete-works/:id', component: () => import('@/views/admin/works/AdminCompleteWorksComponent.vue')},
     {path: 'works/edit-workComplete/:id', component: () => import('@/views/admin/works/AdminEditWorksComplete.vue')},
