@@ -28,6 +28,11 @@
               <span class="material-symbols-outlined">calendar_clock</span>
               <p id="HTxt" class="px-2">Agenda</p>
             </router-link>
+            <router-link to="/admin/admin" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
+              <span class="sr-only">Facturacion</span>
+              <span class="material-symbols-outlined">paid</span>
+              <p id="HTxt" class="px-2">Facturacion</p>
+            </router-link>
             <router-link to="/admin/certificate" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
               <span class="sr-only">Certificados</span>
               <span class="material-symbols-outlined">verified</span>
@@ -48,7 +53,6 @@
               <span class="material-symbols-outlined">shield_person</span>
               <p id="HTxt" class="px-2">Admin</p>
             </router-link>
-
 
             <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 text-blue-800 bg-white rounded-3xl">
               <span class="sr-only">Bitacora</span>

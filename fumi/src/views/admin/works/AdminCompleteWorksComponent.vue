@@ -199,6 +199,7 @@
               <el-checkbox label="Agendar" value="Agendar"></el-checkbox>
               <el-checkbox label="Cancelar" value="Cancelar"></el-checkbox>
               <el-checkbox label="Ellos hablan" value="Ellos hablan"></el-checkbox>
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
         </div>

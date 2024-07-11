@@ -1,13 +1,21 @@
 <template>
+  <!-- Importar Iconos-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
       <div class="flex flex-wrap items-start justify-end ">
+
         <router-link to="/admin/clients"
           class="inline-flex px-5 py-3 text-white bg-red-400 hover:bg-red-700 focus:bg-red-800 rounded-md ml-6 mb-3"
           style="color:black">
-          <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+          <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px;
+            margin-left: -5px; margin-right:10px;"></i>
           Devolver
         </router-link>
+
       </div>
     </div>
     <div class="mr-6">
