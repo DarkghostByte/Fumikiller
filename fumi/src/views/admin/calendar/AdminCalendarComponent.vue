@@ -1,126 +1,176 @@
 <template>
   <!-- Importar Iconos-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <div>
-        <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start" >
-          <div class="flex flex-wrap items-start justify-end ">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <div>
+    <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
+      <div class="flex flex-wrap items-start justify-end ">
 
-            <router-link to="/admin/calendar" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-            style="color:black">
-              <i class="fa fa-bookmark" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>                
-              Agenda por realizar
-            </router-link>
-  
-            <router-link to="/admin/calendar/complete" class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3" style="color:black">
-              <i class="fa fa-check" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>                
-              Agenda realizadas
-            </router-link>
-  
-            <router-link to="/admin/works/edit-works" class="inline-flex px-5 py-3 text-white bg-yellow-400 hover:bg-yellow-500 focus:bg-yellow-600 rounded-md ml-6 mb-3" style="color:black">
-              <i class="fa fa-circle-exclamation" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>                
-              **************
-            </router-link>
-            
-          </div>
-        </div>
-        <div class="mr-6">
-          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda por realizar</h1>
-        </div>
+        <!--RUTAS ENTRES VISTAS-->
+        <router-link to="/admin/calendar"
+          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
+              margin-left: -5px; margin-right:10px;"></i>
+          Agenda por dia
+        </router-link>
 
-        
-        <!-- TABLE DATA -->
-        <div class="flex">
-            <el-table
-                :data="tableData"
-                :default-sort="{ prop: 'name', order: 'descending' }"
-                style="width: 100%"
-            >
+        <router-link to="/admin/calendar/complete"
+          class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-clipboard-check" aria-hidden="true" style="margin-top: 5px;
+            margin-left: -5px; margin-right:10px;"></i>
+          Agenda realizadas
+        </router-link>
+        <!--FIN DE RUTAS ENTRES VISTAS-->
 
-            <!-- 
-            <el-table-column label="">
-              <template #default>
-                <router-link to="" >
-                  <el-button style="color:black"
-                  size="small"
-                  type="warning"
-                  @click="handleDelete()"
-                  ><span class="material-symbols-outlined">done</span></el-button
-                >
-                </router-link>
-              </template>
-            </el-table-column>
-            
-          -->
-            
-
-            <el-table-column label="terminar">
-              <template #default>
-                <router-link to="/admin/works/complete-works" >
-                  <el-button style="color:black"
-                  size="small"
-                  type="success"
-                  @click="handleDelete()"
-                  ><span class="material-symbols-outlined">priority</span></el-button
-                >
-                </router-link>
-              </template>
-            </el-table-column>
-
-                <el-table-column prop="nameCliente" label="Nombre"  sortable width="120" />
-                <el-table-column prop="lastnameCliente1" label="Apellido Paterno"  sortable width="155" />
-                <el-table-column prop="lastnameCliente2" label="Apellido Materno"  sortable width="160" />
-                <el-table-column prop="direccionCliente" label="Dirección" sortable width="130" />
-                <el-table-column prop="numTelefono" label="Celular" sortable width="160"  />
-                <el-table-column prop="fechaAsistencia" label="Fecha para asistir" sortable width="160"  />
-                <el-table-column label="">
-                    <template #default>
-                      <el-button style="color:black"
-                        size="small"
-                        type="danger"
-                        @click="handleDelete()"
-                        ><span class="material-symbols-outlined">delete</span></el-button>
-                    </template>
-                  </el-table-column>
-            </el-table>
-        </div>
-        <!-- END TABLE DATA -->
+      </div>
     </div>
-  
-  </template>
-  
-  <script>
-  
-      export default {
-          name:'AdminHomeComponent',
-          
-          data:()=>({
-                tableData:[],
-          }),
-          mounted(){
-            this.tableData = [{
-                    nameCliente:'Luis Angel',
-                    lastnameCliente1:'Peña',
-                    lastnameCliente2:'Mora',
-                    direccionCliente:'No. 189, Grove St, Los Angeles',
-                    numTelefono:'6361111111',
-                    fechaAsistencia: '2024-03-24',
-                },
-                {
-                    nameCliente:'Jesus Liadeo',
-                    lastnameCliente1:'Chavez',
-                    lastnameCliente2:'Chavez',
-                    direccionCliente:'No. 189, Grove St, Los Angeles',
-                    numTelefono:'6362222222',
-                    fechaAsistencia: '2024-03-24',
-                }
-            ]
-          },
-          methods:{
-            handleEdit(){},
-            handleDelete(){},
-          }
+    <div class="mr-6">
+      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda de trabajo por dia</h1>
+    </div>
+
+    <!-- TABLE DATA -->
+    <div class="flex">
+
+      <div class="row">
+        <div class="mb-4">
+          <el-date-picker placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+            format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+        </div>
+      </div>
+
+
+
+      <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }"
+        style="width: auto; margin: auto;" stripe>
+
+        <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
+        <el-table-column label="">
+          <template #default="scope">
+            <el-button style="color:black" size="small" type="success" @click="pdf(scope.row)">
+              <a :href="url + 'api/orden-de-trabajo/' + scope.row.id_cliente + '/' + scope.row.id" target="_blank">
+                <span class="material-symbols-outlined">lab_profile</span>
+              </a>
+            </el-button>
+          </template>
+        </el-table-column>
+        <!--FIN DEL BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
+
+        <!--VISUALIZACION DE LA TABLA-->
+        <el-table-column label="Nombre" sortable width="200">
+          <template #default="scope">
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+          </template>
+        </el-table-column>
+        <el-table-column label="Direccion" sortable width="220">
+          <template #default="scope">
+            {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
+            ', ' + scope.row.ciudad }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="cell_phone" label="Celular" sortable width="150" />
+        <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
+        <el-table-column prop="time1" label="De" sortable width="90" />
+        <el-table-column prop="time2" label="A" sortable width="90" />
+        <!--FIN DE LA VISUALIZACION DE LA TABLA-->
+      </el-table>
+    </div>
+    <!-- END TABLE DATA -->
+
+    <!-- INICIO DEL DIALOGO PARA ELIMINAR -->
+    <el-dialog v-model="dialogVisible" title="Deseas dar de baja la siguente orden de trabajo" width="1200">
+      <div class="h-72 overflow-scroll" style="font-size:22px; color:black;">
+        Datos la orden de trabajo
+        <br>
+        Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
+        <br>
+        Direccion: {{ selectedItem.city }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{
+            selectedItem.home }} #{{ selectedItem.numAddress }}
+        <br>
+        Dia de la orden: {{ selectedItem.date1 }}
+        <br>
+        Dia de de asistencia: {{ selectedItem.date2 }}
+        <br>
+        De: {{ selectedItem.time1 }}
+        <br>
+        A: {{ selectedItem.time2 }}
+        <br><br>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
+          <el-button type="danger" @click="confimarBaja()">
+            Confirmar
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- FIN DEL DIALOGO PARA ELIMINAR -->
+
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+export default {
+  name: 'AdminCalendarComponentComponent',
+  data: () => ({
+    url: process.env.VUE_APP_ROOT_ASSETS,
+    urlApi: process.env.API,
+    tableData: [],
+    dialogVisible: false,
+    filteredData: [],
+    selectedItem: {},
+    searchQuery: ''
+  }),
+  mounted() {
+    this.refresh()
+  },
+  methods: {
+    refresh() {
+      this.tableData = []
+      axios.get('orden').then(res => {
+        this.tableData = res.data.data
+        this.filteredData = this.tableData;
+
+      })
+    },
+    pdf(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.selectedItem = null
+    },
+    confimarBaja() {
+      axios.delete('orden/' + this.selectedItem.id).then(res => {
+        console.log(res)
+        this.refresh()
+        this.dialogVisible = false
+      })
+    },
+    bajaOrden(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.dialogVisible = true
+    },
+    completarOrden(row) {
+      if (row && row.id) {
+        console.log(row);
+        this.$router.push({ path: `/admin/works/complete-works/${row.id}` });
+      } else {
+        console.error('Row is undefined or does not have an id:', row);
       }
-  </script>
+    },
+    filterData() {
+      if (this.searchQuery) {
+        this.filteredData = this.tableData.filter(orden => {
+          return orden.date2.toLowerCase().includes(this.searchQuery.toLowerCase());
+        });
+      } else {
+        this.filteredData = this.tableData;
+      }
+    }
+  },
+}
+</script>

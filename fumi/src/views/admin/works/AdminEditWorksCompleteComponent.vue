@@ -193,7 +193,7 @@ import { ElNotification } from 'element-plus';
 import axios from 'axios';
 
 export default {
-  name: 'AdminEditClientComponent',
+  name: 'AdminEditWorksCompleteComponent',
   data: () => ({
     formRef: undefined,
     uploadRef: undefined,

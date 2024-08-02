@@ -38,9 +38,9 @@
               </svg>
             </div>
             <div>
-              <span class="block text-gray-500">Venta Sin Facturas</span>
+              <span class="block text-gray-500">Venta sin Facturas</span>
               <span class="block text-2xl font-bold">$0.00</span>
-              <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
+              <router-link to="/admin/ventas" class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
             </div>
           </div>
         </el-carousel-item>

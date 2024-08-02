@@ -59,6 +59,7 @@
                 <el-table-column prop="folioCliente" label="Folio" sortable width="100"  />
                 <el-table-column prop="numTelefono" label="Celular" sortable width="140"  />
                 <el-table-column prop="fechaAsistencia" label="Fecha de asistencia" sortable width="180"  />
+                <el-table-column prop="horaAsistencia" label="Hora de asistencia" sortable width="180"  />
             </el-table>
         </div>
         <!-- END TABLE DATA -->
@@ -83,6 +84,7 @@
                     folioCliente:'A-00001',
                     numTelefono:'6361111111',
                     fechaAsistencia: '2024-03-24',
+                    horaAsistencia: '10:00 P.M.',
                 },
                 {
                     nameCliente:'Jesus Liadeo',
@@ -92,6 +94,7 @@
                     folioCliente:'A-00002',
                     numTelefono:'6362222222',
                     fechaAsistencia: '2024-03-24',
+                    horaAsistencia: '10:00 P.M.',
                 }
             ]
           },

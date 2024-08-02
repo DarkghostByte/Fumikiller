@@ -18,6 +18,7 @@ class CompletarOrdenesController extends Controller
     $query = CompletarOrden::select([
         'completarordenes.*',
         'orden.plague1',
+        'orden.date2',
         'orden.id_cliente',
         'clientes.name',
         'clientes.lastname1',

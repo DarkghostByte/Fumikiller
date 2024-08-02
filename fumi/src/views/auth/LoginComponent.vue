@@ -1,7 +1,7 @@
 <template>
     
     
-    <div class="flex justify-center items-center h-screen bg-gray-200">
+    <div class="flex justify-center items-center h-screen bg-gradient-to-r from-orange-500 from-25% to-blue-800 to-60%">
         <div class="w-1/2">
             <div class="DivAzul">
                 <img v-bind:src="url+'img/logofk.png'" class="imgFk">               

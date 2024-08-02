@@ -2,10 +2,9 @@
 
 
     <aside id="Nav-Box" class="hidden sm:flex sm:flex-col">
-        <a href="#" class="inline-flex items-center justify-center h-20 w-30 bg-orange-600 hover:bg-blue-800 focus:bg-blue-800">
+      <router-link to="/auth/index" class="inline-flex items-center justify-center h-20 w-30 bg-orange-600 hover:bg-blue-800 focus:bg-blue-800">
           <img v-bind:src="url+'img/logofk.png'" class="flex items-center justify-center h-20">
-          
-        </a>
+        </router-link>
         <div  class="flex-grow flex flex-col justify-between text-gray-900 bg-orange-600" >
           <nav class="flex flex-col mx-4 my-6 space-y-4 ">
             <router-link to="/admin/home" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
@@ -106,7 +105,7 @@ nav:hover {
   font-size: 15px;
   width: 150px;
   color: black;
-  transition: width 0.75s, font-size 0.75s;   
+  transition: width 0.75s, font-size 0.75s;  
 } 
 
 </style>

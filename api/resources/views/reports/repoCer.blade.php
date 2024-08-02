@@ -14,7 +14,8 @@
             <h5 >CALLE ABETO 2201 COL. ALAMEDAS</h5>
             <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
         </div>     
-        <h2 class="cerapli">CERTIFICADO DE APLICACION<p>Licencia Sanitaria 04-08A095</h2>
+        <h2 class="cerapli">CERTIFICADO DE APLICACION</h2>
+        <h2><p>Licencia Sanitaria 04-08A095</h2>
         
     <header>    
         
@@ -107,7 +108,7 @@
             <th>OBSERVACIONES:</th>
             <th class="renDivTh">
             
-                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante, <br> la basura tapada y evitar la humedad.</h5>                
+                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
             
             </th> 
         </table>
@@ -115,12 +116,14 @@
 
         </div>
         <table class="">
-            <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
-            <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
-            <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
-            <h5 class="idCert">
-                No.                
-            </h5>
+            <div class="bottom">
+                <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
+                <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
+                <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
+                <h5 class="idCert">
+                    No. 10000
+                </h5>
+                </div>
             
             </th> 
         </table>
@@ -133,6 +136,9 @@
 </body>
 
 <style>
+    .bottom{
+        text-align: center;
+    }
     .clth11{
         width: 66%;
     }
@@ -146,8 +152,9 @@
     .cerapli{
         color:#eb590c;
         position:absolute;
-        margin-left:-62%;
+        margin-left:-77%;
         margin-top:18%;
+        font-size: 32px;
     }
     .mgntp{
         margin-top: -20px;
@@ -181,15 +188,16 @@
         display:flex;
     }
     .idCert{
-        margin-left:45%;
+        font-size: 18px;
+        margin-left:75%;
         margin-top:-60px;
         height:25px;
-        width: 100px;
-        border:1px solid black;
+        width: 150px;
+        
         color: red;
     }
     .txtObser{
-        font-size: 16px;
+        font-size: 18px;
         margin-top:0px;
         text-align: justify;
         text-decoration: underline;

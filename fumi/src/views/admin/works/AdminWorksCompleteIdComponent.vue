@@ -46,6 +46,7 @@
         <el-table-column prop="pago" label="Monto" sortable width="150" />
         <el-table-column prop="requiere3" label="Datos" sortable width="170" />
         <el-table-column prop="responsable" label="Responsable" sortable width="130" />
+        <el-table-column prop="date2" label="Fecha de asistencia" sortable width="130" />
         <el-table-column label="">
           <template #default="scope">
             <router-link :to="'/admin/works/edit-workComplete/'+scope.row.id">

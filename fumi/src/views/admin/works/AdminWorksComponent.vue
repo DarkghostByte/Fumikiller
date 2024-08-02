@@ -61,7 +61,7 @@
         </el-table-column>
         <el-table-column label="Direccion" sortable width="220">
           <template #default="scope">
-            {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ','+scope.row.ciudad }}
+            {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', '+scope.row.ciudad }}
           </template>
         </el-table-column>
         <el-table-column prop="date1" label="Fecha de orden" sortable width="150" />
