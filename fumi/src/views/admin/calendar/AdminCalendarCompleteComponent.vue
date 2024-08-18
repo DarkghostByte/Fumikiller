@@ -30,6 +30,31 @@
           <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda de ordenes de trabajo realizadas</h1>
         </div>
 
+        <p>Agregar filtros de nombre, direccion, fecha, celular y monto</p>
+
+        <div class="mainfiltros flex">
+          <div  class="tamaño px-1 py-4">
+            <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+              format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+          </div>
+          <div  class="tamaño px-1 py-4">
+            <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+              format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+          </div>
+          <div class="tamaño px-1 py-4">
+            <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+              format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+          </div>
+          <div class="tamaño px-1 py-4">
+            <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+              format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+          </div>
+          <div  class="tamaño px-1 py-4">
+            <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+              format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+          </div>
+        </div>
+
         
         <!-- TABLE DATA -->
         <div class="flex">
@@ -104,3 +129,25 @@
           }
       }
   </script>
+
+<style>
+
+.mainfiltros{
+  width:78%;
+  margin-left:11%;
+  
+  align-items: center;
+}
+.filtros{
+  
+  margin-left: -5px;
+  padding: 1.5px;
+  height: 20px;
+  background-color: #b5b5b5;
+}
+.tamaño{
+  width:19.6%;
+}
+
+
+</style>

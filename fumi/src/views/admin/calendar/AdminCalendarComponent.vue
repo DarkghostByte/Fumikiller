@@ -30,16 +30,35 @@
     <div class="mr-6">
       <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda de trabajo por dia</h1>
     </div>
+    <div class="mainfiltros flex">
+      <div  class="tamaño px-1 py-4">
+        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+      </div>
+      <div  class="tamaño px-1 py-4">
+        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+      </div>
+      <div class="tamaño px-1 py-4">
+        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+      </div>
+      <div class="tamaño px-1 py-4">
+        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+      </div>
+      <div  class="tamaño px-1 py-4">
+        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
+          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+      </div>
+    </div>
+
+    <p>Agregar el filtro para no ver antes o despues </p>
+
 
     <!-- TABLE DATA -->
     <div class="flex">
 
-      <div class="row">
-        <div class="mb-4">
-          <el-date-picker placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
-            format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
-        </div>
-      </div>
 
 
 
@@ -174,3 +193,25 @@ export default {
   },
 }
 </script>
+
+<style>
+
+.mainfiltros{
+  width:78%;
+  margin-left:11%;
+  
+  align-items: center;
+}
+.filtros{
+  
+  margin-left: -5px;
+  padding: 1.5px;
+  height: 20px;
+  background-color: #b5b5b5;
+}
+.tamaño{
+  width:19.6%;
+}
+
+
+</style>
