@@ -133,6 +133,7 @@ class ClientesController extends Controller
         return $pdf->stream();
     }
     
+    
     //PDF Certificado
     public function generarPDF(){
 
@@ -162,6 +163,10 @@ class ClientesController extends Controller
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
     }
+    
+
+    
+    
 
     /**
      * Display the specified resource.

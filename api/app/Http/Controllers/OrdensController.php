@@ -113,6 +113,54 @@ class OrdensController extends Controller
             
         }
     }
+    //PDF VentasSinFactura
+    public function generarVentSinFact(){
+
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64');
+        $pdf = Pdf::loadView('reports.repoVentaSinFact',$pdf_data);
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+        return $pdf->download('invoice.pdf');
+    }
+    //PDF VentasConFactura
+    public function generarVentConFact(){
+
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64');
+        $pdf = Pdf::loadView('reports.repoVentaConFact',$pdf_data);
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+        return $pdf->download('invoice.pdf');
+    }
+    //PDF Creditos
+    public function generarCreditos(){
+
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64');
+        $pdf = Pdf::loadView('reports.repoCreditos',$pdf_data);
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+        return $pdf->download('invoice.pdf');
+    }
 
     /**
      * Display the specified resource.

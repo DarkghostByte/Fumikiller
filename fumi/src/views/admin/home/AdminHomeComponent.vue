@@ -40,7 +40,7 @@
             <div>
               <span class="block text-gray-500">Venta sin Facturas</span>
               <span class="block text-2xl font-bold">$0.00</span>
-              <router-link to="/admin/ventas" class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
+              <router-link to="url + 'api/ventsinfact/ " class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
             </div>
           </div>
         </el-carousel-item>
@@ -54,7 +54,7 @@
             <div>
               <span class="block text-gray-500">Venta Por Facturas</span>
               <span class="block text-2xl font-bold">$0.00</span>
-              <router-link to="/admin/clients" class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
+              <router-link to="api/ventconfact" class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
               
             </div>
           </div>
