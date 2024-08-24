@@ -1,35 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Reporte Ventas Sin Factura</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Ventas Sin Factura</title>
+</head>
 <body>
+    <img  class="membre" src="{{ $base64 }}" alt="">
     <div id="main-container">
+
         <table id="table">
             <thead>
                 <tr>
-                    <th>Cliente:</th><th>Direccion:</th><th>Monto:</th><th>Semana del año</th><th>Mes:</th>
+                    <th>Cliente:</th>
+                    <th>Direccion:</th>
+                    <th>Monto:</th>
+                    <th>Semana del año:</th>
+                    <th>Mes:</th>
                 </tr>
             </thead>
-                <tr>
-                    <th>Luis Angel Peña</th><th>Martires agraristas #909</th><th>$1200</th><th>06/05/2024</th><th>Mayo</th>
-                </tr>
-                <tr>
-                    <th>Liade Chavez Chavez</th><th>Colonia Madero</th><th>$1500</th><th>06/05/2024</th><th>Mayo</th>
-                </tr>
-                <tr>
-                    <th>Luis Antonio Olivas</th><th>Laguna Cuervo #1208</th><th>$1500</th><th>06/05/2024</th><th>Mayo</th>
-                </tr>
-                <tr>
-                    <th>Emiliano Mosqueda Gomez</th><th>Nvo. Casas Grandes</th><th>$1500</th><th>06/05/2024</th><th>Mayo</th>
-                </tr>
+            <tbody>
+                @foreach($data as $item)
+                    <tr>
+                        <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
+                        <td>{{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
+                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
+                        <td>{{ $item->date1 }}</td>
+                        <td>{{ $item->date2 }}</td>
+                       <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
-
-
+        <h2>Total de Pagos: ${{ number_format($totalPago, 2) }}</h2> <!-- Mostrar el total de pagos -->
     </div>
 </body>
 </html>
+
+
 
 <style>
     body{
@@ -57,10 +64,20 @@
         color:white;
     }
     tr:nth-child(even){
-        background-color: white;
+        background-color: rgb(255, 255, 255);
     }
     tr:hover td{
         background-color: #526fd9;
         color: white;
     }
+    h2{
+        text-align:right;
+        /*background-color: #071a5e;*/
+    }
+    .membre{
+        margin-left: 12.5%;
+        margin-top:20px;
+        height:12%;
+        width: 80%;
+    }  
 </style>

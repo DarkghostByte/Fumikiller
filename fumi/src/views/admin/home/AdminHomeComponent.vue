@@ -40,7 +40,9 @@
             <div>
               <span class="block text-gray-500">Venta sin Facturas</span>
               <span class="block text-2xl font-bold">$0.00</span>
-              <router-link to="url + 'api/ventsinfact/ " class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
+              <a :href="url + 'api/ventsinfact/'" target="_blank">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+              </a>
             </div>
           </div>
         </el-carousel-item>
@@ -116,6 +118,8 @@
           
           data:()=>({
                 tableData:[],
+                url: process.env.VUE_APP_ROOT_ASSETS,
+                urlApi: process.env.VUE_APP_ROOT_API,
           }),
           mounted(){
             this.tableData = [{

@@ -32,7 +32,7 @@ Route::resource('comercios', ComerciosController::class);
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
-Route::get('/ventsinfact',[OrdensController::class,'generarVentSinFact']);
+Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
 Route::get('/ventconfact',[OrdensController::class,'generarVentConFact']);
 Route::get('/creditos',[OrdensController::class,'generarCreditos']);
 
