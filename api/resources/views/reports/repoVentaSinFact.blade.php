@@ -26,12 +26,19 @@
                         <td>{{ $item->pago }}</td> <!-- Monto individual -->
                         <td>{{ $item->date1 }}</td>
                         <td>{{ $item->date2 }}</td>
-                       <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
+                        <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
                     </tr>
                 @endforeach
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total de Pagos:</td>
+                        <td id="totalPagos"> ${{ number_format($totalPago, 2) }}</td>
+                    </tr>
             </tbody>
         </table>
-        <h2>Total de Pagos: ${{ number_format($totalPago, 2) }}</h2> <!-- Mostrar el total de pagos -->
+
     </div>
 </body>
 </html>
@@ -70,9 +77,19 @@
         background-color: #526fd9;
         color: white;
     }
-    h2{
+    h3{
         text-align:right;
         /*background-color: #071a5e;*/
+    }
+    #fondoTotal{
+        background-color: #526fd9;
+    }
+    #totalPagos{
+        text-aling: right;
+        margin-top: 20px;
+    }
+    #txt{
+        text-align: right;
     }
     .membre{
         margin-left: 12.5%;

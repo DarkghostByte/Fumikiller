@@ -26,7 +26,10 @@
             <div  class="justify-center items-center">
               <span class="block text-gray-500">Creditos</span>
               <span class="block text-2xl font-bold">$0.00</span>
-              <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
+              <a :href="url + 'api/creditos/'" target="_blank">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+              </a>
+              
             </div>
           </div>
         </el-carousel-item>
@@ -55,9 +58,10 @@
             </div>
             <div>
               <span class="block text-gray-500">Venta Por Facturas</span>
-              <span class="block text-2xl font-bold">$0.00</span>
-              <router-link to="api/ventconfact" class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></router-link>
-              
+              <span class="block text-2xl font-bold">$0.00</span> 
+              <a :href="url + 'api/ventconfact/'" target="_blank">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+              </a>
             </div>
           </div>
         </el-carousel-item>

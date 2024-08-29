@@ -33,8 +33,8 @@ Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
 Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
-Route::get('/ventconfact',[OrdensController::class,'generarVentConFact']);
-Route::get('/creditos',[OrdensController::class,'generarCreditos']);
+Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
+Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
 
 //VER OPCIONES
 Route::get('/verCiudades',[ClientesController::class,'verCiudades']);

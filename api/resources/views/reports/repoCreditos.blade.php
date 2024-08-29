@@ -1,35 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Reporte Creditos</title>
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Creditos</title>
+</head>
 <body>
+    <img  class="membre" src="{{ $base64 }}" alt="">
     <div id="main-container">
+
         <table id="table">
             <thead>
                 <tr>
-                    <th>Cliente:</th><th>Direccion:</th><th>Monto del credito:</th><th>Fecha:</th>
+                    <th>Cliente:</th>
+                    <th>Direccion:</th>
+                    <th>Fecha de orden:</th>
+                    <th>Fecha de asitencia:</th>
+                    <th>Monto del credito:</th>
                 </tr>
             </thead>
-                <tr>
-                    <th>Luis Angel Peña</th><th>Martires agraristas #909</th><th>$1200</th><th>06/05/2024</th>
-                </tr>
-                <tr>
-                    <th>Liade Chavez Chavez</th><th>Colonia Madero</th><th>$1500</th><th>06/05/2024</th><
-                </tr>
-                <tr>
-                    <th>Luis Antonio Olivas</th><th>Laguna Cuervo #1208</th><th>$1500</th><th>06/05/2024</th>
-                </tr>
-                <tr>
-                    <th>Emiliano Mosqueda Gomez</th><th>Nvo. Casas Grandes</th><th>$1500</th><th>06/05/2024</th>
-                </tr>
+            <tbody>
+                @foreach($data as $item)
+                    <tr>
+                        <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
+                        <td>{{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
+                        <td>{{ $item->date1 }}</td>
+                        <td>{{ $item->date2 }}</td>
+                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
+                        <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
+                    </tr>
+                    
+                @endforeach
+                    <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total de Pagos:</td>
+                        <td id="totalPagos"> ${{ number_format($totalPago, 2) }}</td>
+                    </tr>
+            </tbody>
         </table>
-
-
     </div>
 </body>
 </html>
+
+
 
 <style>
     body{
@@ -44,7 +58,7 @@
     table{
         background-color:#cfcfcf;
         border-collapse: collapse;
-        text-align: left;
+        text-align: center;
         width: 105%;
     }
     th, td{
@@ -57,10 +71,30 @@
         color:white;
     }
     tr:nth-child(even){
-        background-color: white;
+        background-color: rgb(255, 255, 255);
     }
     tr:hover td{
         background-color: #526fd9;
         color: white;
     }
+    h3{
+        text-align:right;
+        /*background-color: #071a5e;*/
+    }
+    #fondoTotal{
+        background-color: #3c993c;
+    }
+    #totalPagos{
+        text-aling: right;
+        margin-top: 20px;
+    }
+    #txt{
+        text-align: right;
+    }
+    .membre{
+        margin-left: 12.5%;
+        margin-top:20px;
+        height:12%;
+        width: 80%;
+    }  
 </style>
