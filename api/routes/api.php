@@ -35,6 +35,7 @@ Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'gen
 Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
 Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
 Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
+Route::get('/ventatotales',[CompletarOrdenesController::class,'generarVentasTotales']);
 
 //VER OPCIONES
 Route::get('/verCiudades',[ClientesController::class,'verCiudades']);

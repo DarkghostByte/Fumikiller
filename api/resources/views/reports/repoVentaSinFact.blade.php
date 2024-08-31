@@ -6,6 +6,7 @@
 </head>
 <body>
     <img  class="membre" src="{{ $base64 }}" alt="">
+    <h1>Ventas sin factura</h1>
     <div id="main-container">
 
         <table id="table">
@@ -80,7 +81,11 @@
     h3{
         text-align:right;
         /*background-color: #071a5e;*/
+    }h1{
+        text-align:center;
+        /*background-color: #071a5e;*/
     }
+
     #fondoTotal{
         background-color: #526fd9;
     }

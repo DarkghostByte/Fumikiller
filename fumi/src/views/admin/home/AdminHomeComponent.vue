@@ -73,9 +73,11 @@
               </svg>
             </div>
             <div>
-              <span class="block text-gray-500">Otro Apartado</span>
+              <span class="block text-gray-500">Ventas totales</span>
               <span class="block text-2xl font-bold">$0.00</span>
-              <button class="" style="" ><span style="margin-bottom: -80px;" class=" px-10 py-5 material-symbols-outlined">picture_as_pdf</span></button>
+              <a :href="url + 'api/ventatotales/'" target="_blank">
+                <span class="material-symbols-outlined">picture_as_pdf</span>
+              </a>
               
             </div>
           </div>

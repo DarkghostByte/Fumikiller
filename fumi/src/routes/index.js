@@ -22,6 +22,7 @@ const adminRoutes = [
     {path: 'calendar/complete', component: () => import('@/views/admin/calendar/AdminCalendarCompleteComponent.vue')},
 
     {path: 'admin', component: () => import('@/views/admin/admin/AdminAdminComponent.vue')},
+    {path: 'admin/city', component: () => import('@/views/admin/admin/AdminCityComponent.vue')},
 
 ]
 

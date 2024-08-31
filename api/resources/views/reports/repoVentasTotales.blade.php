@@ -2,31 +2,31 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte Ventas Con Factura</title>
+    <title>Reporte Ventas Totales</title>
 </head>
 <body>
     <img  class="membre" src="{{ $base64 }}" alt="">
-    <h1>Ventas con factura</h1>
+    <h1>Ventas totales</h1>
     <div id="main-container">
 
         <table id="table">
             <thead>
                 <tr>
-                    <th>Negocio:</th>
+                    <th>Cliente:</th>
                     <th>Direccion:</th>
-                    <th>Fecha de orden:</th>
-                    <th>Fecha de asitencia:</th>
-                    <th>Monto del credito:</th>
+                    <th>Monto:</th>
+                    <th>Semana del año:</th>
+                    <th>Mes:</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $item)
                     <tr>
-                        <td>{{ $item->tradename }}</td>
+                        <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
                         <td>{{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
+                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
                         <td>{{ $item->date1 }}</td>
                         <td>{{ $item->date2 }}</td>
-                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
                         <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
                     </tr>
                 @endforeach
@@ -39,6 +39,7 @@
                     </tr>
             </tbody>
         </table>
+
     </div>
 </body>
 </html>
@@ -80,11 +81,11 @@
     h3{
         text-align:right;
         /*background-color: #071a5e;*/
-    }
-    h1{
+    }h1{
         text-align:center;
         /*background-color: #071a5e;*/
     }
+
     #fondoTotal{
         background-color: #526fd9;
     }

@@ -7,7 +7,7 @@
     </div>
 
     <div  class="flex flex-wrap items-start justify-start">
-          <router-link to="/admin/clients/agregarComercio-clients"
+          <router-link to="/admin/admin/city"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-500 hover:bg-blue-900 focus:bg-blue-800 rounded-md ml-6 mb-5 shadow-lg" 
           style="width:290px; height:100px; font-size:22px; text-align: center; ;">
             <i class="fa-solid fa-city" aria-hidden="true" style="margin-top: 10%;

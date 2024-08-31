@@ -228,6 +228,7 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->where('clientes.tradename','=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -279,6 +280,7 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->where('completarordenes.requiere3','=','No Pagado')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -329,6 +331,7 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->where('clientes.tradename','!=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -350,6 +353,56 @@ class CompletarOrdenesController extends Controller
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
         $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
+    
+        // Mostrar el PDF al usuario
+        return $pdf->stream();
+    }
+
+    public function generarVentasTotales() {
+        // Realizar la consulta sin filtrar por 'id_cliente'
+        $data = CompletarOrden::select([
+            'completarordenes.*',
+            'orden.plague1',
+            'orden.date1',
+            'orden.date2',
+            'orden.id_cliente',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad'
+        ])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->orderBy('completarordenes.id', 'DESC')
+        ->get();
+    
+        // Verificar si la colección está vacía
+        if ($data->isEmpty()) {
+            return abort(404, 'No se encontraron datos.');
+        }
+    
+        // Sumar todos los pagos
+        $totalPago = $data->sum('pago');
+    
+        // Generación del PDF
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+    
+        // Preparar los datos para la vista del PDF
+        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf = Pdf::loadView('reports.repoVentasTotales', $pdf_data)->save('myfile.pdf');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();

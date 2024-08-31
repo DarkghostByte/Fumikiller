@@ -6,6 +6,7 @@
 </head>
 <body>
     <img  class="membre" src="{{ $base64 }}" alt="">
+    <h1>Creditos</h1>
     <div id="main-container">
 
         <table id="table">
@@ -15,6 +16,7 @@
                     <th>Direccion:</th>
                     <th>Fecha de orden:</th>
                     <th>Fecha de asitencia:</th>
+                    <th>Estado:</th>
                     <th>Monto del credito:</th>
                 </tr>
             </thead>
@@ -25,12 +27,14 @@
                         <td>{{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
                         <td>{{ $item->date1 }}</td>
                         <td>{{ $item->date2 }}</td>
+                        <td>{{ $item->requiere3 }}</td> <!-- Monto individual -->
                         <td>{{ $item->pago }}</td> <!-- Monto individual -->
                         <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
                     </tr>
                     
                 @endforeach
                     <tr id="fondoTotal">
+                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -81,8 +85,12 @@
         text-align:right;
         /*background-color: #071a5e;*/
     }
+    h1{
+        text-align:center;
+        /*background-color: #071a5e;*/
+    }
     #fondoTotal{
-        background-color: #3c993c;
+        background-color: #526fd9;
     }
     #totalPagos{
         text-aling: right;

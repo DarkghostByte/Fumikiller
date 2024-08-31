@@ -37,11 +37,6 @@
               <span class="material-symbols-outlined">verified</span>
               <p id="HTxt" class="px-2">Certificados</p>
             </router-link>
-            <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
-              <span class="sr-only">Bitacora</span>
-              <span class="material-symbols-outlined">library_books</span>
-              <p id="HTxt" class="px-2">Bitacora</p>
-            </router-link>
             <router-link to="/admin/payments" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
               <span class="sr-only">Gastos</span>
               <span class="material-symbols-outlined">payments</span>
@@ -52,23 +47,6 @@
               <span class="material-symbols-outlined">shield_person</span>
               <p id="HTxt" class="px-2">Admin</p>
             </router-link>
-
-            <router-link to="/admin/binnacle" class="inline-flex items-center justify-center py-3 text-blue-800 bg-white rounded-3xl">
-              <span class="sr-only">Bitacora</span>
-              <span class="material-symbols-outlined">payments</span>
-            </router-link>
-            <a to="clients" class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-3xl">
-              <span class="sr-only">Messages</span>
-              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-              </svg>
-            </a>
-            <a href="#" class="inline-flex items-center justify-center py-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-3xl">
-              <span class="sr-only">Documents</span>
-              <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-              </svg>
-            </a>
           </nav>
           <div class="inline-flex items-center justify-center h-20 w-20 border-t border-gray-700">
             <button class="p-3 hover:text-gray-400 hover:bg-gray-700 focus:text-gray-400 focus:bg-gray-700 rounded-3xl">
