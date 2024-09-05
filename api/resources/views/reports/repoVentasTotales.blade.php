@@ -14,24 +14,21 @@
                 <tr>
                     <th>Cliente:</th>
                     <th>Direccion:</th>
+                    <th>Fecha de asistencia:</th>
                     <th>Monto:</th>
-                    <th>Semana del año:</th>
-                    <th>Mes:</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $item)
                     <tr>
                         <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
-                        <td>{{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
-                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
-                        <td>{{ $item->date1 }}</td>
+                        <td>{{ $item->ciudad }}, {{ $item->colonia }}, {{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->       
                         <td>{{ $item->date2 }}</td>
+                        <td>{{ $item->pago }}</td>
                         <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
                     </tr>
                 @endforeach
                 <tr id="fondoTotal">
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td id="txt">Total de Pagos:</td>

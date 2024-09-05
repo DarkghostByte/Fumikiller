@@ -41,6 +41,7 @@ Route::get('/ventatotales',[CompletarOrdenesController::class,'generarVentasTota
 Route::get('/verCiudades',[ClientesController::class,'verCiudades']);
 Route::get('/verColonia',[ClientesController::class,'verColonia']);
 Route::get('/verComercio',[ClientesController::class,'verComercio']);
+Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
 
 //RUTA PARA LA MODIFICACION
 //Route::patch('clientes/{id}', [ClientesController::class, 'update']);verColonia

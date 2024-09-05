@@ -13,4 +13,5 @@ class Colonia extends Model
     protected $fillable = [
         'colonia',
         'codigoPostal',
+        'id_ciudad',
     ];}

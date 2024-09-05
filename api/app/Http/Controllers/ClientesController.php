@@ -114,7 +114,7 @@ class ClientesController extends Controller
             return abort(404);
         }
         //DATOS DE LA BASE DE DATOS DE LAS ORDENES
-        $orden = Orden::find($id_cliente);
+        $orden = Orden::find($id);
         if (!$orden) {
             return abort(404);
         }

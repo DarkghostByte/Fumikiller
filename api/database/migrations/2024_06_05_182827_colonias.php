@@ -15,6 +15,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('colonia');
             $table->string('codigoPostal');
+            $table->integer('id_ciudad')->unsigned();
+            $table->foreign("id_ciudad")->references('id')->on('ciudades');
             $table->timestamps();
         });
     }

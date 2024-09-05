@@ -11,14 +11,41 @@ class ColoniasController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        $data = Colonia ::all();
+
+    public function index(Request $request) {
+        $data = Colonia::select([
+            'colonias.*',
+            'ciudades.ciudad'
+        ])
+        ->join('ciudades', 'colonias.id_ciudad', '=', 'ciudades.id')
+        ->orderBy('colonias.id', 'ASC')
+        ->get();
+
         return response()->json([
-            'status'=>'success',
-            'data'=>$data
+            'status' => 'success',
+            'data' => $data
         ]);
     }
+
+    public function verColoniaPorCiudad($cityId) {
+        $colonias = Colonia::where('id_ciudad', $cityId)
+        ->join('ciudades', 'colonias.id_ciudad', '=', 'ciudades.id')
+        ->get();
+    
+        if ($colonias->isEmpty()) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'No hay colonias para esta ciudad'
+            ], 404);
+        }
+    
+        return response()->json([
+            'status' => 'success',
+            'data' => $colonias
+        ]);
+    }
+    
+                
 
     /**
      * Show the form for creating a new resource.
@@ -37,6 +64,8 @@ class ColoniasController extends Controller
         $reglas = Validator::make($request->all(),[
             'colonia' => 'required|min:1',
             'codigoPostal' => 'required|min:1',
+            'id_ciudad' => 'required|min:1',
+
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -48,6 +77,7 @@ class ColoniasController extends Controller
             $data = new Colonia();
             $data->colonia = $request->colonia;
             $data->codigoPostal = $request->codigoPostal;
+            $data->id_ciudad = $request->id_ciudad;
             $data->save();
 
             return response()->json([

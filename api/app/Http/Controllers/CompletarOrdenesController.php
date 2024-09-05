@@ -272,6 +272,7 @@ class CompletarOrdenesController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
+            'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
             'ciudades.ciudad'
@@ -407,6 +408,8 @@ class CompletarOrdenesController extends Controller
         // Mostrar el PDF al usuario
         return $pdf->stream();
     }
+
+    
     
 
     

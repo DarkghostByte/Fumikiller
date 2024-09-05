@@ -14,9 +14,8 @@
                 <tr>
                     <th>Cliente:</th>
                     <th>Direccion:</th>
-                    <th>Fecha de orden:</th>
+                    <th>Celular:</th>
                     <th>Fecha de asitencia:</th>
-                    <th>Estado:</th>
                     <th>Monto del credito:</th>
                 </tr>
             </thead>
@@ -24,17 +23,15 @@
                 @foreach($data as $item)
                     <tr>
                         <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
-                        <td>{{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
+                        <td>{{ $item->ciudad }}, {{ $item->colonia }}, {{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->                        
+                        <td>{{ $item->cell_phone }}</td> <!-- Monto individual -->                        
                         <td>{{ $item->date1 }}</td>
-                        <td>{{ $item->date2 }}</td>
-                        <td>{{ $item->requiere3 }}</td> <!-- Monto individual -->
                         <td>{{ $item->pago }}</td> <!-- Monto individual -->
                         <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
                     </tr>
                     
                 @endforeach
                     <tr id="fondoTotal">
-                        <td></td>
                         <td></td>
                         <td></td>
                         <td></td>

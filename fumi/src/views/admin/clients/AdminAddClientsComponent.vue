@@ -89,19 +89,24 @@
 
         <!-- Tercera Fila -->
         <div class="flex">
-          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
-              <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
-            </el-select>
-          </el-form-item>
           <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
-            <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad">
+            <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity">
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
+
+          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
+              <el-option v-for="colonia in filteredColonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id">
+                {{ colonia.colonia }}
+              </el-option>
+            </el-select>
+          </el-form-item>
+
           <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-7" style="width: 350px;">
             <el-select v-model="form1.id_comercio" placeholder="Selecciona el tipo de comercio:">
-              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio" :value="comercio.id" />
+              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio"
+                :value="comercio.id" />
             </el-select>
           </el-form-item>
         </div>
@@ -123,19 +128,20 @@
         <p class="px-5">Contacto:</p>
         <div class="flex">
           <el-form-item prop="cell_phone" label="Numero de celular:" class="px-2">
-            <el-input v-model="form1.cell_phone" placeholder="Celular" style="width: 220px;"/>
+            <el-input v-model="form1.cell_phone" placeholder="Celular" style="width: 220px;" />
           </el-form-item>
           <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-7">
-            <el-input v-model="form1.number_fixed_number" placeholder="Celular" style="width: 220px;"/>
+            <el-input v-model="form1.number_fixed_number" placeholder="Celular" style="width: 220px;" />
           </el-form-item>
           <el-form-item prop="contact_form" label="Forma de contacto:" class="px-2">
-            <el-select v-model="form1.contact_form" placeholder="Selecciona la  forma de contacto" style="width: 220px;">
+            <el-select v-model="form1.contact_form" placeholder="Selecciona la  forma de contacto"
+              style="width: 220px;">
               <el-option label="Facebook" value="facebook" />
               <el-option label="Barda" value="barda" />
             </el-select>
           </el-form-item>
           <el-form-item prop="specify" label="Especificar:" class="px-7">
-            <el-input v-model="form1.specify" placeholder="Especificar" style="width: 220px;"/>
+            <el-input v-model="form1.specify" placeholder="Especificar" style="width: 220px;" />
           </el-form-item>
         </div>
 
@@ -199,6 +205,8 @@ export default {
       specify: '',
       recruitment_data: []
     },
+    filteredColonias: [],
+    loadingColonias: false,
     rules: {
       name: [
         { required: true, message: 'El nombre es requerido', trigger: 'blur' },
@@ -260,11 +268,12 @@ export default {
       ],
     }
   }),
+
   mounted() {
     this.refresh();
     this.fetchCiudades();
-    this.fetchColonias();
     this.fetchComercios();
+    this.fetchColonias();
   },
   methods: {
     errorUpload(error) {
@@ -342,6 +351,23 @@ export default {
           console.error('Error fetching comercios:', error);
         });
     },
+    fetchColoniasByCity(cityId) {
+  this.loadingColonias = true;
+  axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
+    .then(response => {
+      console.log('Respuesta de la API:', response.data); // Check response data
+      this.filteredColonias = response.data;
+      console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
+    })
+    .catch(error => {
+      console.error('Error fetching colonias:', error);
+      this.$message.error('Error al cargar las colonias. Por favor, inténtalo de nuevo.');
+    })
+    .finally(() => {
+      this.loadingColonias = false;
+    });
+}
+
   }
 }
 </script>
