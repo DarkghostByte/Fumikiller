@@ -356,7 +356,7 @@ export default {
   axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
     .then(response => {
       console.log('Respuesta de la API:', response.data); // Check response data
-      this.filteredColonias = response.data;
+      this.filteredColonias = response.data.data;
       console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
     })
     .catch(error => {
