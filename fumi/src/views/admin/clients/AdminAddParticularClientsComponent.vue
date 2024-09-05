@@ -85,14 +85,17 @@
 
         <!-- Tercera Fila -->
         <div class="flex">
-          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
-              <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
+          <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
+            <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity">
+              <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
-            <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad">
-              <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
+
+          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
+              <el-option v-for="colonia in filteredColonias" :key="colonia.id" :label="colonia.colonia+' #'+colonia.codigoPostal" :value="colonia.id">
+                {{ colonia.colonia }} #{{ colonia.codigoPostal }} 
+              </el-option>
             </el-select>
           </el-form-item>
         </div>
@@ -190,6 +193,8 @@ export default {
       specify: '',
       recruitment_data: []
     },
+    filteredColonias: [],
+    loadingColonias: false,
     rules: {
 
       name: [
@@ -249,7 +254,7 @@ export default {
   mounted() {
     this.refresh();
     this.fetchCiudades();
-    this.fetchColonias();
+    /*this.fetchColonias();*/
   },
   methods: {
     errorUpload(error) {
@@ -311,6 +316,7 @@ export default {
           console.error('Error fetching ciudades:', error);
         });
     },
+    /*
     fetchColonias() {
       axios.get('verColonia')
         .then(response => {
@@ -321,6 +327,23 @@ export default {
           console.error('Error fetching colonias:', error);
         });
     },
+    */
+    fetchColoniasByCity(cityId) {
+  this.loadingColonias = true;
+  axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
+    .then(response => {
+      console.log('Respuesta de la API:', response.data); // Check response data
+      this.filteredColonias = response.data.data;
+      console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
+    })
+    .catch(error => {
+      console.error('Error fetching colonias:', error);
+      this.$message.error('Error al cargar las colonias. Por favor, inténtalo de nuevo.');
+    })
+    .finally(() => {
+      this.loadingColonias = false;
+    });
+}
   }
 }
 </script>

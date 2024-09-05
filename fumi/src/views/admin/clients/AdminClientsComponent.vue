@@ -72,11 +72,9 @@
             {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column prop="ciudad" label="Ciudad" sortable width="160" />
-        <el-table-column prop="home" label="Dirección" sortable width="150" />
-        <el-table-column label="Num. de domicilio" sortable width="165">
+        <el-table-column label="Dirección" sortable width="500">
           <template #default="scope">
-            {{ '#' + scope.row.numAddress }}
+            {{ scope.row.ciudad+', ' + scope.row.colonia + ', '+scope.row.home+' #' + scope.row.numAddress }}
           </template>
         </el-table-column>
         <el-table-column prop="cell_phone" label="Numero Celular" sortable width="150" />
@@ -222,6 +220,7 @@ export default {
           client.lastname1.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           client.lastname2.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           client.ciudad.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+          client.colonia.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           client.numAddress.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           client.home.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
           client.cell_phone.toLowerCase().includes(this.searchQuery.toLowerCase());

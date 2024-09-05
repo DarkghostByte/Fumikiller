@@ -72,16 +72,20 @@
 
         <!-- Tercera Fila -->
         <div class="flex">
-          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
-              <el-option v-for="colonia in colonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id" />
-            </el-select>
-          </el-form-item>
           <el-form-item prop="id_city" label="Ciudad:" class="px-7" style="width: 350px;">
-            <el-select v-model="form.id_city" placeholder="Selecciona la ciudad">
+            <el-select v-model="form.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity">
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
+
+          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
+            <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
+              <el-option v-for="colonia in filteredColonias" :key="colonia.id" :label="colonia.colonia+' #'+colonia.codigoPostal" :value="colonia.id">
+                {{ colonia.colonia }} #{{ colonia.codigoPostal }} 
+              </el-option>
+            </el-select>
+          </el-form-item>
+
           <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-7" style="width: 350px;">
             <el-select v-model="form.id_comercio" placeholder="Selecciona el tipo de comercio:">
               <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio" :value="comercio.id" />
@@ -172,6 +176,8 @@ export default {
       number_fixed_number: 'Ninguno',
       recruitment_data: []
     },
+    filteredColonias: [],
+    loadingColonias: false,
     id: 0,
     rules: {
       name: [
@@ -277,7 +283,7 @@ export default {
         .catch(error => {
           console.error('Error fetching ciudades:', error);
         });
-    },
+    }, /*
     fetchColonias() {
       axios.get('verColonia')
         .then(response => {
@@ -287,7 +293,7 @@ export default {
         .catch(error => {
           console.error('Error fetching colonias:', error);
         });
-    },
+    }, */
     fetchComercios() {
       axios.get('verComercio')
         .then(response => {
@@ -298,11 +304,27 @@ export default {
           console.error('Error fetching comercios:', error);
         });
     },
+    fetchColoniasByCity(cityId) {
+  this.loadingColonias = true;
+  axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
+    .then(response => {
+      console.log('Respuesta de la API:', response.data); // Check response data
+      this.filteredColonias = response.data.data;
+      console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
+    })
+    .catch(error => {
+      console.error('Error fetching colonias:', error);
+      this.$message.error('Error al cargar las colonias. Por favor, inténtalo de nuevo.');
+    })
+    .finally(() => {
+      this.loadingColonias = false;
+    });
+  }
   },
   mounted() {
     this.refresh();
     this.fetchCiudades();
-    this.fetchColonias();
+    /*this.fetchColonias();*/
     this.fetchComercios();
     const route = useRoute();
     this.id = route.params.id;
@@ -317,8 +339,8 @@ export default {
         this.form.street = datos.street || '';
         this.form.home = datos.home || '';
         this.form.numAddress = datos.numAddress || '';
-        this.form.id_colonia = datos.id_colonia || '';
         this.form.id_city = datos.id_city || '';
+        this.form.id_colonia = datos.id_colonia || '';
         this.form.id_comercio = datos.id_comercio || '';
         this.form.description = datos.description || '';
         this.form.how_to_get = datos.how_to_get || '';

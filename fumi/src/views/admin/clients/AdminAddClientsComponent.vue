@@ -96,9 +96,9 @@
           </el-form-item>
 
           <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
-              <el-option v-for="colonia in filteredColonias" :key="colonia.id" :label="colonia.colonia" :value="colonia.id">
-                {{ colonia.colonia }}
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;" @change="selectColonia">
+              <el-option v-for="colonia in filteredColonias" :key="'colonia'+colonia.id" :label="colonia.colonia+' #'+colonia.codigoPostal" :value="colonia.id">
+                {{ colonia.colonia }} #{{ colonia.codigoPostal }} 
               </el-option>
             </el-select>
           </el-form-item>
@@ -273,7 +273,7 @@ export default {
     this.refresh();
     this.fetchCiudades();
     this.fetchComercios();
-    this.fetchColonias();
+    /*this.fetchColonias();*/
   },
   methods: {
     errorUpload(error) {
@@ -330,7 +330,7 @@ export default {
         .catch(error => {
           console.error('Error fetching ciudades:', error);
         });
-    },
+    },/*
     fetchColonias() {
       axios.get('verColonia')
         .then(response => {
@@ -340,7 +340,7 @@ export default {
         .catch(error => {
           console.error('Error fetching colonias:', error);
         });
-    },
+    },*/
     fetchComercios() {
       axios.get('verComercio')
         .then(response => {
@@ -355,6 +355,7 @@ export default {
   this.loadingColonias = true;
   axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
     .then(response => {
+      this.form1.id_colonia = '';
       console.log('Respuesta de la API:', response.data); // Check response data
       this.filteredColonias = response.data.data;
       console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
@@ -366,8 +367,11 @@ export default {
     .finally(() => {
       this.loadingColonias = false;
     });
+}, 
+  selectColonia(){
+  
+  console.log(this.form1)
 }
-
   }
 }
 </script>
