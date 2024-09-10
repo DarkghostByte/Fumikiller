@@ -12,7 +12,7 @@
           style="width:290px; height:100px; font-size:22px; text-align: center; ;">
             <i class="fa-solid fa-city" aria-hidden="true" style="margin-top: 10%;
             margin-left: -5px; margin-right:10px; font-size:20px;"></i>                
-            <h2>Ciudades</h2>
+            <h2>Ciudades ({{ totalCiudades }})</h2>
           </router-link>
 
           <router-link to="/admin/admin/cologne"
@@ -20,7 +20,7 @@
           style="width:290px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Colonias</h2>
+            <h2>Colonias ({{ totalColonias }})</h2>
           </router-link>
 
           <router-link to="/admin/admin/settlements"
@@ -29,7 +29,7 @@
           <i class="fa-solid fa-apartment"></i>
             <i class="fa-solid fa-school-flag" aria-hidden="true" style="height:15px; margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Asentamientos</h2>
+            <h2>Asentamientos ({{ totalAsentamientos }})</h2>
           </router-link>
 
 
@@ -83,27 +83,33 @@
   <script>
       import axios from 'axios';
       export default {
-          name:'AdminClientsComponent',
+          name:'AdminAdminComponent',
           data:()=>({
             dialogVisible: false,
             dialogVisibleView: false,
             url:process.env.VUE_APP_ROOT_ASSETS,
             urlApi:process.env.VUE_APP_ROOT_API,
             tableData:[],
-            selectedItem: null
+            selectedItem: null,
+            totalCiudades: 0,
+      totalColonias: 0,
+      totalAsentamientos: 0,
           }),
           mounted(){
-            this.refresh()
+            this.refresh(),
+            this.fetchData();
           },
           methods:{
             refresh(){
               this.tableData = []
-              axios.get('clientes').then(res=>{
+              axios.get('ciudades').then(res=>{
               this.tableData=res.data.data
             })
             },
+
             handleEdit(){
             },
+
             handleDelete(){
               axios.delete('clientes/'+this.selectedItem.id).then(res=>{
               console.log(res)
@@ -111,20 +117,39 @@
               this.dialogVisible=false
             })
             },
+
             eliminar(row){
               console.log(row)
               this.selectedItem=row
               this.dialogVisible=true
             },
+
             seleccionar(row){
             console.log(row)
             this.selectedItem=row
             this.dialogVisibleView=true
             },
+
             pdf(row){
             console.log(row)
             this.selectedItem=row
             },
+
+            async fetchData() {
+  try {
+    const responseOrdenes = await axios.get(this.urlApi + 'ciudades');
+    this.tableData = responseOrdenes.data.data;
+
+    const responseTotalCiudades = await axios.get(this.urlApi + 'totalCiudades');
+    this.totalCiudades = responseTotalCiudades.data.total;
+    const responseTotalColonias = await axios.get(this.urlApi + 'totalColonias');
+    this.totalColonias = responseTotalColonias.data.total;
+    const responseTotalAsentamientos = await axios.get(this.urlApi + 'totalAsentamientos');
+    this.totalAsentamientos = responseTotalAsentamientos.data.total;
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+  }
+},
           }
       }
   </script>

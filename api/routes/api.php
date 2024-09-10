@@ -45,9 +45,15 @@ Route::get('/verColonia',[ClientesController::class,'verColonia']);
 Route::get('/verComercio',[ClientesController::class,'verComercio']);
 Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
 
+//CONTEOS
 Route::get('/totalPagos', [CompletarOrdenesController::class, 'totalPagos']);
 Route::get('/totalCreditos', [CompletarOrdenesController::class, 'totalCreditos']);
 Route::get('/totalVentasSinFactura', [CompletarOrdenesController::class, 'totalVentasSinFactura']);
 Route::get('/totalVentasConFactura', [CompletarOrdenesController::class, 'totalVentasConFactura']);
+Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
+Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
+Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
+
+
 //RUTA PARA LA MODIFICACION
 //Route::patch('clientes/{id}', [ClientesController::class, 'update']);verColonia

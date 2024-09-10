@@ -93,4 +93,10 @@ class CiudadesController extends Controller
             'status'=>'success'
         ]);
     }
+
+    public function totalCiudades()
+    {
+        $totalCiudades = Ciudad::count();
+        return response()->json(['total' => $totalCiudades]);
+    }
 }

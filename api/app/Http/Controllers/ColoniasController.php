@@ -123,4 +123,10 @@ class ColoniasController extends Controller
             'status'=>'success'
         ]);
     }
+
+    public function totalColonias()
+    {
+        $totalColonias = Colonia::count();
+        return response()->json(['total' => $totalColonias]);
+    }
 }
