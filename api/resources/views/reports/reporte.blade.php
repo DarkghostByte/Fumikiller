@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
-
-    <div class=delimitador>
-        <head>
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PDF Ordenes</title>
     </head>
+
+    <div class=delimitador>
+        
+
 <body>
 <img  class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo">

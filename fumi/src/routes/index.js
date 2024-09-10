@@ -16,14 +16,12 @@ const adminRoutes = [
     {path: 'works/complete-works/:id', component: () => import('@/views/admin/works/AdminCompleteWorksComponent.vue')},
     {path: 'works/edit-workComplete/:id', component: () => import('@/views/admin/works/AdminEditWorksCompleteComponent.vue')},
 
-    {path: 'ventas', component: () => import('@/views/admin/home/AdminVentasComponent.vue')},
-
     {path: 'calendar', component: () => import('@/views/admin/calendar/AdminCalendarComponent.vue')},
     {path: 'calendar/complete', component: () => import('@/views/admin/calendar/AdminCalendarCompleteComponent.vue')},
 
     {path: 'admin', component: () => import('@/views/admin/admin/AdminAdminComponent.vue')},
     {path: 'admin/city', component: () => import('@/views/admin/admin/AdminCityComponent.vue')},
-
+    {path: 'admin/cologne', component: () => import('@/views/admin/admin/AdminCologneComponent.vue')},
 ]
 
 

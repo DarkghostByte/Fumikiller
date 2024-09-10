@@ -15,7 +15,7 @@
             <h2>Ciudades</h2>
           </router-link>
 
-          <router-link to="/admin/clients/agregarComercio-clients"
+          <router-link to="/admin/admin/cologne"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-500 hover:bg-green-900 focus:bg-green-800 rounded-md ml-6 mb-5 shadow-lg" 
           style="width:290px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house" aria-hidden="true" style="margin-top: 10%; 

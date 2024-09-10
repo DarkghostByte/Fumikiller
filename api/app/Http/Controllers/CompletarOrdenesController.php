@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CompletarOrden;
+use App\Models\Orden;
+
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -257,6 +259,20 @@ class CompletarOrdenesController extends Controller
     
 
     public function generarCreditos() {
+        /*
+        public function generarCreditos()
+        {
+            $data = Completarordene::where('requiere3', 'No Pagado')
+                ->with('orden', 'cliente')
+                ->get();
+
+            // Calculate total credit
+            $totalCredito = $data->sum('pago');
+
+            return view('reports.repoCreditos', compact('data', 'totalCredito'));
+        }
+
+        */
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -409,6 +425,93 @@ class CompletarOrdenesController extends Controller
         return $pdf->stream();
     }
 
+    public function generarOrden($id,$id_cliente){        
+        // Obtener datos del cliente junto con ciudad y colonia
+        $cliente = CompletarOrden::select('completarordenes.*',
+            'orden.plague1',
+            'orden.date1',
+            'orden.date2',
+            'orden.id_cliente',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad')
+            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->where('completarordenes.id', $id)
+            ->first();
+        //Datos de la base de datos
+        if (!$cliente) {
+            return abort(404);
+        }
+        //DATOS DE LA BASE DE DATOS DE LAS ORDENES
+        $orden = Orden::find($id_cliente);
+        if (!$orden) {
+            return abort(404);
+        }
+        //PDF Orden de trabajo
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64','cliente','orden');
+        $pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
+    }
+
+
+    public function totalPagos()
+        {
+            $totalPagos = CompletarOrden::sum('pago');
+            return response()->json(['total' => $totalPagos]);
+        }
+
+    public function totalCreditos()
+        {
+            $totalCreditos = CompletarOrden::where('requiere3', 'No Pagado')
+            ->sum('pago');
+            return response()->json(['total' => $totalCreditos]);
+        }
+
+        public function totalVentasSinFactura()
+        {
+            $totalVentasSinFactura = CompletarOrden::
+            select('completarordenes.*',
+            'clientes.tradename')
+            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->where('clientes.tradename','=','Particular')
+
+            ->sum('pago');
+            return response()->json(['total' => $totalVentasSinFactura]);
+        }
+
+        public function totalVentasConFactura()
+        {
+            $totalVentasConFactura = CompletarOrden::
+            select('completarordenes.*',
+            'clientes.tradename')
+            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->where('clientes.tradename','!=','Particular')
+
+            ->sum('pago');
+            return response()->json(['total' => $totalVentasConFactura]);
+        }
     
     
 

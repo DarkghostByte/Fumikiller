@@ -4,18 +4,20 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
 
-  <!-- PANTALLA -->
+
   <div>
     <div class="container mx-auto px-4">
 
       <!-- INICIO -->
       <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-semibold">Gestión de Ciudades</h1>
-        <div class="flex" style="width: 35%;">
+        <h1 class="text-2xl font-semibold">Gestión de Colonias</h1>
+        <div class="flex" style="width: 55%;">
           <el-input class="" placeholder="Buscar por nombre de la ciudad" v-model="searchQueryCity"
             @input="filterDataCity" />
-          <el-input class="px-2" placeholder="Buscar por nombre del estado" v-model="searchQueryState"
-            @input="filterDataState" />
+          <el-input class="px-2" placeholder="Buscar por nombre de la colonia" v-model="searchQueryCologne"
+            @input="filterDataCologne" />
+          <el-input class="" placeholder="Buscar por codigo postal" v-model="searchQueryZip"
+            @input="filterDataZip" />
         </div>
         <div>
           <router-link to="/admin/admin" class="el-button el-button--danger">
@@ -24,8 +26,8 @@
             Regresar
           </router-link>
           <el-button @click="dialogVisibleCreate = true" class="ml-2 el-button el-button--primary">
-            <i class="fa fa-city" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-            Nueva Ciudad
+            <i class="fa-solid fa-map-location-dot" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+            Nueva Colonia
           </el-button>
         </div>
       </div>
@@ -33,9 +35,14 @@
 
       <!-- TABLE -->
       <div class="flex" style="justify-content: center;">
-        <el-table :data="filteredData" :default-sort="{ prop: 'ciudad', order: 'ascending' }" style="width: 70%;">
+        <el-table :data="filteredData" :default-sort="{ prop: 'ciudad', order: 'ascending' }" style="width: 65%;">
           <el-table-column prop="ciudad" label="Ciudad" sortable />
-          <el-table-column prop="estado" label="Estado" sortable />
+          <el-table-column prop="colonia" label="Colonia" sortable />
+          <el-table-column label="Codigo postal" sortable>
+            <template #default="scope">
+              {{ '#' + scope.row.codigoPostal }}
+            </template>
+          </el-table-column>
           <el-table-column label="Acciones">
             <template #default="scope">
               <div class="flex justify-around">
@@ -54,52 +61,55 @@
       <!-- END TABLE -->
 
       <!-- MODAL 1 -->
-      <el-dialog v-model="dialogVisibleCreate" title="Crear Nueva Ciudad" width="20%">
+      <el-dialog v-model="dialogVisibleCreate" title="Crear Nueva Colonia" width="20%">
         <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
           :label-position="'top'">
           <div class="row">
-            <el-form-item prop="ciudad" label="Ciudad:" style="width: 240px;">
-              <el-input v-model="form1.ciudad" class="px-1" placeholder="Ingresa la ciudad" />
+            <el-form-item prop="id_ciudad" label="Ciudad:">
+              <el-select v-model="form1.id_ciudad" placeholder="Selecciona la ciudad">
+                <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
+              </el-select>
             </el-form-item>
-            <el-form-item prop="estado" label="Estado:" style="width: 240px;">
-              <el-input v-model="form1.estado" class="px-1" placeholder="Ingresa el estado" />
+            <el-form-item prop="colonia" label="Colonia:">
+              <el-input v-model="form1.colonia" class="px-1" placeholder="Ingresa la ciudad" />
+            </el-form-item>
+            <el-form-item prop="codigoPostal" label="Codigo postal:">
+              <el-input v-model="form1.codigoPostal" class="px-1" placeholder="Ingresa el estado" />
             </el-form-item>
           </div>
         </el-form>
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisibleCreate = false">Cancelar</el-button>
-            <el-button type="primary" @click="createCity">Crear</el-button>
+            <el-button type="primary" @click="createCologne">Crear</el-button>
           </span>
         </template>
       </el-dialog>
       <!-- END MODAL 1 -->
 
       <!-- MODAL 2 -->
-      <el-dialog v-model="dialogVisible" title="¿Deseas eliminar la siguente ciudad?" width="20%">
-        <div class="h-35" style="font-size: medium;">
-          Nombre: {{ selectedItem.ciudad }}
-          <br>
-          Estado: {{ selectedItem.estado }}
-          <br>
+    <el-dialog v-model="dialogVisible" title="¿Deseas eliminar la siguente colonia?" width="20%">
+      <div class="h-35" style="font-size: medium;">
+        Ciudad: {{ selectedItem.ciudad }}
+        <br>
+        Colonia: {{ selectedItem.colonia }}
+        <br>
+        Codigo postal: {{ '#'+selectedItem.codigoPostal }}
+        <br>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
+          <el-button type="danger" @click="handleDelete()">
+            Confirmar
+          </el-button>
         </div>
-        <template #footer>
-          <div class="dialog-footer">
-            <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-            <el-button type="danger" @click="handleDelete()">
-              Confirmar
-            </el-button>
-          </div>
-        </template>
-      </el-dialog>
-      <!-- END MODAL 2 -->
-
-
+      </template>
+    </el-dialog>
+    <!-- END MODAL 2 -->
 
     </div>
   </div>
-  <!-- END PANTALLA -->
-
 </template>
 
 <script>
@@ -107,10 +117,10 @@ import axios from 'axios';
 import { ElNotification } from 'element-plus';
 
 export default {
-  name: 'AdminCityComponent',
+  name: 'AdminCologneComponent',
   data: () => ({
-    formRef: undefined,
     dialogVisible: false,
+    dialogVisibleView: false,
     dialogVisibleCreate: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
@@ -119,35 +129,41 @@ export default {
     selectedItem: {},
     searchQuery: '',
     searchQueryCity: '',
-    searchQueryState: '',
+    searchQueryCologne: '',
+    searchQueryZip: '',
     form1: {
-      ciudad: '',
-      estado: '',
+      id_ciudad: '',
+      colonia: '',
+      codigoPostal: '',
     },
     rules: {
-      ciudad: [
-        { required: true, message: 'El nombre de la ciudad es requerida', trigger: 'blur' },
+      id_ciudad: [
+        { required: true, message: 'La ciudad es requerida', trigger: 'blur' },
+      ],
+      colonia: [
+        { required: true, message: 'El nombre de la colonia es requerida', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
-      estado: [
-        { required: true, message: 'El estado es requerido', trigger: 'blur' },
+      codigoPostal: [
+        { required: true, message: 'El codigo postal es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
     }
   }),
   mounted() {
     this.refresh();
+    this.fetchCiudades();
   },
   methods: {
     refresh() {
-      axios.get('ciudades').then(res => {
+      axios.get('colonias').then(res => {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });
     },
 
     handleDelete() {
-      axios.delete('ciudades/' + this.selectedItem.id).then(res => {
+      axios.delete('colonias/' + this.selectedItem.id).then(res => {
         console.log(res);
         this.refresh();
         this.dialogVisible = false;
@@ -160,10 +176,21 @@ export default {
       this.dialogVisible = true;
     },
 
-    createCity() {
+    fetchCiudades() {
+      axios.get('verCiudades')
+        .then(response => {
+          console.log('Ciudades:', response.data);
+          this.ciudades = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching ciudades:', error);
+        });
+    },
+
+    createCologne() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
-          axios.post('ciudades', this.form1)
+          axios.post('colonias', this.form1)
             .then(res => {
               console.log(res);
               this.dialogVisibleCreate = false;
@@ -197,14 +224,20 @@ export default {
     },
 
     filterDataCity() {
-      this.filteredData = this.tableData.filter((city) => {
-        return city.ciudad.toLowerCase().includes(this.searchQueryCity.toLowerCase());
+      this.filteredData = this.tableData.filter((colonia) => {
+        return colonia.ciudad.toLowerCase().includes(this.searchQueryCity.toLowerCase());
       });
     },
 
-    filterDataState() {
-      this.filteredData = this.tableData.filter((city) => {
-        return city.estado.toLowerCase().includes(this.searchQueryState.toLowerCase());
+    filterDataCologne() {
+      this.filteredData = this.tableData.filter((colonia) => {
+        return colonia.ciudad.toLowerCase().includes(this.searchQueryCologne.toLowerCase());
+      });
+    },
+
+    filterDataZip() {
+      this.filteredData = this.tableData.filter((colonia) => {
+        return colonia.codigoPostal.toLowerCase().includes(this.searchQueryZip.toLowerCase());
       });
     },
   }

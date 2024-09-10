@@ -25,7 +25,7 @@
             </div>
             <div  class="justify-center items-center">
               <span class="block text-gray-500">Creditos</span>
-              <span class="block text-2xl font-bold">$0.00</span>
+              <span class="block text-2xl font-bold">${{ totalCreditos }}</span>
               <a :href="url + 'api/creditos/'" target="_blank">
                 <span class="material-symbols-outlined">picture_as_pdf</span>
               </a>
@@ -42,7 +42,7 @@
             </div>
             <div>
               <span class="block text-gray-500">Venta sin Facturas</span>
-              <span class="block text-2xl font-bold">$0.00</span>
+              <span class="block text-2xl font-bold">${{ totalVentasSinFactura }}</span>
               <a :href="url + 'api/ventsinfact/'" target="_blank">
                 <span class="material-symbols-outlined">picture_as_pdf</span>
               </a>
@@ -58,7 +58,7 @@
             </div>
             <div>
               <span class="block text-gray-500">Venta Por Facturas</span>
-              <span class="block text-2xl font-bold">$0.00</span> 
+              <span class="block text-2xl font-bold">${{ totalVentasConFactura }}</span> 
               <a :href="url + 'api/ventconfact/'" target="_blank">
                 <span class="material-symbols-outlined">picture_as_pdf</span>
               </a>
@@ -74,7 +74,7 @@
             </div>
             <div>
               <span class="block text-gray-500">Ventas totales</span>
-              <span class="block text-2xl font-bold">$0.00</span>
+              <span class="block text-2xl font-bold">${{ totalPagos }}</span>
               <a :href="url + 'api/ventatotales/'" target="_blank">
                 <span class="material-symbols-outlined">picture_as_pdf</span>
               </a>
@@ -118,7 +118,7 @@
 </template>
 
 <script>
-  
+  import axios from 'axios';
   export default {
           name:'AdminHomeComponent',
           
@@ -126,8 +126,11 @@
                 tableData:[],
                 url: process.env.VUE_APP_ROOT_ASSETS,
                 urlApi: process.env.VUE_APP_ROOT_API,
+                totalPagos: 0,
+                totalCreditos: 0,
           }),
           mounted(){
+            this.fetchData();
             this.tableData = [{
                     clienteHome: 'Ferreteria',
                     facturaHome:'A0000-1',
@@ -162,6 +165,25 @@
           methods:{
             handleEdit(){},
             handleDelete(){},
+            async fetchData() {
+  try {
+    const responseOrdenes = await axios.get(this.urlApi + 'completarOrden');
+    this.tableData = responseOrdenes.data.data;
+
+    const responseTotalPagos = await axios.get(this.urlApi + 'totalPagos');
+    this.totalPagos = responseTotalPagos.data.total;
+    const responseTotalCreditos = await axios.get(this.urlApi + 'totalCreditos');
+    this.totalCreditos = responseTotalCreditos.data.total;
+    const responseTotalVentasSinFactura = await axios.get(this.urlApi + 'totalVentasSinFactura');
+    this.totalVentasSinFactura = responseTotalVentasSinFactura.data.total;
+    const responseTotalVentasConFactura = await axios.get(this.urlApi + 'totalVentasConFactura');
+    this.totalVentasConFactura = responseTotalVentasConFactura.data.total;
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+  }
+},
+
+
           }
       }
 </script>

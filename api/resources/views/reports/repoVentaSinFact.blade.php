@@ -31,7 +31,7 @@
                 <tr id="fondoTotal">
                         <td></td>
                         <td></td>
-                        <td id="txt">Total de Pagos:</td>
+                        <td id="txt">Total en ventas sin factura:</td>
                         <td id="totalPagos"> ${{ number_format($totalPago, 2) }}</td>
                     </tr>
             </tbody>

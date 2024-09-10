@@ -32,6 +32,7 @@ Route::resource('comercios', ComerciosController::class);
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
+Route::get('/cliente/{id_cliente}/ordenTrabajo/{id}',[CompletarOrdenesController::class,'generarOrden']);
 Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
 Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
 Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
@@ -43,5 +44,9 @@ Route::get('/verColonia',[ClientesController::class,'verColonia']);
 Route::get('/verComercio',[ClientesController::class,'verComercio']);
 Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
 
+Route::get('/totalPagos', [CompletarOrdenesController::class, 'totalPagos']);
+Route::get('/totalCreditos', [CompletarOrdenesController::class, 'totalCreditos']);
+Route::get('/totalVentasSinFactura', [CompletarOrdenesController::class, 'totalVentasSinFactura']);
+Route::get('/totalVentasConFactura', [CompletarOrdenesController::class, 'totalVentasConFactura']);
 //RUTA PARA LA MODIFICACION
 //Route::patch('clientes/{id}', [ClientesController::class, 'update']);verColonia
