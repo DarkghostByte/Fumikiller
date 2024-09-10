@@ -51,7 +51,7 @@
                     size="small"
                     type="success"
                     @click="pdf(scope.row)">
-                      <a :href="url+'api/orden-de-trabajo/'+scope.row.id_cliente+'/'+scope.row.id" target="_blank">
+                      <a :href="url+'api/ordenTrabajoCompleta/'+scope.row.id" target="_blank">
                       <span class="material-symbols-outlined">lab_profile</span>
                       </a>
                   </el-button>

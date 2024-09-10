@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PDF Ordenes {{ $orden->id }} {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}</title>
+        <title>PDF Ordenes Completadas {{ $ordenCompleta->id }} {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}</title>
     </head>
 
     <div class=delimitador>
@@ -16,7 +16,7 @@
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.
-                {{ $orden->id }}
+                {{ $ordenCompleta->id_orden }}
             </div>
         </div>
     
@@ -29,16 +29,16 @@
         <div class="cont">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth112">Fecha Orden:</th>
+            <th class="clth112">Fecha orden:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->date1 }}
+                {{ $ordenCompleta->date1 }}
             </div>
             </th>  
             <th class="clth111">Fecha Programada:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->date2 }}
+                {{ $ordenCompleta->date2 }}
             </div>
             </th>           
         </table>
@@ -47,13 +47,13 @@
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->tradename }}
+                {{ $ordenCompleta->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->time1}} A {{ $orden->time2 }}
+                {{ $ordenCompleta->time1}} A {{ $ordenCompleta->time2 }}
             </div>
             </th>
         </table>
@@ -61,13 +61,13 @@
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
+                {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->cell_phone }}
+                {{ $ordenCompleta->cell_phone }}
             </div>
             </th> 
         </table>
@@ -75,13 +75,13 @@
             <th>Domicilio:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
+                {{ $ordenCompleta->street }} {{ $ordenCompleta->home }} #{{ $ordenCompleta->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->colonia }} #{{ $orden->codigoPostal }}
+                {{ $ordenCompleta->colonia }} #{{ $ordenCompleta->codigoPostal }}
             </div>
             </th> 
         </table>
@@ -89,7 +89,7 @@
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->how_to_get }}
+                {{ $ordenCompleta->how_to_get }}
             </div>
             </th>           
         </table>
@@ -97,19 +97,19 @@
             <th>Lugar:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->comercio }}
+                {{ $ordenCompleta->comercio }}
             </div>
             </th>
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $orden->ciudad }}
+            {{ $ordenCompleta->ciudad }}
             </div>
             </th>
             <th>Plagas:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->plague1 }} y {{ $orden->plague2 }}
+                {{ $ordenCompleta->plague1 }} y {{ $ordenCompleta->plague2 }}
             </div>
             </th> 
         </table>
@@ -117,7 +117,7 @@
             <th>Observaciones:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->description }}
+                {{ $ordenCompleta->description }}
             </div>
             </th> 
         </table>
@@ -139,11 +139,13 @@
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
             </div>
             </th>
             <th>Externo:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
             </div>
             </th> 
         </table>
@@ -151,11 +153,13 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->responsable }}
             </div>
             </th>
             <th>$Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
+                ${{ $ordenCompleta->pago }}
             </div>
             </th> 
         </table>
@@ -174,7 +178,7 @@
             <th class="clth1">Forma de contacto:</th>
             <th class="renDivTh">
             <div class="renDiv1">
-                {{ $orden->contact_form }}
+                {{ $ordenCompleta->contact_form }}
             </div>
             </th>  
             </th>         
@@ -197,15 +201,16 @@
         
     </main>
     </div>
-
     <br>
     <br>
     <div class="division2"></div>
+
     <div class="division"></div>
     
     
     
 </body>
+
 <body>
     <br>
 <img  class="membre" src="{{ $base64 }}" alt="">
@@ -213,7 +218,7 @@
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.
-                {{ $orden->id }}
+                {{ $ordenCompleta->id }}
             </div>
         </div>
     
@@ -226,16 +231,16 @@
         <div class="cont">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth112">Fecha Orden:</th>
+            <th class="clth112">Fecha orden:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->date1 }}
+                {{ $ordenCompleta->date1 }}
             </div>
             </th>  
             <th class="clth111">Fecha Programada:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->date2 }}
+                {{ $ordenCompleta->date2 }}
             </div>
             </th>           
         </table>
@@ -244,13 +249,13 @@
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->tradename }}
+                {{ $ordenCompleta->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->time1}} A {{ $orden->time2 }}
+                {{ $ordenCompleta->time1}} A {{ $ordenCompleta->time2 }}
             </div>
             </th>
         </table>
@@ -258,13 +263,13 @@
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
+                {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->cell_phone }}
+                {{ $ordenCompleta->cell_phone }}
             </div>
             </th> 
         </table>
@@ -272,13 +277,13 @@
             <th>Domicilio:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
+                {{ $ordenCompleta->street }} {{ $ordenCompleta->home }} #{{ $ordenCompleta->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->colonia }} #{{ $orden->codigoPostal }}
+                {{ $ordenCompleta->colonia }} #{{ $ordenCompleta->codigoPostal }}
             </div>
             </th> 
         </table>
@@ -286,7 +291,7 @@
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->how_to_get }}
+                {{ $ordenCompleta->how_to_get }}
             </div>
             </th>           
         </table>
@@ -296,19 +301,19 @@
             <th>Lugar:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->comercio }}
+                {{ $ordenCompleta->comercio }}
             </div>
             </th>
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $orden->ciudad }}
+            {{ $ordenCompleta->ciudad }}
             </div>
             </th> 
             <th>Plagas:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->plague1 }} y {{ $orden->plague2 }}
+                {{ $ordenCompleta->plague1 }} y {{ $ordenCompleta->plague2 }}
             </div>
             </th> 
         </table>
@@ -316,7 +321,7 @@
             <th>Observaciones:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->description }}
+                {{ $ordenCompleta->description }}
             </div>
             </th> 
         </table>
@@ -338,11 +343,13 @@
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
             </div>
             </th>
             <th>Externo:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
             </div>
             </th> 
         </table>
@@ -350,11 +357,13 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->responsable }}
             </div>
             </th>
             <th>$Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
+                ${{ $ordenCompleta->pago }}
             </div>
             </th> 
         </table>
@@ -370,17 +379,10 @@
             <th> Nada</th>
         </table>
         <table>
-            <th class="clth113">Ultima Fumigacion:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-            </div>
-            </th>          
-        </table>
-        <table>
             <th class="clth1">Forma de contacto:</th>
             <th class="renDivTh">
             <div class="renDiv1">
-                {{ $orden->contact_form }}
+                {{ $ordenCompleta->contact_form }}
             </div>
             </th>  
             </th>         
@@ -390,12 +392,13 @@
         <div class="footDiv">
         </div>
         <table class="footer">
-            <th class="footer">Calle del Abeto No.2201</th>
+            <th class="footer">Calle del Abeto 2201</th>
             <th> Col. Alamedas </th>
             <th> Tel.636-694-65-15</th>
             <th> Nuevo Casas Grandes, Chihu. </th>
             <th> C.P. 31704</th>
         </table>
+        </div>
         
 
 

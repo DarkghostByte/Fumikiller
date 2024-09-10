@@ -279,6 +279,7 @@ class CompletarOrdenesController extends Controller
             'orden.plague1',
             'orden.date1',
             'orden.date2',
+            'orden.date2',
             'orden.id_cliente',
             'clientes.name',
             'clientes.lastname1',
@@ -425,12 +426,15 @@ class CompletarOrdenesController extends Controller
         return $pdf->stream();
     }
 
-    public function generarOrden($id,$id_cliente){        
+    public function generarOrden($id){        
         // Obtener datos del cliente junto con ciudad y colonia
-        $cliente = CompletarOrden::select('completarordenes.*',
+        $ordenCompleta = CompletarOrden::select('completarordenes.*',
             'orden.plague1',
+            'orden.plague2',
             'orden.date1',
             'orden.date2',
+            'orden.time1',
+            'orden.time2',
             'orden.id_cliente',
             'clientes.name',
             'clientes.lastname1',
@@ -440,6 +444,11 @@ class CompletarOrdenesController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
+            'clientes.cell_phone',
+            'clientes.how_to_get',
+            'clientes.description',
+            'clientes.contact_form',
+            'comercios.comercio',
             'colonias.colonia',
             'colonias.codigoPostal',
             'ciudades.ciudad')
@@ -447,15 +456,11 @@ class CompletarOrdenesController extends Controller
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
             ->where('completarordenes.id', $id)
             ->first();
         //Datos de la base de datos
-        if (!$cliente) {
-            return abort(404);
-        }
-        //DATOS DE LA BASE DE DATOS DE LAS ORDENES
-        $orden = Orden::find($id_cliente);
-        if (!$orden) {
+        if (!$ordenCompleta) {
             return abort(404);
         }
         //PDF Orden de trabajo
@@ -466,8 +471,8 @@ class CompletarOrdenesController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64','cliente','orden');
-        $pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
+        $pdf_data = compact('base64','ordenCompleta');
+        $pdf = Pdf::loadView('reports.reporteOrdenCompletaPDF',$pdf_data)->save('myfile.pdf');
         //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
