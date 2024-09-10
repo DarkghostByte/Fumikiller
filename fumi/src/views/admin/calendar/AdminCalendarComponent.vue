@@ -31,25 +31,16 @@
       <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Agenda de trabajo por dia</h1>
     </div>
     <div class="mainfiltros flex">
-      <div  class="tamaño px-1 py-4">
-        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
-          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
-      </div>
-      <div  class="tamaño px-1 py-4">
-        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
-          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
-      </div>
       <div class="tamaño px-1 py-4">
-        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
-          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
-      </div>
-      <div class="tamaño px-1 py-4">
-        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
-          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
-      </div>
-      <div  class="tamaño px-1 py-4">
-        <el-date-picker class="filtros" placeholder="Buscar por fecha:" v-model="searchQuery" @change="filterData" type="date"
-          format="DD-MM-YYYY" value-format="DD-MM-YYYY" />
+        <el-date-picker
+          class="filtros"
+          placeholder="Seleccionar fecha"
+          v-model="selectedDate"
+          @change="filterData"
+          type="date"
+          format="DD-MM-YYYY"
+          value-format="DD-MM-YYYY"
+        />
       </div>
     </div>
 
@@ -133,8 +124,9 @@
 
 <script>
 import axios from 'axios';
+import { ElNotification } from 'element-plus';
 export default {
-  name: 'AdminCalendarComponentComponent',
+  name: 'AdminCalendarComponent',
   data: () => ({
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.API,
@@ -142,7 +134,9 @@ export default {
     dialogVisible: false,
     filteredData: [],
     selectedItem: {},
-    searchQuery: ''
+    selectedDate: null,
+    searchQuery: '',
+    today: new Date().toISOString().slice(0, 10),
   }),
   mounted() {
     this.refresh()
@@ -182,14 +176,32 @@ export default {
       }
     },
     filterData() {
-      if (this.searchQuery) {
-        this.filteredData = this.tableData.filter(orden => {
-          return orden.date2.toLowerCase().includes(this.searchQuery.toLowerCase());
-        });
+      if (this.selectedDate) {
+        // Filtra por la fecha seleccionada
+        this.filteredData = this.tableData.filter(orden => orden.date2 === this.selectedDate);
+        if (this.filteredData.length === 0) {
+          ElNotification({
+            title: 'Aviso',
+            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
+            type: 'warning'
+          });
+        } else {
+          ElNotification({
+            title: 'Datos encontrados',
+            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
+            type: 'success',
+          });
+        }
       } else {
+        // Si no se selecciona ninguna fecha, muestra todos los datos
         this.filteredData = this.tableData;
+        ElNotification({
+            title: 'Mostrando todos los datos',
+            message: 'Se estan mostrando todos los datos de la agenda.',
+            type: 'info',
+          });
       }
-    }
+    },
   },
 }
 </script>

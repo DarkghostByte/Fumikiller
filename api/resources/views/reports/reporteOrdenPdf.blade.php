@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PDF Ordenes {{ $orden->id }} {{ $orden->name }}</title>
+        <title>PDF Ordenes {{ $orden->id }} {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}</title>
     </head>
 
     <div class=delimitador>
