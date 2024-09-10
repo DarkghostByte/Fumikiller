@@ -33,6 +33,7 @@ Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/orden-de-trabajo/{id_cliente}/{id}',[ClientesController::class,'generarOrden']);
 Route::get('/cliente/{id_cliente}/ordenTrabajo/{id}',[CompletarOrdenesController::class,'generarOrden']);
+Route::get('/ordenTrabajo/{id}',[OrdensController::class,'generarOrdenPDF']);
 Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
 Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
 Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);

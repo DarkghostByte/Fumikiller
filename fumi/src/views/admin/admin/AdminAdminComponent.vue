@@ -23,7 +23,7 @@
             <h2>Colonias</h2>
           </router-link>
 
-          <router-link to="/admin/clients/agregarComercio-clients"
+          <router-link to="/admin/admin/settlements"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-500 hover:bg-orange-900 focus:bg-orange-800 rounded-md ml-6 mb-5 shadow-lg" 
           style="width:290px; height:100px; font-size:22px;">
           <i class="fa-solid fa-apartment"></i>

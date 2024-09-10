@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PDF Ordenes</title>
+        <title>PDF Ordenes {{ $orden->id }} {{ $orden->name }}</title>
     </head>
 
     <div class=delimitador>
@@ -15,7 +15,7 @@
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.
-                {{ $orden->id_orden }}
+                {{ $orden->id }}
             </div>
         </div>
     
@@ -46,7 +46,7 @@
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->tradename }}
+                {{ $orden->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
@@ -60,13 +60,13 @@
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->name }} {{ $cliente->lastname1 }} {{ $cliente->lastname2 }}
+                {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->cell_phone }}
+                {{ $orden->cell_phone }}
             </div>
             </th> 
         </table>
@@ -74,13 +74,13 @@
             <th>Domicilio:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->street }} {{ $cliente->home }} #{{ $cliente->numAddress }}
+                {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->colonia }} #{{ $cliente->codigoPostal }}
+                {{ $orden->colonia }} #{{ $orden->codigoPostal }}
             </div>
             </th> 
         </table>
@@ -88,7 +88,7 @@
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->how_to_get }}
+                {{ $orden->how_to_get }}
             </div>
             </th>           
         </table>
@@ -96,13 +96,13 @@
             <th>Lugar:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->comercio }}
+                {{ $orden->comercio }}
             </div>
             </th>
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $cliente->ciudad }}
+            {{ $orden->ciudad }}
             </div>
             </th>
             <th>Plagas:</th>
@@ -116,7 +116,7 @@
             <th>Observaciones:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->description }}
+                {{ $orden->description }}
             </div>
             </th> 
         </table>
@@ -180,13 +180,9 @@
             <th class="clth1">Forma de contacto:</th>
             <th class="renDivTh">
             <div class="renDiv1">
-                {{ $cliente->contact_form }}
+                {{ $orden->contact_form }}
             </div>
             </th>  
-            <th class="clth1">Pasado a bitacora:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-            </div>
             </th>         
         </table>
 
@@ -251,7 +247,7 @@
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->tradename }}
+                {{ $orden->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
@@ -265,13 +261,13 @@
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->name }} {{ $cliente->lastname1 }} {{ $cliente->lastname2 }}
+                {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->cell_phone }}
+                {{ $orden->cell_phone }}
             </div>
             </th> 
         </table>
@@ -279,13 +275,13 @@
             <th>Domicilio:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->street }} {{ $cliente->home }} #{{ $cliente->numAddress }}
+                {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->colonia }} #{{ $cliente->codigoPostal }}
+                {{ $orden->colonia }} #{{ $orden->codigoPostal }}
             </div>
             </th> 
         </table>
@@ -293,7 +289,7 @@
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->how_to_get }}
+                {{ $orden->how_to_get }}
             </div>
             </th>           
         </table>
@@ -303,13 +299,13 @@
             <th>Lugar:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->comercio }}
+                {{ $orden->comercio }}
             </div>
             </th>
             <th class="clth1122">Ciudad:</th>
             <th class="renDivTh">
             <div class="renDiv">
-            {{ $cliente->ciudad }}
+            {{ $orden->ciudad }}
             </div>
             </th> 
             <th>Plagas:</th>
@@ -323,7 +319,7 @@
             <th>Observaciones:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $cliente->description }}
+                {{ $orden->description }}
             </div>
             </th> 
         </table>
@@ -387,13 +383,9 @@
             <th class="clth1">Forma de contacto:</th>
             <th class="renDivTh">
             <div class="renDiv1">
-                {{ $cliente->contact_form }}
+                {{ $orden->contact_form }}
             </div>
             </th>  
-            <th class="clth1">Pasado a bitacora:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-            </div>
             </th>         
         </table>
 

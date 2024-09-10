@@ -100,39 +100,6 @@ class ClientesController extends Controller
     {
         //
     }
-
-    public function generarOrden($id,$id_cliente){        
-        // Obtener datos del cliente junto con ciudad y colonia
-        $cliente = Cliente::select('clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia', 'colonias.codigoPostal', 'comercios.comercio')
-            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
-            ->where('clientes.id', $id)
-            ->first();
-        //Datos de la base de datos
-        if (!$cliente) {
-            return abort(404);
-        }
-        //DATOS DE LA BASE DE DATOS DE LAS ORDENES
-        $orden = Orden::find($id);
-        if (!$orden) {
-            return abort(404);
-        }
-        //PDF Orden de trabajo
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64','cliente','orden');
-        $pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
-        //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
-    }
-    
     
     //PDF Certificado
     public function generarPDF(){
@@ -277,5 +244,37 @@ class ClientesController extends Controller
     {
         $comercios = Comercio::all();
         return response()->json($comercios);
+    }
+
+    public function generarOrden($id,$id_cliente){        
+        // Obtener datos del cliente junto con ciudad y colonia
+        $cliente = Cliente::select('clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia', 'colonias.codigoPostal', 'comercios.comercio')
+            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
+            ->where('clientes.id', $id)
+            ->first();
+        //Datos de la base de datos
+        if (!$cliente) {
+            return abort(404);
+        }
+        //DATOS DE LA BASE DE DATOS DE LAS ORDENES
+        $orden = Orden::find($id);
+        if (!$orden) {
+            return abort(404);
+        }
+        //PDF Orden de trabajo
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64','cliente','orden');
+        $pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        return $pdf->stream();
     }
 }
