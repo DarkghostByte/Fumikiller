@@ -30,6 +30,7 @@ Route::resource('comercios', ComerciosController::class);
 
 //RUTAS PARA PDF
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
+Route::get('/certificado1/{id}',[CompletarOrdenesController::class,'generarCertificado']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/ordenTrabajoCompleta/{id}',[CompletarOrdenesController::class,'generarOrden']);
 Route::get('/ordenTrabajo/{id}',[OrdensController::class,'generarOrdenPDF']);
@@ -53,6 +54,5 @@ Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
 Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
 
-
 //RUTA PARA LA MODIFICACION
-//Route::patch('clientes/{id}', [ClientesController::class, 'update']);verColonia
+Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);

@@ -231,7 +231,7 @@ export default {
 
     filterDataCologne() {
       this.filteredData = this.tableData.filter((colonia) => {
-        return colonia.ciudad.toLowerCase().includes(this.searchQueryCologne.toLowerCase());
+        return colonia.colonia.toLowerCase().includes(this.searchQueryCologne.toLowerCase());
       });
     },
 

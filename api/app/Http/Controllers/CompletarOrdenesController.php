@@ -517,10 +517,83 @@ class CompletarOrdenesController extends Controller
             ->sum('pago');
             return response()->json(['total' => $totalVentasConFactura]);
         }
-    
-    
 
-    
+        public function generarCertificado($id){
+            $ordenCompleta = CompletarOrden::select('completarordenes.*',
+            'orden.date2',
+            'orden.id_cliente',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'clientes.cell_phone',
+            'comercios.comercio',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad',
+            'ciudades.estado')
+            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
+            ->where('completarordenes.id', $id)
+            ->first();
+        //Datos de la base de datos
+        if (!$ordenCompleta) {
+            return abort(404);
+        }
+            /* Imagen Del Logo */
+            $path = public_path('img/membretadoFumi.png');
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data_img = file_get_contents($path);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+            //dd($base64);
+            //$pdf_data = compact('data','clientes','base64');
+            $pdf_data = compact('base64','ordenCompleta');
+            $pdf = Pdf::loadView('reports.repoCertificado',$pdf_data)->setPaper('a4', 'landscape');     
+            //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+            return $pdf->stream();
+            return $pdf->download('invoice.pdf');
+        }
+
+        public function actualizarEstado(Request $request, $id)
+        {
+            $completarOrden = CompletarOrden::find($id);
+
+            $validator = Validator::make($request->all(), [
+                'requiere3' => 'required|in:Pagado,No Pagado', 
+            ]);
+
+            if (!$completarOrden) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Orden no encontrada'
+                ], 404);
+            }
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Error de validación',
+                    'errors' => $validator->errors()
+                ], 400);
+            }
+
+            // Actualizar el estado y el pago
+            $completarOrden->requiere3 = $request->requiere3;
+            $completarOrden->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Estado  actualizados correctamente',
+                'data' => $completarOrden
+            ]);
+        }
     
 
 }

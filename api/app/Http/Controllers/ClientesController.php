@@ -112,7 +112,7 @@ class ClientesController extends Controller
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
         $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoCer',$pdf_data);
+        $pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
