@@ -127,6 +127,8 @@
 
 <script>
 import axios from 'axios';
+import { ElNotification } from 'element-plus';
+
 export default {
   name: 'AdminHomeComponent',
 
@@ -155,13 +157,15 @@ export default {
     axios.put(`actualizarEstado/${row.id}`, { requiere3: row.requiere3 })
         .then(response => {
           console.log('Estado actualizado correctamente:', response.data);
-          // Actualizar los datos locales del carrusel
-        this.fetchData();
-          // Mostrar mensaje de éxito al usuario
+          this.fetchData();
+          ElNotification({
+            title: 'Actualizacion de datos',
+            message: `Se actualizaron los datos.`,
+            type: 'success'
+          });        
         })
         .catch(error => {
           console.error('Error al actualizar el estado:', error);
-          // Mostrar mensaje de error al usuario
         });
   },
   
