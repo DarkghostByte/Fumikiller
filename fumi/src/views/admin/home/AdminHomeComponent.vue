@@ -5,15 +5,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div class="">
     <i class="fa fa-file-pdf-o" aria-hidden="true" style="color:black;"></i>
-
-    <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-between">
-      <div class="mr-6">
-        <h1 class="text-4xl font-semibold mb-2">Inicio</h1>
-      </div>
-      <div class="flex flex-wrap items-start justify-end -mb-3">
-
-      </div>
-    </div>
+    <h1>Reportes</h1>
 
     <!-- v-for="item in 4" :key="item"-->
 
@@ -47,7 +39,7 @@
             </svg>
           </div>
           <div>
-            <span class="block text-gray-500">Venta sin Facturas</span>
+            <span class="block text-gray-500">Venta Sin Facturas</span>
             <span class="block text-2xl font-bold">${{ totalVentasSinFactura }}</span>
             <a :href="url + 'api/ventsinfact/'" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
@@ -97,8 +89,8 @@
   </div>
   <!-- TABLE DATA -->
   <div class="flex">
-    <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%">
-      <el-table-column class="" label="Estado">
+    <el-table :data="tableData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 70%; margin: auto;" stripe>
+      <el-table-column class="" label="">
         <template #default="{ row }">
           <button 
             class="ml-5 px-5 h-3 w-3 rounded-full" 
@@ -108,17 +100,16 @@
           </button>
         </template>
       </el-table-column>
-      <el-table-column prop="name" label="Nombres" sortable width="120" />
-      <el-table-column prop="requiere3" label="Pago" sortable width="120">
+      <el-table-column prop="tradename" label="Cliente" sortable />
+      <el-table-column prop="id" label="Factura" sortable />
+      <el-table-column prop="pago" label="Costo" sortable />
+      <el-table-column prop="requiere3" label="Estado" >
         <template #default="{ row }">
           <span v-if="row.requiere3 === 'No Pagado'">{{ row.requiere3 }}</span>
           <span v-else>{{ row.requiere3 }}</span>
         </template>
       </el-table-column>
-      <el-table-column label="">
-        <template #default>
-        </template>
-      </el-table-column>
+      <el-table-column prop="date2" label="Fecha de factura" ></el-table-column>
     </el-table>
   </div>
   <!-- END TABLE DATA -->
@@ -148,8 +139,9 @@ export default {
     handleDelete() { },
     refresh() {
       axios.get('completarOrden').then(res => {
-        this.tableData = res.data.data;
-      });
+        this.tableData = res.data.data.filter(row => row.tradename !== 'Particular'); 
+        
+    });
     },
 
     handleEstadoClick(row) {
@@ -172,7 +164,7 @@ export default {
     async fetchData() {
       try {
         const responseOrdenes = await axios.get(this.urlApi + 'completarOrden');
-        this.tableData = responseOrdenes.data.data;
+        this.tableData = responseOrdenes.data.data.filter(row => row.tradename !== 'Particular'); 
 
         const responseTotalPagos = await axios.get(this.urlApi + 'totalPagos');
         this.totalPagos = responseTotalPagos.data.total;
@@ -193,9 +185,19 @@ export default {
 </script>
 
 <style>
+
+h1{
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+}
+
 .el-carousel__item {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   transition: all 0.5s ease-in-out;
+  border-radius: 10px; /* Added rounded corners */
+  margin: 10px 0px; /* Added spacing between items */
 }
 .el-carousel__item h3 {
   color: #475669;
@@ -220,9 +222,9 @@ export default {
 }
 
 .el-carousel__button:nth-child(2n+1) {
-  height: 3px;
-  width: 45px;
-  background-color: rgb(41, 41, 41);
+  height: 3px;  /* Increased height for better visibility */
+  width: 50px;  /* Increased width for better click area */
+  background-color: #464646; /* Lighter gray color */
 }
 
 .el-carousel__item.is-active {
@@ -233,4 +235,10 @@ export default {
   opacity: 0.25;
   transform: scale(0.9);
 }
+
+.el-table-column label {
+  color: #333; /* Darker text color for headers */
+}
+
+
 </style>

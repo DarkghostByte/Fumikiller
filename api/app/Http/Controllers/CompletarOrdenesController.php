@@ -594,6 +594,5 @@ class CompletarOrdenesController extends Controller
                 'data' => $completarOrden
             ]);
         }
-    
 
 }
