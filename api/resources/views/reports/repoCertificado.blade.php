@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
+    <title>Certificado {{ $ordenCompleta->id_orden }} {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}</title>
 
 
     <div class="delimitador">
         <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PDF Ordenes</title>
     </head>
 <body >
 <img class="membre" src="{{ $base64 }}" alt="">
@@ -35,6 +35,7 @@
             <th>NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->tradename }}
             </div>
             </th> 
         </table>
@@ -42,11 +43,13 @@
             <th>TEL.</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->cell_phone }}
             </div>
             </th> 
             <th> DOMICILIO:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->home }} #{{ $ordenCompleta->numAddress }}
             </div>
             </th> 
         </table>
@@ -60,11 +63,13 @@
             <th>COLONIA:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->colonia }}
             </div>
             </th> 
             <th>C.P.</th>
             <<th class="renDivTh">
             <div class="renDiv">
+                #{{ $ordenCompleta->codigoPostal }}
             </div>
             </th> 
         </table>
@@ -72,11 +77,13 @@
             <th>CIUDAD:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->ciudad }}
             </div>
             </th>             
             <th> ESTADO:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->estado }}
             </div>
             </th> 
         </table>
@@ -84,6 +91,7 @@
             <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $ordenCompleta->comercio }}
             </div>
             </th>             
             </th> 
@@ -95,6 +103,8 @@
             <th>INTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
+
             </div>
             </th> 
         </table>
@@ -102,6 +112,8 @@
             <th>EXTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
+
             </div>
             </th> 
         </table>
@@ -122,7 +134,7 @@
                 <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
                 <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
                 <h5 class="idCert">
-                    No. 10000
+                    No. {{ $ordenCompleta->id_orden }}                
                 </h5>
                 </div>
             
@@ -158,6 +170,7 @@
                     <th class="thtt">FECHA:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->date2 }}
                     </div>
                     </th>            
                 </table>
@@ -166,6 +179,7 @@
                     <th>NOMBRE:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}
                     </div>
                     </th> 
                 </table>
@@ -173,11 +187,13 @@
                     <th>TEL.</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->cell_phone }}
                     </div>
                     </th> 
                     <th> DOMICILIO:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->home }} #{{ $ordenCompleta->numAddress }}
                     </div>
                     </th> 
                 </table>
@@ -191,11 +207,13 @@
                     <th>COLONIA:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->colonia }}
                     </div>
                     </th> 
                     <th>C.P.</th>
                     <<th class="renDivTh">
                     <div class="renDiv">
+                        #{{ $ordenCompleta->codigoPostal }}
                     </div>
                     </th> 
                 </table>
@@ -203,11 +221,13 @@
                     <th>CIUDAD:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->ciudad }}
                     </div>
                     </th>             
                     <th> ESTADO:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->estado }}
                     </div>
                     </th> 
                 </table>
@@ -215,6 +235,7 @@
                     <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
                     <th class="renDivTh">
                     <div class="renDiv1">
+                        {{ $ordenCompleta->comercio }}
                     </div>
                     </th>             
                     </th> 
@@ -226,6 +247,7 @@
                     <th>INTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
                     </div>
                     </th> 
                 </table>
@@ -233,6 +255,7 @@
                     <th>EXTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
+                        {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
                     </div>
                     </th> 
                 </table>
@@ -253,7 +276,7 @@
                         <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
                         <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
                         <h5 class="idCert">
-                            No. 10000
+                            No. {{ $ordenCompleta->id_orden }}                
                         </h5>
                         </div>
                     
