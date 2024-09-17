@@ -5,7 +5,7 @@
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div class="">
     <i class="fa fa-file-pdf-o" aria-hidden="true" style="color:black;"></i>
-    <h1>Reportes</h1>
+    <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">Reportes</h1>
 
     <!-- v-for="item in 4" :key="item"-->
 
@@ -185,13 +185,6 @@ export default {
 </script>
 
 <style>
-
-h1{
-  text-align: center;
-  font-family: 'Arial', sans-serif;
-  font-size: 32px;
-  font-weight: bold;
-}
 
 .el-carousel__item {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
