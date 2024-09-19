@@ -87,6 +87,7 @@ class OrdensController extends Controller
             'time2' => 'required|min:1',
             'hiring' => 'array|required|min:1',
             'requires' => 'array|required|min:1',
+            'agendaInfo' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -105,6 +106,7 @@ class OrdensController extends Controller
             $data->time2 = $request->time2;
             $data->hiring = json_encode($request->hiring);
             $data->requires = json_encode($request->requires);
+            $data->agendaInfo = $request->agendaInfo;
             $data->save();
 
             return response()->json([

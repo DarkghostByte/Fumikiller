@@ -68,6 +68,7 @@
         <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
         <el-table-column prop="time1" label="De" sortable width="90" />
         <el-table-column prop="time2" label="A" sortable width="90" />
+        <el-table-column prop="agendaInfo" label="Estado" sortable width="90" />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
         <!--BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->

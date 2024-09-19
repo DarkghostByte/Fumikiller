@@ -20,6 +20,7 @@ class Orden extends Model
         'time2',
         'hiring',
         'requires',
+        'agendaInfo',
     ];
 
     public function cliente()

@@ -124,40 +124,86 @@
     <!-- END MODAL 1 -->
 
     <!-- MODAL 2 -->
-    <el-dialog v-model="dialogVisibleView" title="Datos acerca del cliente" width="1000" height="400">
-      <div class="h-72 overflow-scroll" style="font-size: 20px;">
-        <p style="font-size: 22px;">Datos del cliente</p>
-        Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
-        <br>
-        Nombre comercial: {{ selectedItem.tradename }}
-        <br><br>
-        <p style="font-size: 22px;">Datos del domicilio</p>
-        Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{
-          selectedItem.colonia
-        }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
-        <br>
-        Tipo de lugar: {{ selectedItem.comercio }}
-        <br><br>
-        <p style="font-size: 22px;">Datos de la ubicacion</p>
-        Como llegar: {{ selectedItem.how_to_get }}
-        <br>
-        Descripcion: {{ selectedItem.description }}
-        <br><br>
-        <p style="font-size: 22px;">Contacto</p>
-        Numero de celular: {{ selectedItem.cell_phone }}
-        <br>
-        Numero fijo: {{ selectedItem.number_fixed_number }}
-        <br><br>
-        <p style="font-size: 22px;">Contacto</p>
-        Tipo de contratacion: {{ selectedItem.recruitment_data }}
-        <br><br>
-      </div>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="success" @click="dialogVisibleView = false">Listo</el-button>
-        </div>
-      </template>
-    </el-dialog>
+    <!--
+    <el-dialog v-model="dialogVisibleView" title="Datos acerca del cliente" width="1000" height="500">
+  <div class="client-details">
+    <h2 class="client-details__title">Datos del cliente</h2>
+    <p>
+      Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
+    </p>
+    <p>Nombre comercial: {{ selectedItem.tradename }}</p>
+  </div>
+
+  <div class="address-details">
+    <h2 class="address-details__title">Datos del domicilio</h2>
+    <p>
+      Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{
+        selectedItem.colonia
+      }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+    </p>
+    <p>Tipo de lugar: {{ selectedItem.comercio }}</p>
+  </div>
+
+  <div class="location-details">
+    <h2 class="location-details__title">Datos de la ubicación</h2>
+    <p>Cómo llegar: {{ selectedItem.how_to_get }}</p>
+    <p>Descripción: {{ selectedItem.description }}</p>
+  </div>
+
+  <div class="contact-details">
+    <h2 class="contact-details__title">Contacto</h2>
+    <p>Número de celular: {{ selectedItem.cell_phone }}</p>
+    <p>Número fijo: {{ selectedItem.number_fixed_number }}</p>
+  </div>
+
+  <div class="contract-details">
+    <h2 class="contract-details__title">Datos de contratación</h2>
+    <p>Tipo de contratación: {{ selectedItem.recruitment_data }}</p>
+  </div>
+
+  <template #footer>
+    <div class="dialog-footer">
+      <el-button type="success" @click="dialogVisibleView = false">Listo</el-button>
+    </div>
+  </template>
+</el-dialog>
+-->
+      <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500" >
+      <div class="clientInfo">
+          <div class="client-details">
+            <i class="fa fa-user fa-2x iconInfo"></i>
+            <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+            <div>
+            <p>
+              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
+            </p>
+            <p>
+              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+            </p>
+            </div>
+          </div>
+          <div class="client-details">
+            <i class="fa fa-city fa-2x iconInfo"></i>
+            <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+<div>
+            <p>
+              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{
+        selectedItem.colonia
+      }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+            </p>
+            <p>
+              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
+            </p>
+       </div>
+          </div>
+          
+          </div>
+           <template #footer>
+    <div class="dialog-footer">
+      <el-button type="primary" @click="dialogVisibleView = false">Listo</el-button>
+    </div>
+  </template>
+          </el-dialog>
     <!-- END MODAL 2 -->
   </div>
 </template>
@@ -229,3 +275,34 @@ export default {
   }
 };
 </script>
+
+<style>
+.clientInfo {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+.client-details {
+  padding: 20px;
+  display: flex;
+}
+p{
+  color:#000000;
+}
+
+.client-details__title {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.iconInfo {
+  color: #409eff;
+  margin-right: 10px;
+}
+/* Estilos adicionales para otras secciones */
+.address-details {
+  /* Estilos específicos para la sección de dirección */
+}
+/* ... */
+</style>

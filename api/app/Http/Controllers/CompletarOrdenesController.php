@@ -280,6 +280,7 @@ class CompletarOrdenesController extends Controller
             'orden.date1',
             'orden.date2',
             'orden.date2',
+            'orden.requires',
             'orden.id_cliente',
             'clientes.name',
             'clientes.lastname1',

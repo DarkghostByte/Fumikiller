@@ -2,448 +2,483 @@
 <html lang="en">
 
 
-    <div class="delimitador">
-        <head>
+<div class="delimitador">
+
+    <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>PDF Ordenes</title>
     </head>
-<body >
-<img class="membre" src="{{ $base64 }}" alt="">
+
+    <body>
+        <img class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo">
             <h5 class="mgntp">CALLE ABETO 2201 COL. ALAMEDAS</h5>
             <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
-        </div>     
+        </div>
         <h2 class="cerapli">CERTIFICADO DE APLICACION</h2>
-        <h2 class="cerapli1"><p>Licencia Sanitaria 04-08A095</h2>
-        
-    <header>    
-        
-    </header>
-    <main> 
-        <div class="fondLimitador"></div>
-        <table>
-            <th class="thtt">FECHA:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                {{ $ordenCompleta->date2 }}
-            </div>
-            </th>            
-        </table>
-            
-        <table>
-            <th>NOMBRE:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th>TEL.</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-            <th> DOMICILIO:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-        <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th>COLONIA:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-            <th>C.P.</th>
-            <<th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th>CIUDAD:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th>             
-            <th> ESTADO:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-            </div>
-            </th>             
-            </th> 
-        </table>
-        <div class="dInAc">
-            <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
-        </div>
-        <table>
-            <th>INTERIOR:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table class="">
-            <th>EXTERIOR:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th>OBSERVACIONES:</th>
-            <th class="renDivTh">
-            
-                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
-            
-            </th> 
-        </table>
-        <div class="footDiv">
+        <h2 class="cerapli1">
+            <p>Licencia Sanitaria 04-08A095
+        </h2>
 
-        </div>
-        <table class="">
-            <div class="bottom">
-                <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
-                <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
-                <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
-                <h5 class="idCert">
-                    No. 10000
-                </h5>
+        <header>
+
+        </header>
+        <main>
+            <div class="fondLimitador"></div>
+            <table>
+                <th class="thtt">FECHA:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                        {{ $ordenCompleta->date2 }}
+                    </div>
+                </th>
+            </table>
+
+            <table>
+                <th>NOMBRE:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table>
+                <th>TEL.</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+                <th> DOMICILIO:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table>
+                <th>COLONIA:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+                <th>C.P.</th>
+                <<th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                    </th>
+            </table>
+            <table>
+                <th>CIUDAD:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+                <th> ESTADO:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table>
+                <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
+                <th class="renDivTh">
+                    <div class="renDiv1">
+                    </div>
+                </th>
+                </th>
+            </table>
+            <div class="dInAc">
+                <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
+            </div>
+            <table>
+                <th>INTERIOR:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table class="">
+                <th>EXTERIOR:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table>
+                <th>OBSERVACIONES:</th>
+                <th class="renDivTh">
+
+                    <h5 class="txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante, la basura tapada y evitar la humedad.</h5>
+
+                </th>
+            </table>
+            <div class="footDiv">
+
+            </div>
+            <table class="">
+                <div class="bottom">
+                    <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
+                    <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>
+                    <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
+                    <h5 class="idCert">
+                        No. 10000
+                    </h5>
                 </div>
-            
-            </th> 
-        </table>
 
-        
+                </th>
+            </table>
 
-    </main>
-    </div>
-    
+
+
+        </main>
+</div>
+
 </body>
 
 <div class="separacion"></div>
 
 <div class="copia">
+
     <body>
         <img class="membre" src="{{ $base64 }}" alt="">
-                <div class="meminfo1">
-                    <h3>COPIA</h3>
-                    <h5 class="mgntp">CALLE ABETO 2201 COL. ALAMEDAS</h5>
-                    <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
-                </div>     
-                <h2 class="cerapli11">CERTIFICADO DE APLICACION</h2>
-                <h2 class="cerapli1"><p>Licencia Sanitaria 04-08A095</h2>
-                
-            <header>    
-                
-            </header>
-            <main> 
-                <div class="fondLimitador"></div>
-                <table>
-                    <th class="thtt">FECHA:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                    </div>
-                    </th>            
-                </table>
-                    
-                <table>
-                    <th>NOMBRE:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                    </div>
-                    </th> 
-                </table>
-                <table>
-                    <th>TEL.</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                    </div>
-                    </th> 
-                    <th> DOMICILIO:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                    </div>
-                    </th> 
-                </table>
-                <table>
+        <div class="meminfo1">
+            <h3>COPIA</h3>
+            <h5 class="mgntp">CALLE ABETO 2201 COL. ALAMEDAS</h5>
+            <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
+        </div>
+        <h2 class="cerapli11">CERTIFICADO DE APLICACION</h2>
+        <h2 class="cerapli1">
+            <p>Licencia Sanitaria 04-08A095
+        </h2>
+
+        <header>
+
+        </header>
+        <main>
+            <div class="fondLimitador"></div>
+            <table>
+                <th class="thtt">FECHA:</th>
                 <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th> 
-                </table>
-                <table>
-                    <th>COLONIA:</th>
-                    <th class="renDivTh">
+                </th>
+            </table>
+
+            <table>
+                <th>NOMBRE:</th>
+                <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th> 
-                    <th>C.P.</th>
-                    <<th class="renDivTh">
+                </th>
+            </table>
+            <table>
+                <th>TEL.</th>
+                <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th> 
-                </table>
-                <table>
-                    <th>CIUDAD:</th>
-                    <th class="renDivTh">
+                </th>
+                <th> DOMICILIO:</th>
+                <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th>             
-                    <th> ESTADO:</th>
-                    <th class="renDivTh">
+                </th>
+            </table>
+            <table>
+                <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th> 
-                </table>
-                <table>
-                    <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
-                    <th class="renDivTh">
+                </th>
+            </table>
+            <table>
+                <th>COLONIA:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+                <th>C.P.</th>
+                <<th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                    </th>
+            </table>
+            <table>
+                <th>CIUDAD:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+                <th> ESTADO:</th>
+                <th class="renDivTh">
+                    <div class="renDiv">
+                    </div>
+                </th>
+            </table>
+            <table>
+                <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
+                <th class="renDivTh">
                     <div class="renDiv1">
                     </div>
-                    </th>             
-                    </th> 
-                </table>
-                <div class="dInAc">
-                    <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
-                </div>
-                <table>
-                    <th>INTERIOR:</th>
-                    <th class="renDivTh">
+                </th>
+                </th>
+            </table>
+            <div class="dInAc">
+                <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
+            </div>
+            <table>
+                <th>INTERIOR:</th>
+                <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th> 
-                </table>
-                <table class="">
-                    <th>EXTERIOR:</th>
-                    <th class="renDivTh">
+                </th>
+            </table>
+            <table class="">
+                <th>EXTERIOR:</th>
+                <th class="renDivTh">
                     <div class="renDiv">
                     </div>
-                    </th> 
-                </table>
-                <table>
-                    <th>OBSERVACIONES:</th>
-                    <th class="renDivTh">
-                    
-                        <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
-                    
-                    </th> 
-                </table>
-                <div class="footDiv">
-        
+                </th>
+            </table>
+            <table>
+                <th>OBSERVACIONES:</th>
+                <th class="renDivTh">
+
+                    <h5 class="txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante, la basura tapada y evitar la humedad.</h5>
+
+                </th>
+            </table>
+            <div class="footDiv">
+
+            </div>
+            <table class="">
+                <div class="bottom">
+                    <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
+                    <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>
+                    <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
+                    <h5 class="idCert">
+                        No. 10000
+                    </h5>
                 </div>
-                <table class="">
-                    <div class="bottom">
-                        <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
-                        <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
-                        <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
-                        <h5 class="idCert">
-                            No. 10000
-                        </h5>
-                        </div>
-                    
-                    </th> 
-                </table>
-        
-                
-            </main>
-            
-        </body>
+
+                </th>
+            </table>
+
+
+        </main>
+
+    </body>
 
 </div>
 
 
 <style>
-    th{
-        font-size:10px;
+    th {
+        font-size: 10px;
         font-weight: normal;
 
     }
-    .bottom{
+
+    .bottom {
         text-align: center;
         font-size: 15px;
     }
-    h5{
+
+    h5 {
         font-size: 15px;
     }
-    .clth11{
+
+    .clth11 {
         width: 66%;
     }
-    .renDiv1{ 
+
+    .renDiv1 {
         border-bottom: 1px solid black;
-        height:15px;
-        width:100%;
-        margin-left:-5px;
-        margin-top:-5px;
+        height: 15px;
+        width: 100%;
+        margin-left: -5px;
+        margin-top: -5px;
     }
-    .cerapli{
-        color:#eb590c;
-        position:absolute;
-        margin-left:-31%;
-        margin-top:12.5%;
+
+    .cerapli {
+        color: #eb590c;
+        position: absolute;
+        margin-left: -31%;
+        margin-top: 12.5%;
         font-size: 16px;
-        
+
     }
-    .cerapli11{
-        color:#eb590c;
-        position:absolute;
-        margin-left:-65%;
-        margin-top:26.5%;
+
+    .cerapli11 {
+        color: #eb590c;
+        position: absolute;
+        margin-left: -65%;
+        margin-top: 26.5%;
         font-size: 16px;
-        
+
     }
-    .cerapli1{
-        color:#eb590c;
-        position:absolute;
-        margin-left:-77%;
-        margin-top:18%;
+
+    .cerapli1 {
+        color: #eb590c;
+        position: absolute;
+        margin-left: -77%;
+        margin-top: 18%;
         font-size: 12px;
-        
+
     }
-    .mgntp{
+
+    .mgntp {
         margin-top: -20px;
         font-size: 12px;
     }
-    .meminfo{
+
+    .meminfo {
         text-align: center;
         position: absolute;
         margin-left: -31%;
-        margin-top:11%;
+        margin-top: 11%;
         font-size: 12px;
     }
-    .meminfo1{
+
+    .meminfo1 {
         text-align: center;
         position: absolute;
         margin-left: -65%;
-        margin-top:23%;
+        margin-top: 23%;
         font-size: 12px;
     }
-    .membre{
-        margin-top:40px;
+
+    .membre {
+        margin-top: 40px;
         padding-left: 10%;
-        height:12%;
+        height: 12%;
         width: 80%;
     }
-    .txtfin1{
-        padding-left:15px;
+
+    .txtfin1 {
+        padding-left: 15px;
         font-size: 12px;
-        margin-top:-17px;
-        color:red;
-    }
-    .txtfin{
-        padding-left:15px;
-        font-size: 12px;
-        margin-top:-17px;
-        color:#104e85;
-    }
-    .flexId{
-        
-        display:flex;
-    }
-    .idCert{
-        font-size: 16px;
-        margin-left:75%;
-        margin-top:-60px;
-        height:25px;
-        width: 150px;
-        
+        margin-top: -17px;
         color: red;
     }
-    .txtObser{
+
+    .txtfin {
+        padding-left: 15px;
         font-size: 12px;
-        margin-top:0px;
+        margin-top: -17px;
+        color: #104e85;
+    }
+
+    .flexId {
+
+        display: flex;
+    }
+
+    .idCert {
+        font-size: 16px;
+        margin-left: 75%;
+        margin-top: -60px;
+        height: 25px;
+        width: 150px;
+
+        color: red;
+    }
+
+    .txtObser {
+        font-size: 12px;
+        margin-top: 0px;
         text-align: justify;
         text-decoration: underline;
     }
-    .renDivTh{
+
+    .renDivTh {
         width: 100%;
-        margin-top:-25px; 
+        margin-top: -25px;
     }
-    .renDiv{
+
+    .renDiv {
         border-bottom: 1px solid black;
-        height:15px;
+        height: 15px;
         width: 100%;
-        margin-top:-5px;
+        margin-top: -5px;
     }
-    h1{
-        text-alaing:center;
+
+    h1 {
+        text-align: center;
     }
-    img{
-        margin-top:30px;
-        height:100px;
+
+    img {
+        margin-top: 30px;
+        height: 100px;
         width: 75px;
     }
-    table{
+
+    table {
         width: 100%;
-        font-size:20px;
-        margin-top:10px;
+        font-size: 20px;
+        margin-top: 10px;
     }
-    
-    .delimitador{
+
+    .delimitador {
         border: 1px solid black;
         width: 100%;
-        height:99%;
+        height: 99%;
     }
-    .dInAc{
+
+    .dInAc {
         height: 35px;
-        margin:20px;
-        background-color:#104e85 ;
-        color:white;
-        text-aling:center;  
+        margin: 20px;
+        background-color: #104e85;
+        color: white;
+        text-align: center;
         margin-top: -1.5%;
     }
-    .tblAg{
-        position:absolute;
-        
+
+    .tblAg {
+        position: absolute;
+
     }
-    p{
-        text-align:center;
-        font-size:16pX;   
+
+    p {
+        text-align: center;
+        font-size: 16pX;
         margin-top: 5%;
     }
-    .agnAct{
-        
+
+
+    .footDiv {
+        margin: 20px;
+        margin-top: 12px;
+        border-bottom: 2px solid rgb(0, 0, 0);
     }
-    .footDiv{
-        margin:20px;
-        margin-top:12px;
-        border-bottom:2px solid rgb(0, 0, 0);
-    }
-    
-    .fondLimitador{
+
+    .fondLimitador {
         position: absolute;
-        background-color:transparent;
-        width: 60px;;
-        left:95%;
+        background-color: transparent;
+        width: 60px;
+        ;
+        left: 95%;
     }
+
     .divLogo {
         position: absolute;
-        
+
     }
-    .letrasFlex{
-        position:relative; 
+
+    .letrasFlex {
+        position: relative;
         display: flex;
         justify-content: space-between;
     }
-    .noOT{
-        margin-top:-40px;
+
+    .noOT {
+        margin-top: -40px;
         margin-left: 35px;
     }
+
     .button {
         background-color: white;
         border: 1px solid black;
@@ -454,39 +489,46 @@
         display: inline-block;
         font-size: 4px;
     }
+
     .button5 {
         border-radius: 50%;
     }
-    .btnCir{
-        position:absolute;
-        left:15%;
+
+    .btnCir {
+        position: absolute;
+        left: 15%;
     }
-    .pr{
-        margin-top:20px;
+
+    .pr {
+        margin-top: 20px;
     }
-    footer{
-        position:absolute;
-        margin-top:40px;
-        left:20%;
+
+    footer {
+        position: absolute;
+        margin-top: 40px;
+        left: 20%;
     }
-    
-    body{
+
+    body {
         width: 47%;
         height: 100%;
-        
+
     }
-    main{
+
+    main {
         height: 70%;
     }
-    .separacion{
+
+    .separacion {
         position: absolute;
         left: 49%;
         margin-top: -72%;
         height: 120%;
-        
+
         border: 1px solid black;
     }
-    .copia{
+
+    .copia {
         position: absolute;
         left: 51%;
         margin-top: -67.5%;
@@ -494,7 +536,8 @@
         height: 98.7%;
         border: 1px solid black;
     }
-    h3{
+
+    h3 {
         position: absolute;
         margin-top: -43%;
         margin-left: 115%;
@@ -503,6 +546,6 @@
         height: 20px;
         width: 70px;
     }
-
 </style>
+
 </html>

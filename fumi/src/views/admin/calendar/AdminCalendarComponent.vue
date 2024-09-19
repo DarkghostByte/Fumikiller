@@ -15,41 +15,17 @@
 
   <div class="container mx-auto">
     <h1 class="text-3xl font-bold mb-4">Agenda de trabajo por día</h1>
-    
+
 
     <div class="flex justify-center items-center mb-4">
-      <el-date-picker
-        class="mx-2"
-        v-model="selectedDate"
-        @change="filterData"
-        type="date"
-        format="DD-MM-YYYY"
-        value-format="DD-MM-YYYY"
-        placeholder="Seleccionar fecha"
-      />
-      <el-input
-        class="mx-2"
-        v-model="selectedDate"
-        @change="filterData"
-        style="width: 240px"
-        placeholder="Buscar por nombre"
-        clearable
-      />
-      <el-input
-        class="mx-2"
-        v-model="selectedDate"
-        @change="filterData"
-        style="width: 240px"
-        placeholder="Buscar por direccion"
-        clearable
-      />
-      <el-input
-        v-model="selectedDate"
-        @change="filterData"
-        style="width: 240px"
-        placeholder="Buscar por celular"
-        clearable
-      />
+      <el-date-picker class="mx-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
+        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" />
+      <el-input class="mx-2" v-model="selectedDate" @change="filterData" style="width: 240px"
+        placeholder="Buscar por nombre" clearable />
+      <el-input class="mx-2" v-model="selectedDate" @change="filterData" style="width: 240px"
+        placeholder="Buscar por direccion" clearable />
+      <el-input v-model="selectedDate" @change="filterData" style="width: 240px" placeholder="Buscar por celular"
+        clearable />
     </div>
 
     <div class="table-container">
@@ -57,7 +33,7 @@
         <el-table-column label="PDF Orden">
           <template #default="scope">
             <el-button style="color:black" type="success" circle @click="pdf(scope.row)">
-              <a :href="url + 'api/ordenTrabajoCompleta/'+scope.row.id" target="_blank">
+              <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
                 <span class="material-symbols-outlined">lab_profile</span>
               </a>
             </el-button>
@@ -71,7 +47,7 @@
         <el-table-column label="Dirección" width="200px" sortable>
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
-            ', ' + scope.row.ciudad }}
+              ', ' + scope.row.ciudad }}
           </template>
         </el-table-column>
         <el-table-column label="Celular" prop="cell_phone" sortable />
@@ -80,7 +56,7 @@
         <el-table-column label="A" prop="time2" sortable />
       </el-table>
     </div>
-  </div>  
+  </div>
 
   <!-- Importar Iconos-->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -110,11 +86,16 @@ export default {
   },
   methods: {
     refresh() {
-      this.tableData = []
       axios.get('orden').then(res => {
-        this.tableData = res.data.data
-        this.filteredData = this.tableData;
+        this.tableData = res.data.data.filter(row => row.agendaInfo === 'Agenda');
 
+        // Imprimir tableData para verificar los datos
+        console.log('tableData:', this.tableData);
+
+        // Imprimir filteredData para verificar el resultado del filtro
+        console.log('filteredData:', this.filteredData);
+
+        this.filteredData = this.tableData;
       })
     },
     pdf(row) {
@@ -163,10 +144,10 @@ export default {
         // Si no se selecciona ninguna fecha, muestra todos los datos
         this.filteredData = this.tableData;
         ElNotification({
-            title: 'Mostrando todos los datos',
-            message: 'Se estan mostrando todos los datos de la agenda.',
-            type: 'info',
-          });
+          title: 'Mostrando todos los datos',
+          message: 'Se estan mostrando todos los datos de la agenda.',
+          type: 'info',
+        });
       }
     },
   },
@@ -174,23 +155,25 @@ export default {
 </script>
 
 <style>
+.mainfiltros {
+  width: 78%;
+  margin-left: 11%;
 
-.mainfiltros{
-  width:78%;
-  margin-left:11%;
-  
   align-items: center;
 }
-.filtros{
-  
+
+.filtros {
+
   margin-left: -5px;
   padding: 1.5px;
   height: 20px;
   background-color: #b5b5b5;
 }
-.tamaño{
-  width:19.6%;
+
+.tamaño {
+  width: 19.6%;
 }
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -218,6 +201,4 @@ export default {
 .btn-success {
   background-color: #4caf50;
 }
-
-
 </style>
