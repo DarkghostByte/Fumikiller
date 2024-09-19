@@ -170,7 +170,7 @@
 -->
       <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500" >
       <div class="clientInfo">
-          <div class="client-details">
+          <div class="details">
             <i class="fa fa-user fa-2x iconInfo"></i>
             <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
             <div>
@@ -182,7 +182,7 @@
             </p>
             </div>
           </div>
-          <div class="client-details">
+          <div class="details">
             <i class="fa fa-city fa-2x iconInfo"></i>
             <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
 <div>
@@ -282,7 +282,7 @@ export default {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
 }
-.client-details {
+.details {
   padding: 20px;
   display: flex;
 }
