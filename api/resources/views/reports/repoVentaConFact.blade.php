@@ -12,27 +12,38 @@
         <table id="table">
             <thead>
                 <tr>
-                    <th>Negocio:</th>
-                    <th>Direccion:</th>
-                    <th>Fecha de asitencia:</th>
-                    <th>Monto del credito:</th>
+                    <th>Cliente</th>
+                    <th>Negocio</th>
+                    <th>Num. Factura</th>
+                    <th>Num. Certificado</th>
+                    <th>Fecha de orden</th>
+                    <th>Fecha de asistencia</th>                   
+                    <th>Estado</th>                   
+                    <th>Monto</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $item)
                     <tr>
-                        <td>{{ $item->tradename }}</td>
-                        <td>{{ $item->ciudad }}, {{ $item->colonia }}, {{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
+                        <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
+                        <td>{{ $item->tradename }}</td> 
+                        <td></td> 
+                        <td></td> 
+                        <td>{{ $item->date1 }}</td>
                         <td>{{ $item->date2 }}</td>
-                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
-                        <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
+                        <td>{{ $item->requiere3 }}</td>
+                        <td class="pagosLbl">{{ number_format($item->pago, 2) }}</td>
                     </tr>
                 @endforeach
                 <tr id="fondoTotal">
                         <td></td>
                         <td></td>
-                        <td id="txt">Total en ventas con factura:</td>
-                        <td id="totalPagos"> ${{ number_format($totalPago, 2) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format($totalPago, 2) }}</td>
                     </tr>
             </tbody>
         </table>
@@ -77,25 +88,28 @@
     h3{
         text-align:right;
         /*background-color: #071a5e;*/
-    }
-    h1{
+    }h1{
         text-align:center;
         /*background-color: #071a5e;*/
     }
+
     #fondoTotal{
         background-color: #526fd9;
     }
     #totalPagos{
-        text-aling: right;
+        text-align: right;
         margin-top: 20px;
     }
     #txt{
-        text-align: right;
+        text-align: left;
     }
     .membre{
         margin-left: 12.5%;
         margin-top:20px;
         height:12%;
         width: 80%;
-    }  
+    }
+    .pagosLbl{
+        text-align: right;
+    }
 </style>
