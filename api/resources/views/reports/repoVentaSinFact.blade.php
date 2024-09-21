@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Reporte Ventas Sin Factura</title>
 </head>
 <body>
+    <?php
+    setlocale(LC_TIME, 'es_ES'); // Set the locale at the beginning of your script
+    ?>
     <img  class="membre" src="{{ $base64 }}" alt="">
     <h1>Ventas sin factura</h1>
     <div id="main-container">
@@ -12,27 +15,32 @@
         <table id="table">
             <thead>
                 <tr>
-                    <th>Cliente:</th>
-                    <th>Direccion:</th>
-                    <th>Fecha de asistencia:</th>                   
-                    <th>Monto:</th>
+                    <th>Cliente</th>
+                    <th>Num. Certificado</th>
+                    <th>Fecha de orden</th>
+                    <th>Fecha de asistencia</th>                   
+                    <th>Estado</th>                   
+                    <th>Monto</th>
                 </tr>
             </thead>
             <tbody>
                 @foreach($data as $item)
                     <tr>
                         <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
-                        <td>{{ $item->ciudad }}, {{ $item->colonia }}, {{ $item->home }} #{{ $item->numAddress }}</td> <!-- Ajusta según tu estructura -->
+                        <td></td> 
+                        <td>{{ $item->date1 }}</td>
                         <td>{{ $item->date2 }}</td>
-                        <td>{{ $item->pago }}</td> <!-- Monto individual -->
-                        <!-- <td>{{ date('F', strtotime($item->date2)) }}</td> -->
+                        <td>{{ $item->requiere3 }}</td>
+                        <td class="pagosLbl">{{ number_format($item->pago, 2) }}</td>
                     </tr>
                 @endforeach
                 <tr id="fondoTotal">
                         <td></td>
                         <td></td>
-                        <td id="txt">Total en ventas sin factura:</td>
-                        <td id="totalPagos"> ${{ number_format($totalPago, 2) }}</td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format($totalPago, 2) }}</td>
                     </tr>
             </tbody>
         </table>
@@ -87,16 +95,19 @@
         background-color: #526fd9;
     }
     #totalPagos{
-        text-aling: right;
+        text-align: right;
         margin-top: 20px;
     }
     #txt{
-        text-align: right;
+        text-align: left;
     }
     .membre{
         margin-left: 12.5%;
         margin-top:20px;
         height:12%;
         width: 80%;
-    }  
+    }
+    .pagosLbl{
+        text-align: right;
+    }
 </style>

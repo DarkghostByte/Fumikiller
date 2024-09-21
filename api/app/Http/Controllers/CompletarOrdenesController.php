@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CompletarOrden;
 use App\Models\Orden;
-
+use Carbon\Carbon;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -233,6 +233,12 @@ class CompletarOrdenesController extends Controller
         ->where('clientes.tradename','=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
+
+        //Funcion para las fechas
+        foreach ($data as &$item) {
+            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
+            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+        }
     
         // Verificar si la colección está vacía
         if ($data->isEmpty()) {
