@@ -264,74 +264,6 @@ class CompletarOrdenesController extends Controller
     }
     
 
-    public function generarCreditos() {
-        /*
-        public function generarCreditos()
-        {
-            $data = Completarordene::where('requiere3', 'No Pagado')
-                ->with('orden', 'cliente')
-                ->get();
-
-            // Calculate total credit
-            $totalCredito = $data->sum('pago');
-
-            return view('reports.repoCreditos', compact('data', 'totalCredito'));
-        }
-
-        */
-        // Realizar la consulta sin filtrar por 'id_cliente'
-        $data = CompletarOrden::select([
-            'completarordenes.*',
-            'orden.plague1',
-            'orden.date1',
-            'orden.date2',
-            'orden.date2',
-            'orden.requires',
-            'orden.id_cliente',
-            'clientes.name',
-            'clientes.lastname1',
-            'clientes.lastname2',
-            'clientes.tradename',
-            'clientes.home',
-            'clientes.numAddress',
-            'clientes.id_colonia',
-            'clientes.id_city',
-            'clientes.cell_phone',
-            'colonias.colonia',
-            'colonias.codigoPostal',
-            'ciudades.ciudad'
-        ])
-        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('completarordenes.requiere3','=','No Pagado')
-        ->orderBy('completarordenes.id', 'DESC')
-        ->get();
-    
-        // Verificar si la colección está vacía
-        if ($data->isEmpty()) {
-            return abort(404, 'No se encontraron datos.');
-        }
-    
-        // Sumar todos los pagos
-        $totalPago = $data->sum('pago');
-    
-        // Generación del PDF
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-    
-        // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
-    
-        // Mostrar el PDF al usuario
-        return $pdf->stream();
-    }
-
     public function generarVentConFact() {
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
@@ -416,6 +348,12 @@ class CompletarOrdenesController extends Controller
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
+        //Funcion para las fechas
+        foreach ($data as &$item) {
+            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
+            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+        }
+
         // Verificar si la colección está vacía
         if ($data->isEmpty()) {
             return abort(404, 'No se encontraron datos.');
@@ -434,6 +372,228 @@ class CompletarOrdenesController extends Controller
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
         $pdf = Pdf::loadView('reports.repoVentasTotales', $pdf_data)->save('myfile.pdf');
+    
+        // Mostrar el PDF al usuario
+        return $pdf->stream();
+    }
+
+    public function generarCreditos() {
+        /*
+        public function generarCreditos()
+        {
+            $data = Completarordene::where('requiere3', 'No Pagado')
+                ->with('orden', 'cliente')
+                ->get();
+
+            // Calculate total credit
+            $totalCredito = $data->sum('pago');
+
+            return view('reports.repoCreditos', compact('data', 'totalCredito'));
+        }
+
+        */
+        // Realizar la consulta sin filtrar por 'id_cliente'
+        $data = CompletarOrden::select([
+            'completarordenes.*',
+            'orden.plague1',
+            'orden.date1',
+            'orden.date2',
+            'orden.date2',
+            'orden.requires',
+            'orden.id_cliente',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'clientes.cell_phone',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad'
+        ])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->where('completarordenes.requiere3','=','No Pagado')
+        ->orderBy('completarordenes.id', 'DESC')
+        ->get();
+    
+        // Verificar si la colección está vacía
+        if ($data->isEmpty()) {
+            return abort(404, 'No se encontraron datos.');
+        }
+    
+        //Funcion para las fechas
+        foreach ($data as &$item) {
+            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
+            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+        }
+
+        // Sumar todos los pagos
+        $totalPago = $data->sum('pago');
+    
+        // Generación del PDF
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+    
+        // Preparar los datos para la vista del PDF
+        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
+    
+        // Mostrar el PDF al usuario
+        return $pdf->stream();
+    }
+
+    public function generarCreditosSinFactura() {
+        /*
+        public function generarCreditos()
+        {
+            $data = Completarordene::where('requiere3', 'No Pagado')
+                ->with('orden', 'cliente')
+                ->get();
+
+            // Calculate total credit
+            $totalCredito = $data->sum('pago');
+
+            return view('reports.repoCreditos', compact('data', 'totalCredito'));
+        }
+
+        */
+        // Realizar la consulta sin filtrar por 'id_cliente'
+        $data = CompletarOrden::select([
+            'completarordenes.*',
+            'orden.plague1',
+            'orden.date1',
+            'orden.date2',
+            'orden.date2',
+            'orden.requires',
+            'orden.id_cliente',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'clientes.cell_phone',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad'
+        ])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->where('completarordenes.requiere3','=','No Pagado')
+        ->orderBy('completarordenes.id', 'DESC')
+        ->get();
+    
+        // Verificar si la colección está vacía
+        if ($data->isEmpty()) {
+            return abort(404, 'No se encontraron datos.');
+        }
+    
+        //Funcion para las fechas
+        foreach ($data as &$item) {
+            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
+            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+        }
+
+        // Sumar todos los pagos
+        $totalPago = $data->sum('pago');
+    
+        // Generación del PDF
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+    
+        // Preparar los datos para la vista del PDF
+        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
+    
+        // Mostrar el PDF al usuario
+        return $pdf->stream();
+    }
+
+    public function generarCreditosConFactura() {
+        /*
+        public function generarCreditos()
+        {
+            $data = Completarordene::where('requiere3', 'No Pagado')
+                ->with('orden', 'cliente')
+                ->get();
+
+            // Calculate total credit
+            $totalCredito = $data->sum('pago');
+
+            return view('reports.repoCreditos', compact('data', 'totalCredito'));
+        }
+
+        */
+        // Realizar la consulta sin filtrar por 'id_cliente'
+        $data = CompletarOrden::select([
+            'completarordenes.*',
+            'orden.plague1',
+            'orden.date1',
+            'orden.date2',
+            'orden.date2',
+            'orden.requires',
+            'orden.id_cliente',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'clientes.cell_phone',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad'
+        ])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->where('completarordenes.requiere3','=','No Pagado')
+        ->orderBy('completarordenes.id', 'DESC')
+        ->get();
+    
+        // Verificar si la colección está vacía
+        if ($data->isEmpty()) {
+            return abort(404, 'No se encontraron datos.');
+        }
+    
+        //Funcion para las fechas
+        foreach ($data as &$item) {
+            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
+            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+        }
+
+        // Sumar todos los pagos
+        $totalPago = $data->sum('pago');
+    
+        // Generación del PDF
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+    
+        // Preparar los datos para la vista del PDF
+        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
