@@ -15,7 +15,7 @@
                     <th>Cliente</th>
                     <th>Num. Certificado</th>
                     <th>Fecha de orden</th>
-                    <th>Fecha de asistencia</th>                   
+                    <th>Fecha de fumigacion</th>                   
                     <th>Monto</th>
                 </tr>
             </thead>

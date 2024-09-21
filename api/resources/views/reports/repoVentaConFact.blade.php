@@ -17,7 +17,7 @@
                     <th>Num. Factura</th>
                     <th>Num. Certificado</th>
                     <th>Fecha de orden</th>
-                    <th>Fecha de asistencia</th>                   
+                    <th>Fecha de fumigacion</th>                   
                     <th>Estado</th>                   
                     <th>Monto</th>
                 </tr>
