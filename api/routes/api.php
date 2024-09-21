@@ -36,8 +36,11 @@ Route::get('/ordenTrabajoCompleta/{id}',[CompletarOrdenesController::class,'gene
 Route::get('/ordenTrabajo/{id}',[OrdensController::class,'generarOrdenPDF']);
 Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
 Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
-Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
 Route::get('/ventatotales',[CompletarOrdenesController::class,'generarVentasTotales']);
+Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
+Route::get('/creditossinfactura',[CompletarOrdenesController::class,'generarCreditosSinFactura']);
+Route::get('/creditosconfactura',[CompletarOrdenesController::class,'generarCreditosConFactura']);
+
 
 //VER OPCIONES
 Route::get('/verCiudades',[ClientesController::class,'verCiudades']);
@@ -47,9 +50,11 @@ Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColo
 
 //CONTEOS
 Route::get('/totalPagos', [CompletarOrdenesController::class, 'totalPagos']);
-Route::get('/totalCreditos', [CompletarOrdenesController::class, 'totalCreditos']);
 Route::get('/totalVentasSinFactura', [CompletarOrdenesController::class, 'totalVentasSinFactura']);
 Route::get('/totalVentasConFactura', [CompletarOrdenesController::class, 'totalVentasConFactura']);
+Route::get('/totalCreditos', [CompletarOrdenesController::class, 'totalCreditos']);
+Route::get('/totalCreditosSinFactura', [CompletarOrdenesController::class, 'totalCreditosSinFactura']);
+Route::get('/totalCreditosConFactura', [CompletarOrdenesController::class, 'totalCreditosConFactura']);
 Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
 Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);

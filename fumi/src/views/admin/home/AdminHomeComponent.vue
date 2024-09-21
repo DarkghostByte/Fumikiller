@@ -93,9 +93,9 @@
             </svg>
           </div>
           <div class="justify-center items-center">
-            <span class="block text-gray-500">Creditos</span>
-            <span class="block text-2xl font-bold">${{ totalCreditos }}</span>
-            <a :href="url + 'api/creditos/'" target="_blank">
+            <span class="block text-gray-500">Creditos Sin Factura</span>
+            <span class="block text-2xl font-bold">${{ totalCreditosSinFactura }}</span>
+            <a :href="url + 'api/creditossinfactura/'" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -111,9 +111,9 @@
             </svg>
           </div>
           <div class="justify-center items-center">
-            <span class="block text-gray-500">Creditos</span>
-            <span class="block text-2xl font-bold">${{ totalCreditos }}</span>
-            <a :href="url + 'api/creditos/'" target="_blank">
+            <span class="block text-gray-500">Creditos Con Factura</span>
+            <span class="block text-2xl font-bold">${{ totalCreditosConFactura }}</span>
+            <a :href="url + 'api/creditosconfactura/'" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -164,6 +164,10 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     totalPagos: 0,
     totalCreditos: 0,
+    totalVentasSinFactura: 0,
+    totalVentasConFactura: 0,
+    totalCreditosSinFactura: 0,
+    totalCreditosConFactura: 0,
   }),
   mounted() {
     this.fetchData();
@@ -209,6 +213,10 @@ export default {
         this.totalVentasSinFactura = responseTotalVentasSinFactura.data.total;
         const responseTotalVentasConFactura = await axios.get(this.urlApi + 'totalVentasConFactura');
         this.totalVentasConFactura = responseTotalVentasConFactura.data.total;
+        const responseTotalCreditosSinFactura = await axios.get(this.urlApi + 'totalCreditosSinFactura');
+        this.totalCreditosSinFactura = responseTotalCreditosSinFactura.data.total;
+        const responseTotalCreditosConFactura = await axios.get(this.urlApi + 'totalCreditosConFactura');
+        this.totalCreditosConFactura = responseTotalCreditosConFactura.data.total;
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }

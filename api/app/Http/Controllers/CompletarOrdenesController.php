@@ -378,20 +378,6 @@ class CompletarOrdenesController extends Controller
     }
 
     public function generarCreditos() {
-        /*
-        public function generarCreditos()
-        {
-            $data = Completarordene::where('requiere3', 'No Pagado')
-                ->with('orden', 'cliente')
-                ->get();
-
-            // Calculate total credit
-            $totalCredito = $data->sum('pago');
-
-            return view('reports.repoCreditos', compact('data', 'totalCredito'));
-        }
-
-        */
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -452,26 +438,11 @@ class CompletarOrdenesController extends Controller
     }
 
     public function generarCreditosSinFactura() {
-        /*
-        public function generarCreditos()
-        {
-            $data = Completarordene::where('requiere3', 'No Pagado')
-                ->with('orden', 'cliente')
-                ->get();
-
-            // Calculate total credit
-            $totalCredito = $data->sum('pago');
-
-            return view('reports.repoCreditos', compact('data', 'totalCredito'));
-        }
-
-        */
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
             'orden.plague1',
             'orden.date1',
-            'orden.date2',
             'orden.date2',
             'orden.requires',
             'orden.id_cliente',
@@ -492,7 +463,10 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('completarordenes.requiere3','=','No Pagado')
+        // Filtrar por órdenes no pagadas y clientes particulares
+        ->where('completarordenes.requiere3', 'No Pagado')
+        ->where('clientes.tradename', 'Particular')
+        // Ordenar por ID de forma descendente
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -519,27 +493,13 @@ class CompletarOrdenesController extends Controller
     
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
+        $pdf = Pdf::loadView('reports.repoCreditosSinFactura', $pdf_data)->save('myfile.pdf');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
     }
 
     public function generarCreditosConFactura() {
-        /*
-        public function generarCreditos()
-        {
-            $data = Completarordene::where('requiere3', 'No Pagado')
-                ->with('orden', 'cliente')
-                ->get();
-
-            // Calculate total credit
-            $totalCredito = $data->sum('pago');
-
-            return view('reports.repoCreditos', compact('data', 'totalCredito'));
-        }
-
-        */
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -566,7 +526,8 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('completarordenes.requiere3','=','No Pagado')
+        ->where('completarordenes.requiere3','No Pagado')
+        ->where('clientes.tradename','!=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -593,7 +554,7 @@ class CompletarOrdenesController extends Controller
     
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
+        $pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->save('myfile.pdf');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
@@ -676,6 +637,34 @@ class CompletarOrdenesController extends Controller
 
             ->sum('pago');
             return response()->json(['total' => $totalVentasSinFactura]);
+        }
+
+        public function totalCreditosSinFactura()
+        {
+            $totalCreditosSinFactura = CompletarOrden::
+            select('completarordenes.*',
+            'clientes.tradename')
+            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->where('completarordenes.requiere3', 'No Pagado')
+            ->where('clientes.tradename', 'Particular')
+
+            ->sum('pago');
+            return response()->json(['total' => $totalCreditosSinFactura]);
+        }
+
+        public function totalCreditosConFactura()
+        {
+            $totalCreditosConFactura = CompletarOrden::
+            select('completarordenes.*',
+            'clientes.tradename')
+            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+            ->where('completarordenes.requiere3', 'No Pagado')
+            ->where('clientes.tradename', '!=' ,'Particular')
+
+            ->sum('pago');
+            return response()->json(['total' => $totalCreditosConFactura]);
         }
 
         public function totalVentasConFactura()
