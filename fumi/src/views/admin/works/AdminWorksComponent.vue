@@ -65,7 +65,7 @@
           </template>
         </el-table-column>
         <el-table-column prop="date1" label="Fecha de orden" sortable width="150" />
-        <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
+        <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="170" />
         <el-table-column prop="time1" label="De" sortable width="90" />
         <el-table-column prop="time2" label="A" sortable width="90" />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->

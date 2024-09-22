@@ -51,7 +51,8 @@
           </template>
         </el-table-column>
         <el-table-column label="Celular" prop="cell_phone" sortable />
-        <el-table-column label="Fecha de asistencia" prop="date2" width="180px" sortable />
+        <el-table-column label="Fecha de orden" prop="date1" width="180px" sortable />
+        <el-table-column label="Fecha de fumigacion" prop="date2" width="180px" sortable />
         <el-table-column label="De" prop="time1" sortable />
         <el-table-column label="A" prop="time2" sortable />
       </el-table>
