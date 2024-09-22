@@ -74,7 +74,7 @@
         </el-table-column>
         <el-table-column label="Dirección" sortable width="500">
           <template #default="scope">
-            {{ scope.row.ciudad + ', ' + scope.row.colonia + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
+            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
           </template>
         </el-table-column>
         <el-table-column prop="cell_phone" label="Numero Celular" sortable width="150" />
@@ -270,7 +270,6 @@ export default {
     refresh() {
       axios.get('clientes').then(res => {
         this.tableData = res.data.data.filter(row => row.infoclient_delete !== 'Baja');
-        this.refresh();
         this.filteredData = this.tableData;
       });
     },  
@@ -278,7 +277,6 @@ export default {
     handleDelete() {
       axios.delete('clientes/' + this.selectedItem.id).then(res => {
         console.log(res);
-        this.refresh();
         this.dialogVisible = false;
       });
     },
@@ -320,6 +318,7 @@ export default {
     .then(response => {
       console.log('El cliente se dio de baja:', response.data);
       this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
+      this.dialogVisible = false;
       ElNotification({
         title: 'Actualizacion de datos',
         message: `Se actualizaron los datos.`,

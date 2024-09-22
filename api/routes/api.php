@@ -58,6 +58,7 @@ Route::get('/totalCreditosConFactura', [CompletarOrdenesController::class, 'tota
 Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
 Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
+Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);

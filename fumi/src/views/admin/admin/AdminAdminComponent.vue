@@ -65,10 +65,18 @@
             <h2>Productos Externos</h2>
           </router-link>
 
+          <router-link to="/admin/admin/clientsView"
+          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg" 
+          style="width:290px; height:100px; font-size:22px;">
+            <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>                
+            <h2>Clientes ({{ totalClientes }})</h2>
+          </router-link>
+
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-gradient-to-l from-pink-500 to-amber-500 hover:bg-gradient-to-r rounded-md ml-6 mb-5 shadow-lg" 
           style="width:290px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
+            <i class="fa-solid fa-person" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Ejemplo</h2>
           </router-link>
@@ -94,6 +102,7 @@
             totalCiudades: 0,
       totalColonias: 0,
       totalAsentamientos: 0,
+      totalClientes: 0,
           }),
           mounted(){
             this.refresh(),
@@ -102,9 +111,6 @@
           methods:{
             refresh(){
               this.tableData = []
-              axios.get('ciudades').then(res=>{
-              this.tableData=res.data.data
-            })
             },
 
             handleEdit(){
@@ -146,6 +152,8 @@
     this.totalColonias = responseTotalColonias.data.total;
     const responseTotalAsentamientos = await axios.get(this.urlApi + 'totalAsentamientos');
     this.totalAsentamientos = responseTotalAsentamientos.data.total;
+    const responseTotalClientes = await axios.get(this.urlApi + 'totalClientes');
+    this.totalClientes = responseTotalClientes.data.total;
   } catch (error) {
     console.error('Error al obtener los datos:', error);
   }

@@ -281,36 +281,45 @@ class ClientesController extends Controller
     }
 
     public function desactivarCliente(Request $request, $id)
-        {
-            $completarOrden = Cliente::find($id);
+    {
+    $cliente = Cliente::find($id);
 
-            $validator = Validator::make($request->all(), [
-                'infoclient_delete' => 'required|in:Alta,Baja', 
-            ]);
+    if (!$cliente) {
+        return response()->json([
+        'status' => 'error',
+        'message' => 'Cliente no encontrado'
+        ], 404);
+    }
 
-            if (!$completarOrden) {
-                return response()->json([
-                    'status' => 'error',
-                    'message' => 'Orden no encontrada'
-                ], 404);
-            }
+    $validator = Validator::make($request->all(), [
+        'infoclient_delete' => 'required|in:Alta,Baja',
+    ]);
 
-            if ($validator->fails()) {
-                return response()->json([
-                    'status' => 'failed',
-                    'message' => 'Error de validación',
-                    'errors' => $validator->errors()
-                ], 400);
-            }
+    if ($validator->fails()) {
+        return response()->json([
+        'status' => 'failed',
+        'message' => 'Error de validación',
+        'errors' => $validator->errors()
+        ], 400);
+    }
 
-            // Actualizar el estado y el pago
-            $completarOrden->infoclient_delete = $request->infoclient_delete;
-            $completarOrden->save();
+    $updatedData = [
+        'infoclient_delete' => $request->infoclient_delete
+    ];
 
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Estado  actualizados correctamente',
-                'data' => $completarOrden
-            ]);
-        }
+    $cliente->update($updatedData);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Cliente desactivado exitosamente',
+        'data' => $cliente
+    ]);
+    }
+
+    public function totalClientes()
+    {
+        $totalClientes = Cliente::count();
+        return response()->json(['total' => $totalClientes]);
+    }
 }
+
