@@ -6,23 +6,21 @@
     
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
-      <div class="flex flex-wrap items-start justify-end ">
-
-        <router-link to="/admin/clients"
-          class="inline-flex px-5 py-3 text-white bg-red-400 hover:bg-red-700 focus:bg-red-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-rotate-left" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>
-          Devolver
+      <div class="flex justify-end mb-4">
+        <router-link to="/admin/clients" class="btn btn-red bg-red-500 hover:bg-red-700 text-black font-bold py-2 px-4 rounded">
+          <i class="fa fa-rotate-left mr-2"></i> Devolver
         </router-link>
-
       </div>
     </div>
-    <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Ordenes completas</h1>
-    </div>
+  </div>
 
-    <div class="flex">
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col items-center">
+      <h1 class="text-3xl font-bold mb-4">Ordenes completas</h1>
+      <h2 class="text-xl font-semibold mb-8" v-if="tableData.length > 0">
+        Nombre del Cliente: {{ clientName }}
+      </h2>
+
       <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
         <el-table-column label="">
           <template #default="scope">
@@ -33,12 +31,7 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column label="Nombre" sortable width="200">
-          <template #default="scope">
-            {{ scope.row.name+' '+scope.row.lastname1+' '+scope.row.lastname2 }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Direccion" sortable width="250">
+        <el-table-column label="Direccion" sortable width="300">
           <template #default="scope">
             {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
           </template>
@@ -46,7 +39,8 @@
         <el-table-column prop="pago" label="Monto" sortable width="150" />
         <el-table-column prop="requiere3" label="Datos" sortable width="170" />
         <el-table-column prop="responsable" label="Responsable" sortable width="130" />
-        <el-table-column prop="date2" label="Fecha de asistencia" sortable width="130" />
+        <el-table-column prop="date1" label="Fecha de orden" sortable width="130" />
+        <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="130" />
         <el-table-column label="">
           <template #default="scope">
             <router-link :to="'/admin/works/edit-workComplete/'+scope.row.id">
@@ -107,6 +101,7 @@ export default {
     dialogVisible: false,
     clientId: null
   }),
+  
   mounted() {
     this.refresh();
     this.clientId = this.$route.params.id;
@@ -115,7 +110,11 @@ export default {
     refresh() {
       this.tableData = [];
       axios.get('completarOrden').then(res => {
-        this.tableData = res.data.data.filter(order => order.id_cliente == this.clientId);
+        this.tableData = res.data.data.filter(order => order.id_cliente == this.clientId);if (this.tableData.length > 0) {
+          this.clientName = `${this.tableData[0].name} ${this.tableData[0].lastname1} ${this.tableData[0].lastname2}`;
+        } else {
+          this.clientName = 'No se encontraron clientes';
+        }
       });
     },
     bajaOrden(row) {

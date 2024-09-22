@@ -6,6 +6,7 @@
           <div class="flex flex-wrap items-start justify-end ">
 
             <!--RUTAS ENTRES VISTAS-->
+
             <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
             style="color:black">
               <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
@@ -32,16 +33,16 @@
 
           </div>
         </div>
-        <div class="mr-6">
-          <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Ordenes completas</h1>
+        <div class="flex flex-col items-center">
+          <h1 class="text-3xl font-bold mb-4 py-2">Ordenes completas</h1>
         </div>
 
         <!-- TABLE DATA -->
-        <div class="flex">
+        <div class="flex" style="justify-content: center;">
             <el-table
                 :data="tableData"
                 :default-sort="{ prop: 'name', order: 'descending' }"
-                style="width: 100%"
+                style="width: 85%"
                 stripe>
 
               <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->

@@ -203,7 +203,9 @@ export default {
       number_fixed_number: 'Ninguno',
       contact_form: '',
       specify: '',
-      recruitment_data: []
+      recruitment_data: [],
+      infoclient_delete: 'Alta',
+
     },
     filteredColonias: [],
     loadingColonias: false,

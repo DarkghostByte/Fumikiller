@@ -60,6 +60,7 @@ class ClientesController extends Controller
             'contact_form' => 'required|min:1',
             'specify' => 'required|min:1',
             'recruitment_data' => 'array|min:1',
+            'infoclient_delete' => 'required|min:1',
         ]);
 
         if ($reglas->fails()) {
@@ -87,6 +88,7 @@ class ClientesController extends Controller
             $data->contact_form = $request->contact_form;
             $data->specify = $request->specify;
             $data->recruitment_data = json_encode($request->recruitment_data);
+            $data->infoclient_delete = $request->infoclient_delete;
             $data->save();
 
             return response()->json([
@@ -277,4 +279,38 @@ class ClientesController extends Controller
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
+
+    public function desactivarCliente(Request $request, $id)
+        {
+            $completarOrden = Cliente::find($id);
+
+            $validator = Validator::make($request->all(), [
+                'infoclient_delete' => 'required|in:Alta,Baja', 
+            ]);
+
+            if (!$completarOrden) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Orden no encontrada'
+                ], 404);
+            }
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Error de validación',
+                    'errors' => $validator->errors()
+                ], 400);
+            }
+
+            // Actualizar el estado y el pago
+            $completarOrden->infoclient_delete = $request->infoclient_delete;
+            $completarOrden->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Estado  actualizados correctamente',
+                'data' => $completarOrden
+            ]);
+        }
 }

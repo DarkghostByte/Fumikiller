@@ -61,3 +61,4 @@ Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamient
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
+Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);

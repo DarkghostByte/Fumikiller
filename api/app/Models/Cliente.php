@@ -26,5 +26,6 @@ class Cliente extends Model
         'contact_form',
         'specify',
         'recruitment_data',
+        'infoclient_delete',
     ];
 }
