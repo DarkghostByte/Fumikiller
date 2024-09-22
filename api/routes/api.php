@@ -59,7 +59,9 @@ Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
 Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
 Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
+Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
 Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);
+Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);

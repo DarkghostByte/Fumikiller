@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('time2');
             $table->string('hiring');
             $table->string('requires');
-            $table->string('agendaInfo');
+            $table->string('infoorden_delete');
             $table->timestamps();
         });
     }

@@ -38,8 +38,8 @@
     </div>
 
     <!-- TABLE DATA -->
-    <div class="flex">
-      <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
+    <div class="flex" style="justify-content: center;">
+      <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 90%" stripe>
 
         <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
         <el-table-column label="">
@@ -68,7 +68,6 @@
         <el-table-column prop="date2" label="Fecha de asistencia" sortable width="170" />
         <el-table-column prop="time1" label="De" sortable width="90" />
         <el-table-column prop="time2" label="A" sortable width="90" />
-        <el-table-column prop="agendaInfo" label="Estado" sortable width="90" />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
         <!--BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
@@ -95,28 +94,58 @@
     <!-- END TABLE DATA -->
 
     <!-- INICIO DEL DIALOGO PARA ELIMINAR -->
-    <el-dialog v-model="dialogVisible" title="Deseas dar de baja la siguente orden de trabajo" width="1200">
-      <div class="h-72 overflow-scroll" style="font-size:22px; color:black;">
-        Datos la orden de trabajo
-        <br>
-        Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
-        <br>
-        Direccion: {{ selectedItem.city }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{
-        selectedItem.home }} #{{ selectedItem.numAddress }}
-        <br>
-        Dia de la orden: {{ selectedItem.date1 }}
-        <br>
-        Dia de de asistencia: {{ selectedItem.date2 }}
-        <br>
-        De: {{ selectedItem.time1 }}
-        <br>
-        A: {{ selectedItem.time2 }}
-        <br><br>
+    <el-dialog v-model="dialogVisible" title="Deseas desactivar la siguiente orden?" width="600" height="500">
+      <div class="clientInfo">
+        <div class="details">
+          <i class="fa fa-user fa-2x iconDeleteOrden"></i>
+          <div>
+            <p>
+              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
+                selectedItem.lastname2 }}
+            </p>
+            <p>
+              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-city fa-2x iconDeleteOrden"></i>
+          <div>
+            <p>
+              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
+              }},
+              {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+            </p>
+            <p>
+              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-phone fa-2x iconDeleteOrden"></i>
+          <div>
+            <p>
+              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-calendar-days fa-2x iconDeleteOrden"></i>
+          <div>
+            <p>
+              <strong>Fecha de orden:</strong> {{ selectedItem.date1 }}
+            </p>
+            <p>
+              <strong>Fecha de fumigacion:</strong> {{ selectedItem.date2 }}
+            </p>
+          </div>
+        </div>
       </div>
       <template #footer>
         <div class="dialog-footer">
           <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-          <el-button type="danger" @click="confimarBaja()">
+          <el-button type="danger"
+            @click="handleEstadoClick()">
             Confirmar
           </el-button>
         </div>
@@ -129,6 +158,8 @@
 
 <script>
 import axios from 'axios';
+import { ElNotification } from 'element-plus';
+
 export default {
   name: 'AdminWorksComponent',
   data: () => ({
@@ -145,8 +176,7 @@ export default {
     refresh() {
       this.tableData = []
       axios.get('orden').then(res => {
-        this.tableData = res.data.data
-      })
+        this.tableData = res.data.data.filter(row => row.infoorden_delete !== 'Baja');      })
     },
     pdf(row) {
       console.log(row)
@@ -173,6 +203,51 @@ export default {
         console.error('Row is undefined or does not have an id:', row);
       }
     },
+    handleEstadoClick() {
+  const newStatus = this.selectedItem.infoorden_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
+  axios.put('desactivarOrden/' + this.selectedItem.id, { infoorden_delete: newStatus })
+    .then(response => {
+      console.log('La orden se dio de baja:', response.data);
+      this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
+      this.dialogVisible = false;
+      ElNotification({
+        title: 'Actualizacion de datos',
+        message: `Se actualizaron los datos.`,
+        type: 'success'
+      });
+    })
+    .catch(error => {
+  console.error('Error al dar de baja la orden:', error.response.data);
+});
+},
   }
 }
 </script>
+
+<style>
+.clientInfo {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.details {
+  padding: 20px;
+  display: flex;
+}
+
+p {
+  color: #000000;
+}
+
+.client-details__title {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.iconDeleteOrden {
+  color: #f32222;
+  margin-right: 10px;
+}
+</style>

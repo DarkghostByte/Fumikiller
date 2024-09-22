@@ -10,31 +10,35 @@
         <!-- INICIO -->
         <div class="flex justify-between items-center mb-4">
           <h1 class="text-2xl font-semibold">Gestión de Clientes</h1>
-          <div class="flex" style="width: 100%;">
-            <el-input class="" placeholder="Buscar por nombre" v-model="searchQueryName"
-              @input="filterDataName" />
-            <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-              @input="filterDataLastname" />
-            <el-input class="" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-              @input="filterDataAddress" />
-              <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
-              @input="filterDataPhone" />
-              <el-input class="" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
-              @input="filterDataInfo" />
+          <div class="py-3">
+            <router-link to="/admin/admin" class="el-button el-button--danger">
+              <i class="fa fa-rotate-left" aria-hidden="true"
+                style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+              Regresar
+            </router-link>
+            <el-button class="ml-2 el-button el-button--primary">
+              <router-link to="/admin/clients/agregarComercio-clients">
+                <i class="fa fa-plus-circle" aria-hidden="true"
+                  style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+                  Nuevo Cliente
+              </router-link>
+            </el-button>
           </div>
         </div>
-        <div class="py-3">
-          <router-link to="/admin/admin" class="el-button el-button--danger">
-            <i class="fa fa-rotate-left" aria-hidden="true"
-              style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-            Regresar
-          </router-link>
-          <router-link to="/admin/clients/agregarComercio-clients" class="el-button el-button--success">
-            <i class="fa fa-plus-circle" aria-hidden="true"
-              style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-              Nuevo Cliente
-          </router-link>
+
+        <div class="flex justify-between items-center mb-4" style="width: 100%;">
+          <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
+            @input="filterDataName" />
+          <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
+            @input="filterDataLastname" />
+          <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+            @input="filterDataAddress" />
+            <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+            @input="filterDataPhone" />
+            <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
+            @input="filterDataInfo" />
         </div>
+        
         <!-- END INICIO -->
   
         <!-- TABLE -->

@@ -21,6 +21,8 @@ class OrdensController extends Controller
                 'clientes.numAddress',
                 'clientes.id_colonia',
                 'clientes.id_city',
+                'clientes.id_comercio',
+                'comercios.comercio',
                 'clientes.cell_phone',
                 'colonias.colonia',
                 'colonias.codigoPostal',
@@ -29,6 +31,7 @@ class OrdensController extends Controller
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
             ->orderBy('orden.id', 'DESC')
             ->get();
 
@@ -87,7 +90,7 @@ class OrdensController extends Controller
             'time2' => 'required|min:1',
             'hiring' => 'array|required|min:1',
             'requires' => 'array|required|min:1',
-            'agendaInfo' => 'required|min:1',
+            'infoorden_delete' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -106,7 +109,7 @@ class OrdensController extends Controller
             $data->time2 = $request->time2;
             $data->hiring = json_encode($request->hiring);
             $data->requires = json_encode($request->requires);
-            $data->agendaInfo = $request->agendaInfo;
+            $data->infoorden_delete = $request->infoorden_delete;
             $data->save();
 
             return response()->json([
@@ -251,5 +254,47 @@ class OrdensController extends Controller
         //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
+    }
+
+    public function desactivarOrden(Request $request, $id)
+    {
+    $orden = Orden::find($id);
+
+    if (!$orden) {
+        return response()->json([
+        'status' => 'error',
+        'message' => 'Orden no encontrado'
+        ], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'infoorden_delete' => 'required|in:Alta,Baja',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+        'status' => 'failed',
+        'message' => 'Error de validación',
+        'errors' => $validator->errors()
+        ], 400);
+    }
+
+    $updatedData = [
+        'infoorden_delete' => $request->infoorden_delete
+    ];
+
+    $orden->update($updatedData);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Cliente desactivado exitosamente',
+        'data' => $orden
+    ]);
+    }
+
+    public function totalOrdenes()
+    {
+        $totalOrdenes = Orden::count();
+        return response()->json(['total' => $totalOrdenes]);
     }
 }

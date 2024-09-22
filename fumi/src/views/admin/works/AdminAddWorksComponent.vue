@@ -152,12 +152,6 @@
               <el-checkbox label="Remision" value="Remision"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item prop="agendaInfo" label="Se pago?" class="px-10">
-            <el-radio-group v-model="form.agendaInfo">
-              <el-radio value="Agenda" size="large" border>Agenda</el-radio>
-              <el-radio value="No agenda" size="large" border>No agenda</el-radio>
-            </el-radio-group>
-          </el-form-item>
         </div>
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
           <el-form-item>
@@ -192,7 +186,7 @@ export default {
       time2: '',
       hiring: [],
       requires: [],
-      agendaInfo: ''
+      infoorden_delete: 'Alta'
     },
     rules: {
       plague1: [
@@ -215,9 +209,6 @@ export default {
       ],
       requires: [
         { required: true, message: 'Requiere de deberia ser requerido', trigger: 'blur' },
-      ],
-      agendaInfo: [
-        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
     }
   }),

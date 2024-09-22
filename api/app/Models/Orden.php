@@ -20,7 +20,7 @@ class Orden extends Model
         'time2',
         'hiring',
         'requires',
-        'agendaInfo',
+        'infoorden_delete',
     ];
 
     public function cliente()
