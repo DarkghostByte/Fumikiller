@@ -211,12 +211,11 @@ export default {
         this.filteredData = this.tableData;
       });
     },
-    handleEdit() { },
-    seleccionar(row) {
-      console.log(row);
-      this.selectedItem = row;
-      this.dialogVisibleView = true;
-    },
+    pdf(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.selectedItem = null
+    },    
 
     filterDataName() {
       this.filteredData = this.tableData.filter((orden) => {
@@ -305,7 +304,6 @@ export default {
       }
     },
 
-
     handleEstadoClick(row) {
       const updatedData = {
         infoorden_delete: row.infoorden_delete === 'Baja' ? 'Alta' : 'Baja'
@@ -335,6 +333,16 @@ export default {
         console.error('Error al obtener los datos:', error);
       }
     },
+
+    completarOrden(row) {
+      if (row && row.id) {
+        console.log(row);
+        this.$router.push({ path: `/admin/works/complete-works/${row.id}` });
+      } else {
+        console.error('Row is undefined or does not have an id:', row);
+      }
+    },
+    
   }
 };
 </script>
