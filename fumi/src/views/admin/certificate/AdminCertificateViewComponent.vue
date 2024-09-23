@@ -33,7 +33,7 @@
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 95%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
         <el-table-column label="" width="100" >
           <template #default="scope">
@@ -63,7 +63,7 @@
             {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
           </template>
         </el-table-column>
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable  />
+        <el-table-column prop="cell_phone" label="Numero Celular" sortable  width="180"/>
 
       </el-table>
     </div>

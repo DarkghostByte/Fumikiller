@@ -9,6 +9,8 @@ use App\Http\Controllers\ColoniasController;
 use App\Http\Controllers\CompletarOrdenesController;
 use App\Http\Controllers\ComerciosController;
 use App\Http\Controllers\CertificadoController;
+use App\Http\Controllers\ProductosInternosController;
+use App\Http\Controllers\ProductosExtrenosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,6 +31,8 @@ Route::resource('colonias', ColoniasController::class);
 Route::resource('completarOrden', CompletarOrdenesController::class);
 Route::resource('comercios', ComerciosController::class);
 Route::resource('certificados', CertificadoController::class);
+Route::resource('productosInternos', ProductosInternosController::class);
+Route::resource('productosExternos', ProductosExtrenosController::class);
 
 //RUTAS PARA PDF
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
