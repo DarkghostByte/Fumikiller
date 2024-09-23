@@ -7,13 +7,13 @@
   <div class="container mx-auto px-4">
     
     <div class="flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-semibold">Gestión de Certificados (Clientes)</h1>
+      <h1 class="text-2xl font-semibold">Gestión de Certificados Realizados</h1>
       <div class="flex flex-wrap items-start justify-end ">
-        <router-link to="/admin/certificate/views/" class="el-button el-button--success" style="color: black;">
-          <i class="fa-solid fa-book" aria-hidden="true"
+        <router-link to="/admin/certificate" class="el-button el-button--danger">
+          <i class="fa fa-rotate-left" aria-hidden="true"
             style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-            Consultar Certificados        
-          </router-link>
+          Regresar
+        </router-link>
       </div>
     </div>
 
@@ -33,13 +33,15 @@
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 95%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 95%" stripe>
         <!-- Columnas de la tabla -->
+
         <el-table-column label="" width="100" >
           <template #default="scope">
-            <el-button @click="certificado(scope.row)" class="ml-2 el-button el-button--primary" style="color:black">
-              <span
-                  class="material-symbols-outlined">Description</span>
+            <el-button style="color:black" size="small" type="info" @click="pdf(scope.row)">
+              <a :href="url + 'api/certificadoRealizado/' + scope.row.id" target="_blank">
+                <span class="material-symbols-outlined">lab_profile</span>
+              </a>
             </el-button>
           </template>
         </el-table-column>
@@ -52,10 +54,10 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column prop="name" label="Nombres" sortable width="150" />
-        <el-table-column label="Apellidos" sortable width="150" >
+        <el-table-column prop="id" label="Id" sortable />
+        <el-table-column label="Nombre" sortable width="180" >
           <template #default="scope">
-            {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
         <el-table-column label="Dirección" sortable width="500">
@@ -260,8 +262,8 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('clientes').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoclient_certificate !== 'No');
+      axios.get('certificados').then(res => {
+        this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });
     },  
@@ -274,6 +276,11 @@ export default {
       console.log(row);
       this.selectedItem = row;
       this.dialogVisibleViewcertificado = true;
+    },
+    pdf(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.selectedItem = null
     },
 
     createCertificate1() {
