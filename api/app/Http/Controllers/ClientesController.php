@@ -61,6 +61,7 @@ class ClientesController extends Controller
             'specify' => 'required|min:1',
             'recruitment_data' => 'array|min:1',
             'infoclient_delete' => 'required|min:1',
+            'infoclient_certificate' => 'required|min:1',
         ]);
 
         if ($reglas->fails()) {
@@ -89,6 +90,7 @@ class ClientesController extends Controller
             $data->specify = $request->specify;
             $data->recruitment_data = json_encode($request->recruitment_data);
             $data->infoclient_delete = $request->infoclient_delete;
+            $data->infoclient_certificate = $request->infoclient_certificate;
             $data->save();
 
             return response()->json([
@@ -179,6 +181,7 @@ class ClientesController extends Controller
             'cell_phone' => 'required|min:10|max:13',
             'number_fixed_number' => 'min:1',
             'recruitment_data' => 'array|min:1',
+            'infoclient_certificate' => 'required|min:1',
         ]);
         if (!$cliente) {
             return response()->json([

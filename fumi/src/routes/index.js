@@ -25,6 +25,9 @@ const adminRoutes = [
     {path: 'admin/settlements', component: () => import('@/views/admin/admin/AdminSettlementsComponent.vue')},
     {path: 'admin/clientsView', component: () => import('@/views/admin/admin/AdminClientsViewComponent.vue')},
     {path: 'admin/orderView', component: () => import('@/views/admin/admin/AdminOrderViewComponent.vue')},
+
+    {path: 'certificate', component: () => import('@/views/admin/certificate/AdminCertificateViewComponent.vue')},
+    {path: 'certificate/add-certificate/:id', component: () => import('@/views/admin/certificate/AdminAddCertificateComponent.vue')},
 ]
 
 

@@ -65,3 +65,6 @@ Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
 Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);
 Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);
+
+//FILTRO DE FECHAS DE HOME
+Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);

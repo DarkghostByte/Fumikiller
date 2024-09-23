@@ -146,6 +146,15 @@
             </el-checkbox-group>
           </el-form-item>
         </div>
+        
+        <div>
+          <el-form-item prop="infoclient_certificate" label="El cliente necesita certificado?" class="px-10">
+            <el-radio-group v-model="form1.infoclient_certificate">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
 
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
           <div style="color:white; display:flex; justify-content: center; transition:10s;">
@@ -193,6 +202,7 @@ export default {
       specify: '',
       recruitment_data: [],
       infoclient_delete: 'Alta',
+      infoclient_certificate: '',
     },
     filteredColonias: [],
     loadingColonias: false,
@@ -248,6 +258,9 @@ export default {
       ],
       recruitment_data: [
         { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
+      ],
+      infoclient_certificate: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
     }
 

@@ -132,6 +132,15 @@
           </el-form-item>
         </div>
 
+        <div>
+          <el-form-item prop="infoclient_certificate" label="El cliente necesita certificado?" class="px-10">
+            <el-radio-group v-model="form.infoclient_certificate">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
+
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
           <el-form-item>
             <el-button type="primary" @click="updateDatos">Modificar</el-button>
@@ -174,7 +183,9 @@ export default {
       how_to_get: '',
       cell_phone: '',
       number_fixed_number: 'Ninguno',
-      recruitment_data: []
+      recruitment_data: [],
+      infoclient_certificate: '',
+
     },
     filteredColonias: [],
     loadingColonias: false,
@@ -226,6 +237,9 @@ export default {
       ],
       recruitment_data: [
         { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
+      ],
+      infoclient_certificate: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
     }
   }),
@@ -346,6 +360,7 @@ export default {
         this.form.how_to_get = datos.how_to_get || '';
         this.form.cell_phone = datos.cell_phone || '';
         this.form.number_fixed_number = datos.number_fixed_number || 'Ninguno';
+        this.form.infoclient_certificate = datos.infoclient_certificate || '';
       }
     });
   }

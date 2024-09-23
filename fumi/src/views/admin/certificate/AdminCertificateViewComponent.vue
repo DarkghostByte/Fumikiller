@@ -1,0 +1,378 @@
+<template>
+  <!-- Importar Iconos-->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <div>
+    <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
+      <div class="flex flex-wrap items-start justify-end ">
+
+        <router-link to="/admin/works"
+          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-book" aria-hidden="true"
+            style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+          Consultar Certificados
+        </router-link>
+
+        <router-link to="/admin/clients/agregarComercio-clients"
+          class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa fa-plus-circle" aria-hidden="true"
+            style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+          Nuevo Certificado
+        </router-link>
+
+      </div>
+    </div>
+
+    <div class="mr-6">
+      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Clientes que requieren certificados</h1>
+    </div>
+
+    <!-- Campo de búsqueda -->
+    <div class="flex mb-4" style="justify-content: center;">
+      <div class="flex mb-4" style="width: 80%;">
+        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
+          @input="filterDataName" />
+        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
+          @input="filterDataLastname" />
+        <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+          @input="filterDataAddress" />
+          <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+          @input="filterDataPhone" />
+      </div>
+    </div>
+
+    <!-- TABLE DATA -->
+    <div class="flex" style="justify-content: center;">
+      <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 85%" stripe>
+        <!-- Columnas de la tabla -->
+
+        <el-table-column label="">
+          <template #default="scope">
+            <router-link :to="'/admin/certificate/add-certificate/' + scope.row.id">
+              <el-button style="color:black" size="small" type="primary" @click="handleEdit()"><span
+                  class="material-symbols-outlined">Description</span></el-button>
+            </router-link>
+          </template>
+        </el-table-column>
+
+        <el-table-column label="">
+          <template #default="scope">
+            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
+                class="material-symbols-outlined">visibility</span></el-button>
+          </template>
+        </el-table-column>
+
+
+        <!-- Agrega las demás columnas aquí -->
+
+        <el-table-column prop="name" label="Nombres" sortable width="150" />
+        <el-table-column label="Apellidos" sortable width="150" >
+          <template #default="scope">
+            {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+          </template>
+        </el-table-column>
+        <el-table-column label="Dirección" sortable width="500">
+          <template #default="scope">
+            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
+          </template>
+        </el-table-column>
+        <el-table-column prop="cell_phone" label="Numero Celular" sortable width="150" />
+
+      </el-table>
+    </div>
+    <!-- END TABLE DATA -->
+
+    <!-- MODAL 1 -->
+    <el-dialog v-model="dialogVisible" title="Deseas desactivar el siguiente cliente?" width="600" height="500">
+      <div class="clientInfo">
+        <div class="details">
+          <i class="fa fa-user fa-2x iconDelete"></i>
+          <div>
+            <p>
+              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
+                selectedItem.lastname2 }}
+            </p>
+            <p>
+              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-city fa-2x iconDelete"></i>
+          <div>
+            <p>
+              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
+              }},
+              {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+            </p>
+            <p>
+              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-phone fa-2x iconDelete"></i>
+          <div>
+            <p>
+              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
+            </p>
+            <p>
+              <strong>Número fijo:</strong> {{ selectedItem.number_fixed_number }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-location-dot fa-2x iconDelete"></i>
+          <div>
+            <p>
+              <strong>Como llegar:</strong> {{ selectedItem.how_to_get }}
+            </p>
+            <p>
+              <strong>Descripcion:</strong> {{ selectedItem.description }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-file-contract fa-2x iconDelete"></i>
+          <div>
+            <p>
+              <strong>Tipo de contratación:</strong> {{ selectedItem.recruitment_data }}
+            </p>
+          </div>
+        </div>
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
+          <el-button type="danger"
+            @click="handleEstadoClick()">
+            Confirmar
+          </el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- END MODAL 1 -->
+
+    <!-- MODAL 2 -->
+    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500">
+      <div class="clientInfo">
+        <div class="details">
+          <i class="fa fa-user fa-2x iconInfo"></i>
+          <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+          <div>
+            <p>
+              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
+                selectedItem.lastname2 }}
+            </p>
+            <p>
+              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-city fa-2x iconInfo"></i>
+          <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+          <div>
+            <p>
+              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
+              }},
+              {{
+                selectedItem.colonia
+              }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+            </p>
+            <p>
+              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
+            </p>
+          </div>
+          
+        </div>
+        <div class="details">
+          <i class="fa fa-phone fa-2x iconInfo"></i>
+          <div>
+            <p>
+              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
+            </p>
+            <p>
+              <strong>Número fijo:</strong> {{ selectedItem.number_fixed_number }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-location-dot fa-2x iconInfo"></i>
+          <div>
+            <p>
+              <strong>Como llegar:</strong> {{ selectedItem.how_to_get }}
+            </p>
+            <p>
+              <strong>Descripcion:</strong> {{ selectedItem.description }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-file-contract fa-2x iconInfo"></i>
+          <div>
+            <p>
+              <strong>Tipo de contratación:</strong> {{ selectedItem.recruitment_data }}
+            </p>
+          </div>
+        </div>
+
+
+      </div>
+      <template #footer>
+        <div class="dialog-footer">
+          <el-button type="primary" @click="dialogVisibleView = false">Listo</el-button>
+        </div>
+      </template>
+    </el-dialog>
+    <!-- END MODAL 2 -->
+  </div>
+</template>
+
+<script>
+import axios from 'axios';
+import { ElNotification } from 'element-plus';
+
+export default {
+  name: 'AdminClientsComponent',
+  data: () => ({
+    dialogVisible: false,
+    dialogVisibleView: false,
+    url: process.env.VUE_APP_ROOT_ASSETS,
+    urlApi: process.env.VUE_APP_ROOT_API,
+    tableData: [],
+    filteredData: [],
+    selectedItem: {},
+    searchQuery: '',
+    searchQueryName: '',
+    searchQueryLastname: '',
+    searchQueryAddress: '',
+    searchQueryPhone: '',
+  }),
+  mounted() {
+    this.refresh();
+  },
+  methods: {
+    refresh() {
+      axios.get('clientes').then(res => {
+        this.tableData = res.data.data.filter(row => row.infoclient_certificate !== 'No');
+        this.filteredData = this.tableData;
+      });
+    },  
+    handleEdit() { },
+    handleDelete() {
+      axios.delete('clientes/' + this.selectedItem.id).then(res => {
+        console.log(res);
+        this.dialogVisible = false;
+      });
+    },
+    eliminar(row) {
+      console.log(row);
+      this.selectedItem = row;
+      this.dialogVisible = true;
+    },
+    seleccionar(row) {
+      console.log(row);
+      this.selectedItem = row;
+      this.dialogVisibleView = true;
+    },
+    historia(row) {
+      if (row && row.id) {
+        console.log(row);
+        this.$router.push({ path: `/admin/worksComplete/${row.id}` });
+      } else {
+        console.error('Row is undefined or does not have an id:', row);
+      }
+    },
+    
+    filterDataName() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
+      });
+    },
+
+    filterDataLastname() {
+  this.filteredData = this.tableData.filter((clientes) => {
+    const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+    return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
+  });
+},
+
+    filterDataAddress() {
+      this.filteredData = this.tableData.filter((clientes) => {
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+  });
+    },
+
+    filterDataPhone() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+      });
+    },
+
+    handleEstadoClick() {
+  const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
+  axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
+    .then(response => {
+      console.log('El cliente se dio de baja:', response.data);
+      this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
+      this.dialogVisible = false;
+      ElNotification({
+        title: 'Actualizacion de datos',
+        message: `Se actualizaron los datos.`,
+        type: 'success'
+      });
+    })
+    .catch(error => {
+  console.error('Error al dar de baja al cliente:', error.response.data);
+});
+},
+
+    async fetchData() {
+      try {
+        const responseOrdenes = await axios.get(this.urlApi + 'clientes');
+        this.tableData = responseOrdenes.data.data.filter(row => row.infoclient_certificate !== 'No');
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    },
+  }
+};
+</script>
+
+<style>
+.clientInfo {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.details {
+  padding: 20px;
+  display: flex;
+}
+
+p {
+  color: #000000;
+}
+
+.client-details__title {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.iconInfo {
+  color: #409eff;
+  margin-right: 10px;
+}
+
+.iconDelete {
+  color: #f32222;
+  margin-right: 10px;
+}
+</style>

@@ -710,6 +710,8 @@ class CompletarOrdenesController extends Controller
         if (!$ordenCompleta) {
             return abort(404);
         }
+        
+
             /* Imagen Del Logo */
             $path = public_path('img/membretadoFumi.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);

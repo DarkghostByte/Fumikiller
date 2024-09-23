@@ -43,7 +43,7 @@
             <th>TEL.</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->cell_phone }}
+                {{ substr($ordenCompleta->cell_phone, 0, 3) }} - {{ substr($ordenCompleta->cell_phone, 3, 3) }} - {{ substr($ordenCompleta->cell_phone, 6, 2) }} - {{ substr($ordenCompleta->cell_phone, 8, 2) }} 
             </div>
             </th> 
             <th> DOMICILIO:</th>
@@ -134,7 +134,7 @@
                 <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
                 <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
                 <h5 class="idCert">
-                    No. {{ $ordenCompleta->id_orden }}                
+                    No. {{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}                 
                 </h5>
                 </div>
             
@@ -276,7 +276,8 @@
                         <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
                         <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
                         <h5 class="idCert">
-                            No. {{ $ordenCompleta->id_orden }}                
+                            No. {{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}   
+                            
                         </h5>
                         </div>
                     

@@ -124,27 +124,26 @@
   </div>
   <!-- TABLE DATA -->
   <div class="flex">
-    <el-table :data="tableData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 70%; margin: auto;" stripe>
+    <el-table :data="tableData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 70%; margin: auto;"
+      stripe>
       <el-table-column class="" label="">
         <template #default="{ row }">
-          <button 
-            class="ml-5 px-5 h-3 w-3 rounded-full" 
+          <button class="ml-5 px-5 h-3 w-3 rounded-full"
             :style="{ backgroundColor: row.requiere3 === 'No Pagado' ? 'Red' : 'Green' }"
-            @click="handleEstadoClick(row)"
-          >
+            @click="handleEstadoClick(row)">
           </button>
         </template>
       </el-table-column>
       <el-table-column prop="tradename" label="Cliente" sortable />
       <el-table-column prop="id" label="Factura" sortable />
       <el-table-column prop="pago" label="Costo" sortable />
-      <el-table-column prop="requiere3" label="Estado" >
+      <el-table-column prop="requiere3" label="Estado">
         <template #default="{ row }">
           <span v-if="row.requiere3 === 'No Pagado'">{{ row.requiere3 }}</span>
           <span v-else>{{ row.requiere3 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="date2" label="Fecha de factura" ></el-table-column>
+      <el-table-column prop="date2" label="Fecha de factura"></el-table-column>
     </el-table>
   </div>
   <!-- END TABLE DATA -->
@@ -174,18 +173,15 @@ export default {
     this.refresh();
   },
   methods: {
-    handleEdit() { },
-    handleDelete() { },
     refresh() {
       axios.get('completarOrden').then(res => {
-        this.tableData = res.data.data.filter(row => row.tradename !== 'Particular'); 
-        
-    });
+        this.tableData = res.data.data.filter(row => row.tradename !== 'Particular');
+      });
     },
 
     handleEstadoClick(row) {
-    row.requiere3 = row.requiere3 === 'Pagado' ? 'No Pagado' : 'Pagado';
-    axios.put(`actualizarEstado/${row.id}`, { requiere3: row.requiere3 })
+      row.requiere3 = row.requiere3 === 'Pagado' ? 'No Pagado' : 'Pagado';
+      axios.put(`actualizarEstado/${row.id}`, { requiere3: row.requiere3 })
         .then(response => {
           console.log('Estado actualizado correctamente:', response.data);
           this.fetchData();
@@ -193,18 +189,18 @@ export default {
             title: 'Actualizacion de datos',
             message: `Se actualizaron los datos.`,
             type: 'success'
-          });        
+          });
         })
         .catch(error => {
           console.error('Error al actualizar el estado:', error);
         });
-  },
-  
+    },
+
     async fetchData() {
       try {
         const responseOrdenes = await axios.get(this.urlApi + 'completarOrden');
-        this.tableData = responseOrdenes.data.data.filter(row => row.tradename !== 'Particular'); 
-
+        this.tableData = responseOrdenes.data.data.filter(row => row.tradename !== 'Particular');
+        
         const responseTotalPagos = await axios.get(this.urlApi + 'totalPagos');
         this.totalPagos = responseTotalPagos.data.total;
         const responseTotalCreditos = await axios.get(this.urlApi + 'totalCreditos');
@@ -222,19 +218,20 @@ export default {
       }
     },
 
-
   }
 }
 </script>
 
 <style>
-
 .el-carousel__item {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 0.5s ease-in-out;
-  border-radius: 10px; /* Added rounded corners */
-  margin: 10px 0px; /* Added spacing between items */
+  transition: all 1.5s ease-in-out;
+  border-radius: 10px;
+  /* Added rounded corners */
+  margin: 10px 0px;
+  /* Added spacing between items */
 }
+
 .el-carousel__item h3 {
   color: #475669;
   opacity: 0.75;
@@ -258,23 +255,26 @@ export default {
 }
 
 .el-carousel__button:nth-child(2n+1) {
-  height: 3px;  /* Increased height for better visibility */
-  width: 50px;  /* Increased width for better click area */
-  background-color: #464646; /* Lighter gray color */
+  height: 3px;
+  /* Increased height for better visibility */
+  width: 50px;
+  /* Increased width for better click area */
+  background-color: #464646;
+  /* Lighter gray color */
 }
 
 .el-carousel__item.is-active {
   opacity: 1;
   transform: scale(1);
 }
+
 .el-carousel__item:not(.is-active) {
   opacity: 0.25;
   transform: scale(0.9);
 }
 
 .el-table-column label {
-  color: #333; /* Darker text color for headers */
+  color: #333;
+  /* Darker text color for headers */
 }
-
-
 </style>
