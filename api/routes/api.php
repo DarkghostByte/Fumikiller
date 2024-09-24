@@ -68,6 +68,7 @@ Route::get('/totalCreditosConFactura', [CompletarOrdenesController::class, 'tota
 Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
 Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
+Route::get('/totalProductosInt', [ProductosInternosController::class, 'totalProductosInt']);
 Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
 Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 

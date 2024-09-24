@@ -91,4 +91,10 @@ class ProductosInternosController extends Controller
             'status'=>'success'
         ]);
     }
+
+    public function totalProductosInt()
+    {
+        $totalProductosInt = ProductoInterno::count();
+        return response()->json(['total' => $totalProductosInt]);
+    }
 }

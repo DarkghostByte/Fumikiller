@@ -351,6 +351,7 @@ export default {
 .details {
   padding: 20px;
   display: flex;
+  align-items:center;
 }
 
 p {

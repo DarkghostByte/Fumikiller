@@ -49,12 +49,12 @@
             <h2>Problematicas</h2>
           </router-link>
 
-          <router-link to="/admin/clients/agregarComercio-clients"
+          <router-link to="/admin/admin/productInt"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-emerald-500 hover:bg-emerald-900 focus:bg-emerald-800 rounded-md ml-6 mb-5 shadow-lg" 
           style="width:290px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-house-chimney-user" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Productos Internos</h2>
+          <i class="fa-solid fa-house-chimney-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>                   
+            <h2>Productos Internos ({{ totalProductosInt }})</h2>
           </router-link>
 
           <router-link to="/admin/clients/agregarComercio-clients"
@@ -110,6 +110,7 @@
             totalCiudades: 0,
       totalColonias: 0,
       totalAsentamientos: 0,
+      totalProductosInt: 0,
       totalClientes: 0,
       totalOrdenes: 0,
           }),
@@ -161,6 +162,8 @@
     this.totalColonias = responseTotalColonias.data.total;
     const responseTotalAsentamientos = await axios.get(this.urlApi + 'totalAsentamientos');
     this.totalAsentamientos = responseTotalAsentamientos.data.total;
+    const responseTotalProductosInt = await axios.get(this.urlApi + 'totalProductosInt');
+    this.totalProductosInt = responseTotalProductosInt.data.total;
     const responseTotalClientes = await axios.get(this.urlApi + 'totalClientes');
     this.totalClientes = responseTotalClientes.data.total;
     const responseTotalOrdenes = await axios.get(this.urlApi + 'totalOrdenes');
