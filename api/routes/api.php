@@ -55,6 +55,7 @@ Route::get('/verColonia',[ClientesController::class,'verColonia']);
 Route::get('/verComercio',[ClientesController::class,'verComercio']);
 Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
 Route::get('/verProductosInternos',[CompletarOrdenesController::class,'verProductosInternos']);
+Route::get('/verProductosExternos',[CompletarOrdenesController::class,'verProductosExternos']);
 
 
 //CONTEOS

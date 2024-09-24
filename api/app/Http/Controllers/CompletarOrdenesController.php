@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CompletarOrden;
 use App\Models\Orden;
 use App\Models\ProductoInterno;
+use App\Models\ProductoExterno;
 use Carbon\Carbon;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -25,6 +26,7 @@ class CompletarOrdenesController extends Controller
     $query = CompletarOrden::select([
         'completarordenes.*',
         'orden.plague1',
+        'orden.plague2',
         'orden.date1',
         'orden.date2',
         'orden.id_cliente',
@@ -39,10 +41,16 @@ class CompletarOrdenesController extends Controller
         'colonias.colonia',
         'colonias.codigoPostal',
         'ciudades.ciudad',
-        'productosInternos.productoInt',
+        'productosInternos1.productoInt as productoInt1',
+        'productosInternos2.productoInt as productoInt2',
+        'productosExternos1.productoExt as productoExt1',
+        'productosExternos2.productoExt as productoExt2'
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-    ->join('productosInternos', 'completarordenes.id_productosInternos', '=', 'productosInternos.id')
+    ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+    ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+    ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+    ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
     ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
     ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id');
@@ -79,8 +87,8 @@ class CompletarOrdenesController extends Controller
             'ayudante' => '',
             'id_productosInternos' => 'required|min:1',
             'id_productosInternos2' => '',
-            'productoExt1' => 'required|min:1',
-            'productoExt2' => '',
+            'id_productosExternos' => 'required|min:1',
+            'id_productosExternos2' => '',
             'noTrapear' => 'required|min:1',
             'noIngresar' => 'required|min:1',
             'otraDosis' => 'required|min:1',
@@ -103,8 +111,8 @@ class CompletarOrdenesController extends Controller
             $data->ayudante = $request->ayudante;
             $data->id_productosInternos = $request->id_productosInternos;
             $data->id_productosInternos2 = $request->id_productosInternos2;
-            $data->productoExt1 = $request->productoExt1;
-            $data->productoExt2 = $request->productoExt2;
+            $data->id_productosExternos = $request->id_productosExternos;
+            $data->id_productosExternos2 = $request->id_productosExternos2;
             $data->noTrapear = $request->noTrapear;
             $data->noIngresar = $request->noIngresar;
             $data->otraDosis = $request->otraDosis;
@@ -129,11 +137,21 @@ class CompletarOrdenesController extends Controller
 {
     $data = CompletarOrden::select(['completarordenes.*', 
     'orden.plague1',
+    'orden.plague2',
     'clientes.name',
     'clientes.lastname1',
     'clientes.lastname2',
-    'clientes.tradename'])
+    'clientes.tradename',
+    'productosInternos1.productoInt as productoInt1',
+    'productosInternos2.productoInt as productoInt2',
+    'productosExternos1.productoExt as productoExt1',
+    'productosExternos2.productoExt as productoExt2'
+    ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+    ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+    ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+    ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+    ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
     ->where('completarordenes.id', $id)
     ->first();
@@ -589,8 +607,17 @@ class CompletarOrdenesController extends Controller
             'comercios.comercio',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad')
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2'
+            )
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+            ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+            ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+            ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
@@ -701,8 +728,17 @@ class CompletarOrdenesController extends Controller
             'colonias.colonia',
             'colonias.codigoPostal',
             'ciudades.ciudad',
-            'ciudades.estado')
+            'ciudades.estado',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            )
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+            ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+            ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+            ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
@@ -767,6 +803,12 @@ class CompletarOrdenesController extends Controller
     {
         $productosInternos = ProductoInterno::all();
         return response()->json($productosInternos);
+    }
+    
+    public function verProductosExternos()
+    {
+        $productosExternos = ProductoExterno::all();
+        return response()->json($productosExternos);
     }
 
 }

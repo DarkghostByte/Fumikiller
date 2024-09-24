@@ -247,7 +247,7 @@
                     <th>INTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
+                        {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
                     </div>
                     </th> 
                 </table>
