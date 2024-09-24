@@ -76,7 +76,30 @@ class ProductosInternosController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = ProductoInterno::find($id);
+        $reglas = Validator::make($request->all(), [
+            'productoInt' => 'required|min:1',
+        ]);
+        if (!$data) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Producto interno no encontrado'
+            ], 404);
+        }
+        if ($reglas->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Error de validación',
+                'errors' => $reglas->errors()
+            ], 400);
+        }
+        $data->fill($request->all());
+        $data->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Producto interno actualizado correctamente',
+            'data' => $data
+        ]);
     }
 
     /**

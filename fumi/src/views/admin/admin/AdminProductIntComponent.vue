@@ -36,10 +36,9 @@
           <el-table-column label="Acciones">
             <template #default="scope">
               <div class="flex justify-around">
-                <router-link :to="'/admin/clients/edit-clients/' + scope.row.id">
-                  <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
-                      class="material-symbols-outlined">edit</span></el-button>
-                </router-link>
+                <el-button style="color:black" size="small" type="warning" @click="handleEdit(scope.row)">
+                  <span class="material-symbols-outlined">edit</span>
+                </el-button>
                 <el-button style="color:black" size="small" type="danger" @click="eliminar(scope.row)">
                   <span class="material-symbols-outlined">delete</span>
                 </el-button>
@@ -92,6 +91,30 @@
     </el-dialog>
     <!-- END MODAL 2 -->
 
+    <!-- MODAL 3 -->
+    <el-dialog v-model="dialogVisibleEdit" title="Editar Producto Interno" width="25%">
+      <el-form :model="formEdit" label-width="auto" style="max-width: 100%" ref="formEditRef" :rules="rules" :label-position="'top'">
+        <div class="clientInfo">
+          <div class="details">
+            <i class="fa-solid fa-house-medical-circle-check fa-2x iconProductIntEdit"></i>
+            <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+            <div class="flex" style="width: 100%;">
+              <el-form-item prop="productoInt" label="Producto Interno:" style="width: 100%;">
+                <el-input v-model="formEdit.productoInt" class="px-1" placeholder="Ingresa el producto interno" />
+              </el-form-item>
+            </div>
+          </div>
+        </div>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisibleEdit = false">Cancelar</el-button>
+          <el-button type="warning" @click="editProductInt">Actualizar</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <!-- END MODAL 3 -->
+
     </div>
   </div>
 </template>
@@ -106,6 +129,7 @@ export default {
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleCreate: false,
+    dialogVisibleEdit: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     tableData: [],
@@ -113,6 +137,9 @@ export default {
     selectedItem: {},
     searchQueryProductInt: '',
     form1: {
+      productoInt: '',
+    },
+    formEdit: {
       productoInt: '',
     },
     rules: {
@@ -133,6 +160,18 @@ export default {
       });
     },
 
+    handleEdit(row) {
+      console.log(row);
+      this.formEdit = row;
+      this.dialogVisibleEdit = true;
+    },
+
+    eliminar(row) {
+      console.log(row);
+      this.selectedItem = row;
+      this.dialogVisible = true;
+    },
+
     handleDelete() {
       axios.delete('productosInternos/' + this.selectedItem.id).then(res => {
         console.log(res);
@@ -146,11 +185,6 @@ export default {
       });
     },
 
-    eliminar(row) {
-      console.log(row);
-      this.selectedItem = row;
-      this.dialogVisible = true;
-    },
 
     createProductInt() {
       this.$refs.formRef.validate((valid) => {
@@ -193,6 +227,43 @@ export default {
         return productosInternos.productoInt.toLowerCase().includes(this.searchQueryProductInt.toLowerCase());
       });
     },
+
+    editProductInt() {
+      this.$refs.formEditRef.validate((valid) => {
+        if (valid) {
+          console.log('Form is valid, sending PUT request');
+          axios.put('productosInternos/'+this.formEdit.id,this.formEdit)
+            .then(res => {
+              console.log(res);
+              this.refresh();
+              this.dialogVisibleEdit = false;
+              this.$message.success('Producto Interno actualizado exitosamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro actualizado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al actualizar el producto interno');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de verificar los datos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed, check form errors');
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          })
+        }
+      });
+    }
   }
 };
 </script>
@@ -225,6 +296,11 @@ p {
 
 .iconProductInt {
   color: #f32222;
+  margin-right: 10px;
+}
+
+.iconProductIntEdit {
+  color: #e6a23c;
   margin-right: 10px;
 }
 </style>
