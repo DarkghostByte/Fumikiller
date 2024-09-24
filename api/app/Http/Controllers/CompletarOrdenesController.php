@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\CompletarOrden;
 use App\Models\Orden;
+use App\Models\ProductoInterno;
 use Carbon\Carbon;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -37,9 +38,11 @@ class CompletarOrdenesController extends Controller
         'clientes.id_city',
         'colonias.colonia',
         'colonias.codigoPostal',
-        'ciudades.ciudad'
+        'ciudades.ciudad',
+        'productosInternos.productoInt',
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+    ->join('productosInternos', 'completarordenes.id_productosInternos', '=', 'productosInternos.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
     ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
     ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id');
@@ -74,8 +77,8 @@ class CompletarOrdenesController extends Controller
             'id_orden' => 'required|min:1',
             'responsable' => 'required|min:1',
             'ayudante' => '',
-            'productoInt1' => 'required|min:1',
-            'productoInt2' => '',
+            'id_productosInternos' => 'required|min:1',
+            'id_productosInternos2' => '',
             'productoExt1' => 'required|min:1',
             'productoExt2' => '',
             'noTrapear' => 'required|min:1',
@@ -98,8 +101,8 @@ class CompletarOrdenesController extends Controller
             $data->id_orden = $request->id_orden;
             $data->responsable = $request->responsable;
             $data->ayudante = $request->ayudante;
-            $data->productoInt1 = $request->productoInt1;
-            $data->productoInt2 = $request->productoInt2;
+            $data->id_productosInternos = $request->id_productosInternos;
+            $data->id_productosInternos2 = $request->id_productosInternos2;
             $data->productoExt1 = $request->productoExt1;
             $data->productoExt2 = $request->productoExt2;
             $data->noTrapear = $request->noTrapear;
@@ -759,5 +762,11 @@ class CompletarOrdenesController extends Controller
                 'data' => $completarOrden
             ]);
         }
+
+        public function verProductosInternos()
+    {
+        $productosInternos = ProductoInterno::all();
+        return response()->json($productosInternos);
+    }
 
 }

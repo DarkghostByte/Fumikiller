@@ -72,29 +72,17 @@
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
         <p>Productos internos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="productoInt1" class="px-2" label="Producto interno #1" >
-            <el-select v-model="form.productoInt1" placeholder="Selecciona el producto" style="width: 220px">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
+          <el-form-item prop="id_productosInternos" label="Tipo de productoInt:" class="px-5" style="width: 300px;">
+            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de productoInt:" :disabled="!productoInternos.length">
+              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
             </el-select>
+            <div v-if="!productoInternos.length">Loading productos internos...</div>
           </el-form-item>
-          <el-form-item prop="productoInt2" class="px-2" label="Producto interno #2" >
-            <el-select v-model="form.productoInt2" placeholder="Selecciona el producto" style="width: 220px">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
+          <el-form-item prop="id_productosInternos2" label="Tipo de productoInt:" class="px-5" style="width: 300px;">
+            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de productoInt:" :disabled="!productoInternos2.length">
+              <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
             </el-select>
+            <div v-if="!productoInternos2.length">Loading productos internos...</div>
           </el-form-item>
         </div>
         <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
@@ -242,12 +230,14 @@ export default {
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
+    productoInternos: [],    
+    productoInternos2: [],    
     form: {
       id_orden: '',
       responsable:'',
       ayudante: 'No aplica',
-      productoInt1: '',
-      productoInt2: 'No aplica',
+      id_productosInternos: '',
+      id_productosInternos2: 'No aplica',
       productoExt1: '',
       productoExt2: 'No aplica',
       noTrapear: '',
@@ -267,7 +257,7 @@ export default {
       responsable: [
         { required: true, message: 'El responsable es requerido', trigger: 'blur' },
       ],
-      productoInt1: [
+      id_productosInternos: [
         { required: true, message: 'El producto interno es requerido', trigger: 'blur' },
       ],
       productoExt1: [
@@ -301,6 +291,8 @@ export default {
     }
   }),  
   mounted() {
+    this.fetchProductosInternos();
+    this.fetchProductosInternos2();
   this.refresh();
   const route = useRoute();
   if (route.params && route.params.id) {
@@ -344,6 +336,39 @@ export default {
         this.tableData = res.data.data;
       });
     },
+
+    fetchProductosInternos() {
+      axios.get('verProductosInternos')
+        .then(response => {
+          console.log('Productos Internos:', response.data);
+          this.productoInternos = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching productos interno:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar productos internos',
+            type: 'error',
+          });
+        });
+    },
+
+    fetchProductosInternos2() {
+      axios.get('verProductosInternos')
+        .then(response => {
+          console.log('Productos Internos:', response.data);
+          this.productoInternos2 = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching productos interno:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar productos internos',
+            type: 'error',
+          });
+        });
+    },
+
     submitForm() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {

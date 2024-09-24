@@ -17,8 +17,10 @@ return new class extends Migration
             $table->foreign("id_orden")->references('id')->on('orden');
             $table->string('responsable');
             $table->string('ayudante');
-            $table->string('productoInt1');
-            $table->string('productoInt2');
+            $table->integer('id_productosInternos')->unsigned();
+            $table->foreign("id_productosInternos")->references('id')->on('productosInternos');
+            $table->integer('id_productosInternos2')->unsigned();
+            $table->foreign("id_productosInternos2")->references('id')->on('productosInternos');
             $table->string('productoExt1');
             $table->string('productoExt2');
             $table->string('noTrapear');
