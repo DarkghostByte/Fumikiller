@@ -1,16 +1,20 @@
 <template>
   <div>
-    <router-link to="/admin/calendar" class="btn btn-primary">
-      <i class="fa fa-calendar-day" aria-hidden="true" style="margin-top: 5px;
-      margin-left: -5px; margin-right:5px;"></i>
-      Agenda por día
-    </router-link>
+    <router-link to="/admin/calendar"
+          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa-solid fa-calendar-day" aria-hidden="true" style="margin-top: 5px;
+            margin-left: -5px; margin-right:10px;"></i>
+            Agenda por día
+        </router-link>
 
-    <router-link to="/admin/calendar/complete" class="btn btn-success">
-      <i class="fa fa-calendar-check" aria-hidden="true" style="margin-top: 5px;
-      margin-left: -5px; margin-right:5px;"></i>
-      Agenda realizadas
-    </router-link>
+        <router-link to="/admin/calendar/complete"
+          class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
+          style="color:black">
+          <i class="fa-solid fa-calendar-check" aria-hidden="true" style="margin-top: 5px;
+            margin-left: -5px; margin-right:10px;"></i>
+            Agenda realizadas
+        </router-link>
   </div>
 
   <div class="container mx-auto">
@@ -32,7 +36,7 @@
       <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }" stripe>
         <el-table-column label="PDF Orden">
           <template #default="scope">
-            <el-button style="color:black" type="success" circle @click="pdf(scope.row)">
+            <el-button style="color:black" type="success" @click="pdf(scope.row)">
               <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
                 <span class="material-symbols-outlined">lab_profile</span>
               </a>
@@ -88,7 +92,7 @@ export default {
   methods: {
     refresh() {
       axios.get('orden').then(res => {
-        this.tableData = res.data.data.filter(row => row.agendaInfo === 'Agenda');
+        this.tableData = res.data.data;
 
         // Imprimir tableData para verificar los datos
         console.log('tableData:', this.tableData);

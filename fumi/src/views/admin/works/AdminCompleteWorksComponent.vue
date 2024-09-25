@@ -170,7 +170,6 @@
         <div class="flex">
           <el-form-item prop="requiere2" label="" class="px-10">
             <el-checkbox-group v-model="form.requiere2" label="Requiere de">
-              <el-checkbox label="Credito" value="Credito"></el-checkbox>
               <el-checkbox label="Bitacora" value="Bitacora"></el-checkbox>
               <el-checkbox label="Agendar" value="Agendar"></el-checkbox>
               <el-checkbox label="Cancelar" value="Cancelar"></el-checkbox>
