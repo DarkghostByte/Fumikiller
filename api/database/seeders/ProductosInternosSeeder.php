@@ -26,5 +26,9 @@ class ProductosInternosSeeder extends Seeder
             'productoInt'=>'Producto #3',
             'infodelete_productoInt'=>'Alta',
         ]);  
+        DB::table('productosInternos')->insert([
+            'productoInt'=>'Producto #4',
+            'infodelete_productoInt'=>'Alta',
+        ]);  
     }
 }

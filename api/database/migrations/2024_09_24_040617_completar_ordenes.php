@@ -24,7 +24,7 @@ return new class extends Migration
             $table->integer('id_productosExternos')->unsigned();
             $table->foreign("id_productosExternos")->references('id')->on('productosExternos');
             $table->integer('id_productosExternos2')->unsigned();
-            $table->foreign("id_productosExternos2")->references('id')->on('productosExternos2');
+            $table->foreign("id_productosExternos2")->references('id')->on('productosExternos');
             $table->string('noTrapear');
             $table->string('noIngresar');
             $table->string('otraDosis');
