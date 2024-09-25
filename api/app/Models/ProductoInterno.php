@@ -12,5 +12,6 @@ class ProductoInterno extends Model
 
     protected $fillable = [
         'productoInt',
+        'infodelete_productoInt'
     ];
 }

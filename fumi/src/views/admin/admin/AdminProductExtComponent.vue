@@ -10,10 +10,10 @@
 
       <!-- INICIO -->
       <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-semibold">Gestión de Productos Internos</h1>
+        <h1 class="text-2xl font-semibold">Gestión de Productos Externos</h1>
         <div class="flex" style="width: 25%;">
-          <el-input class="" placeholder="Buscar por producto interno" v-model="searchQueryProductInt"
-            @input="filterDataProductInt" />
+          <el-input class="" placeholder="Buscar por producto externo" v-model="searchQueryProductExt"
+            @input="filterDataProductExt" />
         </div>
         <div>
           <router-link to="/admin/admin" class="el-button el-button--danger">
@@ -23,7 +23,7 @@
           </router-link>
           <el-button @click="dialogVisibleCreate = true" class="ml-2 el-button el-button--primary">
             <i class="fa-solid fa-house-medical-circle-check" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-            Nuevo Producto Interno
+            Nuevo Producto Externo
           </el-button>
         </div>
       </div>
@@ -31,24 +31,24 @@
 
       <!-- TABLE -->
       <div class="flex" style="justify-content: center;">
-        <el-table :data="filteredData" :default-sort="{ prop: 'productoInt', order: 'ascending' }" style="width: 50%;">
+        <el-table :data="filteredData" :default-sort="{ prop: 'productoExt', order: 'ascending' }" style="width: 55%;">
           <el-table-column class="" label="">
             <template #default="{ row }">
               <button 
                 class="ml-5 px-5 h-3 w-3 rounded-full" 
-                :style="{ backgroundColor: row.infodelete_productoInt === 'Alta' ? 'Green' : 'Red' }"
+                :style="{ backgroundColor: row.infodelete_productoExt === 'Alta' ? 'Green' : 'Red' }"
                 @click="handleEstadoClick(row)"
               >
               </button>
             </template>
           </el-table-column>
-          <el-table-column prop="infodelete_productoInt" label="Estado" >
+          <el-table-column prop="infodelete_productoExt" label="Estado" >
             <template #default="{ row }">
-              <span v-if="row.infodelete_productoInt === 'Alta'">{{ row.infodelete_productoInt }}</span>
-              <span v-else>{{ row.infodelete_productoInt }}</span>
+              <span v-if="row.infodelete_productoExt === 'Alta'">{{ row.infodelete_productoExt }}</span>
+              <span v-else>{{ row.infodelete_productoExt }}</span>
             </template>
           </el-table-column>
-          <el-table-column prop="productoInt" label="Producto interno" sortable />
+          <el-table-column prop="productoExt" label="Producto externo" sortable />
           <el-table-column label="Acciones">
             <template #default="scope">
               <div class="flex justify-around">
@@ -68,33 +68,33 @@
       <!-- END TABLE -->
 
       <!-- MODAL 1 -->
-      <el-dialog v-model="dialogVisibleCreate" title="Agregar nuevo producto interno" width="20%">
+      <el-dialog v-model="dialogVisibleCreate" title="Agregar nuevo producto externo" width="20%">
         <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
           :label-position="'top'">
           <div class="row">
-            <el-form-item prop="productoInt" label="Producto Interno:">
-              <el-input v-model="form1.productoInt" class="px-1" placeholder="Ingresa el producto interno" />
+            <el-form-item prop="productoExt" label="Producto Externo:">
+              <el-input v-model="form1.productoExt" class="px-1" placeholder="Ingresa el producto externo" />
             </el-form-item>
           </div>
         </el-form>
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisibleCreate = false">Cancelar</el-button>
-            <el-button type="primary" @click="createProductInt">Crear</el-button>
+            <el-button type="primary" @click="createProductExt">Crear</el-button>
           </span>
         </template>
       </el-dialog>
       <!-- END MODAL 1 -->
 
-      <!--
-    <el-dialog v-model="dialogVisible" title="¿Deseas eliminar el siguente producto interno?" width="25%" height="500">
+<!--
+    <el-dialog v-model="dialogVisible" title="¿Deseas eliminar el siguente producto externo?" width="25%" height="500">
       <div class="clientInfo">
         <div class="details">
-          <i class="fa-solid fa-house-medical-circle-check fa-2x iconProductInt"></i>
-          
+          <i class="fa-solid fa-house-medical-circle-check fa-2x iconProductExt"></i>
+        
           <div>
             <p>
-              <strong>Producto interno: </strong> {{ selectedItem.productoInt }}
+              <strong>Producto externo: </strong> {{ selectedItem.productoExt }}
             </p>
           </div>
         </div>
@@ -108,19 +108,18 @@
         </div>
       </template>
     </el-dialog>
-    
-    -->
+  -->
 
     <!-- MODAL 3 -->
-    <el-dialog v-model="dialogVisibleEdit" title="Editar Producto Interno" width="25%">
+    <el-dialog v-model="dialogVisibleEdit" title="Editar Producto Externo" width="25%">
       <el-form :model="formEdit" label-width="auto" style="max-width: 100%" ref="formEditRef" :rules="rules" :label-position="'top'">
         <div class="clientInfo">
           <div class="details">
-            <i class="fa-solid fa-house-medical-circle-check fa-2x iconProductIntEdit"></i>
+            <i class="fa-solid fa-house-medical-circle-check fa-2x iconProductExtEdit"></i>
             <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
             <div class="flex" style="width: 100%;">
-              <el-form-item prop="productoInt" label="Producto Interno:" style="width: 100%;">
-                <el-input v-model="formEdit.productoInt" class="px-1" placeholder="Ingresa el producto interno" />
+              <el-form-item prop="productoExt" label="Producto Externo:" style="width: 100%;">
+                <el-input v-model="formEdit.productoExt" class="px-1" placeholder="Ingresa el producto externo" />
               </el-form-item>
             </div>
           </div>
@@ -129,7 +128,7 @@
       <template #footer>
         <span class="dialog-footer">
           <el-button @click="dialogVisibleEdit = false">Cancelar</el-button>
-          <el-button type="warning" @click="editProductInt">Actualizar</el-button>
+          <el-button type="warning" @click="editProductExt">Actualizar</el-button>
         </span>
       </template>
     </el-dialog>
@@ -155,17 +154,18 @@ export default {
     tableData: [],
     filteredData: [],
     selectedItem: {},
-    searchQueryProductInt: '',
+    searchQueryProductExt: '',
     form1: {
-      productoInt: '',
-      infodelete_productoInt: 'Alta',
+      productoExt: '',
+      infodelete_productoExt: 'Alta',
+
     },
     formEdit: {
-      productoInt: '',
+      productoExt: '',
     },
     rules: {
-      productoInt: [
-        { required: true, message: 'El producto interno es requerido', trigger: 'blur' },
+      productoExt: [
+        { required: true, message: 'El producto externo es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
     }
@@ -175,7 +175,7 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('productosInternos').then(res => {
+      axios.get('productosExternos').then(res => {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });
@@ -186,16 +186,16 @@ export default {
       this.formEdit = row;
       this.dialogVisibleEdit = true;
     },
+
 /*
     eliminar(row) {
       console.log(row);
       this.selectedItem = row;
       this.dialogVisible = true;
     },
-    */
-    /*
+
     handleDelete() {
-      axios.delete('productosInternos/' + this.selectedItem.id).then(res => {
+      axios.delete('productosExternos/' + this.selectedItem.id).then(res => {
         console.log(res);
         this.refresh();
         this.dialogVisible = false;
@@ -209,15 +209,15 @@ export default {
     */
 
 
-    createProductInt() {
+    createProductExt() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
-          axios.post('productosInternos', this.form1)
+          axios.post('productosExternos', this.form1)
             .then(res => {
               console.log(res);
               this.dialogVisibleCreate = false;
               this.refresh();
-              this.$message.success('El producto interno se agrego exitosamente');
+              this.$message.success('El producto externo se agrego exitosamente');
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro insertado correctamente',
@@ -226,7 +226,7 @@ export default {
             })
             .catch(error => {
               console.log(error);
-              this.$message.error('Error al agregar el producto interno');
+              this.$message.error('Error al agregar el producto externo');
               ElNotification({
                 title: 'Error',
                 message: 'Favor de llenar los campos',
@@ -245,22 +245,22 @@ export default {
       });
     },
 
-    filterDataProductInt() {
-      this.filteredData = this.tableData.filter((productosInternos) => {
-        return productosInternos.productoInt.toLowerCase().includes(this.searchQueryProductInt.toLowerCase());
+    filterDataProductExt() {
+      this.filteredData = this.tableData.filter((productosExternos) => {
+        return productosExternos.productoExt.toLowerCase().includes(this.searchQueryProductExt.toLowerCase());
       });
     },
 
-    editProductInt() {
+    editProductExt() {
       this.$refs.formEditRef.validate((valid) => {
         if (valid) {
           console.log('Form is valid, sending PUT request');
-          axios.put('productosInternos/'+this.formEdit.id,this.formEdit)
+          axios.put('productosExternos/'+this.formEdit.id,this.formEdit)
             .then(res => {
               console.log(res);
               this.refresh();
               this.dialogVisibleEdit = false;
-              this.$message.success('Producto Interno actualizado exitosamente');
+              this.$message.success('Producto Externo actualizado exitosamente');
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro actualizado correctamente',
@@ -269,7 +269,7 @@ export default {
             })
             .catch(error => {
               console.log(error);
-              this.$message.error('Error al actualizar el producto interno');
+              this.$message.error('Error al actualizar el producto externo');
               ElNotification({
                 title: 'Error',
                 message: 'Favor de verificar los datos',
@@ -287,12 +287,11 @@ export default {
         }
       });
     },
-
     handleEstadoClick(row) {
   const updatedData = {
-    infodelete_productoInt: row.infodelete_productoInt === 'Baja' ? 'Alta' : 'Baja'
+    infodelete_productoExt: row.infodelete_productoExt === 'Baja' ? 'Alta' : 'Baja'
   };
-  axios.put(`desactivarProductoInterno/${row.id}`, updatedData)
+  axios.put(`desactivarProductoExterno/${row.id}`, updatedData)
     .then(response => {
       console.log('Estado actualizado correctamente:', response.data);
       this.refresh();
@@ -306,7 +305,6 @@ export default {
       console.error('Error al actualizar el estado:', error);
     });
 },
-
   }
 };
 </script>
@@ -337,12 +335,12 @@ p {
   margin-bottom: 15px;
 }
 
-.iconProductInt {
+.iconProductExt {
   color: #f32222;
   margin-right: 10px;
 }
 
-.iconProductIntEdit {
+.iconProductExtEdit {
   color: #e6a23c;
   margin-right: 10px;
 }

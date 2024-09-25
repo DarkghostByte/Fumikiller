@@ -69,6 +69,7 @@ Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
 Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
 Route::get('/totalProductosInt', [ProductosInternosController::class, 'totalProductosInt']);
+Route::get('/totalProductosExt', [ProductosExtrenosController::class, 'totalProductosExt']);
 Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
 Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 
@@ -76,6 +77,8 @@ Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
 Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);
 Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);
+Route::put('desactivarProductoInterno/{id}', [ProductosInternosController::class, 'desactivarProductoInterno']);
+Route::put('desactivarProductoExterno/{id}', [ProductosExtrenosController::class, 'desactivarProductoExterno']);
 
 //FILTRO DE FECHAS DE HOME
 Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);

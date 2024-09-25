@@ -170,7 +170,7 @@
           <el-form-item prop="requiere3" label="Se pago?" class="px-10">
             <el-radio-group v-model="form.requiere3">
               <el-radio value="Pagado" size="large" border>Pagado</el-radio>
-              <el-radio value="No Pagado" size="large" border>No Pagado</el-radio>
+              <el-radio value="Credito" size="large" border>Credito</el-radio>
             </el-radio-group>
           </el-form-item>
         </div>

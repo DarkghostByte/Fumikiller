@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('productosInternos', function (Blueprint $table) {
             $table->increments('id');
             $table->string('productoInt');
+            $table->string('infodelete_productoInt');
             $table->timestamps();
         });
     }

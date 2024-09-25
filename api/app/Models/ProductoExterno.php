@@ -12,5 +12,6 @@ class ProductoExterno extends Model
 
     protected $fillable = [
         'productoExt',
+        'infodelete_productoExt'
     ];
 }

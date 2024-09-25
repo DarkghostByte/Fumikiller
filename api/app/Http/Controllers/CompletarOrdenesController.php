@@ -426,7 +426,7 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('completarordenes.requiere3','=','No Pagado')
+        ->where('completarordenes.requiere3','=','Credito')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -486,7 +486,7 @@ class CompletarOrdenesController extends Controller
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         // Filtrar por órdenes no pagadas y clientes particulares
-        ->where('completarordenes.requiere3', 'No Pagado')
+        ->where('completarordenes.requiere3', 'Credito')
         ->where('clientes.tradename', 'Particular')
         // Ordenar por ID de forma descendente
         ->orderBy('completarordenes.id', 'DESC')
@@ -548,7 +548,7 @@ class CompletarOrdenesController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('completarordenes.requiere3','No Pagado')
+        ->where('completarordenes.requiere3','Credito')
         ->where('clientes.tradename','!=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -652,7 +652,7 @@ class CompletarOrdenesController extends Controller
 
     public function totalCreditos()
         {
-            $totalCreditos = CompletarOrden::where('requiere3', 'No Pagado')
+            $totalCreditos = CompletarOrden::where('requiere3', 'Credito')
             ->sum('pago');
             return response()->json(['total' => $totalCreditos]);
         }
@@ -677,7 +677,7 @@ class CompletarOrdenesController extends Controller
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.requiere3', 'No Pagado')
+            ->where('completarordenes.requiere3', 'Credito')
             ->where('clientes.tradename', 'Particular')
 
             ->sum('pago');
@@ -691,7 +691,7 @@ class CompletarOrdenesController extends Controller
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.requiere3', 'No Pagado')
+            ->where('completarordenes.requiere3', 'Credito')
             ->where('clientes.tradename', '!=' ,'Particular')
 
             ->sum('pago');
@@ -770,7 +770,7 @@ class CompletarOrdenesController extends Controller
             $completarOrden = CompletarOrden::find($id);
 
             $validator = Validator::make($request->all(), [
-                'requiere3' => 'required|in:Pagado,No Pagado', 
+                'requiere3' => 'required|in:Pagado,Credito', 
             ]);
 
             if (!$completarOrden) {
@@ -800,15 +800,15 @@ class CompletarOrdenesController extends Controller
         }
 
         public function verProductosInternos()
-    {
-        $productosInternos = ProductoInterno::all();
-        return response()->json($productosInternos);
-    }
-    
-    public function verProductosExternos()
-    {
-        $productosExternos = ProductoExterno::all();
-        return response()->json($productosExternos);
-    }
+        {
+            $productosInternos = ProductoInterno::where('infodelete_productoInt', '!=', 'Baja')->get();
+            return response()->json($productosInternos);
+        }
+
+        public function verProductosExternos()
+        {
+            $productosExternos = ProductoExterno::where('infodelete_productoExt', '!=', 'Baja')->get();
+            return response()->json($productosExternos);
+        }
 
 }

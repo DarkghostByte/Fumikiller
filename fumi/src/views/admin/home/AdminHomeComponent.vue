@@ -129,7 +129,7 @@
       <el-table-column class="" label="">
         <template #default="{ row }">
           <button class="ml-5 px-5 h-3 w-3 rounded-full"
-            :style="{ backgroundColor: row.requiere3 === 'No Pagado' ? 'Red' : 'Green' }"
+            :style="{ backgroundColor: row.requiere3 === 'Credito' ? 'Red' : 'Green' }"
             @click="handleEstadoClick(row)">
           </button>
         </template>
@@ -139,7 +139,7 @@
       <el-table-column prop="pago" label="Costo" sortable />
       <el-table-column prop="requiere3" label="Estado">
         <template #default="{ row }">
-          <span v-if="row.requiere3 === 'No Pagado'">{{ row.requiere3 }}</span>
+          <span v-if="row.requiere3 === 'Credito'">{{ row.requiere3 }}</span>
           <span v-else>{{ row.requiere3 }}</span>
         </template>
       </el-table-column>
@@ -180,7 +180,7 @@ export default {
     },
 
     handleEstadoClick(row) {
-      row.requiere3 = row.requiere3 === 'Pagado' ? 'No Pagado' : 'Pagado';
+      row.requiere3 = row.requiere3 === 'Pagado' ? 'Credito' : 'Pagado';
       axios.put(`actualizarEstado/${row.id}`, { requiere3: row.requiere3 })
         .then(response => {
           console.log('Estado actualizado correctamente:', response.data);

@@ -36,6 +36,8 @@ class ProductosInternosController extends Controller
         
         $reglas = Validator::make($request->all(),[
             'productoInt' => 'required|min:1',
+            'infodelete_productoInt'=>'required|min:1',
+
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -46,6 +48,7 @@ class ProductosInternosController extends Controller
         }else{
             $data = new ProductoInterno();
             $data->productoInt = $request->productoInt;
+            $data->infodelete_productoInt = $request->infodelete_productoInt;
             $data->save();
 
             return response()->json([
@@ -119,5 +122,41 @@ class ProductosInternosController extends Controller
     {
         $totalProductosInt = ProductoInterno::count();
         return response()->json(['total' => $totalProductosInt]);
+    }
+
+    public function desactivarProductoInterno(Request $request, $id)
+    {
+    $data = ProductoInterno::find($id);
+
+    if (!$data) {
+        return response()->json([
+        'status' => 'error',
+        'message' => 'Producto Interno no encontrado'
+        ], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'infodelete_productoInt' => 'required|in:Alta,Baja',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+        'status' => 'failed',
+        'message' => 'Error de validación',
+        'errors' => $validator->errors()
+        ], 400);
+    }
+
+    $updatedData = [
+        'infodelete_productoInt' => $request->infodelete_productoInt
+    ];
+
+    $data->update($updatedData);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Producto Interno desactivado exitosamente',
+        'data' => $data
+    ]);
     }
 }

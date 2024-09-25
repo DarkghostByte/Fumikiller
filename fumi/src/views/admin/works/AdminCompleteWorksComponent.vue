@@ -72,14 +72,14 @@
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
         <p>Productos internos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosInternos" label="Tipo de productoInt:" class="px-5" style="width: 300px;">
-            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de productoInt:" :disabled="!productoInternos.length">
+          <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:" :disabled="!productoInternos.length">
               <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
             </el-select>
             <div v-if="!productoInternos.length">Loading productos internos...</div>
           </el-form-item>
-          <el-form-item prop="id_productosInternos2" label="Tipo de productoInt:" class="px-5" style="width: 300px;">
-            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de productoInt:" :disabled="!productoInternos2.length">
+          <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:" :disabled="!productoInternos2.length">
               <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
             </el-select>
             <div v-if="!productoInternos2.length">Loading productos internos...</div>
@@ -88,14 +88,14 @@
         <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
         <p>Productos externos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosExternos" label="Tipo de productoInt:" class="px-5" style="width: 300px;">
-            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de productoInt:" :disabled="!productoInternos.length">
-              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
+          <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:" :disabled="!productoExternos.length">
+              <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt" :value="productoExt.id" />
             </el-select>
-            <div v-if="!productoInternos.length">Loading productos internos...</div>
+            <div v-if="!productoExternos.length">Loading productos internos...</div>
           </el-form-item>
-          <el-form-item prop="id_productosExternos2" label="Tipo de productoInt:" class="px-5" style="width: 300px;">
-            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de productoInt:" :disabled="!productoExternos2.length">
+          <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:" :disabled="!productoExternos2.length">
               <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt" :value="productoExt.id" />
             </el-select>
             <div v-if="!productoExternos2.length">Loading productos internos...</div>
@@ -188,7 +188,7 @@
           <el-form-item prop="requiere3" label="Se pago?" class="px-10">
             <el-radio-group v-model="form.requiere3">
               <el-radio value="Pagado" size="large" border>Pagado</el-radio>
-              <el-radio value="No Pagado" size="large" border>No Pagado</el-radio>
+              <el-radio value="Credito" size="large" border>Credito</el-radio>
             </el-radio-group>
           </el-form-item>
         </div>
@@ -333,7 +333,7 @@ export default {
       axios.get('verProductosInternos')
         .then(response => {
           console.log('Productos Internos:', response.data);
-          this.productoInternos = response.data; // Assuming the data structure is correct
+          this.productoInternos = response.data;
         })
         .catch(error => {
           console.error('Error fetching productos interno:', error);

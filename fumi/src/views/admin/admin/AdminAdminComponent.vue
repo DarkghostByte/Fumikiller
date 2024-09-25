@@ -9,7 +9,7 @@
     <div  class="flex flex-wrap items-start justify-start">
           <router-link to="/admin/admin/city"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-500 hover:bg-blue-900 focus:bg-blue-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px; text-align: center; ;">
+          style="width:300px; height:100px; font-size:22px; text-align: center; ;">
             <i class="fa-solid fa-city" aria-hidden="true" style="margin-top: 10%;
             margin-left: -5px; margin-right:10px; font-size:20px;"></i>                
             <h2>Ciudades ({{ totalCiudades }})</h2>
@@ -17,7 +17,7 @@
 
           <router-link to="/admin/admin/cologne"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-500 hover:bg-green-900 focus:bg-green-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Colonias ({{ totalColonias }})</h2>
@@ -25,7 +25,7 @@
 
           <router-link to="/admin/admin/settlements"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-500 hover:bg-orange-900 focus:bg-orange-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
           <i class="fa-solid fa-apartment"></i>
             <i class="fa-solid fa-school-flag" aria-hidden="true" style="height:15px; margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
@@ -35,7 +35,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-500 hover:bg-purple-900 focus:bg-purple-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Empleados</h2>
@@ -43,7 +43,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-400 hover:bg-blue-800 focus:bg-blue-700 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-bug" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Problematicas</h2>
@@ -51,23 +51,23 @@
 
           <router-link to="/admin/admin/productInt"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-emerald-500 hover:bg-emerald-900 focus:bg-emerald-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
           <i class="fa-solid fa-house-chimney-user" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                   
             <h2>Productos Internos ({{ totalProductosInt }})</h2>
           </router-link>
 
-          <router-link to="/admin/clients/agregarComercio-clients"
+          <router-link to="/admin/admin/productExt"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-amber-500 hover:bg-amber-900 focus:bg-amber-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-house-circle-xmark" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Productos Externos</h2>
+            <h2>Productos Externos ({{ totalProductosExt }})</h2>
           </router-link>
 
           <router-link to="/admin/admin/clientsView"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Clientes ({{ totalClientes }})</h2>
@@ -75,7 +75,7 @@
 
           <router-link to="/admin/admin/orderView"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-300 hover:bg-blue-700 focus:bg-blue-600 rounded-md ml-6 mb-5 shadow-lg"
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Ordenes ({{ totalOrdenes }})</h2>
@@ -83,7 +83,7 @@
 
           <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-gradient-to-l from-pink-500 to-amber-500 hover:bg-gradient-to-r rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:290px; height:100px; font-size:22px;">
+          style="width:300px; height:100px; font-size:22px;">
             <i class="fa-solid fa-person" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
             <h2>Ejemplo</h2>
@@ -111,6 +111,7 @@
       totalColonias: 0,
       totalAsentamientos: 0,
       totalProductosInt: 0,
+      totalProductosExt: 0,
       totalClientes: 0,
       totalOrdenes: 0,
           }),
@@ -164,6 +165,8 @@
     this.totalAsentamientos = responseTotalAsentamientos.data.total;
     const responseTotalProductosInt = await axios.get(this.urlApi + 'totalProductosInt');
     this.totalProductosInt = responseTotalProductosInt.data.total;
+    const responseTotalProductosExt = await axios.get(this.urlApi + 'totalProductosExt');
+    this.totalProductosExt = responseTotalProductosExt.data.total;
     const responseTotalClientes = await axios.get(this.urlApi + 'totalClientes');
     this.totalClientes = responseTotalClientes.data.total;
     const responseTotalOrdenes = await axios.get(this.urlApi + 'totalOrdenes');
