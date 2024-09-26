@@ -69,6 +69,8 @@ nav {
   justify-content: center;
   width: 50px;
   font-size: 0; 
+  transition: width 0.75s ease-in-out, font-size 0.75s;  
+
 }
 nav.span{
   margin-left: 15px;
@@ -91,10 +93,31 @@ nav:hover {
 
 
 <script>
-    export default{
-        name:'AdminAsideComponent',
-        data:()=>({
-            url:process.env.VUE_APP_ROOT_ASSETS,
-        }),
-    }
+import { debounce } from 'lodash';
+
+export default {
+  name: 'AdminAsideComponent',
+  data() {
+    return {
+      url: process.env.VUE_APP_ROOT_ASSETS,
+      isExpanded: false,
+    };
+  },
+  methods: {
+    toggleExpanded() {
+      this.isExpanded = !this.isExpanded;
+    },
+  },
+  mounted() {
+  const resizeObserver = new ResizeObserver(debounce(entries => {
+    entries.forEach(entry => {
+      if (entry.target === this.$el && window.innerWidth <= 768) { // Adjust breakpoint as needed
+        this.isExpanded = false;
+      }
+    });
+  }, 200));
+
+  resizeObserver.observe(this.$el);
+}
+};
 </script>

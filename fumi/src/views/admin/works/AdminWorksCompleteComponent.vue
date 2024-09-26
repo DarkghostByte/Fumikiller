@@ -73,7 +73,7 @@
             </el-table-column>
             <el-table-column prop="pago" label="Monto"  sortable width="150" />
             <el-table-column prop="requiere3" label="Datos" sortable width="170" />
-            <el-table-column prop="responsable" label="Responsable" sortable width="130"  />
+            <el-table-column prop="nameEmpleado1" label="Responsable" sortable width="130"  />
             <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
             <!--BOTON PARA EDITAR LA ORDEN DE TRABAJO-->

@@ -14,6 +14,8 @@ class CompletarOrden extends Model
         'id_orden',
         'responsable',
         'ayudante',
+        'id_empleado',
+        'id_empleado2',
         'id_productosInternos',
         'id_productosInternos2',
         'id_productosExternos',

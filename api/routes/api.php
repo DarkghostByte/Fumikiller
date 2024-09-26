@@ -11,6 +11,7 @@ use App\Http\Controllers\ComerciosController;
 use App\Http\Controllers\CertificadoController;
 use App\Http\Controllers\ProductosInternosController;
 use App\Http\Controllers\ProductosExtrenosController;
+use App\Http\Controllers\EmpleadosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,6 +34,7 @@ Route::resource('comercios', ComerciosController::class);
 Route::resource('certificados', CertificadoController::class);
 Route::resource('productosInternos', ProductosInternosController::class);
 Route::resource('productosExternos', ProductosExtrenosController::class);
+Route::resource('empleados', EmpleadosController::class);
 
 //RUTAS PARA PDF
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
@@ -56,6 +58,7 @@ Route::get('/verComercio',[ClientesController::class,'verComercio']);
 Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
 Route::get('/verProductosInternos',[CompletarOrdenesController::class,'verProductosInternos']);
 Route::get('/verProductosExternos',[CompletarOrdenesController::class,'verProductosExternos']);
+Route::get('/verEmpleados',[CompletarOrdenesController::class,'verEmpleados']);
 
 
 //CONTEOS
@@ -70,6 +73,7 @@ Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
 Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
 Route::get('/totalProductosInt', [ProductosInternosController::class, 'totalProductosInt']);
 Route::get('/totalProductosExt', [ProductosExtrenosController::class, 'totalProductosExt']);
+Route::get('/totalEmpleados', [EmpleadosController::class, 'totalEmpleados']);
 Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
 Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 
@@ -79,6 +83,7 @@ Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarClie
 Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);
 Route::put('desactivarProductoInterno/{id}', [ProductosInternosController::class, 'desactivarProductoInterno']);
 Route::put('desactivarProductoExterno/{id}', [ProductosExtrenosController::class, 'desactivarProductoExterno']);
+Route::put('desactivarEmpleado/{id}', [EmpleadosController::class, 'desactivarEmpleado']);
 
 //FILTRO DE FECHAS DE HOME
 Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);

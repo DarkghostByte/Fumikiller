@@ -314,6 +314,7 @@
         width:100%;
         margin-left:-5px;
         margin-top:-5px;
+        font-size: 15px;
     }
     .cerapli{
         color:#eb590c;
@@ -397,12 +398,13 @@
     .renDivTh{
         width: 100%;
         margin-top:-25px; 
-    }
+            }
     .renDiv{
         border-bottom: 1px solid black;
         height:15px;
         width: 100%;
         margin-top:-5px;
+        font-size: 15px;
     }
     h1{
         text-alaing:center;

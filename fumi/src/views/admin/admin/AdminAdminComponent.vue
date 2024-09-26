@@ -33,12 +33,12 @@
           </router-link>
 
 
-          <router-link to="/admin/clients/agregarComercio-clients"
+          <router-link to="/admin/admin/employees"
           class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-500 hover:bg-purple-900 focus:bg-purple-800 rounded-md ml-6 mb-5 shadow-lg" 
           style="width:300px; height:100px; font-size:22px;">
             <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Empleados</h2>
+            <h2>Empleados ({{ totalEmpleados }})</h2>
           </router-link>
 
           <router-link to="/admin/clients/agregarComercio-clients"
@@ -114,6 +114,7 @@
       totalProductosExt: 0,
       totalClientes: 0,
       totalOrdenes: 0,
+      totalEmpleados: 0,
           }),
           mounted(){
             this.refresh(),
@@ -171,6 +172,9 @@
     this.totalClientes = responseTotalClientes.data.total;
     const responseTotalOrdenes = await axios.get(this.urlApi + 'totalOrdenes');
     this.totalOrdenes = responseTotalOrdenes.data.total;
+    const responseTotalEmpleados = await axios.get(this.urlApi + 'totalEmpleados');
+    this.totalEmpleados = responseTotalEmpleados.data.total;
+
   } catch (error) {
     console.error('Error al obtener los datos:', error);
   }

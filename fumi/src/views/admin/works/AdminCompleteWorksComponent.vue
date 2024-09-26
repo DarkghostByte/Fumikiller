@@ -54,19 +54,17 @@
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
         <p>Empleados</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="responsable" class="px-2" label="Responsable" >
-            <el-select v-model="form.responsable" placeholder="Selecciona el fumigador" style="width: 220px">
-              <el-option label="Juan" value="juan" />
-              <el-option label="Pepe" value="pepe" />
-              <el-option label="Jesus" value="jesus" />
+          <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:" :disabled="!empleados.length">
+              <el-option v-for="nameEmpleado in empleados" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado" :value="nameEmpleado.id" />
             </el-select>
+            <div v-if="!empleados.length">Loading empleados...</div>
           </el-form-item>
-          <el-form-item prop="ayudante" class="px-2" label="Ayudante" >
-            <el-select v-model="form.ayudante" placeholder="Selecciona el fumigador" style="width: 220px">
-              <el-option label="Juan" value="juan" />
-              <el-option label="Pepe" value="pepe" />
-              <el-option label="Jesus" value="jesus" />
+          <el-form-item prop="id_empleado2" label="Ayudante:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_empleado2" placeholder="Selecciona el ayudante:" :disabled="!empleados2.length">
+              <el-option v-for="nameEmpleado in empleados2" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado" :value="nameEmpleado.id" />
             </el-select>
+            <div v-if="!empleados2.length">Loading empleados...</div>
           </el-form-item>
         </div>
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
@@ -220,11 +218,13 @@ export default {
     productoInternos: [],    
     productoInternos2: [],    
     productoExternos: [],    
-    productoExternos2: [],    
+    productoExternos2: [],  
+    empleados: [],    
+    empleados2: [],  
     form: {
       id_orden: '',
-      responsable:'',
-      ayudante: 'No aplica',
+      id_empleado:'',
+      id_empleado2: 'No aplica',
       id_productosInternos: '',
       id_productosInternos2: 'No aplica',
       id_productosExternos: '',
@@ -243,7 +243,7 @@ export default {
       tradename: ''
     },
     rules: {
-      responsable: [
+      id_empleado: [
         { required: true, message: 'El responsable es requerido', trigger: 'blur' },
       ],
       id_productosInternos: [
@@ -284,6 +284,8 @@ export default {
     this.fetchProductosInternos2();
     this.fetchProductosExternos();
     this.fetchProductosExternos2();
+    this.fetchEmpleados();
+    this.fetchEmpleados2();
   this.refresh();
   const route = useRoute();
   if (route.params && route.params.id) {
@@ -387,6 +389,38 @@ export default {
           ElNotification({
             title: 'Error',
             message: 'Error al recuperar productos externos',
+            type: 'error',
+          });
+        });
+    },
+
+    fetchEmpleados() {
+      axios.get('verEmpleados')
+        .then(response => {
+          console.log('Empleados:', response.data);
+          this.empleados = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching empleados:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar empleados',
+            type: 'error',
+          });
+        });
+    },
+
+    fetchEmpleados2() {
+      axios.get('verEmpleados')
+        .then(response => {
+          console.log('Empleados:', response.data);
+          this.empleados2 = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching empleados:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar empleados',
             type: 'error',
           });
         });

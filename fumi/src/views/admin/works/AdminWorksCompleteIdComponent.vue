@@ -38,7 +38,7 @@
         </el-table-column>
         <el-table-column prop="pago" label="Monto" sortable width="150" />
         <el-table-column prop="requiere3" label="Datos" sortable width="170" />
-        <el-table-column prop="responsable" label="Responsable" sortable width="130" />
+        <el-table-column prop="nameEmpleado1" label="Responsable" sortable width="130" />
         <el-table-column prop="date1" label="Fecha de orden" sortable width="130" />
         <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="130" />
         <el-table-column label="">

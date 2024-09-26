@@ -7,6 +7,7 @@ use App\Models\CompletarOrden;
 use App\Models\Orden;
 use App\Models\ProductoInterno;
 use App\Models\ProductoExterno;
+use App\Models\Empleados;
 use Carbon\Carbon;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -44,13 +45,18 @@ class CompletarOrdenesController extends Controller
         'productosInternos1.productoInt as productoInt1',
         'productosInternos2.productoInt as productoInt2',
         'productosExternos1.productoExt as productoExt1',
-        'productosExternos2.productoExt as productoExt2'
+        'productosExternos2.productoExt as productoExt2',
+        'empleados1.nameEmpleado as nameEmpleado1',
+        'empleados2.nameEmpleado as nameEmpleado2',
+        
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
     ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
     ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
     ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
     ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+    ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+    ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
     ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
     ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id');
@@ -83,8 +89,8 @@ class CompletarOrdenesController extends Controller
     {
         $reglas = Validator::make($request->all(),[
             'id_orden' => 'required|min:1',
-            'responsable' => 'required|min:1',
-            'ayudante' => '',
+            'id_empleado' => 'required|min:1',
+            'id_empleado2' => '',
             'id_productosInternos' => 'required|min:1',
             'id_productosInternos2' => '',
             'id_productosExternos' => 'required|min:1',
@@ -107,8 +113,8 @@ class CompletarOrdenesController extends Controller
         }else{
             $data = new CompletarOrden();
             $data->id_orden = $request->id_orden;
-            $data->responsable = $request->responsable;
-            $data->ayudante = $request->ayudante;
+            $data->id_empleado = $request->id_empleado;
+            $data->id_empleado2 = $request->id_empleado2;
             $data->id_productosInternos = $request->id_productosInternos;
             $data->id_productosInternos2 = $request->id_productosInternos2;
             $data->id_productosExternos = $request->id_productosExternos;
@@ -145,13 +151,17 @@ class CompletarOrdenesController extends Controller
     'productosInternos1.productoInt as productoInt1',
     'productosInternos2.productoInt as productoInt2',
     'productosExternos1.productoExt as productoExt1',
-    'productosExternos2.productoExt as productoExt2'
+    'productosExternos2.productoExt as productoExt2',
+    'empleados1.nameEmpleado as nameEmpleado1',
+        'empleados2.nameEmpleado as nameEmpleado2',
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
     ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
     ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
     ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
     ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+    ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+    ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
     ->where('completarordenes.id', $id)
     ->first();
@@ -178,8 +188,8 @@ class CompletarOrdenesController extends Controller
     {
         $completarOrden = CompletarOrden::find($id);
         $reglas = Validator::make($request->all(), [
-            'responsable' => 'required|min:1',
-            'ayudante' => '',
+            'id_empleado' => 'required|min:1',
+            'id_empleado2' => '',
             'productoInt1' => 'required|min:1',
             'productoInt2' => '',
             'productoExt1' => 'required|min:1',
@@ -809,6 +819,12 @@ class CompletarOrdenesController extends Controller
         {
             $productosExternos = ProductoExterno::where('infodelete_productoExt', '!=', 'Baja')->get();
             return response()->json($productosExternos);
+        }
+
+        public function verEmpleados()
+        {
+            $empleados = Empleados::where('infodelete_Empleados', '!=', 'Baja')->get();
+            return response()->json($empleados);
         }
 
 }
