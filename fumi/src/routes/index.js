@@ -23,6 +23,7 @@ const adminRoutes = [
     {path: 'admin/city', component: () => import('@/views/admin/admin/AdminCityComponent.vue')},
     {path: 'admin/cologne', component: () => import('@/views/admin/admin/AdminCologneComponent.vue')},
     {path: 'admin/settlements', component: () => import('@/views/admin/admin/AdminSettlementsComponent.vue')},
+    {path: 'admin/roads', component: () => import('@/views/admin/admin/AdminRoadsComponent.vue')},
     {path: 'admin/productInt', component: () => import('@/views/admin/admin/AdminProductIntComponent.vue')},
     {path: 'admin/productExt', component: () => import('@/views/admin/admin/AdminProductExtComponent.vue')},
     {path: 'admin/employees', component: () => import('@/views/admin/admin/AdminEmployeesComponent.vue')},

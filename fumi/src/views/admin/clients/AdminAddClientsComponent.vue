@@ -68,11 +68,9 @@
         <!-- Segunda Fila -->
         <p class="px-5">Domicilio:</p>
         <div class="flex">
-          <el-form-item prop="street" label="Tipo de calle:" class="px-5" style="width: 240px;">
-            <el-select v-model="form1.street" placeholder="Tipo de calle" class=" px-1" style="width: 220px;">
-              <el-option label="Av." value="Av." />
-              <el-option label="Calle" value="Calle" />
-              <el-option label="Callejón" value="Callejon" />
+          <el-form-item prop="id_vias" label="Tipo de via:" class="px-5" style="width: 350px;">
+            <el-select v-model="form1.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad">
+              <el-option v-for="tipoVia in vias" :key="tipoVia.id" :label="tipoVia.tipoVia" :value="tipoVia.id" />
             </el-select>
           </el-form-item>
 
@@ -194,12 +192,13 @@ export default {
     ciudades: [],
     colonias: [],
     comercios: [],
+    vias: [],
     form1: {
       name: '',
       lastname1: '',
       lastname2: '',
       tradename: '',
-      street: '',
+      id_vias: '',
       home: '',
       numAddress: '',
       id_colonia: '',
@@ -235,7 +234,7 @@ export default {
         { required: true, message: 'El comercio es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
-      street: [
+      id_vias: [
         { required: true, message: 'El tipo de calle es requerido', trigger: 'blur' },
       ],
       home: [
@@ -286,6 +285,7 @@ export default {
   mounted() {
     this.refresh();
     this.fetchCiudades();
+    this.fetchTypeRoad();
     this.fetchComercios();
     /*this.fetchColonias();*/
   },
@@ -344,17 +344,19 @@ export default {
         .catch(error => {
           console.error('Error fetching ciudades:', error);
         });
-    },/*
-    fetchColonias() {
-      axios.get('verColonia')
+    },
+
+    fetchTypeRoad() {
+      axios.get('verVias')
         .then(response => {
-          console.log('Colonia:', response.data);
-          this.colonias = response.data;
+          console.log('Via:', response.data);
+          this.vias = response.data;
         })
         .catch(error => {
-          console.error('Error fetching colonias:', error);
+          console.error('Error fetching vias:', error);
         });
-    },*/
+    },
+
     fetchComercios() {
       axios.get('verComercio')
         .then(response => {

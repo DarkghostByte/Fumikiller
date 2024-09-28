@@ -13,7 +13,7 @@ class Cliente extends Model
         'lastname1',
         'lastname2',
         'tradename',
-        'street',
+        'id_vias',
         'home',
         'numAddress',
         'id_colonia',

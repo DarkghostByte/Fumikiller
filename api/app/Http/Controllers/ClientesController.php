@@ -12,11 +12,18 @@ class ClientesController extends Controller
 {
     public function index()
 {
-    $data = Cliente::select(['clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia',
-    'colonias.codigoPostal', 'comercios.comercio'])
+    $data = Cliente::select([
+        'clientes.*', 
+        'ciudades.ciudad', 
+        'ciudades.estado', 
+        'colonias.colonia',
+        'colonias.codigoPostal', 
+        'comercios.comercio',
+        'vias.tipoVia',])
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
+        ->join('vias', 'clientes.id_vias', '=', 'vias.id')
         ->orderBy('clientes.id', 'DESC')
         ->get();
 
@@ -44,7 +51,7 @@ class ClientesController extends Controller
             'lastname1' => 'required|min:1',
             'lastname2' => 'required|min:1',
             'tradename' => 'min:1',
-            'street' => 'required|min:1',
+            'id_vias' => 'required|min:1',
             'home' => 'required|min:1',
             'numAddress' => 'required|min:1',
             'id_colonia' => 'required|exists:colonias,id',
@@ -73,7 +80,7 @@ class ClientesController extends Controller
             $data->lastname1 = $request->lastname1;
             $data->lastname2 = $request->lastname2;
             $data->tradename = $request->tradename;
-            $data->street = $request->street;
+            $data->id_vias = $request->id_vias;
             $data->home = $request->home;
             $data->numAddress = $request->numAddress;
             $data->id_colonia = $request->id_colonia;
@@ -167,7 +174,7 @@ class ClientesController extends Controller
             'lastname1' => 'required|min:1',
             'lastname2' => 'required|min:1',
             'tradename' => 'min:1',
-            'street' => 'required|min:1',
+            'id_vias' => 'required|min:1',
             'home' => 'required|min:1',
             'numAddress' => 'required|min:1',
             'id_colonia' => 'required|min:1',
@@ -232,10 +239,18 @@ class ClientesController extends Controller
 
     public function generarOrden($id,$id_cliente){        
         // Obtener datos del cliente junto con ciudad y colonia
-        $cliente = Cliente::select('clientes.*', 'ciudades.ciudad', 'ciudades.estado', 'colonias.colonia', 'colonias.codigoPostal', 'comercios.comercio')
+        $cliente = Cliente::select(
+            'clientes.*', 
+            'ciudades.ciudad', 
+            'ciudades.estado', 
+            'colonias.colonia', 
+            'colonias.codigoPostal', 
+            'comercios.comercio',
+            'vias.tipoVia')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
+            ->join('vias', 'clientes.id_vias', '=', 'vias.id')
             ->where('clientes.id', $id)
             ->first();
         //Datos de la base de datos

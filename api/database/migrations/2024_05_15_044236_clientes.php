@@ -17,7 +17,8 @@ return new class extends Migration
             $table->string('lastname1');
             $table->string('lastname2');
             $table->string('tradename');
-            $table->string('street');
+            $table->integer('id_vias')->unsigned();
+            $table->foreign("id_vias")->references('id')->on('vias');
             $table->string('home');
             $table->string('numAddress');
             $table->integer('id_colonia')->unsigned();
