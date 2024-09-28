@@ -17,7 +17,7 @@
             Regresar
           </router-link>
         </div>
-        
+
       </div>
       <div class="flex justify-between items-center mb-4" style="width: 100%;">
         <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
@@ -26,17 +26,17 @@
         <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
           @input="filterDataAddress" />
         <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%"/>
+          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
       </div>
       <div class="flex justify-between items-center mb-4" style="width: 100%;">
         <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%"/>
-          <el-input class="px-2" placeholder="Buscar por estado de orden" v-model="searchQueryStatus"
+          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
+        <el-input class="px-2" placeholder="Buscar por estado de orden" v-model="searchQueryStatus"
           @input="filterDataStatus" />
-          <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
+        <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
           @input="filterDataInfo" />
       </div>
-      
+
       <!-- END INICIO -->
 
       <!-- TABLE -->
@@ -208,7 +208,7 @@ export default {
       console.log(row)
       this.selectedItem = row
       this.selectedItem = null
-    },    
+    },
 
     filterDataName() {
       this.filteredData = this.tableData.filter((orden) => {
@@ -341,7 +341,7 @@ export default {
         console.error('Row is undefined or does not have an id:', row);
       }
     },
-    
+
   }
 };
 </script>
