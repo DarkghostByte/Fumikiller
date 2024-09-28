@@ -52,13 +52,13 @@ Route::get('/creditosconfactura',[CompletarOrdenesController::class,'generarCred
 
 
 //VER OPCIONES
-Route::get('/verCiudades',[ClientesController::class,'verCiudades']);
-Route::get('/verColonia',[ClientesController::class,'verColonia']);
-Route::get('/verComercio',[ClientesController::class,'verComercio']);
+Route::get('/verCiudades',[CiudadesController::class,'verCiudades']);
+Route::get('/verColonia',[ColoniasController::class,'verColonia']);
+Route::get('/verComercio',[ComerciosController::class,'verComercio']);
 Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
-Route::get('/verProductosInternos',[CompletarOrdenesController::class,'verProductosInternos']);
-Route::get('/verProductosExternos',[CompletarOrdenesController::class,'verProductosExternos']);
-Route::get('/verEmpleados',[CompletarOrdenesController::class,'verEmpleados']);
+Route::get('/verProductosInternos',[ProductosInternosController::class,'verProductosInternos']);
+Route::get('/verProductosExternos',[ProductosExtrenosController::class,'verProductosExternos']);
+Route::get('/verEmpleados',[EmpleadosController::class,'verEmpleados']);
 
 
 //CONTEOS
@@ -81,6 +81,7 @@ Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
 Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);
 Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);
+Route::put('verEstadoOrden/{id}', [OrdensController::class, 'verEstadoOrden']);
 Route::put('desactivarProductoInterno/{id}', [ProductosInternosController::class, 'desactivarProductoInterno']);
 Route::put('desactivarProductoExterno/{id}', [ProductosExtrenosController::class, 'desactivarProductoExterno']);
 Route::put('desactivarEmpleado/{id}', [EmpleadosController::class, 'desactivarEmpleado']);

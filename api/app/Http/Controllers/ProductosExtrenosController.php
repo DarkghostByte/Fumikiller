@@ -155,4 +155,10 @@ class ProductosExtrenosController extends Controller
         'data' => $data
     ]);
     }
+
+    public function verProductosExternos()
+        {
+            $productosExternos = ProductoExterno::where('infodelete_productoExt', '!=', 'Baja')->get();
+            return response()->json($productosExternos);
+        }
 }

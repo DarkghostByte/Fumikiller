@@ -27,8 +27,12 @@
           @input="filterDataAddress" />
         <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
           value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%"/>
+      </div>
+      <div class="flex justify-between items-center mb-4" style="width: 100%;">
         <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
           value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%"/>
+          <el-input class="px-2" placeholder="Buscar por estado de orden" v-model="searchQueryStatus"
+          @input="filterDataStatus" />
           <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
           @input="filterDataInfo" />
       </div>
@@ -73,28 +77,16 @@
               {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
             </template>
           </el-table-column>
-          <el-table-column label="Direccion" sortable width="220">
+          <el-table-column label="Direccion" sortable width="200">
             <template #default="scope">
               {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal
                 + ', ' + scope.row.ciudad }}
             </template>
           </el-table-column>
+          <el-table-column prop="statusOrder" label="Estado de orden" sortable width="160" />
           <el-table-column prop="date1" label="Fecha de orden" sortable width="150" />
-          <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="170" />
-          <el-table-column prop="time1" label="De" sortable width="90" />
-          <el-table-column prop="time2" label="A" sortable width="90" />
+          <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="180" />
           <!--FIN DE LA VISUALIZACION DE LA TABLA-->
-
-          <!--BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
-
-          <el-table-column label="">
-            <template #default="scope">
-              <el-button style="color:black" size="small" type="warning" @click="completarOrden(scope.row)"><span
-                  class="material-symbols-outlined">priority</span></el-button>
-            </template>
-          </el-table-column>
-          <!--FIN DEL BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
-
         </el-table>
       </div>
       <!-- END TABLE -->
@@ -197,6 +189,7 @@ export default {
     searchQueryLastname: '',
     searchQueryAddress: '',
     searchQueryPhone: '',
+    searchQueryStatus: '',
     searchQueryInfo: '',
     selectedDate: null,
     selectedDate2: null,
@@ -240,6 +233,12 @@ export default {
     filterDataPhone() {
       this.filteredData = this.tableData.filter((clientes) => {
         return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+      });
+    },
+
+    filterDataStatus() {
+      this.filteredData = this.tableData.filter((orden) => {
+        return orden.statusOrder.toLowerCase().includes(this.searchQueryStatus.toLowerCase());
       });
     },
 

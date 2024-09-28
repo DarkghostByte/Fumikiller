@@ -24,45 +24,39 @@
     </div>
     <!-- TABLE DATA -->
     <div class="flex ml-5">
-      <el-form
-        :model="form"
-        label-width="auto"
-        style="max-width: 100%"
-        :label-position="'top'"
-        ref="formRef"
+      <el-form :model="form" label-width="auto" style="max-width: 100%" :label-position="'top'" ref="formRef"
         :rules="rules">
         <!-- DATOS DE LA FILA DE CLIENTES -->
         <p>Cliente</p>
         <div class="flex">
           <el-form-item prop="name" label="Nombre del cliente:" class="px-2">
-            <el-input v-model="form.name" class="px-1" style="width: 220px;"
-              disabled/>
+            <el-input v-model="form.name" class="px-1" style="width: 220px;" disabled />
           </el-form-item>
           <el-form-item prop="lastname1" label="Apellido paterno:" class="px-2">
-            <el-input v-model="form.lastname1" class="px-1" style="width: 220px;"
-              disabled/>
+            <el-input v-model="form.lastname1" class="px-1" style="width: 220px;" disabled />
           </el-form-item>
           <el-form-item prop="lastname2" label="Apellido materno:" class="px-2">
-            <el-input v-model="form.lastname2" class="px-1" style="width: 220px;"
-              disabled/>
+            <el-input v-model="form.lastname2" class="px-1" style="width: 220px;" disabled />
           </el-form-item>
           <el-form-item prop="tradename" label="Nombre comercial:" class="px-2">
-            <el-input v-model="form.tradename" class="px-1" style="width: 220px;"
-              disabled/>
+            <el-input v-model="form.tradename" class="px-1" style="width: 220px;" disabled />
           </el-form-item>
         </div>
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
         <p>Empleados</p>
         <div class="flex" style="width:100%;">
           <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:" :disabled="!empleados.length">
-              <el-option v-for="nameEmpleado in empleados" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado" :value="nameEmpleado.id" />
+            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:"
+              :disabled="!empleados.length">
+              <el-option v-for="nameEmpleado in empleados" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
+                :value="nameEmpleado.id" />
             </el-select>
             <div v-if="!empleados.length">Loading empleados...</div>
           </el-form-item>
           <el-form-item prop="id_empleado2" label="Ayudante:" class="px-2" style="width: 300px;">
             <el-select v-model="form.id_empleado2" placeholder="Selecciona el ayudante:" :disabled="!empleados2.length">
-              <el-option v-for="nameEmpleado in empleados2" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado" :value="nameEmpleado.id" />
+              <el-option v-for="nameEmpleado in empleados2" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
+                :value="nameEmpleado.id" />
             </el-select>
             <div v-if="!empleados2.length">Loading empleados...</div>
           </el-form-item>
@@ -70,15 +64,21 @@
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
         <p>Productos internos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:" :disabled="!productoInternos.length">
-              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
+          <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:"
+              :disabled="!productoInternos.length">
+              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
+                :value="productoInt.id" />
             </el-select>
             <div v-if="!productoInternos.length">Loading productos internos...</div>
           </el-form-item>
-          <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:" :disabled="!productoInternos2.length">
-              <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt" :value="productoInt.id" />
+          <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:"
+              :disabled="!productoInternos2.length">
+              <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
+                :value="productoInt.id" />
             </el-select>
             <div v-if="!productoInternos2.length">Loading productos internos...</div>
           </el-form-item>
@@ -86,15 +86,21 @@
         <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
         <p>Productos externos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:" :disabled="!productoExternos.length">
-              <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt" :value="productoExt.id" />
+          <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:"
+              :disabled="!productoExternos.length">
+              <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
+                :value="productoExt.id" />
             </el-select>
             <div v-if="!productoExternos.length">Loading productos internos...</div>
           </el-form-item>
-          <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:" :disabled="!productoExternos2.length">
-              <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt" :value="productoExt.id" />
+          <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:"
+              :disabled="!productoExternos2.length">
+              <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
+                :value="productoExt.id" />
             </el-select>
             <div v-if="!productoExternos2.length">Loading productos internos...</div>
           </el-form-item>
@@ -104,50 +110,26 @@
         <div class="flex">
           <el-form-item prop="noTrapear" class="px-2" label="No trapear:">
             <el-col :span="11" style="width: 220px">
-              <el-date-picker
-                v-model="form.noTrapear"
-                type="date"
-                placeholder="No trapear:"
-                format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY"
-              />
+              <el-date-picker v-model="form.noTrapear" type="date" placeholder="No trapear:" format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY" />
             </el-col>
           </el-form-item>
           <el-form-item prop="noIngresar" class="px-7" label="No ingresar:">
             <el-col :span="11" style="width: 220px">
-              <el-time-select
-                v-model="form.noIngresar"
-                style="width: 220px"
-                start="00:00"
-                step="01:00"
-                end="23:59"
-                format="hh:mm A"
-                placeholder="Seleccionar hora"
-              />
+              <el-time-select v-model="form.noIngresar" style="width: 220px" start="00:00" step="01:00" end="23:59"
+                format="hh:mm A" placeholder="Seleccionar hora" />
             </el-col>
           </el-form-item>
           <el-form-item prop="otraDosis" class="px-2" label="Otra dosis:">
             <el-col :span="11" style="width: 220px">
-              <el-date-picker
-                v-model="form.otraDosis"
-                type="date"
-                placeholder="Otra dosis:"
-                format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY"
-              />
+              <el-date-picker v-model="form.otraDosis" type="date" placeholder="Otra dosis:" format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY" />
             </el-col>
           </el-form-item>
           <el-form-item prop="hora" class="px-7" label="Hora:">
             <el-col :span="11" style="width: 220px">
-              <el-time-select
-                v-model="form.hora"
-                style="width: 220px"
-                start="00:00"
-                step="00:15"
-                end="23:59"
-                format="hh:mm A"
-                placeholder="Seleccionar hora"
-              />
+              <el-time-select v-model="form.hora" style="width: 220px" start="00:00" step="00:15" end="23:59"
+                format="hh:mm A" placeholder="Seleccionar hora" />
             </el-col>
           </el-form-item>
         </div>
@@ -180,7 +162,7 @@
         <p>Pago:</p>
         <div class="flex">
           <el-form-item prop="pago" label="Se cobro:" class="px-2" style="width: 240px;">
-            <el-input v-model="form.pago" class="px-1" placeholder="Ingresa el monto" type="number"/>
+            <el-input v-model="form.pago" class="px-1" placeholder="Ingresa el monto" type="number" />
           </el-form-item>
           <el-form-item prop="requiere3" label="Se pago?" class="px-10">
             <el-radio-group v-model="form.requiere3">
@@ -215,15 +197,15 @@ export default {
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
-    productoInternos: [],    
-    productoInternos2: [],    
-    productoExternos: [],    
-    productoExternos2: [],  
-    empleados: [],    
-    empleados2: [],  
+    productoInternos: [],
+    productoInternos2: [],
+    productoExternos: [],
+    productoExternos2: [],
+    empleados: [],
+    empleados2: [],
     form: {
       id_orden: '',
-      id_empleado:'',
+      id_empleado: '',
       id_empleado2: 'No aplica',
       id_productosInternos: '',
       id_productosInternos2: 'No aplica',
@@ -278,7 +260,7 @@ export default {
         { min: 1, max: 10, message: 'Longitud debería ser 1 a 10', trigger: 'blur' }
       ],
     }
-  }),  
+  }),
   mounted() {
     this.fetchProductosInternos();
     this.fetchProductosInternos2();
@@ -286,42 +268,43 @@ export default {
     this.fetchProductosExternos2();
     this.fetchEmpleados();
     this.fetchEmpleados2();
-  this.refresh();
-  const route = useRoute();
-  if (route.params && route.params.id) {
-    this.id = route.params.id;
-    axios.get('orden/' + this.id).then(res => {
-      console.log('Orden Response:', res.data);
-      if (res.data && res.data.data) {
-        let datos = res.data.data;
-        console.log('Datos Cliente:', datos.cliente); // Verifica aquí los datos del cliente
-        this.form.id_orden = datos.id;
-        if (datos.cliente) {
-          this.form.name = datos.cliente.name || '';
-          this.form.lastname1 = datos.cliente.lastname1 || '';
-          this.form.lastname2 = datos.cliente.lastname2 || '';
-          this.form.tradename = datos.cliente.tradename || '';
+    this.refresh();
+    const route = useRoute();
+    if (route.params && route.params.id) {
+      this.id = route.params.id;
+      axios.get('orden/' + this.id).then(res => {
+        console.log('Orden Response:', res.data);
+        if (res.data && res.data.data) {
+          let datos = res.data.data;
+          console.log('Datos Cliente:', datos.cliente); // Verifica aquí los datos del cliente
+          this.form.id_orden = datos.id;
+          if (datos.cliente) {
+            this.form.name = datos.cliente.name || '';
+            this.form.lastname1 = datos.cliente.lastname1 || '';
+            this.form.lastname2 = datos.cliente.lastname2 || '';
+            this.form.tradename = datos.cliente.tradename || '';
+            this.form.statusOrder = datos.cliente.statusOrder || '';
+          }
+        } else {
+          console.error('Response data is undefined or null');
+          ElNotification({
+            title: 'Error',
+            message: 'No se pudo recuperar la información de la orden',
+            type: 'error'
+          });
         }
-      } else {
-        console.error('Response data is undefined or null');
+      }).catch(error => {
+        console.error('Error fetching orden data:', error);
         ElNotification({
           title: 'Error',
-          message: 'No se pudo recuperar la información de la orden',
+          message: 'Error al recuperar la información de la orden',
           type: 'error'
         });
-      }
-    }).catch(error => {
-      console.error('Error fetching orden data:', error);
-      ElNotification({
-        title: 'Error',
-        message: 'Error al recuperar la información de la orden',
-        type: 'error'
       });
-    });
-  } else {
-    console.error('route.params.id is undefined');
-  }
-},
+    } else {
+      console.error('route.params.id is undefined');
+    }
+  },
 
   methods: {
     refresh() {
@@ -426,6 +409,7 @@ export default {
         });
     },
 
+
     submitForm() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
@@ -438,7 +422,26 @@ export default {
                 message: 'Registro insertado correctamente',
                 type: 'success'
               });
+
+              const updatedData = {
+                statusOrder: this.form.statusOrder === 'Terminada' ? 'Por realizar' : 'Terminada'
+              };
+
+              axios.put('verEstadoOrden/' + this.form.id_orden, updatedData)
+                .then(response => {
+                  console.log('Estado actualizado correctamente:', response.data);
+                  this.refresh();
+                  ElNotification({
+                    title: 'Actualización de datos',
+                    message: `Se actualizaron los datos.`,
+                    type: 'success'
+                  });
+                })
+                .catch(error => {
+                  console.error('Error al actualizar el estado:', error);
+                });
             })
+
             .catch(error => {
               console.error('Error submitting form:', error.response ? error.response.data : error.message);
               ElNotification({

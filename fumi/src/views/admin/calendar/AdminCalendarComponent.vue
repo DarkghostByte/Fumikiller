@@ -92,14 +92,9 @@ export default {
   methods: {
     refresh() {
       axios.get('orden').then(res => {
-        this.tableData = res.data.data;
-
-        // Imprimir tableData para verificar los datos
+        this.tableData = res.data.data.filter(row => row.statusOrder == 'Por realizar');
         console.log('tableData:', this.tableData);
-
-        // Imprimir filteredData para verificar el resultado del filtro
         console.log('filteredData:', this.filteredData);
-
         this.filteredData = this.tableData;
       })
     },

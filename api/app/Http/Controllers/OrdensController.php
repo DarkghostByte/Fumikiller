@@ -91,6 +91,7 @@ class OrdensController extends Controller
             'hiring' => 'array|required|min:1',
             'requires' => 'array|required|min:1',
             'infoorden_delete' => 'required|min:1',
+            'statusOrder' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -110,6 +111,7 @@ class OrdensController extends Controller
             $data->hiring = json_encode($request->hiring);
             $data->requires = json_encode($request->requires);
             $data->infoorden_delete = $request->infoorden_delete;
+            $data->statusOrder = $request->statusOrder;
             $data->save();
 
             return response()->json([
@@ -296,5 +298,41 @@ class OrdensController extends Controller
     {
         $totalOrdenes = Orden::count();
         return response()->json(['total' => $totalOrdenes]);
+    }
+
+    public function verEstadoOrden(Request $request, $id)
+    {
+    $orden = Orden::find($id);
+
+    if (!$orden) {
+        return response()->json([
+        'status' => 'error',
+        'message' => 'Orden no encontrado'
+        ], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'statusOrder' => 'required|in:Terminada,Por realizar',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+        'status' => 'failed',
+        'message' => 'Error de validación',
+        'errors' => $validator->errors()
+        ], 400);
+    }
+
+    $updatedData = [
+        'statusOrder' => $request->statusOrder
+    ];
+
+    $orden->update($updatedData);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Estado cambiado exitosamente',
+        'data' => $orden
+    ]);
     }
 }

@@ -176,7 +176,10 @@ export default {
     refresh() {
       this.tableData = []
       axios.get('orden').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoorden_delete !== 'Baja');      })
+        this.tableData = res.data.data.filter(row => row.infoorden_delete !== 'Baja');   
+        this.tableData = res.data.data.filter(row => row.statusOrder == 'Por realizar');   
+      })
+        
     },
     pdf(row) {
       console.log(row)

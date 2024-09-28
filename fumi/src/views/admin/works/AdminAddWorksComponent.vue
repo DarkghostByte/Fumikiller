@@ -186,7 +186,8 @@ export default {
       time2: '',
       hiring: [],
       requires: [],
-      infoorden_delete: 'Alta'
+      infoorden_delete: 'Alta',
+      statusOrder: 'Por realizar',
     },
     rules: {
       plague1: [

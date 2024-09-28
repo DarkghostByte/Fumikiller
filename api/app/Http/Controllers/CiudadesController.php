@@ -99,4 +99,10 @@ class CiudadesController extends Controller
         $totalCiudades = Ciudad::count();
         return response()->json(['total' => $totalCiudades]);
     }
+
+    public function verCiudades()
+    {
+        $ciudades = Ciudad::all();
+        return response()->json($ciudades);
+    }
 }

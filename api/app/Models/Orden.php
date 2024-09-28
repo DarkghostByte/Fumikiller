@@ -21,6 +21,7 @@ class Orden extends Model
         'hiring',
         'requires',
         'infoorden_delete',
+        'statusOrder',
     ];
 
     public function cliente()

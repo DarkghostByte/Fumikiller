@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('hiring');
             $table->string('requires');
             $table->string('infoorden_delete');
+            $table->string('statusOrder');
             $table->timestamps();
         });
     }

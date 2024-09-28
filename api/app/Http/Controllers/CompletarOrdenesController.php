@@ -4,10 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\CompletarOrden;
-use App\Models\Orden;
-use App\Models\ProductoInterno;
-use App\Models\ProductoExterno;
-use App\Models\Empleados;
 use Carbon\Carbon;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
@@ -807,24 +803,6 @@ class CompletarOrdenesController extends Controller
                 'message' => 'Estado  actualizados correctamente',
                 'data' => $completarOrden
             ]);
-        }
-
-        public function verProductosInternos()
-        {
-            $productosInternos = ProductoInterno::where('infodelete_productoInt', '!=', 'Baja')->get();
-            return response()->json($productosInternos);
-        }
-
-        public function verProductosExternos()
-        {
-            $productosExternos = ProductoExterno::where('infodelete_productoExt', '!=', 'Baja')->get();
-            return response()->json($productosExternos);
-        }
-
-        public function verEmpleados()
-        {
-            $empleados = Empleados::where('infodelete_Empleados', '!=', 'Baja')->get();
-            return response()->json($empleados);
         }
 
 }

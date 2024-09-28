@@ -130,4 +130,10 @@ class ColoniasController extends Controller
         $totalColonias = Colonia::count();
         return response()->json(['total' => $totalColonias]);
     }
+
+    public function verColonia()
+    {
+        $colonias = Colonia::all();
+        return response()->json($colonias);
+    }
 }

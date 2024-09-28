@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Cliente;
 use App\Models\Orden;
-use App\Models\Ciudad;
-use App\Models\Colonia;
-use App\Models\Comercio;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -231,24 +228,6 @@ class ClientesController extends Controller
         return response()->json(['error' => 'No se propocionó ningun archivo'],
         400);
         */
-    }
-
-    public function verCiudades()
-    {
-        $ciudades = Ciudad::all();
-        return response()->json($ciudades);
-    }
-
-    public function verColonia()
-    {
-        $colonias = Colonia::all();
-        return response()->json($colonias);
-    }
-
-    public function verComercio()
-    {
-        $comercios = Comercio::all();
-        return response()->json($comercios);
     }
 
     public function generarOrden($id,$id_cliente){        

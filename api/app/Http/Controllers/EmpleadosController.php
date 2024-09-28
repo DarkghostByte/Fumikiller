@@ -164,4 +164,10 @@ class EmpleadosController extends Controller
         'data' => $data
     ]);
     }
+
+    public function verEmpleados()
+        {
+            $empleados = Empleados::where('infodelete_Empleados', '!=', 'Baja')->get();
+            return response()->json($empleados);
+        }
 }

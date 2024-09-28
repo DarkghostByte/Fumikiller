@@ -159,4 +159,10 @@ class ProductosInternosController extends Controller
         'data' => $data
     ]);
     }
+
+    public function verProductosInternos()
+        {
+            $productosInternos = ProductoInterno::where('infodelete_productoInt', '!=', 'Baja')->get();
+            return response()->json($productosInternos);
+        }
 }

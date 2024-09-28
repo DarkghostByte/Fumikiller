@@ -97,4 +97,10 @@ class ComerciosController extends Controller
         $totalAsentamientos = Comercio::count();
         return response()->json(['total' => $totalAsentamientos]);
     }
+
+    public function verComercio()
+    {
+        $comercios = Comercio::all();
+        return response()->json($comercios);
+    }
 }
