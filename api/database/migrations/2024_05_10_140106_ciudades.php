@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->string('ciudad');
             $table->string('estado');
+            $table->string('infodelete_Ciudad');
             $table->timestamps();
         });
     }

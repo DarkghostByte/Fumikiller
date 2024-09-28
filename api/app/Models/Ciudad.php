@@ -13,5 +13,6 @@ class Ciudad extends Model
     protected $fillable = [
         'ciudad',
         'estado',
+        'infodelete_Ciudad',
     ];
 }

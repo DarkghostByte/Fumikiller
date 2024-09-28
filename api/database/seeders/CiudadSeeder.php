@@ -17,14 +17,17 @@ class CiudadSeeder extends Seeder
         DB::table('ciudades')->insert([
             'ciudad'=>'Nuevo Casas Grandes',
             'estado'=>'Chihuahua',
+            'infodelete_Ciudad'=>'Alta',
         ]);
         DB::table('ciudades')->insert([
             'ciudad'=>'Casas Grandes',
             'estado'=>'Chihuahua',
+            'infodelete_Ciudad'=>'Alta',
         ]);
         DB::table('ciudades')->insert([
             'ciudad'=>'Galeana',
             'estado'=>'Chihuahua',
+            'infodelete_Ciudad'=>'Alta',
         ]);  
     }
 }

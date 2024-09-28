@@ -64,11 +64,9 @@
         <!-- Segunda Fila -->
         <p class="px-5">Domicilio:</p>
         <div class="flex">
-          <el-form-item prop="street" label="Tipo de calle:" class="px-5" style="width: 240px;">
-            <el-select v-model="form1.street" placeholder="Tipo de calle" class=" px-1" style="width: 220px;">
-              <el-option label="Av." value="Av." />
-              <el-option label="Calle" value="Calle" />
-              <el-option label="Callejón" value="Callejon" />
+          <el-form-item prop="id_vias" label="Tipo de via:" class="px-5" style="width: 350px;">
+            <el-select v-model="form1.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad">
+              <el-option v-for="via in vias" :key="via.id" :label="via.tipoVia" :value="via.id" />
             </el-select>
           </el-form-item>
 
@@ -92,7 +90,7 @@
           </el-form-item>
 
           <el-form-item prop="id_colonia" label="Colonia:" class="px-5">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;">
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 260px;">
               <el-option v-for="colonia in filteredColonias" :key="colonia.id" :label="colonia.colonia+' #'+colonia.codigoPostal" :value="colonia.id">
                 {{ colonia.colonia }} #{{ colonia.codigoPostal }} 
               </el-option>
@@ -183,12 +181,13 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
+    vias: [],
     form1: {
       name: '',
       lastname1: '',
       lastname2: '',
       tradename: 'Particular',
-      street: '',
+      id_vias: '',
       home: '',
       numAddress: '',
       id_colonia: '',
@@ -220,7 +219,7 @@ export default {
         { required: true, message: 'El apellido materno es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
-      street: [
+      id_vias: [
         { required: true, message: 'El tipo de calle es requerido', trigger: 'blur' },
       ],
       home: [
@@ -268,6 +267,7 @@ export default {
   mounted() {
     this.refresh();
     this.fetchCiudades();
+    this.fetchTypeRoad();
     /*this.fetchColonias();*/
   },
   methods: {
@@ -330,18 +330,18 @@ export default {
           console.error('Error fetching ciudades:', error);
         });
     },
-    /*
-    fetchColonias() {
-      axios.get('verColonia')
+    
+    fetchTypeRoad() {
+      axios.get('verVias')
         .then(response => {
-          console.log('Colonia:', response.data);
-          this.colonias = response.data;
+          console.log('Via:', response.data);
+          this.vias = response.data;
         })
         .catch(error => {
-          console.error('Error fetching colonias:', error);
+          console.error('Error fetching vias:', error);
         });
     },
-    */
+    
     fetchColoniasByCity(cityId) {
   this.loadingColonias = true;
   axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal

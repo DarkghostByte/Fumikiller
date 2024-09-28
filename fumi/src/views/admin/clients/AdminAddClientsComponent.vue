@@ -70,7 +70,7 @@
         <div class="flex">
           <el-form-item prop="id_vias" label="Tipo de via:" class="px-5" style="width: 350px;">
             <el-select v-model="form1.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad">
-              <el-option v-for="tipoVia in vias" :key="tipoVia.id" :label="tipoVia.tipoVia" :value="tipoVia.id" />
+              <el-option v-for="via in vias" :key="via.id" :label="via.tipoVia" :value="via.id" />
             </el-select>
           </el-form-item>
 
@@ -94,9 +94,11 @@
           </el-form-item>
 
           <el-form-item prop="id_colonia" label="Colonia:" class="px-5">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 220px;" @change="selectColonia">
-              <el-option v-for="colonia in filteredColonias" :key="'colonia'+colonia.id" :label="colonia.colonia+' #'+colonia.codigoPostal" :value="colonia.id">
-                {{ colonia.colonia }} #{{ colonia.codigoPostal }} 
+            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia" class=" px-1"
+              style="width: 260px;" @change="selectColonia">
+              <el-option v-for="colonia in filteredColonias" :key="'colonia' + colonia.id"
+                :label="colonia.colonia + ' #' + colonia.codigoPostal" :value="colonia.id">
+                {{ colonia.colonia }} #{{ colonia.codigoPostal }}
               </el-option>
             </el-select>
           </el-form-item>
@@ -368,26 +370,27 @@ export default {
         });
     },
     fetchColoniasByCity(cityId) {
-  this.loadingColonias = true;
-  axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
-    .then(response => {
-      this.form1.id_colonia = '';
-      console.log('Respuesta de la API:', response.data); // Check response data
-      this.filteredColonias = response.data.data;
-      console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
-    })
-    .catch(error => {
-      console.error('Error fetching colonias:', error);
-      this.$message.error('Error al cargar las colonias. Por favor, inténtalo de nuevo.');
-    })
-    .finally(() => {
-      this.loadingColonias = false;
-    });
-}, 
-  selectColonia(){
-  
-  console.log(this.form1)
+      this.loadingColonias = true;
+      axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
+        .then(response => {
+          this.form1.id_colonia = '';
+          console.log('Respuesta de la API:', response.data); // Check response data
+          this.filteredColonias = response.data.data;
+          console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
+        })
+        .catch(error => {
+          console.error('Error fetching colonias:', error);
+          this.$message.error('Error al cargar las colonias. Por favor, inténtalo de nuevo.');
+        })
+        .finally(() => {
+          this.loadingColonias = false;
+        });
+    },
+    selectColonia() {
+
+      console.log(this.form1)
+    },
+  },
 }
-  }
-}
+
 </script>

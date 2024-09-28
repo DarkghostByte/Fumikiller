@@ -11,11 +11,13 @@
       <!-- INICIO -->
       <div class="flex justify-between items-center mb-4">
         <h1 class="text-2xl font-semibold">Gestión de Ciudades</h1>
-        <div class="flex" style="width: 35%;">
-          <el-input class="" placeholder="Buscar por nombre de la ciudad" v-model="searchQueryCity"
+        <div class="flex" style="width: 50%;">
+          <el-input class="" placeholder="Buscar por ciudad" v-model="searchQueryCity"
             @input="filterDataCity" />
-          <el-input class="px-2" placeholder="Buscar por nombre del estado" v-model="searchQueryState"
+          <el-input class="px-2" placeholder="Buscar por estado" v-model="searchQueryState"
             @input="filterDataState" />
+            <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryStatus"
+            @input="filterDataStatus" />
         </div>
         <div>
           <router-link to="/admin/admin" class="el-button el-button--danger">
@@ -33,19 +35,36 @@
 
       <!-- TABLE -->
       <div class="flex" style="justify-content: center;">
-        <el-table :data="filteredData" :default-sort="{ prop: 'ciudad', order: 'ascending' }" style="width: 70%;">
+        <el-table :data="filteredData" :default-sort="{ prop: 'ciudad', order: 'ascending' }" style="width: 65%;">
+          <el-table-column class="" label="">
+            <template #default="{ row }">
+              <button 
+                class="ml-5 px-5 h-3 w-3 rounded-full" 
+                :style="{ backgroundColor: row.infodelete_Ciudad === 'Alta' ? 'Green' : 'Red' }"
+                @click="handleEstadoClick(row)"
+              >
+              </button>
+            </template>
+          </el-table-column>
+          <el-table-column prop="infodelete_Ciudad" label="Estado" >
+            <template #default="{ row }">
+              <span v-if="row.infodelete_Ciudad === 'Alta'">{{ row.infodelete_Ciudad }}</span>
+              <span v-else>{{ row.infodelete_Ciudad }}</span>
+            </template>
+          </el-table-column>
           <el-table-column prop="ciudad" label="Ciudad" sortable />
           <el-table-column prop="estado" label="Estado" sortable />
           <el-table-column label="Acciones">
             <template #default="scope">
               <div class="flex justify-around">
-                <router-link :to="'/admin/clients/edit-clients/' + scope.row.id">
-                  <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
-                      class="material-symbols-outlined">edit</span></el-button>
-                </router-link>
+                <el-button style="color:black" size="small" type="warning" @click="handleEdit(scope.row)">
+                  <span class="material-symbols-outlined">edit</span>
+                </el-button>
+                <!--
                 <el-button style="color:black" size="small" type="danger" @click="eliminar(scope.row)">
                   <span class="material-symbols-outlined">delete</span>
                 </el-button>
+                -->
               </div>
             </template>
           </el-table-column>
@@ -75,24 +94,31 @@
       </el-dialog>
       <!-- END MODAL 1 -->
 
-      <!-- MODAL 2 -->
-      <el-dialog v-model="dialogVisible" title="¿Deseas eliminar la siguente ciudad?" width="20%">
-        <div class="h-35" style="font-size: medium;">
-          Nombre: {{ selectedItem.ciudad }}
-          <br>
-          Estado: {{ selectedItem.estado }}
-          <br>
-        </div>
-        <template #footer>
-          <div class="dialog-footer">
-            <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-            <el-button type="danger" @click="handleDelete()">
-              Confirmar
-            </el-button>
+      <!-- MODAL 3 -->
+      <el-dialog v-model="dialogVisibleEdit" title="Editar Ciudad" width="40%">
+        <el-form :model="formEdit" label-width="auto" style="max-width: 100%" ref="formEditRef" :rules="rules" :label-position="'top'">
+          <div class="clientInfo">
+            <div class="details">
+              <i class="fa-solid fa-city fa-2x iconCityEdit"></i>
+              <div class="flex" style="width: 100%;">
+                <el-form-item prop="ciudad" label="Ciudad:" style="width: 100%;">
+                  <el-input v-model="formEdit.ciudad" class="px-1" placeholder="Ingresa la ciudad" />
+                </el-form-item>
+                <el-form-item prop="estado" label="Estado:" style="width: 100%;">
+                  <el-input v-model="formEdit.estado" class="px-1" placeholder="Ingresa el estado" />
+                </el-form-item>
+              </div>
+            </div>
           </div>
+        </el-form>
+        <template #footer>
+          <span class="dialog-footer">
+            <el-button @click="dialogVisibleEdit = false">Cancelar</el-button>
+            <el-button type="warning" @click="editCity">Actualizar</el-button>
+          </span>
         </template>
       </el-dialog>
-      <!-- END MODAL 2 -->
+    <!-- END MODAL 3 -->
 
 
 
@@ -117,10 +143,17 @@ export default {
     tableData: [],
     filteredData: [],
     selectedItem: {},
+    dialogVisibleEdit: false,
     searchQuery: '',
     searchQueryCity: '',
     searchQueryState: '',
+    searchQueryStatus: '',
     form1: {
+      ciudad: '',
+      estado: '',
+      infodelete_Ciudad: 'Alta',
+    },
+    formEdit: {
       ciudad: '',
       estado: '',
     },
@@ -144,6 +177,12 @@ export default {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });
+    },
+
+    handleEdit(row) {
+      console.log(row);
+      this.formEdit = row;
+      this.dialogVisibleEdit = true;
     },
 
     handleDelete() {
@@ -207,6 +246,104 @@ export default {
         return city.estado.toLowerCase().includes(this.searchQueryState.toLowerCase());
       });
     },
+
+    filterDataStatus() {
+      this.filteredData = this.tableData.filter((city) => {
+        return city.infodelete_Ciudad.toLowerCase().includes(this.searchQueryStatus.toLowerCase());
+      });
+    },
+
+    editCity() {
+      this.$refs.formEditRef.validate((valid) => {
+        if (valid) {
+          console.log('Form is valid, sending PUT request');
+          axios.put('ciudades/'+this.formEdit.id,this.formEdit)
+            .then(res => {
+              console.log(res);
+              this.refresh();
+              this.dialogVisibleEdit = false;
+              this.$message.success('Ciudad actualizada exitosamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro actualizado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al actualizar la ciudad');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de verificar los datos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed, check form errors');
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          })
+        }
+      });
+    },
+    handleEstadoClick(row) {
+  const updatedData = {
+    infodelete_Ciudad: row.infodelete_Ciudad === 'Baja' ? 'Alta' : 'Baja'
+  };
+  axios.put(`desactivarCiudad/${row.id}`, updatedData)
+    .then(response => {
+      console.log('Estado actualizado correctamente:', response.data);
+      this.refresh();
+      ElNotification({
+        title: 'Actualización de datos',
+        message: `Se actualizaron los datos.`,
+        type: 'success'
+      });
+    })
+    .catch(error => {
+      console.error('Error al actualizar el estado:', error);
+    });
+},
   }
 };
 </script>
+
+<style>
+.clientInfo {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.details {
+  padding: 20px;
+  display: flex;
+  align-items:center;
+
+}
+
+p {
+  color: #000000;
+  display: flex;
+  text-align: center;
+}
+
+.client-details__title {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.iconCity {
+  color: #f32222;
+  margin-right: 10px;
+}
+
+.iconCityEdit {
+  color: #e6a23c;
+  margin-right: 10px;
+}
+</style>

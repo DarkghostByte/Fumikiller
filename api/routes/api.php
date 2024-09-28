@@ -90,6 +90,7 @@ Route::put('desactivarProductoInterno/{id}', [ProductosInternosController::class
 Route::put('desactivarProductoExterno/{id}', [ProductosExtrenosController::class, 'desactivarProductoExterno']);
 Route::put('desactivarEmpleado/{id}', [EmpleadosController::class, 'desactivarEmpleado']);
 Route::put('desactivarVia/{id}', [ViasController::class, 'desactivarVia']);
+Route::put('desactivarCiudad/{id}', [CiudadesController::class, 'desactivarCiudad']);
 
 //FILTRO DE FECHAS DE HOME
 Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);
