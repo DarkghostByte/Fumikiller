@@ -6,7 +6,6 @@
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
       <div class="flex flex-wrap items-start justify-end ">
-
         <router-link to="/admin/works"
           class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
           style="color:black">
@@ -14,7 +13,6 @@
             style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
           Consultar Ordenes
         </router-link>
-
         <router-link to="/admin/clients/agregarComercio-clients"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
           style="color:black">
@@ -22,20 +20,23 @@
             style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
           Nuevo Cliente
         </router-link>
-
       </div>
     </div>
-
-    <div class="mr-6">
-      <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Clientes</h1>
+    <div class="">
+      <h1 class="py-5 px-5 text-4xl font-semibold mb-2">Clientes</h1>
     </div>
-
     <!-- Campo de búsqueda -->
-    <div class="mb-4">
-      <el-input
-        placeholder="Buscar por nombre, apellidos, cuidad, direccion, numero de casa, numero de telefono o ID del cliente"
-        v-model="searchQuery" @input="filterData"></el-input>
+    <div class="flex justify-between items-center mb-4" style="width: 100%;">
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
+        @input="filterDataName" />
+      <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
+        @input="filterDataLastname" />
+      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+        @input="filterDataAddress" />
+        <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+        @input="filterDataPhone" />
     </div>
+    
 
     <!-- TABLE DATA -->
     <div class="flex">
@@ -260,7 +261,11 @@ export default {
     tableData: [],
     filteredData: [],
     selectedItem: {},
-    searchQuery: ''
+    searchQuery: '',
+    searchQueryName: '',
+    searchQueryLastname: '',
+    searchQueryAddress: '',
+    searchQueryPhone: '',
   }),
   mounted() {
     this.refresh();
@@ -297,17 +302,30 @@ export default {
         console.error('Row is undefined or does not have an id:', row);
       }
     },
-    filterData() {
-      this.filteredData = this.tableData.filter(client => {
-        return client.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.id.toString().includes(this.searchQuery) ||
-          client.lastname1.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.lastname2.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.ciudad.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.colonia.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.numAddress.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.home.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
-          client.cell_phone.toLowerCase().includes(this.searchQuery.toLowerCase());
+
+    filterDataName() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
+      });
+    },
+
+    filterDataLastname() {
+  this.filteredData = this.tableData.filter((clientes) => {
+    const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+    return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
+  });
+},
+
+    filterDataAddress() {
+      this.filteredData = this.tableData.filter((clientes) => {
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+  });
+    },
+
+    filterDataPhone() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
       });
     },
 
