@@ -1,7 +1,4 @@
 <template>
-  <div>
-    
-  </div>
   <!--
 
     <header class="flex items-center h-20 px-6 sm:px-10 bg-white">

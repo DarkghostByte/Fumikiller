@@ -46,13 +46,14 @@
           <el-table-column label="Acciones">
             <template #default="scope">
               <div class="flex justify-around">
-                <router-link :to="'/admin/clients/edit-clients/' + scope.row.id">
-                  <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
-                      class="material-symbols-outlined">edit</span></el-button>
-                </router-link>
+                <el-button style="color:black" size="small" type="warning" @click="handleEdit(scope.row)">
+                  <span class="material-symbols-outlined">edit</span>
+                </el-button>
+                <!--
                 <el-button style="color:black" size="small" type="danger" @click="eliminar(scope.row)">
                   <span class="material-symbols-outlined">delete</span>
                 </el-button>
+                -->
               </div>
             </template>
           </el-table-column>
@@ -108,6 +109,42 @@
     </el-dialog>
     <!-- END MODAL 2 -->
 
+    <!-- MODAL 3 -->
+    <el-dialog v-model="dialogVisibleEdit" title="Editar Colonia" width="30%">
+      <el-form :model="formEdit" label-width="auto" style="max-width: 100%" ref="formEditRef" :rules="rules" :label-position="'top'">
+        <div class="clientInfo">
+          <div class="details">
+            <i class="fa-solid fa-city fa-2x iconCologneEdit"></i>
+            <div class="flex" style="width: 100%;">
+              <el-form-item prop="id_ciudad" label="Ciudad:" style="width: 100%;">
+                <el-select v-model="formEdit.id_ciudad" placeholder="Selecciona la ciudad">
+                  <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
+                </el-select>
+              </el-form-item>
+            </div>
+          </div>
+          <div class="details">
+            <i class="fa-solid fa-location-dot fa-2x iconCologneEdit"></i>
+            <div class="flex" style="width: 100%;">
+              <el-form-item prop="colonia" label="Colonia:" style="width: 100%;">
+                <el-input v-model="formEdit.colonia" class="px-1" placeholder="Ingresa la ciudad" />
+              </el-form-item>
+              <el-form-item prop="codigoPostal" label="Codigo postal:" style="width: 100%;">
+                <el-input v-model="formEdit.codigoPostal" class="px-1" placeholder="Ingresa el estado" />
+              </el-form-item>
+            </div>
+          </div>
+        </div>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisibleEdit = false">Cancelar</el-button>
+          <el-button type="warning" @click="editCologne">Actualizar</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  <!-- END MODAL 3 -->
+
     </div>
   </div>
 </template>
@@ -122,6 +159,7 @@ export default {
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleCreate: false,
+    dialogVisibleEdit: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     tableData: [],
@@ -132,6 +170,11 @@ export default {
     searchQueryCologne: '',
     searchQueryZip: '',
     form1: {
+      id_ciudad: '',
+      colonia: '',
+      codigoPostal: '',
+    },
+    formEdit: {
       id_ciudad: '',
       colonia: '',
       codigoPostal: '',
@@ -160,6 +203,12 @@ export default {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });
+    },
+
+    handleEdit(row) {
+      console.log(row);
+      this.formEdit = row;
+      this.dialogVisibleEdit = true;
     },
 
     handleDelete() {
@@ -240,6 +289,81 @@ export default {
         return colonia.codigoPostal.toLowerCase().includes(this.searchQueryZip.toLowerCase());
       });
     },
+
+    editCologne() {
+      this.$refs.formEditRef.validate((valid) => {
+        if (valid) {
+          console.log('Form is valid, sending PUT request');
+          axios.put('colonias/'+this.formEdit.id,this.formEdit)
+            .then(res => {
+              console.log(res);
+              this.refresh();
+              this.dialogVisibleEdit = false;
+              this.$message.success('Colonia actualizada exitosamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro actualizado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al actualizar la colonia');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de verificar los datos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed, check form errors');
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          })
+        }
+      });
+    },
   }
 };
 </script>
+
+<style>
+.clientInfo {
+  background-color: #f5f5f5;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+}
+
+.details {
+  padding: 20px;
+  display: flex;
+  align-items:center;
+
+}
+
+p {
+  color: #000000;
+  display: flex;
+  text-align: center;
+}
+
+.client-details__title {
+  color: #000;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.iconCologne {
+  color: #f32222;
+  margin-right: 10px;
+}
+
+.iconCologneEdit {
+  color: #e6a23c;
+  margin-right: 10px;
+}
+</style>
+
