@@ -7,7 +7,7 @@
                 </div>
                 <div class="contenedor2 row justify-center items-center">
                     <div>
-                        <h1 class="text-center text-8xl font-bold py-10 text-[#000000]">FUMI-KILLE'R</h1>
+                        <h1 class="text-center text-8xl font-bold py-10 text-[#000000] lbltittleFumi">FUMI-KILLE'R</h1>
                     </div>
                     <div class="flex justify-center items-center">
                         <router-link to="/admin/home">
@@ -114,7 +114,7 @@
     position: absolute;
 }
 
-h1:hover {
+.lbltittleFumi:hover {
     transform: scale(1.1);
     text-align: center;
   }
