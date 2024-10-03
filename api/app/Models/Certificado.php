@@ -12,9 +12,10 @@ class Certificado extends Model
     protected $table= "certificados";
 
     protected $fillable = [
-        'productoCertificadoInt1',
-        'productoCertificadoInt2',
-        'productoCertificadoExt1',
-        'productoCertificadoExt2',
+        'id_cliente',
+        'certificateName',
+        'certificateDate',
+        'id_productoCertificadoInt1',
+        'id_productoCertificadoExt1',
     ];
 }

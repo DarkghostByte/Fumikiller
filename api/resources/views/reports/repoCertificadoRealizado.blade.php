@@ -26,7 +26,7 @@
             <th class="thtt">FECHA:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->date2 }}
+                {{ $data->certificateDate }}
             </div>
             </th>            
         </table>
@@ -35,7 +35,7 @@
             <th>NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->tradename }}
+                {{ $data->certificateName }}
             </div>
             </th> 
         </table>
@@ -103,7 +103,7 @@
             <th>INTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->productoCertificadoInt1 }} y {{ $data->productoCertificadoInt2 }}
+                {{ $data->productoInt }}
 
             </div>
             </th> 
@@ -112,7 +112,7 @@
             <th>EXTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->productoCertificadoExt1 }} y {{ $data->productoCertificadoExt2 }}
+                {{ $data->productoExt }}
 
             </div>
             </th> 
@@ -170,7 +170,7 @@
                     <th class="thtt">FECHA:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->date2 }}
+                        {{ $data->certificateDate }}
                     </div>
                     </th>            
                 </table>
@@ -179,7 +179,7 @@
                     <th>NOMBRE:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->name }} {{ $data->lastname1 }} {{ $data->lastname2 }}
+                        {{ $data->certificateName }}
                     </div>
                     </th> 
                 </table>
@@ -247,7 +247,7 @@
                     <th>INTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->productoCertificadoInt1 }} y {{ $data->productoCertificadoInt2 }}
+                        {{ $data->productoInt }}
                     </div>
                     </th> 
                 </table>
@@ -255,7 +255,7 @@
                     <th>EXTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->productoCertificadoExt1 }} y {{ $data->productoCertificadoExt2 }}
+                        {{ $data->productoExt }}
                     </div>
                     </th> 
                 </table>

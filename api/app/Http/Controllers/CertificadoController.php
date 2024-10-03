@@ -29,8 +29,12 @@ class CertificadoController extends Controller
             'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos.productoInt',
+            'productosExternos.productoExt'
         ])
+        ->join('productosInternos', 'certificados.id_productoCertificadoInt1', '=', 'productosInternos.id')
+        ->join('productosExternos', 'certificados.id_productoCertificadoExt1', '=', 'productosExternos.id')
         ->join('clientes', 'certificados.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
@@ -60,10 +64,10 @@ class CertificadoController extends Controller
     {
         $reglas = Validator::make($request->all(),[
             'id_cliente' => 'min:1',
-            'productoCertificadoInt1' => 'required|min:1',
-            'productoCertificadoInt2' => '',
-            'productoCertificadoExt1' => 'required|min:1',
-            'productoCertificadoExt2' => '',
+            'certificateName' => 'required|min:1',
+            'certificateDate' => 'required|min:1',
+            'id_productoCertificadoInt1' => 'required|min:1',
+            'id_productoCertificadoExt1' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -74,10 +78,10 @@ class CertificadoController extends Controller
         }else{
             $data = new Certificado();
             $data->id_cliente = $request->id_cliente;
-            $data->productoCertificadoInt1 = $request->productoCertificadoInt1;
-            $data->productoCertificadoInt2 = $request->productoCertificadoInt2;
-            $data->productoCertificadoExt1 = $request->productoCertificadoExt1;
-            $data->productoCertificadoExt2 = $request->productoCertificadoExt2;            
+            $data->certificateName = $request->certificateName;
+            $data->certificateDate = $request->certificateDate;
+            $data->id_productoCertificadoInt1 = $request->id_productoCertificadoInt1;
+            $data->id_productoCertificadoExt1 = $request->id_productoCertificadoExt1;            
             $data->save();
 
             return response()->json([
@@ -136,8 +140,12 @@ class CertificadoController extends Controller
             'colonias.colonia',
             'colonias.codigoPostal',
             'ciudades.ciudad',
-            'ciudades.estado'
+            'ciudades.estado',
+            'productosInternos.productoInt',
+            'productosExternos.productoExt'
         ])
+        ->join('productosInternos', 'certificados.id_productoCertificadoInt1', '=', 'productosInternos.id')
+        ->join('productosExternos', 'certificados.id_productoCertificadoExt1', '=', 'productosExternos.id')
         ->join('clientes', 'certificados.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')

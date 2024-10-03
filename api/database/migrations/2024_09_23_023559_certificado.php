@@ -15,10 +15,12 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('id_cliente')->unsigned();
             $table->foreign("id_cliente")->references('id')->on('clientes');
-            $table->string('productoCertificadoInt1');
-            $table->string('productoCertificadoInt2');
-            $table->string('productoCertificadoExt1');
-            $table->string('productoCertificadoExt2');
+            $table->string('certificateName');
+            $table->string('certificateDate');
+            $table->integer('id_productoCertificadoInt1')->unsigned();
+            $table->foreign("id_productoCertificadoInt1")->references('id')->on('productosInternos');
+            $table->integer('id_productoCertificadoExt1')->unsigned();
+            $table->foreign("id_productoCertificadoExt1")->references('id')->on('productosExternos');
             $table->timestamps();
         });
     }

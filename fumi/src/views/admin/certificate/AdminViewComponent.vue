@@ -54,8 +54,12 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column prop="id" label="Id" sortable />
-        <el-table-column label="Nombre" sortable width="180" >
+        <el-table-column label="Folio" sortable>
+          <template #default="scope">
+            {{ 'No. ' + this.formatDate(scope.row.id) }}
+          </template>
+        </el-table-column>
+        <el-table-column label="Nombre" sortable width="200" >
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
@@ -376,6 +380,17 @@ export default {
         console.error('Error al obtener los datos:', error);
       }
     },
+    
+    formatDate(id, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id);
+
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
+
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
   }
 };
 </script>
