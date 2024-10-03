@@ -12,8 +12,8 @@ class Orden extends Model
 
     protected $fillable = [
         'id_cliente',
-        'plague1',
-        'plague2',
+        'id_plague1',
+        'id_plague2',
         'date1',
         'date2',
         'time1',

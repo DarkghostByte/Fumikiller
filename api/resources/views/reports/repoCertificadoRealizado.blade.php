@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
     <title>Certificado {{ $data->id_orden }} {{ $data->name }} {{ $data->lastname1 }} {{ $data->lastname2 }}</title>
 
 
@@ -26,7 +26,10 @@
             <th class="thtt">FECHA:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->certificateDate }}
+                <?php
+                setlocale(LC_TIME, 'es_ES'); // Establece el locale para español
+                ?>
+                {{ strftime("%A %d de %B de %Y", strtotime($data->certificateDate)) }}
             </div>
             </th>            
         </table>
@@ -170,7 +173,10 @@
                     <th class="thtt">FECHA:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->certificateDate }}
+                        <?php
+                        setlocale(LC_TIME, 'es_ES'); // Establece el locale para español
+                        ?>
+                        {{ strftime("%A %d de %B de %Y", strtotime($data->certificateDate)) }}
                     </div>
                     </th>            
                 </table>

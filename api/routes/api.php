@@ -13,6 +13,7 @@ use App\Http\Controllers\ProductosInternosController;
 use App\Http\Controllers\ProductosExtrenosController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\ViasController;
+use App\Http\Controllers\ProblematicasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,6 +38,7 @@ Route::resource('productosInternos', ProductosInternosController::class);
 Route::resource('productosExternos', ProductosExtrenosController::class);
 Route::resource('empleados', EmpleadosController::class);
 Route::resource('vias', ViasController::class);
+Route::resource('problematica', ProblematicasController::class);
 
 //RUTAS PARA PDF
 Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
@@ -62,6 +64,7 @@ Route::get('/verProductosInternos',[ProductosInternosController::class,'verProdu
 Route::get('/verProductosExternos',[ProductosExtrenosController::class,'verProductosExternos']);
 Route::get('/verEmpleados',[EmpleadosController::class,'verEmpleados']);
 Route::get('/verVias',[ViasController::class,'verVias']);
+Route::get('/verProblematicas',[ProblematicasController::class,'verProblematicas']);
 
 
 //CONTEOS
@@ -80,6 +83,7 @@ Route::get('/totalEmpleados', [EmpleadosController::class, 'totalEmpleados']);
 Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
 Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
 Route::get('/totalVias', [ViasController::class, 'totalVias']);
+Route::get('/totalProblematica', [ProblematicasController::class, 'totalProblematica']);
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
@@ -91,6 +95,7 @@ Route::put('desactivarProductoExterno/{id}', [ProductosExtrenosController::class
 Route::put('desactivarEmpleado/{id}', [EmpleadosController::class, 'desactivarEmpleado']);
 Route::put('desactivarVia/{id}', [ViasController::class, 'desactivarVia']);
 Route::put('desactivarCiudad/{id}', [CiudadesController::class, 'desactivarCiudad']);
+Route::put('desactivarProblematica/{id}', [ProblematicasController::class, 'desactivarProblematica']);
 
 //FILTRO DE FECHAS DE HOME
 Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);

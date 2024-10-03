@@ -50,31 +50,27 @@
         <!-- FILA DE LAS PLAGAS (PROBLEMATICA) -->
         <p>Problematica</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="plague1" class="px-2" label="Tipo de plaga #1" >
-            <el-select v-model="form.plague1" placeholder="Selecciona la plaga" style="width: 220px">
-              <el-option label="Cucarachas" value="Cucarachas" />
-              <el-option label="Pulgas" value="Pulgas" />
-              <el-option label="Chinches" value="Chinches" />
-              <el-option label="Cucaracha de cocina" value="Cucaracha de cocina" />
-              <el-option label="Garrapatas" value="Garrapatas" />
-              <el-option label="Palomillas" value="Palomillas" />
-              <el-option label="Roedores" value="Roedores" />
-              <el-option label="Hormigas" value="Hormigas" />
+          <el-form-item prop="id_plague1" label="Tipo de producto interno:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_plague1" placeholder="Selecciona el tipo de producto interno:"
+              :disabled="!problematicas1.length">
+              <el-option v-for="problematicaBug in problematicas1" :key="problematicaBug.id" :label="problematicaBug.problematica"
+                :value="problematicaBug.id" />
             </el-select>
+            <div v-if="!problematicas1.length">Loading problematicas...</div>
           </el-form-item>
-          <el-form-item prop="plague2" class="px-7" label="Tipo de plaga #2">
-            <el-select v-model="form.plague2" placeholder="Selecciona la plaga" style="width: 220px">
-              <el-option label="Nada" value="solamente" />
-              <el-option label="Cucarachas" value="Cucarachas" />
-              <el-option label="Pulgas" value="Pulgas" />
-              <el-option label="Chinches" value="Chinches" />
-              <el-option label="Cucaracha de cocina" value="Cucaracha de cocina" />
-              <el-option label="Garrapatas" value="Garrapatas" />
-              <el-option label="Palomillas" value="Palomillas" />
-              <el-option label="Roedores" value="Roedores" />
-              <el-option label="Hormigas" value="Hormigas" />
+
+          <el-form-item prop="id_plague2" label="Tipo de producto interno:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_plague2" placeholder="Selecciona el tipo de producto interno:"
+              :disabled="!problematicas2.length">
+              <el-option v-for="problematicaBug2 in problematicas2" :key="problematicaBug2.id" :label="problematicaBug2.problematica"
+                :value="problematicaBug2.id" />
             </el-select>
+            <div v-if="!problematicas2.length">Loading problematicas...</div>
           </el-form-item>
+
+        
         </div>
         <!-- FILA DE FECHAS -->
         <p>Fechas</p>
@@ -176,10 +172,12 @@ export default {
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
+    problematicas1: [],
+    problematicas2: [],
     form: {
       name: '',
-      plague1: '',
-      plague2: 'Nada',
+      id_plague1: '',
+      id_plague2: '',
       date1: '',
       date2: '',
       time1: '',
@@ -190,7 +188,7 @@ export default {
       statusOrder: 'Por realizar',
     },
     rules: {
-      plague1: [
+      id_plague1: [
         { required: true, message: 'El tipo de plaga es requerida', trigger: 'blur' },
       ],
       date1: [
@@ -214,6 +212,8 @@ export default {
     }
   }),
   mounted() {
+    this.fetchProblematicaBug();
+    this.fetchProblematicaBug2();
     this.refresh();
     const route = useRoute();
     this.id = route.params.id;
@@ -272,7 +272,38 @@ export default {
           return false;
         }
       })
-    }
+    },
+    fetchProblematicaBug() {
+      axios.get('verProblematicas')
+        .then(response => {
+          console.log('Problematicas:', response.data);
+          this.problematicas1 = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching problematica:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar problematicas',
+            type: 'error',
+          });
+        });
+    },
+
+    fetchProblematicaBug2() {
+      axios.get('verProblematicas')
+        .then(response => {
+          console.log('Problematicas:', response.data);
+          this.problematicas2 = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching problematica:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar problematicas',
+            type: 'error',
+          });
+        });
+    },
   }
 }
 </script>

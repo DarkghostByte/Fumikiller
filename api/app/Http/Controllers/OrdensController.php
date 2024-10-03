@@ -26,8 +26,12 @@ class OrdensController extends Controller
                 'clientes.cell_phone',
                 'colonias.colonia',
                 'colonias.codigoPostal',
-                'ciudades.ciudad'
+                'ciudades.ciudad',
+                'problematica1.problematica as plague1',
+                'problematica2.problematica as plague2',
             ])
+            ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+            ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
@@ -82,8 +86,8 @@ class OrdensController extends Controller
     {
         $reglas = Validator::make($request->all(),[
             'id_cliente' => 'min:1',
-            'plague1' => 'required|min:1',
-            'plague2' => '',
+            'id_plague1' => 'required|min:1',
+            'id_plague2' => '',
             'date1' => 'required|min:1',
             'date2' => 'required|min:1',
             'time1' => 'required|min:1',
@@ -102,8 +106,8 @@ class OrdensController extends Controller
         }else{
             $data = new Orden();
             $data->id_cliente = $request->id_cliente;
-            $data->plague1 = $request->plague1;
-            $data->plague2 = $request->plague2;
+            $data->id_plague1 = $request->id_plague1;
+            $data->id_plague2 = $request->id_plague2;
             $data->date1 = $request->date1;
             $data->date2 = $request->date2;            
             $data->time1 = $request->time1;
@@ -120,55 +124,6 @@ class OrdensController extends Controller
             
         }
     }
-    //PDF VentasSinFactura
-    public function generarVentSinFact(){
-
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoVentaSinFact',$pdf_data);
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
-        return $pdf->download('invoice.pdf');
-    }
-    //PDF VentasConFactura
-    public function generarVentConFact(){
-
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoVentaConFact',$pdf_data);
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
-        return $pdf->download('invoice.pdf');
-    }
-    //PDF Creditos
-    public function generarCreditos(){
-
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoCreditos',$pdf_data);
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
-        return $pdf->download('invoice.pdf');
-    }
-
     /**
      * Display the specified resource.
      */
@@ -232,7 +187,11 @@ class OrdensController extends Controller
             'colonias.codigoPostal',
             'ciudades.ciudad',
             'comercios.comercio',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
         ])
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')

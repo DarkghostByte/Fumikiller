@@ -1,214 +1,222 @@
 <template>
   <!-- Importar Iconos-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div>
     <div class="mr-6">
       <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Administración</h1>
     </div>
 
-    <div  class="flex flex-wrap items-start justify-start">
-          <router-link to="/admin/admin/city"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-600 hover:bg-blue-1000 focus:bg-blue-900 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px; text-align: center; ;">
-            <i class="fa-solid fa-city" aria-hidden="true" style="margin-top: 10%;
-            margin-left: -5px; margin-right:10px; font-size:20px;"></i>                
-            <h2>Ciudades ({{ totalCiudades }})</h2>
-            <h3></h3>
-          </router-link>
+    <div class="flex flex-wrap items-start justify-start">
+      <router-link to="/admin/admin/city"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-600 hover:bg-blue-1000 focus:bg-blue-900 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px; text-align: center; ;">
+        <i class="fa-solid fa-city" aria-hidden="true" style="margin-top: 10%;
+            margin-left: -5px; margin-right:10px; font-size:20px;"></i>
+        <h2>Ciudades ({{ totalCiudades }})</h2>
+        <h3></h3>
+      </router-link>
 
-          <router-link to="/admin/admin/cologne"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-600 hover:bg-green-1000 focus:bg-green-900 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-house" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Colonias ({{ totalColonias }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/cologne"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-600 hover:bg-green-1000 focus:bg-green-900 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-house" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Colonias ({{ totalColonias }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/settlements"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-600 hover:bg-orange-1000 focus:bg-orange-900 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-          <i class="fa-solid fa-apartment"></i>
-            <i class="fa-solid fa-school-flag" aria-hidden="true" style="height:15px; margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Asentamientos ({{ totalAsentamientos }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/settlements"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-600 hover:bg-orange-1000 focus:bg-orange-900 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-apartment"></i>
+        <i class="fa-solid fa-school-flag" aria-hidden="true" style="height:15px; margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Asentamientos ({{ totalAsentamientos }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/roads"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-600 hover:bg-purple-1000 focus:bg-purple-900 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Tipos de vias ({{ totalVias }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/roads"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-600 hover:bg-purple-1000 focus:bg-purple-900 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Tipos de vias ({{ totalVias }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/employees"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-500 hover:bg-blue-900 focus:bg-blue-800 rounded-md ml-6 mb-5 shadow-lg"           
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Empleados ({{ totalEmpleados }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/employees"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-500 hover:bg-blue-900 focus:bg-blue-800 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-regular fa-address-card" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Empleados ({{ totalEmpleados }})</h2>
+      </router-link>
 
-          <router-link to="/admin/clients/agregarComercio-clients"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-500 hover:bg-green-900 focus:bg-green-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-bug" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Problematicas</h2>
-          </router-link>
+      <router-link to="/admin/admin/problematic"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-500 hover:bg-green-900 focus:bg-green-800 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-bug" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Problematicas ({{ totalProblematica }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/productInt"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-500 hover:bg-orange-900 focus:bg-orange-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-          <i class="fa-solid fa-house-chimney-user" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                   
-            <h2>Productos Internos ({{ totalProductosInt }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/productInt"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-500 hover:bg-orange-900 focus:bg-orange-800 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-house-chimney-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Productos Internos ({{ totalProductosInt }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/productExt"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-500 hover:bg-purple-900 focus:bg-purple-800 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-house-circle-xmark" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Productos Externos ({{ totalProductosExt }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/productExt"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-500 hover:bg-purple-900 focus:bg-purple-800 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-house-circle-xmark" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Productos Externos ({{ totalProductosExt }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/clientsView"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-400 hover:bg-blue-800 focus:bg-blue-700 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Clientes ({{ totalClientes }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/clientsView"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-400 hover:bg-blue-800 focus:bg-blue-700 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Clientes ({{ totalClientes }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/orderView"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-400 hover:bg-green-800 focus:bg-green-700 rounded-md ml-6 mb-5 shadow-lg"
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Ordenes ({{ totalOrdenes }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/orderView"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-400 hover:bg-green-800 focus:bg-green-700 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Ordenes ({{ totalOrdenes }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/clientsView"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-400 hover:bg-orange-800 focus:bg-orange-700 rounded-md ml-6 mb-5 shadow-lg" 
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Clientes ({{ totalClientes }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/clientsView"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-400 hover:bg-orange-800 focus:bg-orange-700 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Clientes ({{ totalClientes }})</h2>
+      </router-link>
 
-          <router-link to="/admin/admin/orderView"
-          class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg"
-          style="width:300px; height:100px; font-size:22px;">
-            <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>                
-            <h2>Ordenes ({{ totalOrdenes }})</h2>
-          </router-link>
+      <router-link to="/admin/admin/orderView"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Ordenes ({{ totalOrdenes }})</h2>
+      </router-link>
 
     </div>
   </div>
 
 
 
-  
-  </template>
-  
-  <script>
-      import axios from 'axios';
-      export default {
-          name:'AdminAdminComponent',
-          data:()=>({
-            dialogVisible: false,
-            dialogVisibleView: false,
-            url:process.env.VUE_APP_ROOT_ASSETS,
-            urlApi:process.env.VUE_APP_ROOT_API,
-            tableData:[],
-            selectedItem: null,
-            totalCiudades: 0,
-      totalColonias: 0,
-      totalAsentamientos: 0,
-      totalProductosInt: 0,
-      totalProductosExt: 0,
-      totalClientes: 0,
-      totalOrdenes: 0,
-      totalEmpleados: 0,
-      totalVias: 0,
-          }),
-          mounted(){
-            this.refresh(),
-            this.fetchData();
-          },
-          methods:{
-            refresh(){
-              this.tableData = []
-            },
 
-            handleEdit(){
-            },
+</template>
 
-            handleDelete(){
-              axios.delete('clientes/'+this.selectedItem.id).then(res=>{
-              console.log(res)
-              this.refresh()
-              this.dialogVisible=false
-            })
-            },
+<script>
+import axios from 'axios';
+export default {
+  name: 'AdminAdminComponent',
+  data: () => ({
+    dialogVisible: false,
+    dialogVisibleView: false,
+    url: process.env.VUE_APP_ROOT_ASSETS,
+    urlApi: process.env.VUE_APP_ROOT_API,
+    tableData: [],
+    selectedItem: null,
+    totalCiudades: 0,
+    totalColonias: 0,
+    totalAsentamientos: 0,
+    totalProductosInt: 0,
+    totalProductosExt: 0,
+    totalClientes: 0,
+    totalOrdenes: 0,
+    totalEmpleados: 0,
+    totalVias: 0,
+    totalProblematica: 0,
+  }),
+  mounted() {
+    this.refresh(),
+      this.fetchData();
+  },
+  methods: {
+    refresh() {
+      this.tableData = []
+    },
 
-            eliminar(row){
-              console.log(row)
-              this.selectedItem=row
-              this.dialogVisible=true
-            },
+    handleEdit() {
+    },
 
-            seleccionar(row){
-            console.log(row)
-            this.selectedItem=row
-            this.dialogVisibleView=true
-            },
+    handleDelete() {
+      axios.delete('clientes/' + this.selectedItem.id).then(res => {
+        console.log(res)
+        this.refresh()
+        this.dialogVisible = false
+      })
+    },
 
-            pdf(row){
-            console.log(row)
-            this.selectedItem=row
-            },
+    eliminar(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.dialogVisible = true
+    },
 
-            async fetchData() {
-  try {
-    const responseOrdenes = await axios.get(this.urlApi + 'ciudades');
-    this.tableData = responseOrdenes.data.data;
+    seleccionar(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.dialogVisibleView = true
+    },
 
-    const responseTotalCiudades = await axios.get(this.urlApi + 'totalCiudades');
-    this.totalCiudades = responseTotalCiudades.data.total;
-    const responseTotalColonias = await axios.get(this.urlApi + 'totalColonias');
-    this.totalColonias = responseTotalColonias.data.total;
-    const responseTotalAsentamientos = await axios.get(this.urlApi + 'totalAsentamientos');
-    this.totalAsentamientos = responseTotalAsentamientos.data.total;
-    const responseTotalProductosInt = await axios.get(this.urlApi + 'totalProductosInt');
-    this.totalProductosInt = responseTotalProductosInt.data.total;
-    const responseTotalProductosExt = await axios.get(this.urlApi + 'totalProductosExt');
-    this.totalProductosExt = responseTotalProductosExt.data.total;
-    const responseTotalClientes = await axios.get(this.urlApi + 'totalClientes');
-    this.totalClientes = responseTotalClientes.data.total;
-    const responseTotalOrdenes = await axios.get(this.urlApi + 'totalOrdenes');
-    this.totalOrdenes = responseTotalOrdenes.data.total;
-    const responseTotalEmpleados = await axios.get(this.urlApi + 'totalEmpleados');
-    this.totalEmpleados = responseTotalEmpleados.data.total;
-    const responseTotalVias = await axios.get(this.urlApi + 'totalVias');
-    this.totalVias = responseTotalVias.data.total;
+    pdf(row) {
+      console.log(row)
+      this.selectedItem = row
+    },
 
-  } catch (error) {
-    console.error('Error al obtener los datos:', error);
-  }
-},
-          }
+    async fetchData() {
+      try {
+        const responseOrdenes = await axios.get(this.urlApi + 'ciudades');
+        this.tableData = responseOrdenes.data.data;
+
+        const responseTotalCiudades = await axios.get(this.urlApi + 'totalCiudades');
+        this.totalCiudades = responseTotalCiudades.data.total;
+        const responseTotalColonias = await axios.get(this.urlApi + 'totalColonias');
+        this.totalColonias = responseTotalColonias.data.total;
+        const responseTotalAsentamientos = await axios.get(this.urlApi + 'totalAsentamientos');
+        this.totalAsentamientos = responseTotalAsentamientos.data.total;
+        const responseTotalProductosInt = await axios.get(this.urlApi + 'totalProductosInt');
+        this.totalProductosInt = responseTotalProductosInt.data.total;
+        const responseTotalProductosExt = await axios.get(this.urlApi + 'totalProductosExt');
+        this.totalProductosExt = responseTotalProductosExt.data.total;
+        const responseTotalClientes = await axios.get(this.urlApi + 'totalClientes');
+        this.totalClientes = responseTotalClientes.data.total;
+        const responseTotalOrdenes = await axios.get(this.urlApi + 'totalOrdenes');
+        this.totalOrdenes = responseTotalOrdenes.data.total;
+        const responseTotalEmpleados = await axios.get(this.urlApi + 'totalEmpleados');
+        this.totalEmpleados = responseTotalEmpleados.data.total;
+        const responseTotalVias = await axios.get(this.urlApi + 'totalVias');
+        this.totalVias = responseTotalVias.data.total;
+        const responseTotalProblematica = await axios.get(this.urlApi + 'totalProblematica');
+        this.totalProblematica = responseTotalProblematica.data.total;
+
+        
+
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
       }
-  </script>
-
-  <style>
-  h2{
-    margin-top: 8%;
-    text-align: center;
+    },
   }
-.box-item{
+}
+</script>
+
+<style>
+h2 {
+  margin-top: 8%;
+  text-align: center;
+}
+
+.box-item {
   position: absolute;
   text-align: center;
   justify-content: center;

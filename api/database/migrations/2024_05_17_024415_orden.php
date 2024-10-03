@@ -12,8 +12,10 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('id_cliente')->unsigned();
             $table->foreign("id_cliente")->references('id')->on('clientes');
-            $table->string('plague1');
-            $table->string('plague2');
+            $table->integer('id_plague1')->unsigned();
+            $table->foreign("id_plague1")->references('id')->on('problematicas');
+            $table->integer('id_plague2')->unsigned();
+            $table->foreign("id_plague2")->references('id')->on('problematicas');
             $table->string('date1');
             $table->string('date2');
             $table->string('time1');
