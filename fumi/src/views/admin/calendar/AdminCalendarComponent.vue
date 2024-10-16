@@ -23,22 +23,20 @@
 
 
     <div class="flex justify-center items-center mb-4">
-      <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha de orden" style="width: 100%" />
-      <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
-        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha de fumigacion" style="width: 100%" />
-        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-          @input="filterDataLastname" />
-          <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-          @input="filterDataAddress" />
-          <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
-          @input="filterDataPhone" />
+      <el-date-picker class="mx-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
+        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
+      <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterData1" type="date" format="DD-MM-YYYY"
+        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+        @input="filterDataAddress" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+        @input="filterDataPhone" style="width: 100%;"/>
     </div>
 
     <div class="table-container">
-      <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }" stripe>
-        <el-table-column label="PDF Orden">
+      <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }" stripe >
+        <el-table-column label="PDF Orden" width="100px">
           <template #default="scope">
             <el-button style="color:black" type="success" @click="pdf(scope.row)">
               <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
@@ -52,14 +50,14 @@
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" width="200px" sortable>
+        <el-table-column label="Dirección" width="240px" sortable>
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
               ', ' + scope.row.ciudad }}
           </template>
         </el-table-column>
-        <el-table-column label="Celular" prop="cell_phone" sortable />
-        <el-table-column label="Fecha de orden" prop="date1" width="180px" sortable />
+        <el-table-column label="Celular" prop="cell_phone" width="100px" sortable />
+        <el-table-column label="Fecha de orden" prop="date1" width="150px" sortable />
         <el-table-column label="Fecha de fumigacion" prop="date2" width="180px" sortable />
         <el-table-column label="De" prop="time1" sortable />
         <el-table-column label="A" prop="time2" sortable />
@@ -87,10 +85,9 @@ export default {
     filteredData: [],
     selectedItem: {},
     selectedDate: null,
-    selectedDate2: null,
+    selectedDate1: null,
     searchQuery: '',
     searchQueryName:'',
-searchQueryLastname:'',
 searchQueryAddress:'',
 searchQueryPhone:'',
     today: new Date().toISOString().slice(0, 10),
@@ -108,10 +105,23 @@ searchQueryPhone:'',
       })
     },
     
+    filterDataName() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+        return combinedName.includes(this.searchQueryName.toLowerCase());
+      });
+    },
+filterDataAddress() {
+      this.filteredData = this.tableData.filter((clientes) => {
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+  });
+    }, 
+
     filterData() {
       if (this.selectedDate) {
         // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(orden => orden.date1 === this.selectedDate);
+        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date1 === this.selectedDate);
         if (this.filteredData.length === 0) {
           ElNotification({
             title: 'Aviso',
@@ -136,20 +146,20 @@ searchQueryPhone:'',
       }
     },
 
-    filterData2() {
-      if (this.selectedDate2) {
+    filterData1() {
+      if (this.selectedDate1) {
         // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(orden => orden.date2 === this.selectedDate2);
+        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date2 === this.selectedDate1);
         if (this.filteredData.length === 0) {
           ElNotification({
             title: 'Aviso',
-            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate2}).`,
+            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate1}).`,
             type: 'warning'
           });
         } else {
           ElNotification({
             title: 'Datos encontrados',
-            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate2}).`,
+            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate1}).`,
             type: 'success',
           });
         }
@@ -162,26 +172,6 @@ searchQueryPhone:'',
           type: 'info',
         });
       }
-    },
-
-    filterDataName() {
-      this.filteredData = this.tableData.filter((orden) => {
-        return orden.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
-      });
-    },
-
-    filterDataLastname() {
-      this.filteredData = this.tableData.filter((orden) => {
-        const combinedLastname = orden.lastname1.toLowerCase() + ' ' + orden.lastname2.toLowerCase();
-        return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
-      });
-    },
-
-    filterDataAddress() {
-      this.filteredData = this.tableData.filter((orden) => {
-        const combinedAddress = orden.ciudad.toLowerCase() + ' ' + orden.colonia.toLowerCase() + ' ' + orden.home.toLowerCase() + ' ' + orden.codigoPostal.toLowerCase() + ' ' + orden.numAddress.toLowerCase();
-        return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-      });
     },
 
     filterDataPhone() {

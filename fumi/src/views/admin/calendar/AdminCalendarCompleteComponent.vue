@@ -2,35 +2,34 @@
   <div>
 
     <router-link to="/admin/calendar"
-          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa-solid fa-calendar-day" aria-hidden="true" style="margin-top: 5px;
+      class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
+      style="color:black">
+      <i class="fa-solid fa-calendar-day" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>
-            Agenda por día
-        </router-link>
+      Agenda por día
+    </router-link>
 
-        <router-link to="/admin/calendar/complete"
-          class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa-solid fa-calendar-check" aria-hidden="true" style="margin-top: 5px;
+    <router-link to="/admin/calendar/complete"
+      class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
+      style="color:black">
+      <i class="fa-solid fa-calendar-check" aria-hidden="true" style="margin-top: 5px;
             margin-left: -5px; margin-right:10px;"></i>
-            Agenda realizadas
-        </router-link>
+      Agenda realizadas
+    </router-link>
   </div>
 
   <div class="container mx-auto">
     <h1 class="text-3xl font-bold mb-4">Agenda de trabajo Realizadas</h1>
 
 
-    <div class="flex justify-center items-center mb-4">
+    <div class="flex justify-center items-center mb-4" style="width: 100%;">
       <el-date-picker class="mx-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" />
-      <el-input class="mx-2" v-model="selectedDate" @change="filterData" style="width: 240px"
-        placeholder="Buscar por nombre" clearable />
-      <el-input class="mx-2" v-model="selectedDate" @change="filterData" style="width: 240px"
-        placeholder="Buscar por direccion" clearable />
-      <el-input v-model="selectedDate" @change="filterData" style="width: 240px" placeholder="Buscar por celular"
-        clearable />
+        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
+      <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterData1" type="date" format="DD-MM-YYYY"
+        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+        @input="filterDataAddress" style="width: 100%;"/>
     </div>
 
     <div class="table-container">
@@ -84,7 +83,10 @@ export default {
     filteredData: [],
     selectedItem: {},
     selectedDate: null,
+    selectedDate1: null,
     searchQuery: '',
+    searchQueryName: '',
+    searchQueryAddress: '',
     today: new Date().toISOString().slice(0, 10),
   }),
   mounted() {
@@ -129,10 +131,24 @@ export default {
         console.error('Row is undefined or does not have an id:', row);
       }
     },
+
+    filterDataName() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+        return combinedName.includes(this.searchQueryName.toLowerCase());
+      });
+    },
+filterDataAddress() {
+      this.filteredData = this.tableData.filter((clientes) => {
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+  });
+    }, 
+
     filterData() {
       if (this.selectedDate) {
         // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date2 === this.selectedDate);
+        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date1 === this.selectedDate);
         if (this.filteredData.length === 0) {
           ElNotification({
             title: 'Aviso',
@@ -143,6 +159,34 @@ export default {
           ElNotification({
             title: 'Datos encontrados',
             message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
+            type: 'success',
+          });
+        }
+      } else {
+        // Si no se selecciona ninguna fecha, muestra todos los datos
+        this.filteredData = this.tableData;
+        ElNotification({
+          title: 'Mostrando todos los datos',
+          message: 'Se estan mostrando todos los datos de la agenda.',
+          type: 'info',
+        });
+      }
+    },
+
+    filterData1() {
+      if (this.selectedDate1) {
+        // Filtra por la fecha seleccionada
+        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date2 === this.selectedDate1);
+        if (this.filteredData.length === 0) {
+          ElNotification({
+            title: 'Aviso',
+            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate1}).`,
+            type: 'warning'
+          });
+        } else {
+          ElNotification({
+            title: 'Datos encontrados',
+            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate1}).`,
             type: 'success',
           });
         }
