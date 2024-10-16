@@ -92,12 +92,6 @@ class ComerciosController extends Controller
         ]);
     }
 
-    public function totalAsentamientos()
-    {
-        $totalAsentamientos = Comercio::count();
-        return response()->json(['total' => $totalAsentamientos]);
-    }
-
     public function verComercio()
     {
         $comercios = Comercio::all();

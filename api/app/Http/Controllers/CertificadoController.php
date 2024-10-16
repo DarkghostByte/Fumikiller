@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Certificado;
 use Validator;
 use Barryvdh\DomPDF\Facade\Pdf;
-
+use Carbon\Carbon;
 class CertificadoController extends Controller
 {
     /**
@@ -165,7 +165,15 @@ class CertificadoController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64','data');
+        setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+        date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+        $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))));
+        str_replace('S?BADO','SÁBADO',$fecha);
+        $fecha = Carbon::parse($data->certificateDate);
+        Carbon::setLocale('es');
+       
+        $pdf_data = compact('base64','data','fecha');
+     
         $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('a4', 'landscape');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();

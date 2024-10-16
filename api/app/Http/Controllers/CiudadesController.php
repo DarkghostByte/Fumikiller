@@ -120,12 +120,6 @@ class CiudadesController extends Controller
         ]);
     }
 
-    public function totalCiudades()
-    {
-        $totalCiudades = Ciudad::count();
-        return response()->json(['total' => $totalCiudades]);
-    }
-
     public function verCiudades()
     {
         $ciudades = Ciudad::where('infodelete_Ciudad', '!=', 'Baja')->get();

@@ -25,7 +25,7 @@
         <el-table-column label="">
           <template #default="scope">
             <el-button style="color:black" size="small" type="success">
-              <a :href="url+'api/orden-de-trabajo/'+scope.row.id_cliente+'/'+scope.row.id" target="_blank">
+              <a :href="url+'api/ordenTrabajoCompleta/'+scope.row.id" target="_blank">
                 <span class="material-symbols-outlined">lab_profile</span>
               </a>
             </el-button>

@@ -14,6 +14,7 @@ use App\Http\Controllers\ProductosExtrenosController;
 use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\ViasController;
 use App\Http\Controllers\ProblematicasController;
+use App\Http\Controllers\AdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,18 +42,16 @@ Route::resource('vias', ViasController::class);
 Route::resource('problematica', ProblematicasController::class);
 
 //RUTAS PARA PDF
-Route::get('/certificado/{id}',[ClientesController::class,'generarPDF']);
-Route::get('/certificado1/{id}',[CompletarOrdenesController::class,'generarCertificado']);
 Route::get('/certificadoRealizado/{id}',[CertificadoController::class,'generarCertificado']);
 Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
 Route::get('/ordenTrabajoCompleta/{id}',[CompletarOrdenesController::class,'generarOrden']);
-Route::get('/ordenTrabajo/{id}',[OrdensController::class,'generarOrdenPDF']);
 Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
 Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
 Route::get('/ventatotales',[CompletarOrdenesController::class,'generarVentasTotales']);
 Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
 Route::get('/creditossinfactura',[CompletarOrdenesController::class,'generarCreditosSinFactura']);
 Route::get('/creditosconfactura',[CompletarOrdenesController::class,'generarCreditosConFactura']);
+Route::get('/ordenTrabajo/{id}',[OrdensController::class,'generarOrdenPDF']);
 
 
 //VER OPCIONES
@@ -68,22 +67,8 @@ Route::get('/verProblematicas',[ProblematicasController::class,'verProblematicas
 
 
 //CONTEOS
-Route::get('/totalPagos', [CompletarOrdenesController::class, 'totalPagos']);
-Route::get('/totalVentasSinFactura', [CompletarOrdenesController::class, 'totalVentasSinFactura']);
-Route::get('/totalVentasConFactura', [CompletarOrdenesController::class, 'totalVentasConFactura']);
-Route::get('/totalCreditos', [CompletarOrdenesController::class, 'totalCreditos']);
-Route::get('/totalCreditosSinFactura', [CompletarOrdenesController::class, 'totalCreditosSinFactura']);
-Route::get('/totalCreditosConFactura', [CompletarOrdenesController::class, 'totalCreditosConFactura']);
-Route::get('/totalCiudades', [CiudadesController::class, 'totalCiudades']);
-Route::get('/totalColonias', [ColoniasController::class, 'totalColonias']);
-Route::get('/totalAsentamientos', [ComerciosController::class, 'totalAsentamientos']);
-Route::get('/totalProductosInt', [ProductosInternosController::class, 'totalProductosInt']);
-Route::get('/totalProductosExt', [ProductosExtrenosController::class, 'totalProductosExt']);
-Route::get('/totalEmpleados', [EmpleadosController::class, 'totalEmpleados']);
-Route::get('/totalClientes', [ClientesController::class, 'totalClientes']);
-Route::get('/totalOrdenes', [OrdensController::class, 'totalOrdenes']);
-Route::get('/totalVias', [ViasController::class, 'totalVias']);
-Route::get('/totalProblematica', [ProblematicasController::class, 'totalProblematica']);
+Route::get('/totales', [AdminController::class, 'totales']);
+Route::get('/totalDinero', [AdminController::class, 'totalDinero']);
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);

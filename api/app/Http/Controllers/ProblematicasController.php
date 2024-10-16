@@ -117,12 +117,6 @@ class ProblematicasController extends Controller
         ]);
     }
 
-    public function totalProblematica()
-    {
-        $totalProblematica = Problematicas::count();
-        return response()->json(['total' => $totalProblematica]);
-    }
-
     public function desactivarProblematica(Request $request, $id)
     {
     $data = Problematicas::find($id);

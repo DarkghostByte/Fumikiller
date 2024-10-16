@@ -226,18 +226,30 @@ export default {
         const responseOrdenes = await axios.get(this.urlApi + 'completarOrden');
         this.tableData = responseOrdenes.data.data.filter(row => row.tradename !== 'Particular');
         
-        const responseTotalPagos = await axios.get(this.urlApi + 'totalPagos');
-        this.totalPagos = responseTotalPagos.data.total;
-        const responseTotalCreditos = await axios.get(this.urlApi + 'totalCreditos');
-        this.totalCreditos = responseTotalCreditos.data.total;
-        const responseTotalVentasSinFactura = await axios.get(this.urlApi + 'totalVentasSinFactura');
-        this.totalVentasSinFactura = responseTotalVentasSinFactura.data.total;
-        const responseTotalVentasConFactura = await axios.get(this.urlApi + 'totalVentasConFactura');
-        this.totalVentasConFactura = responseTotalVentasConFactura.data.total;
-        const responseTotalCreditosSinFactura = await axios.get(this.urlApi + 'totalCreditosSinFactura');
-        this.totalCreditosSinFactura = responseTotalCreditosSinFactura.data.total;
-        const responseTotalCreditosConFactura = await axios.get(this.urlApi + 'totalCreditosConFactura');
-        this.totalCreditosConFactura = responseTotalCreditosConFactura.data.total;
+        const responseTotalDinero = await axios.get(this.urlApi + 'totalDinero');
+        const {
+          totalPagos,
+          totalCreditos,
+          totalVentasSinFactura,
+          totalCreditosSinFactura,
+          totalCreditosConFactura,
+          totalVentasConFactura,
+        } = responseTotalDinero.data; // Destructuring assignment
+
+        this.totalPagos = totalPagos;
+        this.totalCreditos = totalCreditos;
+        this.totalVentasSinFactura = totalVentasSinFactura;
+        this.totalCreditosSinFactura = totalCreditosSinFactura;
+        this.totalCreditosConFactura = totalCreditosConFactura;
+        this.totalVentasConFactura = totalVentasConFactura;
+
+        console.log('Total pagos', this.totalPagos);
+        console.log('Total creditos', this.totalCreditos);
+        console.log('Total ventas sin factura', this.totalVentasSinFactura);
+        console.log('Total creditos sin factura', this.totalCreditosSinFactura);
+        console.log('Total creditos con factura', this.totalCreditosConFactura);
+        console.log('Total ventas con factura', this.totalVentasConFactura);
+        console.log('Totales', responseTotalDinero.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }

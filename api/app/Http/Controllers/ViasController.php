@@ -117,12 +117,6 @@ class ViasController extends Controller
         ]);
     }
 
-    public function totalVias()
-    {
-        $totalVias = Vias::count();
-        return response()->json(['total' => $totalVias]);
-    }
-
     public function verVias()
     {
         $vias = Vias::where('infodelete_Vias', '!=', 'Baja')->get();

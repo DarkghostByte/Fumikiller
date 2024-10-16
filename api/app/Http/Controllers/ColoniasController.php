@@ -151,12 +151,6 @@ class ColoniasController extends Controller
         ]);
     }
 
-    public function totalColonias()
-    {
-        $totalColonias = Colonia::count();
-        return response()->json(['total' => $totalColonias]);
-    }
-
     public function verColonia()
     {
         $colonias = Colonia::all();

@@ -118,12 +118,6 @@ class ProductosInternosController extends Controller
         ]);
     }
 
-    public function totalProductosInt()
-    {
-        $totalProductosInt = ProductoInterno::count();
-        return response()->json(['total' => $totalProductosInt]);
-    }
-
     public function desactivarProductoInterno(Request $request, $id)
     {
     $data = ProductoInterno::find($id);

@@ -114,12 +114,6 @@ class ProductosExtrenosController extends Controller
         ]);
     }
 
-    public function totalProductosExt()
-    {
-        $totalProductosExt = ProductoExterno::count();
-        return response()->json(['total' => $totalProductosExt]);
-    }
-
     public function desactivarProductoExterno(Request $request, $id)
     {
     $data = ProductoExterno::find($id);

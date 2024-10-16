@@ -253,12 +253,6 @@ class OrdensController extends Controller
     ]);
     }
 
-    public function totalOrdenes()
-    {
-        $totalOrdenes = Orden::count();
-        return response()->json(['total' => $totalOrdenes]);
-    }
-
     public function verEstadoOrden(Request $request, $id)
     {
     $orden = Orden::find($id);

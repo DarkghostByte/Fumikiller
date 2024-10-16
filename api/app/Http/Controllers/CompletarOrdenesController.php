@@ -22,8 +22,8 @@ class CompletarOrdenesController extends Controller
 
     $query = CompletarOrden::select([
         'completarordenes.*',
-        'orden.plague1',
-        'orden.plague2',
+        'problematica1.problematica as plague1',
+        'problematica2.problematica as plague2',
         'orden.date1',
         'orden.date2',
         'orden.id_cliente',
@@ -55,6 +55,8 @@ class CompletarOrdenesController extends Controller
     ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
     ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+    ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+    ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
     ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id');
 
     if ($id_cliente) {
@@ -138,17 +140,28 @@ class CompletarOrdenesController extends Controller
     public function show(string $id)
 {
     $data = CompletarOrden::select(['completarordenes.*', 
-    'orden.plague1',
-    'orden.plague2',
-    'clientes.name',
-    'clientes.lastname1',
-    'clientes.lastname2',
-    'clientes.tradename',
-    'productosInternos1.productoInt as productoInt1',
-    'productosInternos2.productoInt as productoInt2',
-    'productosExternos1.productoExt as productoExt1',
-    'productosExternos2.productoExt as productoExt2',
-    'empleados1.nameEmpleado as nameEmpleado1',
+    'completarordenes.*',
+        'problematica1.problematica as plague1',
+        'problematica2.problematica as plague2',
+        'orden.date1',
+        'orden.date2',
+        'orden.id_cliente',
+        'clientes.name',
+        'clientes.lastname1',
+        'clientes.lastname2',
+        'clientes.tradename',
+        'clientes.home',
+        'clientes.numAddress',
+        'clientes.id_colonia',
+        'clientes.id_city',
+        'colonias.colonia',
+        'colonias.codigoPostal',
+        'ciudades.ciudad',
+        'productosInternos1.productoInt as productoInt1',
+        'productosInternos2.productoInt as productoInt2',
+        'productosExternos1.productoExt as productoExt1',
+        'productosExternos2.productoExt as productoExt2',
+        'empleados1.nameEmpleado as nameEmpleado1',
         'empleados2.nameEmpleado as nameEmpleado2',
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
@@ -159,6 +172,10 @@ class CompletarOrdenesController extends Controller
     ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
     ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
     ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+    ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+    ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+    ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
+    ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
     ->where('completarordenes.id', $id)
     ->first();
 
@@ -238,7 +255,8 @@ class CompletarOrdenesController extends Controller
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
-            'orden.plague1',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
             'orden.id_cliente',
@@ -252,11 +270,25 @@ class CompletarOrdenesController extends Controller
             'clientes.id_city',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->where('clientes.tradename','=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
@@ -296,7 +328,8 @@ class CompletarOrdenesController extends Controller
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
-            'orden.plague1',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
             'orden.id_cliente',
@@ -310,11 +343,25 @@ class CompletarOrdenesController extends Controller
             'clientes.id_city',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->where('clientes.tradename','!=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
@@ -353,7 +400,8 @@ class CompletarOrdenesController extends Controller
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
-            'orden.plague1',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
             'orden.id_cliente',
@@ -367,11 +415,25 @@ class CompletarOrdenesController extends Controller
             'clientes.id_city',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -409,11 +471,10 @@ class CompletarOrdenesController extends Controller
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
-            'orden.plague1',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
-            'orden.date2',
-            'orden.requires',
             'orden.id_cliente',
             'clientes.name',
             'clientes.lastname1',
@@ -423,14 +484,27 @@ class CompletarOrdenesController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->where('completarordenes.requiere3','=','Credito')
         ->orderBy('completarordenes.id', 'DESC')
@@ -469,10 +543,10 @@ class CompletarOrdenesController extends Controller
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
-            'orden.plague1',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
-            'orden.requires',
             'orden.id_cliente',
             'clientes.name',
             'clientes.lastname1',
@@ -482,14 +556,27 @@ class CompletarOrdenesController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         // Filtrar por órdenes no pagadas y clientes particulares
         ->where('completarordenes.requiere3', 'Credito')
@@ -531,11 +618,10 @@ class CompletarOrdenesController extends Controller
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
-            'orden.plague1',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
-            'orden.date2',
-            'orden.requires',
             'orden.id_cliente',
             'clientes.name',
             'clientes.lastname1',
@@ -545,14 +631,27 @@ class CompletarOrdenesController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
-            'ciudades.ciudad'
+            'ciudades.ciudad',
+            'productosInternos1.productoInt as productoInt1',
+            'productosInternos2.productoInt as productoInt2',
+            'productosExternos1.productoExt as productoExt1',
+            'productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
+        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
+        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
+        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->where('completarordenes.requiere3','Credito')
         ->where('clientes.tradename','!=','Particular')
@@ -590,9 +689,10 @@ class CompletarOrdenesController extends Controller
 
     public function generarOrden($id){        
         // Obtener datos del cliente junto con ciudad y colonia
-        $ordenCompleta = CompletarOrden::select('completarordenes.*',
-            'orden.plague1',
-            'orden.plague2',
+        $ordenCompleta = CompletarOrden::select(
+            'completarordenes.*',
+            'problematica1.problematica as plague1',
+            'problematica2.problematica as plague2',
             'orden.date1',
             'orden.date2',
             'orden.time1',
@@ -624,6 +724,8 @@ class CompletarOrdenesController extends Controller
             ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
             ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
             ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
+            ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
+            ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
@@ -648,128 +750,6 @@ class CompletarOrdenesController extends Controller
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
     }
-
-
-    public function totalPagos()
-        {
-            $totalPagos = CompletarOrden::sum('pago');
-            return response()->json(['total' => $totalPagos]);
-        }
-
-    public function totalCreditos()
-        {
-            $totalCreditos = CompletarOrden::where('requiere3', 'Credito')
-            ->sum('pago');
-            return response()->json(['total' => $totalCreditos]);
-        }
-
-        public function totalVentasSinFactura()
-        {
-            $totalVentasSinFactura = CompletarOrden::
-            select('completarordenes.*',
-            'clientes.tradename')
-            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('clientes.tradename','=','Particular')
-
-            ->sum('pago');
-            return response()->json(['total' => $totalVentasSinFactura]);
-        }
-
-        public function totalCreditosSinFactura()
-        {
-            $totalCreditosSinFactura = CompletarOrden::
-            select('completarordenes.*',
-            'clientes.tradename')
-            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.requiere3', 'Credito')
-            ->where('clientes.tradename', 'Particular')
-
-            ->sum('pago');
-            return response()->json(['total' => $totalCreditosSinFactura]);
-        }
-
-        public function totalCreditosConFactura()
-        {
-            $totalCreditosConFactura = CompletarOrden::
-            select('completarordenes.*',
-            'clientes.tradename')
-            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.requiere3', 'Credito')
-            ->where('clientes.tradename', '!=' ,'Particular')
-
-            ->sum('pago');
-            return response()->json(['total' => $totalCreditosConFactura]);
-        }
-
-        public function totalVentasConFactura()
-        {
-            $totalVentasConFactura = CompletarOrden::
-            select('completarordenes.*',
-            'clientes.tradename')
-            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('clientes.tradename','!=','Particular')
-
-            ->sum('pago');
-            return response()->json(['total' => $totalVentasConFactura]);
-        }
-
-        public function generarCertificado($id){
-            $ordenCompleta = CompletarOrden::select('completarordenes.*',
-            'orden.date2',
-            'orden.id_cliente',
-            'clientes.name',
-            'clientes.lastname1',
-            'clientes.lastname2',
-            'clientes.tradename',
-            'clientes.home',
-            'clientes.numAddress',
-            'clientes.id_colonia',
-            'clientes.id_city',
-            'clientes.cell_phone',
-            'comercios.comercio',
-            'colonias.colonia',
-            'colonias.codigoPostal',
-            'ciudades.ciudad',
-            'ciudades.estado',
-            'productosInternos1.productoInt as productoInt1',
-            'productosInternos2.productoInt as productoInt2',
-            'productosExternos1.productoExt as productoExt1',
-            'productosExternos2.productoExt as productoExt2',
-            )
-            ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-            ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
-            ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
-            ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
-            ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
-            ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-            ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
-            ->where('completarordenes.id', $id)
-            ->first();
-        //Datos de la base de datos
-        if (!$ordenCompleta) {
-            return abort(404);
-        }
-        
-
-            /* Imagen Del Logo */
-            $path = public_path('img/membretadoFumi.png');
-            $type = pathinfo($path, PATHINFO_EXTENSION);
-            $data_img = file_get_contents($path);
-            $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-            //dd($base64);
-            //$pdf_data = compact('data','clientes','base64');
-            $pdf_data = compact('base64','ordenCompleta');
-            $pdf = Pdf::loadView('reports.repoCertificado',$pdf_data)->setPaper('a4', 'landscape');     
-            //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-            return $pdf->stream();
-            return $pdf->download('invoice.pdf');
-        }
 
         public function actualizarEstado(Request $request, $id)
         {

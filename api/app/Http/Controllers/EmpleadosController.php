@@ -123,12 +123,6 @@ class EmpleadosController extends Controller
         ]);
     }
 
-    public function totalEmpleados()
-    {
-        $totalEmpleados = Empleados::count();
-        return response()->json(['total' => $totalEmpleados]);
-    }
-
     public function desactivarEmpleado(Request $request, $id)
     {
     $data = Empleados::find($id);

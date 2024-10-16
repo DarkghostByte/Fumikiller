@@ -1,36 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
     <title>Certificado {{ $data->id_orden }} {{ $data->name }} {{ $data->lastname1 }} {{ $data->lastname2 }}</title>
-
-
-    <div class="delimitador">
-        <head>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
+
+    <div class="delimitador">
+        
 <body >
-<img class="membre" src="{{ $base64 }}" alt="">
+        <img class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo">
             <h5 class="mgntp">CALLE ABETO 2201 COL. ALAMEDAS</h5>
             <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
         </div>     
-        <h2 class="cerapli">CERTIFICADO DE APLICACION</h2>
+        <h2 class="cerapli">CERTIFICADO DE APLICACIÓN</h2>
         <h2 class="cerapli1"><p>Licencia Sanitaria 04-08A095</h2>
         
-    <header>    
-        
-    </header>
+    
     <main> 
         <div class="fondLimitador"></div>
         <table>
             <th class="thtt">FECHA:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+                <div class="renDiv" style="text-transform: uppercase">
                 <?php
-                setlocale(LC_TIME, 'es_ES'); // Establece el locale para español
+                //setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+                //date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+                // strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))) 
                 ?>
-                {{ strftime("%A %d de %B de %Y", strtotime($data->certificateDate)) }}
-            </div>
+                    {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
+                 
+                </div>
             </th>            
         </table>
             
@@ -38,7 +40,7 @@
             <th>NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->certificateName }}
+                {{ strtoupper($data->certificateName) }}
             </div>
             </th> 
         </table>
@@ -49,16 +51,12 @@
                 {{ substr($data->cell_phone, 0, 3) }} - {{ substr($data->cell_phone, 3, 3) }} - {{ substr($data->cell_phone, 6, 2) }} - {{ substr($data->cell_phone, 8, 2) }} 
             </div>
             </th> 
+        </table>
+        <table>
             <th> DOMICILIO:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->home }} #{{ $data->numAddress }}
-            </div>
-            </th> 
-        </table>
-        <table>
-        <th class="renDivTh">
-            <div class="renDiv">
+                {{ strtoupper($data->home) }} #{{ $data->numAddress }}
             </div>
             </th> 
         </table>
@@ -66,7 +64,7 @@
             <th>COLONIA:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->colonia }}
+                {{ strtoupper($data->colonia) }}
             </div>
             </th> 
             <th>C.P.</th>
@@ -80,13 +78,13 @@
             <th>CIUDAD:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->ciudad }}
+                {{ strtoupper($data->ciudad) }}
             </div>
             </th>             
             <th> ESTADO:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->estado }}
+                {{ strtoupper($data->estado) }}
             </div>
             </th> 
         </table>
@@ -94,7 +92,7 @@
             <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
-                {{ $data->comercio }}
+                {{ strtoupper($data->comercio) }}
             </div>
             </th>             
             </th> 
@@ -106,7 +104,7 @@
             <th>INTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->productoInt }}
+                {{ strtoupper($data->productoInt) }}
 
             </div>
             </th> 
@@ -115,7 +113,7 @@
             <th>EXTERIOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $data->productoExt }}
+                {{ strtoupper($data->productoExt) }}
 
             </div>
             </th> 
@@ -124,7 +122,7 @@
             <th>OBSERVACIONES:</th>
             <th class="renDivTh">
             
-                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
+                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
             
             </th> 
         </table>
@@ -172,12 +170,9 @@
                 <table>
                     <th class="thtt">FECHA:</th>
                     <th class="renDivTh">
-                    <div class="renDiv">
-                        <?php
-                        setlocale(LC_TIME, 'es_ES'); // Establece el locale para español
-                        ?>
-                        {{ strftime("%A %d de %B de %Y", strtotime($data->certificateDate)) }}
-                    </div>
+                    <div class="renDiv" style="text-transform: uppercase">
+                        {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
+                     </div>
                     </th>            
                 </table>
                     
@@ -185,7 +180,7 @@
                     <th>NOMBRE:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->certificateName }}
+                        {{ strtoupper($data->certificateName) }}
                     </div>
                     </th> 
                 </table>
@@ -196,24 +191,21 @@
                         {{ substr($data->cell_phone, 0, 3) }} - {{ substr($data->cell_phone, 3, 3) }} - {{ substr($data->cell_phone, 6, 2) }} - {{ substr($data->cell_phone, 8, 2) }} 
                     </div>
                     </th> 
+                </table>
+                <table>
                     <th> DOMICILIO:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->home }} #{{ $data->numAddress }}
+                        {{ strtoupper($data->home) }} #{{ $data->numAddress }}
                     </div>
                     </th> 
                 </table>
                 <table>
-                <th class="renDivTh">
-                    <div class="renDiv">
-                    </div>
-                    </th> 
-                </table>
                 <table>
                     <th>COLONIA:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->colonia }}
+                        {{ strtoupper($data->colonia) }}
                     </div>
                     </th> 
                     <th>C.P.</th>
@@ -227,13 +219,13 @@
                     <th>CIUDAD:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->ciudad }}
+                        {{ strtoupper($data->ciudad) }}
                     </div>
                     </th>             
                     <th> ESTADO:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->estado }}
+                        {{ strtoupper($data->estado) }}
                     </div>
                     </th> 
                 </table>
@@ -241,7 +233,7 @@
                     <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
                     <th class="renDivTh">
                     <div class="renDiv1">
-                        {{ $data->comercio }}
+                        {{ strtoupper($data->comercio) }}
                     </div>
                     </th>             
                     </th> 
@@ -253,7 +245,7 @@
                     <th>INTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->productoInt }}
+                        {{ strtoupper($data->productoInt) }}
                     </div>
                     </th> 
                 </table>
@@ -261,7 +253,7 @@
                     <th>EXTERIOR:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
-                        {{ $data->productoExt }}
+                        {{ strtoupper($data->productoExt) }}
                     </div>
                     </th> 
                 </table>
@@ -269,7 +261,7 @@
                     <th>OBSERVACIONES:</th>
                     <th class="renDivTh">
                     
-                        <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo <br> 1 hora para la re-entrada. Para mayor efectividad de la fumigación, <br> no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
+                        <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
                     
                     </th> 
                 </table>
@@ -281,7 +273,7 @@
                         <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
                         <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
                         <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
-                        <h5 class="idCert">
+                        <h5 class="idCert1">
                             No. {{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}   
                             
                         </h5>
@@ -299,8 +291,13 @@
 
 
 <style>
+    .thdomicilio{
+        position:;
+        text-align: justify;
+        text-decoration: underline;
+    }
     th{
-        font-size:10px;
+        font-size:13px;
         font-weight: normal;
 
     }
@@ -372,14 +369,14 @@
     }
     .txtfin1{
         padding-left:15px;
-        font-size: 12px;
-        margin-top:-17px;
+        font-size: 16px;
+        margin-top:-20px;
         color:red;
     }
     .txtfin{
         padding-left:15px;
-        font-size: 12px;
-        margin-top:-17px;
+        font-size: 16px;
+        margin-top:-20px;
         color:#104e85;
     }
     .flexId{
@@ -387,24 +384,34 @@
         display:flex;
     }
     .idCert{
-        font-size: 16px;
-        margin-left:75%;
-        margin-top:-60px;
+        position: absolute;
+        font-size: 18px;
+        margin-left:35%;
+        margin-top:-25px;
         height:25px;
         width: 150px;
-        
+        color: red;
+    }
+    .idCert1{
+        position: absolute;
+        font-size: 18px;
+        margin-left:75%;
+        margin-top:-37px;
+        height:25px;
+        width: 150px;
         color: red;
     }
     .txtObser{
-        font-size: 12px;
-        margin-top:0px;
+        font-size: 13px;
+        margin-right: 5px;
+        margin-top:0;
         text-align: justify;
         text-decoration: underline;
     }
     .renDivTh{
         width: 100%;
         margin-top:-25px; 
-            }
+    }
     .renDiv{
         border-bottom: 1px solid black;
         height:15px;
@@ -432,12 +439,13 @@
         height:99%;
     }
     .dInAc{
-        height: 35px;
+        height: 25px;
         margin:20px;
+        margin-bottom: -20px;
+        margin-top: -20px;
         background-color:#104e85 ;
         color:white;
-        text-aling:center;  
-        margin-top: -1.5%;
+        text-align:center;  
     }
     .tblAg{
         position:absolute;
@@ -453,7 +461,7 @@
     }
     .footDiv{
         margin:20px;
-        margin-top:12px;
+        margin-top:-10px;
         border-bottom:2px solid rgb(0, 0, 0);
     }
     

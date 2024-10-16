@@ -1,8 +1,4 @@
 <template>
-  <!-- Importar Iconos-->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-    integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div>
     <div class="mr-6">
       <h1 class="py-10 px-5 text-4xl font-semibold mb-2">Administración</h1>
@@ -86,25 +82,25 @@
       <router-link to="/admin/admin/orderView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-400 hover:bg-green-800 focus:bg-green-700 rounded-md ml-6 mb-5 shadow-lg"
         style="width:300px; height:100px; font-size:22px;">
-        <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
+        <i class="fa-solid fa-folder" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>
         <h2>Ordenes ({{ totalOrdenes }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/clientsView"
+      <router-link to="/admin/admin/"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-400 hover:bg-orange-800 focus:bg-orange-700 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:300px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Ordenes Terminadas ()</h2>
+      </router-link>
+
+      <router-link to="/admin/admin/"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg"
         style="width:300px; height:100px; font-size:22px;">
         <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>
-        <h2>Clientes ({{ totalClientes }})</h2>
-      </router-link>
-
-      <router-link to="/admin/admin/orderView"
-        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg"
-        style="width:300px; height:100px; font-size:22px;">
-        <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
-            margin-left: -5px; margin-right:10px; "></i>
-        <h2>Ordenes ({{ totalOrdenes }})</h2>
+        <h2>forma de contacto ()</h2>
       </router-link>
 
     </div>
@@ -176,32 +172,42 @@ export default {
 
     async fetchData() {
       try {
-        const responseOrdenes = await axios.get(this.urlApi + 'ciudades');
-        this.tableData = responseOrdenes.data.data;
+        const responseTotales = await axios.get(this.urlApi + 'totales');
+        const {
+          totalProductosExt,
+          totalProductosInt,
+          totalCiudades,
+          totalColonias,
+          totalProblematica,
+          totalAsentamientos,
+          totalClientes,
+          totalOrdenes,
+          totalEmpleados,
+          totalVias
+        } = responseTotales.data; // Destructuring assignment
 
-        const responseTotalCiudades = await axios.get(this.urlApi + 'totalCiudades');
-        this.totalCiudades = responseTotalCiudades.data.total;
-        const responseTotalColonias = await axios.get(this.urlApi + 'totalColonias');
-        this.totalColonias = responseTotalColonias.data.total;
-        const responseTotalAsentamientos = await axios.get(this.urlApi + 'totalAsentamientos');
-        this.totalAsentamientos = responseTotalAsentamientos.data.total;
-        const responseTotalProductosInt = await axios.get(this.urlApi + 'totalProductosInt');
-        this.totalProductosInt = responseTotalProductosInt.data.total;
-        const responseTotalProductosExt = await axios.get(this.urlApi + 'totalProductosExt');
-        this.totalProductosExt = responseTotalProductosExt.data.total;
-        const responseTotalClientes = await axios.get(this.urlApi + 'totalClientes');
-        this.totalClientes = responseTotalClientes.data.total;
-        const responseTotalOrdenes = await axios.get(this.urlApi + 'totalOrdenes');
-        this.totalOrdenes = responseTotalOrdenes.data.total;
-        const responseTotalEmpleados = await axios.get(this.urlApi + 'totalEmpleados');
-        this.totalEmpleados = responseTotalEmpleados.data.total;
-        const responseTotalVias = await axios.get(this.urlApi + 'totalVias');
-        this.totalVias = responseTotalVias.data.total;
-        const responseTotalProblematica = await axios.get(this.urlApi + 'totalProblematica');
-        this.totalProblematica = responseTotalProblematica.data.total;
+        this.totalProductosExt = totalProductosExt;
+        this.totalProductosInt = totalProductosInt;
+        this.totalCiudades = totalCiudades;
+        this.totalColonias = totalColonias;
+        this.totalProblematica = totalProblematica;
+        this.totalAsentamientos = totalAsentamientos;
+        this.totalClientes = totalClientes;
+        this.totalOrdenes = totalOrdenes;
+        this.totalEmpleados = totalEmpleados;
+        this.totalVias = totalVias;
 
-        
-
+        console.log('Total productos externos', this.totalProductosExt);
+        console.log('Total productos internos', this.totalProductosInt);
+        console.log('Total ciudades', this.totalCiudades);
+        console.log('Total colonias', this.totalColonias);
+        console.log('Total problematicas', this.totalProblematica);
+        console.log('Total comercios', this.totalAsentamientos);
+        console.log('Total clientes', this.totalClientes);
+        console.log('Total ordenes', this.totalOrdenes);
+        console.log('Total empleados', this.totalEmpleados);
+        console.log('Total vias', this.totalVias);
+        console.log('Totales', responseTotales.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
