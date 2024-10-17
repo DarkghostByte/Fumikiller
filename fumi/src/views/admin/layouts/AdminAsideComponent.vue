@@ -27,7 +27,7 @@
               <span class="material-symbols-outlined">calendar_clock</span>
               <p id="HTxt" class="">Agenda</p>
             </router-link>
-            <router-link to="/admin/admin" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
+            <router-link to="/admin/facturacion" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
               <span class="sr-only">Facturacion</span>
               <span class="material-symbols-outlined">paid</span>
               <p id="HTxt" class="">Facturacion</p>
@@ -37,7 +37,7 @@
               <span class="material-symbols-outlined">verified</span>
               <p id="HTxt" class="">Certificados</p>
             </router-link>
-            <router-link to="/admin/payments" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
+            <router-link to="/admin/gastos" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
               <span class="sr-only">Gastos</span>
               <span class="material-symbols-outlined">payments</span>
               <p id="HTxt" class="">Gastos</p>
