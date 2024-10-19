@@ -15,6 +15,8 @@ use App\Http\Controllers\EmpleadosController;
 use App\Http\Controllers\ViasController;
 use App\Http\Controllers\ProblematicasController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\IngresosController;
+use App\Http\Controllers\EgresosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -40,6 +42,8 @@ Route::resource('productosExternos', ProductosExtrenosController::class);
 Route::resource('empleados', EmpleadosController::class);
 Route::resource('vias', ViasController::class);
 Route::resource('problematica', ProblematicasController::class);
+Route::resource('ingresos', IngresosController::class);
+Route::resource('egresos', EgresosController::class);
 
 //RUTAS PARA PDF
 Route::get('/certificadoRealizado/{id}',[CertificadoController::class,'generarCertificado']);
@@ -69,6 +73,7 @@ Route::get('/verProblematicas',[ProblematicasController::class,'verProblematicas
 //CONTEOS
 Route::get('/totales', [AdminController::class, 'totales']);
 Route::get('/totalDinero', [AdminController::class, 'totalDinero']);
+Route::get('/totalCaja', [AdminController::class, 'totalCaja']);
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);

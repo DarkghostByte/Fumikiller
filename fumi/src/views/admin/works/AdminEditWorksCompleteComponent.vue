@@ -21,7 +21,7 @@
     </div>
 
     <div class="mr-6">
-      <h1 class="py-6 px-2 text-4xl font-semibold mb-2">Modificar cliente</h1>
+      <h1 class="py-6 px-2 text-4xl font-semibold mb-2">Modificar orden de trabajo</h1>
     </div>
 
 
@@ -38,74 +38,52 @@
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
         <p>Empleados</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="responsable" class="px-2" label="Responsable" >
-            <el-select v-model="form.responsable" placeholder="Selecciona el fumigador" style="width: 220px">
-              <el-option label="Juan" value="juan" />
-              <el-option label="Pepe" value="pepe" />
-              <el-option label="Jesus" value="jesus" />
+          <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:">
+              <el-option v-for="nameEmpleado in empleados" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
+                :value="nameEmpleado.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="ayudante" class="px-2" label="Ayudante" >
-            <el-select v-model="form.ayudante" placeholder="Selecciona el fumigador" style="width: 220px">
-              <el-option label="Juan" value="juan" />
-              <el-option label="Pepe" value="pepe" />
-              <el-option label="Jesus" value="jesus" />
+          <el-form-item prop="id_empleado2" label="Ayudante:" class="px-2" style="width: 300px;">
+            <el-select v-model="form.id_empleado2" placeholder="Selecciona el ayudante:">
+              <el-option v-for="nameEmpleado in empleados2" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
+                :value="nameEmpleado.id" />
             </el-select>
           </el-form-item>
         </div>
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
         <p>Productos internos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="productoInt1" class="px-2" label="Producto interno #1" >
-            <el-select v-model="form.productoInt1" placeholder="Selecciona el producto" style="width: 220px">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
+          <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:">
+              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
+                :value="productoInt.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="productoInt2" class="px-2" label="Producto interno #2" >
-            <el-select v-model="form.productoInt2" placeholder="Selecciona el producto" style="width: 220px">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
+          <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:">
+              <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
+                :value="productoInt.id" />
             </el-select>
           </el-form-item>
         </div>
         <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
         <p>Productos externos</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="productoExt1" class="px-2" label="Producto externo #1" >
-            <el-select v-model="form.productoExt1" placeholder="Selecciona el producto" style="width: 220px">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
+          <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:">
+              <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
+                :value="productoExt.id" />
             </el-select>
           </el-form-item>
-          <el-form-item prop="productoExt2" class="px-2" label="Producto externo #2" >
-            <el-select v-model="form.productoExt2" placeholder="Selecciona el producto" style="width: 220px">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
+          <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:">
+              <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
+                :value="productoExt.id" />
             </el-select>
           </el-form-item>
         </div>
@@ -171,6 +149,7 @@
             <el-radio-group v-model="form.requiere3">
               <el-radio value="Pagado" size="large" border>Pagado</el-radio>
               <el-radio value="Credito" size="large" border>Credito</el-radio>
+              <el-radio value="Cortesia" size="large" border>Cortesia</el-radio>
             </el-radio-group>
           </el-form-item>
         </div>
@@ -199,13 +178,19 @@ export default {
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
+    productoInternos: [],
+    productoInternos2: [],
+    productoExternos: [],
+    productoExternos2: [],
+    empleados: [],
+    empleados2: [],
     form: {
-      responsable:'',
-      ayudante: 'No aplica',
-      productoInt1: '',
-      productoInt2: 'No aplica',
-      productoExt1: '',
-      productoExt2: 'No aplica',
+      id_empleado: '',
+      id_empleado2: '',
+      id_productosInternos: '',
+      id_productosInternos2: '',
+      id_productosExternos: '',
+      id_productosExternos2: '',
       noTrapear: '',
       noIngresar: '',
       otraDosis: '',
@@ -215,13 +200,13 @@ export default {
     },
     id: 0,
     rules: {
-      responsable: [
+      id_empleado: [
         { required: true, message: 'El responsable es requerido', trigger: 'blur' },
       ],
-      productoInt1: [
+      id_productosInternos: [
         { required: true, message: 'El producto interno es requerido', trigger: 'blur' },
       ],
-      productoExt1: [
+      id_productosExternos: [
         { required: true, message: 'El producto externo es requerido', trigger: 'blur' },
       ],
       noTrapear: [
@@ -290,8 +275,65 @@ export default {
         }
       });
     },
+    fetchProductosInternos() {
+      axios.get('verProductosInternos')
+        .then(response => {
+          console.log('Productos Internos:', response.data);
+          this.productoInternos = response.data;
+          this.productoInternos2 = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching productos interno:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar productos internos',
+            type: 'error',
+          });
+        });
+    },
+
+    
+
+    fetchProductosExternos() {
+      axios.get('verProductosExternos')
+        .then(response => {
+          console.log('Productos Externos:', response.data);
+          this.productoExternos = response.data; // Assuming the data structure is correct
+          this.productoExternos2 = response.data; // Assuming the data structure is correct
+
+        })
+        .catch(error => {
+          console.error('Error fetching productos externos:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar productos externos',
+            type: 'error',
+          });
+        });
+    },
+
+    fetchEmpleados() {
+      axios.get('verEmpleados')
+        .then(response => {
+          console.log('Empleados:', response.data);
+          this.empleados = response.data; // Assuming the data structure is correct
+          this.empleados2 = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching empleados:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar empleados',
+            type: 'error',
+          });
+        });
+    },
+
   },
   mounted() {
+    this.fetchProductosInternos();
+    this.fetchProductosExternos();
+    this.fetchEmpleados();
     this.refresh();
     const route = useRoute();
     this.id = route.params.id;
@@ -299,12 +341,12 @@ export default {
       console.log(res);
       let datos = res.data.data;
       if (datos) {
-        this.form.responsable = datos.responsable || '';
-        this.form.ayudante = datos.ayudante || '';
-        this.form.productoInt1 = datos.productoInt1 || '';
-        this.form.productoInt2 = datos.productoInt2 || '';
-        this.form.productoExt1 = datos.productoExt1 || '';
-        this.form.productoExt2 = datos.productoExt2 || '';
+        this.form.id_empleado = datos.id_empleado || '';
+        this.form.id_empleado2 = datos.id_empleado2 || '';
+        this.form.id_productosInternos = datos.id_productosInternos || '';
+        this.form.id_productosInternos2 = datos.id_productosInternos2 || '';
+        this.form.id_productosExternos = datos.id_productosExternos || '';
+        this.form.id_productosExternos2 = datos.id_productosExternos2 || '';
         this.form.noTrapear = datos.noTrapear || '';
         this.form.noIngresar = datos.noIngresar || '';
         this.form.otraDosis = datos.otraDosis || '';

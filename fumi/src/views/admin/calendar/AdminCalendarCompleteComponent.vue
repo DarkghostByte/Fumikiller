@@ -32,8 +32,8 @@
         @input="filterDataAddress" style="width: 100%;"/>
     </div>
 
-    <div class="table-container">
-      <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }" stripe>
+    <div class="flex justify-center items-center">
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" stripe style="width:100%;">
         <el-table-column label="PDF Orden">
           <template #default="scope">
             <el-button style="color:black" type="success" @click="pdf(scope.row)">
@@ -43,22 +43,20 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column label="Nombre" width="200px" sortable>
+        <el-table-column label="Nombre" width="250px" sortable>
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" width="200px" sortable>
+        <el-table-column label="Dirección" width="350px" sortable>
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
               ', ' + scope.row.ciudad }}
           </template>
         </el-table-column>
-        <el-table-column label="Celular" prop="cell_phone" sortable />
-        <el-table-column label="Fecha de orden" prop="date1" width="180px" sortable />
+        <el-table-column label="Celular" prop="cell_phone" sortable width="120px"/>
+        <el-table-column label="Fecha de orden" prop="date1" width="150px" sortable />
         <el-table-column label="Fecha de fumigacion" prop="date2" width="180px" sortable />
-        <el-table-column label="De" prop="time1" sortable />
-        <el-table-column label="A" prop="time2" sortable />
       </el-table>
     </div>
   </div>
@@ -228,6 +226,8 @@ filterDataAddress() {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
+  align-items: center;
+  justify-content: center
 }
 
 .table-container {

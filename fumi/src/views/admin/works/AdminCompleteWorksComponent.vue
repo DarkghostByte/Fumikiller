@@ -161,13 +161,14 @@
         <!-- FILA DE PAGO -->
         <p>Pago:</p>
         <div class="flex">
-          <el-form-item prop="pago" label="Se cobro:" class="px-2" style="width: 240px;">
+          <el-form-item prop="pago" label="Monto:" class="px-2" style="width: 240px;">
             <el-input v-model="form.pago" class="px-1" placeholder="Ingresa el monto" type="number" />
           </el-form-item>
           <el-form-item prop="requiere3" label="Se pago?" class="px-10">
             <el-radio-group v-model="form.requiere3">
               <el-radio value="Pagado" size="large" border>Pagado</el-radio>
               <el-radio value="Credito" size="large" border>Credito</el-radio>
+              <el-radio value="Cortesia" size="large" border>Cortesia</el-radio>
             </el-radio-group>
           </el-form-item>
         </div>

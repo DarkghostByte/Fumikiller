@@ -14,6 +14,8 @@ use App\Models\Empleados;
 use App\Models\Cliente;
 use App\Models\Orden;
 use App\Models\CompletarOrden;
+use App\Models\Ingresos;
+use App\Models\Egresos;
 use Validator;
 
 class AdminController extends Controller
@@ -147,4 +149,31 @@ class AdminController extends Controller
             'totalVentasConFactura' => $totalVentasConFactura
         ]);
     }
+
+    public function totalCaja()
+{
+    // Obtener la suma total de 'pago' de CompletarOrden
+    $totalPagos = CompletarOrden::where('requiere3', 'Pagado')->sum('pago');
+
+    // Obtener la suma total de 'montoIngreso' de Ingresos
+    $totalIngresosAdicionales = Ingresos::sum('montoIngreso');
+
+    // Calcular el total general
+    $totalCaja = $totalPagos + $totalIngresosAdicionales;
+
+    $totalEgresos = Egresos::sum('montoEgresos');
+
+    $totalSaldo = $totalCaja - $totalEgresos;
+
+    // Formatear los números como decimales
+    $totalCajaFormateado = number_format($totalCaja, 2, '.', ',');
+    $totalEgresosFormateado = number_format($totalEgresos, 2, '.', ',');
+    $totalSaldoFormateado = number_format($totalSaldo, 2, '.', ',');
+
+    return response()->json([
+        'totalIngresos' => $totalCajaFormateado,
+        'totalEgresos' => $totalEgresosFormateado,
+        'totalSaldo' => $totalSaldoFormateado,
+    ]);
+}
 }

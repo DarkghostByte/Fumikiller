@@ -50,24 +50,20 @@
         <!-- FILA DE LAS PLAGAS (PROBLEMATICA) -->
         <p>Problematica</p>
         <div class="flex" style="width:100%;">
-          <el-form-item prop="id_plague1" label="Tipo de producto interno:" class="px-2"
+          <el-form-item prop="id_plague1" label="Problematica #1:" class="px-2"
             style="width: 300px;">
-            <el-select v-model="form.id_plague1" placeholder="Selecciona el tipo de producto interno:"
-              :disabled="!problematicas1.length">
+            <el-select v-model="form.id_plague1" placeholder="Selecciona la problematica:">
               <el-option v-for="problematicaBug in problematicas1" :key="problematicaBug.id" :label="problematicaBug.problematica"
                 :value="problematicaBug.id" />
             </el-select>
-            <div v-if="!problematicas1.length">Loading problematicas...</div>
           </el-form-item>
 
-          <el-form-item prop="id_plague2" label="Tipo de producto interno:" class="px-2"
+          <el-form-item prop="id_plague2" label="Problematica #2:" class="px-2"
             style="width: 300px;">
-            <el-select v-model="form.id_plague2" placeholder="Selecciona el tipo de producto interno:"
-              :disabled="!problematicas2.length">
+            <el-select v-model="form.id_plague2" placeholder="Selecciona la problematica:">
               <el-option v-for="problematicaBug2 in problematicas2" :key="problematicaBug2.id" :label="problematicaBug2.problematica"
                 :value="problematicaBug2.id" />
             </el-select>
-            <div v-if="!problematicas2.length">Loading problematicas...</div>
           </el-form-item>
 
         

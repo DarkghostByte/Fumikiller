@@ -235,7 +235,7 @@
         </table>
 
         <div class="ctr">
-            <h5 class="tipo">COPIA</h5>
+            <h5 class="tipo">COPIA FUMI-KILLE'R</h5>
         </div>
 
         <div class="footDiv">

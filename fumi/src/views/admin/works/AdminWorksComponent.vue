@@ -50,7 +50,7 @@
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 95%" stripe>
 
         <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
         <el-table-column label="">
@@ -76,24 +76,24 @@
 
 
         <!--VISUALIZACION DE LA TABLA-->
-        <el-table-column label="Nombre" sortable width="200">
+        <el-table-column label="Nombre" sortable width="250px">
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Direccion" sortable width="350">
+        <el-table-column label="Direccion" sortable width="350px">
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
               ', ' + scope.row.ciudad }}
           </template>
         </el-table-column>
-        <el-table-column prop="date1" label="Fecha de orden" sortable width="150" />
-        <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="180" />
-        <el-table-column prop="time1" label="De" sortable width="90" />
-        <el-table-column prop="time2" label="A" sortable width="90" />
+        <el-table-column prop="date1" label="Fecha de orden" sortable width="150px" />
+        <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="180px" />
+        <el-table-column prop="time1" label="De" sortable width="90px" />
+        <el-table-column prop="time2" label="A" sortable width="90px" />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
-        <!--BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
+        <!--BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO
         <el-table-column label="">
           <template #default="scope">
             <el-button style="color:black" size="small" type="danger" @click="bajaOrden(scope.row)">
@@ -101,7 +101,7 @@
             </el-button>
           </template>
         </el-table-column>
-        <!--FIN DEL BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
+        FIN DEL BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
       </el-table>
     </div>
     <!-- END TABLE DATA -->
@@ -194,7 +194,7 @@ export default {
       this.tableData = []
       axios.get('orden').then(res => {
         this.tableData = res.data.data.filter(row => row.infoorden_delete !== 'Baja');
-        this.tableData = res.data.data.filter(row => row.statusOrder == 'Por realizar');
+        this.tableData = res.data.data.filter(row => row.statusOrder == 'Por realizar');        
         this.filteredData = this.tableData;
       })
 
@@ -203,7 +203,7 @@ export default {
       console.log(row)
       this.selectedItem = row
       this.selectedItem = null
-    },
+    },/*
     confimarBaja() {
       axios.delete('orden/' + this.selectedItem.id).then(res => {
         console.log(res)
@@ -215,7 +215,7 @@ export default {
       console.log(row)
       this.selectedItem = row
       this.dialogVisible = true
-    },
+    },*/
     completarOrden(row) {
       if (row && row.id) {
         console.log(row);
