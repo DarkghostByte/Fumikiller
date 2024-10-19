@@ -17,6 +17,7 @@ use App\Http\Controllers\ProblematicasController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IngresosController;
 use App\Http\Controllers\EgresosController;
+use App\Http\Controllers\PdfsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,16 +47,19 @@ Route::resource('ingresos', IngresosController::class);
 Route::resource('egresos', EgresosController::class);
 
 //RUTAS PARA PDF
-Route::get('/certificadoRealizado/{id}',[CertificadoController::class,'generarCertificado']);
-Route::get('/remision/{id}',[ClientesController::class,'generarPDFRem']);
-Route::get('/ordenTrabajoCompleta/{id}',[CompletarOrdenesController::class,'generarOrden']);
-Route::get('/ventsinfact',[CompletarOrdenesController::class,'generarVentSinFact']);
-Route::get('/ventconfact',[CompletarOrdenesController::class,'generarVentConFact']);
-Route::get('/ventatotales',[CompletarOrdenesController::class,'generarVentasTotales']);
-Route::get('/creditos',[CompletarOrdenesController::class,'generarCreditos']);
-Route::get('/creditossinfactura',[CompletarOrdenesController::class,'generarCreditosSinFactura']);
-Route::get('/creditosconfactura',[CompletarOrdenesController::class,'generarCreditosConFactura']);
-Route::get('/ordenTrabajo/{id}',[OrdensController::class,'generarOrdenPDF']);
+Route::get('/remision/{id}',[PdfsController::class,'generarPDFRem']);
+Route::get('/ordenTrabajo/{id}',[PdfsController::class,'generarOrdenPDF']);
+Route::get('/ordenTrabajoCompleta/{id}',[PdfsController::class,'generarOrden']);
+Route::get('/certificadoRealizado/{id}',[PdfsController::class,'generarCertificado']);
+Route::get('/ventsinfact',[PdfsController::class,'generarVentSinFact']);
+Route::get('/ventconfact',[PdfsController::class,'generarVentConFact']);
+Route::get('/ventatotales',[PdfsController::class,'generarVentasTotales']);
+Route::get('/creditos',[PdfsController::class,'generarCreditos']);
+Route::get('/creditossinfactura',[PdfsController::class,'generarCreditosSinFactura']);
+Route::get('/creditosconfactura',[PdfsController::class,'generarCreditosConFactura']);
+Route::get('/pdfIngreso',[PdfsController::class,'generarPDFIngreso']);
+Route::get('/pdfEgreso',[PdfsController::class,'generarPDFEgreso']);
+Route::get('/pdfSaldo',[PdfsController::class,'generarPDFSaldo']);
 
 
 //VER OPCIONES

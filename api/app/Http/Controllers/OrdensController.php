@@ -167,56 +167,6 @@ class OrdensController extends Controller
         ]);
     }
 
-    public function generarOrdenPDF($id){        
-        // Obtener datos del cliente junto con ciudad y colonia
-        $orden = Orden::select([
-            'orden.*',
-            'clientes.name',
-            'clientes.lastname1',
-            'clientes.lastname2',
-            'clientes.tradename',
-            'clientes.home',
-            'clientes.numAddress',
-            'clientes.id_colonia',
-            'clientes.id_city',
-            'clientes.cell_phone',
-            'clientes.how_to_get',
-            'clientes.description',
-            'clientes.contact_form',
-            'colonias.colonia',
-            'colonias.codigoPostal',
-            'ciudades.ciudad',
-            'comercios.comercio',
-            'problematica1.problematica as plague1',
-            'problematica2.problematica as plague2',
-        ])
-        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
-        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')
-        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
-        ->where('orden.id', $id)
-        ->first();
-        //Datos de la base de datos
-        if (!$orden) {
-            return abort(404);
-        }
-        //PDF Orden de trabajo
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64','orden');
-        $pdf = Pdf::loadView('reports.reporteOrdenPdf',$pdf_data)->save('myfile.pdf');
-        //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
-    }
-
     public function desactivarOrden(Request $request, $id)
     {
     $orden = Orden::find($id);

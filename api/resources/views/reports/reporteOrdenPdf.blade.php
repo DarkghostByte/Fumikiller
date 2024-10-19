@@ -31,14 +31,14 @@
         <table>
             <th class="clth112">Fecha Orden:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-                {{ $orden->date1 }}
+            <div class="renDiv" style="text-transform: uppercase">
+                {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
             </div>
             </th>  
             <th class="clth111">Fecha Programada:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-                {{ $orden->date2 }}
+            <div class="renDiv" style="text-transform: uppercase">
+                {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}
             </div>
             </th>           
         </table>
@@ -67,7 +67,7 @@
             <th> Telefono:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $orden->cell_phone }}
+                {{ substr($orden->cell_phone, 0, 3) }} - {{ substr($orden->cell_phone, 3, 3) }} - {{ substr($orden->cell_phone, 6, 2) }} - {{ substr($orden->cell_phone, 8, 2) }} 
             </div>
             </th> 
         </table>
@@ -228,14 +228,14 @@
         <table>
             <th class="clth112">Fecha Orden:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-                {{ $orden->date1 }}
+            <div class="renDiv" style="text-transform: uppercase">
+                {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
             </div>
             </th>  
             <th class="clth111">Fecha Programada:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-                {{ $orden->date2 }}
+            <div class="renDiv" style="text-transform: uppercase">
+                {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}
             </div>
             </th>           
         </table>

@@ -108,20 +108,6 @@ class ClientesController extends Controller
     {
         //
     }
-
-    public function generarPDFRem(){
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoRemision',$pdf_data);
-        return $pdf->stream();
-        return $pdf->download('invoice.pdf');
-    }
     
     /**
      * Display the specified resource.
