@@ -12,14 +12,14 @@
         <table id="table">
             <thead>
                 <tr>
-                    <th>Cliente</th>
-                    <th>Negocio</th>
-                    <th>Num. Factura</th>
-                    <th>Num. Certificado</th>
-                    <th>Fecha de orden</th>
-                    <th>Fecha de fumigacion</th>                   
-                    <th>Estado</th>                   
-                    <th>Monto</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>                   
+                    <th></th>                   
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -54,14 +54,14 @@
         <table id="table">
             <thead>
                 <tr>
-                    <th>Cliente</th>
-                    <th>Negocio</th>
-                    <th>Num. Factura</th>
-                    <th>Num. Certificado</th>
-                    <th>Fecha de orden</th>
-                    <th>Fecha de fumigacion</th>                   
-                    <th>Estado</th>                   
-                    <th>Monto</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>                   
+                    <th></th>                   
+                    <th></th>
                 </tr>
             </thead>
             <tbody>

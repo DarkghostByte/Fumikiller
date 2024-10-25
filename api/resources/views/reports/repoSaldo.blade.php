@@ -5,21 +5,364 @@
     <title>Reporte Saldo</title>
 </head>
 <body>
-    <img  class="membre" src="{{ $base64 }}" alt="">
+    <div class="imagen-cabecera">
+        <img  class="membre" src="{{ $base64 }}" alt="">
+      </div>
+    
+    <h1>Ingreso</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                <tr>
+                    <td></td>
+                    <td></td> 
+                    <td></td> 
+                    <td></td> 
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                </tr>
+            <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>Parte de las fumigaciones</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                <tr>
+                    <td></td>
+                    <td></td> 
+                    <td></td> 
+                    <td></td> 
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                </tr>
+            <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <h1>Egreso</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                <tr>
+                    <td></td>
+                    <td></td> 
+                    <td></td> 
+                    <td></td> 
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                </tr>
+            <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+        <h1>Saldo total</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                    </tr>
+                <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+
+
+
+
     <h1>Saldo total</h1>
     <div id="main-container">
 
         <table id="table">
             <thead>
                 <tr>
-                    <th>Cliente</th>
-                    <th>Negocio</th>
-                    <th>Num. Factura</th>
-                    <th>Num. Certificado</th>
-                    <th>Fecha de orden</th>
-                    <th>Fecha de fumigacion</th>                   
-                    <th>Estado</th>                   
-                    <th>Monto</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                    </tr>
+                <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div><h1>Saldo total</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                    </tr>
+                <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>Saldo total</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                    </tr>
+                <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>Saldo total</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- @ foreach($data as $item)*/ -->
+                    <tr>
+                        <td></td>
+                        <td></td> 
+                        <td></td> 
+                        <td></td> 
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                    </tr>
+                <!-- @ endforeach -->
+                <tr id="fondoTotal">
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td id="txt">Total</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+    <h1>Saldo total</h1>
+    <div id="main-container">
+
+        <table id="table">
+            <thead>
+                <tr>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>
+                    <th>**</th>                   
+                    <th>**</th>                   
+                    <th>**</th>
                 </tr>
             </thead>
             <tbody>
@@ -54,12 +397,19 @@
 
 
 <style>
+    .imagen-cabecera {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: -1; /* Coloca la imagen detrás del contenido */
+}
     body{
         font-family: Arial;
         margin-left: -35px;
+        margin:120px auto;
     }
     #main-container{
-        
         margin:10px auto;
         width: 100%;
     }

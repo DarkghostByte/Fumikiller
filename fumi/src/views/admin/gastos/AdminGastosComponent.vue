@@ -1,18 +1,27 @@
 <template>
   <div>
-    <div class="mr-6">
-      <h1 class="py-6 px-5 text-4xl font-semibold mb-2">Caja</h1>
+    <div class="flex mr-6">
+      <h1 class="py-6 px-5 text-4xl font-semibold mb-2 flex-grow">Caja</h1>
+      <div class="flex justify-end flex-grow">
+        <a :href="url + 'api/pdfSaldo/'" target="_blank"
+    class="btnPdf inline-flex text-black bg-gray-100 focus:bg-gray-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
+    style="width:80px; height:50px; text-align: center; ">
+    <div class="flex">
+        <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>
+    </div>
+</a>
+      </div>
     </div>
 
     <div class="container mx-auto">
       <div class="mb-4 centerFiltros">
-        <el-date-picker class="mx-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 25%;" />
-        <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterData1" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 25%;" />
-        <el-input class="px-2" placeholder="Buscar" v-model="searchQueryName" @input="filterDataName"
+        <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate1" type="date" format="DD-MM-YYYY"
+          value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
+        <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate1" type="date" format="DD-MM-YYYY"
+          value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
+        <el-input class="px-2" placeholder="Buscar por descripcion" v-model="searchQuery1" @input="filterData1"
           style="width: 25%;" />
-        <el-input class="px-2" placeholder="Buscar" v-model="searchQueryAddress" @input="filterDataAddress"
+        <el-input class="px-2" placeholder="Buscar por monto" v-model="searchQuery2" @input="filterData2"
           style="width: 25%;" />
 
       </div>
@@ -20,7 +29,7 @@
 
 
     <div class="flex flex-wrap items-center justify-center mt-6">
-      <router-link to="/admin/admin/city"
+      <Button
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-600 hover:bg-blue-1000 focus:bg-blue-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style="width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
@@ -29,9 +38,9 @@
         </div>
         <i class="fa-solid fa-solid fa-money-bill-trend-up fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
-      </router-link>
+      </Button>
 
-      <router-link to="/admin/admin/city"
+      <Button
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-600 hover:bg-green-1000 focus:bg-green-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style="width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
@@ -41,9 +50,9 @@
         <i class="fa-solid fa-money-bill fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
 
-      </router-link>
+      </Button>
 
-      <router-link to="/admin/admin/city"
+      <Button
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-600 hover:bg-orange-1000 focus:bg-orange-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style="width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
@@ -52,7 +61,7 @@
         </div>
         <i class="fa-solid fa-cash-register fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
-      </router-link>
+      </Button>
     </div>
 
     <div class="table-container mt-2" style="width:100%;">
@@ -67,7 +76,7 @@
             </el-button>
           </div>
           <div class="flex">
-            <el-table :data="tableData1" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
+            <el-table :data="filteredData1" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
               style="width:100%;">
               <el-table-column label="Fecha" prop="dateIngreso" width="150px" sortable />
               <el-table-column label="Descripcion" prop="descriptionIngreso" width="300px" sortable />
@@ -75,15 +84,15 @@
             </el-table>
           </div>
           <div class="flex">
-            <el-table :data="tableData3" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
+            <el-table :data="filteredData3" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
               style="width:100%;">
-              <el-table-column prop="date1" width="150px"  />
+              <el-table-column prop="date1" width="150px" />
               <el-table-column label="Parte de Fumigaciones" width="300px">
                 <template #default>
-                  {{ 'Fumigacion'}}
+                  {{ 'Fumigacion' }}
                 </template>
               </el-table-column>
-              <el-table-column prop="pago" width="150px"  />
+              <el-table-column prop="pago" width="150px" />
             </el-table>
           </div>
         </div>
@@ -94,11 +103,11 @@
             <el-button @click="dialogVisibleCreate1 = true" class="ml-2 el-button el-button--primary">
               <i class="fa-solid fa-money-bill" aria-hidden="true"
                 style="margin-top:5px; margin-left: -5px; margin-right:5px;"></i>
-                Insertar Egreso
+              Insertar Egreso
             </el-button>
           </div>
           <div class="flex">
-            <el-table :data="tableData2" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
+            <el-table :data="filteredData2" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
               style="width:100%;">
               <el-table-column label="Fecha" prop="dateEgresos" width="150px" sortable />
               <el-table-column label="Descripcion" prop="descriptionEgresos" width="300px" sortable />
@@ -115,12 +124,13 @@
         <div class="row">
           <el-form-item prop="dateIngreso" label="Fecha:">
             <el-col :span="11" style="width: 240px">
-              <el-date-picker v-model="form1.dateIngreso" type="date" placeholder="Fecha del ingreso:" format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY" />
+              <el-date-picker v-model="form1.dateIngreso" type="date" placeholder="Fecha del ingreso:"
+                format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
             </el-col>
           </el-form-item>
           <el-form-item prop="descriptionIngreso" label="Descripcion:" style="width: 240px;">
-            <el-input v-model="form1.descriptionIngreso" type="textarea" class="px-1" placeholder="Ingresa la descripcion:" maxlength="100" show-word-limit/>
+            <el-input v-model="form1.descriptionIngreso" type="textarea" class="px-1"
+              placeholder="Ingresa la descripcion:" maxlength="100" show-word-limit />
           </el-form-item>
           <el-form-item prop="montoIngreso" label="Monto:" style="width: 240px;">
             <el-input v-model="form1.montoIngreso" class="px-1" placeholder="Ingresa el monto:" type="number" />
@@ -143,12 +153,13 @@
         <div class="row">
           <el-form-item prop="dateEgresos" label="Fecha:">
             <el-col :span="11" style="width: 240px">
-              <el-date-picker v-model="form2.dateEgresos" type="date" placeholder="Fecha del ingreso:" format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY" />
+              <el-date-picker v-model="form2.dateEgresos" type="date" placeholder="Fecha del ingreso:"
+                format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
             </el-col>
           </el-form-item>
           <el-form-item prop="descriptionEgresos" label="Descripcion:" style="width: 240px;">
-            <el-input v-model="form2.descriptionEgresos" type="textarea" class="px-1" placeholder="Ingresa la descripcion:" maxlength="100" show-word-limit/>
+            <el-input v-model="form2.descriptionEgresos" type="textarea" class="px-1"
+              placeholder="Ingresa la descripcion:" maxlength="100" show-word-limit />
           </el-form-item>
           <el-form-item prop="montoEgresos" label="Monto:" style="width: 240px;">
             <el-input v-model="form2.montoEgresos" class="px-1" placeholder="Ingresa el monto:" type="number" />
@@ -183,15 +194,23 @@ export default {
     dialogVisibleView: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
-    dialogVisibleCreate:false,
-    dialogVisibleCreate1:false,
+    dialogVisibleCreate: false,
+    dialogVisibleCreate1: false,
+    isHovered: false,
     tableData1: [],
     tableData2: [],
     tableData3: [],
+    filteredData1: [],
+    filteredData2: [],
+    filteredData3: [],
     selectedItem: null,
     totalIngresos: 0,
     totalEgresos: 0,
     totalSaldo: 0,
+    selectedDate: null,
+    selectedDate1: null,
+    searchQuery1: '',
+    searchQuery2: '',
     form1: {
       dateIngreso: '',
       descriptionIngreso: '',
@@ -240,18 +259,25 @@ export default {
       axios.get('ingresos')
         .then(res => {
           this.tableData1 = res.data.data;
+          this.filteredData1 = this.tableData1;
         });
 
-        axios.get('egresos')
+      axios.get('egresos')
         .then(res => {
           this.tableData2 = res.data.data;
+          this.filteredData2 = this.tableData2;
         });
 
       axios.get('completarOrden')
         .then(res => {
           this.tableData3 = res.data.data;
           this.tableData3 = res.data.data.filter(row => row.requiere3 == 'Pagado');
+          this.filteredData3 = this.tableData3;
         });
+    },
+
+    handleHover(event) {
+      this.isHovered = event.type === 'mouseover';
     },
 
     handleEdit() {
@@ -305,78 +331,158 @@ export default {
     },
 
     createIngreso() {
-  this.$refs.formRef.validate((valid) => {
-    if (valid) {
-      axios.post('ingresos', this.form1)
-        .then(res => {
-          console.log(res);
-          this.dialogVisibleCreate = false;
-          this.refresh(); // Call fetchData here
-          this.fetchData();
-          this.$message.success('Ingreso insertado exitosamente');
-          ElNotification({
-            title: 'Alerta',
-            message: 'Registro insertado correctamente',
-            type: 'success'
-          })
-        })
-        .catch(error => {
-          console.log(error);
-          this.$message.error('Error al insertar el ingreso');
+      this.$refs.formRef.validate((valid) => {
+        if (valid) {
+          axios.post('ingresos', this.form1)
+            .then(res => {
+              console.log(res);
+              this.dialogVisibleCreate = false;
+              this.refresh(); // Call fetchData here
+              this.fetchData();
+              this.$message.success('Ingreso insertado exitosamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro insertado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al insertar el ingreso');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de llenar los campos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed');
           ElNotification({
             title: 'Error',
             message: 'Favor de llenar los campos',
             type: 'error'
-          })
-        });
-    } else {
-      console.log('Validation failed');
-      ElNotification({
-        title: 'Error',
-        message: 'Favor de llenar los campos',
-        type: 'error'
+          });
+          return false;
+        }
       });
-      return false;
-    }
-  });
-},
+    },
 
-createEgreso() {
-  this.$refs.formRef.validate((valid) => {
-    if (valid) {
-      axios.post('egresos', this.form2)
-        .then(res => {
-          console.log(res);
-          this.dialogVisibleCreate1 = false;
-          this.refresh(); // Call fetchData here
-          this.fetchData();
-          this.$message.success('Egreso insertado exitosamente');
-          ElNotification({
-            title: 'Alerta',
-            message: 'Registro insertado correctamente',
-            type: 'success'
-          })
-        })
-        .catch(error => {
-          console.log(error);
-          this.$message.error('Error al insertar el egreso');
+    createEgreso() {
+      this.$refs.formRef.validate((valid) => {
+        if (valid) {
+          axios.post('egresos', this.form2)
+            .then(res => {
+              console.log(res);
+              this.dialogVisibleCreate1 = false;
+              this.refresh(); // Call fetchData here
+              this.fetchData();
+              this.$message.success('Egreso insertado exitosamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro insertado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al insertar el egreso');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de llenar los campos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed');
           ElNotification({
             title: 'Error',
             message: 'Favor de llenar los campos',
             type: 'error'
-          })
-        });
-    } else {
-      console.log('Validation failed');
-      ElNotification({
-        title: 'Error',
-        message: 'Favor de llenar los campos',
-        type: 'error'
+          });
+          return false;
+        }
       });
-      return false;
-    }
-  });
-},
+    },
+
+    filterDate1() {
+      if (this.selectedDate && this.selectedDate1) {
+        // Convert dates to Date objects and handle null values
+        const startDate = this.selectedDate;
+        const endDate = this.selectedDate1;
+
+        // Ensure startDate is less than or equal to endDate
+        if (startDate > endDate) {
+          ElNotification({
+            title: 'Error',
+            message: 'La fecha de inicio debe ser anterior a la fecha final.',
+            type: 'error'
+          });
+          return;
+        }
+
+        this.filteredData1 = this.tableData1.filter(ingresos => {
+          const ingresoDate = ingresos.dateIngreso;
+          return ingresoDate && isNaN(ingresoDate) && ingresoDate >= startDate && ingresoDate <= endDate;
+        });
+
+        this.filteredData2 = this.tableData2.filter(egresos => {
+          const egresoDate = egresos.dateEgresos;
+          return egresoDate && isNaN(egresoDate) && egresoDate >= startDate && egresoDate <= endDate;
+        });
+
+        this.filteredData3 = this.tableData3.filter(completarOrden => {
+          const completarOrdenDate = completarOrden.date1;
+          return completarOrdenDate && isNaN(completarOrdenDate) && completarOrdenDate >= startDate && completarOrdenDate <= endDate;
+        });
+
+        // Show notification based on filtered data count
+        if (this.filteredData1.length === 0 && this.filteredData2.length === 0 && this.filteredData3.length === 0) {
+          ElNotification({
+            title: 'Aviso',
+            message: `No se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
+            type: 'warning'
+          });
+        } else {
+          ElNotification({
+            title: 'Datos encontrados',
+            message: `Se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
+            type: 'success'
+          });
+        }
+      } else {
+        // If no dates are selected or only one is selected, show all data
+        this.filteredData1 = this.tableData1;
+        this.filteredData2 = this.tableData2;
+        this.filteredData3 = this.tableData3;
+        ElNotification({
+          title: 'Mostrando todos los datos',
+          message: 'Se están mostrando todos los datos de la agenda.',
+          type: 'info'
+        });
+      }
+    },
+
+
+    filterData1() {
+      this.filteredData1 = this.tableData1.filter((ingresos) => {
+        return ingresos.descriptionIngreso.toLowerCase().includes(this.searchQuery1.toLowerCase());
+      });
+      this.filteredData2 = this.tableData2.filter((egresos) => {
+        return egresos.descriptionEgresos.toLowerCase().includes(this.searchQuery1.toLowerCase());
+      });
+    },
+
+    filterData2() {
+      this.filteredData1 = this.tableData1.filter((ingresos) => {
+        return ingresos.montoIngreso.toLowerCase().includes(this.searchQuery2.toLowerCase());
+      });
+      this.filteredData2 = this.tableData2.filter((egresos) => {
+        return egresos.montoEgresos.toLowerCase().includes(this.searchQuery2.toLowerCase());
+      });
+      this.filteredData3 = this.tableData3.filter((completarOrden) => {
+        return completarOrden.pago.toLowerCase().includes(this.searchQuery2.toLowerCase());
+      });
+    },
 
   }
 }
@@ -424,4 +530,18 @@ h2 {
   overflow-x: auto;
 }
 
+.btnPdf{
+  border: 1px solid rgb(0, 0, 0, 0.20);
+  box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.60);
+  background-color: white;
+  color: red;
+  transition: 1s  ease-in-out;  
+
+}
+
+.btnPdf:hover{
+  background-color: red;
+  color:white;
+  transition: 1s  ease-in-out;  
+}
 </style>
