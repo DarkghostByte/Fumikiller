@@ -6,39 +6,45 @@
 </head>
 <body>
     <img  class="membre" src="{{ $base64 }}" alt="">
-    <h1>Ingreso</h1>
     <div id="main-container">
-
         <table id="table">
+
             <thead>
+                <tr id="cabezera">
+                    <th id="td1">Ingresos</th>
+                    <td id="td1"></td> 
+                    <td id="td1"></td>
+                    <td id="td1"></td>
+                    <td id="td2"></td>
+                    
+                </tr>
                 <tr>
+                    <th>Fecha</th>
+                    <th>Concepto</th>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>                   
-                    <th></th>                   
+                    <th>Monto</th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
                 <!-- @ foreach($data as $item)*/ -->
                 <tr>
+                    <td>30/10/2024</td>
+                    <td>Fumigacion</td>
                     <td></td>
-                    <td></td> 
-                    <td></td> 
-                    <td></td> 
+                    <td>400</td>
+                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>31/10/2024</td>
+                    <td>Fumigacion</td>
                     <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>400</td>
+                    
                     <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
                 </tr>
             <!-- @ endforeach -->
-                <tr id="fondoTotal">
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                <tr id="fondoTotal"> 
                         <td></td>
                         <td></td>
                         <td></td>
@@ -47,40 +53,44 @@
                     </tr>
             </tbody>
         </table>
-    </div>
-    <h1>Parte de las fumigaciones</h1>
-    <div id="main-container">
 
-        <table id="table">
-            <thead>
+        <table id="table2">
+
+            <thead id="thead2">
+                <tr id="cabezera">
+                    <th id="td1">Egresos</th>
+                    <td id="td1"></td> 
+                    <td id="td1"></td>
+                    <td id="td1"></td>
+                    <td id="td2"></td>
+                    
+                </tr>
                 <tr>
+                    <th>Fecha</th>
+                    <th>Concepto</th>
+                    <th>Monto</th>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>                   
-                    <th></th>                   
                     <th></th>
                 </tr>
             </thead>
-            <tbody>
+            <tbody >
                 <!-- @ foreach($data as $item)*/ -->
                 <tr>
+                    <td>30/10/2024</td>
+                    <td>Gasolina</td>
+                    <td>800</td>
                     <td></td>
-                    <td></td> 
-                    <td></td> 
-                    <td></td> 
-                    <td></td>
-                    <td></td>
+                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
+                </tr>
+                <tr>
+                    <td>31/10/2024</td>
+                    <td>Productos Externos</td>
+                    <td>800</td>
                     <td></td>
                     <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
                 </tr>
             <!-- @ endforeach -->
-                <tr id="fondoTotal">
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                <tr id="fondoTotal2"> 
                         <td></td>
                         <td></td>
                         <td></td>
@@ -89,7 +99,20 @@
                     </tr>
             </tbody>
         </table>
+        
+
+        <table id="table3">
+                <tr id="fondoTotalNeto"> 
+                        <td id="td1"></td>
+                        <td id="td1"></td>
+                        <td id="td1"></td>
+                        <td id="txt">Saldo neto</td>
+                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                    </tr>
+            </tbody>
+        </table>
     </div>
+    
 </body>
 </html>
 
@@ -105,12 +128,27 @@
         margin:10px auto;
         width: 100%;
     }
-    table{
+    #table{
         background-color:#cfcfcf;
         border-collapse: collapse;
         text-align: left;
         width: 105%;
     }
+    #table2{
+        background-color:#cfcfcf;
+        border-collapse: collapse;
+        text-align: left;
+        width: 105%;
+
+    }
+    #table3{
+        background-color:#51ed78;
+        border-collapse: collapse;
+        text-align: left;
+        width: 105%;
+
+    }
+    
     th, td{
         border: 1px solid black;
         padding: 3px;
@@ -118,8 +156,18 @@
     thead{
         background-color: #526fd9;
         border-bottom: 5px solid #071a5e;
-        color:white;
+        color:black;
     }
+    #thead2{
+        background-color: #d9bc52;
+        border-bottom: 5px solid #071a5e;
+        color:black;
+    }
+    tbody{
+        text-align: center;
+        color:black;
+    }
+    
     tr:nth-child(even){
         background-color: rgb(255, 255, 255);
     }
@@ -137,13 +185,24 @@
 
     #fondoTotal{
         background-color: #526fd9;
+        text-align: end;
+    }
+    #fondoTotal2{
+        background-color: #d9bc52;
+        text-align: end;
+    }
+    #fondoTotalNeto{
+        background-color: #59d952;
+        text-align: end;
     }
     #totalPagos{
         text-align: right;
         margin-top: 20px;
+        width: 150px;
     }
     #txt{
         text-align: left;
+        width: 150px;
     }
     .membre{
         margin-left: 12.5%;
@@ -153,6 +212,18 @@
     }
     .pagosLbl{
         text-align: right;
+    }
+    .cabezera{
+        background-color: transparent;
+    }
+    #thvacio{
+        width: 115px;
+    }
+    #td1{
+        width: 140px;
+    }
+    #td2{
+        width: 100px;
     }
 </style>
 
