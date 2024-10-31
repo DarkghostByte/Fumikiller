@@ -57,9 +57,7 @@ Route::get('/ventatotales',[PdfsController::class,'generarVentasTotales']);
 Route::get('/creditos',[PdfsController::class,'generarCreditos']);
 Route::get('/creditossinfactura',[PdfsController::class,'generarCreditosSinFactura']);
 Route::get('/creditosconfactura',[PdfsController::class,'generarCreditosConFactura']);
-Route::get('/pdfIngreso',[PdfsController::class,'generarPDFIngreso']);
-Route::get('/pdfEgreso',[PdfsController::class,'generarPDFEgreso']);
-Route::get('/pdfSaldo',[PdfsController::class,'generarPDFSaldo']);
+Route::get('/pdfCaja',[PdfsController::class,'generarPDFCaja']);
 
 
 //VER OPCIONES

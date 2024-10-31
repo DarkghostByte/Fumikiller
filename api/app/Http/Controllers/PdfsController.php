@@ -7,6 +7,8 @@ use Validator;
 use App\Models\Orden;
 use App\Models\CompletarOrden;
 use App\Models\Certificado;
+use App\Models\Ingresos;
+use App\Models\Egresos;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
@@ -612,35 +614,33 @@ class PdfsController extends Controller
         return $pdf->stream();
     }
 
-    public function generarPDFIngreso(){
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoIngreso',$pdf_data);
-        return $pdf->stream();
-        return $pdf->download('invoice.pdf');
-    }
+    public function generarPDFCaja(){
+        $data = Ingresos ::all();
 
-    public function generarPDFEgreso(){
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoEgreso',$pdf_data);
-        return $pdf->stream();
-        return $pdf->download('invoice.pdf');
-    }
+        $dataCO = CompletarOrden::select([
+            'completarordenes.*',
+            'orden.date1',
+            'clientes.name',
+        ])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->get();
 
-    public function generarPDFSaldo(){
+        // Obtener la suma total de 'pago' de CompletarOrden
+        $totalPagos = CompletarOrden::where('requiere3', 'Pagado')->sum('pago');
+
+        // Obtener la suma total de 'montoIngreso' de Ingresos
+        $totalIngresosAdicionales = Ingresos::sum('montoIngreso');
+
+        $totalCaja = $totalPagos + $totalIngresosAdicionales;
+
+        $dataEg = Egresos ::all();
+
+        $totalEgresos = Egresos::sum('montoEgresos');
+
+    $totalSaldo = $totalCaja - $totalEgresos;
+    
+        
         /* Imagen Del Logo */
         $path = public_path('img/membretadoFumi.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -648,8 +648,8 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoSaldo',$pdf_data);
+        $pdf_data = compact('base64','data','dataCO','totalCaja','dataEg','totalEgresos','totalSaldo');
+        $pdf = Pdf::loadView('reports.repoCaja',$pdf_data);
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
     }

@@ -3,8 +3,8 @@
     <div class="flex mr-6">
       <h1 class="py-6 px-5 text-4xl font-semibold mb-2 flex-grow">Caja</h1>
       <div class="flex justify-end flex-grow">
-        <a :href="url + 'api/pdfSaldo/'" target="_blank"
-    class="btnPdf inline-flex text-black bg-gray-100 focus:bg-gray-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
+        <a :href="url + 'api/pdfCaja/'" target="_blank"
+    class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
     style="width:80px; height:50px; text-align: center; ">
     <div class="flex">
         <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>

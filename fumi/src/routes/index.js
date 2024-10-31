@@ -29,6 +29,7 @@ const adminRoutes = [
     {path: 'admin/employees', component: () => import('@/views/admin/admin/AdminEmployeesComponent.vue')},
     {path: 'admin/problematic', component: () => import('@/views/admin/admin/AdminProblematicComponent.vue')},
     {path: 'admin/clientsView', component: () => import('@/views/admin/admin/AdminClientsViewComponent.vue')},
+    {path: 'admin/ordercompleteView', component: () => import('@/views/admin/admin/AdminOrderCompleteViewComponent.vue')},
     {path: 'admin/orderView', component: () => import('@/views/admin/admin/AdminOrderViewComponent.vue')},
 
     {path: 'certificate', component: () => import('@/views/admin/certificate/AdminCertificateViewComponent.vue')},

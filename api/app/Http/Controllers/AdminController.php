@@ -88,6 +88,7 @@ class AdminController extends Controller
         $totalEmpleados = Empleados::count();
         $totalClientes = Cliente::count();
         $totalOrdenes = Orden::count();
+        $totalOrdenesCompletadas = CompletarOrden::count();
 
 
         return response()->json([
@@ -100,7 +101,8 @@ class AdminController extends Controller
             'totalVias' => $totalVias,
             'totalEmpleados' => $totalEmpleados,
             'totalClientes' => $totalClientes,
-            'totalOrdenes' => $totalOrdenes
+            'totalOrdenes' => $totalOrdenes,
+            'totalOrdenesCompletadas' => $totalOrdenesCompletadas
         ]);
     }
 

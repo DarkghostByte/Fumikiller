@@ -23,9 +23,9 @@
 
 
     <div class="flex justify-center items-center mb-4" style="width: 100%;">
-      <el-date-picker class="mx-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
+      <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate10" type="date" format="DD-MM-YYYY"
         value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
-      <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterData1" type="date" format="DD-MM-YYYY"
+      <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate10" type="date" format="DD-MM-YYYY"
         value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
       <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" style="width: 100%;"/>
       <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
@@ -71,6 +71,8 @@
 <script>
 import axios from 'axios';
 import { ElNotification } from 'element-plus';
+//import moment from 'moment';
+
 export default {
   name: 'AdminCalendarComponent',
   data: () => ({
@@ -143,58 +145,47 @@ filterDataAddress() {
   });
     }, 
 
-    filterData() {
-      if (this.selectedDate) {
-        // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date1 === this.selectedDate);
-        if (this.filteredData.length === 0) {
-          ElNotification({
-            title: 'Aviso',
-            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
-            type: 'warning'
-          });
-        } else {
-          ElNotification({
-            title: 'Datos encontrados',
-            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
-            type: 'success',
-          });
-        }
-      } else {
-        // Si no se selecciona ninguna fecha, muestra todos los datos
-        this.filteredData = this.tableData;
-        ElNotification({
-          title: 'Mostrando todos los datos',
-          message: 'Se estan mostrando todos los datos de la agenda.',
-          type: 'info',
-        });
-      }
-    },
+    filterDate10() {
+      if (this.selectedDate && this.selectedDate1) {
+        const startDate = this.selectedDate;
+        const endDate = this.selectedDate1;
 
-    filterData1() {
-      if (this.selectedDate1) {
-        // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(completarOrden => completarOrden.date2 === this.selectedDate1);
+        // Ensure startDate is less than or equal to endDate
+        if (startDate > endDate) {
+          ElNotification({
+            title: 'Error',
+            message: 'La fecha de inicio debe ser anterior a la fecha final.',
+            type: 'error'
+          });
+          return;
+        }
+
+        this.filteredData = this.tableData.filter(completarOrden => {
+          const ingresoDate = completarOrden.date1;
+          return ingresoDate && isNaN(ingresoDate) && ingresoDate >= startDate && ingresoDate <= endDate;
+        });
+
+        // Show notification based on filtered data count
         if (this.filteredData.length === 0) {
           ElNotification({
             title: 'Aviso',
-            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate1}).`,
+            message: `No se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
             type: 'warning'
           });
         } else {
           ElNotification({
             title: 'Datos encontrados',
-            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate1}).`,
-            type: 'success',
+            message: `Se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
+            type: 'success'
           });
         }
       } else {
-        // Si no se selecciona ninguna fecha, muestra todos los datos
+        // If no dates are selected or only one is selected, show all data
         this.filteredData = this.tableData;
         ElNotification({
           title: 'Mostrando todos los datos',
-          message: 'Se estan mostrando todos los datos de la agenda.',
-          type: 'info',
+          message: 'Se están mostrando todos los datos de la agenda.',
+          type: 'info'
         });
       }
     },

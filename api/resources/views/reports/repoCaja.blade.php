@@ -15,7 +15,6 @@
                     <td id="td1"></td> 
                     <td id="td1"></td>
                     <td id="td1"></td>
-                    <td id="td2"></td>
                     
                 </tr>
                 <tr>
@@ -23,37 +22,37 @@
                     <th>Concepto</th>
                     <th></th>
                     <th>Monto</th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody>
                 <!-- @ foreach($data as $item)*/ -->
-                <tr>
-                    <td>30/10/2024</td>
-                    <td>Fumigacion</td>
-                    <td></td>
-                    <td>400</td>
-                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
-                </tr>
-                <tr>
-                    <td>31/10/2024</td>
-                    <td>Fumigacion</td>
-                    <td></td>
-                    <td>400</td>
+                    @foreach($data as $item)
+                    <tr>
+                        <td>{{ $item->dateIngreso }}</td>
+                        <td>{{ $item->descriptionIngreso }}</td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format($item->montoIngreso, 2) }}</td>
+                    </tr>
+                @endforeach
                     
-                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
-                </tr>
+                @foreach($dataCO as $itemCo)
+                    <tr>
+                        <td>{{ $itemCo->date1 }}</td>
+                        <td>Fumigacion {{ ucwords(strtolower($itemCo->name))}}</td>
+                        <td></td>
+                        <td class="pagosLbl">{{ number_format($itemCo->pago, 2) }}</td>
+                    </tr>
+                @endforeach
             <!-- @ endforeach -->
                 <tr id="fondoTotal"> 
                         <td></td>
                         <td></td>
-                        <td></td>
                         <td id="txt">Total</td>
-                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                        <td id="totalPagos"> {{ number_format($totalCaja, 2) }}</td>
                     </tr>
             </tbody>
         </table>
-
+<br>
         <table id="table2">
 
             <thead id="thead2">
@@ -62,7 +61,6 @@
                     <td id="td1"></td> 
                     <td id="td1"></td>
                     <td id="td1"></td>
-                    <td id="td2"></td>
                     
                 </tr>
                 <tr>
@@ -70,44 +68,35 @@
                     <th>Concepto</th>
                     <th>Monto</th>
                     <th></th>
-                    <th></th>
                 </tr>
             </thead>
             <tbody >
                 <!-- @ foreach($data as $item)*/ -->
-                <tr>
-                    <td>30/10/2024</td>
-                    <td>Gasolina</td>
-                    <td>800</td>
-                    <td></td>
-                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
-                </tr>
-                <tr>
-                    <td>31/10/2024</td>
-                    <td>Productos Externos</td>
-                    <td>800</td>
-                    <td></td>
-                    <td class="pagosLbl">{{ number_format(1000, 2) }}</td>
-                </tr>
+                @foreach($dataEg as $itemEg)
+                    <tr>
+                        <td>{{ $itemEg->dateEgresos }}</td>
+                        <td>{{ $itemEg->descriptionEgresos }}</td>
+                        <td class="pagosLbl">{{ number_format($itemEg->montoEgresos, 2) }}</td>
+                        <td></td>
+                    </tr>
+                @endforeach
             <!-- @ endforeach -->
                 <tr id="fondoTotal2"> 
                         <td></td>
-                        <td></td>
-                        <td></td>
                         <td id="txt">Total</td>
-                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                        <td id="totalPagos"> {{ number_format($totalEgresos, 2) }}</td>
+                        <td></td>
                     </tr>
             </tbody>
         </table>
         
-
+<br>
         <table id="table3">
                 <tr id="fondoTotalNeto"> 
                         <td id="td1"></td>
                         <td id="td1"></td>
-                        <td id="td1"></td>
                         <td id="txt">Saldo neto</td>
-                        <td id="totalPagos"> {{ number_format(1000, 2) }}</td>
+                        <td id="totalPagos"> {{ number_format($totalSaldo, 2) }}</td>
                     </tr>
             </tbody>
         </table>
@@ -198,11 +187,11 @@
     #totalPagos{
         text-align: right;
         margin-top: 20px;
-        width: 150px;
+        width: 160px;
     }
     #txt{
         text-align: left;
-        width: 150px;
+        width: 160px;
     }
     .membre{
         margin-left: 12.5%;
@@ -220,7 +209,7 @@
         width: 115px;
     }
     #td1{
-        width: 140px;
+        width: 160px;
     }
     #td2{
         width: 100px;

@@ -87,12 +87,12 @@
         <h2>Ordenes ({{ totalOrdenes }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/"
+      <router-link to="/admin/admin/ordercompleteView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-400 hover:bg-orange-800 focus:bg-orange-700 rounded-md ml-6 mb-5 shadow-lg"
         style="width:300px; height:100px; font-size:22px;">
         <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>
-        <h2>Ordenes Terminadas ()</h2>
+        <h2>Ordenes Terminadas ({{ totalOrdenesCompletadas }})</h2>
       </router-link>
 
       <router-link to="/admin/admin/"
@@ -132,6 +132,7 @@ export default {
     totalEmpleados: 0,
     totalVias: 0,
     totalProblematica: 0,
+    totalOrdenesCompletadas: 0,
   }),
   mounted() {
     this.refresh(),
@@ -183,7 +184,8 @@ export default {
           totalClientes,
           totalOrdenes,
           totalEmpleados,
-          totalVias
+          totalVias,
+          totalOrdenesCompletadas
         } = responseTotales.data; // Destructuring assignment
 
         this.totalProductosExt = totalProductosExt;
@@ -196,6 +198,7 @@ export default {
         this.totalOrdenes = totalOrdenes;
         this.totalEmpleados = totalEmpleados;
         this.totalVias = totalVias;
+        this.totalOrdenesCompletadas = totalOrdenesCompletadas;
 
         console.log('Total productos externos', this.totalProductosExt);
         console.log('Total productos internos', this.totalProductosInt);
@@ -207,6 +210,7 @@ export default {
         console.log('Total ordenes', this.totalOrdenes);
         console.log('Total empleados', this.totalEmpleados);
         console.log('Total vias', this.totalVias);
+        console.log('Total ordenes completadas', this.totalOrdenesCompletadas);
         console.log('Totales', responseTotales.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
