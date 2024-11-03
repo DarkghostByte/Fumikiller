@@ -20,8 +20,8 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Concepto</th>
-                    <th></th>
                     <th>Monto</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -30,8 +30,9 @@
                     <tr>
                         <td>{{ $item->dateIngreso }}</td>
                         <td>{{ $item->descriptionIngreso }}</td>
-                        <td></td>
                         <td class="pagosLbl">{{ number_format($item->montoIngreso, 2) }}</td>
+                        <td></td>
+                        
                     </tr>
                 @endforeach
                     
@@ -39,8 +40,9 @@
                     <tr>
                         <td>{{ $itemCo->date1 }}</td>
                         <td>Fumigacion {{ ucwords(strtolower($itemCo->name))}}</td>
-                        <td></td>
                         <td class="pagosLbl">{{ number_format($itemCo->pago, 2) }}</td>
+                        <td></td>
+                        
                     </tr>
                 @endforeach
             <!-- @ endforeach -->
@@ -66,8 +68,8 @@
                 <tr>
                     <th>Fecha</th>
                     <th>Concepto</th>
-                    <th>Monto</th>
                     <th></th>
+                    <th>Monto</th>
                 </tr>
             </thead>
             <tbody >
@@ -76,16 +78,16 @@
                     <tr>
                         <td>{{ $itemEg->dateEgresos }}</td>
                         <td>{{ $itemEg->descriptionEgresos }}</td>
-                        <td class="pagosLbl">{{ number_format($itemEg->montoEgresos, 2) }}</td>
                         <td></td>
+                        <td class="pagosLbl">{{ number_format($itemEg->montoEgresos, 2) }}</td>
                     </tr>
                 @endforeach
             <!-- @ endforeach -->
                 <tr id="fondoTotal2"> 
                         <td></td>
                         <td id="txt">Total</td>
-                        <td id="totalPagos"> {{ number_format($totalEgresos, 2) }}</td>
                         <td></td>
+                        <td id="totalPagos"> {{ number_format($totalEgresos, 2) }}</td>
                     </tr>
             </tbody>
         </table>
