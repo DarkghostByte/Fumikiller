@@ -35,6 +35,9 @@ const adminRoutes = [
     {path: 'certificate', component: () => import('@/views/admin/certificate/AdminCertificateViewComponent.vue')},
     {path: 'certificate/views/', component: () => import('@/views/admin/certificate/AdminViewComponent.vue')},
 
+    {path: 'remisiones', component: () => import('@/views/admin/remisiones/AdminRemisionesViewComponent.vue')},
+    {path: 'remisiones/views/', component: () => import('@/views/admin/remisiones/AdminRemisionViewComponent.vue')},
+
     {path: 'gastos', component: () => import('@/views/admin/gastos/AdminGastosComponent.vue')},
 ]
 

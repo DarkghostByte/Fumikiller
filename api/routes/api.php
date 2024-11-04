@@ -18,6 +18,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\IngresosController;
 use App\Http\Controllers\EgresosController;
 use App\Http\Controllers\PdfsController;
+use App\Http\Controllers\RemisionesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,6 +46,7 @@ Route::resource('vias', ViasController::class);
 Route::resource('problematica', ProblematicasController::class);
 Route::resource('ingresos', IngresosController::class);
 Route::resource('egresos', EgresosController::class);
+Route::resource('remisiones', RemisionesController::class);
 
 //RUTAS PARA PDF
 Route::get('/remision/{id}',[PdfsController::class,'generarPDFRem']);

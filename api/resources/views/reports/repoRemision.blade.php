@@ -11,7 +11,7 @@
 <body >
 <table class="tblDia" >
     <h5 class="txtDia">DIA</h5>
-    <h5 class="txtDia1">01-mar-24</h5>
+    <h5 class="txtDia1">{{ $data->RemisionDate }}</h5>
 </table>
 <img class="membre" src="{{ $base64 }}" alt="">
     
@@ -31,6 +31,7 @@
             <th class="clth1">RAZON SOCIAL:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->tradename }}
             </div>
             </th>  
         </table>
@@ -39,6 +40,7 @@
             <th class="clth">NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->name }} {{ $data->lastname1 }} {{ $data->lastname2 }}
             </div>
             </th>  
         </table>
@@ -46,11 +48,13 @@
             <th>DOMICILIO:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->home }} #{{ $data->numAddress }}
             </div>
             </th> 
             <th> CIUDAD:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->ciudad }}
             </div>
             </th> 
         </table>
@@ -58,16 +62,19 @@
             <th class="clth11">COLONIA:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->colonia }} #{{ $data->codigoPostal }}
             </div>
             </th> 
             <th class="clth11">TELEFONO:</th>
             <<th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->number_fixed_number }}
             </div>
             </th> 
             <th class="clth11">CELULAR:</th>
             <<th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->cell_phone }}
             </div>
             </th> 
         </table>
@@ -75,6 +82,7 @@
             <th class="clth1">TIPO DE LUGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->comercio }}
             </div>
             </th>  
         </table>
@@ -88,11 +96,13 @@
             <th class="clth114">NUMERO:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->RemisionCertificado }}
             </div>
             </th> 
             <th class="clth113">IMPORTE:</th>
             <th class="renDivTh">
             <div class="renDiv13">
+                {{ $data->RemisionMonto }}
             </div>
             </th>
             
@@ -104,6 +114,7 @@
             <th>OBSERVACIONES:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->RemisionObservaciones }}
             </div>
             </th>            
         </table>
@@ -135,7 +146,7 @@
 <body >
 <table class="tblDia" >
     <h5 class="txtDia">DIA</h5>
-    <h5 class="txtDia1">01-mar-24</h5>
+    <h5 class="txtDia1">{{ $data->RemisionDate }}</h5>
 </table>
 <img class="membre" src="{{ $base64 }}" alt="">
     <div class="meminfo">
@@ -157,6 +168,7 @@
             <th class="clth1">RAZON SOCIAL:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->tradename }}
             </div>
             </th>  
         </table>
@@ -165,6 +177,7 @@
             <th class="clth">NOMBRE:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->name }} {{ $data->lastname1 }} {{ $data->lastname2 }}
             </div>
             </th>  
         </table>
@@ -172,11 +185,13 @@
             <th>DOMICILIO:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->home }} #{{ $data->numAddress }}
             </div>
             </th> 
             <th> CIUDAD:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->ciudad }}
             </div>
             </th> 
         </table>
@@ -184,16 +199,19 @@
             <th class="clth11">COLONIA:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->colonia }} #{{ $data->codigoPostal }}
             </div>
             </th> 
             <th class="clth11">TELEFONO:</th>
             <<th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->number_fixed_number }}
             </div>
             </th> 
             <th class="clth11">CELULAR:</th>
             <<th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->cell_phone }}
             </div>
             </th> 
         </table>
@@ -201,6 +219,7 @@
             <th class="clth1">TIPO DE LUGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
+                {{ $data->comercio }}
             </div>
             </th>  
         </table>
@@ -214,11 +233,13 @@
             <th class="clth114">NUMERO:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->RemisionCertificado }}
             </div>
             </th> 
             <th class="clth113">IMPORTE:</th>
             <th class="renDivTh">
             <div class="renDiv13">
+                {{ $data->RemisionMonto }}
             </div>
             </th>
             
@@ -230,6 +251,7 @@
             <th>OBSERVACIONES:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $data->RemisionObservaciones }}
             </div>
             </th>            
         </table>

@@ -9,12 +9,43 @@ use App\Models\CompletarOrden;
 use App\Models\Certificado;
 use App\Models\Ingresos;
 use App\Models\Egresos;
+use App\Models\Remisiones;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
 class PdfsController extends Controller
 {
-    public function generarPDFRem(){
+    public function generarPDFRem($id){
+        $data = Remisiones::select([
+            'remisiones.*',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+            'clientes.tradename',
+            'clientes.home',
+            'clientes.numAddress',
+            'clientes.id_colonia',
+            'clientes.id_city',
+            'clientes.id_comercio',
+            'comercios.comercio',
+            'clientes.cell_phone',
+            'clientes.number_fixed_number',
+            'colonias.colonia',
+            'colonias.codigoPostal',
+            'ciudades.ciudad'
+        ])
+        ->join('clientes', 'remisiones.id_cliente', '=', 'clientes.id')
+        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
+        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
+        ->where('remisiones.id', $id)
+        ->first();
+    //Datos de la base de datos
+    if (!$data) {
+        return abort(404);
+    }
+    
+
         /* Imagen Del Logo */
         $path = public_path('img/membretadoFumi.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -22,8 +53,15 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
-        $pdf_data = compact('base64');
-        $pdf = Pdf::loadView('reports.repoRemision',$pdf_data);
+        setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+        date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+        $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))));
+        str_replace('S?BADO','SÁBADO',$fecha);
+        $fecha = Carbon::parse($data->certificateDate);
+        Carbon::setLocale('es');
+        $pdf_data = compact('base64','data','fecha');
+        $pdf = Pdf::loadView('reports.repoRemision',$pdf_data)->setPaper('a4');     
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
     }
