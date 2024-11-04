@@ -158,9 +158,23 @@
             </el-checkbox-group>
           </el-form-item>
         </div>
-        <div>
+        <div class="flex">
           <el-form-item prop="infoclient_certificate" label="El cliente necesita certificado?" class="px-10">
             <el-radio-group v-model="form1.infoclient_certificate">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item prop="infoclient_remision" label="El cliente necesita remision?" class="px-10">
+            <el-radio-group v-model="form1.infoclient_remision">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item prop="infoclient_facturacion" label="El cliente necesita facturacion?" class="px-10">
+            <el-radio-group v-model="form1.infoclient_facturacion">
               <el-radio value="Si" size="large" border>Si</el-radio>
               <el-radio value="No" size="large" border>No</el-radio>
             </el-radio-group>
@@ -215,6 +229,8 @@ export default {
       recruitment_data: [],
       infoclient_delete: 'Alta',
       infoclient_certificate: '',
+      infoclient_remision: '',
+      infoclient_facturacion: ''
 
     },
     filteredColonias: [],
@@ -279,6 +295,12 @@ export default {
         { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
       ],
       infoclient_certificate: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      infoclient_remision: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      infoclient_facturacion: [
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
     }

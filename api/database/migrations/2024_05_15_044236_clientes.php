@@ -36,6 +36,8 @@ return new class extends Migration
             $table->string('recruitment_data');
             $table->string('infoclient_delete');
             $table->string('infoclient_certificate');
+            $table->string('infoclient_remision');
+            $table->string('infoclient_facturacion');
             $table->timestamps();
 
             /*$table->timestamp('email_verified_at')->nullable()->unique();*/

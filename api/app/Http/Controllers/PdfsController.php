@@ -217,7 +217,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('clientes.tradename','=','Particular')
+        ->where('clientes.infoclient_facturacion','=','No')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -290,7 +290,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('clientes.tradename','!=','Particular')
+        ->where('clientes.infoclient_facturacion','=','Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
