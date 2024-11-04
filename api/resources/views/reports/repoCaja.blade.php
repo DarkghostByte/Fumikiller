@@ -39,7 +39,7 @@
                 @foreach($dataCO as $itemCo)
                     <tr>
                         <td>{{ $itemCo->date1 }}</td>
-                        <td>Fumigacion {{ ucwords(strtolower($itemCo->name))}}</td>
+                        <td>Fumigacion {{ ucwords(strtolower($itemCo->name))}} {{ ucwords(strtolower($itemCo->lastname1))}} {{ ucwords(strtolower($itemCo->lastname2))}}</td>
                         <td class="pagosLbl">{{ number_format($itemCo->pago, 2) }}</td>
                         <td></td>
                         

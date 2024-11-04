@@ -621,6 +621,8 @@ class PdfsController extends Controller
             'completarordenes.*',
             'orden.date1',
             'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')

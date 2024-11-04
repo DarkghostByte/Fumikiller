@@ -148,10 +148,15 @@
           <br>
 
           <div class="flex" style="width:100%;">
-            <el-form-item prop="certificateName" label="A quien estara el certificado:" class="px-2"
-              style="width: 100%;">
-              <el-input v-model="form1.certificateName" placeholder="Ingresa a quien va dirigido el certificado:" />
+            <el-form-item prop="certificateName" label="A quien estara el certificado:" class="px-2">
+              <el-radio-group v-model="form1.certificateName">
+                <el-radio :value="selectedItem.name+' '+selectedItem.lastname1+' '+ selectedItem.lastname2" size="large" border>{{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}</el-radio>
+                <el-radio :value="selectedItem.tradename" size="large" border>{{ selectedItem.tradename }}</el-radio>
+              </el-radio-group>
             </el-form-item>
+          </div>
+
+          <div class="flex" style="width:100%;">
             <el-form-item prop="certificateDate" class="px-2" label="Fecha del certificado:">
               <el-col :span="11">
                 <el-date-picker v-model="form1.certificateDate" type="date" placeholder="Fecha de certificado"

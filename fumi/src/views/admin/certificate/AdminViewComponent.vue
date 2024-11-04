@@ -22,8 +22,6 @@
       <div class="flex mb-4" style="width: 80%;">
         <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
           @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-          @input="filterDataLastname" />
         <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
           @input="filterDataAddress" />
           <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
@@ -33,7 +31,7 @@
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
 
         <el-table-column label="" width="100" >
@@ -59,12 +57,8 @@
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-        <el-table-column label="Nombre" sortable width="200" >
-          <template #default="scope">
-            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Dirección" sortable width="500">
+        <el-table-column prop="certificateName" label="Nombre" sortable width="250" />
+        <el-table-column label="Dirección" sortable width="550">
           <template #default="scope">
             {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
           </template>
@@ -76,24 +70,18 @@
     <!-- END TABLE DATA -->
 
     <!-- MODAL 1 -->
-    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500">
+    <el-dialog v-model="dialogVisibleView" title="Datos del certificado" width="700" height="500">
       <div class="clientInfo">
         <div class="details">
-          <i class="fa fa-user fa-2x iconInfo"></i>
-          <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+          <i class="fa fa-file fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
-                selectedItem.lastname2 }}
-            </p>
-            <p>
-              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+              <strong>Certificado a:</strong> {{ selectedItem.name }}
             </p>
           </div>
         </div>
         <div class="details">
           <i class="fa fa-city fa-2x iconInfo"></i>
-          <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
           <div>
             <p>
               <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
@@ -114,119 +102,33 @@
             <p>
               <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
             </p>
-            <p>
-              <strong>Número fijo:</strong> {{ selectedItem.number_fixed_number }}
-            </p>
           </div>
         </div>
         <div class="details">
-          <i class="fa fa-location-dot fa-2x iconInfo"></i>
+          <i class="fa fa-bugs fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Como llegar:</strong> {{ selectedItem.how_to_get }}
+              <strong>Producto interno:</strong> {{ selectedItem.productoInt }}
             </p>
             <p>
-              <strong>Descripcion:</strong> {{ selectedItem.description }}
+              <strong>Producto externo:</strong> {{ selectedItem.productoExt }}
             </p>
           </div>
         </div>
-        <div class="details">
-          <i class="fa fa-file-contract fa-2x iconInfo"></i>
-          <div>
-            <p>
-              <strong>Tipo de contratación:</strong> {{ selectedItem.recruitment_data }}
-            </p>
-          </div>
-        </div>
-
       </div>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" @click="dialogVisibleView = false">Listo</el-button>
+          <el-button type="primary" color="#ff7640" @click="dialogVisibleView = false">Listo</el-button>
         </div>
       </template>
     </el-dialog>
     <!-- END MODAL 1 -->
-
-    <!-- MODAL 2 -->
-    <el-dialog v-model="dialogVisibleViewcertificado" title="Crear certificado" width="35%">
-      <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
-        :label-position="'top'">
-        <div class="row" style="width:100%;">
-          <p>Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
-            selectedItem.lastname2 }}</p>
-            <br>
-          <p>Productos internos</p>
-        <div class="flex" style="width:100%;">
-          <el-form-item prop="productoCertificadoInt1" class="px-2" label="Producto interno #1" style="width: 100%">
-            <el-select v-model="form1.productoCertificadoInt1" placeholder="Selecciona el producto">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="productoCertificadoInt2" class="px-2" label="Producto interno #2" style="width: 100%">
-            <el-select v-model="form1.productoCertificadoInt2" placeholder="Selecciona el producto">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
-            </el-select>
-          </el-form-item>
-        </div>
-        <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
-        <p>Productos externos</p>
-        <div class="flex">
-          <el-form-item prop="productoCertificadoExt1" class="px-2" label="Producto externo #1" style="width: 100%">
-            <el-select v-model="form1.productoCertificadoExt1" placeholder="Selecciona el producto">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="productoCertificadoExt2" class="px-2" label="Producto externo #2" style="width: 100%">
-            <el-select v-model="form1.productoCertificadoExt2" placeholder="Selecciona el producto">
-              <el-option label="Sipermetrina" value="Sipermetrina" />
-              <el-option label="Alpha Sipermetrina" value="Alpha Sipermetrina" />
-              <el-option label="Deltametrina" value="Deltametrina" />
-              <el-option label="Cuaternario de amonio" value="Cuaternario de amonio" />
-              <el-option label="Piretrina natural" value="Piretrina natural" />
-              <el-option label="Carbendamezin" value="Carbendamezin" />
-              <el-option label="Cumin pasta" value="Cumin pasta" />
-              <el-option label="Siege" value="Siege" />
-            </el-select>
-          </el-form-item>
-        </div>
-        </div>
-      </el-form>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisibleViewcertificado = false">Cancelar</el-button>
-          <el-button type="primary" @click="createCertificate1(selectedItem.id)">Crear</el-button>
-        </span>
-      </template>
-    </el-dialog>
-    <!-- END MODAL 2 -->
   </div>
 </template>
 
 <script>
 import axios from 'axios';
-import { ElNotification } from 'element-plus';
+//import { ElNotification } from 'element-plus';
 
 export default {
   name: 'AdminClientsComponent',
@@ -239,27 +141,11 @@ export default {
     tableData: [],
     filteredData: [],
     selectedItem: {},
+    selectedItem1: {},
     searchQuery: '',
     searchQueryName: '',
-    searchQueryLastname: '',
     searchQueryAddress: '',
     searchQueryPhone: '',
-    form1: {
-      productoCertificadoInt1: '',
-      productoCertificadoInt2: 'No aplica',
-      productoCertificadoExt1: '',
-      productoCertificadoExt2: 'No aplica',
-    },
-    rules: {
-      productoCertificadoInt1: [
-        { required: true, message: 'La producto es requerido', trigger: 'blur' },
-      ],
-      
-      productoCertificadoExt1: [
-        { required: true, message: 'La producto es requerido', trigger: 'blur' },
-      ],
-      
-    }
   }),
   mounted() {
     this.refresh();
@@ -276,70 +162,17 @@ export default {
       this.selectedItem = row;
       this.dialogVisibleView = true;
     },
-    certificado(row) {
-      console.log(row);
-      this.selectedItem = row;
-      this.dialogVisibleViewcertificado = true;
-    },
     pdf(row) {
       console.log(row)
-      this.selectedItem = row
-      this.selectedItem = null
+      this.selectedItem1 = row
+      this.selectedItem1 = null
     },
-
-    createCertificate1() {
-  this.$refs.formRef.validate(async (valid) => {
-    if (valid) {
-      try {
-        const response = await axios.post('certificados', {
-          ...this.form1,
-          id_cliente: this.selectedItem.id,
-        });
-        console.log(response);
-        this.dialogVisibleViewcertificado = false;
-              this.refresh();
-              this.$message.success('El certificado se creo correctamente');
-              ElNotification({
-                title: 'Alerta',
-                message: 'Registro insertado correctamente',
-                type: 'success'
-              })
-      } catch (error) {
-        console.error('Error creating certificate:', error.response.data);
-        this.$message.error('Error al crear el certificado');
-              ElNotification({
-                title: 'Error',
-                message: 'Favor de llenar los campos',
-                type: 'error'
-              })
-              console.error('Error creating certificate:', error.response.data);
-              this.$message.error('Error al crear el certificado');
-      }
-    } else {
-      console.log('Validation failed');
-      console.log('Validation failed');
-          ElNotification({
-            title: 'Error',
-            message: 'Favor de llenar los campos',
-            type: 'error'
-          });
-          return false;
-    }
-  });
-},
     
     filterDataName() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
+      this.filteredData = this.tableData.filter((certificados) => {
+        return certificados.certificateName.toLowerCase().includes(this.searchQueryName.toLowerCase());
       });
     },
-
-    filterDataLastname() {
-  this.filteredData = this.tableData.filter((clientes) => {
-    const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-    return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
-  });
-},
 
     filterDataAddress() {
       this.filteredData = this.tableData.filter((clientes) => {
@@ -354,28 +187,10 @@ export default {
       });
     },
 
-    handleEstadoClick() {
-  const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
-  axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
-    .then(response => {
-      console.log('El cliente se dio de baja:', response.data);
-      this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
-      this.dialogVisible = false;
-      ElNotification({
-        title: 'Actualizacion de datos',
-        message: `Se actualizaron los datos.`,
-        type: 'success'
-      });
-    })
-    .catch(error => {
-  console.error('Error al dar de baja al cliente:', error.response.data);
-});
-},
-
     async fetchData() {
       try {
-        const responseOrdenes = await axios.get(this.urlApi + 'clientes');
-        this.tableData = responseOrdenes.data.data.filter(row => row.infoclient_certificate !== 'No');
+        const responseOrdenes = await axios.get(this.urlApi + 'certificados');
+        this.tableData = responseOrdenes.data.data;
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
@@ -418,7 +233,7 @@ p {
 }
 
 .iconInfo {
-  color: #409eff;
+  color: #ff7640;
   margin-right: 10px;
 }
 
