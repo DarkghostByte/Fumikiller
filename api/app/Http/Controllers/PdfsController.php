@@ -72,7 +72,7 @@ class PdfsController extends Controller
             'orden.*',
             'clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename','clientes.home',
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
-            'clientes.description','clientes.contact_form','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
+            'clientes.description','clientes.contact_form','clientes.recruitment_data','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
             'comercios.comercio','problematica1.problematica as plague1','problematica2.problematica as plague2',
         ])
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
@@ -102,6 +102,7 @@ class PdfsController extends Controller
         $fecha2 = Carbon::parse($orden->date2);
         /* Localizacion */
         Carbon::setLocale('es');
+        
         /* PDF */
         $pdf_data = compact('base64','orden','fecha','fecha2');
         $pdf = Pdf::loadView('reports.reporteOrdenPdf',$pdf_data)->save('myfile.pdf');
@@ -216,7 +217,7 @@ class PdfsController extends Controller
         return $pdf->download('invoice.pdf');
     }
 
-    public function generarVentSinFact() {
+    public function generarVentSinFact($f1,$f2) {
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -255,7 +256,9 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('clientes.infoclient_facturacion','=','No')
+        ->orWhere('orden.date1','=',$f1)
+        ->orWhere('orden.date2','=',$f2)
+        ->where('clientes.infoclient_facturacion','No')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -289,8 +292,11 @@ class PdfsController extends Controller
     }
     
 
-    public function generarVentConFact() {
+    public function generarVentConFact($f1,$f2) {
+        
         // Realizar la consulta sin filtrar por 'id_cliente'
+        //$f1 = Carbon::parse($f1);
+        //$f2 = Carbon::parse($f2);
         $data = CompletarOrden::select([
             'completarordenes.*',
             'problematica1.problematica as plague1',
@@ -316,6 +322,8 @@ class PdfsController extends Controller
             'empleados1.nameEmpleado as nameEmpleado1',
             'empleados2.nameEmpleado as nameEmpleado2',
         ])
+        //->whereBetween('orden.date1', [$f1, $f2])
+        //->where('clientes.infoclient_facturacion', 'Si')
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
         ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
         ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
@@ -328,40 +336,51 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->where('clientes.infoclient_facturacion','=','Si')
+        //->whereBetween('orden.date1', [$f1, $f2])
+        
+        ->orWhere('orden.date1','=',$f1)
+        ->orWhere('orden.date2','=',$f2)
+        ->where('clientes.infoclient_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
-    
+        //dd($data);
+        //dd($f1);
+        //dd($f2);
         //Funcion para las fechas
-        foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
-        }
+        
 
         // Verificar si la colección está vacía
         if ($data->isEmpty()) {
+            // Manejar el caso cuando no hay datos
             return abort(404, 'No se encontraron datos.');
+        } else {
+            foreach ($data as &$item) {
+                $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
+                $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+            }
+            $totalPago = $data->sum('pago');
+    
+            // Generación del PDF
+            /* Imagen Del Logo */
+            $path = public_path('img/membretadoFumi.png');
+            $type = pathinfo($path, PATHINFO_EXTENSION);
+            $data_img = file_get_contents($path);
+            $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        
+            // Preparar los datos para la vista del PDF
+            $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+            $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
+        
+            // Mostrar el PDF al usuario
+            return $pdf->stream();
+
         }
     
         // Sumar todos los pagos
-        $totalPago = $data->sum('pago');
-    
-        // Generación del PDF
-        /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
-        $type = pathinfo($path, PATHINFO_EXTENSION);
-        $data_img = file_get_contents($path);
-        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-    
-        // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
-    
-        // Mostrar el PDF al usuario
-        return $pdf->stream();
+        
     }
 
-    public function generarVentasTotales() {
+    public function generarVentasTotales($f1,$f2) {
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -400,6 +419,8 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->orWhere('orden.date1','=',$f1)
+        ->orWhere('orden.date2','=',$f2)
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     

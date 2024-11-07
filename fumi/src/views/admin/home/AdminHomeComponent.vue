@@ -4,8 +4,21 @@
     integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
     crossorigin="anonymous" referrerpolicy="no-referrer" />
   <div class="">
-    <i class="fa fa-file-pdf-o" aria-hidden="true" style="color:black;"></i>
+    <i class="fa fa-file-pdf-o" aria-hidden="true" style="color: black;"></i>
     <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">Reportes</h1>
+
+    <div class="flex justify-center mb-5">
+      <el-date-picker v-model="f1" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Fecha inicial"></el-date-picker>
+      <span class="mx-3"> - </span>
+      <el-date-picker v-model="f2" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Fecha final"></el-date-picker>
+      <button class="ml-3 px-3 py-2 bg-blue-500 text-white rounded-md" @click="fetchDate">Buscar</button>
+    </div>
+
+    <div class="flex justify-center mb-5">
+      <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">{{ f1 }}</h1>
+      <h1 class="mx-3" style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">-</h1>
+      <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">{{ f2 }}</h1>
+    </div>
 
     <!-- v-for="item in 4" :key="item"-->
 
@@ -22,7 +35,7 @@
           <div>
             <span class="block text-gray-500">Venta Sin Facturas</span>
             <span class="block text-2xl font-bold">${{ totalVentasSinFactura }}</span>
-            <a :href="url + 'api/ventsinfact/'" target="_blank">
+            <a :href="url + 'api/ventsinfact/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -40,7 +53,7 @@
           <div>
             <span class="block text-gray-500">Venta Por Facturas</span>
             <span class="block text-2xl font-bold">${{ totalVentasConFactura }}</span>
-            <a :href="url + 'api/ventconfact/'" target="_blank">
+            <a :href="url + 'api/ventconfact/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -58,7 +71,7 @@
           <div>
             <span class="block text-gray-500">Ventas totales</span>
             <span class="block text-2xl font-bold">${{ totalPagos }}</span>
-            <a :href="url + 'api/ventatotales/'" target="_blank">
+            <a :href="url + 'api/ventatotales/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
 
@@ -191,6 +204,8 @@ export default {
     totalVentasConFactura: 0,
     totalCreditosSinFactura: 0,
     totalCreditosConFactura: 0,
+    f1: null,
+    f2: null,
   }),
   mounted() {
     this.fetchData();
@@ -220,6 +235,34 @@ export default {
           console.error('Error al actualizar el estado:', error);
         });
     },
+
+    fetchDate() {
+    if (this.f1 === null && this.f2 === null) {
+        ElNotification({
+            title: 'Aviso',
+            message: `No se realizó el filtro de las fechas seleccionadas.`,
+            type: 'warning'
+        });
+    } else if (this.f1 === null) {
+        ElNotification({
+            title: 'Aviso',
+            message: `No se realizó el filtro de la fecha inicial.`,
+            type: 'warning'
+        });
+    } else if (this.f2 === null) {
+        ElNotification({
+            title: 'Aviso',
+            message: `No se realizó el filtro de la fecha final.`,
+            type: 'warning'
+        });
+    } else {
+        ElNotification({
+            title: 'Filtro realizado',
+            message: `Se realizó el filtro con las fechas seleccionadas (${this.f1} - ${this.f2}).`,
+            type: 'success'
+        });
+    }
+},
 
     async fetchData() {
       try {

@@ -154,7 +154,8 @@
           <i class="fa fa-file-contract fa-2x iconDelete"></i>
           <div>
             <p>
-              <strong>Tipo de contratación:</strong> {{ selectedItem.recruitment_data }}
+              <strong>Tipo de contratación:</strong>
+              <span v-for="item in selectedItem.recruitment_data"  v-bind:key="item">{{ item}},&nbsp;</span>
             </p>
           </div>
         </div>
@@ -179,11 +180,11 @@
           <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
           <div>
             <p>
-              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
-                selectedItem.lastname2 }}
+              <strong>Nombre completo:</strong> {{ selectedItem1.name }} {{ selectedItem1.lastname1 }} {{
+                selectedItem1.lastname2 }}
             </p>
             <p>
-              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+              <strong>Nombre comercial:</strong> {{ selectedItem1.tradename }}
             </p>
           </div>
         </div>
@@ -192,14 +193,14 @@
           <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
           <div>
             <p>
-              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
+              <strong>Domicilio:</strong> {{ selectedItem1.street }} {{ selectedItem1.home }} #{{ selectedItem1.numAddress
               }},
               {{
-                selectedItem.colonia
-              }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+                selectedItem1.colonia
+              }} #{{ selectedItem1.codigoPostal }}, {{ selectedItem1.ciudad }}
             </p>
             <p>
-              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
+              <strong>Tipo de lugar:</strong> {{ selectedItem1.comercio }}
             </p>
           </div>
           
@@ -208,10 +209,10 @@
           <i class="fa fa-phone fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
+              <strong>Numero de celular:</strong> {{ selectedItem1.cell_phone }}
             </p>
             <p>
-              <strong>Número fijo:</strong> {{ selectedItem.number_fixed_number }}
+              <strong>Número fijo:</strong> {{ selectedItem1.number_fixed_number }}
             </p>
           </div>
         </div>
@@ -219,10 +220,10 @@
           <i class="fa fa-location-dot fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Como llegar:</strong> {{ selectedItem.how_to_get }}
+              <strong>Como llegar:</strong> {{ selectedItem1.how_to_get }}
             </p>
             <p>
-              <strong>Descripcion:</strong> {{ selectedItem.description }}
+              <strong>Descripcion:</strong> {{ selectedItem1.description }}
             </p>
           </div>
         </div>
@@ -230,7 +231,8 @@
           <i class="fa fa-file-contract fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Tipo de contratación:</strong> {{ selectedItem.recruitment_data }}
+              <strong>Tipo de contratación:</strong> 
+              <span v-for="item in selectedItem1.recruitment_data"  v-bind:key="item">{{ item}},&nbsp;</span>
             </p>
           </div>
         </div>
@@ -261,6 +263,7 @@ export default {
     tableData: [],
     filteredData: [],
     selectedItem: {},
+    selectedItem1: {},
     searchQuery: '',
     searchQueryName: '',
     searchQueryLastname: '',
@@ -287,12 +290,16 @@ export default {
     eliminar(row) {
       console.log(row);
       this.selectedItem = row;
+      this.selectedItem.recruitment_data = JSON.parse(this.selectedItem.recruitment_data)
       this.dialogVisible = true;
+      this.refresh();
     },
     seleccionar(row) {
       console.log(row);
-      this.selectedItem = row;
+      this.selectedItem1 = row;
+      this.selectedItem1.recruitment_data = JSON.parse(this.selectedItem1.recruitment_data)
       this.dialogVisibleView = true;
+      this.refresh();
     },
     historia(row) {
       if (row && row.id) {
@@ -347,14 +354,19 @@ export default {
 });
 },
 
-    async fetchData() {
-      try {
-        const responseOrdenes = await axios.get(this.urlApi + 'clientes');
-        this.tableData = responseOrdenes.data.data.filter(row => row.infoclient_delete !== 'Baja');
-      } catch (error) {
-        console.error('Error al obtener los datos:', error);
-      }
-    },
+async fetchData() {
+  try {
+    const response = await axios.get(this.urlApi + 'clientes');
+    // Verifica si la respuesta tiene un atributo 'data' que sea un array
+    if (response.data && Array.isArray(response.data)) {
+      this.tableData = response.data.filter(row => row.infoclient_delete !== 'Baja');
+    } else {
+      console.error('La respuesta de la API no tiene el formato esperado:', response.data);
+    }
+  } catch (error) {
+    console.error('Error al obtener los datos:', error);
+  }
+},
   }
 };
 </script>

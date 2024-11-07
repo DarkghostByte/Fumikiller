@@ -122,18 +122,68 @@
             </th> 
         </table>
 
+        @php 
+            $arreglo = json_decode($orden->recruitment_data );
+            $presupuesto=false;
+            $fumigar=false;
+            $garantia=false;
+            $cortesia=false;
+            $nada=false;
         
-<table class="btnCir">
-            <th ><button class="button button5"> </button>
+            foreach($arreglo as $item){
+                if($item == 'Presupuesto'){ $presupuesto=true; }
+                if($item == 'Fumigar'){ $fumigar=true; }
+                if($item == 'Garantia'){ $garantia=true; }
+                if($item == 'Cortesia'){ $cortesia=true; }
+                if($item == 'Nada'){ $nada=true; }
+            }
+        @endphp
+        <table class="btnCir">
+            <th>
+                @if($presupuesto)
+                    <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>            
             <th class=> Presupuesto</th>
-            <th><button class="button button5"> </button>
+
+            <th>
+                @if($fumigar)
+                    <button class="button button5"> </button>
+                    @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
             <th> Fumigar</th>
-            <th><button class="button button5"> </button>
+            
+            <th>
+                @if($garantia)
+                <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
             <th> Garantia</th>
-            <th><button class="button button5"> </button>
+            
+            <th> 
+                @if($cortesia)
+                <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
             <th> Cortesia</th>
-            <th><button class="button button5"> </button>
-            <th> Otros</th>
+            
+            <th> 
+                @if($nada)
+                <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
+            <th> Nada</th>
+            
         </table>
         <table class="">
             <th class="clth114">Producto Interno:</th>
@@ -160,6 +210,7 @@
             </th> 
         </table>
         <table class="btnCir">
+           
             <th>Require de:</th>
             <th ><button class="button button5"> </button>
             <th > Factura</th>
@@ -322,17 +373,53 @@
         </table>
 
         
-<table class="btnCir">
-            <th ><button class="button button5"> </button>
+        <table class="btnCir">
+    
+            <th>
+                @if($presupuesto)
+                    <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>            
             <th class=> Presupuesto</th>
-            <th><button class="button button5"> </button>
+
+            <th>
+                @if($fumigar)
+                    <button class="button button5"> </button>
+                    @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
             <th> Fumigar</th>
-            <th><button class="button button5"> </button>
+            
+            <th>
+                @if($garantia)
+                <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
             <th> Garantia</th>
-            <th><button class="button button5"> </button>
+            
+            <th> 
+                @if($cortesia)
+                <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
             <th> Cortesia</th>
-            <th><button class="button button5"> </button>
-            <th> Otros</th>
+            
+            <th> 
+                @if($nada)
+                <button class="button button5"> </button>
+                @else
+                <button class="" style="background-color: red;"> </button>
+                @endif
+            </th>
+            <th> Nada</th>
+            
         </table>
         <table class="">
             <th class="clth114">Producto Interno:</th>

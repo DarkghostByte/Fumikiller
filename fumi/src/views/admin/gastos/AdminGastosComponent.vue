@@ -15,9 +15,9 @@
 
     <div class="container mx-auto">
       <div class="mb-4 centerFiltros">
-        <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate1" type="date" format="DD-MM-YYYY"
+        <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate1" type="date" format="YYYY-MM-DD"
           value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
-        <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate1" type="date" format="DD-MM-YYYY"
+        <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate1" type="date" format="YYYY-MM-DD"
           value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
         <el-input class="px-2" placeholder="Buscar por descripcion" v-model="searchQuery1" @input="filterData1"
           style="width: 25%;" />
@@ -403,15 +403,22 @@ export default {
         }
       });
     },
-
+    parseDate(fecha){
+      var f1=fecha.split("-")[2]
+      f1+="-"+fecha.split("-")[1]
+      f1+="-"+fecha.split("-")[0]
+      return new Date(f1)
+    },
     filterDate1() {
       if (this.selectedDate && this.selectedDate1) {
         // Convert dates to Date objects and handle null values
         const startDate = this.selectedDate;
         const endDate = this.selectedDate1;
+        var f1=this.parseDate(startDate)
+        var f2=this.parseDate(endDate)
 
         // Ensure startDate is less than or equal to endDate
-        if (startDate > endDate) {
+        if (f1 > f2) {
           ElNotification({
             title: 'Error',
             message: 'La fecha de inicio debe ser anterior a la fecha final.',
@@ -419,20 +426,31 @@ export default {
           });
           return;
         }
-
+        
         this.filteredData1 = this.tableData1.filter(ingresos => {
-          const ingresoDate = ingresos.dateIngreso;
-          return ingresoDate && isNaN(ingresoDate) && ingresoDate >= startDate && ingresoDate <= endDate;
+          const ingresoDate = this.parseDate(ingresos.dateIngreso);
+          return  ingresoDate >=f1 && ingresoDate <= f2;
         });
-
+       // this.filteredData1 = this.tableData1.filter(ingresos =>f1 >= this.parseDate(ingresos.dateIngreso) && this.parseDate(ingresos.dateIngreso) <= f2)
+       /*this.filteredData1 =[]
+       for(var i=0;i<this.tableData1.length;i++){
+          const ingresoDate = this.parseDate(this.tableData1[i].dateIngreso);
+          if(ingresoDate >= f1 && ingresoDate<=f2){
+            this.filteredData1.push(this.tableData1[i])
+            console.log("ENTRO",ingresoDate, f1,f2)
+          }
+          console.log("ENTRO",ingresoDate, f1,f2, ingresoDate >= f1, ingresoDate<=f2)
+          
+        }*/
+        
         this.filteredData2 = this.tableData2.filter(egresos => {
-          const egresoDate = egresos.dateEgresos;
-          return egresoDate && isNaN(egresoDate) && egresoDate >= startDate && egresoDate <= endDate;
+          const egresoDate = this.parseDate(egresos.dateEgresos);
+          return egresoDate >= f1 && egresoDate <= f2;
         });
 
         this.filteredData3 = this.tableData3.filter(completarOrden => {
-          const completarOrdenDate = completarOrden.date1;
-          return completarOrdenDate && isNaN(completarOrdenDate) && completarOrdenDate >= startDate && completarOrdenDate <= endDate;
+          const completarOrdenDate = this.parseDate(completarOrden.date1);
+          return completarOrdenDate >= f1 && completarOrdenDate <= f2;
         });
 
         // Show notification based on filtered data count
