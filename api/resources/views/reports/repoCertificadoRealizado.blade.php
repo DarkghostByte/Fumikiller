@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-    <title>Certificado {{ $data->id_orden }} {{ $data->name }} {{ $data->lastname1 }} {{ $data->lastname2 }}</title>
+    <title>Certificado {{ $data->certificateName }}</title>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
         <meta charset="UTF-8">

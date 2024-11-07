@@ -43,7 +43,7 @@
           </el-form-item>
         </div>
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
-        <p>Empleados</p>
+        <p>Fumigador</p>
         <div class="flex" style="width:100%;">
           <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
             <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:"

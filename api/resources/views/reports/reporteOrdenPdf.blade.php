@@ -46,13 +46,13 @@
         <table>
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $orden->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $orden->time1}} A {{ $orden->time2 }}
             </div>
             </th>
@@ -60,13 +60,13 @@
         <table>
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ substr($orden->cell_phone, 0, 3) }} - {{ substr($orden->cell_phone, 3, 3) }} - {{ substr($orden->cell_phone, 6, 2) }} - {{ substr($orden->cell_phone, 8, 2) }} 
             </div>
             </th> 
@@ -74,13 +74,13 @@
         <table>
             <th>Domicilio:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDivDom" style="text-transform: uppercase">
                 {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $orden->colonia }} #{{ $orden->codigoPostal }}
             </div>
             </th> 
@@ -88,27 +88,27 @@
         <table>
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $orden->how_to_get }}
             </div>
             </th>           
         </table>
-        <table class="">
-            <th>Lugar:</th>
+        <table class="" style="background-color: aqua;">
+            <th class="txtLugar">Lugar:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDivloca" style="text-transform: uppercase">
                 {{ $orden->comercio }}
             </div>
             </th>
             <th class="clth1122">Ciudad:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivThlocal">
+            <div class="renDivcity" style="text-transform: uppercase">
             {{ $orden->ciudad }}
             </div>
             </th>
             <th>Plagas:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDivplaga" style="text-transform: uppercase">
                 {{ $orden->plague1 }} y {{ $orden->plague2 }}
             </div>
             </th> 
@@ -116,7 +116,7 @@
         <table>
             <th>Observaciones:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $orden->description }}
             </div>
             </th> 
@@ -138,53 +138,73 @@
                 if($item == 'Nada'){ $nada=true; }
             }
         @endphp
-        <table class="btnCir">
-            <th>
-                @if($presupuesto)
-                    <button class="button button5"> </button>
-                @else
-                <button class="" style="background-color: red;"> </button>
-                @endif
-            </th>            
-            <th class=> Presupuesto</th>
 
-            <th>
-                @if($fumigar)
-                    <button class="button button5"> </button>
-                    @else
-                <button class="" style="background-color: red;"> </button>
-                @endif
-            </th>
-            <th> Fumigar</th>
+<table class="btnCir" >
             
-            <th>
-                @if($garantia)
-                <button class="button button5"> </button>
-                @else
-                <button class="" style="background-color: red;"> </button>
-                @endif
-            </th>
-            <th> Garantia</th>
-            
-            <th> 
-                @if($cortesia)
-                <button class="button button5"> </button>
-                @else
-                <button class="" style="background-color: red;"> </button>
-                @endif
-            </th>
-            <th> Cortesia</th>
-            
-            <th> 
-                @if($nada)
-                <button class="button button5"> </button>
-                @else
-                <button class="" style="background-color: red;"> </button>
-                @endif
-            </th>
-            <th> Nada</th>
-            
-        </table>
+    <th >
+        @if($presupuesto)
+            <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;">X</h1>
+            </div>
+        @else
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>            
+    <th style="margin-left: -15px; "> Presupuesto</th>
+
+    <th>
+        @if($fumigar)
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+            @else
+            <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;"></h1>
+            </div>
+        @endif
+    </th>
+    <th style="margin-left: -15px; "> Fumigar</th>
+    
+    <th >
+        @if($garantia)
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="margin-left: -15px; "> Garantia</th>
+    <th> 
+        @if($cortesia)
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="margin-left: -15px; "> Cortesia</th>
+    <th> 
+        @if($nada)
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="margin-left: -15px; "> Nada</th>
+</table>
+
         <table class="">
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
@@ -209,7 +229,7 @@
             </div>
             </th> 
         </table>
-        <table class="btnCir">
+        <table class="btnCir2">
            
             <th>Require de:</th>
             <th ><button class="button button5"> </button>
@@ -373,53 +393,70 @@
         </table>
 
         
-        <table class="btnCir">
-    
-            <th>
+        <table class="btnCir" >
+            
+            <th >
                 @if($presupuesto)
-                    <button class="button button5"> </button>
+                    <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                        <h1 style="margin: 0;">X</h1>
+                    </div>
                 @else
-                <button class="" style="background-color: red;"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;"></h1>
+                </div>
                 @endif
             </th>            
-            <th class=> Presupuesto</th>
-
+            <th style="margin-left: -15px; "> Presupuesto</th>
+        
             <th>
                 @if($fumigar)
-                    <button class="button button5"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;">X</h1>
+                </div>
                     @else
-                <button class="" style="background-color: red;"> </button>
+                    <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                        <h1 style="margin: 0;"></h1>
+                    </div>
                 @endif
             </th>
-            <th> Fumigar</th>
+            <th style="margin-left: -15px; "> Fumigar</th>
             
-            <th>
+            <th >
                 @if($garantia)
-                <button class="button button5"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;">X</h1>
+                </div>
                 @else
-                <button class="" style="background-color: red;"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;"></h1>
+                </div>
                 @endif
             </th>
-            <th> Garantia</th>
-            
+            <th style="margin-left: -15px; "> Garantia</th>
             <th> 
                 @if($cortesia)
-                <button class="button button5"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;">X</h1>
+                </div>
                 @else
-                <button class="" style="background-color: red;"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;"></h1>
+                </div>
                 @endif
             </th>
-            <th> Cortesia</th>
-            
+            <th style="margin-left: -15px; "> Cortesia</th>
             <th> 
                 @if($nada)
-                <button class="button button5"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;">X</h1>
+                </div>
                 @else
-                <button class="" style="background-color: red;"> </button>
+                <div class="" style="display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                    <h1 style="margin: 0;"></h1>
+                </div>
                 @endif
             </th>
-            <th> Nada</th>
-            
+            <th style="margin-left: -15px; "> Nada</th>
         </table>
         <table class="">
             <th class="clth114">Producto Interno:</th>
@@ -501,7 +538,8 @@
         width: 5%;
     }
     .clth1122{
-        width: 15%;
+        width: -50%;
+        padding: -100px;
     }
     .renDiv115{
         width: 100%;
@@ -569,6 +607,11 @@
     .renDivTh{
         width: 100%;
     }
+    .renDivDom{
+        border-bottom: 1px solid black;
+        height:15px;
+        width:70%;
+    }
     .renDiv{
         border-bottom: 1px solid black;
         height:15px;
@@ -582,6 +625,24 @@
         width: 44%;
     }.clth11{
         width: 37%;
+    }
+    .renDivloca{
+        border-bottom: 1px solid black;
+        height:15px;
+        width:60%;
+    }
+    .renDivThlocal{
+        width: 100%;
+        margin-right: 10%;
+    }
+    .renDivplaga{
+        border-bottom: 1px solid black;
+        width: 220%;
+        font-size: 9;
+    }
+    .renDivcity{
+        border-bottom: 1px solid black;
+        width: 100%;
     }
     body{
         width: 100%;
@@ -648,28 +709,46 @@
         width: auto;
     }
 .button {
+        height: 4px;
+        height: 4px;
         background-color: white;
         border: 1px solid black;
         color: white;
         padding: 7px;
-        text-align: center;
+        
         text-decoration: none;
-        font-size: 4px;
+        font-size: 14px;
+        text-align: start;
     }  
 .button5 {
+    text-align: start;
+    height: 4px;
+    height: 4px;
     border-radius: 50%;
     margin-right:-30px;
     background-color:blue;
 }
-.btnCir{    
 
+.btnCan{
+    border-radius: 50%;
+    margin-right:-30px;
+    background-color:rgba(0, 0, 255, 0);
+}
+.btnCir{    
     font-size:15px;
     font-weight: normal;
     width: 90%;
-    justify-content: space-between;
+}
+.btnCir2{    
+    font-size:15px;
+    font-weight: normal;
+    width: 90%;
+
 }
 .pr{
     margin-top:20px;
+}
+.txtLugar{
 }
 
 </style>

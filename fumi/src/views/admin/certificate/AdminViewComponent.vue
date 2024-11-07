@@ -76,7 +76,15 @@
           <i class="fa fa-file fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Certificado a:</strong> {{ selectedItem.name }}
+              <strong>Certificado a:</strong> {{ selectedItem.id }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-file fa-2x iconInfo"></i>
+          <div>
+            <p>
+              <strong>Certificado a:</strong> {{ selectedItem.certificateName }}
             </p>
           </div>
         </div>

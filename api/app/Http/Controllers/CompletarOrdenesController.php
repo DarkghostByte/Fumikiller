@@ -45,6 +45,7 @@ class CompletarOrdenesController extends Controller
         'productosExternos2.productoExt as productoExt2',
         'empleados1.nameEmpleado as nameEmpleado1',
         'empleados2.nameEmpleado as nameEmpleado2',
+        'empleados1.nominaEmpleado as nominaEmpleado1',
         
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')

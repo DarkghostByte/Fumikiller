@@ -5,8 +5,14 @@
     <title>Reporte Ventas Totales</title>
 </head>
 <body>
-    <img  class="membre" src="{{ $base64 }}" alt="">
-    <h1>Ventas totales</h1>
+    <div class="divImg">
+        <img  class="membre" src="{{ $base64 }}" alt="">
+        <h1 style="position: absolute; color: #1a5084; margin-top:10px;">Fumigaciones<br>FUMI-KILLE'R</h1>
+        <h1 style="position: absolute; color: #1a5084; margin-top:-10px; margin-left:57%; font-size:25px;">Período: {{ $f1 }} a {{ $f2 }}</h1>
+    </div>
+    
+    <h1 style="margin-top: -50px;">Ventas totales</h1>
+    
     <div id="main-container">
 
         <table id="table">
@@ -14,10 +20,10 @@
                 <tr>
                     <th>Cliente</th>
                     <th>Negocio</th>
-                    <th>Num. Factura</th>
-                    <th>Num. Certificado</th>
-                    <th>Fecha de orden</th>
-                    <th>Fecha de fumigacion</th>                   
+                    <th># Factura</th>
+                    <th># Certificado</th>
+                    <th>F. de orden</th>
+                    <th>F. de fumigacion</th>                   
                     <th>Estado</th>                   
                     <th>Monto</th>
                 </tr>
@@ -27,7 +33,7 @@
                     <tr>
                         <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
                         <td>{{ $item->tradename }}</td> 
-                        <td></td> 
+                        <td>88888</td> 
                         <td></td> 
                         <td>{{ $item->date1 }}</td>
                         <td>{{ $item->date2 }}</td>
@@ -67,7 +73,7 @@
         background-color:#cfcfcf;
         border-collapse: collapse;
         text-align: left;
-        width: 105%;
+        width: 100%;
     }
     th, td{
         border: 1px solid black;
@@ -104,13 +110,15 @@
         text-align: left;
     }
     .membre{
-        margin-left: 12.5%;
-        margin-top:20px;
-        height:12%;
-        width: 80%;
+        height:20%;
+        margin-left: 20px;
     }
     .pagosLbl{
         text-align: right;
+    }
+    .divImg{
+        display: flex;
+        background-color:transparent;
     }
 </style>
 

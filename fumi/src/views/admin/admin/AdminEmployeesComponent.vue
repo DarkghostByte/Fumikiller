@@ -78,8 +78,8 @@
         <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
           :label-position="'top'">
           <div class="row">
-            <el-form-item prop="nominaEmpleado" label="Nomina:">
-              <el-input v-model="form1.nominaEmpleado" class="px-1" placeholder="Ingresa la nomina" />
+            <el-form-item prop="nominaEmpleado" label="Fumigador:">
+              <el-input v-model="form1.nominaEmpleado" class="px-1" placeholder="Ingresa el fumigador" />
             </el-form-item>
             <el-form-item prop="nameEmpleado" label="Nombre:">
               <el-input v-model="form1.nameEmpleado" class="px-1" placeholder="Ingresa el nombre" />
@@ -111,8 +111,8 @@
             <div class="detailsEmployees">
               <i class="fa-solid fa-money-check-dollar fa-2x iconEmployees"></i>
               <div class="flex" style="width: 50%;">
-                <el-form-item prop="nominaEmpleado" label="Nomina:" style="width: 100%;">
-                  <el-input v-model="formEdit.nominaEmpleado" class="px-1" placeholder="Ingresa la nomina" />
+                <el-form-item prop="nominaEmpleado" label="Fumigador:" style="width: 100%;">
+                  <el-input v-model="formEdit.nominaEmpleado" class="px-1" placeholder="Ingresa el fumigador" />
                 </el-form-item>
               </div>
             </div>

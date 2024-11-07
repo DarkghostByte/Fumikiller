@@ -119,9 +119,13 @@ class PdfsController extends Controller
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
             'clientes.description','clientes.contact_form','comercios.comercio','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
             'productosInternos1.productoInt as productoInt1','productosInternos2.productoInt as productoInt2',
-            'productosExternos1.productoExt as productoExt1','productosExternos2.productoExt as productoExt2'
+            'productosExternos1.productoExt as productoExt1','productosExternos2.productoExt as productoExt2',
+            'empleados1.nameEmpleado as nameEmpleado1',
+            'empleados2.nameEmpleado as nameEmpleado2'
             )
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+            ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
+            ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
             ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
             ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
             ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
@@ -278,7 +282,7 @@ class PdfsController extends Controller
     
         // Generación del PDF
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
@@ -338,8 +342,8 @@ class PdfsController extends Controller
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         //->whereBetween('orden.date1', [$f1, $f2])
         
-        ->orWhere('orden.date1','=',$f1)
-        ->orWhere('orden.date2','=',$f2)
+        ->orWhere('orden.date1','>=',$f1)
+        ->orWhere('orden.date2','<=',$f2)
         ->where('clientes.infoclient_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -355,20 +359,20 @@ class PdfsController extends Controller
             return abort(404, 'No se encontraron datos.');
         } else {
             foreach ($data as &$item) {
-                $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-                $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+                $item->date1 = Carbon::parse($item->date1)->format('d-M-Y');
+                $item->date2 = Carbon::parse($item->date2)->format('d-M-Y'); // Ajusta el formato según tus necesidades
             }
             $totalPago = $data->sum('pago');
     
             // Generación del PDF
             /* Imagen Del Logo */
-            $path = public_path('img/membretadoFumi.png');
+            $path = public_path('img/logofk.png');
             $type = pathinfo($path, PATHINFO_EXTENSION);
             $data_img = file_get_contents($path);
             $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         
             // Preparar los datos para la vista del PDF
-            $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+            $pdf_data = compact('base64', 'data', 'totalPago','f1'); // Incluimos $totalPago
             $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
         
             // Mostrar el PDF al usuario
@@ -419,15 +423,15 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->orWhere('orden.date1','=',$f1)
-        ->orWhere('orden.date2','=',$f2)
+        ->orWhere('orden.date1','>=',$f1)
+        ->orWhere('orden.date2','<=',$f2)
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
         //Funcion para las fechas
         foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+            $item->date1 = Carbon::parse($item->date1)->format('d-M-Y');
+            $item->date2 = Carbon::parse($item->date2)->format('d-M-Y'); // Ajusta el formato según tus necesidades
         }
 
         // Verificar si la colección está vacía
@@ -440,14 +444,14 @@ class PdfsController extends Controller
     
         // Generación del PDF
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoVentasTotales', $pdf_data)->save('myfile.pdf');
+        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2'); // Incluimos $totalPago
+        $pdf = Pdf::loadView('reports.repoVentasTotales', $pdf_data)->setPaper('a4', 'landscape');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
@@ -512,7 +516,7 @@ class PdfsController extends Controller
     
         // Generación del PDF
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
@@ -587,7 +591,7 @@ class PdfsController extends Controller
     
         // Generación del PDF
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
@@ -660,7 +664,7 @@ class PdfsController extends Controller
     
         // Generación del PDF
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/logofk.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);

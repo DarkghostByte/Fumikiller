@@ -34,7 +34,7 @@
 
     <div class="flex justify-center items-center">
       <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" stripe style="width:100%;">
-        <el-table-column label="PDF Orden">
+        <el-table-column label="PDF Orden" width="100">
           <template #default="scope">
             <el-button style="color:black" type="success" @click="pdf(scope.row)">
               <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
@@ -43,20 +43,21 @@
             </el-button>
           </template>
         </el-table-column>
-        <el-table-column label="Nombre" width="250px" sortable>
+        <el-table-column label="Nombre" width="220" sortable>
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" width="350px" sortable>
+        <el-table-column label="Dirección" width="300" sortable>
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
               ', ' + scope.row.ciudad }}
           </template>
         </el-table-column>
         <el-table-column label="Celular" prop="cell_phone" sortable width="120px"/>
-        <el-table-column label="Fecha de orden" prop="date1" width="150px" sortable />
-        <el-table-column label="Fecha de fumigacion" prop="date2" width="180px" sortable />
+        <el-table-column label="F. orden" prop="date1" width="120" sortable />
+        <el-table-column label="F. fumigacion" prop="date2" width="150" sortable />
+        <el-table-column label="Fumigador" prop="nominaEmpleado1" width="180px" sortable />
       </el-table>
     </div>
   </div>

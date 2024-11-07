@@ -7,7 +7,8 @@
                 </div>
                 <div class="contenedor2 row justify-center items-center">
                     <div>
-                        <h1 class="text-center text-8xl font-bold py-10 text-[#000000] lbltittleFumi">FUMI-KILLE'R</h1>
+                        <h1 class="mt-5 text-center text-2xl font-bold text-yellow-500" style="">SISTEMA DE FUMIGACIONES URBANAS</h1>
+                        <h1 class="text-center text-6xl font-bold text-blue-950 lbltittleFumi" style="text-shadow: -2px 2px 5px white;">FUMI-KILLE'R</h1>
                     </div>
                     <div class="flex justify-center items-center">
                         <router-link to="/admin/home">
@@ -15,6 +16,10 @@
                                 Inicio
                             </button>
                         </router-link>
+                    </div>
+                    <div>
+                        <h1 class="mt-28 text-center text-2xl font-bold text-blue-800" style="">EN CASA FUMIGADA, "NO ENTRAN BICHOS"</h1>
+                        <h1 class="mt-5 mr-2 text-end text-md font-bold text-neutral-950" style="">******* 2024</h1>
                     </div>
                 </div>
             </div>
@@ -66,7 +71,7 @@
 <style>
 
 .btnInicio {
-    margin-top: 10%;
+    margin-top:     50%;
     background-color: black;
     border-radius: 50px;
     width: 270px;
@@ -96,27 +101,28 @@
 
 .contenedor1 {
     background-color: #1e40af;
-    width: 45%;
+    width: 35%;
     height: 100%;
     border-radius: 25px 0% 0% 25px;
 }
 
 .contenedor2 {
     background-color: #f97316;
-    width: 55%;
+    width: 65%;
     height: 100%;
     border-radius: 0% 25px 25px 0%;
 }
 
 .imgFk {
-    width: 20%;
-    height: 70%;
+    width: 15%;
+    height: auto;
     position: absolute;
 }
 
 .lbltittleFumi:hover {
     transform: scale(1.1);
     text-align: center;
+
   }
 
 </style>

@@ -153,7 +153,7 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->responsable }}
+                {{ $ordenCompleta->nameEmpleado1 }}
             </div>
             </th>
             <th>$Cotizacion</th>
@@ -218,7 +218,7 @@
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.
-                {{ $ordenCompleta->id }}
+                {{ $ordenCompleta->id_orden }}
             </div>
         </div>
     
