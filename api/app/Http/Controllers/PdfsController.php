@@ -289,7 +289,8 @@ class PdfsController extends Controller
     
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoVentaSinFact', $pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.repoVentaSinFact', $pdf_data)->save('myfile.pdf');
+        $pdf = Pdf::loadView('reports.repoVentaSinFact', $pdf_data)->setPaper('a4', 'landscape');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
@@ -373,7 +374,8 @@ class PdfsController extends Controller
         
             // Preparar los datos para la vista del PDF
             $pdf_data = compact('base64', 'data', 'totalPago','f1'); // Incluimos $totalPago
-            $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
+            //$pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
+            $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->setPaper('a4', 'landscape');
         
             // Mostrar el PDF al usuario
             return $pdf->stream();
@@ -452,6 +454,7 @@ class PdfsController extends Controller
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago','f1','f2'); // Incluimos $totalPago
         $pdf = Pdf::loadView('reports.repoVentasTotales', $pdf_data)->setPaper('a4', 'landscape');
+        
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
@@ -523,7 +526,8 @@ class PdfsController extends Controller
     
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
+        $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->setPaper('a4', 'landscape');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
@@ -598,7 +602,8 @@ class PdfsController extends Controller
     
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoCreditosSinFactura', $pdf_data)->save('myfile.pdf');
+        //$pdf = Pdf::loadView('reports.repoCreditosSinFactura', $pdf_data)->save('myfile.pdf');
+        $pdf = Pdf::loadView('reports.repoCreditosSinFactura', $pdf_data)->setPaper('a4', 'landscape');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();
@@ -671,7 +676,8 @@ class PdfsController extends Controller
     
         // Preparar los datos para la vista del PDF
         $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->save('myfile.pdf');
+        $pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->setPaper('a4', 'landscape');
+        //$pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->save('myfile.pdf');
     
         // Mostrar el PDF al usuario
         return $pdf->stream();

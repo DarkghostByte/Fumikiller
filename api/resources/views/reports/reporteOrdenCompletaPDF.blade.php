@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -18,27 +19,23 @@
                 No.
                 {{ $ordenCompleta->id_orden }}
             </div>
-        </div>
-    
-    
-    <header>    
-        
+        </div>    
+    <header>       
     </header>
-
     <main > 
         <div class="cont">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth112">Fecha orden:</th>
+            <th class="clth112">Fecha Orden:</th>
             <th class="renDivTh">
             <div class="renDiv" style="text-transform: uppercase">
-                {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}            
+               {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}   
             </div>
             </th>  
             <th class="clth111">Fecha Programada:</th>
             <th class="renDivTh">
             <div class="renDiv" style="text-transform: uppercase">
-                {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}          
+                {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}
             </div>
             </th>           
         </table>
@@ -46,13 +43,13 @@
         <table>
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->time1}} A {{ $ordenCompleta->time2 }}
             </div>
             </th>
@@ -60,27 +57,27 @@
         <table>
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ substr($ordenCompleta->cell_phone, 0, 3) }} - {{ substr($ordenCompleta->cell_phone, 3, 3) }} - {{ substr($ordenCompleta->cell_phone, 6, 2) }} - {{ substr($ordenCompleta->cell_phone, 8, 2) }} 
             </div>
             </th> 
         </table>
         <table>
             <th>Domicilio:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivTh" >
+            <div class="renDivDom" style="text-transform: uppercase;">
                 {{ $ordenCompleta->street }} {{ $ordenCompleta->home }} #{{ $ordenCompleta->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->colonia }} #{{ $ordenCompleta->codigoPostal }}
             </div>
             </th> 
@@ -88,27 +85,27 @@
         <table>
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->how_to_get }}
             </div>
             </th>           
         </table>
         <table class="">
-            <th>Lugar:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
+            <th class="renDivTh2">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->comercio }}
             </div>
             </th>
-            <th class="clth1122">Ciudad:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="clth1122" >Ciudad:</th>
+            <th class="renDivThlocal">
+            <div class="renDivcity" style="text-transform: uppercase;">
             {{ $ordenCompleta->ciudad }}
             </div>
             </th>
             <th>Plagas:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivTh3">
+            <div class="renDivplaga" style="text-transform: uppercase">
                 {{ $ordenCompleta->plague1 }} y {{ $ordenCompleta->plague2 }}
             </div>
             </th> 
@@ -116,36 +113,104 @@
         <table>
             <th>Observaciones:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->description }}
             </div>
             </th> 
         </table>
 
+        @php 
+            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $presupuesto=false;
+            $fumigar=false;
+            $garantia=false;
+            $cortesia=false;
+            $nada=false;
         
+            foreach($arreglo as $item){
+                if($item == 'Presupuesto'){ $presupuesto=true; }
+                if($item == 'Fumigar'){ $fumigar=true; }
+                if($item == 'Garantia'){ $garantia=true; }
+                if($item == 'Cortesia'){ $cortesia=true; }
+                if($item == 'Nada'){ $nada=true; }
+            }
+        @endphp
+
 <table class="btnCir">
-            <th ><button class="button button5"> </button>
-            <th class=> Presupuesto</th>
-            <th><button class="button button5"> </button>
-            <th> Fumigar</th>
-            <th><button class="button button5"> </button>
-            <th> Garantia</th>
-            <th><button class="button button5"> </button>
-            <th> Cortesia</th>
-            <th><button class="button button5"> </button>
-            <th> Otros</th>
-        </table>
+            
+    <th style="text-align:center;">
+        @if($presupuesto)
+            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;">X</h1>
+            </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>            
+    <th style="text-align:left; ">Presupuesto</th>
+
+    <th>
+        @if($fumigar)
+        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+            @else
+            <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;"></h1>
+            </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Fumigar</th>
+    
+    <th >
+        @if($garantia)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; "> Garantia</th>
+    <th> 
+        @if($cortesia)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Cortesia</th>
+    <th> 
+        @if($nada)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; margin-top:5px;"> Nada</th>
+</table>
+
         <table class="">
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
             </div>
             </th>
             <th>Externo:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
             </div>
             </th> 
         </table>
@@ -153,36 +218,87 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->nameEmpleado1 }}
             </div>
             </th>
-            <th>$Cotizacion</th>
+            <th>Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
-                ${{ $ordenCompleta->pago }}
             </div>
             </th> 
         </table>
-        <table class="btnCir">
-            <th>Require de:</th>
-            <th ><button class="button button5"> </button>
-            <th > Factura</th>
-            <th><button class="button button5"> </button>
-            <th> Certificado</th>
-            <th><button class="button button5"> </button>
-            <th> Remision</th>
-            <th><button class="button button5"> </button>
-            <th> Nada</th>
-        </table>
-        <table>
-            <th class="clth1">Forma de contacto:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                {{ $ordenCompleta->contact_form }}
+
+
+        @php 
+            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $factura=false;
+            $certificado=false;
+            $remision=false;
+            $nada=false;
+        
+            foreach($arreglo as $item){
+                if($item == 'Factura'){ $presupuesto=true; }
+                if($item == 'Certificado'){ $fumigar=true; }
+                if($item == 'Remision'){ $garantia=true; }
+                if($item == 'Nada'){ $nada=true; }
+            }
+        @endphp
+
+<table class="btnCir2">
+<th>Require de:</th>
+    <th style="text-align:center;">
+        @if($factura)
+            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;">X</h1>
             </div>
-            </th>  
-            </th>         
-        </table>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>            
+    <th style="text-align:left; "> Factura</th>
+
+    <th>
+        @if($certificado)
+        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+            @else
+            <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;"></h1>
+            </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Certificado</th>
+    
+    <th >
+        @if($remision)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; ">Remision</th>
+    <th> 
+        @if($nada)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Nada</th>
+    
+</table>
+
+        
 
 
         <div class="footDiv">
@@ -201,15 +317,15 @@
         
     </main>
     </div>
+
     <br>
     <br>
     <div class="division2"></div>
-
     <div class="division"></div>
     
     
     
-</body>
+<body>
 
 <body>
     <br>
@@ -220,42 +336,37 @@
                 No.
                 {{ $ordenCompleta->id_orden }}
             </div>
-        </div>
-    
-    
-    <header>    
-        
+        </div>    
+    <header>       
     </header>
-
-    <main class="cont"> 
+    <main > 
         <div class="cont">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth112">Fecha orden:</th>
+            <th class="clth112">Fecha Orden:</th>
             <th class="renDivTh">
             <div class="renDiv" style="text-transform: uppercase">
-                {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}            
+               {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}   
             </div>
-            </th> 
+            </th>  
             <th class="clth111">Fecha Programada:</th>
             <th class="renDivTh">
             <div class="renDiv" style="text-transform: uppercase">
-                {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}            
+                {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}
             </div>
-            </th> 
             </th>           
         </table>
             
         <table>
             <th class="clth11">Nombre Comercial:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->tradename }}
             </div>
             </th> 
             <th>Hora:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->time1}} A {{ $ordenCompleta->time2 }}
             </div>
             </th>
@@ -263,27 +374,27 @@
         <table>
             <th class="clth110">Nombre Personal:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->name }} {{ $ordenCompleta->lastname1 }} {{ $ordenCompleta->lastname2 }}
             </div>
             </th> 
             <th> Telefono:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-                {{ $ordenCompleta->cell_phone }}
+            <div class="renDiv" style="text-transform: uppercase">
+                {{ substr($ordenCompleta->cell_phone, 0, 3) }} - {{ substr($ordenCompleta->cell_phone, 3, 3) }} - {{ substr($ordenCompleta->cell_phone, 6, 2) }} - {{ substr($ordenCompleta->cell_phone, 8, 2) }} 
             </div>
             </th> 
         </table>
         <table>
             <th>Domicilio:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivTh" >
+            <div class="renDivDom" style="text-transform: uppercase;">
                 {{ $ordenCompleta->street }} {{ $ordenCompleta->home }} #{{ $ordenCompleta->numAddress }}
             </div>
             </th> 
             <th>Colonia:</th>
             <<th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->colonia }} #{{ $ordenCompleta->codigoPostal }}
             </div>
             </th> 
@@ -291,29 +402,27 @@
         <table>
             <th class="clth1112">Localizacion:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->how_to_get }}
             </div>
             </th>           
         </table>
-        
-        
         <table class="">
-            <th>Lugar:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
+            <th class="renDivTh2">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->comercio }}
             </div>
             </th>
-            <th class="clth1122">Ciudad:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="clth1122" >Ciudad:</th>
+            <th class="renDivThlocal">
+            <div class="renDivcity" style="text-transform: uppercase;">
             {{ $ordenCompleta->ciudad }}
             </div>
-            </th> 
+            </th>
             <th>Plagas:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivTh3">
+            <div class="renDivplaga" style="text-transform: uppercase">
                 {{ $ordenCompleta->plague1 }} y {{ $ordenCompleta->plague2 }}
             </div>
             </th> 
@@ -321,36 +430,104 @@
         <table>
             <th>Observaciones:</th>
             <th class="renDivTh">
-            <div class="renDiv">
+            <div class="renDiv" style="text-transform: uppercase">
                 {{ $ordenCompleta->description }}
             </div>
             </th> 
         </table>
 
+        @php 
+            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $presupuesto=false;
+            $fumigar=false;
+            $garantia=false;
+            $cortesia=false;
+            $nada=false;
         
+            foreach($arreglo as $item){
+                if($item == 'Presupuesto'){ $presupuesto=true; }
+                if($item == 'Fumigar'){ $fumigar=true; }
+                if($item == 'Garantia'){ $garantia=true; }
+                if($item == 'Cortesia'){ $cortesia=true; }
+                if($item == 'Nada'){ $nada=true; }
+            }
+        @endphp
+
 <table class="btnCir">
-            <th ><button class="button button5"> </button>
-            <th class=> Presupuesto</th>
-            <th><button class="button button5"> </button>
-            <th> Fumigar</th>
-            <th><button class="button button5"> </button>
-            <th> Garantia</th>
-            <th><button class="button button5"> </button>
-            <th> Cortesia</th>
-            <th><button class="button button5"> </button>
-            <th> Otros</th>
-        </table>
+            
+    <th style="text-align:center;">
+        @if($presupuesto)
+            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;">X</h1>
+            </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>            
+    <th style="text-align:left; ">Presupuesto</th>
+
+    <th>
+        @if($fumigar)
+        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+            @else
+            <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;"></h1>
+            </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Fumigar</th>
+    
+    <th >
+        @if($garantia)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; "> Garantia</th>
+    <th> 
+        @if($cortesia)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Cortesia</th>
+    <th> 
+        @if($nada)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; margin-top:5px;"> Nada</th>
+</table>
+
         <table class="">
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->productoInt1 }} y {{ $ordenCompleta->productoInt2 }}
             </div>
             </th>
             <th>Externo:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->productoExt1 }} y {{ $ordenCompleta->productoExt2 }}
             </div>
             </th> 
         </table>
@@ -358,36 +535,87 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
-                {{ $ordenCompleta->responsable }}
             </div>
             </th>
-            <th>$Cotizacion</th>
+            <th>Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
-                ${{ $ordenCompleta->pago }}
             </div>
             </th> 
         </table>
-        <table class="btnCir">
-            <th>Require de:</th>
-            <th ><button class="button button5"> </button>
-            <th > Factura</th>
-            <th><button class="button button5"> </button>
-            <th> Certificado</th>
-            <th><button class="button button5"> </button>
-            <th> Remision</th>
-            <th><button class="button button5"> </button>
-            <th> Nada</th>
-        </table>
-        <table>
-            <th class="clth1">Forma de contacto:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                {{ $ordenCompleta->contact_form }}
+
+
+        @php 
+            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $factura=false;
+            $certificado=false;
+            $remision=false;
+            $nada=false;
+        
+            foreach($arreglo as $item){
+                if($item == 'Factura'){ $presupuesto=true; }
+                if($item == 'Certificado'){ $fumigar=true; }
+                if($item == 'Remision'){ $garantia=true; }
+                if($item == 'Nada'){ $nada=true; }
+            }
+        @endphp
+
+<table class="btnCir2">
+<th>Require de:</th>
+    <th style="text-align:center;">
+        @if($factura)
+            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;">X</h1>
             </div>
-            </th>  
-            </th>         
-        </table>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>            
+    <th style="text-align:left; "> Factura</th>
+
+    <th>
+        @if($certificado)
+        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+            @else
+            <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;"></h1>
+            </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Certificado</th>
+    
+    <th >
+        @if($remision)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; ">Remision</th>
+    <th> 
+        @if($nada)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Nada</th>
+    
+</table>
+
+        
 
 
         <div class="footDiv">
@@ -399,26 +627,20 @@
             <th> Nuevo Casas Grandes, Chihu. </th>
             <th> C.P. 31704</th>
         </table>
-        </div>
-        
-
-
-        
-        </div>
-
+        </div>   
     </main>
     </div>
 
-    
-    
-</body>
+<body>
+
 
 <style>
     .clth1112{
         width: 5%;
     }
     .clth1122{
-        width: 15%;
+        width: -50%;
+        padding: -100px;
     }
     .renDiv115{
         width: 100%;
@@ -465,13 +687,14 @@
         margin-top:4px;
     }
     .letrasflex{
+        margin-top: 15px;
         padding-right:40px;
     }
     .meminfo{
         text-align: center;
         position: absolute;
         margin-left: -55%;
-        margin-top:11%;
+        margin-top:12%;
         
     }
     .membre{
@@ -485,6 +708,19 @@
     }
     .renDivTh{
         width: 100%;
+    }
+    .renDivTh2{
+        width: 33%;
+
+    }
+    .renDivTh3{
+        width: 150%;
+
+    }
+    .renDivDom{
+        border-bottom: 1px solid black;
+        height:15px;
+        width:100%;
     }
     .renDiv{
         border-bottom: 1px solid black;
@@ -500,12 +736,30 @@
     }.clth11{
         width: 37%;
     }
+    .renDivloca{
+        border-bottom: 1px solid black;
+        height:15px;
+        width:100%;
+    }
+    .renDivThlocal{
+    
+        width: 70%;
+    }
+    .renDivplaga{
+        border-bottom: 1px solid black;
+        width: 100%;
+        font-size: 9;
+    }
+    .renDivcity{
+        border-bottom: 1px solid black;
+        width: 100%;
+    }
     body{
         width: 100%;
         
     }
     h1{
-        text-alaing:center;
+        text-align:center;
     }
     img{
         margin-top:30px;
@@ -521,7 +775,7 @@
         margin:20px;
         background-color:#104e85 ;
         color:white;
-        text-aling:center;       
+        text-align:center;       
     }
     .tblAg{
         position:absolute;
@@ -565,29 +819,50 @@
         width: auto;
     }
 .button {
+        height: 4px;
+        height: 4px;
         background-color: white;
         border: 1px solid black;
         color: white;
         padding: 7px;
-        text-align: center;
+        
         text-decoration: none;
-        font-size: 4px;
+        font-size: 14px;
+        text-align: start;
     }  
 .button5 {
+    text-align: start;
+    height: 4px;
+    height: 4px;
     border-radius: 50%;
     margin-right:-30px;
     background-color:blue;
 }
-.btnCir{    
 
+.btnCan{
+    border-radius: 50%;
+    margin-right:-30px;
+    background-color:rgba(0, 0, 255, 0);
+}
+.btnCir{    
     font-size:15px;
     font-weight: normal;
     width: 90%;
-    justify-content: space-between;
+}
+.btnCir2{    
+    font-size:15px;
+    font-weight: normal;
+    width: 90%;
+
 }
 .pr{
     margin-top:20px;
 }
 
+
 </style>
 </html>
+
+
+
+

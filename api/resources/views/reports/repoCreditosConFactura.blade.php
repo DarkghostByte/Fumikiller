@@ -5,7 +5,12 @@
     <title>Reporte Creditos Con Factura</title>
 </head>
 <body>
-    <img  class="membre" src="{{ $base64 }}" alt="">
+    <div class="divImg">
+        <img  class="membre" src="{{ $base64 }}" alt="">
+        <h1 style="position: absolute; color: #1a5084; margin-top:10px;">Fumigaciones<br>FUMI-KILLE'R</h1>
+        <h1 style="position: absolute; color: #1a5084; margin-top:-10px; margin-left:57%; font-size:25px;">Período:</h1>
+    </div>
+
     <h1>Creditos Con Factura</h1>
     <div id="main-container">
 
@@ -14,10 +19,10 @@
                 <tr>
                     <th>Cliente</th>
                     <th>Negocio</th>
-                    <th>Num. Factura</th>
-                    <th>Num. Certificado</th>
-                    <th>Fecha de orden</th>
-                    <th>Fecha de fumigacion</th>                   
+                    <th># Factura</th>
+                    <th># Certificado</th>
+                    <th>F. de orden</th>
+                    <th>F. de fumigacion</th>                   
                     <th>Monto</th>
                 </tr>
             </thead>
@@ -64,7 +69,7 @@
         background-color:#cfcfcf;
         border-collapse: collapse;
         text-align: left;
-        width: 105%;
+        width: 100%;
     }
     th, td{
         border: 1px solid black;
@@ -101,13 +106,15 @@
         text-align: left;
     }
     .membre{
-        margin-left: 12.5%;
-        margin-top:20px;
-        height:12%;
-        width: 80%;
+        height:20%;
+        margin-left: 20px;
     }
     .pagosLbl{
         text-align: right;
+    }
+    .divImg{
+        display: flex;
+        background-color:transparent;
     }
 </style>
 
