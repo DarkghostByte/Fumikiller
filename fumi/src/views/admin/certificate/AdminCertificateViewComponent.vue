@@ -49,6 +49,11 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
+        <el-table-column label="Folio" sortable>
+          <template #default="scope">
+            {{ 'No. ' + this.formatDate(scope.row.id) }}
+          </template>
+        </el-table-column>
         <el-table-column prop="name" label="Nombres" sortable width="150" />
         <el-table-column label="Apellidos" sortable width="150">
           <template #default="scope">
@@ -252,8 +257,8 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('clientes').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoclient_certificate !== 'No');
+      axios.get('orden').then(res => {
+        this.tableData = res.data.data.filter(row => row.infoorden_certificate !== 'No');
         this.filteredData = this.tableData;
       });
     },
@@ -392,6 +397,17 @@ export default {
           });
         });
     },
+
+    formatDate(id, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id);
+
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
+
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
   }
 };
 </script>

@@ -72,7 +72,7 @@ class PdfsController extends Controller
             'orden.*',
             'clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename','clientes.home',
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
-            'clientes.description','clientes.contact_form','clientes.recruitment_data','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
+            'clientes.description','clientes.contact_form','clientes.recruitment_data','clientes.requires','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
             'comercios.comercio','problematica1.problematica as plague1','problematica2.problematica as plague2',
         ])
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
@@ -114,14 +114,16 @@ class PdfsController extends Controller
         $ordenCompleta = CompletarOrden::select(
             'completarordenes.*',
             'problematica1.problematica as plague1','problematica2.problematica as plague2',
-            'orden.date1','orden.date2','orden.time1','orden.time2','orden.id_cliente',
+            'orden.date1','orden.date2','orden.time1','orden.time2','orden.id_cliente','clientes.requires','orden.hiring',
             'clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename','clientes.home',
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
-            'clientes.description','clientes.contact_form','comercios.comercio','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
+            'clientes.description','clientes.contact_form','comercios.comercio','clientes.recruitment_data','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
             'productosInternos1.productoInt as productoInt1','productosInternos2.productoInt as productoInt2',
             'productosExternos1.productoExt as productoExt1','productosExternos2.productoExt as productoExt2',
             'empleados1.nameEmpleado as nameEmpleado1',
-            'empleados2.nameEmpleado as nameEmpleado2'
+            'empleados2.nameEmpleado as nameEmpleado2',
+            'empleados1.nominaEmpleado as nominaEmpleado1'
+
             )
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
@@ -217,6 +219,8 @@ class PdfsController extends Controller
         $pdf_data = compact('base64','data','fecha');
         $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('a4', 'landscape');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
+        //$nombreArchivo = $data->name . '.pdf';
+        //return $pdf->save($nombreArchivo);       
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
     }
@@ -260,16 +264,26 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->orWhere('orden.date1','=',$f1)
-        ->orWhere('orden.date2','=',$f2)
+        ->whereBetween('orden.date1', [$f1, $f2])
         ->where('clientes.infoclient_facturacion','No')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
         //Funcion para las fechas
         foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+            
+
+            setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+            date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+
+            $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
+            $fecha1 = Carbon::parse($item->date1);
+
+            $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
+            $fecha2 = Carbon::parse($item->date2);
+
+
+            Carbon::setLocale('es');
         }
     
         // Verificar si la colección está vacía
@@ -288,7 +302,7 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2','fecha1','fecha2'); // Incluimos $totalPago
         //$pdf = Pdf::loadView('reports.repoVentaSinFact', $pdf_data)->save('myfile.pdf');
         $pdf = Pdf::loadView('reports.repoVentaSinFact', $pdf_data)->setPaper('a4', 'landscape');
     
@@ -341,10 +355,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        //->whereBetween('orden.date1', [$f1, $f2])
-        
-        ->orWhere('orden.date1','>=',$f1)
-        ->orWhere('orden.date2','<=',$f2)
+        ->whereBetween('orden.date1', [$f1, $f2])
         ->where('clientes.infoclient_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -360,9 +371,21 @@ class PdfsController extends Controller
             return abort(404, 'No se encontraron datos.');
         } else {
             foreach ($data as &$item) {
-                $item->date1 = Carbon::parse($item->date1)->format('d-M-Y');
-                $item->date2 = Carbon::parse($item->date2)->format('d-M-Y'); // Ajusta el formato según tus necesidades
+            
+
+                setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+                date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+    
+                $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
+                $fecha1 = Carbon::parse($item->date1);
+    
+                $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
+                $fecha2 = Carbon::parse($item->date2);
+    
+    
+                Carbon::setLocale('es');
             }
+
             $totalPago = $data->sum('pago');
     
             // Generación del PDF
@@ -373,7 +396,7 @@ class PdfsController extends Controller
             $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
         
             // Preparar los datos para la vista del PDF
-            $pdf_data = compact('base64', 'data', 'totalPago','f1'); // Incluimos $totalPago
+            $pdf_data = compact('base64', 'data', 'totalPago','f1','f2','fecha1','fecha2'); // Incluimos $totalPago
             //$pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->save('myfile.pdf');
             $pdf = Pdf::loadView('reports.repoVentaConFact', $pdf_data)->setPaper('a4', 'landscape');
         
@@ -387,6 +410,8 @@ class PdfsController extends Controller
     }
 
     public function generarVentasTotales($f1,$f2) {
+        $f1 = Carbon::parse($f1)->format('d-m-Y');
+        $f2 = Carbon::parse($f2)->format('d-m-Y');
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -425,15 +450,30 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->orWhere('orden.date1','>=',$f1)
-        ->orWhere('orden.date2','<=',$f2)
+        ->whereBetween('orden.date1', [$f1, $f2])
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
+
+
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        
     
         //Funcion para las fechas
         foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-M-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-M-Y'); // Ajusta el formato según tus necesidades
+            
+
+            setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+            date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+
+            $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
+            $fecha1 = Carbon::parse($item->date1);
+
+            $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
+            $fecha2 = Carbon::parse($item->date2);
+
+
+            Carbon::setLocale('es');
         }
 
         // Verificar si la colección está vacía
@@ -452,7 +492,7 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2'); // Incluimos $totalPago
+        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2','fecha1','fecha2'); // Incluimos $totalPago
         $pdf = Pdf::loadView('reports.repoVentasTotales', $pdf_data)->setPaper('a4', 'landscape');
         
     
@@ -460,7 +500,7 @@ class PdfsController extends Controller
         return $pdf->stream();
     }
 
-    public function generarCreditos() {
+    public function generarCreditos($f1,$f2) {
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -499,6 +539,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->whereBetween('orden.date1', [$f1, $f2])
         ->where('completarordenes.requiere3','=','Credito')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -510,8 +551,19 @@ class PdfsController extends Controller
     
         //Funcion para las fechas
         foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+            
+
+            setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+            date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+
+            $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
+            $fecha1 = Carbon::parse($item->date1);
+
+            $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
+            $fecha2 = Carbon::parse($item->date2);
+
+
+            Carbon::setLocale('es');
         }
 
         // Sumar todos los pagos
@@ -525,7 +577,7 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2','fecha1','fecha2'); // Incluimos $totalPago
         //$pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->save('myfile.pdf');
         $pdf = Pdf::loadView('reports.repoCreditos', $pdf_data)->setPaper('a4', 'landscape');
     
@@ -533,7 +585,7 @@ class PdfsController extends Controller
         return $pdf->stream();
     }
 
-    public function generarCreditosSinFactura() {
+    public function generarCreditosSinFactura($f1,$f2) {
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -572,6 +624,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->whereBetween('orden.date1', [$f1, $f2])
         // Filtrar por órdenes no pagadas y clientes particulares
         ->where('completarordenes.requiere3', 'Credito')
         ->where('clientes.tradename', 'Particular')
@@ -586,8 +639,19 @@ class PdfsController extends Controller
     
         //Funcion para las fechas
         foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+            
+
+            setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+            date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+
+            $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
+            $fecha1 = Carbon::parse($item->date1);
+
+            $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
+            $fecha2 = Carbon::parse($item->date2);
+
+
+            Carbon::setLocale('es');
         }
 
         // Sumar todos los pagos
@@ -601,7 +665,7 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2','fecha1','fecha2'); // Incluimos $totalPago
         //$pdf = Pdf::loadView('reports.repoCreditosSinFactura', $pdf_data)->save('myfile.pdf');
         $pdf = Pdf::loadView('reports.repoCreditosSinFactura', $pdf_data)->setPaper('a4', 'landscape');
     
@@ -609,7 +673,7 @@ class PdfsController extends Controller
         return $pdf->stream();
     }
 
-    public function generarCreditosConFactura() {
+    public function generarCreditosConFactura($f1,$f2) {
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -648,6 +712,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->whereBetween('orden.date1', [$f1, $f2])
         ->where('completarordenes.requiere3','Credito')
         ->where('clientes.tradename','!=','Particular')
         ->orderBy('completarordenes.id', 'DESC')
@@ -660,8 +725,19 @@ class PdfsController extends Controller
     
         //Funcion para las fechas
         foreach ($data as &$item) {
-            $item->date1 = Carbon::parse($item->date1)->format('d-m-Y');
-            $item->date2 = Carbon::parse($item->date2)->format('d-m-Y'); // Ajusta el formato según tus necesidades
+            
+
+            setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+            date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+
+            $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
+            $fecha1 = Carbon::parse($item->date1);
+
+            $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
+            $fecha2 = Carbon::parse($item->date2);
+
+
+            Carbon::setLocale('es');
         }
 
         // Sumar todos los pagos
@@ -675,7 +751,7 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64', 'data', 'totalPago'); // Incluimos $totalPago
+        $pdf_data = compact('base64', 'data', 'totalPago','f1','f2','fecha1','fecha2'); // Incluimos $totalPago
         $pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->setPaper('a4', 'landscape');
         //$pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->save('myfile.pdf');
     

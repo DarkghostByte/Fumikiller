@@ -21,43 +21,47 @@
         Nombre del Cliente: {{ clientName }}
       </h2>
 
-      <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
-        <el-table-column label="">
-          <template #default="scope">
-            <el-button style="color:black" size="small" type="success">
-              <a :href="url+'api/ordenTrabajoCompleta/'+scope.row.id" target="_blank">
-                <span class="material-symbols-outlined">lab_profile</span>
-              </a>
-            </el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="Direccion" sortable width="300">
-          <template #default="scope">
-            {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="pago" label="Monto" sortable width="150" />
-        <el-table-column prop="requiere3" label="Datos" sortable width="170" />
-        <el-table-column prop="nameEmpleado1" label="Responsable" sortable width="130" />
-        <el-table-column prop="date1" label="Fecha de orden" sortable width="130" />
-        <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="130" />
-        <el-table-column label="">
-          <template #default="scope">
-            <router-link :to="'/admin/works/edit-workComplete/'+scope.row.id">
-              <el-button style="color:black" size="small" type="warning">
-                <span class="material-symbols-outlined">edit</span>
+      <div class="flex" style="justify-content: center;">
+        <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
+          <el-table-column label="">
+            <template #default="scope">
+              <el-button style="color:black" size="small" type="success">
+                <a :href="url+'api/ordenTrabajoCompleta/'+scope.row.id" target="_blank">
+                  <span class="material-symbols-outlined">lab_profile</span>
+                </a>
               </el-button>
-            </router-link>
-          </template>
-        </el-table-column>
-        <el-table-column label="">
-          <template #default="scope">
-            <el-button style="color:black" size="small" type="danger" @click="bajaOrden(scope.row)">
-              <span class="material-symbols-outlined">disabled_by_default</span>
-            </el-button>
-          </template>
-        </el-table-column>
-      </el-table>
+            </template>
+          </el-table-column>
+          <el-table-column label="Direccion" sortable width="400">
+            <template #default="scope">
+              {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
+            </template>
+          </el-table-column>
+          <el-table-column prop="cell_phone" label="Celular" sortable width="100" />
+          <el-table-column prop="pago" label="Monto" sortable width="100" />
+          <el-table-column prop="requiere3" label="Datos" sortable width="90" />
+          <el-table-column prop="nominaEmpleado1" label="Responsable" sortable width="130" />
+          <el-table-column prop="date1" label="F. Orden" sortable width="130" />
+          <el-table-column prop="date2" label="F. Fumigacion" sortable width="140" />
+          <el-table-column label="">
+            <template #default="scope">
+              <router-link :to="'/admin/works/edit-workComplete/'+scope.row.id">
+                <el-button style="color:black" size="small" type="warning">
+                  <span class="material-symbols-outlined">edit</span>
+                </el-button>
+              </router-link>
+            </template>
+          </el-table-column>
+          <el-table-column label="">
+            <template #default="scope">
+              <el-button style="color:black" size="small" type="danger" @click="bajaOrden(scope.row)">
+                <span class="material-symbols-outlined">disabled_by_default</span>
+              </el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+      </div>
+      
     </div>
 
     <el-dialog v-model="dialogVisible" title="Deseas dar de baja la siguente orden de trabajo" width="1200">

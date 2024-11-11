@@ -95,11 +95,11 @@
         <div>
           <p class="px-5">Datos del domicilio:</p>
           <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-5">
-            <el-input v-model="form.how_to_get" type="textarea" maxlength="200" show-word-limit
+            <el-input v-model="form.how_to_get" type="textarea" maxlength="100" show-word-limit
               placeholder="Agrega como llegar al domicilio" />
           </el-form-item>
           <el-form-item prop="description" label="Descripcion:" class="pt-2 px-5">
-            <el-input v-model="form.description" type="textarea" maxlength="200" show-word-limit
+            <el-input v-model="form.description" type="textarea" maxlength="100" show-word-limit
               placeholder="Agrega una descripcion" />
           </el-form-item>
         </div>
@@ -130,12 +130,15 @@
           </el-form-item>
         </div>
 
-        <div>
-          <el-form-item prop="infoclient_certificate" label="El cliente necesita certificado?" class="px-10">
-            <el-radio-group v-model="form.infoclient_certificate">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
+        <p class="px-5">Requiere de:</p>
+        <div class="flex">
+          <el-form-item prop="requires" label="" class="px-5">
+            <el-checkbox-group v-model="form.requires" label="Requiere de">
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
+              <el-checkbox label="Factura" value="Factura"></el-checkbox>
+              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
+              <el-checkbox label="Remision" value="Remision"></el-checkbox>
+            </el-checkbox-group>
           </el-form-item>
         </div>
 
@@ -183,7 +186,7 @@ export default {
       cell_phone: '',
       number_fixed_number: 'Ninguno',
       recruitment_data: [],
-      infoclient_certificate: '',
+      requires: [],
 
     },
     filteredColonias: [],
@@ -239,6 +242,9 @@ export default {
       ],
       infoclient_certificate: [
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      requires: [
+        { required: true, message: 'Requiere de deberia ser requerido', trigger: 'blur' },
       ],
     }
   }),
@@ -359,9 +365,9 @@ export default {
         this.form.id_comercio = datos.id_comercio || '';
         this.form.description = datos.description || '';
         this.form.how_to_get = datos.how_to_get || '';
+        this.form.requires = datos.requires || '';
         this.form.cell_phone = datos.cell_phone || '';
         this.form.number_fixed_number = datos.number_fixed_number || 'Ninguno';
-        this.form.infoclient_certificate = datos.infoclient_certificate || '';
       }
     });
   }

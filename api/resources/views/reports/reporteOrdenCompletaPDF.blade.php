@@ -16,8 +16,7 @@
         <div class="meminfo">
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
-                No.
-                {{ $ordenCompleta->id_orden }}
+                No.{{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>    
     <header>       
@@ -120,7 +119,7 @@
         </table>
 
         @php 
-            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $arreglo = json_decode($ordenCompleta->hiring );
             $presupuesto=false;
             $fumigar=false;
             $garantia=false;
@@ -149,7 +148,7 @@
         </div>
         @endif
     </th>            
-    <th style="text-align:left; ">Presupuesto</th>
+    <th style="text-align:left; "> Presupuesto</th>
 
     <th>
         @if($fumigar)
@@ -202,15 +201,18 @@
     <th style="text-align:left; margin-top:5px;"> Nada</th>
 </table>
 
+
         <table class="">
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoInt1 }}
             </div>
             </th>
             <th>Externo:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoExt1 }}
             </div>
             </th> 
         </table>
@@ -218,27 +220,29 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->nominaEmpleado1 }}
             </div>
             </th>
             <th>Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
+                $ {{ $ordenCompleta->pago }}
             </div>
             </th> 
         </table>
 
 
         @php 
-            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $arreglo = json_decode($ordenCompleta->requiere1 );
             $factura=false;
             $certificado=false;
             $remision=false;
             $nada=false;
         
             foreach($arreglo as $item){
-                if($item == 'Factura'){ $presupuesto=true; }
-                if($item == 'Certificado'){ $fumigar=true; }
-                if($item == 'Remision'){ $garantia=true; }
+                if($item == 'Factura'){ $factura=true; }
+                if($item == 'Certificado'){ $certificado=true; }
+                if($item == 'Remision'){ $remision=true; }
                 if($item == 'Nada'){ $nada=true; }
             }
         @endphp
@@ -304,11 +308,11 @@
         <div class="footDiv">
         </div>
         <table class="footer">
-            <th class="footer">Calle del Abeto 2201</th>
-            <th> Col. Alamedas </th>
-            <th> Tel.636-694-65-15</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
-            <th> C.P. 31704</th>
+            <th class="footer">Col. Alamedas</th>
+            <th>C.P. 31704</th>
+            <th>Calle del Abeto #2201</th>
+            <th>Nuevo Casas Grandes, Chihu. </th>
+            <th>Tel.636-694-65-15</th>
         </table>
         </div>
         
@@ -333,8 +337,7 @@
         <div class="meminfo">
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
-                No.
-                {{ $ordenCompleta->id_orden }}
+                No.{{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>    
     <header>       
@@ -437,7 +440,7 @@
         </table>
 
         @php 
-            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $arreglo = json_decode($ordenCompleta->hiring );
             $presupuesto=false;
             $fumigar=false;
             $garantia=false;
@@ -466,7 +469,7 @@
         </div>
         @endif
     </th>            
-    <th style="text-align:left; ">Presupuesto</th>
+    <th style="text-align:left; "> Presupuesto</th>
 
     <th>
         @if($fumigar)
@@ -523,11 +526,13 @@
             <th class="clth114">Producto Interno:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoInt1 }}
             </div>
             </th>
             <th>Externo:</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->productoExt1 }}
             </div>
             </th> 
         </table>
@@ -535,27 +540,29 @@
             <th>Fumigador</th>
             <th class="renDivTh">
             <div class="renDiv">
+                {{ $ordenCompleta->nominaEmpleado1 }}
             </div>
             </th>
             <th>Cotizacion</th>
             <th class="renDivTh">
             <div class="renDiv">
+                $ {{ $ordenCompleta->pago }}
             </div>
             </th> 
         </table>
 
 
         @php 
-            $arreglo = json_decode($ordenCompleta->requiere2 );
+            $arreglo = json_decode($ordenCompleta->requiere1 );
             $factura=false;
             $certificado=false;
             $remision=false;
             $nada=false;
         
             foreach($arreglo as $item){
-                if($item == 'Factura'){ $presupuesto=true; }
-                if($item == 'Certificado'){ $fumigar=true; }
-                if($item == 'Remision'){ $garantia=true; }
+                if($item == 'Factura'){ $factura=true; }
+                if($item == 'Certificado'){ $certificado=true; }
+                if($item == 'Remision'){ $remision=true; }
                 if($item == 'Nada'){ $nada=true; }
             }
         @endphp
@@ -621,11 +628,11 @@
         <div class="footDiv">
         </div>
         <table class="footer">
-            <th class="footer">Calle del Abeto 2201</th>
-            <th> Col. Alamedas </th>
-            <th> Tel.636-694-65-15</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
-            <th> C.P. 31704</th>
+            <th class="footer">Col. Alamedas</th>
+            <th>C.P. 31704</th>
+            <th>Calle del Abeto #2201</th>
+            <th>Nuevo Casas Grandes, Chihu. </th>
+            <th>Tel.636-694-65-15</th>
         </table>
         </div>   
     </main>

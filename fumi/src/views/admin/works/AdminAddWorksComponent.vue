@@ -136,15 +136,29 @@
         <!-- FILA DE REQUIERE DE -->
         <p>Requiere de:</p>
         <div class="flex">
-          <el-form-item prop="requires" label="" class="px-10">
-            <el-checkbox-group v-model="form.requires" label="Requiere de">
-              <el-checkbox label="Nada" value="Nada"></el-checkbox>
-              <el-checkbox label="Factura" value="Factura"></el-checkbox>
-              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
-              <el-checkbox label="Remision" value="Remision"></el-checkbox>
-            </el-checkbox-group>
+          <el-form-item prop="infoorden_certificate" label="El cliente necesita certificado?" class="px-10">
+            <!--<el-input v-model="form.infoorden_certificate" placeholder="Ingresa sus nombres" />-->
+            <el-radio-group v-model="form.infoorden_certificate">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item prop="infoorden_remision" label="El cliente necesita remision?" class="px-10">
+            <el-radio-group v-model="form.infoorden_remision">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item prop="infoorden_facturacion" label="El cliente necesita facturacion?" class="px-10">
+            <el-radio-group v-model="form.infoorden_facturacion">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
           </el-form-item>
         </div>
+
         <div style="color:white; display:flex; justify-content: center; transition:10s;">
           <el-form-item>
             <el-button type="primary" @click="submitForm">Guardar</el-button>
@@ -179,9 +193,11 @@ export default {
       time1: '',
       time2: '',
       hiring: [],
-      requires: [],
       infoorden_delete: 'Alta',
       statusOrder: 'Por realizar',
+      infoorden_certificate: '',
+      infoorden_remision: '',
+      infoorden_facturacion: ''
     },
     rules: {
       id_plague1: [
@@ -202,8 +218,14 @@ export default {
       hiring: [
         { required: true, message: 'La contratacion deberia ser requeriada', trigger: 'blur' },
       ],
-      requires: [
-        { required: true, message: 'Requiere de deberia ser requerido', trigger: 'blur' },
+      infoorden_certificate: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      infoorden_remision: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      infoorden_facturacion: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
     }
   }),

@@ -19,8 +19,10 @@ class Orden extends Model
         'time1',
         'time2',
         'hiring',
-        'requires',
         'infoorden_delete',
+        'infoorden_certificate',
+        'infoorden_remision',
+        'infoorden_facturacion',
         'statusOrder',
     ];
 

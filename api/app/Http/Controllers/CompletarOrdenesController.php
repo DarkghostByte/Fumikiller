@@ -98,7 +98,6 @@ class CompletarOrdenesController extends Controller
             'noTrapear' => 'required|min:1',
             'noIngresar' => 'required|min:1',
             'otraDosis' => 'required|min:1',
-            'hora' => 'required|min:1',
             'pago' => 'required|numeric',
             'requiere1' => 'array|min:1',
             'requiere2' => 'array|min:1',
@@ -122,7 +121,6 @@ class CompletarOrdenesController extends Controller
             $data->noTrapear = $request->noTrapear;
             $data->noIngresar = $request->noIngresar;
             $data->otraDosis = $request->otraDosis;
-            $data->hora = $request->hora;
             $data->pago = $request->pago;
             $data->requiere1 = json_encode($request->requiere1);
             $data->requiere2 = json_encode($request->requiere2);

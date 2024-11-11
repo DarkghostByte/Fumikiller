@@ -173,7 +173,7 @@
     <!-- END MODAL 1 -->
 
     <!-- MODAL 2 -->
-    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500">
+    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500" >
       <div class="clientInfo">
         <div class="details">
           <i class="fa fa-user fa-2x iconInfo"></i>
@@ -236,6 +236,15 @@
             </p>
           </div>
         </div>
+        <div class="details">
+          <i class="fa fa-address-card fa-2x iconInfo"></i>
+          <div>
+            <p>
+              <strong>Tipo de contratación:</strong> 
+              <span v-for="item in selectedItem1.requires"  v-bind:key="item">{{ item}},&nbsp;</span>
+            </p>
+          </div>
+        </div>
 
 
       </div>
@@ -272,6 +281,8 @@ export default {
   }),
   mounted() {
     this.refresh();
+
+
   },
   methods: {
     refresh() {
@@ -291,6 +302,7 @@ export default {
       console.log(row);
       this.selectedItem = row;
       this.selectedItem.recruitment_data = JSON.parse(this.selectedItem.recruitment_data)
+      this.selectedItem.requires = JSON.parse(this.selectedItem.requires)
       this.dialogVisible = true;
       this.refresh();
     },
@@ -298,6 +310,7 @@ export default {
       console.log(row);
       this.selectedItem1 = row;
       this.selectedItem1.recruitment_data = JSON.parse(this.selectedItem1.recruitment_data)
+      this.selectedItem1.requires = JSON.parse(this.selectedItem1.requires)
       this.dialogVisibleView = true;
       this.refresh();
     },

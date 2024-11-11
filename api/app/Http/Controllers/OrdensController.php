@@ -93,8 +93,10 @@ class OrdensController extends Controller
             'time1' => 'required|min:1',
             'time2' => 'required|min:1',
             'hiring' => 'array|required|min:1',
-            'requires' => 'array|required|min:1',
             'infoorden_delete' => 'required|min:1',
+            'infoorden_certificate' => 'required|min:1',
+            'infoorden_remision' => 'required|min:1',
+            'infoorden_facturacion' => 'required|min:1',
             'statusOrder' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
@@ -113,8 +115,10 @@ class OrdensController extends Controller
             $data->time1 = $request->time1;
             $data->time2 = $request->time2;
             $data->hiring = json_encode($request->hiring);
-            $data->requires = json_encode($request->requires);
             $data->infoorden_delete = $request->infoorden_delete;
+            $data->infoorden_certificate = $request->infoorden_certificate;
+            $data->infoorden_remision = $request->infoorden_remision;
+            $data->infoorden_facturacion = $request->infoorden_facturacion;
             $data->statusOrder = $request->statusOrder;
             $data->save();
 

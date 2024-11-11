@@ -23,7 +23,6 @@ class CompletarOrden extends Model
         'noTrapear',
         'noIngresar',
         'otraDosis',
-        'hora',
         'pago',
         'requiere1',
         'requiere2',

@@ -15,8 +15,7 @@
         <div class="meminfo">
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
-                No.
-                {{ $orden->id }}
+                No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
     
@@ -123,7 +122,7 @@
         </table>
 
         @php 
-            $arreglo = json_decode($orden->recruitment_data );
+            $arreglo = json_decode($orden->hiring );
             $presupuesto=false;
             $fumigar=false;
             $garantia=false;
@@ -230,18 +229,18 @@
             </th> 
         </table>
 
-
+<!-- 
         @php 
-            $arreglo = json_decode($orden->recruitment_data );
+            $arreglo = json_decode($orden->requires );
             $factura=false;
             $certificado=false;
             $remision=false;
             $nada=false;
         
             foreach($arreglo as $item){
-                if($item == 'Factura'){ $presupuesto=true; }
-                if($item == 'Certificado'){ $fumigar=true; }
-                if($item == 'Remision'){ $garantia=true; }
+                if($item == 'Factura'){ $factura=true; }
+                if($item == 'Certificado'){ $certificado=true; }
+                if($item == 'Remision'){ $remision=true; }
                 if($item == 'Nada'){ $nada=true; }
             }
         @endphp
@@ -300,6 +299,39 @@
     <th style="text-align:left;"> Nada</th>
     
 </table>
+-->
+
+<table class="btnCir2">
+<th>Require de:</th>
+    <th style="text-align:center;">       
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+    </th>            
+    <th style="text-align:left; "> Factura</th>
+
+    <th>
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+    </th>
+    <th style="text-align:left;"> Certificado</th>
+    
+    <th >
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+    </th>
+    <th style="text-align:left; ">Remision</th>
+    <th> 
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+    </th>
+    <th style="text-align:left;"> Nada</th>
+    
+</table>
+
 
         <!--Antigua tabla
             <table class="btnCir2">
@@ -328,11 +360,11 @@
         <div class="footDiv">
         </div>
         <table class="footer">
-            <th class="footer">Calle del Abeto 2201</th>
-            <th> Col. Alamedas </th>
-            <th> Tel.636-694-65-15</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
-            <th> C.P. 31704</th>
+            <th class="footer">Col. Alamedas</th>
+            <th>C.P. 31704</th>
+            <th>Calle del Abeto #2201</th>
+            <th>Nuevo Casas Grandes, Chihu. </th>
+            <th>Tel.636-694-65-15</th>
         </table>
         </div>
         
@@ -356,8 +388,7 @@
         <div class="meminfo">
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
-                No.
-                {{ $orden->id }}
+                No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
     
@@ -464,7 +495,7 @@
         </table>
 
         @php 
-            $arreglo = json_decode($orden->recruitment_data );
+            $arreglo = json_decode($orden->hiring );
             $presupuesto=false;
             $fumigar=false;
             $garantia=false;
@@ -573,16 +604,16 @@
 
 
         @php 
-            $arreglo = json_decode($orden->recruitment_data );
+            $arreglo = json_decode($orden->requires );
             $factura=false;
             $certificado=false;
             $remision=false;
             $nada=false;
         
             foreach($arreglo as $item){
-                if($item == 'Factura'){ $presupuesto=true; }
-                if($item == 'Certificado'){ $fumigar=true; }
-                if($item == 'Remision'){ $garantia=true; }
+                if($item == 'Factura'){ $factura=true; }
+                if($item == 'Certificado'){ $certificado=true; }
+                if($item == 'Remision'){ $remision=true; }
                 if($item == 'Nada'){ $nada=true; }
             }
         @endphp
@@ -590,53 +621,29 @@
 <table class="btnCir2">
 <th>Require de:</th>
     <th style="text-align:center;">
-        @if($factura)
-            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
-                <h1 style="margin: 0;">X</h1>
-            </div>
-        @else
         <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
             <h1 style="margin: 0;"></h1>
         </div>
-        @endif
     </th>            
     <th style="text-align:left; "> Factura</th>
 
     <th>
-        @if($certificado)
-        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-            @else
             <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
                 <h1 style="margin: 0;"></h1>
             </div>
-        @endif
     </th>
     <th style="text-align:left;"> Certificado</th>
     
     <th >
-        @if($remision)
-        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-        @else
         <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
             <h1 style="margin: 0;"></h1>
         </div>
-        @endif
     </th>
     <th style="text-align:left; ">Remision</th>
     <th> 
-        @if($nada)
-        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-        @else
         <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
             <h1 style="margin: 0;"></h1>
         </div>
-        @endif
     </th>
     <th style="text-align:left;"> Nada</th>
     
@@ -669,11 +676,11 @@
         <div class="footDiv">
         </div>
         <table class="footer">
-            <th class="footer">Calle del Abeto 2201</th>
-            <th> Col. Alamedas </th>
-            <th> Tel.636-694-65-15</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
-            <th> C.P. 31704</th>
+            <th class="footer">Col. Alamedas</th>
+            <th>C.P. 31704</th>
+            <th>Calle del Abeto #2201</th>
+            <th>Nuevo Casas Grandes, Chihu. </th>
+            <th>Tel.636-694-65-15</th>
         </table>
         </div>
     </main>

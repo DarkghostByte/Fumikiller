@@ -48,7 +48,7 @@
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" width="300" sortable>
+        <el-table-column label="Dirección" width="280" sortable>
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
               ', ' + scope.row.ciudad }}
@@ -57,7 +57,7 @@
         <el-table-column label="Celular" prop="cell_phone" sortable width="120px"/>
         <el-table-column label="F. orden" prop="date1" width="120" sortable />
         <el-table-column label="F. fumigacion" prop="date2" width="150" sortable />
-        <el-table-column label="Fumigador" prop="nominaEmpleado1" width="180px" sortable />
+        <el-table-column label="Fumigador" prop="nominaEmpleado1" width="145" sortable />
       </el-table>
     </div>
   </div>

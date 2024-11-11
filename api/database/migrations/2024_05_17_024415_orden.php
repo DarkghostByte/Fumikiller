@@ -21,8 +21,10 @@ return new class extends Migration
             $table->string('time1');
             $table->string('time2');
             $table->string('hiring');
-            $table->string('requires');
             $table->string('infoorden_delete');
+            $table->string('infoorden_certificate');
+            $table->string('infoorden_remision');
+            $table->string('infoorden_facturacion');
             $table->string('statusOrder');
             $table->timestamps();
         });

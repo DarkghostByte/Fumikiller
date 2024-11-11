@@ -102,11 +102,11 @@
         <div>
           <p class="px-5">Datos del domicilio:</p>
           <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-5">
-            <el-input v-model="form1.how_to_get" type="textarea" maxlength="200" show-word-limit
+            <el-input v-model="form1.how_to_get" type="textarea" maxlength="100" show-word-limit
               placeholder="Agrega como llegar al domicilio" />
           </el-form-item>
           <el-form-item prop="description" label="Descripcion:" class="pt-2 px-5">
-            <el-input v-model="form1.description" type="textarea" maxlength="200" show-word-limit
+            <el-input v-model="form1.description" type="textarea" maxlength="100" show-word-limit
               placeholder="Agrega una descripcion" />
           </el-form-item>
         </div>
@@ -144,27 +144,16 @@
             </el-checkbox-group>
           </el-form-item>
         </div>
-        
+
+        <p class="px-5">Requiere de:</p>
         <div class="flex">
-          <el-form-item prop="infoclient_certificate" label="El cliente necesita certificado?" class="px-10">
-            <el-radio-group v-model="form1.infoclient_certificate">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
-          </el-form-item>
-
-          <el-form-item prop="infoclient_remision" label="El cliente necesita remision?" class="px-10">
-            <el-radio-group v-model="form1.infoclient_remision">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
-          </el-form-item>
-
-          <el-form-item prop="infoclient_facturacion" label="El cliente necesita facturacion?" class="px-10">
-            <el-radio-group v-model="form1.infoclient_facturacion">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
+          <el-form-item prop="requires" label="" class="px-5">
+            <el-checkbox-group v-model="form1.requires" label="Requiere de">
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
+              <el-checkbox label="Factura" value="Factura"></el-checkbox>
+              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
+              <el-checkbox label="Remision" value="Remision"></el-checkbox>
+            </el-checkbox-group>
           </el-form-item>
         </div>
 
@@ -215,9 +204,7 @@ export default {
       specify: '',
       recruitment_data: [],
       infoclient_delete: 'Alta',
-      infoclient_certificate: '',
-      infoclient_remision: '',
-      infoclient_facturacion: ''
+      requires: [],
     },
     filteredColonias: [],
     loadingColonias: false,
@@ -274,14 +261,8 @@ export default {
       recruitment_data: [
         { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
       ],
-      infoclient_certificate: [
-        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
-      ],
-      infoclient_remision: [
-        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
-      ],
-      infoclient_facturacion: [
-        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      requires: [
+        { required: true, message: 'Requiere de deberia ser requerido', trigger: 'blur' },
       ],
     }
 

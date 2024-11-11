@@ -7,30 +7,30 @@
     <i class="fa fa-file-pdf-o" aria-hidden="true" style="color: black;"></i>
     <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">Reportes</h1>
 
-    <div class="flex justify-center mb-5">
+    <div class="flex justify-center items-center mt-4">
       <el-date-picker v-model="f1" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Fecha inicial"></el-date-picker>
       <span class="mx-3"> - </span>
       <el-date-picker v-model="f2" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Fecha final"></el-date-picker>
-      <button class="ml-3 px-3 py-2 bg-blue-500 text-white rounded-md" @click="fetchDate">Buscar</button>
+      <button class="ml-3 px-3 py-2 bg-blue-500 hover:bg-orange-500 text-white hover:text-neutral-950 rounded-md border-2 border-neutral-950" @click="fetchDate">Buscar</button>
     </div>
 
+    <!--
     <div class="flex justify-center mb-5">
       <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">{{ f1 }}</h1>
       <h1 class="mx-3" style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">-</h1>
       <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">{{ f2 }}</h1>
     </div>
+    -->
 
     <!-- v-for="item in 4" :key="item"-->
 
-    <el-carousel type="card" height="200px" class="m-5 border-radius:5 gb-gray  ">
+    <el-carousel type="card" height="200px" class="m-5 border-radius:5 gb-gray">
+      <!--VENTAS SIN FACTURA-->
       <el-carousel-item class="h-auto">
         <div style="justify-content:center;" class="flex items-center p-8  shadow rounded-lg">
           <div
             class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-green-600 bg-green-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-            </svg>
+            <i class="fa-solid fa-money-bill fa-beat fa-xl"></i>
           </div>
           <div>
             <span class="block text-gray-500">Venta Sin Facturas</span>
@@ -41,14 +41,12 @@
           </div>
         </div>
       </el-carousel-item>
+      <!--VENTAS CON FACTURA-->
       <el-carousel-item class=" h-auto">
         <div style="justify-content:center;" class="flex items-center p-8 shadow rounded-lg">
           <div
             class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M13 17h8m0 0V9m0 8l-8-8-4 4-6-6" />
-            </svg>
+            <i class="fa-solid fa-file-invoice-dollar fa-beat fa-xl"></i>
           </div>
           <div>
             <span class="block text-gray-500">Venta Por Facturas</span>
@@ -59,14 +57,12 @@
           </div>
         </div>
       </el-carousel-item>
+      <!--VENTAS TOTALES-->
       <el-carousel-item class=" h-auto">
         <div style="justify-content:center;" class="flex items-center p-8  shadow rounded-lg">
           <div
             class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-blue-600 bg-blue-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-            </svg>
+            <i class="fa-solid fa-wallet fa-beat fa-xl"></i>
           </div>
           <div>
             <span class="block text-gray-500">Ventas Totales</span>
@@ -74,59 +70,52 @@
             <a :href="url + 'api/ventatotales/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
-
           </div>
         </div>
       </el-carousel-item>
+      <!--CREDITOS SIN FACTURA-->
       <el-carousel-item class=" h-auto">
         <div style="justify-content:center;" class="h-auto flex items-center p-8  shadow rounded-lg">
           <div
-            class="inline-flex flex-shrink-0 items-center justify-center items-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            class="inline-flex flex-shrink-0 items-center justify-center items-center h-16 w-16 text-orange-600 bg-orange-100 rounded-full mr-6">
+            <i class="fa-solid fa-circle-dollar-to-slot fa-beat fa-xl"></i>
           </div>
           <div class="justify-center items-center">
             <span class="block text-gray-500">Creditos Sin Factura</span>
             <span class="block text-2xl font-bold">${{ totalCreditosSinFactura }}</span>
-            <a :href="url + 'api/creditossinfactura/'" target="_blank">
+            <a :href="url + 'api/creditossinfactura/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
         </div>
       </el-carousel-item>
+      <!--CREDITOS CON FACTURA-->
       <el-carousel-item class=" h-auto">
         <div style="justify-content:center;" class="h-auto flex items-center p-8  shadow rounded-lg">
           <div
-            class="inline-flex flex-shrink-0 items-center justify-center items-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            class="inline-flex flex-shrink-0 items-center justify-center items-center h-16 w-16 text-yellow-600 bg-yellow-100 rounded-full mr-6">
+            <i class="fa-solid fa-handshake fa-beat fa-xl"></i>
           </div>
           <div class="justify-center items-center">
             <span class="block text-gray-500">Creditos Con Factura</span>
             <span class="block text-2xl font-bold">${{ totalCreditosConFactura }}</span>
-            <a :href="url + 'api/creditosconfactura/'" target="_blank">
+            <a :href="url + 'api/creditosconfactura/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
         </div>
       </el-carousel-item>
+      <!--CREDITOS TOTALES-->
       <el-carousel-item class=" h-auto">
         <div style="justify-content:center;" class="h-auto flex items-center p-8  shadow rounded-lg">
           <div
             class="inline-flex flex-shrink-0 items-center justify-center items-center h-16 w-16 text-purple-600 bg-purple-100 rounded-full mr-6">
-            <svg aria-hidden="true" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-6 w-6">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-            </svg>
+            <i class="fa-solid fa-percent fa-beat fa-xl"></i>
           </div>
           <div class="justify-center items-center">
             <span class="block text-gray-500">Creditos Totales</span>
             <span class="block text-2xl font-bold">${{ totalCreditos }}</span>
-            <a :href="url + 'api/creditos/'" target="_blank">
+            <a :href="url + 'api/creditos/'+f1+'/'+f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>

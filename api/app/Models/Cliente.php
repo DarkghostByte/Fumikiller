@@ -27,8 +27,6 @@ class Cliente extends Model
         'specify',
         'recruitment_data',
         'infoclient_delete',
-        'infoclient_certificate',
-        'infoclient_remision',
-        'infoclient_facturacion'
+        'requires',
     ];
 }

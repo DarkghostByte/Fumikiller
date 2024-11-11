@@ -30,7 +30,6 @@ return new class extends Migration
             $table->string('noTrapear');
             $table->string('noIngresar');
             $table->string('otraDosis');
-            $table->string('hora');
             $table->decimal('pago');
             $table->string('requiere1');
             $table->string('requiere2');

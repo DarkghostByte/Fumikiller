@@ -30,7 +30,7 @@ class ColoniasController extends Controller
     public function verColoniaPorCiudad($cityId) {
         
         $colonias = Colonia::where('id_ciudad', $cityId)
-        //->join('ciudades', 'colonias.id_ciudad', '=', 'ciudades.id')
+        ->orderBy('colonias.colonia', 'ASC')
         ->get();
     
         if ($colonias->isEmpty()) {

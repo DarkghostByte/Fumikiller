@@ -8,7 +8,7 @@
                 <div class="contenedor2 row justify-center items-center">
                     <div>
                         <h1 class="mt-5 text-center text-2xl font-bold text-yellow-500" style="">SISTEMA DE FUMIGACIONES URBANAS</h1>
-                        <h1 class="text-center text-6xl font-bold text-blue-950 lbltittleFumi" style="text-shadow: -2px 2px 5px white;">FUMI-KILLE'R</h1>
+                        <h1 class="mt-5 text-center text-6xl font-bold text-blue-950 lbltittleFumi" style="text-shadow: -2px 2px 5px white;">FUMI-KILLE'R</h1>
                     </div>
                     <div class="flex justify-center items-center">
                         <router-link to="/admin/home">
@@ -18,8 +18,8 @@
                         </router-link>
                     </div>
                     <div>
-                        <h1 class="mt-28 text-center text-2xl font-bold text-blue-800" style="">EN CASA FUMIGADA, "NO ENTRAN BICHOS"</h1>
-                        <h1 class="mt-5 mr-2 text-end text-md font-bold text-neutral-950" style="">******* 2024</h1>
+                        <h1 class="mt-24 text-center text-2xl font-bold text-blue-800" style="">EN CASA FUMIGADA, "NO ENTRAN BICHOS"</h1>
+                        <h1 class="mt-5 mr-4 text-end text-md font-bold text-neutral-950" style="">Liadeo Chávez & Luis Peña 2024 v8.1.166 </h1>
                     </div>
                 </div>
             </div>
@@ -85,14 +85,13 @@
 
 .btnInicio:hover {
     align-items: center;
-    transform: scale(1.1);
+    transform: scale(1.2);
     text-align: center;
-    height: 95px;
-    width: 280px;
     border: 1px solid black; 
     /*background: linear-gradient(to right, white, black);*/
     color: white;
     font-weight: bolder; 
+    background-color: #1e40af;
 }
 
 
@@ -111,6 +110,7 @@
     width: 65%;
     height: 100%;
     border-radius: 0% 25px 25px 0%;
+    font-family: cursive;
 }
 
 .imgFk {

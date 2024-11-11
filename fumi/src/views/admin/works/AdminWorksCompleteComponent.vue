@@ -42,7 +42,7 @@
             <el-table
                 :data="tableData"
                 :default-sort="{ prop: 'name', order: 'descending' }"
-                style="width: 85%"
+                style="width: 100%"
                 stripe>
 
               <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
@@ -66,14 +66,17 @@
                 {{ scope.row.name+' '+scope.row.lastname1+' '+scope.row.lastname2 }}
               </template>
             </el-table-column>
-            <el-table-column label="Direccion" sortable width="250">
+            <el-table-column label="Direccion" sortable width="240">
               <template #default="scope">
                 {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
               </template>
             </el-table-column>
-            <el-table-column prop="pago" label="Monto"  sortable width="150" />
-            <el-table-column prop="requiere3" label="Datos" sortable width="170" />
-            <el-table-column prop="nameEmpleado1" label="Responsable" sortable width="130"  />
+            <el-table-column prop="cell_phone" label="Celular" sortable width="100" />
+            <el-table-column prop="date1" label="F. Orden" sortable width="105" />
+            <el-table-column prop="date2" label="F. Fumigacion" sortable width="135" />
+            <el-table-column prop="pago" label="Monto"  sortable width="100" />
+            <el-table-column prop="requiere3" label="Datos" sortable width="90" />
+            <el-table-column prop="nominaEmpleado1" label="Responsable" sortable width="125"  />
             <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
             <!--BOTON PARA EDITAR LA ORDEN DE TRABAJO-->
