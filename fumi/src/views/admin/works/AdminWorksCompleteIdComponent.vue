@@ -40,7 +40,7 @@
           <el-table-column prop="cell_phone" label="Celular" sortable width="100" />
           <el-table-column prop="pago" label="Monto" sortable width="100" />
           <el-table-column prop="requiere3" label="Datos" sortable width="90" />
-          <el-table-column prop="nominaEmpleado1" label="Responsable" sortable width="130" />
+          <el-table-column prop="ariasEmpleado1" label="Responsable" sortable width="130" />
           <el-table-column prop="date1" label="F. Orden" sortable width="130" />
           <el-table-column prop="date2" label="F. Fumigacion" sortable width="140" />
           <el-table-column label="">

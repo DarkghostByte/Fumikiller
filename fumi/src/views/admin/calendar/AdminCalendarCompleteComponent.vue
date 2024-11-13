@@ -57,7 +57,7 @@
         <el-table-column label="Celular" prop="cell_phone" sortable width="120px"/>
         <el-table-column label="F. orden" prop="date1" width="120" sortable />
         <el-table-column label="F. fumigacion" prop="date2" width="150" sortable />
-        <el-table-column label="Fumigador" prop="nominaEmpleado1" width="145" sortable />
+        <el-table-column label="Fumigador" prop="ariasEmpleado1" width="145" sortable />
       </el-table>
     </div>
   </div>

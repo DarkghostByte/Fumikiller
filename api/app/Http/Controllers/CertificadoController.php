@@ -24,8 +24,7 @@ class CertificadoController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.id_comercio',
-            'comercios.comercio',
+            'clientes.comercio',
             'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
@@ -38,7 +37,6 @@ class CertificadoController extends Controller
         ->join('clientes', 'certificados.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->orderBy('certificados.id', 'DESC')
         ->get();
 

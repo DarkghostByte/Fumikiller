@@ -18,7 +18,7 @@ class EmpleadosSeeder extends Seeder
             'nameEmpleado'=>'Jesus Liadeo',
             'lastnameEmpleado1'=>'Chavez',
             'lastnameEmpleado2'=>'Chavez',
-            'nominaEmpleado'=>'20cg0023',
+            'ariasEmpleado'=>'20cg0023',
             'infodelete_Empleados'=>'Alta',
         ]);
     }

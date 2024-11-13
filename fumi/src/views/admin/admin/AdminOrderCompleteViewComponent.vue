@@ -62,7 +62,7 @@
         </el-table-column>
         <el-table-column prop="pago" label="Monto"  sortable width="" />
         <el-table-column prop="requiere3" label="Datos" sortable width="" />
-        <el-table-column prop="nameEmpleado1" label="Responsable" sortable width=""  />
+        <el-table-column prop="ariasEmpleado1" label="Responsable" sortable width=""  />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
         </el-table>
@@ -214,7 +214,7 @@ export default {
 
     filterDataResponsable() {
       this.filteredData = this.tableData.filter((completarOrden) => {
-        return completarOrden.nameEmpleado1.toLowerCase().includes(this.searchQueryResponsable.toLowerCase());
+        return completarOrden.ariasEmpleado1.toLowerCase().includes(this.searchQueryResponsable.toLowerCase());
       });
     },
 

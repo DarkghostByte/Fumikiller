@@ -18,11 +18,9 @@ class ClientesController extends Controller
         'ciudades.estado', 
         'colonias.colonia',
         'colonias.codigoPostal', 
-        'comercios.comercio',
         'vias.tipoVia',])
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->join('vias', 'clientes.id_vias', '=', 'vias.id')
         ->orderBy('clientes.id', 'DESC')
         ->get();
@@ -56,7 +54,7 @@ class ClientesController extends Controller
             'numAddress' => 'required|min:1',
             'id_colonia' => 'required|exists:colonias,id',
             'id_city' => 'required|exists:ciudades,id',
-            'id_comercio' => 'exists:comercios,id',
+            'comercio' => 'required|min:1',
             'description' => 'min:1|max:200',
             'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',
@@ -85,7 +83,7 @@ class ClientesController extends Controller
             $data->numAddress = $request->numAddress;
             $data->id_colonia = $request->id_colonia;
             $data->id_city = $request->id_city;
-            $data->id_comercio = $request->id_comercio;
+            $data->comercio = $request->comercio;
             $data->description = $request->description;
             $data->how_to_get = $request->how_to_get;
             $data->cell_phone = $request->cell_phone;
@@ -145,9 +143,9 @@ class ClientesController extends Controller
             'numAddress' => 'required|min:1',
             'id_colonia' => 'required|min:1',
             'id_city' => 'required|exists:ciudades,id',
-            'id_comercio' => 'exists:comercios,id',
-            'description' => 'min:1|max:200',
-            'how_to_get' => 'min:1|max:200',
+            'comercio' => 'required|min:1',
+            'description' => 'min:1|max:100',
+            'how_to_get' => 'min:1|max:100',
             'cell_phone' => 'required|min:10|max:13',
             'number_fixed_number' => 'min:1',
             'recruitment_data' => 'array|min:1',

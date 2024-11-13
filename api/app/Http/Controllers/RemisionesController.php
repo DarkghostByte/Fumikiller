@@ -25,8 +25,7 @@ class RemisionesController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.id_comercio',
-            'comercios.comercio',
+            'clientes.comercio',
             'clientes.cell_phone',
             'clientes.number_fixed_number',
             'colonias.colonia',
@@ -36,7 +35,6 @@ class RemisionesController extends Controller
         ->join('clientes', 'remisiones.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->orderBy('remisiones.id', 'DESC')
         ->get();
 

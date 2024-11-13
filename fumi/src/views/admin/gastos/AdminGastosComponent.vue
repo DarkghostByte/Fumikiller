@@ -4,12 +4,12 @@
       <h1 class="py-6 px-5 text-4xl font-semibold mb-2 flex-grow">Caja</h1>
       <div class="flex justify-end flex-grow">
         <a :href="url + 'api/pdfCaja/'" target="_blank"
-    class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
-    style="width:80px; height:50px; text-align: center; ">
-    <div class="flex">
-        <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>
-    </div>
-</a>
+          class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
+          style="width:80px; height:50px; text-align: center; ">
+          <div class="flex">
+            <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>
+          </div>
+        </a>
       </div>
     </div>
 
@@ -80,7 +80,9 @@
               style="width:100%;">
               <el-table-column label="Fecha" prop="dateIngreso" width="150px" sortable />
               <el-table-column label="Descripcion" prop="descriptionIngreso" width="300px" sortable />
-              <el-table-column label="Monto" prop="montoIngreso" width="150px" sortable />
+              <el-table-column label="Monto" prop="montoIngreso" width="150px" sortable
+                :formatter="(row) => formatNumber(row, 'montoIngreso')">
+              </el-table-column>
             </el-table>
           </div>
           <div class="flex">
@@ -92,7 +94,8 @@
                   {{ 'Fumigacion' }}
                 </template>
               </el-table-column>
-              <el-table-column prop="pago" width="150px" />
+              <el-table-column prop="pago" width="150px" sortable :formatter="(row) => formatNumber(row, 'pago')">
+              </el-table-column>
             </el-table>
           </div>
         </div>
@@ -111,7 +114,8 @@
               style="width:100%;">
               <el-table-column label="Fecha" prop="dateEgresos" width="150px" sortable />
               <el-table-column label="Descripcion" prop="descriptionEgresos" width="300px" sortable />
-              <el-table-column label="Monto" prop="montoEgresos" width="150px" sortable />
+              <el-table-column label="Monto" prop="montoEgresos" width="150px" sortable
+                :formatter="(row) => formatNumber(row, 'montoEgresos')"></el-table-column>
             </el-table>
           </div>
         </div>
@@ -403,10 +407,10 @@ export default {
         }
       });
     },
-    parseDate(fecha){
-      var f1=fecha.split("-")[2]
-      f1+="-"+fecha.split("-")[1]
-      f1+="-"+fecha.split("-")[0]
+    parseDate(fecha) {
+      var f1 = fecha.split("-")[2]
+      f1 += "-" + fecha.split("-")[1]
+      f1 += "-" + fecha.split("-")[0]
       return new Date(f1)
     },
     filterDate1() {
@@ -414,8 +418,8 @@ export default {
         // Convert dates to Date objects and handle null values
         const startDate = this.selectedDate;
         const endDate = this.selectedDate1;
-        var f1=this.parseDate(startDate)
-        var f2=this.parseDate(endDate)
+        var f1 = this.parseDate(startDate)
+        var f2 = this.parseDate(endDate)
 
         // Ensure startDate is less than or equal to endDate
         if (f1 > f2) {
@@ -426,23 +430,23 @@ export default {
           });
           return;
         }
-        
+
         this.filteredData1 = this.tableData1.filter(ingresos => {
           const ingresoDate = this.parseDate(ingresos.dateIngreso);
-          return  ingresoDate >=f1 && ingresoDate <= f2;
+          return ingresoDate >= f1 && ingresoDate <= f2;
         });
-       // this.filteredData1 = this.tableData1.filter(ingresos =>f1 >= this.parseDate(ingresos.dateIngreso) && this.parseDate(ingresos.dateIngreso) <= f2)
-       /*this.filteredData1 =[]
-       for(var i=0;i<this.tableData1.length;i++){
-          const ingresoDate = this.parseDate(this.tableData1[i].dateIngreso);
-          if(ingresoDate >= f1 && ingresoDate<=f2){
-            this.filteredData1.push(this.tableData1[i])
-            console.log("ENTRO",ingresoDate, f1,f2)
-          }
-          console.log("ENTRO",ingresoDate, f1,f2, ingresoDate >= f1, ingresoDate<=f2)
-          
-        }*/
-        
+        // this.filteredData1 = this.tableData1.filter(ingresos =>f1 >= this.parseDate(ingresos.dateIngreso) && this.parseDate(ingresos.dateIngreso) <= f2)
+        /*this.filteredData1 =[]
+        for(var i=0;i<this.tableData1.length;i++){
+           const ingresoDate = this.parseDate(this.tableData1[i].dateIngreso);
+           if(ingresoDate >= f1 && ingresoDate<=f2){
+             this.filteredData1.push(this.tableData1[i])
+             console.log("ENTRO",ingresoDate, f1,f2)
+           }
+           console.log("ENTRO",ingresoDate, f1,f2, ingresoDate >= f1, ingresoDate<=f2)
+           
+         }*/
+
         this.filteredData2 = this.tableData2.filter(egresos => {
           const egresoDate = this.parseDate(egresos.dateEgresos);
           return egresoDate >= f1 && egresoDate <= f2;
@@ -502,6 +506,15 @@ export default {
       });
     },
 
+    formatNumber(row, property) {
+      const value = row[property];
+      const parts = value.toString().split('.');
+      const integerPart = parts[0];
+      const decimalPart = parts[1] || '00';
+      const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+      return formattedInteger + '.' + decimalPart;
+    }
+
   }
 }
 </script>
@@ -548,18 +561,18 @@ h2 {
   overflow-x: auto;
 }
 
-.btnPdf{
+.btnPdf {
   border: 1px solid rgb(0, 0, 0, 0.20);
   box-shadow: 2px 2px 2px rgb(0, 0, 0, 0.60);
   background-color: white;
   color: red;
-  transition: 1s  ease-in-out;  
+  transition: 1s ease-in-out;
 
 }
 
-.btnPdf:hover{
+.btnPdf:hover {
   background-color: red;
-  color:white;
-  transition: 1s  ease-in-out;  
+  color: white;
+  transition: 1s ease-in-out;
 }
 </style>

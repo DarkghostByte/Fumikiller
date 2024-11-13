@@ -195,7 +195,7 @@ export default {
       numAddress: '',
       id_colonia: '',
       id_city: '',
-      id_comercio: '1',
+      comercio: 'Particular',
       description: '',
       how_to_get: '',
       cell_phone: '',

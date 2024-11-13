@@ -14,7 +14,7 @@ class Empleados extends Model
         'nameEmpleado',
         'lastnameEmpleado1',
         'lastnameEmpleado2',
-        'nominaEmpleado',
+        'ariasEmpleado',
         'infodelete_Empleados'
     ];
 }

@@ -76,7 +76,7 @@
             <el-table-column prop="date2" label="F. Fumigacion" sortable width="135" />
             <el-table-column prop="pago" label="Monto"  sortable width="100" />
             <el-table-column prop="requiere3" label="Datos" sortable width="90" />
-            <el-table-column prop="nominaEmpleado1" label="Responsable" sortable width="125"  />
+            <el-table-column prop="ariasEmpleado1" label="Responsable" sortable width="125"  />
             <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
             <!--BOTON PARA EDITAR LA ORDEN DE TRABAJO-->

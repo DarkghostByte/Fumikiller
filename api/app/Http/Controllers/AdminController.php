@@ -116,7 +116,7 @@ class AdminController extends Controller
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('clientes.infoclient_facturacion','=','No')
+            ->where('orden.infoorden_facturacion','=','No')
             ->sum('pago');
         $totalCreditosSinFactura = CompletarOrden::
             select('completarordenes.*',
@@ -124,7 +124,7 @@ class AdminController extends Controller
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->where('completarordenes.requiere3', 'Credito')
-            ->where('clientes.infoclient_facturacion','=', 'No')
+            ->where('orden.infoorden_facturacion','=', 'No')
             ->sum('pago');
         $totalCreditosConFactura = CompletarOrden::
             select('completarordenes.*',
@@ -132,14 +132,14 @@ class AdminController extends Controller
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->where('completarordenes.requiere3', 'Credito')
-            ->where('clientes.infoclient_facturacion', '=' ,'Si')
+            ->where('orden.infoorden_facturacion', '=' ,'Si')
             ->sum('pago');
         $totalVentasConFactura = CompletarOrden::
             select('completarordenes.*',
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('clientes.infoclient_facturacion','=','Si')
+            ->where('orden.infoorden_facturacion','=','Si')
             ->sum('pago');
 
         return response()->json([

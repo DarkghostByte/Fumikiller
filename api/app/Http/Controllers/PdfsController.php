@@ -26,8 +26,7 @@ class PdfsController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.id_comercio',
-            'comercios.comercio',
+            'clientes.comercio',
             'clientes.cell_phone',
             'clientes.number_fixed_number',
             'colonias.colonia',
@@ -37,7 +36,6 @@ class PdfsController extends Controller
         ->join('clientes', 'remisiones.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->where('remisiones.id', $id)
         ->first();
     //Datos de la base de datos
@@ -72,15 +70,15 @@ class PdfsController extends Controller
             'orden.*',
             'clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename','clientes.home',
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
-            'clientes.description','clientes.contact_form','clientes.recruitment_data','clientes.requires','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
-            'comercios.comercio','problematica1.problematica as plague1','problematica2.problematica as plague2',
+            'clientes.description','clientes.contact_form','clientes.recruitment_data','clientes.requires','clientes.comercio',
+            'colonias.colonia','colonias.codigoPostal','ciudades.ciudad'
+            ,'problematica1.problematica as plague1','problematica2.problematica as plague2',
         ])
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->where('orden.id', $id)->first();
         //Datos de la base de datos
         if (!$orden) {
@@ -117,12 +115,12 @@ class PdfsController extends Controller
             'orden.date1','orden.date2','orden.time1','orden.time2','orden.id_cliente','clientes.requires','orden.hiring',
             'clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename','clientes.home',
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
-            'clientes.description','clientes.contact_form','comercios.comercio','clientes.recruitment_data','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
+            'clientes.description','clientes.contact_form','clientes.comercio','clientes.recruitment_data','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',
             'productosInternos1.productoInt as productoInt1','productosInternos2.productoInt as productoInt2',
             'productosExternos1.productoExt as productoExt1','productosExternos2.productoExt as productoExt2',
             'empleados1.nameEmpleado as nameEmpleado1',
             'empleados2.nameEmpleado as nameEmpleado2',
-            'empleados1.nominaEmpleado as nominaEmpleado1'
+            'empleados1.ariasEmpleado as ariasEmpleado1'
 
             )
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
@@ -137,7 +135,6 @@ class PdfsController extends Controller
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
             ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-            ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
             ->where('completarordenes.id', $id)
             ->first();
         //Datos de la base de datos
@@ -179,8 +176,7 @@ class PdfsController extends Controller
             'clientes.numAddress',
             'clientes.id_colonia',
             'clientes.id_city',
-            'clientes.id_comercio',
-            'comercios.comercio',
+            'clientes.comercio',
             'clientes.cell_phone',
             'colonias.colonia',
             'colonias.codigoPostal',
@@ -194,7 +190,6 @@ class PdfsController extends Controller
         ->join('clientes', 'certificados.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->join('comercios', 'clientes.id_comercio', '=', 'comercios.id')
         ->where('certificados.id', $id)
         ->first();
     //Datos de la base de datos
@@ -265,7 +260,8 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->where('clientes.infoclient_facturacion','No')
+        //->orWhere('orden.infoorden_facturacion', 'No')
+        ->where('orden.infoorden_facturacion','No')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -356,7 +352,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->where('clientes.infoclient_facturacion', 'Si')
+        ->where('orden.infoorden_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
         //dd($data);
@@ -368,7 +364,6 @@ class PdfsController extends Controller
         // Verificar si la colección está vacía
         if ($data->isEmpty()) {
             // Manejar el caso cuando no hay datos
-            return abort(404, 'No se encontraron datos.');
         } else {
             foreach ($data as &$item) {
             
@@ -410,8 +405,8 @@ class PdfsController extends Controller
     }
 
     public function generarVentasTotales($f1,$f2) {
-        $f1 = Carbon::parse($f1)->format('d-m-Y');
-        $f2 = Carbon::parse($f2)->format('d-m-Y');
+        //$f1 = Carbon::parse($f1)->format('d-m-Y');
+        //$f2 = Carbon::parse($f2)->format('d-m-Y');
         // Realizar la consulta sin filtrar por 'id_cliente'
         $data = CompletarOrden::select([
             'completarordenes.*',
@@ -479,6 +474,7 @@ class PdfsController extends Controller
         // Verificar si la colección está vacía
         if ($data->isEmpty()) {
             return abort(404, 'No se encontraron datos.');
+            
         }
     
         // Sumar todos los pagos
@@ -627,7 +623,7 @@ class PdfsController extends Controller
         ->whereBetween('orden.date1', [$f1, $f2])
         // Filtrar por órdenes no pagadas y clientes particulares
         ->where('completarordenes.requiere3', 'Credito')
-        ->where('clientes.tradename', 'Particular')
+        ->where('orden.infoorden_facturacion', 'No')
         // Ordenar por ID de forma descendente
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -714,7 +710,7 @@ class PdfsController extends Controller
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
         ->where('completarordenes.requiere3','Credito')
-        ->where('clientes.tradename','!=','Particular')
+        ->where('orden.infoorden_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     

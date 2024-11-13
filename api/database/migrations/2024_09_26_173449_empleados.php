@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('nameEmpleado');
             $table->string('lastnameEmpleado1');
             $table->string('lastnameEmpleado2');
-            $table->string('nominaEmpleado');
+            $table->string('ariasEmpleado');
             $table->string('infodelete_Empleados');
             $table->timestamps();
         });

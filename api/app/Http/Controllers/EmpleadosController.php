@@ -35,7 +35,7 @@ class EmpleadosController extends Controller
             'nameEmpleado' => 'required|min:1',
             'lastnameEmpleado1' => 'required|min:1',
             'lastnameEmpleado2' => 'required|min:1',
-            'nominaEmpleado' => 'required|min:1',
+            'ariasEmpleado' => 'required|min:1',
             'infodelete_Empleados' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
@@ -49,7 +49,7 @@ class EmpleadosController extends Controller
             $data->nameEmpleado = $request->nameEmpleado;
             $data->lastnameEmpleado1 = $request->lastnameEmpleado1;
             $data->lastnameEmpleado2 = $request->lastnameEmpleado2;
-            $data->nominaEmpleado = $request->nominaEmpleado;
+            $data->ariasEmpleado = $request->ariasEmpleado;
             $data->infodelete_Empleados = $request->infodelete_Empleados;
             $data->save();
 
@@ -86,7 +86,7 @@ class EmpleadosController extends Controller
             'nameEmpleado' => 'required|min:1',
             'lastnameEmpleado1' => 'required|min:1',
             'lastnameEmpleado2' => 'required|min:1',
-            'nominaEmpleado' => 'required|min:1',
+            'ariasEmpleado' => 'required|min:1',
         ]);
         if (!$data) {
             return response()->json([

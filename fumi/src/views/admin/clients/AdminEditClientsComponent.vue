@@ -83,11 +83,9 @@
               </el-option>
             </el-select>
           </el-form-item>
-
-          <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
-            <el-select v-model="form.id_comercio" placeholder="Selecciona el tipo de comercio:">
-              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio" :value="comercio.id" />
-            </el-select>
+<!--comercio-->
+          <el-form-item prop="comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
+            <el-input v-model="form.comercio" class="px-1" placeholder="Ingresa el comercio" />
           </el-form-item>
         </div>
 
@@ -168,7 +166,7 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
-    comercios: [],
+    //comercios: [],
     vias: [],
     form: {
       name: '',
@@ -180,7 +178,7 @@ export default {
       numAddress: '',
       id_colonia: '',
       id_city: '',
-      id_comercio: '',
+      comercio: '',
       description: '',
       how_to_get: '',
       cell_phone: '',
@@ -222,7 +220,7 @@ export default {
       id_city: [
         { required: true, message: 'La ciudad es requerida', trigger: 'blur' }
       ],
-      id_comercio: [
+      comercio: [
         { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' }
       ],
       description: [
@@ -314,7 +312,7 @@ export default {
           console.error('Error fetching vias:', error);
         });
     },
-
+/*
     fetchComercios() {
       axios.get('verComercio')
         .then(response => {
@@ -325,6 +323,7 @@ export default {
           console.error('Error fetching comercios:', error);
         });
     },
+    */
     fetchColoniasByCity(cityId) {
   this.loadingColonias = true;
   axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
@@ -346,7 +345,7 @@ export default {
     this.refresh();
     this.fetchCiudades();
     this.fetchTypeRoad();
-    this.fetchComercios();
+    //this.fetchComercios();
     const route = useRoute();
     this.id = route.params.id;
     axios.get(`clientes/${this.id}`).then(res => {
@@ -362,7 +361,7 @@ export default {
         this.form.numAddress = datos.numAddress || '';
         this.form.id_city = datos.id_city || '';
         this.form.id_colonia = datos.id_colonia || '';
-        this.form.id_comercio = datos.id_comercio || '';
+        this.form.comercio = datos.comercio || '';
         this.form.description = datos.description || '';
         this.form.how_to_get = datos.how_to_get || '';
         this.form.requires = datos.requires || '';

@@ -102,12 +102,10 @@
               </el-option>
             </el-select>
           </el-form-item>
+          <!--comercio-->
 
-          <el-form-item prop="id_comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
-            <el-select v-model="form1.id_comercio" placeholder="Selecciona el tipo de comercio:">
-              <el-option v-for="comercio in comercios" :key="comercio.id" :label="comercio.comercio"
-                :value="comercio.id" />
-            </el-select>
+          <el-form-item prop="comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
+            <el-input v-model="form1.comercio" class="px-1" placeholder="Ingresa el comercio" />
           </el-form-item>
         </div>
 
@@ -197,7 +195,7 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
-    comercios: [],
+    //comercios: [],
     vias: [],
     form1: {
       name: '',
@@ -209,7 +207,7 @@ export default {
       numAddress: '',
       id_colonia: '',
       id_city: '',
-      id_comercio: '',
+      comercio: '',
       description: '',
       how_to_get: '',
       cell_phone: '',
@@ -257,7 +255,7 @@ export default {
       id_city: [
         { required: true, message: 'La ciudad es requerida', trigger: 'blur' },
       ],
-      id_comercio: [
+      comercio: [
         { required: true, message: 'El tipo de comercio es requerido', trigger: 'blur' },
       ],
       description: [
@@ -292,7 +290,7 @@ export default {
     this.refresh();
     this.fetchCiudades();
     this.fetchTypeRoad();
-    this.fetchComercios();
+    //this.fetchComercios();
     /*this.fetchColonias();*/
   },
   methods: {
@@ -362,7 +360,7 @@ export default {
           console.error('Error fetching vias:', error);
         });
     },
-
+/*
     fetchComercios() {
       axios.get('verComercio')
         .then(response => {
@@ -373,6 +371,7 @@ export default {
           console.error('Error fetching comercios:', error);
         });
     },
+    */
     fetchColoniasByCity(cityId) {
       this.loadingColonias = true;
       axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal

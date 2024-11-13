@@ -25,8 +25,7 @@ return new class extends Migration
             $table->foreign("id_colonia")->references('id')->on('colonias');
             $table->integer('id_city')->unsigned();
             $table->foreign("id_city")->references('id')->on('ciudades');
-            $table->integer('id_comercio')->unsigned();
-            $table->foreign("id_comercio")->references('id')->on('comercios');
+            $table->string('comercio');
             $table->string('description');
             $table->string('how_to_get');
             $table->string('cell_phone');
