@@ -12,14 +12,41 @@
 
 <body>
     <br>
-<img  class="membre" src="{{ $base64 }}" alt="">
+    <div class="memretado">
+    <img  class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo">
             <h3 class="letrasFlex">Orden de trabajo</h3>
             <div class="noOT">
                 No.{{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
             </div>
-        </div>    
-    <header>       
+        </div> 
+    </div>
+   
+    <header id="tablaAdi">  
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">CREDITO</th>
+        </table>
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">PAGADO</th>
+        </table>
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">BITACORA</th>
+        </table>   
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">AGENDAR</th>
+        </table>
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">CANCELAR</th>
+        </table>   
+        <table>
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
+        </table>              
     </header>
     <main > 
         <div class="cont">
@@ -92,7 +119,7 @@
         <table class="">
             <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
             <th class="renDivTh2">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDivlugar" style="text-transform: uppercase">
                 {{ $ordenCompleta->comercio }}
             </div>
             </th>
@@ -340,7 +367,31 @@
                 No.{{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>    
-    <header>       
+        <header id="tablaAdi2">  
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">CREDITO</th>
+        </table>
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">PAGADO</th>
+        </table>
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">BITACORA</th>
+        </table>   
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">AGENDAR</th>
+        </table>
+        <table >
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:50px;">CANCELAR</th>
+        </table>   
+        <table>
+            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+            <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
+        </table>              
     </header>
     <main > 
         <div class="cont">
@@ -413,7 +464,7 @@
         <table class="">
             <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
             <th class="renDivTh2">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDivlugar" style="text-transform: uppercase">
                 {{ $ordenCompleta->comercio }}
             </div>
             </th>
@@ -642,6 +693,25 @@
 
 
 <style>
+    
+    td{
+        font-size: 12.5px;
+    }
+    #tablaAdi{
+        position: absolute;
+        margin-top: -170px;
+        margin-left: 75%;
+        font-size: 15px;
+        width: 7%;
+    }
+    #tablaAdi2{
+
+        position: absolute;
+        margin-top: 0%;
+        margin-left: 60px;
+        font-size: 15px;
+        width: 7%;
+    }
     .clth1112{
         width: 5%;
     }
@@ -694,8 +764,10 @@
         margin-top:4px;
     }
     .letrasflex{
+        margin-left: 20px;
         margin-top: 15px;
-        padding-right:40px;
+        padding-right:70px;
+        padding-left:70px;
     }
     .meminfo{
         text-align: center;
@@ -706,9 +778,10 @@
     }
     .membre{
         margin-top:40px;
-        padding-left: 10%;
+        padding-left: -10%;
         height:12%;
-        width: 80%;
+        width: auto;
+        padding-right: 40px;
     }    
     .delimitador{
         margin-top:-5%;
@@ -751,6 +824,11 @@
     .renDivThlocal{
     
         width: 70%;
+    }
+    .renDivlugar{
+        border-bottom: 1px solid black;
+        width: 100%;
+        font-size: 9;
     }
     .renDivplaga{
         border-bottom: 1px solid black;
@@ -825,7 +903,7 @@
         font-weight: normal;
         width: auto;
     }
-.button {
+    .button {
         height: 4px;
         height: 4px;
         background-color: white;
@@ -837,34 +915,37 @@
         font-size: 14px;
         text-align: start;
     }  
-.button5 {
-    text-align: start;
-    height: 4px;
-    height: 4px;
-    border-radius: 50%;
-    margin-right:-30px;
-    background-color:blue;
-}
+    .button5 {
+        text-align: start;
+        height: 4px;
+        height: 4px;
+        border-radius: 50%;
+        margin-right:-30px;
+        background-color:blue;
+    }
 
-.btnCan{
-    border-radius: 50%;
-    margin-right:-30px;
-    background-color:rgba(0, 0, 255, 0);
-}
-.btnCir{    
-    font-size:15px;
-    font-weight: normal;
-    width: 90%;
-}
-.btnCir2{    
-    font-size:15px;
-    font-weight: normal;
-    width: 90%;
+    .btnCan{
+        border-radius: 50%;
+        margin-right:-30px;
+        background-color:rgba(0, 0, 255, 0);
+    }
+    .btnCir{    
+        font-size:15px;
+        font-weight: normal;
+        width: 90%;
+    }
+    .btnCir2{    
+     font-size:15px;
+        font-weight: normal;
+        width: 90%;
 
-}
-.pr{
-    margin-top:20px;
-}
+    }
+    .pr{
+        margin-top:20px;
+    }
+    .memretado{
+        margin-left: 0px;
+    }
 
 
 </style>

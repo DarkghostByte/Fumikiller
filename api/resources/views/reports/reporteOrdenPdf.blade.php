@@ -95,7 +95,7 @@
         <table class="">
             <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
             <th class="renDivTh2">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDivlugar" style="text-transform: uppercase">
                 {{ $orden->comercio }}
             </div>
             </th>
@@ -468,7 +468,7 @@
         <table class="">
             <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
             <th class="renDivTh2">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDivlugar" style="text-transform: uppercase">
                 {{ $orden->comercio }}
             </div>
             </th>
@@ -799,6 +799,11 @@
     .renDivThlocal{
     
         width: 70%;
+    }
+    .renDivlugar{
+        border-bottom: 1px solid black;
+        width: 100%;
+        font-size: 9;
     }
     .renDivplaga{
         border-bottom: 1px solid black;
