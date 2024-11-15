@@ -49,7 +49,7 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="Folio" sortable>
+        <el-table-column label="O. Trabajo" sortable>
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>

@@ -38,6 +38,7 @@ class IngresosController extends Controller
             'dateIngreso' => 'required|min:1',
             'descriptionIngreso' => 'required|min:1',
             'montoIngreso' => 'required|min:1',
+            'dataIngreso' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -50,6 +51,7 @@ class IngresosController extends Controller
             $data->dateIngreso = $request->dateIngreso;
             $data->descriptionIngreso = $request->descriptionIngreso;
             $data->montoIngreso = $request->montoIngreso;
+            $data->dataIngreso = $request->dataIngreso;
             $data->save();
 
             return response()->json([
@@ -85,6 +87,7 @@ class IngresosController extends Controller
             'dateIngreso' => 'required|min:1',
             'descriptionIngreso' => 'required|min:1',
             'montoIngreso' => 'required|min:1',
+            'dataIngreso' => 'required|min:1',
         ]);
         if (!$data) {
             return response()->json([

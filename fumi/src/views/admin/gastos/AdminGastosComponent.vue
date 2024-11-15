@@ -2,15 +2,6 @@
   <div>
     <div class="flex mr-6">
       <h1 class="py-6 px-5 text-4xl font-semibold mb-2 flex-grow">Caja</h1>
-      <div class="flex justify-end flex-grow">
-        <a :href="url + 'api/pdfCaja/'" target="_blank"
-          class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
-          style="width:80px; height:50px; text-align: center; ">
-          <div class="flex">
-            <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>
-          </div>
-        </a>
-      </div>
     </div>
 
     <div class="container mx-auto">
@@ -29,9 +20,10 @@
 
 
     <div class="flex flex-wrap items-center justify-center mt-6">
+      <h1 style="width:100px;" class="text-2xl font-bold">CAJA</h1>
       <Button
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-600 hover:bg-blue-1000 focus:bg-blue-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
-        style="width:300px; height:100px; font-size:26px; text-align: center;">
+        style=" width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
           <h3 class="txtH3" style="font-size:32px; margin-bottom:-15px;">$ {{ totalIngresos }}</h3>
           <h2>Ingresos</h2>
@@ -44,7 +36,7 @@
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-600 hover:bg-green-1000 focus:bg-green-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style="width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
-          <h3 class="txtH3" style="font-size:32px; margin-bottom:-15px;">$ {{ totalEgresos }}</h3>
+          <h3 class="txtH3" style="font-size:32px; margin-bottom:-15px;">$ {{ totalCajaEgreso }}</h3>
           <h2>Egresos</h2>
         </div>
         <i class="fa-solid fa-money-bill fa-rotate-by fa-2xl" aria-hidden="true"
@@ -62,6 +54,59 @@
         <i class="fa-solid fa-cash-register fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
       </Button>
+
+      <a :href="url + 'api/pdfCaja/'" target="_blank"
+          class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
+          style="width:80px; height:50px; text-align: center; ">
+          <div class="flex">
+            <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>
+          </div>
+        </a>
+    </div>
+
+    <div class="flex flex-wrap items-center justify-center">
+      <h1 style="width:100px;" class="text-2xl font-bold">BANCOS</h1>
+      <Button
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-lime-600 hover:bg-lime-1000 focus:bg-lime-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
+        style="width:300px; height:100px; font-size:26px; text-align: center;">
+        <div class="row">
+          <h3 class="txtH3" style="font-size:32px; margin-bottom:-15px;">$ {{ totalCajaBanco }}</h3>
+          <h2>Ingresos</h2>
+        </div>
+        <i class="fa-solid fa-solid fa-money-bill-trend-up fa-rotate-by fa-2xl" aria-hidden="true"
+          style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
+      </Button>
+
+      <Button
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-rose-600 hover:bg-rose-1000 focus:bg-rose-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
+        style="width:300px; height:100px; font-size:26px; text-align: center;">
+        <div class="row">
+          <h3 class="txtH3" style="font-size:32px; margin-bottom:-15px;">$ {{ totalBancoEgreso }}</h3>
+          <h2>Egresos</h2>
+        </div>
+        <i class="fa-solid fa-money-bill fa-rotate-by fa-2xl" aria-hidden="true"
+          style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
+
+      </Button>
+
+      <Button
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-cyan-600 hover:bg-cyan-1000 focus:bg-cyan-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
+        style="width:300px; height:100px; font-size:26px; text-align: center;">
+        <div class="row">
+          <h3 class="txtH3" style="font-size:32px; margin-bottom:-15px;">$ {{ totalSaldoBanco }}</h3>
+          <h2>Saldo</h2>
+        </div>
+        <i class="fa-solid fa-cash-register fa-rotate-by fa-2xl" aria-hidden="true"
+          style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
+      </Button>
+
+      <a :href="url + 'api/pdfCaja/'" target="_blank"
+          class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
+          style="width:80px; height:50px; text-align: center; ">
+          <div class="flex">
+            <i class="fa-solid fa-file-pdf pdfBtn" style="font-size: 25px;"></i>
+          </div>
+        </a>
     </div>
 
     <div class="table-container mt-2" style="width:100%;">
@@ -126,6 +171,12 @@
       <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
         :label-position="'top'">
         <div class="row">
+          <el-form-item prop="dataIngreso" label="Datos">
+            <el-radio-group v-model="form1.dataIngreso">
+              <el-radio value="Caja" size="large" border>Caja</el-radio>
+              <el-radio value="Banco" size="large" border>Banco</el-radio>
+            </el-radio-group>
+          </el-form-item>
           <el-form-item prop="dateIngreso" label="Fecha:">
             <el-col :span="11" style="width: 240px">
               <el-date-picker v-model="form1.dateIngreso" type="date" placeholder="Fecha del ingreso:"
@@ -155,6 +206,20 @@
       <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules2"
         :label-position="'top'">
         <div class="row">
+          <el-form-item prop="dataEgresos" label="Datos">
+            <el-radio-group v-model="form2.dataEgresos" size="large">
+              <el-radio-button label="Caja" value="Caja" />
+              <el-radio-button label="Banco" value="Banco" />
+              <el-radio-button label="Deposito" value="Deposito" />
+            </el-radio-group> 
+            <!--
+            <el-radio-group v-model="form2.dataEgresos">
+              <el-radio value="Caja" border>Caja</el-radio>
+              <el-radio value="Banco" border>Banco</el-radio>
+              <el-radio value="Deposito" border>Deposito</el-radio>
+            </el-radio-group>
+            -->
+          </el-form-item>
           <el-form-item prop="dateEgresos" label="Fecha:">
             <el-col :span="11" style="width: 240px">
               <el-date-picker v-model="form2.dateEgresos" type="date" placeholder="Fecha del ingreso:"
@@ -211,6 +276,9 @@ export default {
     totalIngresos: 0,
     totalEgresos: 0,
     totalSaldo: 0,
+    totalBancoIngreso: 0,
+    totalBancoEgreso: 0,
+    totalSaldoBanco: 0,
     selectedDate: null,
     selectedDate1: null,
     searchQuery1: '',
@@ -219,6 +287,7 @@ export default {
       dateIngreso: '',
       descriptionIngreso: '',
       montoIngreso: '',
+      dataIngreso: '',
     },
     rules: {
       dateIngreso: [
@@ -233,11 +302,16 @@ export default {
         { required: true, message: 'El monto es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
+      dataIngreso: [
+        { required: true, message: 'El campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
     },
     form2: {
       dateEgresos: '',
       descriptionEgresos: '',
       montoEgresos: '',
+      dataEgresos: '',
     },
     rules2: {
       dateEgresos: [
@@ -249,6 +323,10 @@ export default {
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
       montoEgresos: [
+        { required: true, message: 'El monto es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      dataEgresos: [
         { required: true, message: 'El monto es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
@@ -317,17 +395,32 @@ export default {
         const responseTotalDinero = await axios.get(this.urlApi + 'totalCaja');
         const {
           totalIngresos,
+          totalBancoIngreso,
           totalEgresos,
+          totalBancoEgreso,
           totalSaldo,
+          totalSaldoBanco,
+          totalCajaBanco,
+          totalCajaEgreso,
         } = responseTotalDinero.data; // Destructuring assignment
 
         this.totalIngresos = totalIngresos;
+        this.totalBancoIngreso = totalBancoIngreso;
         this.totalEgresos = totalEgresos;
+        this.totalBancoEgreso = totalBancoEgreso;
         this.totalSaldo = totalSaldo;
+        this.totalSaldoBanco = totalSaldoBanco;
+        this.totalCajaBanco = totalCajaBanco;
+        this.totalCajaEgreso = totalCajaEgreso;
 
         console.log('Total Ingresos', this.totalIngresos);
-        console.log('Total Egreso', this.totalEgresos);
+        console.log('Total Ingresos Banco', this.totalBancoIngreso);
+        console.log('Total Egresos', this.totalEgresos);
+        console.log('Total Egresos Banco', this.totalBancoEgreso);
         console.log('Total Caja', this.totalSaldo);
+        console.log('Total Banco', this.totalSaldoBanco);
+        console.log('Total Caja Banco', this.totalCajaBanco);
+        console.log('Total Caja Egresos', this.totalCajaEgreso);
         console.log('Totales', responseTotalDinero.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);

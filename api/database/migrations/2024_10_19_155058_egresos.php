@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('dateEgresos');
             $table->string('descriptionEgresos');
             $table->decimal('montoEgresos');
+            $table->string('dataEgresos');
             $table->timestamps();
         });
     }

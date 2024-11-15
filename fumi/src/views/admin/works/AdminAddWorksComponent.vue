@@ -119,6 +119,12 @@
               />
             </el-col>
           </el-form-item>
+          <el-form-item prop="infoorden_cell" label="Hablar antes de ir?" class="px-10">
+            <el-radio-group v-model="form.infoorden_cell">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
         </div>
         <!-- FILA DE TIPO DE CONTRATACION -->
         <p>Contratacion:</p>
@@ -195,9 +201,10 @@ export default {
       hiring: [],
       infoorden_delete: 'Alta',
       statusOrder: 'Por realizar',
-      infoorden_certificate: '',
-      infoorden_remision: '',
-      infoorden_facturacion: ''
+      infoorden_certificate: 'No',
+      infoorden_remision: 'No',
+      infoorden_facturacion: 'No',
+      infoorden_cell: 'No'
     },
     rules: {
       id_plague1: [

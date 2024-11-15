@@ -13,6 +13,7 @@ class Ingresos extends Model
     protected $fillable = [
         'dateIngreso',
         'descriptionIngreso',
-        'montoIngreso'
+        'montoIngreso',
+        'dataIngreso'
     ];
 }

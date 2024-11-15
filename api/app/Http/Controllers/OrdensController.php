@@ -95,6 +95,7 @@ class OrdensController extends Controller
             'infoorden_certificate' => 'required|min:1',
             'infoorden_remision' => 'required|min:1',
             'infoorden_facturacion' => 'required|min:1',
+            'infoorden_cell' => 'required|min:1',
             'statusOrder' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
@@ -117,6 +118,7 @@ class OrdensController extends Controller
             $data->infoorden_certificate = $request->infoorden_certificate;
             $data->infoorden_remision = $request->infoorden_remision;
             $data->infoorden_facturacion = $request->infoorden_facturacion;
+            $data->infoorden_cell = $request->infoorden_cell;
             $data->statusOrder = $request->statusOrder;
             $data->save();
 

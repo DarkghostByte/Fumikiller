@@ -13,6 +13,7 @@ class Egresos extends Model
     protected $fillable = [
         'dateEgresos',
         'descriptionEgresos',
-        'montoEgresos'
+        'montoEgresos',
+        'dataEgresos'
     ];
 }

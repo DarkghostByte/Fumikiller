@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('certificados', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('id_cliente')->unsigned();
-            $table->foreign("id_cliente")->references('id')->on('clientes');
+            $table->integer('id_orden')->unsigned();
+            $table->foreign("id_orden")->references('id')->on('orden');
             $table->string('certificateName');
             $table->string('certificateDate');
             $table->integer('id_productoCertificadoInt1')->unsigned();

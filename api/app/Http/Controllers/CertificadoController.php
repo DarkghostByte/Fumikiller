@@ -34,7 +34,8 @@ class CertificadoController extends Controller
         ])
         ->join('productosInternos', 'certificados.id_productoCertificadoInt1', '=', 'productosInternos.id')
         ->join('productosExternos', 'certificados.id_productoCertificadoExt1', '=', 'productosExternos.id')
-        ->join('clientes', 'certificados.id_cliente', '=', 'clientes.id')
+        ->join('orden', 'certificados.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->orderBy('certificados.id', 'DESC')
@@ -61,7 +62,7 @@ class CertificadoController extends Controller
     public function store(Request $request)
     {
         $reglas = Validator::make($request->all(),[
-            'id_cliente' => 'min:1',
+            'id_orden' => 'min:1',
             'certificateName' => 'required|min:1',
             'certificateDate' => 'required|min:1',
             'id_productoCertificadoInt1' => 'required|min:1',
@@ -75,7 +76,7 @@ class CertificadoController extends Controller
             ],201);
         }else{
             $data = new Certificado();
-            $data->id_cliente = $request->id_cliente;
+            $data->id_orden = $request->id_orden;
             $data->certificateName = $request->certificateName;
             $data->certificateDate = $request->certificateDate;
             $data->id_productoCertificadoInt1 = $request->id_productoCertificadoInt1;

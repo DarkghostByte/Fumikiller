@@ -49,7 +49,7 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="Folio" sortable>
+        <el-table-column label="O. Trabajo" sortable>
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
@@ -279,7 +279,7 @@ export default {
           try {
             const response = await axios.post('certificados', {
               ...this.form1,
-              id_cliente: this.selectedItem.id,
+              id_orden: this.selectedItem.id,
             });
             console.log(response);
             this.dialogVisibleViewcertificado = false;
@@ -290,6 +290,7 @@ export default {
               message: 'Registro insertado correctamente',
               type: 'success'
             })
+            this.$refs.formRef.resetFields();
           } catch (error) {
             console.error('Error creating certificate:', error.response.data);
             this.$message.error('Error al crear el certificado');
@@ -360,8 +361,8 @@ export default {
 
     async fetchData() {
       try {
-        const responseOrdenes = await axios.get(this.urlApi + 'clientes');
-        this.tableData = responseOrdenes.data.data.filter(row => row.infoclient_certificate !== 'No');
+        const responseOrdenes = await axios.get(this.urlApi + 'orden');
+        this.tableData = responseOrdenes.data.data.filter(row => row.infoorden_certificate !== 'No');
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }

@@ -46,7 +46,7 @@ class ColoniaSeeder extends Seeder
         ]);
         DB::table('colonias')->insert([
             'colonia'=>'Ampliación Zapata',
-            'codigoPostal'=>'91777',
+            'codigoPostal'=>'31777',
             'id_ciudad'=>1,
 
         ]);
@@ -309,7 +309,7 @@ class ColoniaSeeder extends Seeder
 
         ]);
         DB::table('colonias')->insert([
-            'colonia'=>'Nuevo Casas Grandes Centro',
+            'colonia'=>'Centro',
             'codigoPostal'=>'31700',
             'id_ciudad'=>1,
 

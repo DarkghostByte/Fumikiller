@@ -38,6 +38,7 @@ class EgresosController extends Controller
             'dateEgresos' => 'required|min:1',
             'descriptionEgresos' => 'required|min:1',
             'montoEgresos' => 'required|min:1',
+            'dataEgresos' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -50,6 +51,7 @@ class EgresosController extends Controller
             $data->dateEgresos = $request->dateEgresos;
             $data->descriptionEgresos = $request->descriptionEgresos;
             $data->montoEgresos = $request->montoEgresos;
+            $data->dataEgresos = $request->dataEgresos;
             $data->save();
 
             return response()->json([
@@ -85,6 +87,7 @@ class EgresosController extends Controller
             'dateEgresos' => 'required|min:1',
             'descriptionEgresos' => 'required|min:1',
             'montoEgresos' => 'required|min:1',
+            'dataEgresos' => 'required|min:1',
         ]);
         if (!$data) {
             return response()->json([

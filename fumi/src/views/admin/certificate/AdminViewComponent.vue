@@ -163,6 +163,7 @@ export default {
       axios.get('certificados').then(res => {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
+        console.log(this.tableData);
       });
     },  
     seleccionar(row) {

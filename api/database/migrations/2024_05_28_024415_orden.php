@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('infoorden_certificate');
             $table->string('infoorden_remision');
             $table->string('infoorden_facturacion');
+            $table->string('infoorden_cell');
             $table->string('statusOrder');
             $table->timestamps();
         });

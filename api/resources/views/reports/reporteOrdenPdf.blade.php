@@ -18,11 +18,20 @@
                 No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
+        @php 
+        $si = ($orden->infoorden_cell == 'Si') ? true : false;
+
+    @endphp 
     
-    
-    <header>    
-        
+    <header> 
+        @if($si)
+        <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
+        @else
+        <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
+        @endif
     </header>
+
+
 
     <main > 
         <div class="cont">
@@ -393,9 +402,13 @@
         </div>
     
     
-    <header>    
-        
-    </header>
+        <header> 
+            @if($si)
+            <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
+            @else
+            <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
+            @endif
+        </header>
 
     <main > 
         <div class="cont">

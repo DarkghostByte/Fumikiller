@@ -154,28 +154,48 @@ class AdminController extends Controller
 
     public function totalCaja()
 {
-    // Obtener la suma total de 'pago' de CompletarOrden
+    /*INGRESOS TOTALES*/ 
     $totalPagos = CompletarOrden::where('requiere3', 'Pagado')->sum('pago');
-
-    // Obtener la suma total de 'montoIngreso' de Ingresos
-    $totalIngresosAdicionales = Ingresos::sum('montoIngreso');
-
-    // Calcular el total general
+    $totalIngresosAdicionales = Ingresos::where('dataIngreso', 'Caja')->sum('montoIngreso');
+    $totalBancoIngreso= Ingresos::where('dataIngreso', 'Banco')->sum('montoIngreso');
     $totalCaja = $totalPagos + $totalIngresosAdicionales;
+    
+    /*EGRESOS*/
+    $totalEgresos = Egresos::where('dataEgresos', 'Caja')->sum('montoEgresos');
+    $totalBancosEgresos = Egresos::where('dataEgresos', 'Banco')->sum('montoEgresos');
+    $totalDepositoEgresos = Egresos::where('dataEgresos', 'Deposito')->sum('montoEgresos');
+    /*CAJA*/
+    
+    /*BANCO*/
+    $totalCajaEgreso = $totalEgresos + $totalDepositoEgresos;
+    
+    $totalCajaBanco = $totalBancoIngreso + $totalDepositoEgresos;
 
-    $totalEgresos = Egresos::sum('montoEgresos');
+    $totalSaldoBanco = $totalCajaBanco - $totalBancosEgresos;
 
-    $totalSaldo = $totalCaja - $totalEgresos;
+    $totalSaldo = $totalCaja - $totalCajaEgreso;
+    
+
 
     // Formatear los números como decimales
     $totalCajaFormateado = number_format($totalCaja, 2, '.', ',');
     $totalEgresosFormateado = number_format($totalEgresos, 2, '.', ',');
     $totalSaldoFormateado = number_format($totalSaldo, 2, '.', ',');
+    $totalBancoIngresoFormateado = number_format($totalBancoIngreso, 2, '.', ',');
+    $totalBancoEgresoFormateado = number_format($totalBancosEgresos, 2, '.', ',');
+    $totalSaldoBancoFormateado = number_format($totalSaldoBanco, 2, '.', ',');
+    $totalCajaBancoFormateado = number_format($totalCajaBanco, 2, '.', ',');
+    $totalCajaEgresoFormateado = number_format($totalCajaEgreso, 2, '.', ',');
 
     return response()->json([
         'totalIngresos' => $totalCajaFormateado,
         'totalEgresos' => $totalEgresosFormateado,
         'totalSaldo' => $totalSaldoFormateado,
+        'totalBancoIngreso' => $totalBancoIngresoFormateado,
+        'totalBancoEgreso' => $totalBancoEgresoFormateado,
+        'totalSaldoBanco' => $totalSaldoBancoFormateado,
+        'totalCajaBanco' => $totalCajaBancoFormateado,
+        'totalCajaEgreso' => $totalCajaEgresoFormateado,
     ]);
 }
 }

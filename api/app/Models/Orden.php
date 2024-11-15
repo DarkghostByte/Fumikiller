@@ -23,6 +23,7 @@ class Orden extends Model
         'infoorden_certificate',
         'infoorden_remision',
         'infoorden_facturacion',
+        'infoorden_cell',
         'statusOrder',
     ];
 

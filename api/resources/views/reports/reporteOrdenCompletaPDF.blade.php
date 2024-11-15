@@ -22,31 +22,97 @@
         </div> 
     </div>
    
-    <header id="tablaAdi">  
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">CREDITO</th>
-        </table>
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">PAGADO</th>
-        </table>
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">BITACORA</th>
-        </table>   
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">AGENDAR</th>
-        </table>
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">CANCELAR</th>
-        </table>   
-        <table>
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
-        </table>              
+    <header id="tablaAdi"> 
+        @php 
+            $arregloRequiere = json_decode($ordenCompleta->requiere2 );
+            $bitacora=false;
+            $agendar=false;
+            $cancelar=false;
+            $elloshablan=false;
+            $nada=false;
+        
+            foreach($arregloRequiere as $item){
+                if($item == 'Bitacora'){ $bitacora=true; }
+                if($item == 'Agendar'){ $agendar=true; }
+                if($item == 'Cancelar'){ $cancelar=true; }
+                if($item == 'Ellos hablan'){ $elloshablan=true; }
+                if($item == 'Nada'){ $nada=true; }
+            }
+
+            $pagado = ($ordenCompleta->requiere3 == 'Pagado') ? true : false;
+            $credito = ($ordenCompleta->requiere3 == 'Credito') ? true : false;
+
+        @endphp 
+        <div>
+            @if($pagado)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+            </table>
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+            </table>
+            @endif
+            @if($credito)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:50px;">CREDITO</th>
+            </table>
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">CREDITO</th>
+            </table>
+            @endif
+            @if($bitacora)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:50px;">BITACORA</th>
+            </table>
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">BITACORA</th>
+            </table>
+            @endif
+            @if($agendar)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:150px;">AGENDAR {{ $ordenCompleta->otraDosis }}</th>
+            </table>
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">AGENDAR</th>
+            </table>
+            @endif
+            @if($cancelar)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:50px;">CANCELAR</th>
+            </table>   
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">CANCELAR</th>
+            </table>   
+            @endif
+            @if($elloshablan)
+            <table>
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
+            </table> 
+            @else
+            <table>
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
+            </table> 
+            @endif
+            
+            
+        </div>                
     </header>
     <main > 
         <div class="cont">
@@ -368,30 +434,77 @@
             </div>
         </div>    
         <header id="tablaAdi2">  
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">CREDITO</th>
-        </table>
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">PAGADO</th>
-        </table>
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">BITACORA</th>
-        </table>   
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">AGENDAR</th>
-        </table>
-        <table >
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:50px;">CANCELAR</th>
-        </table>   
-        <table>
-            <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
-            <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
-        </table>              
+
+            <div>
+                @if($pagado)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+            </table>
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+            </table>
+            @endif
+            @if($credito)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:50px;">CREDITO</th>
+            </table>
+            @else
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">CREDITO</th>
+            </table>
+            @endif
+                @if($bitacora)
+                <table >
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                    <td style="margin-left: -50px; width:50px;">BITACORA</th>
+                </table>
+                @else
+                <table >
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                    <td style="margin-left: -50px; width:50px;">BITACORA</th>
+                </table>
+                @endif
+                @if($agendar)
+                <table >
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                    <td style="margin-left: -50px; width:150px;">AGENDAR {{ $ordenCompleta->otraDosis }}</th>
+                </table>
+                @else
+                <table >
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                    <td style="margin-left: -50px; width:50px;">AGENDAR</th>
+                </table>
+                @endif
+                @if($cancelar)
+                <table >
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                    <td style="margin-left: -50px; width:50px;">CANCELAR</th>
+                </table>   
+                @else
+                <table >
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                    <td style="margin-left: -50px; width:50px;">CANCELAR</th>
+                </table>   
+                @endif
+                @if($elloshablan)
+                <table>
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                    <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
+                </table> 
+                @else
+                <table>
+                    <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                    <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
+                </table> 
+                @endif
+                
+                
+            </div>             
     </header>
     <main > 
         <div class="cont">
@@ -489,24 +602,6 @@
             </div>
             </th> 
         </table>
-
-        @php 
-            $arreglo = json_decode($ordenCompleta->hiring );
-            $presupuesto=false;
-            $fumigar=false;
-            $garantia=false;
-            $cortesia=false;
-            $nada=false;
-        
-            foreach($arreglo as $item){
-                if($item == 'Presupuesto'){ $presupuesto=true; }
-                if($item == 'Fumigar'){ $fumigar=true; }
-                if($item == 'Garantia'){ $garantia=true; }
-                if($item == 'Cortesia'){ $cortesia=true; }
-                if($item == 'Nada'){ $nada=true; }
-            }
-        @endphp
-
 <table class="btnCir">
             
     <th style="text-align:center;">
@@ -601,22 +696,6 @@
             </div>
             </th> 
         </table>
-
-
-        @php 
-            $arreglo = json_decode($ordenCompleta->requiere1 );
-            $factura=false;
-            $certificado=false;
-            $remision=false;
-            $nada=false;
-        
-            foreach($arreglo as $item){
-                if($item == 'Factura'){ $factura=true; }
-                if($item == 'Certificado'){ $certificado=true; }
-                if($item == 'Remision'){ $remision=true; }
-                if($item == 'Nada'){ $nada=true; }
-            }
-        @endphp
 
 <table class="btnCir2">
 <th>Require de:</th>
