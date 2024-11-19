@@ -8,10 +8,35 @@
     <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">Reportes</h1>
 
     <div class="flex justify-center items-center mt-4">
-      <el-date-picker v-model="f1" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Fecha inicial"></el-date-picker>
+      <el-date-picker v-model="f1" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY"
+        placeholder="Fecha inicial"></el-date-picker>
       <span class="mx-3"> - </span>
-      <el-date-picker v-model="f2" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Fecha final"></el-date-picker>
-      <button class="ml-3 px-3 py-2 bg-blue-500 hover:bg-orange-500 text-white hover:text-neutral-950 rounded-md border-2 border-neutral-950" @click="fetchDate">Buscar</button>
+      <el-date-picker v-model="f2" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY"
+        placeholder="Fecha final"></el-date-picker>
+      <button
+        class="ml-3 px-3 py-2 bg-blue-500 hover:bg-orange-500 text-white hover:text-neutral-950 rounded-md border-2 border-neutral-950"
+        @click="fetchDate">Buscar</button>
+    </div>
+
+    <div class="flex justify-center items-center mt-2">
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData1"
+        style="width: 25%;" />
+      <el-input class="px-2" placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData2"
+        style="width: 25%;" />
+      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQuery3" @input="filterData3"
+        style="width: 25%;" />
+    </div>
+    <div class="flex justify-center items-center mt-2">
+      <el-input class="px-2" placeholder="Buscar si es que tiene facturacion" v-model="searchQuery4"
+        @input="filterData4" style="width: 25%;" />
+      <el-input class="px-2" placeholder="Buscar por facturacion" v-model="searchQuery5" @input="filterData5"
+        style="width: 25%;" />
+      <el-input class="px-2" placeholder="Buscar por numero de folio" v-model="searchQuery6" @input="filterData6"
+        style="width: 25%;" />
+      <el-input class="px-2" placeholder="Buscar por estado (Pagado o Credito)" v-model="searchQuery7"
+        @input="filterData7" style="width: 25%;" />
+      <el-date-picker class="px-2" v-model="selectedDate" @change="filterData8" type="date" format="YYYY-MM-DD"
+        value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
     </div>
 
     <!--
@@ -35,7 +60,7 @@
           <div>
             <span class="block text-gray-500">Venta Sin Facturas</span>
             <span class="block text-2xl font-bold">${{ totalVentasSinFactura }}</span>
-            <a :href="url + 'api/ventsinfact/'+f1+'/'+f2" target="_blank">
+            <a :href="url + 'api/ventsinfact/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -51,7 +76,7 @@
           <div>
             <span class="block text-gray-500">Venta Por Facturas</span>
             <span class="block text-2xl font-bold">${{ totalVentasConFactura }}</span>
-            <a :href="url + 'api/ventconfact/'+f1+'/'+f2" target="_blank">
+            <a :href="url + 'api/ventconfact/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -67,7 +92,7 @@
           <div>
             <span class="block text-gray-500">Ventas Totales</span>
             <span class="block text-2xl font-bold">${{ totalPagos }}</span>
-            <a :href="url + 'api/ventatotales/'+f1+'/'+f2" target="_blank">
+            <a :href="url + 'api/ventatotales/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -83,7 +108,7 @@
           <div class="justify-center items-center">
             <span class="block text-gray-500">Creditos Sin Factura</span>
             <span class="block text-2xl font-bold">${{ totalCreditosSinFactura }}</span>
-            <a :href="url + 'api/creditossinfactura/'+f1+'/'+f2" target="_blank">
+            <a :href="url + 'api/creditossinfactura/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -99,7 +124,7 @@
           <div class="justify-center items-center">
             <span class="block text-gray-500">Creditos Con Factura</span>
             <span class="block text-2xl font-bold">${{ totalCreditosConFactura }}</span>
-            <a :href="url + 'api/creditosconfactura/'+f1+'/'+f2" target="_blank">
+            <a :href="url + 'api/creditosconfactura/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -115,7 +140,7 @@
           <div class="justify-center items-center">
             <span class="block text-gray-500">Creditos Totales</span>
             <span class="block text-2xl font-bold">${{ totalCreditos }}</span>
-            <a :href="url + 'api/creditos/'+f1+'/'+f2" target="_blank">
+            <a :href="url + 'api/creditos/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
             </a>
           </div>
@@ -126,42 +151,30 @@
   </div>
   <!-- TABLE DATA -->
   <div class="flex">
-    <el-table :data="tableData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 70%; margin: auto;"
-      stripe>
+    <el-table :data="filteredData1" :default-sort="{ prop: 'id', order: 'ascending' }"
+      style="width: 100%; margin: auto;" stripe>
       <el-table-column class="" label="">
         <template #default="{ row }">
           <button class="ml-5 px-5 my-5 h-3 w-3 rounded-full"
-            :style="{ backgroundColor: row.requiere3 === 'Credito' ? 'Red' : 'Green' }"
-            @click="handleEstadoClick(row)">
-            <!-- Inicio de animacion
-            <div class="container">
-              <div class="left-side">
-               <div class="card">
-                <div class="card-line"></div>
-                <div class="buttons"></div>
-               </div>
-               <div class="post">
-                <div class="post-line"></div>
-                <div class="screen">
-                 <div class="dollar"></div>
-                </div>
-                <div class="numbers"></div>
-                <div class="numbers-line2"></div>
-               </div>
-              </div>
-              <div class="right-side">
-               <div class="new"></div>
-               
-                <svg viewBox="0 0 451.846 451.847" height="512" width="512" xmlns="http://www.w3.org/2000/svg" class="arrow"><path fill="#cfcfcf" data-old_color="#000000" class="active-path" data-original="#000000" d="M345.441 248.292L151.154 442.573c-12.359 12.365-32.397 12.365-44.75 0-12.354-12.354-12.354-32.391 0-44.744L278.318 225.92 106.409 54.017c-12.354-12.359-12.354-32.394 0-44.748 12.354-12.359 32.391-12.359 44.75 0l194.287 194.284c6.177 6.18 9.262 14.271 9.262 22.366 0 8.099-3.091 16.196-9.267 22.373z"></path></svg>
-              
-              </div>
-             </div>
-             Fin de animacion-->
+            :style="{ backgroundColor: row.requiere3 === 'Credito' ? 'Red' : 'Green' }" @click="handleEstadoClick(row)">
           </button>
         </template>
       </el-table-column>
-      <el-table-column prop="tradename" label="Cliente" sortable />
-      <el-table-column prop="id" label="Factura" sortable />
+      <el-table-column label="Nombre" sortable width="200">
+        <template #default="scope">
+          {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+        </template>
+      </el-table-column>
+      <el-table-column prop="tradename" label="Negocio" sortable />
+      <el-table-column label="Direccion" sortable width="300">
+        <template #default="scope">
+          {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
+            ', ' + scope.row.ciudad }}
+        </template>
+      </el-table-column>
+
+      <el-table-column prop="infoorden_facturacion" label="Facturacion" width="125" sortable />
+      <el-table-column prop="id" label="No. Factura" width="125" sortable />
       <el-table-column prop="pago" label="Costo" sortable />
       <el-table-column prop="requiere3" label="Estado">
         <template #default="{ row }">
@@ -169,7 +182,7 @@
           <span v-else>{{ row.requiere3 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="date2" label="Fecha de factura"></el-table-column>
+      <el-table-column prop="date1" label="Fecha de factura"></el-table-column>
     </el-table>
   </div>
   <!-- END TABLE DATA -->
@@ -195,6 +208,16 @@ export default {
     totalCreditosConFactura: 0,
     f1: null,
     f2: null,
+    searchQuery1: '',
+    searchQuery2: '',
+    searchQuery3: '',
+    searchQuery4: '',
+    searchQuery5: '',
+    searchQuery6: '',
+    searchQuery7: '',
+    searchQuery8: '',
+    filteredData1: [],
+    selectedDate: null,
   }),
   mounted() {
     this.fetchData();
@@ -203,7 +226,8 @@ export default {
   methods: {
     refresh() {
       axios.get('completarOrden').then(res => {
-        this.tableData = res.data.data.filter(row => row.tradename !== 'Particular');
+        this.tableData = res.data.data;
+        this.filteredData1 = this.tableData;
         console.log(res.data.data);
       });
     },
@@ -226,38 +250,38 @@ export default {
     },
 
     fetchDate() {
-    if (this.f1 === null && this.f2 === null) {
+      if (this.f1 === null && this.f2 === null) {
         ElNotification({
-            title: 'Aviso',
-            message: `No se realizó el filtro de las fechas seleccionadas.`,
-            type: 'warning'
+          title: 'Aviso',
+          message: `No se realizó el filtro de las fechas seleccionadas.`,
+          type: 'warning'
         });
-    } else if (this.f1 === null) {
+      } else if (this.f1 === null) {
         ElNotification({
-            title: 'Aviso',
-            message: `No se realizó el filtro de la fecha inicial.`,
-            type: 'warning'
+          title: 'Aviso',
+          message: `No se realizó el filtro de la fecha inicial.`,
+          type: 'warning'
         });
-    } else if (this.f2 === null) {
+      } else if (this.f2 === null) {
         ElNotification({
-            title: 'Aviso',
-            message: `No se realizó el filtro de la fecha final.`,
-            type: 'warning'
+          title: 'Aviso',
+          message: `No se realizó el filtro de la fecha final.`,
+          type: 'warning'
         });
-    } else {
+      } else {
         ElNotification({
-            title: 'Filtro realizado',
-            message: `Se realizó el filtro con las fechas seleccionadas (${this.f1} - ${this.f2}).`,
-            type: 'success'
+          title: 'Filtro realizado',
+          message: `Se realizó el filtro con las fechas seleccionadas (${this.f1} - ${this.f2}).`,
+          type: 'success'
         });
-    }
-},
+      }
+    },
 
     async fetchData() {
       try {
         const responseOrdenes = await axios.get(this.urlApi + 'completarOrden');
         this.tableData = responseOrdenes.data.data.filter(row => row.tradename !== 'Particular');
-        
+
         const responseTotalDinero = await axios.get(this.urlApi + 'totalDinero');
         const {
           totalPagos,
@@ -284,6 +308,79 @@ export default {
         console.log('Totales', responseTotalDinero.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
+      }
+    },
+
+    filterData1() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        const combinedName = completarOrden.name.toLowerCase() + ' ' + completarOrden.lastname1.toLowerCase() + ' ' + completarOrden.lastname2.toLowerCase();
+        return combinedName.includes(this.searchQuery1.toLowerCase());
+      });
+    },
+
+    filterData2() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        return completarOrden.tradename.toLowerCase().includes(this.searchQuery2.toLowerCase());
+      });
+    },
+
+    filterData3() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        const combinedAddress = completarOrden.ciudad.toLowerCase() + ' ' + completarOrden.colonia.toLowerCase() + ' ' + completarOrden.home.toLowerCase() + ' ' + completarOrden.codigoPostal.toLowerCase() + ' ' + completarOrden.numAddress.toLowerCase();
+        return combinedAddress.includes(this.searchQuery3.toLowerCase());
+      });
+    },
+
+    filterData4() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        return completarOrden.infoorden_facturacion.toLowerCase().includes(this.searchQuery4.toLowerCase());
+      });
+    },
+
+    filterData5() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        const idString = completarOrden.id.toString();
+        return idString.toLowerCase().includes(this.searchQuery5.toLowerCase());
+      });
+    },
+
+    filterData6() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        return completarOrden.pago.toLowerCase().includes(this.searchQuery6.toLowerCase());
+      });
+    },
+
+    filterData7() {
+      this.filteredData1 = this.tableData.filter((completarOrden) => {
+        return completarOrden.requiere3.toLowerCase().includes(this.searchQuery7.toLowerCase());
+      });
+    },
+
+filterData8() {
+      if (this.selectedDate) {
+        // Filtra por la fecha seleccionada
+        this.filteredData1 = this.tableData.filter(completarOrden => completarOrden.date1 === this.selectedDate);
+        if (this.filteredData1.length === 0) {
+          ElNotification({
+            title: 'Aviso',
+            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
+            type: 'warning'
+          });
+        } else {
+          ElNotification({
+            title: 'Datos encontrados',
+            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
+            type: 'success',
+          });
+        }
+      } else {
+        // Si no se selecciona ninguna fecha, muestra todos los datos
+        this.filteredData1 = this.tableData;
+        ElNotification({
+          title: 'Mostrando todos los datos',
+          message: 'Se estan mostrando todos los datos de la agenda.',
+          type: 'info',
+        });
       }
     },
 
@@ -346,6 +443,4 @@ export default {
   color: #333;
   /* Darker text color for headers */
 }
-
-
 </style>

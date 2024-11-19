@@ -91,51 +91,15 @@
         <p>Recomendaciones</p>
         <div class="flex">
           <el-form-item prop="noTrapear" class="px-2" label="No trapear:">
-            <el-col :span="11" style="width: 220px">
-              <el-date-picker
-                v-model="form.noTrapear"
-                type="date"
-                placeholder="No trapear:"
-                format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY"
-              />
-            </el-col>
+            <el-input v-model="form.noTrapear" placeholder="A los cuantos dias" />
           </el-form-item>
           <el-form-item prop="noIngresar" class="px-7" label="No ingresar:">
-            <el-col :span="11" style="width: 220px">
-              <el-time-select
-                v-model="form.noIngresar"
-                style="width: 220px"
-                start="00:00"
-                step="01:00"
-                end="23:59"
-                format="hh:mm A"
-                placeholder="Seleccionar hora"
-              />
-            </el-col>
+            <el-input v-model="form.noIngresar" placeholder="Cuantas horas" />
           </el-form-item>
           <el-form-item prop="otraDosis" class="px-2" label="Otra dosis:">
             <el-col :span="11" style="width: 220px">
-              <el-date-picker
-                v-model="form.otraDosis"
-                type="date"
-                placeholder="Otra dosis:"
-                format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY"
-              />
-            </el-col>
-          </el-form-item>
-          <el-form-item prop="hora" class="px-7" label="Hora:">
-            <el-col :span="11" style="width: 220px">
-              <el-time-select
-                v-model="form.hora"
-                style="width: 220px"
-                start="00:00"
-                step="00:15"
-                end="23:59"
-                format="hh:mm A"
-                placeholder="Seleccionar hora"
-              />
+              <el-date-picker v-model="form.otraDosis" type="date" placeholder="Otra dosis:" format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY" />
             </el-col>
           </el-form-item>
         </div>
@@ -350,7 +314,6 @@ export default {
         this.form.noTrapear = datos.noTrapear || '';
         this.form.noIngresar = datos.noIngresar || '';
         this.form.otraDosis = datos.otraDosis || '';
-        this.form.hora = datos.hora || '';
         this.form.pago = datos.pago || '';
         this.form.requiere3 = datos.requiere3 || '';
       }

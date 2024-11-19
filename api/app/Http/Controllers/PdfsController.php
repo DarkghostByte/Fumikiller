@@ -352,6 +352,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
+        ->orWhere('orden.infoorden_facturacion', 'Si')
         ->where('orden.infoorden_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -446,6 +447,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
+        ->orWhere('completarordenes.requiere3', 'like', '%')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -536,6 +538,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
+        ->orWhere('completarordenes.requiere3','=','Credito')
         ->where('completarordenes.requiere3','=','Credito')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -621,6 +624,8 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
+        ->orWhere('completarordenes.requiere3', 'Credito')
+        ->orWhere('orden.infoorden_facturacion', 'No')
         // Filtrar por órdenes no pagadas y clientes particulares
         ->where('completarordenes.requiere3', 'Credito')
         ->where('orden.infoorden_facturacion', 'No')
@@ -709,6 +714,8 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
+        ->orWhere('completarordenes.requiere3','Credito')
+        ->orWhere('orden.infoorden_facturacion', 'Si')
         ->where('completarordenes.requiere3','Credito')
         ->where('orden.infoorden_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')

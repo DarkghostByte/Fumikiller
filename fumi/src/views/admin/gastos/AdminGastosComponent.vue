@@ -14,7 +14,8 @@
           style="width: 25%;" />
         <el-input class="px-2" placeholder="Buscar por monto" v-model="searchQuery2" @input="filterData2"
           style="width: 25%;" />
-
+        <el-input class="px-2" placeholder="Buscar por Caja/Banco/Deposito" v-model="searchQuery3" @input="filterData3"
+          style="width: 25%;" />
       </div>
     </div>
 
@@ -110,7 +111,7 @@
     </div>
 
     <div class="table-container mt-2" style="width:100%;">
-      <div class="flex items-start justify-center">
+      <div class="flex items-start justify-center"> 
         <div class="mx-6 row">
           <div class="flex mb-2 items-center justify-center">
             <h1 class="txtH1">Resumen Ingresos</h1>
@@ -122,24 +123,25 @@
           </div>
           <div class="flex">
             <el-table :data="filteredData1" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:100%;">
-              <el-table-column label="Fecha" prop="dateIngreso" width="150px" sortable />
-              <el-table-column label="Descripcion" prop="descriptionIngreso" width="300px" sortable />
-              <el-table-column label="Monto" prop="montoIngreso" width="150px" sortable
+              style="width:90%;">
+              <el-table-column label="Fecha" prop="dateIngreso" width="120" sortable />
+              <el-table-column label="Descripcion" prop="descriptionIngreso" width="150" sortable />
+              <el-table-column label="Caja/Banco" prop="dataIngreso" width="150" sortable />
+              <el-table-column label="Monto" prop="montoIngreso" width="150" sortable
                 :formatter="(row) => formatNumber(row, 'montoIngreso')">
               </el-table-column>
             </el-table>
           </div>
           <div class="flex">
             <el-table :data="filteredData3" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:100%;">
-              <el-table-column prop="date1" width="150px" />
-              <el-table-column label="Parte de Fumigaciones" width="300px">
+              style="width:90%;">
+              <el-table-column prop="date1" width="120" />
+              <el-table-column label="Parte de Fumigaciones" width="300">
                 <template #default>
                   {{ 'Fumigacion' }}
                 </template>
               </el-table-column>
-              <el-table-column prop="pago" width="150px" sortable :formatter="(row) => formatNumber(row, 'pago')">
+              <el-table-column prop="pago" width="150" :formatter="(row) => formatNumber(row, 'pago')">
               </el-table-column>
             </el-table>
           </div>
@@ -156,10 +158,11 @@
           </div>
           <div class="flex">
             <el-table :data="filteredData2" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:100%;">
-              <el-table-column label="Fecha" prop="dateEgresos" width="150px" sortable />
-              <el-table-column label="Descripcion" prop="descriptionEgresos" width="300px" sortable />
-              <el-table-column label="Monto" prop="montoEgresos" width="150px" sortable
+              style="width:90%;">
+              <el-table-column label="Fecha" prop="dateEgresos" width="120" sortable />
+              <el-table-column label="Descripcion" prop="descriptionEgresos" width="170" sortable />
+              <el-table-column label="Caja/Banco/Deposito" prop="dataEgresos" width="200" sortable />
+              <el-table-column label="Monto" prop="montoEgresos" width="150" sortable
                 :formatter="(row) => formatNumber(row, 'montoEgresos')"></el-table-column>
             </el-table>
           </div>
@@ -279,10 +282,13 @@ export default {
     totalBancoIngreso: 0,
     totalBancoEgreso: 0,
     totalSaldoBanco: 0,
+    totalCajaEgreso: 0,
+    totalCajaBanco: 0,
     selectedDate: null,
     selectedDate1: null,
     searchQuery1: '',
     searchQuery2: '',
+    searchQuery3: '',
     form1: {
       dateIngreso: '',
       descriptionIngreso: '',
@@ -596,6 +602,15 @@ export default {
       });
       this.filteredData3 = this.tableData3.filter((completarOrden) => {
         return completarOrden.pago.toLowerCase().includes(this.searchQuery2.toLowerCase());
+      });
+    },
+
+    filterData3() {
+      this.filteredData1 = this.tableData1.filter((ingresos) => {
+        return ingresos.dataIngreso.toLowerCase().includes(this.searchQuery3.toLowerCase());
+      });
+      this.filteredData2 = this.tableData2.filter((egresos) => {
+        return egresos.dataEgresos.toLowerCase().includes(this.searchQuery3.toLowerCase());
       });
     },
 

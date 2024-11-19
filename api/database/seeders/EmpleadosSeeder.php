@@ -21,5 +21,12 @@ class EmpleadosSeeder extends Seeder
             'ariasEmpleado'=>'20cg0023',
             'infodelete_Empleados'=>'Alta',
         ]);
+        DB::table('empleados')->insert([
+            'nameEmpleado'=>'No aplica',
+            'lastnameEmpleado1'=>'No aplica',
+            'lastnameEmpleado2'=>'No aplica',
+            'ariasEmpleado'=>'No aplica',
+            'infodelete_Empleados'=>'Alta',
+        ]);
     }
 }

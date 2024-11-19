@@ -142,13 +142,21 @@ class AdminController extends Controller
             ->where('orden.infoorden_facturacion','=','Si')
             ->sum('pago');
 
+        // Formatear los números como decimales
+        $totalPagosFormateado = number_format($totalPagos, 2, '.', ',');
+        $totalCreditosFormateado = number_format($totalCreditos, 2, '.', ',');
+        $totalVentasSinFacturaFormateado = number_format($totalVentasSinFactura, 2, '.', ',');
+        $totalCreditosSinFacturaFormateado = number_format($totalCreditosSinFactura, 2, '.', ',');
+        $totalCreditosConFacturaFormateado = number_format($totalCreditosConFactura, 2, '.', ',');
+        $totalVentasConFacturaFormateado = number_format($totalVentasConFactura, 2, '.', ',');
+
         return response()->json([
-            'totalPagos' => $totalPagos,
-            'totalCreditos' => $totalCreditos,
-            'totalVentasSinFactura' => $totalVentasSinFactura,
-            'totalCreditosSinFactura' => $totalCreditosSinFactura,
-            'totalCreditosConFactura' => $totalCreditosConFactura,
-            'totalVentasConFactura' => $totalVentasConFactura
+            'totalPagos' => $totalPagosFormateado,
+            'totalCreditos' => $totalCreditosFormateado,
+            'totalVentasSinFactura' => $totalVentasSinFacturaFormateado,
+            'totalCreditosSinFactura' => $totalCreditosSinFacturaFormateado,
+            'totalCreditosConFactura' => $totalCreditosConFacturaFormateado,
+            'totalVentasConFactura' => $totalVentasConFacturaFormateado
         ]);
     }
 

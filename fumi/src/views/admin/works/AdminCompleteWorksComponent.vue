@@ -120,6 +120,13 @@
                 value-format="DD-MM-YYYY" />
             </el-col>
           </el-form-item>
+          <el-form-item class="px-2" label="Nueva orden:">
+            <el-button @click="dialogVisibleOrdenNueva = true" class="el-button el-button--warning">
+              <i class="fa-solid fa-calendar" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+              Otra dosis
+            </el-button>
+          </el-form-item>
+          
         </div>
         <!-- FILA DE REQUIERE DE -->
         <p>Requiere de:</p>
@@ -169,7 +176,139 @@
       </el-form>
     </div>
     <!-- END TABLE DATA -->
+     <!-- MODAL 1 -->
+  <el-dialog v-model="dialogVisibleOrdenNueva" title="Crear Nueva Colonia" width="80%">
+    <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef2" :rules="rules2"
+      :label-position="'top'">
+      <div class="row">
+
+        <p>Cliente {{ form1.name + ' ' + form1.lastname1 + ' ' + form1.lastname2}}</p>
+
+        <p>Problematica</p>
+        <div class="flex" style="width:100%;">
+          <el-form-item prop="id_plague1" label="Problematica #1:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form1.id_plague1" placeholder="Selecciona la problematica:">
+              <el-option v-for="problematicaBug in problematicas1" :key="problematicaBug.id" :label="problematicaBug.problematica"
+                :value="problematicaBug.id" />
+            </el-select>
+          </el-form-item>
+          <el-form-item prop="id_plague2" label="Problematica #2:" class="px-2"
+            style="width: 300px;">
+            <el-select v-model="form1.id_plague2" placeholder="Selecciona la problematica:">
+              <el-option v-for="problematicaBug2 in problematicas2" :key="problematicaBug2.id" :label="problematicaBug2.problematica"
+                :value="problematicaBug2.id" />
+            </el-select>
+          </el-form-item>
+        </div>
+
+        <p>Fechas</p>
+        <div class="flex">
+          <el-form-item prop="date1" class="px-2" label="Fecha de orden:">
+            <el-col :span="11" style="width: 220px">
+              <el-date-picker
+                v-model="form1.date1"
+                type="date"
+                placeholder="Orden"
+                format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY"
+              />
+            </el-col>
+          </el-form-item>
+          <el-form-item prop="date2" class="px-2" label="Fecha para asistir:">
+            <el-col :span="11" style="width: 220px">
+              <el-date-picker
+                v-model="form1.date2"
+                type="date"
+                placeholder="Orden"
+                format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY"
+              />
+            </el-col>
+          </el-form-item>
+          <el-form-item prop="time1" class="px-2" label="De hora:">
+            <el-col :span="11" style="width: 220px">
+              <el-time-select
+                v-model="form1.time1"
+                style="width: 220px"
+                start="08:30"
+                step="00:15"
+                end="20:30"
+                format="hh:mm A"
+                placeholder="Seleccionar hora"
+              />
+            </el-col>
+          </el-form-item>
+          <el-form-item prop="time2" class="px-2" label="A hora:">
+            <el-col :span="11" style="width: 220px">
+              <el-time-select
+                v-model="form1.time2"
+                style="width: 220px"
+                start="08:30"
+                step="00:15"
+                end="20:30"
+                format="hh:mm A"
+                placeholder="Seleccionar hora"
+              />
+            </el-col>
+          </el-form-item>
+          <el-form-item prop="infoorden_cell" label="Hablar antes de ir?" class="px-2">
+            <el-radio-group v-model="form1.infoorden_cell">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
+
+        <p>Contratacion:</p>
+        <div class="flex">
+          <el-form-item prop="hiring" label="" class="px-10">
+            <el-checkbox-group v-model="form1.hiring">
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
+              <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
+              <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
+              <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
+              <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </div>
+
+        <p>Requiere de:</p>
+        <div class="flex">
+          <el-form-item prop="infoorden_certificate" label="El cliente necesita certificado?" class="px-10">
+            <el-radio-group v-model="form1.infoorden_certificate">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item prop="infoorden_remision" label="El cliente necesita remision?" class="px-10">
+            <el-radio-group v-model="form1.infoorden_remision">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+
+          <el-form-item prop="infoorden_facturacion" label="El cliente necesita facturacion?" class="px-10">
+            <el-radio-group v-model="form1.infoorden_facturacion">
+              <el-radio value="Si" size="large" border>Si</el-radio>
+              <el-radio value="No" size="large" border>No</el-radio>
+            </el-radio-group>
+          </el-form-item>
+        </div>
+
+      </div>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="dialogVisibleOrdenNueva = false">Cancelar</el-button>
+        <el-button type="primary" @click="createNewOrder">Crear</el-button>
+      </span>
+    </template>
+  </el-dialog>
+  <!-- END MODAL 1 -->
   </div>
+  
 
 </template>
 
@@ -183,6 +322,7 @@ export default {
   data: () => ({
     tableData: [],
     formRef: undefined,
+    formRef2: undefined,
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
@@ -192,6 +332,10 @@ export default {
     productoExternos2: [],
     empleados: [],
     empleados2: [],
+    dialogVisibleOrdenNueva: false,
+    problematicas1: [],
+    problematicas2: [],
+    selectedItem: {},
     form: {
       id_orden: '',
       id_empleado: '',
@@ -211,6 +355,25 @@ export default {
       lastname1: '',
       lastname2: '',
       tradename: ''
+    },
+    form1: {
+      name: '',
+      lastname1: '',
+      lastname2: '',
+      tradename: '',
+      id_plague1: '',
+      id_plague2: '',
+      date1: '',
+      date2: '',
+      time1: '',
+      time2: '',
+      hiring: [],
+      infoorden_delete: 'Alta',
+      statusOrder: '',
+      infoorden_certificate: 'No',
+      infoorden_remision: 'No',
+      infoorden_facturacion: 'No',
+      infoorden_cell: 'No'
     },
     rules: {
       id_empleado: [
@@ -244,6 +407,35 @@ export default {
         { required: true, message: 'El pago es requerido', trigger: 'blur' },
         { min: 1, max: 10, message: 'Longitud debería ser 1 a 10', trigger: 'blur' }
       ],
+    },
+    rules2: {
+      id_plague1: [
+        { required: true, message: 'El tipo de plaga es requerida', trigger: 'blur' },
+      ],
+      date1: [
+        { required: true, message: 'La fecha deberia ser requerida', trigger: 'blur' },
+      ],
+      date2: [
+        { required: true, message: 'La fecha deberia ser requerida', trigger: 'blur' },
+      ],
+      time1: [
+        { required: true, message: 'La hora deberia ser requerida', trigger: 'blur' },
+      ],
+      time2: [
+        { required: true, message: 'La hora deberia ser requerida', trigger: 'blur' },
+      ],
+      hiring: [
+        { required: true, message: 'La contratacion deberia ser requeriada', trigger: 'blur' },
+      ],
+      infoorden_certificate: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      infoorden_remision: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
+      infoorden_facturacion: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
     }
   }),
   mounted() {
@@ -254,6 +446,8 @@ export default {
     this.fetchEmpleados();
     this.fetchEmpleados2();
     this.refresh();
+    this.fetchProblematicaBug();
+    this.fetchProblematicaBug2();
     const route = useRoute();
     if (route.params && route.params.id) {
       this.id = route.params.id;
@@ -261,15 +455,36 @@ export default {
         console.log('Orden Response:', res.data);
         if (res.data && res.data.data) {
           let datos = res.data.data;
+          console.log('Datos:', res.data.data); // Verifica aquí los datos del cliente
           console.log('Datos Cliente:', datos.cliente); // Verifica aquí los datos del cliente
           this.form.id_orden = datos.id;
           if (datos.cliente) {
+            this.clientId =  datos.cliente.name;
             this.form.name = datos.cliente.name || '';
             this.form.lastname1 = datos.cliente.lastname1 || '';
             this.form.lastname2 = datos.cliente.lastname2 || '';
             this.form.tradename = datos.cliente.tradename || '';
             this.form.statusOrder = datos.cliente.statusOrder || '';
+            this.form1.name = datos.cliente.name || '';
+            this.form1.lastname1 = datos.cliente.lastname1 || '';
+            this.form1.lastname2 = datos.cliente.lastname2 || '';
+            this.form1.tradename = datos.cliente.tradename || '';
+            this.form1.statusOrder = datos.statusOrder || '';
+            this.form1.id_plague1 = datos.id_plague1 || '';
+            this.form1.id_plague2 = datos.id_plague2 || '';
+            this.form1.id_cliente = datos.id_cliente || '';
+            this.form1.date1 = datos.date1 || '';
+            this.form1.date2 = datos.date2 || '';
+            this.form1.time1 = datos.time1 || '';
+            this.form1.time2 = datos.time2 || '';
+            this.form1.infoorden_cell = datos.infoorden_cell || '';
+            this.form1.hiring = JSON.parse(datos.hiring) || '';
+            this.form1.infoorden_certificate = datos.infoorden_certificate || '';
+            this.form1.infoorden_remision = datos.infoorden_remision || '';
+            this.form1.infoorden_facturacion = datos.infoorden_facturacion || '';
           }
+            
+      
         } else {
           console.error('Response data is undefined or null');
           ElNotification({
@@ -289,6 +504,7 @@ export default {
     } else {
       console.error('route.params.id is undefined');
     }
+
   },
 
   methods: {
@@ -445,7 +661,75 @@ export default {
           return false;
         }
       });
-    }
+    },
+
+    fetchProblematicaBug() {
+      axios.get('verProblematicas')
+        .then(response => {
+          console.log('Problematicas:', response.data);
+          this.problematicas1 = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching problematica:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar problematicas',
+            type: 'error',
+          });
+        });
+    },
+
+    fetchProblematicaBug2() {
+      axios.get('verProblematicas')
+        .then(response => {
+          console.log('Problematicas:', response.data);
+          this.problematicas2 = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching problematica:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar problematicas',
+            type: 'error',
+          });
+        });
+    },
+
+    createNewOrder() {
+      this.$refs.formRef2.validate((valid) => {
+        if (valid) {
+          axios.post('orden', this.form1)
+            .then(res => {
+              console.log(res);
+              this.refresh();
+              this.$message.success('La otra dosis se creo correctamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro insertado correctamente',
+                type: 'success'
+              })
+              this.dialogVisibleOrdenNueva = false;
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al crear la segunda dosis');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de llenar los campos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          });
+          return false;
+        }
+      });
+    },
   }
 };
 </script>

@@ -26,6 +26,7 @@ class CompletarOrdenesController extends Controller
         'problematica2.problematica as plague2',
         'orden.date1',
         'orden.date2',
+        'orden.infoorden_facturacion',
         'orden.id_cliente',
         'clientes.name',
         'clientes.lastname1',
