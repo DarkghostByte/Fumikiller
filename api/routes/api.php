@@ -66,7 +66,7 @@ Route::get('/ordenDeCompra',[PdfsController::class,'generarOrdendecompra']);
 //VER OPCIONES
 Route::get('/verCiudades',[CiudadesController::class,'verCiudades']);
 Route::get('/verColonia',[ColoniasController::class,'verColonia']);
-Route::get('/verComercio',[ComerciosController::class,'verComercio']);
+Route::get('/verDepartamento',[ComerciosController::class,'verDepartamento']);
 Route::get('/verColoniaPorCiudad/{cityId}', [ColoniasController::class, 'verColoniaPorCiudad']);
 Route::get('/verProductosInternos',[ProductosInternosController::class,'verProductosInternos']);
 Route::get('/verProductosExternos',[ProductosExtrenosController::class,'verProductosExternos']);

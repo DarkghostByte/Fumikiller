@@ -15,6 +15,7 @@ class Empleados extends Model
         'lastnameEmpleado1',
         'lastnameEmpleado2',
         'ariasEmpleado',
-        'infodelete_Empleados'
+        'infodelete_Empleados',
+        'id_departamento'
     ];
 }

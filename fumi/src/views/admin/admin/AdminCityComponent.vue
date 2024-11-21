@@ -136,6 +136,7 @@ export default {
   name: 'AdminCityComponent',
   data: () => ({
     formRef: undefined,
+    formEditRef: undefined,
     dialogVisible: false,
     dialogVisibleCreate: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
@@ -208,6 +209,7 @@ export default {
               this.dialogVisibleCreate = false;
               this.refresh();
               this.$message.success('Ciudad creada exitosamente');
+              this.$refs.formRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro insertado correctamente',
@@ -263,6 +265,7 @@ export default {
               this.refresh();
               this.dialogVisibleEdit = false;
               this.$message.success('Ciudad actualizada exitosamente');
+              this.$refs.formEditRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro actualizado correctamente',

@@ -25,10 +25,9 @@
       <router-link to="/admin/admin/settlements"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-600 hover:bg-orange-1000 focus:bg-orange-900 rounded-md ml-6 mb-5 shadow-lg"
         style="width:305px; height:100px; font-size:22px;">
-        <i class="fa-solid fa-apartment"></i>
         <i class="fa-solid fa-school-flag" aria-hidden="true" style="height:15px; margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>
-        <h2>Asentamientos ({{ totalAsentamientos }})</h2>
+        <h2>Departamentos ({{ totalAsentamientos }})</h2>
       </router-link>
 
       <router-link to="/admin/admin/roads"

@@ -144,6 +144,8 @@ import { ElNotification } from 'element-plus';
 export default {
   name: 'AdminCologneComponent',
   data: () => ({
+    formRef: undefined,
+    formEditRef: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleCreate: false,
@@ -217,6 +219,7 @@ export default {
               this.dialogVisibleCreate = false;
               this.refresh();
               this.$message.success('La problematica se agrego exitosamente');
+              this.$refs.formRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro insertado correctamente',
@@ -260,6 +263,7 @@ export default {
               this.refresh();
               this.dialogVisibleEdit = false;
               this.$message.success('Problematica actualizada exitosamente');
+              this.$refs.formEditRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro actualizado correctamente',

@@ -12,4 +12,5 @@ class Comercio extends Model
 
     protected $fillable = [
         'comercio',
+        'infodelete_departamento',
     ];}

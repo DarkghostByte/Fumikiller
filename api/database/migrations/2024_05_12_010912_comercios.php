@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('comercios', function (Blueprint $table) {
             $table->increments('id');
             $table->string('comercio');
+            $table->string('infodelete_departamento');
             $table->timestamps();
         });
     }

@@ -10,9 +10,9 @@
 
       <!-- INICIO -->
       <div class="flex justify-between items-center mb-4">
-        <h1 class="text-2xl font-semibold">Gestión de Tipos de Comercios</h1>
+        <h1 class="text-2xl font-semibold">Gestión de Departamnetos</h1>
         <div class="flex" style="width: 25%;">
-          <el-input class="" placeholder="Buscar por tipo de comercio" v-model="searchQuerySettlements"
+          <el-input class="" placeholder="Buscar por departamento" v-model="searchQuerySettlements"
             @input="filterDataSettlements" />
         </div>
         <div>
@@ -22,8 +22,8 @@
             Regresar
           </router-link>
           <el-button @click="dialogVisibleCreate = true" class="ml-2 el-button el-button--primary">
-            <i class="fa-solid fa-map-location-dot" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-            Nuevo Tipo De Comercio
+            <i class="fa-solid fa-school-flag" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+            Nuevo Departamento
           </el-button>
         </div>
       </div>
@@ -32,59 +32,30 @@
       <!-- TABLE -->
       <div class="flex" style="justify-content: center;">
         <el-table :data="filteredData" :default-sort="{ prop: 'comercio', order: 'ascending' }" style="width: 35%;">
-          <el-table-column prop="comercio" label="Tipo de comercio" sortable />
-          <el-table-column label="Acciones">
-            <template #default="scope">
-              <div class="flex justify-around">
-                <router-link :to="'/admin/clients/edit-clients/' + scope.row.id">
-                  <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
-                      class="material-symbols-outlined">edit</span></el-button>
-                </router-link>
-                <el-button style="color:black" size="small" type="danger" @click="eliminar(scope.row)">
-                  <span class="material-symbols-outlined">delete</span>
-                </el-button>
-              </div>
-            </template>
-          </el-table-column>
+          <el-table-column prop="comercio" label="Departamneto" sortable />
+          <el-table-column prop="infodelete_departamento" label="Estado" sortable />
         </el-table>
       </div>
       <!-- END TABLE -->
 
       <!-- MODAL 1 -->
-      <el-dialog v-model="dialogVisibleCreate" title="Crear Nuevo Tipo De Comercio" width="20%">
+      <el-dialog v-model="dialogVisibleCreate" title="Nuevo Departamento" width="20%">
         <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
           :label-position="'top'">
           <div class="row">
-            <el-form-item prop="comercio" label="Tipo de comercio:">
-              <el-input v-model="form1.comercio" class="px-1" placeholder="Ingresa el tipo de comercio" />
+            <el-form-item prop="comercio" label="Departamento:">
+              <el-input v-model="form1.comercio" class="px-1" placeholder="Ingresa el departamento" />
             </el-form-item>
           </div>
         </el-form>
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisibleCreate = false">Cancelar</el-button>
-            <el-button type="primary" @click="createCologne">Crear</el-button>
+            <el-button type="primary" @click="createDepartamento">Crear</el-button>
           </span>
         </template>
       </el-dialog>
       <!-- END MODAL 1 -->
-
-      <!-- MODAL 2 -->
-    <el-dialog v-model="dialogVisible" title="¿Deseas eliminar el siguente tipo de comercio?" width="20%">
-      <div class="h-35" style="font-size: medium;">
-        Tipo de comercio: {{ selectedItem.comercio }}
-        <br>
-      </div>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-          <el-button type="danger" @click="handleDelete()">
-            Confirmar
-          </el-button>
-        </div>
-      </template>
-    </el-dialog>
-    <!-- END MODAL 2 -->
 
     </div>
   </div>
@@ -97,6 +68,8 @@ import { ElNotification } from 'element-plus';
 export default {
   name: 'AdminCologneComponent',
   data: () => ({
+    formRef: undefined,
+    formEditRef: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleCreate: false,
@@ -108,6 +81,7 @@ export default {
     searchQuerySettlements: '',
     form1: {
       comercio: '',
+      infodelete_departamento:'Alta',
     },
     rules: {
       comercio: [
@@ -127,21 +101,7 @@ export default {
       });
     },
 
-    handleDelete() {
-      axios.delete('comercios/' + this.selectedItem.id).then(res => {
-        console.log(res);
-        this.refresh();
-        this.dialogVisible = false;
-      });
-    },
-
-    eliminar(row) {
-      console.log(row);
-      this.selectedItem = row;
-      this.dialogVisible = true;
-    },
-
-    createCologne() {
+    createDepartamento() {
       this.$refs.formRef.validate((valid) => {
         if (valid) {
           axios.post('comercios', this.form1)
@@ -150,11 +110,13 @@ export default {
               this.dialogVisibleCreate = false;
               this.refresh();
               this.$message.success('Tipo de comercio creado exitosamente');
-              ElNotification({
+              /*ElNotification({
                 title: 'Alerta',
                 message: 'Registro insertado correctamente',
                 type: 'success'
               })
+                */
+              this.$refs.formRef.resetFields();
             })
             .catch(error => {
               console.log(error);

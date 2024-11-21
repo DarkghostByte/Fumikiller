@@ -16,7 +16,7 @@
             @input="filterDataNameEmpleado" />
           <el-input class="" placeholder="Buscar por apellido paterno" v-model="searchQueryLastnameEmpleado1"
             @input="filterDataLastnameEmpleado1" />
-            <el-input class="px-2" placeholder="Buscar por apellido materno" v-model="searchQueryLastnameEmpleado2"
+          <el-input class="px-2" placeholder="Buscar por apellido materno" v-model="searchQueryLastnameEmpleado2"
             @input="filterDataLastnameEmpleado2" />
           <el-input class="" placeholder="Buscar estado de activacion" v-model="searchQueryEstado"
             @input="filterDataEstado" />
@@ -38,7 +38,7 @@
 
       <!-- TABLE -->
       <div class="flex" style="justify-content: center;">
-        <el-table :data="filteredData" :default-sort="{ prop: 'productoExt', order: 'ascending' }" style="width: 60%;">
+        <el-table :data="filteredData" :default-sort="{ prop: 'empleados', order: 'ascending' }" style="width: 80%;">
           <el-table-column class="" label="">
             <template #default="{ row }">
               <button class="ml-5 px-5 h-3 w-3 rounded-full"
@@ -60,6 +60,7 @@
               {{ scope.row.lastnameEmpleado1 + ' ' + scope.row.lastnameEmpleado2 }}
             </template>
           </el-table-column>
+          <el-table-column prop="comercio" label="Departamento" sortable />
           <el-table-column label="Acciones">
             <template #default="scope">
               <div class="flex justify-around">
@@ -90,6 +91,14 @@
               </el-form-item>
               <el-form-item prop="lastnameEmpleado2" label="Apellido materno:" style="width:50%;">
                 <el-input v-model="form1.lastnameEmpleado2" class="px-1" placeholder="Ingresa el apellido materno" />
+              </el-form-item>
+            </div>
+            <div class="flex" style="width: 100%;">
+              <el-form-item prop="id_departamento" label="Departamento:" class="px-2" style="width: 300px;">
+                <el-select v-model="form1.id_departamento" placeholder="Selecciona el departamento:">
+                  <el-option v-for="selectDepartamento in departamentos" :key="selectDepartamento.id"
+                    :label="selectDepartamento.comercio" :value="selectDepartamento.id" />
+                </el-select>
               </el-form-item>
             </div>
           </div>
@@ -125,12 +134,14 @@
               </div>
               <div class="flex" style="width: 100%;">
                 <el-form-item prop="lastnameEmpleado1" label="Apellido paterno:" style="width: 100%;">
-                  <el-input v-model="formEdit.lastnameEmpleado1" class="px-1" placeholder="Ingresa el apellido paterno" />
+                  <el-input v-model="formEdit.lastnameEmpleado1" class="px-1"
+                    placeholder="Ingresa el apellido paterno" />
                 </el-form-item>
               </div>
               <div class="flex" style="width: 100%;">
                 <el-form-item prop="lastnameEmpleado2" label="Apellido materno:" style="width: 100%;">
-                  <el-input v-model="formEdit.lastnameEmpleado2" class="px-1" placeholder="Ingresa el apellido materno" />
+                  <el-input v-model="formEdit.lastnameEmpleado2" class="px-1"
+                    placeholder="Ingresa el apellido materno" />
                 </el-form-item>
               </div>
             </div>
@@ -139,7 +150,7 @@
         <template #footer>
           <span class="dialog-footer">
             <el-button @click="dialogVisibleEdit = false">Cancelar</el-button>
-            <el-button type="warning" @click="editProductExt">Actualizar</el-button>
+            <el-button type="warning" @click="ediyEmpleados">Actualizar</el-button>
           </span>
         </template>
       </el-dialog>
@@ -156,6 +167,8 @@ import { ElNotification } from 'element-plus';
 export default {
   name: 'AdminCologneComponent',
   data: () => ({
+    formRef: undefined,
+    formEditRef: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleCreate: false,
@@ -169,19 +182,21 @@ export default {
     searchQueryLastnameEmpleado1: '',
     searchQueryLastnameEmpleado2: '',
     searchQueryEstado: '',
+    departamentos: [],
     form1: {
-      ariasEmpleado:'',
-      nameEmpleado:'',
-      lastnameEmpleado1:'',
-      lastnameEmpleado2:'',
+      ariasEmpleado: '',
+      nameEmpleado: '',
+      lastnameEmpleado1: '',
+      lastnameEmpleado2: '',
       infodelete_Empleados: 'Alta',
+      id_departamento: '',
 
     },
     formEdit: {
-      ariasEmpleado:'',
-      nameEmpleado:'',
-      lastnameEmpleado1:'',
-      lastnameEmpleado2:'',
+      ariasEmpleado: '',
+      nameEmpleado: '',
+      lastnameEmpleado1: '',
+      lastnameEmpleado2: '',
     },
     rules: {
       ariasEmpleado: [
@@ -204,6 +219,7 @@ export default {
   }),
   mounted() {
     this.refresh();
+    this.fetchDepartamento();
   },
   methods: {
     refresh() {
@@ -217,6 +233,22 @@ export default {
       console.log(row);
       this.formEdit = row;
       this.dialogVisibleEdit = true;
+    },
+
+    fetchDepartamento() {
+      axios.get('verDepartamento')
+        .then(response => {
+          console.log('Departamento:', response.data);
+          this.departamentos = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching departamento:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar departamento',
+            type: 'error',
+          });
+        });
     },
 
     /*
@@ -250,6 +282,7 @@ export default {
               this.dialogVisibleCreate = false;
               this.refresh();
               this.$message.success('El empleado se agrego exitosamente');
+              this.$refs.formRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro insertado correctamente',
@@ -301,7 +334,7 @@ export default {
       });
     },
 
-    editProductExt() {
+    ediyEmpleados() {
       this.$refs.formEditRef.validate((valid) => {
         if (valid) {
           console.log('Form is valid, sending PUT request');
@@ -311,6 +344,7 @@ export default {
               this.refresh();
               this.dialogVisibleEdit = false;
               this.$message.success('Producto Externo actualizado exitosamente');
+              this.$refs.formEditRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro actualizado correctamente',

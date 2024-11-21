@@ -144,6 +144,8 @@ import { ElNotification } from 'element-plus';
 export default {
   name: 'AdminCologneComponent',
   data: () => ({
+    formRef: undefined,
+    formEditRef: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleCreate: false,
@@ -217,6 +219,7 @@ export default {
               this.dialogVisibleCreate = false;
               this.refresh();
               this.$message.success('El tipo de via se agrego exitosamente');
+              this.$refs.formRef.resetFields();
               ElNotification({
                 title: 'Alerta',
                 message: 'Registro insertado correctamente',
@@ -265,6 +268,7 @@ export default {
                 message: 'Registro actualizado correctamente',
                 type: 'success'
               })
+              this.$refs.formEditRef.resetFields();
             })
             .catch(error => {
               console.log(error);

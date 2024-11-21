@@ -10,11 +10,19 @@ class EmpleadosController extends Controller
 {
     public function index()
     {
-        $data = Empleados ::all();
-        return response()->json([
-            'status'=>'success',
-            'data'=>$data
-        ]);
+
+        $data = Empleados::select([
+            'empleados.*',
+            'comercios.comercio',
+        ])
+        ->join('comercios', 'empleados.id_departamento', '=', 'comercios.id')
+        ->orderBy('empleados.id', 'DESC')
+        ->get();
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $data
+    ]);
     }
 
     /**
@@ -37,6 +45,7 @@ class EmpleadosController extends Controller
             'lastnameEmpleado2' => 'required|min:1',
             'ariasEmpleado' => 'required|min:1',
             'infodelete_Empleados' => 'required|min:1',
+            'id_departamento' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -51,6 +60,7 @@ class EmpleadosController extends Controller
             $data->lastnameEmpleado2 = $request->lastnameEmpleado2;
             $data->ariasEmpleado = $request->ariasEmpleado;
             $data->infodelete_Empleados = $request->infodelete_Empleados;
+            $data->id_departamento = $request->id_departamento;
             $data->save();
 
             return response()->json([

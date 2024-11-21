@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('lastnameEmpleado2');
             $table->string('ariasEmpleado');
             $table->string('infodelete_Empleados');
+            $table->integer('id_departamento')->unsigned();
+            $table->foreign("id_departamento")->references('id')->on('comercios');
             $table->timestamps();
         });
     }

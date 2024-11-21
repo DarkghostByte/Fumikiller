@@ -18,8 +18,17 @@ class EmpleadosSeeder extends Seeder
             'nameEmpleado'=>'Jesus Liadeo',
             'lastnameEmpleado1'=>'Chavez',
             'lastnameEmpleado2'=>'Chavez',
-            'ariasEmpleado'=>'20cg0023',
+            'ariasEmpleado'=>'JCC',
             'infodelete_Empleados'=>'Alta',
+            'id_departamento'=>'1',
+        ]);
+        DB::table('empleados')->insert([
+            'nameEmpleado'=>'Luis Angel',
+            'lastnameEmpleado1'=>'Peña',
+            'lastnameEmpleado2'=>'Mora',
+            'ariasEmpleado'=>'LPM',
+            'infodelete_Empleados'=>'Alta',
+            'id_departamento'=>'2',
         ]);
         DB::table('empleados')->insert([
             'nameEmpleado'=>'No aplica',
@@ -27,6 +36,7 @@ class EmpleadosSeeder extends Seeder
             'lastnameEmpleado2'=>'No aplica',
             'ariasEmpleado'=>'No aplica',
             'infodelete_Empleados'=>'Alta',
+            'id_departamento'=>'1',
         ]);
     }
 }

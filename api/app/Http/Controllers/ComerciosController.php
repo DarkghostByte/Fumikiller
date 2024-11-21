@@ -36,6 +36,7 @@ class ComerciosController extends Controller
         
         $reglas = Validator::make($request->all(),[
             'comercio' => 'required|min:1',
+            'infodelete_departamento' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -46,6 +47,7 @@ class ComerciosController extends Controller
         }else{
             $data = new Comercio();
             $data->comercio = $request->comercio;
+            $data->infodelete_departamento = $request->infodelete_departamento;
             $data->save();
 
             return response()->json([
@@ -95,6 +97,12 @@ class ComerciosController extends Controller
     public function verComercio()
     {
         $comercios = Comercio::all();
+        return response()->json($comercios);
+    }
+
+    public function verDepartamento()
+    {
+        $comercios = Comercio::where('infodelete_departamento', '!=', 'Baja')->get();
         return response()->json($comercios);
     }
 }

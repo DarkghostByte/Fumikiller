@@ -21,7 +21,7 @@ class ColoniaSeeder extends Seeder
             'id_ciudad'=>1,
         ]);
         DB::table('colonias')->insert([
-            'colonia'=>'Acción Popular',
+            'colonia'=>'Accion Popular',
             'codigoPostal'=>'31778',
             'id_ciudad'=>1,
 
@@ -39,13 +39,13 @@ class ColoniaSeeder extends Seeder
 
         ]);
         DB::table('colonias')->insert([
-            'colonia'=>'Álamos',
+            'colonia'=>'Alamos',
             'codigoPostal'=>'31710',
             'id_ciudad'=>1,
 
         ]);
         DB::table('colonias')->insert([
-            'colonia'=>'Ampliación Zapata',
+            'colonia'=>'Ampliacion Zapata',
             'codigoPostal'=>'31777',
             'id_ciudad'=>1,
 
@@ -57,7 +57,7 @@ class ColoniaSeeder extends Seeder
 
         ]);
         DB::table('colonias')->insert([
-            'colonia'=>'Benito Juárez',
+            'colonia'=>'Benito Juarez',
             'codigoPostal'=>'31770',
             'id_ciudad'=>1,
 

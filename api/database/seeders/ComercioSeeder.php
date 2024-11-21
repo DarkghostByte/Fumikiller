@@ -15,16 +15,12 @@ class ComercioSeeder extends Seeder
     public function run(): void
     {
         DB::table('comercios')->insert([
-            'comercio'=>'Casa',
+            'comercio'=>'Administracion',
+            'infodelete_departamento'=>'Alta'
         ]);
         DB::table('comercios')->insert([
-            'comercio'=>'Abarrotes',
+            'comercio'=>'Ventas',
+            'infodelete_departamento'=>'Alta'
         ]);
-        DB::table('comercios')->insert([
-            'comercio'=>'Mercado',
-        ]);
-        DB::table('comercios')->insert([
-            'comercio'=>'Bodega',
-        ]);  
     }
 }

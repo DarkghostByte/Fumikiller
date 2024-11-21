@@ -114,14 +114,16 @@
           <el-form-item prop="noIngresar" class="px-7" label="No ingresar:">
             <el-input v-model="form.noIngresar" placeholder="Cuantas horas" />
           </el-form-item>
-          <el-form-item prop="otraDosis" class="px-2" label="Otra dosis:">
-            <el-col :span="11" style="width: 220px">
-              <el-date-picker v-model="form.otraDosis" type="date" placeholder="Otra dosis:" format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY" />
-            </el-col>
+
+          <el-form-item prop="otraDosis" label="Otra dosis" class="px-2">
+            <el-radio-group v-model="form.otraDosis">
+              <el-date-picker class="px-2" v-model="form.otraDosis" type="date" placeholder="Otra dosis:" format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
+              <el-radio label="No aplica" value="No aplica" border />
+            </el-radio-group>
           </el-form-item>
-          <el-form-item class="px-2" label="Nueva orden:">
-            <el-button @click="dialogVisibleOrdenNueva = true" class="el-button el-button--warning">
+        
+          <el-form-item class="px-10" label="Nueva orden:">
+            <el-button :disabled="isButtonDisabled" @click="dialogVisibleOrdenNueva = true" class="el-button el-button--warning">
               <i class="fa-solid fa-calendar" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
               Otra dosis
             </el-button>
@@ -346,7 +348,7 @@ export default {
       id_productosExternos2: 'No aplica',
       noTrapear: '',
       noIngresar: '',
-      otraDosis: '',
+      otraDosis: 'No aplica',
       pago: '',
       requiere1: [],
       requiere2: [],
