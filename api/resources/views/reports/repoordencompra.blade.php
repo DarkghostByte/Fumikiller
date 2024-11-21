@@ -13,8 +13,8 @@
     <br>
 <img  class="membre" src="{{ $base64 }}" alt=""/>
 <table class="tblDia" >
-    <h5 class="txtDia">FOLIO</h5>
-    <h5 class="txtDia1"></h5>
+    <td class="txtDia">FOLIO</td>
+    <td class="txtDia1">000000</td>
 </table>
         
 
@@ -27,178 +27,68 @@
         <div class="cont">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth112">Fecha Orden:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
-                
+            <th class="clthpara" style="width: 0; "></th>
+            <th class="renDivTh" style="text-align: left;">Fecha:
+            <div class="renDiv" style="text-transform: uppercase"> 
             </div>
             </th>  
-            <th class="clth111">Fecha Programada:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
-                
-            </div>
-            </th>           
         </table>
             
         <table>
-            <th class="clth11">Nombre Comercial:</th>
-            <th class="renDivTh">
+            <th class="clthpara" style="width: 0;"></th>
+            <th class="renDivTh" style="text-align: left;">Para:
             <div class="renDiv" style="text-transform: uppercase">
             </div>
             </th> 
-            <th>Hora:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
             
-            </div>
-            </th>
         </table>
         <table>
-            <th class="clth110">Nombre Personal:</th>
-            <th class="renDivTh">
+            <th class="clthpara" style="width: 0;"></th>
+            <th class="renDivthsepa">
             <div class="renDiv" style="text-transform: uppercase">
-                
             </div>
-            </th> 
-            <th> Telefono:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
-                
-            </div>
-            </th> 
+            </th>      
         </table>
         <table>
-            <th>Domicilio:</th>
-            <th class="renDivTh" >
-            <div class="renDivDom" style="text-transform: uppercase;">
-                
+        <th class="clthpara" style="width: 0;"></th>
+            <th class="renDivThCon" >"Concepto" 
+            <div class="" style="text-transform: uppercase;">
             </div>
-            </th> 
-            <th>Colonia:</th>
-            <<th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
-                
-            </div>
-            </th> 
+            </th>  
         </table>
         <table>
-            <th class="clth1112">Localizacion:</th>
-            <th class="renDivTh">
+            <th class="clthpara" style="width: 0;"></th>
+            <th class="renDivthsepa">
             <div class="renDiv" style="text-transform: uppercase">
-                
             </div>
-            </th>           
-        </table>
-        <table class="">
-            <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
-            <th class="renDivTh2">
-            <div class="renDivlugar" style="text-transform: uppercase">
-                
-            </div>
-            </th>
-            <th class="clth1122" >Ciudad:</th>
-            <th class="renDivThlocal">
-            <div class="renDivcity" style="text-transform: uppercase;">
-            
-            </div>
-            </th>
-            <th>Plagas:</th>
-            <th class="renDivTh3">
-            <div class="renDivplaga" style="text-transform: uppercase">
-                
-            </div>
-            </th> 
+            </th>      
         </table>
         <table>
-            <th>Observaciones:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
-                
+            <th class="clthpara" style="width: 0;"></th>
+            <th class="renDivThCon" >"Detalle" 
+            <div class="" style="text-transform: uppercase;">
             </div>
-            </th> 
+            </th>  
         </table>
-
-        
-
-<table class="btnCir">
-            
-    <th style="text-align:center;">
-        
-            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
-                <h1 style="margin: 0;">X</h1>
+        <table>
+            <th class="clthpara" style="width: 0;"></th>
+            <th class="renDivThCon" >Empleado: 
+            <div class="" style="text-transform: uppercase;">
             </div>
-        
-    </th>            
-    <th style="text-align:left; "> Presupuesto</th>
-
-    <th>
-        
-        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-            
-    </th>
-    <th style="text-align:left;"> Fumigar</th>
-    
-    <th >
-        
-        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-        
-    </th>
-    <th style="text-align:left; "> Garantia</th>
-    <th> 
-        
-        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-        
-    </th>
-    <th style="text-align:left;"> Cortesia</th>
-    <th> 
-        
-        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-            <h1 style="margin: 0;">X</h1>
-        </div>
-    
-    </th>
-    <th style="text-align:left; margin-top:5px;"> Nada</th>
-</table>
-
-        <table class="">
-            <th class="clth114">Producto Interno:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th>
-            <th>Externo:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
-        </table>
-        <table class="">
-            <th>Fumigador</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th>
-            <th>Cotizacion</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-            </div>
-            </th> 
+            </th>  
         </table>
 
 
-
-
-
-
-        <div class="footDiv">
-        </div>
+        <table class="tblauto" >
+            <td class="txtauto">Autorizo:</td>
+            <td class="txtauto1"></td>
+        </table>
+        <table>
+            <td style="text-align: center; font-size:16px;">Nombre del empleado que autoriza</td>
+        </table>
+        
+        <div class="footDiv"></div>
+        <div class="footDiv2"></div>
         <table class="footer">
             <th class="footer">Col. Alamedas</th>
             <th>C.P. 31704</th>
@@ -225,27 +115,67 @@
 
 <style>
     .txtDia{
-        justify-content: center;
         text-align: center;
-        justify-content: center;
-        width: 38px;;
+        width: 65px;
         margin-top:-20px;
-        margin-left:75%;
+        padding-right: -10px;
         border: 1px solid black;
     }
-.txtDia1{
-        justify-content: center;
+    .txtDia1{
+        text-align: center;
+        width: 80px;
+        border: 1px solid black;
+        padding-left: -10px;
+        margin-left: -10px;
+    }
+    .tblDia{
+        width: 15%;
+        margin-left: -10%;
+        position:absolute;
+    }
+    .tblauto{
+        margin-top: 20px;
+        width: 15%;
+        margin-left: 30%;
+
+    }
+
+
+    .txtauto{
+        text-align: center;
+        width: 65px;
+        margin-top:-20px;
+        padding-right: -10px;
+    }
+    .txtauto1{
+        width: 200px;
+        border-bottom: 1px solid black;
+    }
+    
+    .renDivthsepa{
+        width: 100%;
+        position: left;
+    }
+    .renDivThCon{
+        text-decoration: underline;
+        width: 100%;
+        text-align: left;
+        border-bottom: 1px solid black;
+        height: 5px;
+    }
+    .renDivThaut{
+        text-decoration: underline;
+        width: 10px;
+        text-align: center;
+        border-bottom: 1px solid black;
+        height: 5px;
+        
+    }
+    .autori{
+        background-color: red;
+        width: 100%;
         text-align: center;
         justify-content: center;
-        width: 100px;
-        position:absolute;
-        margin-top:-49px;
-        margin-left:80%;
-        border: 1px solid black;
-    }
-.tblDia{
-        position:absolute;
-        justify-content:center;
     }
     .clth1112{
         width: 5%;
@@ -339,8 +269,7 @@
     }
     .renDiv{
         border-bottom: 1px solid black;
-        height:15px;
-        width:100%;
+        height:7px;
     }.renDiv1{
         border-bottom: 1px solid black;
         height:15px;
@@ -402,8 +331,13 @@
         
     }
     .footDiv{
-        border-bottom:2px solid grey;
+        border-bottom:4px solid grey;
         margin-top:15px;
+        width: 100%;
+    }
+    .footDiv2{
+        border-bottom:2px solid grey;
+        margin-top:5px;
         width: 100%;
     }
     
@@ -439,7 +373,7 @@
         font-weight: normal;
         width: auto;
     }
-.button {
+    .button {
         height: 4px;
         height: 4px;
         background-color: white;
@@ -451,34 +385,34 @@
         font-size: 14px;
         text-align: start;
     }  
-.button5 {
-    text-align: start;
-    height: 4px;
-    height: 4px;
-    border-radius: 50%;
-    margin-right:-30px;
-    background-color:blue;
-}
+    .button5 {
+        text-align: start;
+        height: 4px;
+        height: 4px;
+        border-radius: 50%;
+        margin-right:-30px;
+        background-color:blue;
+    }
 
-.btnCan{
-    border-radius: 50%;
-    margin-right:-30px;
-    background-color:rgba(0, 0, 255, 0);
-}
-.btnCir{    
-    font-size:15px;
-    font-weight: normal;
-    width: 90%;
-}
-.btnCir2{    
-    font-size:15px;
-    font-weight: normal;
-    width: 90%;
+    .btnCan{
+        border-radius: 50%;
+        margin-right:-30px;
+        background-color:rgba(0, 0, 255, 0);
+    }
+    .btnCir{    
+        font-size:15px;
+        font-weight: normal;
+        width: 90%;
+    }
+    .btnCir2{    
+        font-size:15px;
+        font-weight: normal;
+        width: 90%;
 
-}
-.pr{
-    margin-top:20px;
-}
+    }
+    .pr{
+        margin-top:20px;
+    }
 
 
 </style>

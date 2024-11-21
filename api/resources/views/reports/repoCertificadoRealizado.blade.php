@@ -118,12 +118,19 @@
             </div>
             </th> 
         </table>
-        <table>
-            <th>OBSERVACIONES:</th>
+        <table class="">
+            <th>FUMIGADOR:</th>
             <th class="renDivTh">
-            
-                <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
-            
+            <div class="renDiv">
+                NOMBRE DEL FUMIGADOR
+
+            </div>
+            </th> 
+        </table>
+        <table>
+
+            <th class="renDivTh txtObser" style="text-align: left;">OBSERVACIONES:
+                Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.            
             </th> 
         </table>
         <div class="footDiv">
@@ -257,14 +264,21 @@
                     </div>
                     </th> 
                 </table>
-                <table>
-                    <th>OBSERVACIONES:</th>
-                    <th class="renDivTh">
-                    
-                        <h5 class= "txtObser">Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.</h5>                
-                    
-                    </th> 
-                </table>
+                <table class="">
+            <th>FUMIGADOR:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                NOMBRE DEL FUMIGADOR
+
+            </div>
+            </th> 
+        </table>
+        <table>
+
+            <th class="renDivTh txtObser" style="text-align: left;">OBSERVACIONES:
+                Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.            
+            </th> 
+        </table>
                 <div class="footDiv">
         
                 </div>
@@ -292,7 +306,6 @@
 
 <style>
     .thdomicilio{
-        position:;
         text-align: justify;
         text-decoration: underline;
     }
@@ -322,7 +335,7 @@
     .cerapli{
         color:#eb590c;
         position:absolute;
-        margin-left:-31%;
+        margin-left:-25.5%;
         margin-top:12.5%;
         font-size: 16px;
         
@@ -330,7 +343,7 @@
     .cerapli11{
         color:#eb590c;
         position:absolute;
-        margin-left:-65%;
+        margin-left:-55%;
         margin-top:26.5%;
         font-size: 16px;
         
@@ -338,7 +351,7 @@
     .cerapli1{
         color:#eb590c;
         position:absolute;
-        margin-left:-77%;
+        margin-left:-50%;
         margin-top:18%;
         font-size: 12px;
         
@@ -350,22 +363,23 @@
     .meminfo{
         text-align: center;
         position: absolute;
-        margin-left: -31%;
+        margin-left: -25%;
         margin-top:11%;
         font-size: 12px;
     }
     .meminfo1{
         text-align: center;
         position: absolute;
-        margin-left: -65%;
+        margin-left: -55%;
         margin-top:23%;
         font-size: 12px;
     }
     .membre{
         margin-top:40px;
         padding-left: 10%;
+        
+        width: 70%;
         height:12%;
-        width: 80%;
     }
     .txtfin1{
         padding-left:15px;
@@ -420,7 +434,7 @@
         font-size: 15px;
     }
     h1{
-        text-alaing:center;
+        text-align:center;
     }
     img{
         margin-top:30px;
@@ -456,12 +470,10 @@
         font-size:16pX;   
         margin-top: 5%;
     }
-    .agnAct{
-        
-    }
+
     .footDiv{
         margin:20px;
-        margin-top:-10px;
+        margin-top:2px;
         border-bottom:2px solid rgb(0, 0, 0);
     }
     
