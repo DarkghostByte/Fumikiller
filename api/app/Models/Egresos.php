@@ -14,6 +14,7 @@ class Egresos extends Model
         'dateEgresos',
         'descriptionEgresos',
         'montoEgresos',
-        'dataEgresos'
+        'dataEgresos',
+        'id_departamento1'
     ];
 }

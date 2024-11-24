@@ -17,28 +17,6 @@
         class="ml-3 px-3 py-2 bg-blue-500 hover:bg-orange-500 text-white hover:text-neutral-950 rounded-md border-2 border-neutral-950"
         @click="fetchDate">Buscar</button>
     </div>
-
-    <div class="flex justify-center items-center mt-2">
-      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData1"
-        style="width: 25%;" />
-      <el-input class="px-2" placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData2"
-        style="width: 25%;" />
-      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQuery3" @input="filterData3"
-        style="width: 25%;" />
-    </div>
-    <div class="flex justify-center items-center mt-2">
-      <el-input class="px-2" placeholder="Buscar si es que tiene facturacion" v-model="searchQuery4"
-        @input="filterData4" style="width: 25%;" />
-      <el-input class="px-2" placeholder="Buscar por facturacion" v-model="searchQuery5" @input="filterData5"
-        style="width: 25%;" />
-      <el-input class="px-2" placeholder="Buscar por numero de folio" v-model="searchQuery6" @input="filterData6"
-        style="width: 25%;" />
-      <el-input class="px-2" placeholder="Buscar por estado (Pagado o Credito)" v-model="searchQuery7"
-        @input="filterData7" style="width: 25%;" />
-      <el-date-picker class="px-2" v-model="selectedDate" @change="filterData8" type="date" format="YYYY-MM-DD"
-        value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
-    </div>
-
     <!--
     <div class="flex justify-center mb-5">
       <h1 style="text-align: center; font-family: 'Arial', sans-serif; font-size: 32px; font-weight: bold;">{{ f1 }}</h1>
@@ -74,7 +52,7 @@
             <i class="fa-solid fa-file-invoice-dollar fa-beat fa-xl"></i>
           </div>
           <div>
-            <span class="block text-gray-500">Venta Por Facturas</span>
+            <span class="block text-gray-500">Venta Con Facturas</span>
             <span class="block text-2xl font-bold">${{ totalVentasConFactura }}</span>
             <a :href="url + 'api/ventconfact/' + f1 + '/' + f2" target="_blank">
               <span class="material-symbols-outlined">picture_as_pdf</span>
@@ -149,6 +127,28 @@
     </el-carousel>
     <!-- END FILE -->
   </div>
+
+  <div class="flex justify-center items-center mt-2">
+    <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData1"
+      style="width: 25%;" />
+    <el-input class="px-2" placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData2"
+      style="width: 25%;" />
+    <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQuery3" @input="filterData3"
+      style="width: 25%;" />
+  </div>
+  <div class="flex justify-center items-center mt-2">
+    <el-input class="px-2" placeholder="Buscar si es que tiene facturacion" v-model="searchQuery4"
+      @input="filterData4" style="width: 25%;" />
+    <el-input class="px-2" placeholder="Buscar por facturacion" v-model="searchQuery5" @input="filterData5"
+      style="width: 25%;" />
+    <el-input class="px-2" placeholder="Buscar por numero de folio" v-model="searchQuery6" @input="filterData6"
+      style="width: 25%;" />
+    <el-input class="px-2" placeholder="Buscar por estado (Pagado o Credito)" v-model="searchQuery7"
+      @input="filterData7" style="width: 25%;" />
+    <el-date-picker class="px-2" v-model="selectedDate" @change="filterData8" type="date" format="YYYY-MM-DD"
+      value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
+  </div>
+
   <!-- TABLE DATA -->
   <div class="flex">
     <el-table :data="filteredData1" :default-sort="{ prop: 'id', order: 'ascending' }"

@@ -9,7 +9,7 @@
     <div class="flex justify-between items-center mb-4">
       <h1 class="text-2xl font-semibold">Gestión de Remisiónes Realizadas</h1>
       <div class="flex flex-wrap items-start justify-end ">
-        <router-link to="/admin/certificate" class="el-button el-button--danger">
+        <router-link to="/admin/facturas" class="el-button el-button--danger">
           <i class="fa fa-rotate-left" aria-hidden="true"
             style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
           Regresar
@@ -36,16 +36,6 @@
 
         <el-table-column label="" width="100" >
           <template #default="scope">
-            <el-button style="color:black" size="small" type="info" @click="pdf(scope.row)">
-              <a :href="url + 'api/remision/' + scope.row.id" target="_blank">
-                <span class="material-symbols-outlined">lab_profile</span>
-              </a>
-            </el-button>
-          </template>
-        </el-table-column>
-
-        <el-table-column label="" width="100" >
-          <template #default="scope">
             <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
                 class="material-symbols-outlined">visibility</span></el-button>
           </template>
@@ -57,7 +47,7 @@
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-        <el-table-column prop="certificateName" label="Nombre" sortable width="250" />
+        <el-table-column prop="folioFactura" label="Nombre" sortable width="250" />
         <el-table-column label="Dirección" sortable width="550">
           <template #default="scope">
             {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
@@ -76,7 +66,7 @@
           <i class="fa fa-file fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Certificado a:</strong> {{ selectedItem.name }}
+              <strong>Num. Factura:</strong> {{ selectedItem.folioFactura }}
             </p>
           </div>
         </div>
@@ -108,10 +98,11 @@
           <i class="fa fa-bugs fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Producto interno:</strong> {{ selectedItem.productoInt }}
+              <strong>Nombre</strong> {{ selectedItem.name+' '+selectedItem.lastname1+' '+selectedItem.lastname2 }}
+              <strong>negocio</strong> {{ selectedItem.tradename }}
             </p>
             <p>
-              <strong>Producto externo:</strong> {{ selectedItem.productoExt }}
+              <strong>Correo</strong> correo
             </p>
           </div>
         </div>
@@ -152,7 +143,7 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('remisiones').then(res => {
+      axios.get('facturas').then(res => {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });

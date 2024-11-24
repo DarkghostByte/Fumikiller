@@ -13,11 +13,18 @@ class EgresosController extends Controller
      */
     public function index()
     {
-        $data = Egresos ::all();
-        return response()->json([
-            'status'=>'success',
-            'data'=>$data
-        ]);
+        $data = Egresos::select([
+            'egresos.*',
+            'comercios.comercio',
+        ])
+        ->join('comercios', 'egresos.id_departamento1', '=', 'comercios.id')
+        ->orderBy('egresos.id', 'DESC')
+        ->get();
+
+    return response()->json([
+        'status' => 'success',
+        'data' => $data
+    ]);
     }
 
     /**
@@ -39,6 +46,7 @@ class EgresosController extends Controller
             'descriptionEgresos' => 'required|min:1',
             'montoEgresos' => 'required|min:1',
             'dataEgresos' => 'required|min:1',
+            'id_departamento1' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -52,6 +60,7 @@ class EgresosController extends Controller
             $data->descriptionEgresos = $request->descriptionEgresos;
             $data->montoEgresos = $request->montoEgresos;
             $data->dataEgresos = $request->dataEgresos;
+            $data->id_departamento1 = $request->id_departamento1;
             $data->save();
 
             return response()->json([
@@ -88,6 +97,7 @@ class EgresosController extends Controller
             'descriptionEgresos' => 'required|min:1',
             'montoEgresos' => 'required|min:1',
             'dataEgresos' => 'required|min:1',
+            'id_departamento1' => 'required|min:1',
         ]);
         if (!$data) {
             return response()->json([

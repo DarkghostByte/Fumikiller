@@ -28,5 +28,6 @@ class Cliente extends Model
         'recruitment_data',
         'infoclient_delete',
         'requires',
+        'correo',
     ];
 }

@@ -16,7 +16,6 @@ return new class extends Migration
             $table->integer('id_orden')->unsigned();
             $table->foreign("id_orden")->references('id')->on('orden');
             $table->string('certificateName');
-            $table->string('certificateDate');
             $table->integer('id_productoCertificadoInt1')->unsigned();
             $table->foreign("id_productoCertificadoInt1")->references('id')->on('productosInternos');
             $table->integer('id_productoCertificadoExt1')->unsigned();

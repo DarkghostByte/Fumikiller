@@ -117,18 +117,21 @@
 
           <el-form-item prop="otraDosis" label="Otra dosis" class="px-2">
             <el-radio-group v-model="form.otraDosis">
-              <el-date-picker class="px-2" v-model="form.otraDosis" type="date" placeholder="Otra dosis:" format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
+              <el-date-picker class="px-2" v-model="form.otraDosis" type="date" placeholder="Otra dosis:"
+                format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
               <el-radio label="No aplica" value="No aplica" border />
             </el-radio-group>
           </el-form-item>
-        
+
           <el-form-item class="px-10" label="Nueva orden:">
-            <el-button :disabled="isButtonDisabled" @click="dialogVisibleOrdenNueva = true" class="el-button el-button--warning">
-              <i class="fa-solid fa-calendar" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+            <el-button :disabled="isButtonDisabled" @click="dialogVisibleOrdenNueva = true"
+              class="el-button el-button--warning">
+              <i class="fa-solid fa-calendar" aria-hidden="true"
+                style="margin-top: 2px; margin-left: -5px; margin-right:10px;"></i>
               Otra dosis
             </el-button>
           </el-form-item>
-          
+
         </div>
         <!-- FILA DE REQUIERE DE -->
         <p>Requiere de:</p>
@@ -140,6 +143,13 @@
               <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
               <el-checkbox label="Remision" value="Remision"></el-checkbox>
             </el-checkbox-group>
+          </el-form-item>
+          <el-form-item class="px-4">
+            <el-button @click="dialogVisibleFactura = true" class="el-button el-button--warning">
+              <i class="fa-solid fa-file" aria-hidden="true"
+                style="margin-left: -5px; margin-right:10px; margin-top: 2px;"></i>
+              Generar Factura
+            </el-button>
           </el-form-item>
         </div>
         <!-- FILA DE DATO -->
@@ -178,139 +188,148 @@
       </el-form>
     </div>
     <!-- END TABLE DATA -->
-     <!-- MODAL 1 -->
-  <el-dialog v-model="dialogVisibleOrdenNueva" title="Crear Nueva Colonia" width="80%">
-    <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef2" :rules="rules2"
-      :label-position="'top'">
-      <div class="row">
+    <!-- MODAL 1 -->
+    <el-dialog v-model="dialogVisibleOrdenNueva" title="Otra dosis:" width="80%">
+      <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef2" :rules="rules2"
+        :label-position="'top'">
+        <div class="row">
 
-        <p>Cliente {{ form1.name + ' ' + form1.lastname1 + ' ' + form1.lastname2}}</p>
+          <p>Cliente {{ form1.name + ' ' + form1.lastname1 + ' ' + form1.lastname2 }}</p>
 
-        <p>Problematica</p>
-        <div class="flex" style="width:100%;">
-          <el-form-item prop="id_plague1" label="Problematica #1:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form1.id_plague1" placeholder="Selecciona la problematica:">
-              <el-option v-for="problematicaBug in problematicas1" :key="problematicaBug.id" :label="problematicaBug.problematica"
-                :value="problematicaBug.id" />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="id_plague2" label="Problematica #2:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form1.id_plague2" placeholder="Selecciona la problematica:">
-              <el-option v-for="problematicaBug2 in problematicas2" :key="problematicaBug2.id" :label="problematicaBug2.problematica"
-                :value="problematicaBug2.id" />
-            </el-select>
-          </el-form-item>
+          <p>Problematica</p>
+          <div class="flex" style="width:100%;">
+            <el-form-item prop="id_plague1" label="Problematica #1:" class="px-2" style="width: 300px;">
+              <el-select v-model="form1.id_plague1" placeholder="Selecciona la problematica:">
+                <el-option v-for="problematicaBug in problematicas1" :key="problematicaBug.id"
+                  :label="problematicaBug.problematica" :value="problematicaBug.id" />
+              </el-select>
+            </el-form-item>
+            <el-form-item prop="id_plague2" label="Problematica #2:" class="px-2" style="width: 300px;">
+              <el-select v-model="form1.id_plague2" placeholder="Selecciona la problematica:">
+                <el-option v-for="problematicaBug2 in problematicas2" :key="problematicaBug2.id"
+                  :label="problematicaBug2.problematica" :value="problematicaBug2.id" />
+              </el-select>
+            </el-form-item>
+          </div>
+
+          <p>Fechas</p>
+          <div class="flex">
+            <el-form-item prop="date1" class="px-2" label="Fecha de orden:">
+              <el-col :span="11" style="width: 220px">
+                <el-date-picker v-model="form1.date1" type="date" placeholder="Orden" format="DD/MM/YYYY"
+                  value-format="DD-MM-YYYY" />
+              </el-col>
+            </el-form-item>
+            <el-form-item prop="date2" class="px-2" label="Fecha para asistir:">
+              <el-col :span="11" style="width: 220px">
+                <el-date-picker v-model="form1.date2" type="date" placeholder="Orden" format="DD/MM/YYYY"
+                  value-format="DD-MM-YYYY" />
+              </el-col>
+            </el-form-item>
+            <el-form-item prop="time1" class="px-2" label="De hora:">
+              <el-col :span="11" style="width: 220px">
+                <el-time-select v-model="form1.time1" style="width: 220px" start="08:30" step="00:15" end="20:30"
+                  format="hh:mm A" placeholder="Seleccionar hora" />
+              </el-col>
+            </el-form-item>
+            <el-form-item prop="time2" class="px-2" label="A hora:">
+              <el-col :span="11" style="width: 220px">
+                <el-time-select v-model="form1.time2" style="width: 220px" start="08:30" step="00:15" end="20:30"
+                  format="hh:mm A" placeholder="Seleccionar hora" />
+              </el-col>
+            </el-form-item>
+            <el-form-item prop="infoorden_cell" label="Hablar antes de ir?" class="px-2">
+              <el-radio-group v-model="form1.infoorden_cell">
+                <el-radio value="Si" size="large" border>Si</el-radio>
+                <el-radio value="No" size="large" border>No</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </div>
+
+          <p>Contratacion:</p>
+          <div class="flex">
+            <el-form-item prop="hiring" label="" class="px-10">
+              <el-checkbox-group v-model="form1.hiring">
+                <el-checkbox label="Nada" value="Nada"></el-checkbox>
+                <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
+                <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
+                <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
+                <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </div>
+
+          <p>Requiere de:</p>
+          <div class="flex">
+            <el-form-item prop="infoorden_certificate" label="El cliente necesita certificado?" class="px-10">
+              <el-radio-group v-model="form1.infoorden_certificate">
+                <el-radio value="Si" size="large" border>Si</el-radio>
+                <el-radio value="No" size="large" border>No</el-radio>
+              </el-radio-group>
+            </el-form-item>
+
+            <el-form-item prop="infoorden_remision" label="El cliente necesita remision?" class="px-10">
+              <el-radio-group v-model="form1.infoorden_remision">
+                <el-radio value="Si" size="large" border>Si</el-radio>
+                <el-radio value="No" size="large" border>No</el-radio>
+              </el-radio-group>
+            </el-form-item>
+
+            <el-form-item prop="infoorden_facturacion" label="El cliente necesita facturacion?" class="px-10">
+              <el-radio-group v-model="form1.infoorden_facturacion">
+                <el-radio value="Si" size="large" border>Si</el-radio>
+                <el-radio value="No" size="large" border>No</el-radio>
+              </el-radio-group>
+            </el-form-item>
+          </div>
+
         </div>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisibleOrdenNueva = false">Cancelar</el-button>
+          <el-button type="primary" @click="createNewOrder">Crear</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <!-- END MODAL 2 -->
 
-        <p>Fechas</p>
-        <div class="flex">
-          <el-form-item prop="date1" class="px-2" label="Fecha de orden:">
-            <el-col :span="11" style="width: 220px">
-              <el-date-picker
-                v-model="form1.date1"
-                type="date"
-                placeholder="Orden"
-                format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY"
-              />
+    <el-dialog v-model="dialogVisibleFactura" title="Facturación" width="30%">
+      <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef3" :rules="rules3"
+        :label-position="'top'">
+        <el-card class="facturacion-card" :style="{ background: 'var(--color-primary-light)' }">
+          <h3 class="facturacion-card-title" style="color: black">Datos del Cliente</h3>
+          <el-row>
+            <el-col :span="12">
+              <p style="color: black">Cliente: {{ form2.name }} {{ form2.lastname1 }} {{ form2.lastname2 }}</p>
+              <p style="color: black">Negocio: {{ form2.tradename }}</p>
+              <p style="color: black">Teléfono: {{ form2.cell_phone }}</p>
+              <p style="color: black">Correo: {{ form2.email }}</p>
+              <p style="color: black">Fecha: {{ form2.date2 }}</p>
             </el-col>
-          </el-form-item>
-          <el-form-item prop="date2" class="px-2" label="Fecha para asistir:">
-            <el-col :span="11" style="width: 220px">
-              <el-date-picker
-                v-model="form1.date2"
-                type="date"
-                placeholder="Orden"
-                format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY"
-              />
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item class="label-negro" prop="folioFactura" label="Folio de factura:"
+                style="color: black; width: 300px;">
+                <el-input v-model="form2.folioFactura" class="px-1" placeholder="Ingresa el folio" />
+              </el-form-item>
             </el-col>
-          </el-form-item>
-          <el-form-item prop="time1" class="px-2" label="De hora:">
-            <el-col :span="11" style="width: 220px">
-              <el-time-select
-                v-model="form1.time1"
-                style="width: 220px"
-                start="08:30"
-                step="00:15"
-                end="20:30"
-                format="hh:mm A"
-                placeholder="Seleccionar hora"
-              />
-            </el-col>
-          </el-form-item>
-          <el-form-item prop="time2" class="px-2" label="A hora:">
-            <el-col :span="11" style="width: 220px">
-              <el-time-select
-                v-model="form1.time2"
-                style="width: 220px"
-                start="08:30"
-                step="00:15"
-                end="20:30"
-                format="hh:mm A"
-                placeholder="Seleccionar hora"
-              />
-            </el-col>
-          </el-form-item>
-          <el-form-item prop="infoorden_cell" label="Hablar antes de ir?" class="px-2">
-            <el-radio-group v-model="form1.infoorden_cell">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </div>
+          </el-row>
+        </el-card>
+      </el-form>
 
-        <p>Contratacion:</p>
-        <div class="flex">
-          <el-form-item prop="hiring" label="" class="px-10">
-            <el-checkbox-group v-model="form1.hiring">
-              <el-checkbox label="Nada" value="Nada"></el-checkbox>
-              <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
-              <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
-              <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
-              <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </div>
 
-        <p>Requiere de:</p>
-        <div class="flex">
-          <el-form-item prop="infoorden_certificate" label="El cliente necesita certificado?" class="px-10">
-            <el-radio-group v-model="form1.infoorden_certificate">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
-          </el-form-item>
-
-          <el-form-item prop="infoorden_remision" label="El cliente necesita remision?" class="px-10">
-            <el-radio-group v-model="form1.infoorden_remision">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
-          </el-form-item>
-
-          <el-form-item prop="infoorden_facturacion" label="El cliente necesita facturacion?" class="px-10">
-            <el-radio-group v-model="form1.infoorden_facturacion">
-              <el-radio value="Si" size="large" border>Si</el-radio>
-              <el-radio value="No" size="large" border>No</el-radio>
-            </el-radio-group>
-          </el-form-item>
-        </div>
-
-      </div>
-    </el-form>
-    <template #footer>
-      <span class="dialog-footer">
-        <el-button @click="dialogVisibleOrdenNueva = false">Cancelar</el-button>
-        <el-button type="primary" @click="createNewOrder">Crear</el-button>
-      </span>
-    </template>
-  </el-dialog>
-  <!-- END MODAL 1 -->
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisibleFactura = false">Cancelar</el-button>
+          <el-button type="primary" @click="createFactura">Crear</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <!-- END MODAL 2 -->
   </div>
-  
+
 
 </template>
 
@@ -325,6 +344,7 @@ export default {
     tableData: [],
     formRef: undefined,
     formRef2: undefined,
+
     uploadRef: undefined,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
@@ -335,6 +355,7 @@ export default {
     empleados: [],
     empleados2: [],
     dialogVisibleOrdenNueva: false,
+    dialogVisibleFactura: false,
     problematicas1: [],
     problematicas2: [],
     selectedItem: {},
@@ -377,6 +398,7 @@ export default {
       infoorden_facturacion: 'No',
       infoorden_cell: 'No'
     },
+
     rules: {
       id_empleado: [
         { required: true, message: 'El responsable es requerido', trigger: 'blur' },
@@ -438,7 +460,7 @@ export default {
       infoorden_facturacion: [
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
-    }
+    },
   }),
   mounted() {
     this.fetchProductosInternos();
@@ -451,6 +473,15 @@ export default {
     this.fetchProblematicaBug();
     this.fetchProblematicaBug2();
     const route = useRoute();
+
+    console.log('ID', route.params.id)
+    console.log('ID Orden', route.params)
+
+
+    this.form2.id_ordenCompleta = this.id || '';
+    console.log('ID Orden Complete', this.id)
+
+
     if (route.params && route.params.id) {
       this.id = route.params.id;
       axios.get('orden/' + this.id).then(res => {
@@ -459,9 +490,10 @@ export default {
           let datos = res.data.data;
           console.log('Datos:', res.data.data); // Verifica aquí los datos del cliente
           console.log('Datos Cliente:', datos.cliente); // Verifica aquí los datos del cliente
+          console.log('Datos De Orden:', datos); // Verifica aquí los datos del cliente
           this.form.id_orden = datos.id;
           if (datos.cliente) {
-            this.clientId =  datos.cliente.name;
+            this.clientId = datos.cliente.name;
             this.form.name = datos.cliente.name || '';
             this.form.lastname1 = datos.cliente.lastname1 || '';
             this.form.lastname2 = datos.cliente.lastname2 || '';
@@ -471,6 +503,7 @@ export default {
             this.form1.lastname1 = datos.cliente.lastname1 || '';
             this.form1.lastname2 = datos.cliente.lastname2 || '';
             this.form1.tradename = datos.cliente.tradename || '';
+            this.form1.cell_phone = datos.cliente.cell_phone || '';
             this.form1.statusOrder = datos.statusOrder || '';
             this.form1.id_plague1 = datos.id_plague1 || '';
             this.form1.id_plague2 = datos.id_plague2 || '';
@@ -484,9 +517,16 @@ export default {
             this.form1.infoorden_certificate = datos.infoorden_certificate || '';
             this.form1.infoorden_remision = datos.infoorden_remision || '';
             this.form1.infoorden_facturacion = datos.infoorden_facturacion || '';
+
+            this.form2.name = datos.cliente.name || '';
+            this.form2.lastname1 = datos.cliente.lastname1 || '';
+            this.form2.lastname2 = datos.cliente.lastname2 || '';
+            this.form2.tradename = datos.cliente.tradename || '';
+            this.form2.cell_phone = datos.cliente.cell_phone || '';
+            this.form2.date2 = datos.date2 || '';
           }
-            
-      
+
+
         } else {
           console.error('Response data is undefined or null');
           ElNotification({
@@ -732,6 +772,50 @@ export default {
         }
       });
     },
+
+    createFactura() {
+      this.$refs.formRef3.validate((valid) => {
+        if (valid) {
+          axios.post('facturas', this.form2)
+            .then(res => {
+              console.log(res);
+              this.refresh();
+              this.$message.success('La factura se inserto correctamente');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro insertado correctamente',
+                type: 'success'
+              })
+              this.dialogVisibleFactura = false;
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al crear la factura');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de llenar los campos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          });
+          return false;
+        }
+      });
+    },
   }
 };
 </script>
+
+<style>
+.label-negro {
+  color: red;
+  font-size: 16px;
+  font-weight: bold;
+}
+</style>

@@ -19,6 +19,7 @@ use App\Http\Controllers\IngresosController;
 use App\Http\Controllers\EgresosController;
 use App\Http\Controllers\PdfsController;
 use App\Http\Controllers\RemisionesController;
+use App\Http\Controllers\FacturasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::resource('problematica', ProblematicasController::class);
 Route::resource('ingresos', IngresosController::class);
 Route::resource('egresos', EgresosController::class);
 Route::resource('remisiones', RemisionesController::class);
+Route::resource('facturas', FacturasController::class);
 
 //RUTAS PARA PDF
 Route::get('/remision/{id}',[PdfsController::class,'generarPDFRem']);
@@ -85,6 +87,8 @@ Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actuali
 Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);
 Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);
 Route::put('verEstadoOrden/{id}', [OrdensController::class, 'verEstadoOrden']);
+Route::put('verEstadoFacturacion/{id}', [OrdensController::class, 'verEstadoFacturacion']);
+Route::put('verEstadoCertificado/{id}', [OrdensController::class, 'verEstadoCertificado']);
 Route::put('desactivarProductoInterno/{id}', [ProductosInternosController::class, 'desactivarProductoInterno']);
 Route::put('desactivarProductoExterno/{id}', [ProductosExtrenosController::class, 'desactivarProductoExterno']);
 Route::put('desactivarEmpleado/{id}', [EmpleadosController::class, 'desactivarEmpleado']);

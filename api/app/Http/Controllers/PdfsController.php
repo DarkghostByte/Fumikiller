@@ -90,6 +90,11 @@ class PdfsController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        /* Imagen */
+        $path1 = public_path('img/logofk.png');
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data_img1 = file_get_contents($path1);
+        $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
         /* Fecha Date1 */
         $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($orden->date1))));
         str_replace('S?BADO','SÁBADO',$fecha);
@@ -102,9 +107,10 @@ class PdfsController extends Controller
         Carbon::setLocale('es');
         
         /* PDF */
-        $pdf_data = compact('base64','orden','fecha','fecha2');
-        $pdf = Pdf::loadView('reports.reporteOrdenPdf',$pdf_data)->save('myfile.pdf');
-        return $pdf->stream();
+        $pdf_data = compact('base64','base641','orden','fecha','fecha2');
+        $pdf = Pdf::loadView('reports.reporteOrdenPdf',$pdf_data)->setPaper('letter');;
+        $nombreArchivo = 'No_'.str_pad($orden->id, 5, '0', STR_PAD_LEFT) . '_' .$orden->name . '_' . $orden->lastname1 . '_' . $orden->lastname2 . '.pdf';
+        return $pdf->stream($nombreArchivo);
     }
 
     public function generarOrden($id){        
@@ -147,6 +153,11 @@ class PdfsController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        /* Imagen */
+        $path1 = public_path('img/logofk.png');
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data_img1 = file_get_contents($path1);
+        $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
         /* Fecha Date1 */
         $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($ordenCompleta->date1))));
         str_replace('S?BADO','SÁBADO',$fecha);
@@ -158,11 +169,10 @@ class PdfsController extends Controller
         /* Localizacion */
         Carbon::setLocale('es');
         /* PDF */
-        $pdf_data = compact('base64','ordenCompleta','fecha','fecha2');
-        $pdf = Pdf::loadView('reports.reporteOrdenCompletaPDF',$pdf_data)->save('myfile.pdf');
-        //$pdf = Pdf::loadView('reports.reporte',$pdf_data)->save('myfile.pdf');
-        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
-        return $pdf->stream();
+        $pdf_data = compact('base64','base641','ordenCompleta','fecha','fecha2');
+        $pdf = Pdf::loadView('reports.reporteOrdenCompletaPDF',$pdf_data)->setPaper('letter');;
+        $nombreArchivo = 'OrdenCompleta_No_'.str_pad($ordenCompleta->id, 5, '0', STR_PAD_LEFT) . '_' .$ordenCompleta->name . '_' . $ordenCompleta->lastname1 . '_' . $ordenCompleta->lastname2 . '.pdf';
+        return $pdf->stream($nombreArchivo);
     }
 
     public function generarCertificado($id){
@@ -182,8 +192,9 @@ class PdfsController extends Controller
             'colonias.codigoPostal',
             'ciudades.ciudad',
             'ciudades.estado',
+            'orden.date1',
             'productosInternos.productoInt',
-            'productosExternos.productoExt'
+            'productosExternos.productoExt',
         ])
         ->join('productosInternos', 'certificados.id_productoCertificadoInt1', '=', 'productosInternos.id')
         ->join('productosExternos', 'certificados.id_productoCertificadoExt1', '=', 'productosExternos.id')
@@ -207,9 +218,9 @@ class PdfsController extends Controller
         //$pdf_data = compact('data','clientes','base64');
         setlocale(LC_ALL, 'es_MX.UTF-8','esp');
         date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
-        $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))));
+        $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->date1))));
         str_replace('S?BADO','SÁBADO',$fecha);
-        $fecha = Carbon::parse($data->certificateDate);
+        $fecha = Carbon::parse($data->date1);
         Carbon::setLocale('es');
         $pdf_data = compact('base64','data','fecha');
         $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('a4', 'landscape');     

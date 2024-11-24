@@ -63,6 +63,9 @@
           <el-form-item prop="tradename" label="Nombre Comercial:" class="px-5">
             <el-input v-model="form1.tradename" class="" placeholder="Ingresa el nombre del comercio" />
           </el-form-item>
+          <el-form-item prop="correo" label="Correo:" class="px-5">
+            <el-input v-model="form1.correo" class="" placeholder="Ingresa el correo" />
+          </el-form-item>
         </div>
 
         <!-- Segunda Fila -->
@@ -202,6 +205,7 @@ export default {
       lastname1: '',
       lastname2: '',
       tradename: '',
+      correo: '',
       id_vias: '',
       home: '',
       numAddress: '',
@@ -236,6 +240,10 @@ export default {
       ],
       tradename: [
         { required: true, message: 'El comercio es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      correo: [
+        { required: true, message: 'El correo es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
       id_vias: [

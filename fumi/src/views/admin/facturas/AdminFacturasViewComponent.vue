@@ -7,12 +7,12 @@
   <div class="container mx-auto px-4">
 
     <div class="flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-semibold">Gestión de Remisiones (Clientes)</h1>
+      <h1 class="text-2xl font-semibold">Gestión de Facturas</h1>
       <div class="flex flex-wrap items-start justify-end ">
-        <router-link to="/admin/remisiones/views/" class="el-button el-button--success" style="color: black;">
+        <router-link to="/admin/facturas/views/" class="el-button el-button--success" style="color: black;">
           <i class="fa-solid fa-book" aria-hidden="true"
             style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-          Consultar Remisiones
+          Consultar todas las facturas
         </router-link>
       </div>
     </div>
@@ -41,13 +41,6 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="" width="100">
-          <template #default="scope">
-            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
-                class="material-symbols-outlined">visibility</span></el-button>
-          </template>
-        </el-table-column>
-
         <!-- Agrega las demás columnas aquí -->
         <el-table-column label="Folio" sortable>
           <template #default="scope">
@@ -55,7 +48,7 @@
           </template>
         </el-table-column>
 
-        <el-table-column prop="name" label="Nombres" sortable width="150" />
+        <el-table-column prop="folioFactura" label="Nombres" sortable width="150" />
         <el-table-column label="Apellidos" sortable width="150">
           <template #default="scope">
             {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
@@ -145,44 +138,35 @@
     <!-- END MODAL 1 -->
 
     <!-- MODAL 2 -->
-    <el-dialog v-model="dialogVisibleViewRemisiones" title="Crear Remision" width="40%">
-      <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
+    <el-dialog v-model="dialogVisibleFactura" title="Facturación" width="30%">
+      <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef3" :rules="rules3"
         :label-position="'top'">
-        <div class="row" style="width:100%;">
-          <p>Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}</p>
-          <p>Negocio: {{ selectedItem.tradename }}</p>
-          <br>
-
-          <div class="flex" style="width:100%;">
-            <el-form-item prop="RemisionCertificado" label="Num. Certificado:" class="px-2">
-              <el-input v-model="form1.RemisionCertificado" placeholder="Ingresa numero de certificado" />
-            </el-form-item>
-
-            <el-form-item prop="RemisionDate" class="px-2" label="Fecha de la remisión:">
-              <el-col :span="11">
-                <el-date-picker v-model="form1.RemisionDate" type="date" placeholder="Fecha de la remisión"
-                  format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
-              </el-col>
-            </el-form-item>
-
-            <el-form-item prop="RemisionMonto" label="Monto:" class="px-2">
-              <el-input v-model="form1.RemisionMonto" placeholder="Ingresa el monto" />
-            </el-form-item>
-          </div>
-
-          <div class="flex" style="width:100%;">
-            <el-form-item style="width:100%;" prop="RemisionObservaciones" label="Observaciones:" class="px-2">
-              <el-input v-model="form1.RemisionObservaciones" type="textarea" maxlength="200" show-word-limit
-                placeholder="Agrega las observaciones" />
-            </el-form-item>
-          </div>
-
-        </div>
+        <el-card class="facturacion-card" :style="{ background: 'var(--color-primary-light)' }">
+          <h3 class="facturacion-card-title" style="color: black">Datos del Cliente</h3>
+          <el-row>
+            <el-col :span="12">
+              <p style="color: black">Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}</p>
+              <p style="color: black">Negocio: {{ selectedItem.tradename }}</p>
+              <p style="color: black">Teléfono: {{ selectedItem.cell_phone }}</p>
+              <p style="color: black">Correo: {{ selectedItem.email }}</p>
+              <p style="color: black">Fecha: {{ selectedItem.date2 }}</p>
+            </el-col>
+          </el-row>
+          <el-row>
+            <el-col :span="12">
+              <el-form-item class="label-negro" prop="folioFactura" label="Folio de factura:" style="color: black; width: 300px;">
+                <el-input type="number" v-model="form2.folioFactura" class="px-1" placeholder="Ingresa el folio"/>
+              </el-form-item>
+            </el-col>
+          </el-row>
+        </el-card>
       </el-form>
+      
+    
       <template #footer>
         <span class="dialog-footer">
-          <el-button @click="dialogVisibleViewRemisiones = false">Cancelar</el-button>
-          <el-button type="primary" @click="createRemision1(selectedItem.id)">Crear</el-button>
+          <el-button @click="dialogVisibleFactura = false">Cancelar</el-button>
+          <el-button type="primary" @click="createFactura">Crear</el-button>
         </span>
       </template>
     </el-dialog>
@@ -197,9 +181,10 @@ import { ElNotification } from 'element-plus';
 export default {
   name: 'AdminRemisionesViewComponent',
   data: () => ({
+    formRef3: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
-    dialogVisibleViewRemisiones: false,
+    dialogVisibleFactura: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     tableData: [],
@@ -210,11 +195,10 @@ export default {
     searchQueryLastname: '',
     searchQueryAddress: '',
     searchQueryPhone: '',
-    form1: {
-      RemisionDate: '',
-      RemisionCertificado: '',
-      RemisionMonto: '',
-      RemisionObservaciones: '',
+    form2:{
+      id_ordenCompleta: '',
+      folioFactura:'',
+      statusFolio:'Alta',
     },
     rules: {
       RemisionDate: [
@@ -233,7 +217,11 @@ export default {
         { required: true, message: 'La fecha es requerida', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
-
+    },
+    rules3: {
+      folioFactura: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+      ],
     }
   }),
   mounted() {
@@ -242,8 +230,9 @@ export default {
   methods: {
     refresh() {
       axios.get('orden').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoorden_remision !== 'No');
+        this.tableData = res.data.data.filter(row => row.infoorden_facturacion !== 'No');
         this.filteredData = this.tableData;
+        console.log('Datos', this.tableData)
       });
     },
     seleccionar(row) {
@@ -254,36 +243,56 @@ export default {
     remision(row) {
       console.log(row);
       this.selectedItem = row;
-      this.dialogVisibleViewRemisiones = true;
+      this.dialogVisibleFactura = true;
     },
 
-    createRemision1() {
-      this.$refs.formRef.validate(async (valid) => {
+    createFactura() {
+      this.$refs.formRef3.validate(async (valid) => {
         if (valid) {
           try {
-            const response = await axios.post('remisiones', {
-              ...this.form1,
-              id_cliente: this.selectedItem.id,
+            const response = await axios.post('facturas', {
+              ...this.form2,
+              id_ordenCompleta: this.selectedItem.id,
             });
             console.log(response);
-            this.dialogVisibleViewRemisiones = false;
+            this.dialogVisibleFactura = false;
             this.refresh();
-            this.$message.success('La remisión se creo correctamente');
+            this.$message.success('La factura se creo correctamente');
             ElNotification({
               title: 'Alerta',
               message: 'Registro insertado correctamente',
               type: 'success'
             })
+            this.$refs.formRef3.resetFields();
+
+            const updatedData = {
+                infoorden_facturacion: this.form2.infoorden_facturacion === 'No' ? 'Si' : 'No'
+              };
+
+              axios.put('verEstadoFacturacion/' + this.selectedItem.id, updatedData)
+                .then(response => {
+                  console.log('Estado actualizado correctamente:', response.data);
+                  this.refresh();
+                  ElNotification({
+                    title: 'Actualización de datos',
+                    message: `Se actualizaron los datos.`,
+                    type: 'success'
+                  });
+                })
+                .catch(error => {
+                  console.error('Error al actualizar el estado:', error);
+                });
+
           } catch (error) {
-            console.error('Error creating remisión:', error.response.data);
-            this.$message.error('Error al crear la remisión1');
+            console.error('Error creating factura:', error.response.data);
+            this.$message.error('Error al crear el factura');
             ElNotification({
               title: 'Error',
               message: 'Favor de llenar los campos',
               type: 'error'
             })
-            console.error('Error creating remisión:', error.response.data);
-            this.$message.error('Error al crear la remisión');
+            console.error('Error creating factura:', error.response.data);
+            this.$message.error('Error al crear el factura');
           }
         } else {
           console.log('Validation failed');

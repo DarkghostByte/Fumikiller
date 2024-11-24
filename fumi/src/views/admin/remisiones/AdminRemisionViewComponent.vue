@@ -9,7 +9,7 @@
     <div class="flex justify-between items-center mb-4">
       <h1 class="text-2xl font-semibold">Gestión de Remisiónes Realizadas</h1>
       <div class="flex flex-wrap items-start justify-end ">
-        <router-link to="/admin/certificate" class="el-button el-button--danger">
+        <router-link to="/admin/remisiones" class="el-button el-button--danger">
           <i class="fa fa-rotate-left" aria-hidden="true"
             style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
           Regresar

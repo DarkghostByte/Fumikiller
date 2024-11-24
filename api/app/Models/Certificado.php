@@ -14,7 +14,6 @@ class Certificado extends Model
     protected $fillable = [
         'id_orden',
         'certificateName',
-        'certificateDate',
         'id_productoCertificadoInt1',
         'id_productoCertificadoExt1',
     ];

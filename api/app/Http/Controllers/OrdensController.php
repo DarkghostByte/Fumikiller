@@ -17,6 +17,7 @@ class OrdensController extends Controller
                 'clientes.lastname1',
                 'clientes.lastname2',
                 'clientes.tradename',
+                'clientes.correo',
                 'clientes.home',
                 'clientes.numAddress',
                 'clientes.id_colonia',
@@ -232,6 +233,79 @@ class OrdensController extends Controller
 
     $updatedData = [
         'statusOrder' => $request->statusOrder
+    ];
+
+    $orden->update($updatedData);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Estado cambiado exitosamente',
+        'data' => $orden
+    ]);
+    }
+
+
+    public function verEstadoFacturacion(Request $request, $id)
+    {
+    $orden = Orden::find($id);
+
+    if (!$orden) {
+        return response()->json([
+        'status' => 'error',
+        'message' => 'Orden no encontrado'
+        ], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'infoorden_facturacion' => 'required|in:No,Si',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+        'status' => 'failed',
+        'message' => 'Error de validación',
+        'errors' => $validator->errors()
+        ], 400);
+    }
+
+    $updatedData = [
+        'infoorden_facturacion' => $request->infoorden_facturacion
+    ];
+
+    $orden->update($updatedData);
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Estado cambiado exitosamente',
+        'data' => $orden
+    ]);
+    }
+
+    public function verEstadoCertificado(Request $request, $id)
+    {
+    $orden = Orden::find($id);
+
+    if (!$orden) {
+        return response()->json([
+        'status' => 'error',
+        'message' => 'Orden no encontrado'
+        ], 404);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'infoorden_certificate' => 'required|in:No,Si',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+        'status' => 'failed',
+        'message' => 'Error de validación',
+        'errors' => $validator->errors()
+        ], 400);
+    }
+
+    $updatedData = [
+        'infoorden_certificate' => $request->infoorden_certificate
     ];
 
     $orden->update($updatedData);

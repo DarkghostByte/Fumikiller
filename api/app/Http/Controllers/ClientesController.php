@@ -64,6 +64,7 @@ class ClientesController extends Controller
             'recruitment_data' => 'array|min:1',
             'infoclient_delete' => 'required|min:1',
             'requires' => 'array|required|min:1',
+            'correo' => 'required|min:1',
         ]);
 
         if ($reglas->fails()) {
@@ -78,6 +79,7 @@ class ClientesController extends Controller
             $data->lastname1 = $request->lastname1;
             $data->lastname2 = $request->lastname2;
             $data->tradename = $request->tradename;
+            $data->correo = $request->correo;
             $data->id_vias = $request->id_vias;
             $data->home = $request->home;
             $data->numAddress = $request->numAddress;
@@ -141,15 +143,18 @@ class ClientesController extends Controller
             'id_vias' => 'required|min:1',
             'home' => 'required|min:1',
             'numAddress' => 'required|min:1',
-            'id_colonia' => 'required|min:1',
+            'id_colonia' => 'required|exists:colonias,id',
             'id_city' => 'required|exists:ciudades,id',
             'comercio' => 'required|min:1',
-            'description' => 'min:1|max:100',
-            'how_to_get' => 'min:1|max:100',
+            'description' => 'min:1|max:200',
+            'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',
             'number_fixed_number' => 'min:1',
+            'contact_form' => 'required|min:1',
+            'specify' => 'required|min:1',
             'recruitment_data' => 'array|min:1',
             'requires' => 'array|required|min:1',
+            'correo' => 'required|min:1',
         ]);
         if (!$cliente) {
             return response()->json([

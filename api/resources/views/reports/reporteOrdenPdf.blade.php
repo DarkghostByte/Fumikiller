@@ -12,9 +12,9 @@
 <body>
     <br>
 <img  class="membre" src="{{ $base64 }}" alt="">
-        <div class="meminfo">
-            <h3 class="letrasFlex">Orden de trabajo</h3>
-            <div class="noOT">
+        <div class="meminfo" style="">
+            <h3 class="letrasFlex" style="width: 200px; margin-top:25px; ">Orden de trabajo</h3>
+            <div class="noOT" style="color: red; font-weight:bold; font-size:20px;">
                 No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
@@ -25,7 +25,7 @@
     
     <header> 
         @if($si)
-        <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
+        <h2 style="position: absolute; margin-top:-24.5%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
         @else
         <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
         @endif
@@ -33,98 +33,102 @@
 
 
 
-    <main > 
+    <main style="margin-top: 24px"> 
+        <img src="{{ $base641 }}" alt="" style="position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
-        <table>
-            <th class="clth112">Fecha Orden:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+        <table style="margin-top: 0px">
+            <th class="clth112" style="width: 105px; text-align:left;">Fecha Orden</th>
+            <th class="renDivTh" style="width: 50%;">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
             </div>
             </th>  
-            <th class="clth111">Fecha Programada:</th>
+            <th class="clth111" style="width: 160px; ">Fecha Programada</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}
             </div>
             </th>           
         </table>
             
-        <table>
-            <th class="clth11">Nombre Comercial:</th>
+        <table style="margin-top: 0px">
+            <th class="clth11" style="width: 157px; text-align:left;">Nombre Comercial</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->tradename }}
             </div>
             </th> 
-            <th>Hora:</th>
+            <th>Hora</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->time1}} A {{ $orden->time2 }}
             </div>
             </th>
         </table>
-        <table>
-            <th class="clth110">Nombre Personal:</th>
+        <table style="margin-top: 0px">
+            <th class="clth110" style="width: 146px; text-align:left;" >Nombre Personal</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
             </div>
             </th> 
-            <th> Telefono:</th>
+            <th> Telefono</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ substr($orden->cell_phone, 0, 3) }} - {{ substr($orden->cell_phone, 3, 3) }} - {{ substr($orden->cell_phone, 6, 2) }} - {{ substr($orden->cell_phone, 8, 2) }} 
             </div>
             </th> 
         </table>
-        <table>
-            <th>Domicilio:</th>
+        <table style="margin-top: 0px">
+            <th>Domicilio</th>
             <th class="renDivTh" >
-            <div class="renDivDom" style="text-transform: uppercase;">
+            <div class="renDivDom" style="font-size:14px; text-transform: uppercase;">
                 {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
             </div>
             </th> 
-            <th>Colonia:</th>
+            <th>Colonia</th>
             <<th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->colonia }} #{{ $orden->codigoPostal }}
             </div>
             </th> 
         </table>
-        <table>
-            <th class="clth1112">Localizacion:</th>
+        <table style="margin-top: 0px">
+            <th class="clth1112" style="text-align:left;">Localizacion</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->how_to_get }}
             </div>
             </th>           
         </table>
         <table class="">
-            <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
+            <th class="clth1112" style=" text-align:left;">Lugar</th>
             <th class="renDivTh2">
-            <div class="renDivlugar" style="text-transform: uppercase">
+            <div class="renDivlugar" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->comercio }}
             </div>
             </th>
-            <th class="clth1122" >Ciudad:</th>
+            <th class="clth1122" >Ciudad</th>
             <th class="renDivThlocal">
-            <div class="renDivcity" style="text-transform: uppercase;">
+            <div class="renDivcity" style="font-size:14px; text-transform: uppercase;">
             {{ $orden->ciudad }}
             </div>
             </th>
-            <th>Plagas:</th>
+            
+        </table>
+        <table>
+            <th>Plagas</th>
             <th class="renDivTh3">
-            <div class="renDivplaga" style="text-transform: uppercase">
+            <div class="renDivplaga" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->plague1 }} y {{ $orden->plague2 }}
             </div>
             </th> 
         </table>
         <table>
-            <th>Observaciones:</th>
+            <th style="text-align:left;">Observaciones</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->description }}
             </div>
             </th> 
@@ -161,7 +165,6 @@
         @endif
     </th>            
     <th style="text-align:left; "> Presupuesto</th>
-
     <th>
         @if($fumigar)
         <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
@@ -214,12 +217,12 @@
 </table>
 
         <table class="">
-            <th class="clth114">Producto Interno:</th>
-            <th class="renDivTh">
+            <th class="clth114" style="width: 155px; text-align:left;">Producto: Interno</th>
+            <th class="renDivTh" style="width: 50%">
             <div class="renDiv">
             </div>
             </th>
-            <th>Externo:</th>
+            <th>Externo</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -227,12 +230,12 @@
         </table>
         <table class="">
             <th>Fumigador</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivTh"style="font-size:14px;">
+            <div class="renDiv" >
             </div>
             </th>
             <th>Cotizacion</th>
-            <th class="renDivTh">
+            <th class="renDivTh" style="font-size:14px;">
             <div class="renDiv">
             </div>
             </th> 
@@ -365,9 +368,8 @@
         </table> 
         -->
 
-
-        <div class="footDiv">
-        </div>
+        <div class="footDiv"></div>
+        <div class="footDiv1"></div>
         <table class="footer">
             <th class="footer">Col. Alamedas</th>
             <th>C.P. 31704</th>
@@ -386,7 +388,7 @@
     <br>
     <br>
     <div class="division2"></div>
-    <div class="division"></div>
+
     
     
     
@@ -394,114 +396,123 @@
 <body>
     <br>
 <img  class="membre" src="{{ $base64 }}" alt="">
-        <div class="meminfo">
-            <h3 class="letrasFlex">Orden de trabajo</h3>
-            <div class="noOT">
+        <div class="meminfo" style="">
+            <h3 class="letrasFlex" style="width: 200px; margin-top:25px;">Orden de trabajo</h3>
+            <div class="noOT" style="color: red; font-weight:bold; font-size:20px;">
                 No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
-    
-    
-        <header> 
-            @if($si)
-            <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
-            @else
-            <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
-            @endif
-        </header>
+        @php 
+        $si = ($orden->infoorden_cell == 'Si') ? true : false;
 
-    <main > 
+    @endphp 
+    
+    <header> 
+        @if($si)
+        <h2 style="position: absolute; margin-top:-24.5%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
+        @else
+        <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
+        @endif
+    </header>
+
+
+
+    <main style="margin-top: 24px"> 
+        <img src="{{ $base641 }}" alt="" style="position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
-        <table>
-            <th class="clth112">Fecha Orden:</th>
-            <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+        <table style="margin-top: 0px">
+            <th class="clth112" style="width: 105px; text-align:left;">Fecha Orden</th>
+            <th class="renDivTh" style="width: 50%;">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
             </div>
             </th>  
-            <th class="clth111">Fecha Programada:</th>
+            <th class="clth111" style="width: 160px; ">Fecha Programada</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $fecha2->dayName }}, {{ $fecha2->day }}  de {{ $fecha2->monthName }} de {{ $fecha2->year }}
             </div>
             </th>           
         </table>
             
-        <table>
-            <th class="clth11">Nombre Comercial:</th>
+        <table style="margin-top: 0px">
+            <th class="clth11" style="width: 157px; text-align:left;">Nombre Comercial</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->tradename }}
             </div>
             </th> 
-            <th>Hora:</th>
+            <th>Hora</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->time1}} A {{ $orden->time2 }}
             </div>
             </th>
         </table>
-        <table>
-            <th class="clth110">Nombre Personal:</th>
+        <table style="margin-top: 0px">
+            <th class="clth110" style="width: 146px; text-align:left;" >Nombre Personal</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->name }} {{ $orden->lastname1 }} {{ $orden->lastname2 }}
             </div>
             </th> 
-            <th> Telefono:</th>
+            <th> Telefono</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ substr($orden->cell_phone, 0, 3) }} - {{ substr($orden->cell_phone, 3, 3) }} - {{ substr($orden->cell_phone, 6, 2) }} - {{ substr($orden->cell_phone, 8, 2) }} 
             </div>
             </th> 
         </table>
-        <table>
-            <th>Domicilio:</th>
-            <th class="renDivTh">
-            <div class="renDivDom" style="text-transform: uppercase">
+        <table style="margin-top: 0px">
+            <th>Domicilio</th>
+            <th class="renDivTh" >
+            <div class="renDivDom" style="font-size:14px; text-transform: uppercase;">
                 {{ $orden->street }} {{ $orden->home }} #{{ $orden->numAddress }}
             </div>
             </th> 
-            <th>Colonia:</th>
+            <th>Colonia</th>
             <<th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->colonia }} #{{ $orden->codigoPostal }}
             </div>
             </th> 
         </table>
-        <table>
-            <th class="clth1112">Localizacion:</th>
+        <table style="margin-top: 0px">
+            <th class="clth1112" style="text-align:left;">Localizacion</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->how_to_get }}
             </div>
             </th>           
         </table>
         <table class="">
-            <th class="clth1112" style="margin-left: -50px; padding-right:-50px;">Lugar:</th>
+            <th class="clth1112" style=" text-align:left;">Lugar</th>
             <th class="renDivTh2">
-            <div class="renDivlugar" style="text-transform: uppercase">
+            <div class="renDivlugar" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->comercio }}
             </div>
             </th>
-            <th class="clth1122" >Ciudad:</th>
+            <th class="clth1122" >Ciudad</th>
             <th class="renDivThlocal">
-            <div class="renDivcity" style="text-transform: uppercase;">
+            <div class="renDivcity" style="font-size:14px; text-transform: uppercase;">
             {{ $orden->ciudad }}
             </div>
             </th>
-            <th>Plagas:</th>
+            
+        </table>
+        <table>
+            <th>Plagas</th>
             <th class="renDivTh3">
-            <div class="renDivplaga" style="text-transform: uppercase">
+            <div class="renDivplaga" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->plague1 }} y {{ $orden->plague2 }}
             </div>
             </th> 
         </table>
         <table>
-            <th>Observaciones:</th>
+            <th style="text-align:left;">Observaciones</th>
             <th class="renDivTh">
-            <div class="renDiv" style="text-transform: uppercase">
+            <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->description }}
             </div>
             </th> 
@@ -538,7 +549,6 @@
         @endif
     </th>            
     <th style="text-align:left; "> Presupuesto</th>
-
     <th>
         @if($fumigar)
         <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
@@ -591,12 +601,12 @@
 </table>
 
         <table class="">
-            <th class="clth114">Producto Interno:</th>
-            <th class="renDivTh">
+            <th class="clth114" style="width: 155px; text-align:left;">Producto: Interno</th>
+            <th class="renDivTh" style="width: 50%">
             <div class="renDiv">
             </div>
             </th>
-            <th>Externo:</th>
+            <th>Externo</th>
             <th class="renDivTh">
             <div class="renDiv">
             </div>
@@ -604,18 +614,18 @@
         </table>
         <table class="">
             <th>Fumigador</th>
-            <th class="renDivTh">
-            <div class="renDiv">
+            <th class="renDivTh"style="font-size:14px;">
+            <div class="renDiv" >
             </div>
             </th>
             <th>Cotizacion</th>
-            <th class="renDivTh">
+            <th class="renDivTh" style="font-size:14px;">
             <div class="renDiv">
             </div>
             </th> 
         </table>
 
-
+<!-- 
         @php 
             $arreglo = json_decode($orden->requires );
             $factura=false;
@@ -634,6 +644,62 @@
 <table class="btnCir2">
 <th>Require de:</th>
     <th style="text-align:center;">
+        @if($factura)
+            <div class="" style="margin-left:25%;  display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;">X</h1>
+            </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>            
+    <th style="text-align:left; "> Factura</th>
+
+    <th>
+        @if($certificado)
+        <div class="" style=" margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+            @else
+            <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+                <h1 style="margin: 0;"></h1>
+            </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Certificado</th>
+    
+    <th >
+        @if($remision)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left; ">Remision</th>
+    <th> 
+        @if($nada)
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;">X</h1>
+        </div>
+        @else
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
+        @endif
+    </th>
+    <th style="text-align:left;"> Nada</th>
+    
+</table>
+-->
+
+<table class="btnCir2">
+<th>Require de:</th>
+    <th style="text-align:center;">       
         <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
             <h1 style="margin: 0;"></h1>
         </div>
@@ -641,9 +707,9 @@
     <th style="text-align:left; "> Factura</th>
 
     <th>
-            <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
-                <h1 style="margin: 0;"></h1>
-            </div>
+        <div class="" style="margin-left:25%; display:flex; width: 17px; height:17px; border: 1px solid black; justify-content:center; align-items:center; border-radius:50%; font-size:7.5px;">
+            <h1 style="margin: 0;"></h1>
+        </div>
     </th>
     <th style="text-align:left;"> Certificado</th>
     
@@ -661,6 +727,7 @@
     <th style="text-align:left;"> Nada</th>
     
 </table>
+
 
         <!--Antigua tabla
             <table class="btnCir2">
@@ -685,9 +752,8 @@
         </table> 
         -->
 
-
-        <div class="footDiv">
-        </div>
+        <div class="footDiv"></div>
+        <div class="footDiv1"></div>
         <table class="footer">
             <th class="footer">Col. Alamedas</th>
             <th>C.P. 31704</th>
@@ -696,10 +762,17 @@
             <th>Tel.636-694-65-15</th>
         </table>
         </div>
+        
+
+
+        
     </main>
     </div>
+
     <br>
-    <br> 
+    <br>
+    
+    
 </body>
 
 <style>
@@ -718,10 +791,13 @@
         margin-left:-50%;
     }
     .division2{
+        position: absolute;
         width: 130%;
         margin-left:-60px;
+        margin-top:-20px;
         border:1px solid grey;
-        margin-top:30px;
+
+        
     }
     .division{
         width: 130%;
@@ -761,8 +837,9 @@
     .meminfo{
         text-align: center;
         position: absolute;
-        margin-left: -55%;
+        margin-left: -61%;
         margin-top:12%;
+        width: 300px;
         
     }
     .membre{
@@ -828,8 +905,11 @@
         width: 100%;
     }
     body{
-        width: 100%;
-        
+        width: 110%;
+        margin: -5%;
+        margin-top: -2%;
+        font-weight: bold;
+        text-transform: uppercase;
     }
     h1{
         text-align:center;
@@ -855,8 +935,12 @@
         
     }
     .footDiv{
-        border-bottom:2px solid grey;
+        border-bottom:4px solid blue;
         margin-top:15px;
+        width: 100%;
+    }.footDiv1{
+        border-bottom:2px solid orangered;
+        margin-top:5px;
         width: 100%;
     }
     
@@ -873,8 +957,8 @@
     }
     .noOT{ 
         position: absolute;
-        margin-top:-38px;
-        margin-left:145px;
+        margin-top:-43px;
+        margin-left:205px;
         border:1px solid black;
         width: 100px;
         
@@ -887,7 +971,7 @@
     }
     th{
         float: left;
-        font-size:13px;
+        font-size:15px;
         font-weight: normal;
         width: auto;
     }
@@ -920,7 +1004,8 @@
 .btnCir{    
     font-size:15px;
     font-weight: normal;
-    width: 90%;
+    width: 100%;
+    text-align: center;
 }
 .btnCir2{    
     font-size:15px;

@@ -123,7 +123,7 @@
           </div>
           <div class="flex">
             <el-table :data="filteredData1" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:90%;">
+              style="width:100%;">
               <el-table-column label="Fecha" prop="dateIngreso" width="120" sortable />
               <el-table-column label="Descripcion" prop="descriptionIngreso" width="150" sortable />
               <el-table-column label="Caja/Banco" prop="dataIngreso" width="150" sortable />
@@ -134,7 +134,7 @@
           </div>
           <div class="flex">
             <el-table :data="filteredData3" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:90%;">
+              style="width:100%;">
               <el-table-column prop="date1" width="120" />
               <el-table-column label="Parte de Fumigaciones" width="300">
                 <template #default>
@@ -158,9 +158,10 @@
           </div>
           <div class="flex">
             <el-table :data="filteredData2" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:90%;">
+              style="width:100%;">
               <el-table-column label="Fecha" prop="dateEgresos" width="120" sortable />
-              <el-table-column label="Descripcion" prop="descriptionEgresos" width="170" sortable />
+              <el-table-column label="Descripcion" prop="descriptionEgresos" width="130" sortable />
+              <el-table-column label="Departamento" prop="comercio" width="145" sortable />
               <el-table-column label="Caja/Banco/Deposito" prop="dataEgresos" width="200" sortable />
               <el-table-column label="Monto" prop="montoEgresos" width="150" sortable
                 :formatter="(row) => formatNumber(row, 'montoEgresos')"></el-table-column>
@@ -215,13 +216,12 @@
               <el-radio-button label="Banco" value="Banco" />
               <el-radio-button label="Deposito" value="Deposito" />
             </el-radio-group> 
-            <!--
-            <el-radio-group v-model="form2.dataEgresos">
-              <el-radio value="Caja" border>Caja</el-radio>
-              <el-radio value="Banco" border>Banco</el-radio>
-              <el-radio value="Deposito" border>Deposito</el-radio>
-            </el-radio-group>
-            -->
+            <el-form-item prop="id_departamento1" label="Departamento:" class="px-2" style="width: 300px;">
+              <el-select v-model="form2.id_departamento1" placeholder="Selecciona el departamento:">
+                <el-option v-for="selectDepartamento in departamentos" :key="selectDepartamento.id"
+                  :label="selectDepartamento.comercio" :value="selectDepartamento.id" />
+              </el-select>
+            </el-form-item>
           </el-form-item>
           <el-form-item prop="dateEgresos" label="Fecha:">
             <el-col :span="11" style="width: 240px">
@@ -289,11 +289,13 @@ export default {
     searchQuery1: '',
     searchQuery2: '',
     searchQuery3: '',
+    departamentos:[],
     form1: {
       dateIngreso: '',
       descriptionIngreso: '',
       montoIngreso: '',
       dataIngreso: '',
+      id_departamento1: '',
     },
     rules: {
       dateIngreso: [
@@ -340,7 +342,8 @@ export default {
   }),
   mounted() {
     this.refresh(),
-      this.fetchData();
+    this.fetchData();
+    this.fetchDepartamento();
   },
   methods: {
     refresh() {
@@ -621,7 +624,23 @@ export default {
       const decimalPart = parts[1] || '00';
       const formattedInteger = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
       return formattedInteger + '.' + decimalPart;
-    }
+    },
+
+    fetchDepartamento() {
+      axios.get('verDepartamento')
+        .then(response => {
+          console.log('Departamento:', response.data);
+          this.departamentos = response.data; // Assuming the data structure is correct
+        })
+        .catch(error => {
+          console.error('Error fetching departamento:', error);
+          ElNotification({
+            title: 'Error',
+            message: 'Error al recuperar departamento',
+            type: 'error',
+          });
+        });
+    },
 
   }
 }

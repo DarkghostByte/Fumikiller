@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('descriptionEgresos');
             $table->decimal('montoEgresos');
             $table->string('dataEgresos');
+            $table->integer('id_departamento1')->unsigned();
+            $table->foreign("id_departamento1")->references('id')->on('comercios');
             $table->timestamps();
         });
     }

@@ -29,122 +29,138 @@
     <!-- Primera Fila -->
     <div class="flex">
       <el-form :model="form" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
-        :label-position="'top'">
-
-        <!--  FILA DATOS DEL CLIENTE -->
-        <p class="px-5">Datos del cliente:</p>
-        <div class="flex">
-          <el-form-item prop="name" label="Nombres:" class="px-5" style="width: 240px;">
-            <el-input v-model="form.name" class="px-1" placeholder="Ingresa sus nombres" />
-          </el-form-item>
-          <el-form-item prop="lastname1" label="Apellidos Paterno:" class="px-5">
-            <el-input v-model="form.lastname1" class="px-1" placeholder="Ingresa su apellido paterno" />
-          </el-form-item>
-          <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-5">
-            <el-input v-model="form.lastname2" class="px-1" placeholder="Ingresa su apellido materno" />
-          </el-form-item>
-          <el-form-item prop="tradename" label="Nombre Comercial:" class="px-5">
-            <el-input v-model="form.tradename" class="" placeholder="Ingresa el nombre del comercio" />
-          </el-form-item>
-        </div>
-
-        <!-- Segunda Fila -->
-        <p class="px-5">Domicilio:</p>
-        <div class="flex">
-          <el-form-item prop="id_vias" label="Tipo de via:" class="px-5" style="width: 350px;">
-            <el-select v-model="form.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad">
-              <el-option v-for="via in vias" :key="via.id" :label="via.tipoVia" :value="via.id" />
-            </el-select>
-          </el-form-item>
-
-          <el-form-item prop="home" label="Domicilio:" class=" px-5" style="width: 300px;">
-            <el-input v-model="form.home" class="px-1" placeholder="Ingresa el domicilio" />
-          </el-form-item>
-
-          <el-form-item prop="numAddress" label="Numero:" class=" px-5" style="width: 300px;">
-            <el-input v-model="form.numAddress" class="px-1" placeholder="Ingresa el numero de domicilio"
-              type="number" />
-          </el-form-item>
-
-        </div>
-
-        <!-- Tercera Fila -->
-        <div class="flex">
-          <el-form-item prop="id_city" label="Ciudad:" class="px-5" style="width: 350px;">
-            <el-select v-model="form.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity">
-              <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
-            </el-select>
-          </el-form-item>
-
-          <el-form-item prop="id_colonia" label="Colonia:" class="px-5">
-            <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia" class=" px-1" style="width: 260px;">
-              <el-option v-for="colonia in filteredColonias" :key="colonia.id" :label="colonia.colonia+' #'+colonia.codigoPostal" :value="colonia.id">
-                {{ colonia.colonia }} #{{ colonia.codigoPostal }} 
-              </el-option>
-            </el-select>
-          </el-form-item>
-<!--comercio-->
-          <el-form-item prop="comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
-            <el-input v-model="form.comercio" class="px-1" placeholder="Ingresa el comercio" />
-          </el-form-item>
-        </div>
-
-        <!-- Datos del domicilio Fila -->
-        <div>
-          <p class="px-5">Datos del domicilio:</p>
-          <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-5">
-            <el-input v-model="form.how_to_get" type="textarea" maxlength="100" show-word-limit
-              placeholder="Agrega como llegar al domicilio" />
-          </el-form-item>
-          <el-form-item prop="description" label="Descripcion:" class="pt-2 px-5">
-            <el-input v-model="form.description" type="textarea" maxlength="100" show-word-limit
-              placeholder="Agrega una descripcion" />
-          </el-form-item>
-        </div>
-
-        <!-- Sexta Fila -->
-        <p class="px-5">Contacto:</p>
-        <div class="flex">
-          <el-form-item prop="cell_phone" label="Numero de celular:" class="px-5">
-            <el-input v-model="form.cell_phone" placeholder="Celular" style="width: 220px;"/>
-          </el-form-item>
-          <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-5">
-            <el-input v-model="form.number_fixed_number" placeholder="Celular" style="width: 220px;"/>
-          </el-form-item>
-        </div>
-
-
-        <!-- Octava fila -->
-        <p class="px-5">Contratacion:</p>
-        <div class="flex">
-          <el-form-item prop="recruitment_data" label="Tipo de contratacion:" class="px-5">
-            <el-checkbox-group v-model="form.recruitment_data">
-              <el-checkbox label="Nada" value="Nada"></el-checkbox>
-              <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
-              <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
-              <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
-              <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </div>
-
-        <p class="px-5">Requiere de:</p>
-        <div class="flex">
-          <el-form-item prop="requires" label="" class="px-5">
-            <el-checkbox-group v-model="form.requires" label="Requiere de">
-              <el-checkbox label="Nada" value="Nada"></el-checkbox>
-              <el-checkbox label="Factura" value="Factura"></el-checkbox>
-              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
-              <el-checkbox label="Remision" value="Remision"></el-checkbox>
-            </el-checkbox-group>
-          </el-form-item>
-        </div>
-
-        <div style="color:white; display:flex; justify-content: center; transition:10s;">
-          <el-form-item>
-            <el-button type="primary" @click="updateDatos">Modificar</el-button>
-          </el-form-item>
-        </div>
+          :label-position="'top'">
+  
+          <!--  FILA DATOS DEL CLIENTE -->
+          <p class="px-5">Datos del cliente:</p>
+          <div class="flex">
+            <el-form-item prop="name" label="Nombres:" class="px-5" style="width: 240px;">
+              <el-input v-model="form.name" class="px-1" placeholder="Ingresa sus nombres" />
+            </el-form-item>
+            <el-form-item prop="lastname1" label="Apellidos Paterno:" class="px-5">
+              <el-input v-model="form.lastname1" class="px-1" placeholder="Ingresa su apellido paterno" />
+            </el-form-item>
+            <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-5">
+              <el-input v-model="form.lastname2" class="px-1" placeholder="Ingresa su apellido materno" />
+            </el-form-item>
+            <el-form-item prop="tradename" label="Nombre Comercial:" class="px-5">
+              <el-input v-model="form.tradename" class="" placeholder="Ingresa el nombre del comercio" />
+            </el-form-item>
+            <el-form-item prop="correo" label="Correo:" class="px-5">
+              <el-input v-model="form.correo" class="" placeholder="Ingresa el correo" />
+            </el-form-item>
+          </div>
+  
+          <!-- Segunda Fila -->
+          <p class="px-5">Domicilio:</p>
+          <div class="flex">
+            <el-form-item prop="id_vias" label="Tipo de via:" class="px-5" style="width: 350px;">
+              <el-select v-model="form.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad">
+                <el-option v-for="via in vias" :key="via.id" :label="via.tipoVia" :value="via.id" />
+              </el-select>
+            </el-form-item>
+  
+            <el-form-item prop="home" label="Domicilio:" class="px-5" style="width: 300px;">
+              <el-input v-model="form.home" class="px-1" placeholder="Ingresa el domicilio" />
+            </el-form-item>
+  
+            <el-form-item prop="numAddress" label="Numero de domicilio:" class=" px-5" style="width: 300px;">
+              <el-input v-model="form.numAddress" class="px-1" placeholder="Ingresa el numero de domicilio"
+                type="number" />
+            </el-form-item>
+  
+          </div>
+  
+          <!-- Tercera Fila -->
+          <div class="flex">
+            <el-form-item prop="id_city" label="Ciudad:" class="px-5" style="width: 350px;">
+              <el-select v-model="form.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity">
+                <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
+              </el-select>
+            </el-form-item>
+  
+            <el-form-item prop="id_colonia" label="Colonia:" class="px-5">
+              <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia" class=" px-1"
+                style="width: 260px;" @change="selectColonia">
+                <el-option v-for="colonia in colonias" :key="'colonia' + colonia.id"
+                  :label="colonia.colonia + ' #' + colonia.codigoPostal" :value="colonia.id">
+                  {{ colonia.colonia }} #{{ colonia.codigoPostal }}
+                </el-option>
+              </el-select>
+            </el-form-item>
+            <!--comercio-->
+  
+            <el-form-item prop="comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
+              <el-input v-model="form.comercio" class="px-1" placeholder="Ingresa el comercio" />
+            </el-form-item>
+          </div>
+  
+          <!-- Datos del domicilio Fila -->
+          <div>
+            <p class="px-5">Datos del domicilio:</p>
+            <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-5">
+              <el-input v-model="form.how_to_get" type="textarea" maxlength="100" show-word-limit
+                placeholder="Agrega como llegar al domicilio" />
+            </el-form-item>
+            <el-form-item prop="description" label="Descripcion:" class="pt-2 px-5">
+              <el-input v-model="form.description" type="textarea" maxlength="100" show-word-limit
+                placeholder="Agrega una descripcion" />
+            </el-form-item>
+          </div>
+  
+          <!-- Sexta Fila -->
+          <p class="px-5">Contacto:</p>
+          <div class="flex">
+            <el-form-item prop="cell_phone" label="Numero de celular:" class="px-5">
+              <el-input v-model="form.cell_phone" placeholder="Celular" style="width: 220px;" />
+            </el-form-item>
+            <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-5">
+              <el-input v-model="form.number_fixed_number" placeholder="Celular" style="width: 220px;" />
+            </el-form-item>
+            <el-form-item prop="contact_form" label="Forma de contacto:" class="px-5">
+              <el-select v-model="form.contact_form" placeholder="Selecciona la  forma de contacto"
+                style="width: 220px;">
+                <el-option label="Facebook" value="facebook" />
+                <el-option label="Barda" value="barda" />
+              </el-select>
+            </el-form-item>
+            <el-form-item prop="specify" label="Especificar:" class="px-5">
+              <el-input v-model="form.specify" placeholder="Especificar" style="width: 220px;" />
+            </el-form-item>
+          </div>
+  
+          <!-- Septima Fila -->
+          <p class="px-5">Contratacion:</p>
+          <div class="flex">
+            <el-form-item prop="recruitment_data" label="Tipo de contratacion:" class="px-5">
+              <el-checkbox-group v-model="form.recruitment_data">
+                <el-checkbox label="Nada" value="Nada"></el-checkbox>
+                <el-checkbox label="Presupuesto" value="Presupuesto"></el-checkbox>
+                <el-checkbox label="Fumigar" value="Fumigar"></el-checkbox>
+                <el-checkbox label="Garantia" value="Garantia"></el-checkbox>
+                <el-checkbox label="Cortesia" value="Cortesia"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </div>
+  
+          <p class="px-5">Requiere de:</p>
+          <div class="flex">
+            <el-form-item prop="requires" label="" class="px-5">
+              <el-checkbox-group v-model="form.requires" label="Requiere de">
+                <el-checkbox label="Nada" value="Nada"></el-checkbox>
+                <el-checkbox label="Factura" value="Factura"></el-checkbox>
+                <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
+                <el-checkbox label="Remision" value="Remision"></el-checkbox>
+              </el-checkbox-group>
+            </el-form-item>
+          </div>
+  
+          <div style="color:white; display:flex; justify-content: center; transition:10s;">
+            <el-form-item>
+              <el-button type="primary" @click="updateDatos">Guardar</el-button>
+              <el-button @click="resetForm">Reset</el-button>
+            </el-form-item>
+          </div>
       </el-form>
     </div>
     <!-- END TABLE DATA -->
@@ -173,6 +189,7 @@ export default {
       lastname1: '',
       lastname2: '',
       tradename: '',
+      correo: '',
       id_vias: '',
       home: '',
       numAddress: '',
@@ -201,6 +218,10 @@ export default {
       ],
       lastname2: [
         { required: true, message: 'El apellido materno es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      correo: [
+        { required: true, message: 'El cooreo es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
       id_vias: [
@@ -312,6 +333,7 @@ export default {
           console.error('Error fetching vias:', error);
         });
     },
+    
 /*
     fetchComercios() {
       axios.get('verComercio')
@@ -323,28 +345,27 @@ export default {
           console.error('Error fetching comercios:', error);
         });
     },
-    */
-    fetchColoniasByCity(cityId) {
-  this.loadingColonias = true;
-  axios.get(`verColoniaPorCiudad/${cityId}`) // Use template literal
-    .then(response => {
-      console.log('Respuesta de la API:', response.data); // Check response data
-      this.filteredColonias = response.data.data;
-      console.log('Filtered Colonias:', this.filteredColonias); // Verify data is assigned
-    })
-    .catch(error => {
-      console.error('Error fetching colonias:', error);
-      this.$message.error('Error al cargar las colonias. Por favor, inténtalo de nuevo.');
-    })
-    .finally(() => {
-      this.loadingColonias = false;
-    });
-  }
+ */
+    fetchColoniasByCity() {
+      axios.get('verColonia')
+        .then(response => {
+          console.log('Colonia:', response.data);
+          this.colonias = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching colonias:', error);
+        });
+    },
+       
+        selectColonia() {
+      console.log(this.form)
+    },
   },
   mounted() {
     this.refresh();
     this.fetchCiudades();
     this.fetchTypeRoad();
+    this.fetchColoniasByCity();
     //this.fetchComercios();
     const route = useRoute();
     this.id = route.params.id;
@@ -359,14 +380,18 @@ export default {
         this.form.id_vias = datos.id_vias || '';
         this.form.home = datos.home || '';
         this.form.numAddress = datos.numAddress || '';
-        this.form.id_city = datos.id_city || '';
         this.form.id_colonia = datos.id_colonia || '';
+        this.form.id_city = datos.id_city || '';
         this.form.comercio = datos.comercio || '';
         this.form.description = datos.description || '';
         this.form.how_to_get = datos.how_to_get || '';
-        this.form.requires = datos.requires || '';
         this.form.cell_phone = datos.cell_phone || '';
-        this.form.number_fixed_number = datos.number_fixed_number || 'Ninguno';
+        this.form.number_fixed_number = datos.number_fixed_number || '';
+        this.form.contact_form = datos.contact_form || '';
+        this.form.specify = datos.specify || '';
+        this.form.recruitment_data = JSON.parse(datos.recruitment_data) || '';
+        this.form.requires = JSON.parse(datos.requires) || '';
+        this.form.correo = datos.correo || '';
       }
     });
   }

@@ -161,14 +161,7 @@
             </el-form-item>
           </div>
 
-          <div class="flex" style="width:100%;">
-            <el-form-item prop="certificateDate" class="px-2" label="Fecha del certificado:">
-              <el-col :span="11">
-                <el-date-picker v-model="form1.certificateDate" type="date" placeholder="Fecha de certificado"
-                  format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
-              </el-col>
-            </el-form-item>
-          </div>
+          
 
           <div class="flex" style="width:100%;">
             <el-form-item prop="id_productoCertificadoInt1" label="Tipo de producto interno:" class="px-2"
@@ -211,6 +204,7 @@ import { ElNotification } from 'element-plus';
 export default {
   name: 'AdminClientsComponent',
   data: () => ({
+    formRef: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleViewcertificado: false,
@@ -228,17 +222,12 @@ export default {
     productoExternos: [],
     form1: {
       certificateName: '',
-      certificateDate: '',
       id_productoCertificadoInt1: '',
       id_productoCertificadoExt1: '',
     },
     rules: {
       certificateName: [
         { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      certificateDate: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
       id_productoCertificadoInt1: [
@@ -291,6 +280,25 @@ export default {
               type: 'success'
             })
             this.$refs.formRef.resetFields();
+
+            const updatedData = {
+                infoorden_certificate: this.form1.infoorden_certificate === 'No' ? 'Si' : 'No'
+              };
+
+              axios.put('verEstadoCertificado/' + this.selectedItem.id, updatedData)
+                .then(response => {
+                  console.log('Estado actualizado correctamente:', response.data);
+                  this.refresh();
+                  ElNotification({
+                    title: 'Actualización de datos',
+                    message: `Se actualizaron los datos.`,
+                    type: 'success'
+                  });
+                })
+                .catch(error => {
+                  console.error('Error al actualizar el estado:', error);
+                });
+
           } catch (error) {
             console.error('Error creating certificate:', error.response.data);
             this.$message.error('Error al crear el certificado');
