@@ -20,6 +20,7 @@ class FacturasController extends Controller
             'clientes.lastname1',
             'clientes.lastname2',
             'clientes.tradename',
+            'clientes.correo',
             'clientes.home',
             'clientes.numAddress',
             'clientes.id_colonia',

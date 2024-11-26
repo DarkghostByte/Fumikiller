@@ -7,7 +7,7 @@
   <div class="container mx-auto px-4">
     
     <div class="flex justify-between items-center mb-4">
-      <h1 class="text-2xl font-semibold">Gestión de Remisiónes Realizadas</h1>
+      <h1 class="text-2xl font-semibold">Gestión de Facturas Realizadas</h1>
       <div class="flex flex-wrap items-start justify-end ">
         <router-link to="/admin/facturas" class="el-button el-button--danger">
           <i class="fa fa-rotate-left" aria-hidden="true"
@@ -20,18 +20,19 @@
     <!-- Campo de búsqueda -->
     <div class="flex mb-4" style="justify-content: center;">
       <div class="flex mb-4" style="width: 80%;">
-        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
+        <el-input class="px-2" placeholder="Buscar por correo" v-model="searchQueryCorreo" @input="filterDatCorreo" />
+        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterDataTradeame" />
+        <el-input class="px-2" placeholder="Buscar por persona fisica" v-model="searchQueryName"
           @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-          @input="filterDataAddress" />
-          <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
-          @input="filterDataPhone" />
+        <el-input class="px-2" placeholder="Buscar por folio" v-model="searchQueryFolio"
+          @input="filterDataFolio" />
+        <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone" @input="filterDataPhone" />
       </div>
     </div>
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
 
         <el-table-column label="" width="100" >
@@ -44,29 +45,41 @@
         <!-- Agrega las demás columnas aquí -->
         <el-table-column label="Folio" sortable>
           <template #default="scope">
-            {{ 'No. ' + this.formatDate(scope.row.id) }}
+            {{ 'No. ' + scope.row.folioFactura }}
           </template>
         </el-table-column>
-        <el-table-column prop="folioFactura" label="Nombre" sortable width="250" />
-        <el-table-column label="Dirección" sortable width="550">
+        <el-table-column label="Persona fisica" sortable width="250">
           <template #default="scope">
-            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable  />
+        <el-table-column prop="tradename" label="Persona moral" sortable width="200" />
+        <el-table-column prop="correo" label="Correo" sortable width="400" />
+        <el-table-column prop="cell_phone" label="Numero Celular" sortable />
 
       </el-table>
     </div>
     <!-- END TABLE DATA -->
 
     <!-- MODAL 1 -->
-    <el-dialog v-model="dialogVisibleView" title="Datos del certificado" width="700" height="500">
+    <el-dialog v-model="dialogVisibleView" title="Datos de la factura" width="700" height="500">
       <div class="clientInfo">
         <div class="details">
           <i class="fa fa-file fa-2x iconInfo"></i>
           <div>
             <p>
               <strong>Num. Factura:</strong> {{ selectedItem.folioFactura }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-user fa-2x iconInfo"></i>
+          <div>
+            <p>
+              <strong>Persona fisica:</strong> {{ selectedItem.name+' '+selectedItem.lastname1+' '+selectedItem.lastname2 }}
+            </p>
+            <p>
+              <strong>Persona moral:</strong> {{ selectedItem.tradename }}            
             </p>
           </div>
         </div>
@@ -92,17 +105,8 @@
             <p>
               <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
             </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-bugs fa-2x iconInfo"></i>
-          <div>
             <p>
-              <strong>Nombre</strong> {{ selectedItem.name+' '+selectedItem.lastname1+' '+selectedItem.lastname2 }}
-              <strong>negocio</strong> {{ selectedItem.tradename }}
-            </p>
-            <p>
-              <strong>Correo</strong> correo
+              <strong>Correo:</strong> {{ selectedItem.correo }}
             </p>
           </div>
         </div>
@@ -134,8 +138,10 @@ export default {
     selectedItem: {},
     selectedItem1: {},
     searchQuery: '',
+    searchQueryCorreo: '',
+    searchQueryTradename: '',
     searchQueryName: '',
-    searchQueryAddress: '',
+    searchQueryFolio: '',
     searchQueryPhone: '',
   }),
   mounted() {
@@ -159,17 +165,29 @@ export default {
       this.selectedItem1 = null
     },
     
-    filterDataName() {
-      this.filteredData = this.tableData.filter((certificados) => {
-        return certificados.certificateName.toLowerCase().includes(this.searchQueryName.toLowerCase());
+    filterDataCorreo() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        return clientes.correo.toLowerCase().includes(this.searchQueryCorreo.toLowerCase());
       });
     },
 
-    filterDataAddress() {
+    filterDataTradeame() {
       this.filteredData = this.tableData.filter((clientes) => {
-    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-  });
+        return clientes.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
+      });
+    },
+
+    filterDataName() {
+      this.filteredData = this.tableData.filter((clientes) => {
+        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+        return combinedName.includes(this.searchQueryName.toLowerCase());
+      });
+    },
+
+    filterDataFolio() {
+      this.filteredData = this.tableData.filter((facturas) => {
+        return facturas.folioFactura.toLowerCase().includes(this.searchQueryFolio.toLowerCase());
+      });
     },
 
     filterDataPhone() {
@@ -187,9 +205,9 @@ export default {
       }
     },
     
-    formatDate(id, paddingLength = 5, paddingChar = '0') {
+    formatDate(folioFactura, paddingLength = 5, paddingChar = '0') {
   // Convert id to string in case it's a number
-  const idString = String(id);
+  const idString = String(folioFactura);
 
   // Ensure paddingLength is a positive integer
   paddingLength = Math.max(0, Math.floor(paddingLength));
@@ -224,7 +242,7 @@ p {
 }
 
 .iconInfo {
-  color: #ff7640;
+  color: rgb(64, 255, 89);
   margin-right: 10px;
 }
 

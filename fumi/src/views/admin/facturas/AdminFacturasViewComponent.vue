@@ -20,9 +20,9 @@
     <!-- Campo de búsqueda -->
     <div class="flex mb-4" style="justify-content: center;">
       <div class="flex mb-4" style="width: 80%;">
-        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-          @input="filterDataLastname" />
+        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterDataTradeame" />
+        <el-input class="px-2" placeholder="Buscar por persona fisica" v-model="searchQueryName"
+          @input="filterDataName" />
         <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
           @input="filterDataAddress" />
         <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone" @input="filterDataPhone" />
@@ -47,14 +47,15 @@
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-
-        <el-table-column prop="folioFactura" label="Nombres" sortable width="150" />
-        <el-table-column label="Apellidos" sortable width="150">
+        <el-table-column label="Persona fisica" sortable width="250">
           <template #default="scope">
-            {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" sortable width="500">
+
+        <el-table-column prop="tradename" label="Persona moral" sortable width="200" />
+        
+        <el-table-column label="Dirección" sortable width="400">
           <template #default="scope">
             {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + '#'
               + scope.row.numAddress }}
@@ -66,100 +67,67 @@
     </div>
     <!-- END TABLE DATA -->
 
-    <!-- MODAL 1 -->
-    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500">
-      <div class="clientInfo">
-        <div class="details">
-          <i class="fa fa-user fa-2x iconInfo"></i>
-          <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
-          <div>
-            <p>
-              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }}
-              {{ selectedItem.lastname2 }}
-            </p>
-            <p>
-              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-city fa-2x iconInfo"></i>
-          <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
-          <div>
-            <p>
-              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{
-                selectedItem.numAddress}},
-              {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
-            </p>
-            <p>
-              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
-            </p>
-          </div>
-
-        </div>
-        <div class="details">
-          <i class="fa fa-phone fa-2x iconInfo"></i>
-          <div>
-            <p>
-              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
-            </p>
-            <p>
-              <strong>Número fijo:</strong> {{ selectedItem.number_fixed_number }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-location-dot fa-2x iconInfo"></i>
-          <div>
-            <p>
-              <strong>Como llegar:</strong> {{ selectedItem.how_to_get }}
-            </p>
-            <p>
-              <strong>Descripcion:</strong> {{ selectedItem.description }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-file-contract fa-2x iconInfo"></i>
-          <div>
-            <p>
-              <strong>Tipo de contratación:</strong> {{ selectedItem.recruitment_data }}
-            </p>
-          </div>
-        </div>
-
-      </div>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="primary" @click="dialogVisibleView = false">Listo</el-button>
-        </div>
-      </template>
-    </el-dialog>
-    <!-- END MODAL 1 -->
-
     <!-- MODAL 2 -->
     <el-dialog v-model="dialogVisibleFactura" title="Facturación" width="30%">
       <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef3" :rules="rules3"
         :label-position="'top'">
-        <el-card class="facturacion-card" :style="{ background: 'var(--color-primary-light)' }">
-          <h3 class="facturacion-card-title" style="color: black">Datos del Cliente</h3>
-          <el-row>
-            <el-col :span="12">
-              <p style="color: black">Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}</p>
-              <p style="color: black">Negocio: {{ selectedItem.tradename }}</p>
-              <p style="color: black">Teléfono: {{ selectedItem.cell_phone }}</p>
-              <p style="color: black">Correo: {{ selectedItem.email }}</p>
-              <p style="color: black">Fecha: {{ selectedItem.date2 }}</p>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="12">
+        <div class="clientInfo">
+          <div class="details">
+            <i class="fa fa-user fa-2x iconInfo"></i>
+            <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+            <div>
+              <p>
+                <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }}
+                {{ selectedItem.lastname2 }}
+              </p>
+              <p>
+                <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
+              </p>
+            </div>
+          </div>
+          <div class="details">
+            <i class="fa fa-city fa-2x iconInfo"></i>
+            <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
+            <div>
+              <p>
+                <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{
+                  selectedItem.numAddress}},
+                {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
+              </p>
+              <p>
+                <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
+              </p>
+            </div>
+  
+          </div>
+          <div class="details">
+            <i class="fa fa-phone fa-2x iconInfo"></i>
+            <div>
+              <p>
+                <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
+              </p>
+              <p>
+                <strong>Correo:</strong> {{ selectedItem.correo }}
+              </p>
+            </div>
+          </div>
+          <div class="details">
+            <i class="fa fa-calendar-days fa-2x iconInfo"></i>
+            <div>
+              <p>
+                <strong>Fecha:</strong> {{ selectedItem.date1 }}
+              </p>
+            </div>
+          </div>
+          <div class="details">
+            <i class="fa fa-file-contract fa-2x iconInfo"></i>
+            <div>
               <el-form-item class="label-negro" prop="folioFactura" label="Folio de factura:" style="color: black; width: 300px;">
                 <el-input type="number" v-model="form2.folioFactura" class="px-1" placeholder="Ingresa el folio"/>
               </el-form-item>
-            </el-col>
-          </el-row>
-        </el-card>
+            </div>
+          </div>
+        </div>
       </el-form>
       
     
@@ -191,8 +159,8 @@ export default {
     filteredData: [],
     selectedItem: {},
     searchQuery: '',
+    searchQueryTradename: '',
     searchQueryName: '',
-    searchQueryLastname: '',
     searchQueryAddress: '',
     searchQueryPhone: '',
     form2:{
@@ -307,16 +275,16 @@ export default {
       });
     },
 
-    filterDataName() {
+    filterDataTradeame() {
       this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
+        return clientes.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
       });
     },
 
-    filterDataLastname() {
+    filterDataName() {
       this.filteredData = this.tableData.filter((clientes) => {
-        const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
+        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+        return combinedName.includes(this.searchQueryName.toLowerCase());
       });
     },
 
