@@ -900,4 +900,5 @@ class PdfsController extends Controller
         // Mostrar el PDF al usuario
         return $pdf->stream();
     }
+
 }

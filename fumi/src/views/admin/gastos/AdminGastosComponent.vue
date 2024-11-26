@@ -19,10 +19,10 @@
       </div>
     </div>
 
-
     <div class="flex flex-wrap items-center justify-center mt-6">
       <h1 style="width:100px;" class="text-2xl font-bold">CAJA</h1>
-      <Button
+
+      <a :href="url + 'api/pdfIngreso/'" target="_blank"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-600 hover:bg-blue-1000 focus:bg-blue-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style=" width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
@@ -31,9 +31,9 @@
         </div>
         <i class="fa-solid fa-solid fa-money-bill-trend-up fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
-      </Button>
+      </a>
 
-      <Button
+      <a :href="url + 'api/pdfEgreso/'" target="_blank"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-600 hover:bg-green-1000 focus:bg-green-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style="width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
@@ -43,9 +43,9 @@
         <i class="fa-solid fa-money-bill fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
 
-      </Button>
+      </a>
 
-      <Button
+      <a :href="url + 'api/pdfSaldo/'" target="_blank"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-600 hover:bg-orange-1000 focus:bg-orange-900 rounded-md ml-6 mb-5 shadow-lg justify-center items-center"
         style="width:300px; height:100px; font-size:26px; text-align: center;">
         <div class="row">
@@ -54,7 +54,7 @@
         </div>
         <i class="fa-solid fa-cash-register fa-rotate-by fa-2xl" aria-hidden="true"
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
-      </Button>
+      </a>
 
       <a :href="url + 'api/pdfCaja/'" target="_blank"
           class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"

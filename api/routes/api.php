@@ -20,6 +20,7 @@ use App\Http\Controllers\EgresosController;
 use App\Http\Controllers\PdfsController;
 use App\Http\Controllers\RemisionesController;
 use App\Http\Controllers\FacturasController;
+use App\Http\Controllers\PdfsGastosController;
 
 /*
 |--------------------------------------------------------------------------
@@ -62,6 +63,9 @@ Route::get('/creditos/{f1}/{f2}',[PdfsController::class,'generarCreditos']);
 Route::get('/creditossinfactura/{f1}/{f2}',[PdfsController::class,'generarCreditosSinFactura']);
 Route::get('/creditosconfactura/{f1}/{f2}',[PdfsController::class,'generarCreditosConFactura']);
 Route::get('/pdfCaja',[PdfsController::class,'generarPDFCaja']);
+Route::get('/pdfIngreso',[PdfsGastosController::class,'generarPDFIngreso']);
+Route::get('/pdfEgreso',[PdfsGastosController::class,'generarPDFEgreso']);
+Route::get('/pdfSaldo',[PdfsGastosController::class,'generarPDFSaldo']);
 Route::get('/ordenDeCompra',[PdfsController::class,'generarOrdendecompra']);
 
 
