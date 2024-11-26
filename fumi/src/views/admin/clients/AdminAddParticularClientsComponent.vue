@@ -205,7 +205,7 @@ export default {
       cell_phone: '',
       number_fixed_number: 'Ninguno',
       contact_form: '',
-      specify: '',
+      specify: 'Ninguno',
       recruitment_data: [],
       infoclient_delete: 'Alta',
       requires: [],
@@ -261,10 +261,6 @@ export default {
       ],
       contact_form: [
         { required: true, message: 'La forma de contacto es requerido', trigger: 'blur' },
-      ],
-      specify: [
-        { required: true, message: 'Especificar es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 500', trigger: 'blur' }
       ],
       recruitment_data: [
         { required: true, message: 'Requiere de es requerido', trigger: 'blur' },

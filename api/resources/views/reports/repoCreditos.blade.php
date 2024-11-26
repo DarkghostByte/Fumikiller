@@ -9,9 +9,9 @@
         <img  class="membre" src="{{ $base64 }}" alt="">
         <h1 style="position: absolute; color: #1a5084; margin-top:10px;">Fumigaciones<br>FUMI-KILLE'R</h1>
         <h1 style="position: absolute; color: #1a5084; margin-top:-10px; margin-left:38%; font-size:25px;">Período: 
-            {{ strtoupper(strftime("%d", strtotime($f1)) . '-' .strftime("%B", strtotime($f1)). '-' .strftime("%Y", strtotime($f1))) }} 
+            {{ strtoupper(strftime("%d", strtotime($f1)) . '-' .substr(strftime("%B", strtotime($f1)), 0, 3). '-' .strftime("%Y", strtotime($f1))) }} 
             a 
-            {{ strtoupper(strftime("%d", strtotime($f2)) . '-' .strftime("%B", strtotime($f2)). '-' .strftime("%Y", strtotime($f2))) }}
+            {{ strtoupper(strftime("%d", strtotime($f2)) . '-' .substr(strftime("%B", strtotime($f2)), 0, 3). '-' .strftime("%Y", strtotime($f2))) }}
         </h1>
     </div>
     <h1 style="margin-top: -50px;">Creditos</h1>

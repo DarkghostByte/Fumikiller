@@ -144,13 +144,6 @@
               <el-checkbox label="Remision" value="Remision"></el-checkbox>
             </el-checkbox-group>
           </el-form-item>
-          <el-form-item class="px-4">
-            <el-button @click="dialogVisibleFactura = true" class="el-button el-button--warning">
-              <i class="fa-solid fa-file" aria-hidden="true"
-                style="margin-left: -5px; margin-right:10px; margin-top: 2px;"></i>
-              Generar Factura
-            </el-button>
-          </el-form-item>
         </div>
         <!-- FILA DE DATO -->
         <p>Datos:</p>
@@ -292,42 +285,6 @@
         </span>
       </template>
     </el-dialog>
-    <!-- END MODAL 2 -->
-
-    <el-dialog v-model="dialogVisibleFactura" title="Facturación" width="30%">
-      <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef3" :rules="rules3"
-        :label-position="'top'">
-        <el-card class="facturacion-card" :style="{ background: 'var(--color-primary-light)' }">
-          <h3 class="facturacion-card-title" style="color: black">Datos del Cliente</h3>
-          <el-row>
-            <el-col :span="12">
-              <p style="color: black">Cliente: {{ form2.name }} {{ form2.lastname1 }} {{ form2.lastname2 }}</p>
-              <p style="color: black">Negocio: {{ form2.tradename }}</p>
-              <p style="color: black">Teléfono: {{ form2.cell_phone }}</p>
-              <p style="color: black">Correo: {{ form2.email }}</p>
-              <p style="color: black">Fecha: {{ form2.date2 }}</p>
-            </el-col>
-          </el-row>
-          <el-row>
-            <el-col :span="12">
-              <el-form-item class="label-negro" prop="folioFactura" label="Folio de factura:"
-                style="color: black; width: 300px;">
-                <el-input v-model="form2.folioFactura" class="px-1" placeholder="Ingresa el folio" />
-              </el-form-item>
-            </el-col>
-          </el-row>
-        </el-card>
-      </el-form>
-
-
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisibleFactura = false">Cancelar</el-button>
-          <el-button type="primary" @click="createFactura">Crear</el-button>
-        </span>
-      </template>
-    </el-dialog>
-    <!-- END MODAL 2 -->
   </div>
 
 
@@ -362,11 +319,11 @@ export default {
     form: {
       id_orden: '',
       id_empleado: '',
-      id_empleado2: 'No aplica',
+      id_empleado2: 3,
       id_productosInternos: '',
-      id_productosInternos2: 'No aplica',
+      id_productosInternos2: 3,
       id_productosExternos: '',
-      id_productosExternos2: 'No aplica',
+      id_productosExternos2: 3,
       noTrapear: '',
       noIngresar: '',
       otraDosis: 'No aplica',
@@ -477,11 +434,6 @@ export default {
     console.log('ID', route.params.id)
     console.log('ID Orden', route.params)
 
-
-    this.form2.id_ordenCompleta = this.id || '';
-    console.log('ID Orden Complete', this.id)
-
-
     if (route.params && route.params.id) {
       this.id = route.params.id;
       axios.get('orden/' + this.id).then(res => {
@@ -517,13 +469,6 @@ export default {
             this.form1.infoorden_certificate = datos.infoorden_certificate || '';
             this.form1.infoorden_remision = datos.infoorden_remision || '';
             this.form1.infoorden_facturacion = datos.infoorden_facturacion || '';
-
-            this.form2.name = datos.cliente.name || '';
-            this.form2.lastname1 = datos.cliente.lastname1 || '';
-            this.form2.lastname2 = datos.cliente.lastname2 || '';
-            this.form2.tradename = datos.cliente.tradename || '';
-            this.form2.cell_phone = datos.cliente.cell_phone || '';
-            this.form2.date2 = datos.date2 || '';
           }
 
 

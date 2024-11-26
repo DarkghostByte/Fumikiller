@@ -288,9 +288,6 @@ class PdfsController extends Controller
 
             $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
             $fecha2 = Carbon::parse($item->date2);
-
-
-            Carbon::setLocale('es');
         }
     
         // Verificar si la colección está vacía
