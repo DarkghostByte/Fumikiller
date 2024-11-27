@@ -20,6 +20,7 @@
         
     
     <main> 
+        <img src="{{ $base641 }}" alt="" style="z-index:-1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:14.6%; margin-top:3%;">
         <div class="fondLimitador"></div>
         <table>
             <th class="thtt">FECHA:</th>
@@ -173,6 +174,7 @@
                 
             </header>
             <main> 
+                <img src="{{ $base641 }}" alt="" style="z-index:-1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:31%; margin-top:6.8%;">
                 <div class="fondLimitador"></div>
                 <table>
                     <th class="thtt">FECHA:</th>
@@ -208,7 +210,7 @@
                     </th> 
                 </table>
                 <table>
-                <table>
+                <table style="margin-top: -1.2px;">
                     <th>COLONIA:</th>
                     <th class="renDivTh">
                     <div class="renDiv">
@@ -410,7 +412,7 @@
         position: absolute;
         font-size: 18px;
         margin-left:75%;
-        margin-top:-37px;
+        margin-top:-25px;
         height:25px;
         width: 150px;
         color: red;
@@ -541,7 +543,7 @@
     .copia{
         position: absolute;
         left: 51%;
-        margin-top: -67.5%;
+        margin-top: -67.7%;
         width: 47%;
         height: 98.7%;
         border: 1px solid black;

@@ -214,6 +214,11 @@ class PdfsController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        /* Imagen */
+        $path1 = public_path('img/logofk.png');
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data_img1 = file_get_contents($path1);
+        $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
         setlocale(LC_ALL, 'es_MX.UTF-8','esp');
@@ -222,7 +227,7 @@ class PdfsController extends Controller
         str_replace('S?BADO','SÁBADO',$fecha);
         $fecha = Carbon::parse($data->date1);
         Carbon::setLocale('es');
-        $pdf_data = compact('base64','data','fecha');
+        $pdf_data = compact('base64','base641','data','fecha');
         $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('a4', 'landscape');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         //$nombreArchivo = $data->name . '.pdf';

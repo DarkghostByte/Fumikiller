@@ -14,8 +14,8 @@
 <img  class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo" style="">
             <h3 class="letrasFlex" style="width: 200px; margin-top:25px; ">Orden de trabajo</h3>
-            <div class="noOT" style="color: red; font-weight:bold; font-size:20px;">
-                No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
+            <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
+                No. {{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
         @php 
@@ -398,8 +398,8 @@
 <img  class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo" style="">
             <h3 class="letrasFlex" style="width: 200px; margin-top:25px;">Orden de trabajo</h3>
-            <div class="noOT" style="color: red; font-weight:bold; font-size:20px;">
-                No.{{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
+            <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
+                No. {{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div>
         @php 
@@ -847,6 +847,10 @@
         padding-left: 10%;
         height:12%;
         width: 80%;
+        /*
+        height: 12%;
+        width: auto;
+        */
     }    
     .delimitador{
         margin-top:-5%;
