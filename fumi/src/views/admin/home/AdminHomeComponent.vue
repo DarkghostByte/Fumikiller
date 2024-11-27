@@ -125,6 +125,16 @@
         </div>
       </el-carousel-item>
     </el-carousel>
+    <div class="flex justify-center">
+      <p class="px-4" style="margin-top:-2%;">VSF</p>
+      <p class="px-4" style="margin-top:-2%;">VCF</p>
+      <p class="px-4" style="margin-top:-2%; font-weight: bold;">VT</p>
+      <p class="px-4" style="margin-top:-2%;">CSF</p>
+      <p class="px-4" style="margin-top:-2%;">CCF</p>
+      <p class="px-4" style="margin-top:-2%; font-weight: bold;">CT</p>
+    </div>
+    
+
     <!-- END FILE -->
   </div>
 
@@ -422,11 +432,9 @@ filterData8() {
 
 .el-carousel__button:nth-child(2n+1) {
   height: 3px;
-  /* Increased height for better visibility */
   width: 50px;
-  /* Increased width for better click area */
   background-color: #464646;
-  /* Lighter gray color */
+  position: relative; /* Necessary for absolute positioning of the text */
 }
 
 .el-carousel__item.is-active {
