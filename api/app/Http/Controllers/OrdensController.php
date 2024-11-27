@@ -156,7 +156,41 @@ class OrdensController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $orden = Orden::find($id);
+        $reglas = Validator::make($request->all(), [
+            'id_cliente' => 'min:1',
+            'id_plague1' => 'required|min:1',
+            'id_plague2' => '',
+            'date1' => 'required|min:1',
+            'date2' => 'required|min:1',
+            'time1' => 'required|min:1',
+            'time2' => 'required|min:1',
+            'hiring' => 'array|required|min:1',
+            'infoorden_certificate' => 'required|min:1',
+            'infoorden_remision' => 'required|min:1',
+            'infoorden_facturacion' => 'required|min:1',
+            'infoorden_cell' => 'required|min:1',
+        ]);
+        if (!$orden) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Cliente no encontrado'
+            ], 404);
+        }
+        if ($reglas->fails()) {
+            return response()->json([
+                'status' => 'failed',
+                'message' => 'Error de validación',
+                'errors' => $reglas->errors()
+            ], 400);
+        }
+        $orden->fill($request->all());
+        $orden->save();
+        return response()->json([
+            'status' => 'success',
+            'message' => 'La orden se actualizo correctamente',
+            'data' => $orden
+        ]);
     }
 
     /**

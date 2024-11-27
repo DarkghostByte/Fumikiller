@@ -16,8 +16,8 @@
     <img  class="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo" style="">
             <h3 class="letrasFlex" style="width: 200px; margin-top:5px;" >Orden de trabajo</h3>
-            <div class="noOT" style="color: red; font-weight:bold; font-size:20px;">
-                No.{{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
+            <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
+                No. {{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div> 
     </div>
@@ -80,7 +80,7 @@
             @if($agendar)
             <table >
                 <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
-                <td style="margin-left: -50px; width:150px;">AGENDAR {{ $ordenCompleta->otraDosis }}</th>
+                <td style="margin-left: -50px; width:150px;">AGENDAR ({{ $ordenCompleta->otraDosis }})</th>
             </table>
             @else
             <table >
@@ -115,7 +115,7 @@
         </div>                
     </header>
     <main style="margin-top: 24px"> 
-        <img src="{{ $base641 }}" alt="" style="position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
         <table style="margin-top: 0px">
@@ -452,8 +452,8 @@
     <img  id="membre" src="{{ $base64 }}" alt="">
         <div class="meminfo" style="">
             <h3 class="letrasFlex" style="width: 200px; margin-top:5px;" >Orden de trabajo</h3>
-            <div class="noOT" style="color: red; font-weight:bold; font-size:20px;">
-                No.{{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
+            <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
+                No. {{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
             </div>
         </div> 
     </div>
@@ -551,7 +551,7 @@
         </div>                
     </header>
     <main style="margin-top: 24px"> 
-        <img src="{{ $base641 }}" alt="" style="position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
         <table style="margin-top: 0px">

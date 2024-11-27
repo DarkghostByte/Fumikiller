@@ -15,6 +15,7 @@ const adminRoutes = [
     {path: 'works/add-works/:id', component: () => import('@/views/admin/works/AdminAddWorksComponent.vue')},
     {path: 'works/complete-works/:id', component: () => import('@/views/admin/works/AdminCompleteWorksComponent.vue')},
     {path: 'works/edit-workComplete/:id', component: () => import('@/views/admin/works/AdminEditWorksCompleteComponent.vue')},
+    {path: 'works/edit-work/:id', component: () => import('@/views/admin/works/AdminEditWorksComponent.vue')},
 
     {path: 'calendar', component: () => import('@/views/admin/calendar/AdminCalendarComponent.vue')},
     {path: 'calendar/complete', component: () => import('@/views/admin/calendar/AdminCalendarCompleteComponent.vue')},

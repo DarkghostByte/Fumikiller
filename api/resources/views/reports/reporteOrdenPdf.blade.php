@@ -34,7 +34,7 @@
 
 
     <main style="margin-top: 24px"> 
-        <img src="{{ $base641 }}" alt="" style="position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
         <table style="margin-top: 0px">
@@ -418,7 +418,7 @@
 
 
     <main style="margin-top: 24px"> 
-        <img src="{{ $base641 }}" alt="" style="position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
         <table style="margin-top: 0px">

@@ -50,7 +50,7 @@
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 95%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
 
         <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
         <el-table-column label="">
@@ -93,15 +93,15 @@
         <el-table-column prop="time2" label="A" sortable width="90px" />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
-        <!--BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO
+        <!-- Botones de acción -->
         <el-table-column label="">
           <template #default="scope">
-            <el-button style="color:black" size="small" type="danger" @click="bajaOrden(scope.row)">
-              <span class="material-symbols-outlined">disabled_by_default</span>
-            </el-button>
+            <router-link :to="'/admin/works/edit-work/' + scope.row.id">
+              <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
+                  class="material-symbols-outlined">edit</span></el-button>
+            </router-link>
           </template>
         </el-table-column>
-        FIN DEL BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
       </el-table>
     </div>
     <!-- END TABLE DATA -->
@@ -203,19 +203,9 @@ export default {
       console.log(row)
       this.selectedItem = row
       this.selectedItem = null
-    },/*
-    confimarBaja() {
-      axios.delete('orden/' + this.selectedItem.id).then(res => {
-        console.log(res)
-        this.refresh()
-        this.dialogVisible = false
-      })
     },
-    bajaOrden(row) {
-      console.log(row)
-      this.selectedItem = row
-      this.dialogVisible = true
-    },*/
+    handleEdit() { },
+
     completarOrden(row) {
       if (row && row.id) {
         console.log(row);
