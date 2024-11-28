@@ -27,7 +27,7 @@
 
     <!-- v-for="item in 4" :key="item"-->
 
-    <el-carousel type="card" height="200px" class="m-5 border-radius:5 gb-gray">
+    <el-carousel type="card" height="200px" class="m-5 border-radius:5 gb-gray prueba">
       <!--VENTAS SIN FACTURA-->
       <el-carousel-item class="h-auto">
         <div style="justify-content:center;" class="flex items-center p-8  shadow rounded-lg">
@@ -45,7 +45,7 @@
         </div>
       </el-carousel-item>
       <!--VENTAS CON FACTURA-->
-      <el-carousel-item class=" h-auto">
+      <el-carousel-item class="h-auto carousel">
         <div style="justify-content:center;" class="flex items-center p-8 shadow rounded-lg">
           <div
             class="inline-flex flex-shrink-0 items-center justify-center h-16 w-16 text-red-600 bg-red-100 rounded-full mr-6">
@@ -406,6 +406,7 @@ filterData8() {
   /* Added rounded corners */
   margin: 10px 0px;
   /* Added spacing between items */
+
 }
 
 .el-carousel__item h3 {
@@ -415,40 +416,50 @@ filterData8() {
   text-align: center;
   font-family: 'Arial', sans-serif;
   font-size: 24px;
+  
+  
 }
 
 .el-carousel__item:nth-child(2n) {
   border-radius: 10px;
   background-color: white;
 
+  
 }
 
 .el-carousel__item:nth-child(2n+1) {
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
-
+ 
 
 }
-
 .el-carousel__button:nth-child(2n+1) {
-  height: 3px;
-  width: 50px;
-  background-color: #464646;
+  width: 45px;
+  background-color: transparent;
   position: relative; /* Necessary for absolute positioning of the text */
+  height: 25px;
+  margin-left: 7px;
+  border-bottom: 3px solid #464646;
 }
+
 
 .el-carousel__item.is-active {
   opacity: 1;
   transform: scale(1);
+  
 }
 
 .el-carousel__item:not(.is-active) {
   opacity: 0.25;
   transform: scale(0.9);
+
 }
 
 .el-table-column label {
   color: #333;
   /* Darker text color for headers */
+}
+.prueba{
+  margin-bottom: -15px;
 }
 </style>

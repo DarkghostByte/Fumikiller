@@ -67,6 +67,8 @@ nav {
   width: 50px;
   font-size: 0; 
   transition: width 0.75s ease-in-out, font-size 0.75s;  
+  position: sticky;
+  top: 0;
 
 }
 nav.span{

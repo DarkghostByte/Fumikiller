@@ -76,6 +76,8 @@
             <div class="" style="text-transform: uppercase;">
             </div>
             </th>  
+            <th class="importe">IMPORTE</th>
+            <h5 class="importe1"> $</h5>
         </table>
 
 
@@ -114,9 +116,25 @@
 </body>
 
 <style>
+    .importe{
+        width: 60px;
+        height: 17px;
+        border: 1px solid black;
+        text-align: center;
+        font-size: 12px;
+    }
+    .importe1{
+        width: 80px;
+        height: 20px;
+        border: 1px solid black;
+        margin-left: -3px;
+        text-align: left;
+        font-size: 12px;
+    }
     .txtDia{
         text-align: center;
         width: 65px;
+        height: 20px;
         margin-top:-20px;
         padding-right: -10px;
         border: 1px solid black;
@@ -125,12 +143,12 @@
         text-align: center;
         width: 80px;
         border: 1px solid black;
-        padding-left: -10px;
-        margin-left: -10px;
+        margin-top: 0px;
+        
     }
     .tblDia{
         width: 15%;
-        margin-left: -10%;
+        margin-left: -12%;
         position:absolute;
     }
     .tblauto{
@@ -155,16 +173,15 @@
     .renDivthsepa{
         width: 100%;
         position: left;
+        padding-top: 7px;
     }
     .renDivThCon{
-        text-decoration: underline;
         width: 100%;
         text-align: left;
         border-bottom: 1px solid black;
         height: 5px;
     }
     .renDivThaut{
-        text-decoration: underline;
         width: 10px;
         text-align: center;
         border-bottom: 1px solid black;
@@ -228,13 +245,7 @@
         margin-left:-5px;
         margin-top:4px;
     }
-    .letrasflex{
-        margin-top: -15%;
-        height: 50px;
-        width: auto;
-        background-color: aqua
-        border: 1px solid black;
-    }
+   
     .meminfo{
         text-align: center;
         position: absolute;

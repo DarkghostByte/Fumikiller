@@ -11,10 +11,11 @@
         
 
 <body >
+<h5 class="oc" style="position: absolute; margin-left:97%; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">ORIGINAL</h5>
     <br>
     <div class="memretado" style="margin-top: 30px;">
     <img  class="membre" src="{{ $base64 }}" alt="">
-        <div class="meminfo" style="">
+        <div class="meminfo">
             <h3 class="letrasFlex" style="width: 200px; margin-top:5px;" >Orden de trabajo</h3>
             <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
                 No. {{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
@@ -447,10 +448,11 @@
 </body>
 
 <body>
+<h5 class="oc" style="position: absolute; margin-left:97%; margin-top:-10px; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">COPIA</h5>
     <br>
     <div class="memretado">
     <img  id="membre" src="{{ $base64 }}" alt="">
-        <div class="meminfo" style="">
+        <div class="meminfo" >
             <h3 class="letrasFlex" style="width: 200px; margin-top:5px;" >Orden de trabajo</h3>
             <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
                 No. {{ str_pad($ordenCompleta->id_orden, 5, 0, STR_PAD_LEFT) }}
@@ -1102,7 +1104,7 @@ td {
 #tablaAdi{
     position: absolute;
     margin-top: -170px;
-    margin-left: 85%;
+    margin-left: 75%;
     font-size: 15px;
     width: 7%;
 }

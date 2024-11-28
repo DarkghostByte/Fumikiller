@@ -10,10 +10,12 @@
         
 
 <body>
+    <h5 class="oc" style="position: absolute; margin-left:97%; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">ORIGINAL</h5>
+
     <br>
 <img  class="membre" src="{{ $base64 }}" alt="">
-        <div class="meminfo" style="">
-            <h3 class="letrasFlex" style="width: 200px; margin-top:25px; ">Orden de trabajo</h3>
+        <div class="meminfo" >
+            <h3 class="letrasFlex" style="width: 200px; margin-top:30px; ">Orden de trabajo</h3>
             <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
                 No. {{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
@@ -25,7 +27,7 @@
     
     <header> 
         @if($si)
-        <h2 style="position: absolute; margin-top:-24.5%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
+        <h2 style="position: absolute; margin-top:-27%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
         @else
         <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
         @endif
@@ -33,7 +35,7 @@
 
 
 
-    <main style="margin-top: 24px"> 
+    <main style="margin-top: 5px"> 
         <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
@@ -88,7 +90,7 @@
             </div>
             </th> 
             <th>Colonia</th>
-            <<th class="renDivTh">
+            <th class="renDivTh">
             <div class="renDiv" style="font-size:14px; text-transform: uppercase">
                 {{ $orden->colonia }} #{{ $orden->codigoPostal }}
             </div>
@@ -389,15 +391,16 @@
     <br>
     <div class="division2"></div>
 
-    
+    <div class="mitad"></div>
     
     
 </body>
 <body>
+<h5 class="oc" style="position: absolute; margin-left:97%; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">COPIA</h5>
     <br>
-<img  class="membre" src="{{ $base64 }}" alt="">
-        <div class="meminfo" style="">
-            <h3 class="letrasFlex" style="width: 200px; margin-top:25px;">Orden de trabajo</h3>
+<img  class="membre2" src="{{ $base64 }}" alt="">
+        <div class="meminfo2" >
+            <h3 class="letrasFlex" style="width: 200px; margin-top:15px;">Orden de trabajo</h3>
             <div class="noOT" style="color: red; font-weight:bold; font-size:20px; text-transform: capitalize;">
                 No. {{ str_pad($orden->id, 5, 0, STR_PAD_LEFT) }}
             </div>
@@ -409,7 +412,7 @@
     
     <header> 
         @if($si)
-        <h2 style="position: absolute; margin-top:-24.5%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
+        <h2 style="position: absolute; margin-top:-27%; margin-left:35%; font-weight:bold;">LLAMAR ANTES DE IR</h2>
         @else
         <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
         @endif
@@ -417,7 +420,7 @@
 
 
 
-    <main style="margin-top: 24px"> 
+    <main style="margin-top: 15px"> 
         <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:42%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
@@ -773,9 +776,18 @@
     <br>
     
     
+    
 </body>
 
 <style>
+    .mitad{
+        width: 110%;
+        border: 1px solid red;
+        position:absolute;
+        top: 471px;
+
+        
+    }
     .clth1112{
         width: 5%;
     }
@@ -837,21 +849,29 @@
     .meminfo{
         text-align: center;
         position: absolute;
-        margin-left: -61%;
+        margin-left: -50%;
         margin-top:12%;
         width: 300px;
-        
+    }
+    .meminfo2{
+        text-align: center;
+        position: absolute;
+        margin-left: -47%;
+        margin-top:12%;
+        width: 300px;
     }
     .membre{
         margin-top:40px;
         padding-left: 10%;
-        height:12%;
-        width: 80%;
-        /*
-        height: 12%;
-        width: auto;
-        */
-    }    
+        height: 14%;
+        width: auto; 
+    }  
+    .membre2{
+        margin-top:20px;
+        padding-left: 10%;
+        height: 14%;
+        width: auto; 
+    }   
     .delimitador{
         margin-top:-5%;
     }
