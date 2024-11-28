@@ -59,7 +59,7 @@
         <!-- Botones de acción -->
         <el-table-column label="">
           <template #default="scope">
-            <router-link :to="'/admin/works/edit-work/' + scope.row.id">
+            <router-link :to="'/admin/ordenCompra/edit/' + scope.row.id">
               <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
                   class="material-symbols-outlined">edit</span></el-button>
             </router-link>

@@ -46,6 +46,7 @@ const adminRoutes = [
 
     {path: 'ordenCompra', component: () => import('@/views/admin/ordenCompra/AdminOrdenCompraComponent.vue')},
     {path: 'ordenCompra/new', component: () => import('@/views/admin/ordenCompra/AdminAddOrdenCompraComponent.vue')},
+    {path: 'ordenCompra/edit/:id', component: () => import('@/views/admin/ordenCompra/AdminEditOrdenCompraComponent.vue')},
 ]
 
 

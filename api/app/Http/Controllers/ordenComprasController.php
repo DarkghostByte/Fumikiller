@@ -13,10 +13,13 @@ class ordenComprasController extends Controller
      */
     public function index()
     {
-        $data = ordenCompra ::all();
+        $data = ordenCompra::select(['ordenCompra.*', ])
+            ->orderBy('ordenCompra.id', 'DESC')
+            ->get();
+    
         return response()->json([
-            'status'=>'success',
-            'data'=>$data
+            'status' => 'success',
+            'data' => $data
         ]);
     }
 
@@ -72,7 +75,11 @@ class ordenComprasController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = ordenCompra::find($id);
+        return response()->json([
+            'status'=>'success',
+            'data'=>$data
+        ]);
     }
 
     /**
