@@ -16,66 +16,14 @@ use App\Models\Orden;
 use App\Models\CompletarOrden;
 use App\Models\Ingresos;
 use App\Models\Egresos;
+use App\Models\Certificado;
+use App\Models\Facturas;
+use App\Models\Remisiones;
+use App\Models\ordenCompra;
 use Validator;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
-    }
-
     public function totales()
     {
         $totalProductosExt = ProductoExterno::count();
@@ -89,6 +37,10 @@ class AdminController extends Controller
         $totalClientes = Cliente::count();
         $totalOrdenes = Orden::count();
         $totalOrdenesCompletadas = CompletarOrden::count();
+        $totalCertificados = Certificado::count();
+        $totalFacturas = Facturas::count();
+        $totalRemisiones = Remisiones::count();
+        $totalOrdenCompra = ordenCompra::count();
 
 
         return response()->json([
@@ -102,7 +54,11 @@ class AdminController extends Controller
             'totalEmpleados' => $totalEmpleados,
             'totalClientes' => $totalClientes,
             'totalOrdenes' => $totalOrdenes,
-            'totalOrdenesCompletadas' => $totalOrdenesCompletadas
+            'totalOrdenesCompletadas' => $totalOrdenesCompletadas,
+            'totalCertificados' => $totalCertificados,
+            'totalFacturas' => $totalFacturas,
+            'totalRemisiones' => $totalRemisiones,
+            'totalOrdenCompra' => $totalOrdenCompra
         ]);
     }
 

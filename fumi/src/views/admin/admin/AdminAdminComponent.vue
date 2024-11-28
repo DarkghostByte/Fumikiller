@@ -102,6 +102,38 @@
         <h2>forma de contacto ()</h2>
       </router-link>
 
+      <router-link to="/admin/admin/"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-300 hover:bg-blue-700 focus:bg-blue-600 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:305px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Certificados ({{ totalCertificados }})</h2>
+      </router-link>
+
+      <router-link to="/admin/admin/"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-300 hover:bg-green-700 focus:bg-green-600 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:305px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-folder" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Facturas ({{ totalFacturas }})</h2>
+      </router-link>
+
+      <router-link to="/admin/admin/"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-300 hover:bg-orange-700 focus:bg-orange-600 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:305px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>Remisiones ({{ totalRemisiones }})</h2>
+      </router-link>
+
+      <router-link to="/admin/admin/"
+        class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-300 hover:bg-purple-700 focus:bg-purple-600 rounded-md ml-6 mb-5 shadow-lg"
+        style="width:305px; height:100px; font-size:22px;">
+        <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
+            margin-left: -5px; margin-right:10px; "></i>
+        <h2>O. Compra ({{ totalOrdenCompra }})</h2>
+      </router-link>
+
     </div>
   </div>
 
@@ -132,6 +164,10 @@ export default {
     totalVias: 0,
     totalProblematica: 0,
     totalOrdenesCompletadas: 0,
+    totalCertificados: 0,
+    totalFacturas: 0,
+    totalRemisiones: 0,
+    totalOrdenCompra: 0,
   }),
   mounted() {
     this.refresh(),
@@ -184,7 +220,11 @@ export default {
           totalOrdenes,
           totalEmpleados,
           totalVias,
-          totalOrdenesCompletadas
+          totalOrdenesCompletadas,
+          totalCertificados,
+          totalFacturas,
+          totalRemisiones,
+          totalOrdenCompra
         } = responseTotales.data; // Destructuring assignment
 
         this.totalProductosExt = totalProductosExt;
@@ -198,6 +238,10 @@ export default {
         this.totalEmpleados = totalEmpleados;
         this.totalVias = totalVias;
         this.totalOrdenesCompletadas = totalOrdenesCompletadas;
+        this.totalCertificados = totalCertificados;
+        this.totalFacturas = totalFacturas;
+        this.totalRemisiones = totalRemisiones;
+        this.totalOrdenCompra = totalOrdenCompra;
 
         console.log('Total productos externos', this.totalProductosExt);
         console.log('Total productos internos', this.totalProductosInt);
@@ -210,6 +254,10 @@ export default {
         console.log('Total empleados', this.totalEmpleados);
         console.log('Total vias', this.totalVias);
         console.log('Total ordenes completadas', this.totalOrdenesCompletadas);
+        console.log('Total certificados', this.totalCertificados);
+        console.log('Total facturas', this.totalFacturas);
+        console.log('Total remisiones', this.totalRemisiones);
+        console.log('Total ordenes compra', this.totalOrdenCompra);
         console.log('Totales', responseTotales.data);
       } catch (error) {
         console.error('Error al obtener los datos:', error);
