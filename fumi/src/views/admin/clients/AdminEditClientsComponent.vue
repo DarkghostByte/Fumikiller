@@ -220,10 +220,6 @@ export default {
         { required: true, message: 'El apellido materno es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
-      correo: [
-        { required: true, message: 'El cooreo es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
       id_vias: [
         { required: true, message: 'El tipo de calle es requerido', trigger: 'blur' }
       ],

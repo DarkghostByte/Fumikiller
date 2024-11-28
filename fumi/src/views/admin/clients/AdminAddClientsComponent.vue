@@ -205,7 +205,7 @@ export default {
       lastname1: '',
       lastname2: '',
       tradename: '',
-      correo: '',
+      correo: 'Ninguno',
       id_vias: '',
       home: '',
       numAddress: '',
@@ -240,10 +240,6 @@ export default {
       ],
       tradename: [
         { required: true, message: 'El comercio es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      correo: [
-        { required: true, message: 'El correo es requerido', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
       id_vias: [
