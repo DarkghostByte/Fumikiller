@@ -837,9 +837,13 @@ class PdfsController extends Controller
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-    
+        /* Imagen */
+        $path1 = public_path('img/logofk.png');
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data_img1 = file_get_contents($path1);
+        $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('ordenCompra','base64'); // Incluimos $totalPago
+        $pdf_data = compact('ordenCompra','base64','base641'); // Incluimos $totalPago
         $pdf = Pdf::loadView('reports.repoordencompra', $pdf_data)->setPaper('a4');    
         // Mostrar el PDF al usuario
         return $pdf->stream();

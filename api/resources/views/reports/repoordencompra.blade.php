@@ -25,6 +25,7 @@
 
 
     <main >
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:38%; margin-top:-7%;">
         <div class="cont">
         <div class="fondLimitador"></div>
         <table>
