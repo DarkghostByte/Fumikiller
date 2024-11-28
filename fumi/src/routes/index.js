@@ -43,6 +43,9 @@ const adminRoutes = [
     {path: 'facturas/views/', component: () => import('@/views/admin/facturas/AdminFacturasRepoComponent.vue')},
 
     {path: 'gastos', component: () => import('@/views/admin/gastos/AdminGastosComponent.vue')},
+
+    {path: 'ordenCompra', component: () => import('@/views/admin/ordenCompra/AdminOrdenCompraComponent.vue')},
+    {path: 'ordenCompra/new', component: () => import('@/views/admin/ordenCompra/AdminAddOrdenCompraComponent.vue')},
 ]
 
 
