@@ -1,334 +1,415 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
+
+
+    <div class="delimitador">
+        <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>PDF Ordenes de Compra</title>
+        <title>PDF Ordenes</title>
     </head>
-
-    <div class=delimitador>
-        
-@foreach ($ordenCompra as $ordenCompra)
-<body>
-    <br>
-<img  class="membre" src="{{ $base64 }}" alt=""/>
+<body >
 <table class="tblDia" >
-    <td class="txtDia">FOLIO</td>
-    <td class="txtDia1">{{ str_pad($ordenCompra->id, 5, 0, STR_PAD_LEFT) }}</td>
-    
+    <h5 class="txtDia">DIA</h5>
+    <h5 class="txtDia1">fecha asi</h5>
 </table>
+<img class="membre" src="{{ $base64 }}" alt="">
+    
+    <div class="meminfo">
         
-
-    <header> 
+        <div style="margin-top: -30%; margin-left:70%; padding-bottom:-20px;">
+            <h2 class="letrasFlex%;" >Orden de Compra</h2>
+        </div>
+    </div>
+    <header>    
+        
     </header>
 
-
-
-    <main >
-        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:38%; margin-top:-7%;">
-        <div class="cont">
+    <main style="margin-top: -60px;"> 
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clthpara" style="width: 0; "></th>
-            <th class="renDivTh" style="text-align: left;">Fecha:
-            <div class="renDiv" style="text-transform: uppercase"> 
-                {{ $ordenCompra->fechaOrdenCompra }}
+            <th class="clthrs">RAZON SOCIAL:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                puca
             </div>
             </th>  
         </table>
             
         <table>
-            <th class="clthpara" style="width: 0;"></th>
-            <th class="renDivTh" style="text-align: left;">Para:
-            <div class="renDiv" style="text-transform: uppercase">
-                {{ $ordenCompra->paraOrdenCompra }}
+            <th class="clth">NOMBRE:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                maye
+            </div>
+            </th>  
+        </table>
+        <table>
+            <th>DOMICILIO:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                tengo
+            </div>
+            </th> 
+            <th> CIUDAD:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                bigote
+            </div>
+            </th> 
+        </table>
+        <table>
+            <th class="clthcelu"  >COLONIA:</th>
+            <th class="renDivTh" >
+            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
+                ddd
+            </div>
+            </th> 
+            <th class="clthcelu">TELEFONO:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                ddd
             </div>
             </th> 
             
         </table>
         <table>
-            <th class="clthpara" style="width: 0;"></th>
-            <th class="renDivthsepa">
-            <div class="renDiv" style="text-transform: uppercase">
+            <th class="clthcelu">CELULAR:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                l
             </div>
-            </th>      
-        </table>
-        <table>
-        <th class="clthpara" style="width: 0;"></th>
-            <th class="renDivThCon" >"Concepto" 
-            <div class="" style="text-transform: uppercase;">
-                {{ $ordenCompra->conceptoOrdenCompra }}
-            </div>
-            </th>  
-        </table>
-        <table>
-            <th class="clthpara" style="width: 0;"></th>
-            <th class="renDivthsepa">
-            <div class="renDiv" style="text-transform: uppercase">
-            </div>
-            </th>      
-        </table>
-        <table>
-            <th class="clthpara" style="width: 0;"></th>
-            <th class="renDivThCon" >"Detalle" 
-            <div class="" style="text-transform: uppercase;">
-                {{ $ordenCompra->detalleOrdenCompra }}
+            </th> 
+            <th class="clthtipo">TIPO DE LUGAR:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                i
             </div>
             </th>  
         </table>
-        <table>
-            <th class="clthpara" style="width: 0;"></th>
-            <th class="renDivThCon" >Empleado: 
-            <div class="" style="text-transform: uppercase;">
-                {{ $ordenCompra->empleadoOrdenCompra }}
+        <div >
+        <table class="btnCir">
+            
+            <th class="clth118">REQUIERE DE:</th>
+            <div class="btntxt"></div>
+            <th class="clth22" > Certificado</th>
+            <th class="btnrd"><button class="button button5"> </button>
+            <th class="clth114">NUMERO:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                a
             </div>
-            </th>  
-            <th class="importe">IMPORTE</th>
-            <h5 class="importe1"> $ {{ $ordenCompra->importeOrdenCompra }}</h5>
+            </th> 
+            <th class="clth113">IMPORTE:</th>
+            <th class="renDivTh">
+            <div class="renDiv13">
+                d
+            </div>
+            </th>
+            
         </table>
 
-
-        <table class="tblauto" >
-            <td class="txtauto">Autorizo:</td>
-            <td class="txtauto1"></td>
-        </table>
-        <table>
-            <td style="text-align: center; font-size:16px;">Nombre del empleado que autoriza</td>
-            <td style="text-align: center; font-size:16px;">{{ $ordenCompra->autorizoOrdenCompra }}</td>
-        </table>
-        
-        <div class="footDiv"></div>
-        <div class="footDiv2"></div>
-        <table class="footer">
-            <th class="footer">Col. Alamedas</th>
-            <th>C.P. 31704</th>
-            <th>Calle del Abeto #2201</th>
-            <th>Nuevo Casas Grandes, Chihu. </th>
-            <th>Tel.636-694-65-15</th>
-        </table>
         </div>
+        
+        <table class="">
+            <th>OBSERVACIONES:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                e
+            </div>
+            </th>            
+        </table>
+
+        <div class="ctr">
+            <h5 class="tipo">ORIGINAL CLIENTE</h5>
+        </div>
+
+        <div class="footDiv"></div>
+        <div class="footDiv1"></div>
+        <table class="footer">
+            <th class="footer">Calle del Abeto No.2201</th>
+            <th> Col. Alamedas </th>
+            <th> C.P. 31704</th>
+            <th> Nuevo Casas Grandes, Chihu. </th>
+            <th> Tel.636-694-65-15</th>
+            
+            
+        </table>
         
 
 
         
     </main>
     </div>
-
-    <br>
-    <br>
-    <div class="division2"></div>
-    <div class="division"></div>
-    
-    
+    <div class="separacion"></div>
     
 </body>
-@endforeach
+<body >
+    <table class="tblDia" >
+        <h5 class="txtDia">DIA</h5>
+        <h5 class="txtDia1">o</h5>
+    </table>
+    <img class="membre2" style="" src="{{ $base64 }}" alt="">
+        
+        <div class="meminfo">
+            
+            <div style="margin-top: -30%; margin-left:70%; padding-bottom:-20px;">
+                <h2 class="letrasFlex%;" >Orden de Compra</h2>
+            </div>
+        </div>
+    
+    
+    <header>    
+        
+    </header>
+
+    <main> 
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
+        <div class="fondLimitador"></div>
+        <table>
+            <th class="clth1">RAZON SOCIAL:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                m
+            </div>
+            </th>  
+        </table>
+            
+        <table>
+            <th class="clth">NOMBRE:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                i
+            </div>
+            </th>  
+        </table>
+        <table>
+            <th>DOMICILIO:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                a
+            </div>
+            </th> 
+            <th> CIUDAD:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                m
+            </div>
+            </th> 
+        </table>
+        <table>
+            <th class="clthcelu"  >COLONIA:</th>
+            <th class="renDivTh" >
+            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
+                o
+            </div>
+            </th> 
+            <th class="clthcelu">TELEFONO:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                r
+            </div>
+            </th> 
+            
+        </table>
+        <table>
+            <th class="clthcelu">CELULAR:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                l
+            </div>
+            </th> 
+            <th class="clthtipo">TIPO DE LUGAR:</th>
+            <th class="renDivTh">
+            <div class="renDiv1">
+                i
+            </div>
+            </th>  
+        </table>
+        <div >
+        <table class="btnCir">
+            
+            <th class="clth118">REQUIERE DE:</th>
+            <div class="btntxt"></div>
+            <th class="clth22" > Certificado</th>
+            <th class="btnrd"><button class="button button5"> </button>
+            <th class="clth114">NUMERO:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                z
+            </div>
+            </th> 
+            <th class="clth113">IMPORTE:</th>
+            <th class="renDivTh">
+            <div class="renDiv13">
+                moto
+            </div>
+            </th>
+            
+        </table>
+
+        </div>
+        
+        <table class="">
+            <th>OBSERVACIONES:</th>
+            <th class="renDivTh">
+            <div class="renDiv">
+                g
+            </div>
+            </th>            
+        </table>
+
+        <div class="ctr">
+            <h5 class="tipo">COPIA FUMI-KILLE'R</h5>
+        </div>
+
+        <div class="footDiv"></div>
+        <div class="footDiv1"></div>
+        <table class="footer">
+            <th class="footer">Calle del Abeto No.2201</th>
+            <th> Col. Alamedas </th>
+            <th> C.P. 31704</th>
+            <th> Nuevo Casas Grandes, Chihu. </th>
+            <th> Tel.636-694-65-15</th>
+        </table>
+    </main>
+    </div>
+    
+</body>
 
 <style>
-    .importe{
-        width: 60px;
-        height: 17px;
-        border: 1px solid black;
-        text-align: center;
-        font-size: 12px;
-    }
-    .importe1{
-        width: 80px;
-        height: 20px;
-        border: 1px solid black;
-        margin-left: -3px;
-        text-align: left;
-        font-size: 12px;
-    }
     .txtDia{
+        justify-content: center;
         text-align: center;
-        width: 65px;
-        height: 20px;
+        justify-content: center;
+        width: 38px;;
         margin-top:-20px;
-        padding-right: -10px;
+        margin-left:75%;
         border: 1px solid black;
     }
     .txtDia1{
-        text-align: center;
-        width: 80px;
-        border: 1px solid black;
-        margin-top: 0px;
-        
-    }
-    .tblDia{
-        width: 15%;
-        margin-left: -12%;
-        position:absolute;
-    }
-    .tblauto{
-        margin-top: 20px;
-        width: 15%;
-        margin-left: 30%;
-
-    }
-
-
-    .txtauto{
-        text-align: center;
-        width: 65px;
-        margin-top:-20px;
-        padding-right: -10px;
-    }
-    .txtauto1{
-        width: 200px;
-        border-bottom: 1px solid black;
-    }
-    
-    .renDivthsepa{
-        width: 100%;
-        position: left;
-        padding-top: 7px;
-    }
-    .renDivThCon{
-        width: 100%;
-        text-align: left;
-        border-bottom: 1px solid black;
-        height: 5px;
-    }
-    .renDivThaut{
-        width: 10px;
-        text-align: center;
-        border-bottom: 1px solid black;
-        height: 5px;
-        
-    }
-    .autori{
-        background-color: red;
-        width: 100%;
+        justify-content: center;
         text-align: center;
         justify-content: center;
+        width: 100px;
+        position:absolute;
+        margin-top:-50px;
+        margin-left:80%;
+        border: 1px solid black;
     }
-    .clth1112{
-        width: 5%;
+    .txtBDDia{
+        left:80%;
+    }.tblDia{
+        position:absolute;
+        margin-left: 65px;
     }
-    .clth1122{
-        width: -50%;
-        padding: -100px;
+    .separacion{
+        margin-top: 65px;
+        border-top:2px solid black;
+        padding-bottom:40px;
     }
-    .renDiv115{
-        width: 100%;
-        border-bottom: 1px solid black;
+    .ctr{
+        justify-content: center;
     }
-    .clth20{
-        margin-left:-50%;
+    .tipo{
+        justify-content: center;
+        text-align: center;
+        justify-content: center;
+        margin-left:75%;
+        margin-top: 5px;
+        height:27px;
+        width: 150px;
+        border:1px solid black;
     }
-    .division2{
-        width: 130%;
-        margin-left:-60px;
-        border:1px solid grey;
-        margin-top:30px;
+    .clth118{
+        width:65.7%;
     }
-    .division{
-        width: 130%;
-        margin-left:-60px;
-        margin-top: 30px;
-        padding-bottom:0px;   
+    .clthrs{
+        width:19.9%;
     }
-    .cont{
-        margin-top:-5%;
+    .btnrd{
+        position:absolute;
+        margin-left: 10%;
+    }
+    .clth22{
+        width:85%;
     }
     .clth114{
-        width: 32%;
+        width: 30%;
+        
     }
     .clth113{
-        width: 19%;
+        weight:30%;
     }
-    .clth112{
-        width: 31%;
+    .clth1{
+        width: 21%;
     }
-    .clth111{
-        width: 43%;
+    .letrasflex{
+        margin-bottom: 40px;
+        left: 20px;
     }
-    .clth110{
-        width: 33%;
-    }
-    .renDiv1{ 
-        border-bottom: 1px solid black;
-        height:15px;
-        width:100%;
-        margin-left:-5px;
-        margin-top:4px;
-    }
-   
     .meminfo{
         text-align: center;
         position: absolute;
-        margin-left: -20%;
-        margin-top:-4%;
+        margin-left: -42%;
+        margin-top:11%;
+        padding-bottom:-50px; 
         
     }
     .membre{
-        margin-top:40px;
-        padding-left: 10%;
-        height:12%;
-        width: 80%;
+        margin-top:0px;
+        padding-left: 160px;
+        height:15%;
+        width: auto;
+    }  
+    .membre2{
+        margin-top:0px;
+        padding-left: 160px;
+        height:13.8%;
+        width: auto;
     }    
+    .nmM{
+        padding-left:50px;
+    }
     .delimitador{
-        margin-top:-5%;
+        width: 100%;
     }
     .renDivTh{
         width: 100%;
     }
-    .renDivTh2{
-        width: 33%;
-
-    }
-    .renDivTh3{
-        width: 150%;
-
-    }
-    .renDivDom{
+    .renDiv{
         border-bottom: 1px solid black;
         height:15px;
         width:100%;
     }
-    .renDiv{
+    .renDiv13{
         border-bottom: 1px solid black;
-        height:7px;
-    }.renDiv1{
+        height:15px;
+        width:210%;        
+
+    }
+    .renDiv1{
+        
         border-bottom: 1px solid black;
         height:15px;
         width:100%;
         margin-left:-5px;
-    }.clth1{
-        width: 44%;
     }.clth11{
-        width: 37%;
+        width: 50%;
     }
-    .renDivloca{
-        border-bottom: 1px solid black;
-        height:15px;
-        width:100%;
+    .clthcelu{
+        width: 5%;
     }
-    .renDivThlocal{
-    
-        width: 70%;
-    }
-    .renDivlugar{
-        border-bottom: 1px solid black;
-        width: 100%;
-        font-size: 9;
-    }
-    .renDivplaga{
-        border-bottom: 1px solid black;
-        width: 100%;
-        font-size: 9;
-    }
-    .renDivcity{
-        border-bottom: 1px solid black;
-        width: 100%;
+    .clthtipo{
+        width: 42.7%;
     }
     body{
         width: 100%;
-        
+        font-family: Arial, Helvetica, sans-serif;
     }
     h1{
-        text-align:center;
+        text-alaing:center;
     }
     img{
         margin-top:30px;
@@ -344,19 +425,18 @@
         margin:20px;
         background-color:#104e85 ;
         color:white;
-        text-align:center;       
+        text-aling:center;       
     }
     .tblAg{
         position:absolute;
         
     }
     .footDiv{
-        border-bottom:4px solid grey;
-        margin-top:15px;
+        border-bottom:4px solid blue;
+        margin-top:45px;
         width: 100%;
-    }
-    .footDiv2{
-        border-bottom:2px solid grey;
+    }.footDiv1{
+        border-bottom:2px solid orangered;
         margin-top:5px;
         width: 100%;
     }
@@ -372,67 +452,50 @@
         position: absolute;
         
     }
-    .noOT{ 
-        background-color: aqua;
-        position: absolute;
-        margin-top:-38px;
-        margin-left:200%;
+    .noOT{
+        margin-top:-22px;
+        margin-left:150px;
         border:1px solid black;
-        width: 100px;
-        
     }
 
     
     footer{
         position:absolute;
         left:20%;
+        
     }
     th{
         float: left;
-        font-size:13px;
+        font-size:15px;
         font-weight: normal;
         width: auto;
     }
-    .button {
-        height: 4px;
-        height: 4px;
+.button {
         background-color: white;
         border: 1px solid black;
         color: white;
         padding: 7px;
-        
+        text-align: center;
         text-decoration: none;
-        font-size: 14px;
-        text-align: start;
+        font-size: 4px;
     }  
-    .button5 {
-        text-align: start;
-        height: 4px;
-        height: 4px;
-        border-radius: 50%;
-        margin-right:-30px;
-        background-color:blue;
-    }
+.button5 {
+    border-radius: 50%;
+    margin-left:-40px;    
+    background-color:blue;
+}
+.btnCir{
+    font-size:15px;
+    font-weight: normal;
+    width: 90%;
+    
+    
 
-    .btnCan{
-        border-radius: 50%;
-        margin-right:-30px;
-        background-color:rgba(0, 0, 255, 0);
-    }
-    .btnCir{    
-        font-size:15px;
-        font-weight: normal;
-        width: 90%;
-    }
-    .btnCir2{    
-        font-size:15px;
-        font-weight: normal;
-        width: 90%;
+}
+.pr{
+    margin-top:20px;
+}
 
-    }
-    .pr{
-        margin-top:20px;
-    }
 
 
 </style>

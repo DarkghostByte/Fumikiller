@@ -10,7 +10,7 @@
         
 
 <body>
-    <h5 class="oc" style="position: absolute; margin-left:97%; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">ORIGINAL</h5>
+    <h5 class="oc" style="position: absolute; margin-left:97%; margin-top:10px; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">ORIGINAL</h5>
 
     <br>
 <img  class="membre" src="{{ $base64 }}" alt="">
@@ -396,7 +396,7 @@
     
 </body>
 <body>
-<h5 class="oc" style="position: absolute; margin-left:97%; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">COPIA</h5>
+<h5 class="oc" style="position: absolute; margin-left:97%; margin-top:0%; font-size:15px; border: 1px solid black; height:20px; width:80px; text-align:center;">COPIA</h5>
     <br>
 <img  class="membre2" src="{{ $base64 }}" alt="">
         <div class="meminfo2" >
@@ -781,11 +781,7 @@
 
 <style>
     .mitad{
-        width: 110%;
-        border: 1px solid red;
-        position:absolute;
-        top: 471px;
-
+        
         
     }
     .clth1112{
@@ -806,7 +802,7 @@
         position: absolute;
         width: 130%;
         margin-left:-60px;
-        margin-top:-20px;
+        margin-top:-15px;
         border:1px solid grey;
 
         
@@ -850,25 +846,25 @@
         text-align: center;
         position: absolute;
         margin-left: -50%;
-        margin-top:12%;
+        margin-top:11%;
         width: 300px;
     }
     .meminfo2{
         text-align: center;
         position: absolute;
         margin-left: -47%;
-        margin-top:12%;
+        margin-top:13%;
         width: 300px;
     }
     .membre{
-        margin-top:40px;
-        padding-left: 10%;
+        margin-top:35px;
+        padding-left: 17%;
         height: 14%;
         width: auto; 
     }  
     .membre2{
-        margin-top:20px;
-        padding-left: 10%;
+        margin-top:33.5px;
+        padding-left: 17%;
         height: 14%;
         width: auto; 
     }   

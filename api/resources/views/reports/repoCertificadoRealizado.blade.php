@@ -16,7 +16,7 @@
             <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
         </div>     
         <h2 class="cerapli">CERTIFICADO DE APLICACIÓN</h2>
-        <h2 class="cerapli1"><p>Licencia Sanitaria 04-08A095</h2>
+        <h2 class="cerapli1">Licencia Sanitaria 04-08A095</h2>
         
     
     <main> 
@@ -32,7 +32,7 @@
                 // strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))) 
                 ?>
                     {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
-                 
+                
                 </div>
             </th>            
         </table>
@@ -141,7 +141,7 @@
             <div class="bottom">
                 <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
                 <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
-                <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
+                <h5 class="txtfin2">LLAMANOS AL 636-694-65-15</h5>
                 <h5 class="idCert">
                     No. {{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}                 
                 </h5>
@@ -159,151 +159,155 @@
 
 <div class="separacion"></div>
 
-<div class="copia">
-    <body>
-        <img class="membre" src="{{ $base64 }}" alt="">
-                <div class="meminfo1">
-                    <h3>COPIA</h3>
-                    <h5 class="mgntp">CALLE ABETO 2201 COL. ALAMEDAS</h5>
-                    <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
-                </div>     
-                <h2 class="cerapli11">CERTIFICADO DE APLICACION</h2>
-                <h2 class="cerapli1"><p>Licencia Sanitaria 04-08A095</h2>
-                
-            <header>    
-                
-            </header>
-            <main> 
-                <img src="{{ $base641 }}" alt="" style="z-index:-1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:31%; margin-top:6.8%;">
-                <div class="fondLimitador"></div>
-                <table>
-                    <th class="thtt">FECHA:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv" style="text-transform: uppercase">
-                        {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
-                     </div>
-                    </th>            
-                </table>
-                    
-                <table>
-                    <th>NOMBRE:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->certificateName) }}
-                    </div>
-                    </th> 
-                </table>
-                <table>
-                    <th>TEL.</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ substr($data->cell_phone, 0, 3) }} - {{ substr($data->cell_phone, 3, 3) }} - {{ substr($data->cell_phone, 6, 2) }} - {{ substr($data->cell_phone, 8, 2) }} 
-                    </div>
-                    </th> 
-                </table>
-                <table>
-                    <th> DOMICILIO:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->home) }} #{{ $data->numAddress }}
-                    </div>
-                    </th> 
-                </table>
-                <table>
-                <table style="margin-top: -1.2px;">
-                    <th>COLONIA:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->colonia) }}
-                    </div>
-                    </th> 
-                    <th>C.P.</th>
-                    <<th class="renDivTh">
-                    <div class="renDiv">
-                        #{{ $data->codigoPostal }}
-                    </div>
-                    </th> 
-                </table>
-                <table>
-                    <th>CIUDAD:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->ciudad) }}
-                    </div>
-                    </th>             
-                    <th> ESTADO:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->estado) }}
-                    </div>
-                    </th> 
-                </table>
-                <table>
-                    <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv1">
-                        {{ strtoupper($data->comercio) }}
-                    </div>
-                    </th>             
-                    </th> 
-                </table>
-                <div class="dInAc">
-                    <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
-                </div>
-                <table>
-                    <th>INTERIOR:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->productoInt) }}
-                    </div>
-                    </th> 
-                </table>
-                <table class="">
-                    <th>EXTERIOR:</th>
-                    <th class="renDivTh">
-                    <div class="renDiv">
-                        {{ strtoupper($data->productoExt) }}
-                    </div>
-                    </th> 
-                </table>
-                <table class="">
-            <th>FUMIGADOR:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                NOMBRE DEL FUMIGADOR
-
-            </div>
-            </th> 
-        </table>
-        <table>
-
-            <th class="renDivTh txtObser" style="text-align: left;">OBSERVACIONES:
-                Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.            
-            </th> 
-        </table>
-                <div class="footDiv">
+<div class="delimitador" style="margin-left: 115%; margin-top:-163.4%;">
         
-                </div>
-                <table class="">
-                    <div class="bottom">
-                        <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
-                        <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
-                        <h5 class="txtfin">LLAMANOS AL 636-694-65-15</h5>
-                        <h5 class="idCert1">
-                            No. {{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}   
-                            
-                        </h5>
-                        </div>
-                    
-                    </th> 
-                </table>
-        
-                
-            </main>
+    <body >
+            <img class="membre" src="{{ $base64 }}" alt="">
+            <div class="meminfo">
+                <h5 class="mgntp">CALLE ABETO 2201 COL. ALAMEDAS</h5>
+                <h5 class="mgntp">NUEVO CASAS GRANDES, CHIH. C.P. 31704</h5>
+            </div>     
+            <h2 class="cerapli">CERTIFICADO DE APLICACIÓN</h2>
+            <h2 class="cerapli1">Licencia Sanitaria 04-08A095</h2>
             
-        </body>
-
-</div>
+        
+        <main> 
+            <img src="{{ $base641 }}" alt="" style="z-index:-1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:14.6%; margin-top:3%;">
+            <div class="fondLimitador"></div>
+            <table>
+                <th class="thtt">FECHA:</th>
+                <th class="renDivTh">
+                    <div class="renDiv" style="text-transform: uppercase">
+                    <?php
+                    //setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+                    //date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+                    // strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))) 
+                    ?>
+                        {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
+                    
+                    </div>
+                </th>            
+            </table>
+                
+            <table>
+                <th>NOMBRE:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->certificateName) }}
+                </div>
+                </th> 
+            </table>
+            <table>
+                <th>TEL.</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ substr($data->cell_phone, 0, 3) }} - {{ substr($data->cell_phone, 3, 3) }} - {{ substr($data->cell_phone, 6, 2) }} - {{ substr($data->cell_phone, 8, 2) }} 
+                </div>
+                </th> 
+            </table>
+            <table>
+                <th> DOMICILIO:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->home) }} #{{ $data->numAddress }}
+                </div>
+                </th> 
+            </table>
+            <table>
+                <th>COLONIA:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->colonia) }}
+                </div>
+                </th> 
+                <th>C.P.</th>
+                <<th class="renDivTh">
+                <div class="renDiv">
+                    #{{ $data->codigoPostal }}
+                </div>
+                </th> 
+            </table>
+            <table>
+                <th>CIUDAD:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->ciudad) }}
+                </div>
+                </th>             
+                <th> ESTADO:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->estado) }}
+                </div>
+                </th> 
+            </table>
+            <table>
+                <th class="clth11">TIPO DE LUGAR A FUMIGAR:</th>
+                <th class="renDivTh">
+                <div class="renDiv1">
+                    {{ strtoupper($data->comercio) }}
+                </div>
+                </th>             
+                </th> 
+            </table>
+            <div class="dInAc">
+                <p>PRODUCTO UTILIZADO (INGREDIENTE ACTIVO)</p>
+            </div>
+            <table>
+                <th>INTERIOR:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->productoInt) }}
+    
+                </div>
+                </th> 
+            </table>
+            <table class="">
+                <th>EXTERIOR:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    {{ strtoupper($data->productoExt) }}
+    
+                </div>
+                </th> 
+            </table>
+            <table class="">
+                <th>FUMIGADOR:</th>
+                <th class="renDivTh">
+                <div class="renDiv">
+                    NOMBRE DEL FUMIGADOR
+    
+                </div>
+                </th> 
+            </table>
+            <table>
+    
+                <th class="renDivTh txtObser" style="text-align: left;">OBSERVACIONES:
+                    Tapar los utensilios de cocina y alimentos, Ventilar durante minimo 1 hora para la re-entrada. Para mayor efectividad de la fumigación, no trapear por las zonas en las que se aplico, mantener limpieza constante,  la basura tapada y evitar la humedad.            
+                </th> 
+            </table>
+            <div class="footDiv">
+    
+            </div>
+            <table class="">
+                <div class="bottom">
+                    <h5 class="txtfin">"Porque, en casa fumigada, no entran bichos"</h5>
+                    <h5 class="txtfin1">VALIDO UNICAMENTE POR 30 DIAS</h5>     
+                    <h5 class="txtfin2">LLAMANOS AL 636-694-65-15</h5>
+                    <h5 class="idCert">
+                        No. {{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}                 
+                    </h5>
+                    </div>
+                
+                </th> 
+            </table>
+    
+            
+    
+        </main>
+        </div>
+        
+    </body>
 
 
 <style>
@@ -337,9 +341,10 @@
     .cerapli{
         color:#eb590c;
         position:absolute;
-        margin-left:-25.5%;
-        margin-top:12.5%;
-        font-size: 16px;
+        margin-left:-35%;
+        margin-top:13.5%;
+        font-size: 22px;
+        -webkit-text-stroke: 3px black;
         
     }
     .cerapli11{
@@ -351,11 +356,11 @@
         
     }
     .cerapli1{
-        color:#eb590c;
+        color:black;
         position:absolute;
-        margin-left:-50%;
-        margin-top:18%;
-        font-size: 12px;
+        margin-left:-30%;
+        margin-top:16%;
+        font-size: 15px;
         
     }
     .mgntp{
@@ -365,8 +370,8 @@
     .meminfo{
         text-align: center;
         position: absolute;
-        margin-left: -25%;
-        margin-top:11%;
+        margin-left: -30%;
+        margin-top:12%;
         font-size: 12px;
     }
     .meminfo1{
@@ -378,21 +383,28 @@
     }
     .membre{
         margin-top:40px;
-        padding-left: 10%;
-        
-        width: 70%;
-        height:12%;
+        padding-left: 5%;
+        height:18%;
+        width: auto;
     }
     .txtfin1{
         padding-left:15px;
-        font-size: 16px;
-        margin-top:-20px;
+        margin-left:-45px;
+        font-size: 20px;
+        margin-top:-30px;
         color:red;
     }
     .txtfin{
-        padding-left:15px;
-        font-size: 16px;
+        padding-left:-10px;
+        font-size: 18px;
         margin-top:-20px;
+        margin-left: -40px;
+        color:#104e85;
+    }
+    .txtfin2{
+        margin-left:-50px;
+        font-size: 18px;
+        margin-top:-35px;
         color:#104e85;
     }
     .flexId{
@@ -402,8 +414,8 @@
     .idCert{
         position: absolute;
         font-size: 18px;
-        margin-left:35%;
-        margin-top:-25px;
+        margin-left:32%;
+        margin-top:-30px;
         height:25px;
         width: 150px;
         color: red;
@@ -525,8 +537,11 @@
     }
     
     body{
+        
+        margin-top: -20px;
         width: 47%;
-        height: 100%;
+        height: 103%;
+        font-family: Arial, Helvetica, sans-serif;
         
     }
     main{

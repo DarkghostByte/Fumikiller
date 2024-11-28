@@ -17,18 +17,19 @@
     
     <div class="meminfo">
         
-        <div >
-            <h2 class="letrasFlex" class="letrasFlex">REMISION</h2>
+        <div style="margin-top: -30%; margin-left:70%; padding-bottom:-20px;">
+            <h2 class="letrasFlex%;" >REMISION</h2>
         </div>
     </div>
     <header>    
         
     </header>
 
-    <main> 
+    <main style="margin-top: -60px;"> 
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clth1">RAZON SOCIAL:</th>
+            <th class="clthrs">RAZON SOCIAL:</th>
             <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->tradename }}
@@ -59,27 +60,28 @@
             </th> 
         </table>
         <table>
-            <th class="clth11">COLONIA:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
+            <th class="clthcelu"  >COLONIA:</th>
+            <th class="renDivTh" >
+            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
                 {{ $data->colonia }} #{{ $data->codigoPostal }}
             </div>
             </th> 
-            <th class="clth11">TELEFONO:</th>
-            <<th class="renDivTh">
+            <th class="clthcelu">TELEFONO:</th>
+            <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->number_fixed_number }}
             </div>
             </th> 
-            <th class="clth11">CELULAR:</th>
-            <<th class="renDivTh">
+            
+        </table>
+        <table>
+            <th class="clthcelu">CELULAR:</th>
+            <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->cell_phone }}
             </div>
             </th> 
-        </table>
-        <table>
-            <th class="clth1">TIPO DE LUGAR:</th>
+            <th class="clthtipo">TIPO DE LUGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->comercio }}
@@ -123,8 +125,8 @@
             <h5 class="tipo">ORIGINAL CLIENTE</h5>
         </div>
 
-        <div class="footDiv">
-        </div>
+        <div class="footDiv"></div>
+        <div class="footDiv1"></div>
         <table class="footer">
             <th class="footer">Calle del Abeto No.2201</th>
             <th> Col. Alamedas </th>
@@ -144,18 +146,18 @@
     
 </body>
 <body >
-<table class="tblDia" >
-    <h5 class="txtDia">DIA</h5>
-    <h5 class="txtDia1">{{ $data->RemisionDate }}</h5>
-</table>
-<img class="membre" src="{{ $base64 }}" alt="">
-    <div class="meminfo">
-        <div >
-            <h2 class="letrasFlex" class="letrasFlex">REMISION</h2>
+    <table class="tblDia" >
+        <h5 class="txtDia">DIA</h5>
+        <h5 class="txtDia1">{{ $data->RemisionDate }}</h5>
+    </table>
+    <img class="membre2" style="" src="{{ $base64 }}" alt="">
+        
+        <div class="meminfo">
             
+            <div style="margin-top: -30%; margin-left:70%; padding-bottom:-20px;">
+                <h2 class="letrasFlex%;" >REMISION</h2>
+            </div>
         </div>
-    
-    </div>
     
     
     <header>    
@@ -163,6 +165,7 @@
     </header>
 
     <main> 
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
         <div class="fondLimitador"></div>
         <table>
             <th class="clth1">RAZON SOCIAL:</th>
@@ -196,27 +199,28 @@
             </th> 
         </table>
         <table>
-            <th class="clth11">COLONIA:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
+            <th class="clthcelu"  >COLONIA:</th>
+            <th class="renDivTh" >
+            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
                 {{ $data->colonia }} #{{ $data->codigoPostal }}
             </div>
             </th> 
-            <th class="clth11">TELEFONO:</th>
-            <<th class="renDivTh">
+            <th class="clthcelu">TELEFONO:</th>
+            <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->number_fixed_number }}
             </div>
             </th> 
-            <th class="clth11">CELULAR:</th>
-            <<th class="renDivTh">
+            
+        </table>
+        <table>
+            <th class="clthcelu">CELULAR:</th>
+            <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->cell_phone }}
             </div>
             </th> 
-        </table>
-        <table>
-            <th class="clth1">TIPO DE LUGAR:</th>
+            <th class="clthtipo">TIPO DE LUGAR:</th>
             <th class="renDivTh">
             <div class="renDiv1">
                 {{ $data->comercio }}
@@ -260,8 +264,8 @@
             <h5 class="tipo">COPIA FUMI-KILLE'R</h5>
         </div>
 
-        <div class="footDiv">
-        </div>
+        <div class="footDiv"></div>
+        <div class="footDiv1"></div>
         <table class="footer">
             <th class="footer">Calle del Abeto No.2201</th>
             <th> Col. Alamedas </th>
@@ -290,7 +294,7 @@
         justify-content: center;
         width: 100px;
         position:absolute;
-        margin-top:-49px;
+        margin-top:-50px;
         margin-left:80%;
         border: 1px solid black;
     }
@@ -298,10 +302,10 @@
         left:80%;
     }.tblDia{
         position:absolute;
-        justify-content:end;
+        margin-left: 65px;
     }
     .separacion{
-        margin-top: 40px;
+        margin-top: 65px;
         border-top:2px solid black;
         padding-bottom:40px;
     }
@@ -319,7 +323,10 @@
         border:1px solid black;
     }
     .clth118{
-        width:63.7%;
+        width:65.7%;
+    }
+    .clthrs{
+        width:19.9%;
     }
     .btnrd{
         position:absolute;
@@ -339,6 +346,7 @@
         width: 21%;
     }
     .letrasflex{
+        margin-bottom: 40px;
         left: 20px;
     }
     .meminfo{
@@ -346,13 +354,20 @@
         position: absolute;
         margin-left: -42%;
         margin-top:11%;
+        padding-bottom:-50px; 
         
     }
     .membre{
-        margin-top:40px;
-        padding-left: 10%;
-        height:12%;
-        width: 80%;
+        margin-top:0px;
+        padding-left: 160px;
+        height:15%;
+        width: auto;
+    }  
+    .membre2{
+        margin-top:0px;
+        padding-left: 160px;
+        height:13.8%;
+        width: auto;
     }    
     .nmM{
         padding-left:50px;
@@ -383,9 +398,15 @@
     }.clth11{
         width: 50%;
     }
+    .clthcelu{
+        width: 5%;
+    }
+    .clthtipo{
+        width: 42.7%;
+    }
     body{
         width: 100%;
-        
+        font-family: Arial, Helvetica, sans-serif;
     }
     h1{
         text-alaing:center;
@@ -411,10 +432,13 @@
         
     }
     .footDiv{
-        margin:20px;
-        border-bottom:4px solid grey;
-        margin-top:15px;
-        
+        border-bottom:4px solid blue;
+        margin-top:45px;
+        width: 100%;
+    }.footDiv1{
+        border-bottom:2px solid orangered;
+        margin-top:5px;
+        width: 100%;
     }
     
     .fondLimitador{
@@ -471,6 +495,8 @@
 .pr{
     margin-top:20px;
 }
+
+
 
 </style>
 </html>

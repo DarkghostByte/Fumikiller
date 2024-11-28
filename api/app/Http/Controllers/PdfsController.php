@@ -46,20 +46,23 @@ class PdfsController extends Controller
     
 
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/membretadoFumioOrden.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
-        //dd($base64);
-        //$pdf_data = compact('data','clientes','base64');
+        /* Imagen */
+        $path1 = public_path('img/logofk.png');
+        $type1 = pathinfo($path1, PATHINFO_EXTENSION);
+        $data_img1 = file_get_contents($path1);
+        $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
         setlocale(LC_ALL, 'es_MX.UTF-8','esp');
         date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
         $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->certificateDate))));
         str_replace('S?BADO','SÁBADO',$fecha);
         $fecha = Carbon::parse($data->certificateDate);
         Carbon::setLocale('es');
-        $pdf_data = compact('base64','data','fecha');
-        $pdf = Pdf::loadView('reports.repoRemision',$pdf_data)->setPaper('a4');     
+        $pdf_data = compact('base64','base641','data','fecha');
+        $pdf = Pdf::loadView('reports.repoRemision',$pdf_data)->setPaper('letter');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
@@ -211,7 +214,7 @@ class PdfsController extends Controller
     }
     
         /* Imagen Del Logo */
-        $path = public_path('img/membretadoFumi.png');
+        $path = public_path('img/membretadoFumioOrden.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
@@ -229,7 +232,7 @@ class PdfsController extends Controller
         $fecha = Carbon::parse($data->date1);
         Carbon::setLocale('es');
         $pdf_data = compact('base64','base641','data','fecha');
-        $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('a4', 'landscape');     
+        $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('letter ', 'landscape');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         //$nombreArchivo = $data->name . '.pdf';
         //return $pdf->save($nombreArchivo);       

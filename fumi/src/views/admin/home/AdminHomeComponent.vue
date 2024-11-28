@@ -126,12 +126,12 @@
       </el-carousel-item>
     </el-carousel>
     <div class="flex justify-center">
-      <p class="px-4" style="margin-top:-2%;">VSF</p>
-      <p class="px-4" style="margin-top:-2%;">VCF</p>
-      <p class="px-4" style="margin-top:-2%; font-weight: bold;">VT</p>
-      <p class="px-4" style="margin-top:-2%;">CSF</p>
-      <p class="px-4" style="margin-top:-2%;">CCF</p>
-      <p class="px-4" style="margin-top:-2%; font-weight: bold;">CT</p>
+      <p class="px-4" style="margin-top:-1%;">VSF</p>
+      <p class="px-4" style="margin-top:-1%;">VCF</p>
+      <p class="px-4" style="margin-top:-1%; font-weight: bold;">VT</p>
+      <p class="px-4" style="margin-top:-1%;">CSF</p>
+      <p class="px-4" style="margin-top:-1%;">CCF</p>
+      <p class="px-4" style="margin-top:-1%; font-weight: bold;">CT</p>
     </div>
     
 
@@ -423,6 +423,7 @@ filterData8() {
 .el-carousel__item:nth-child(2n) {
   border-radius: 10px;
   background-color: white;
+  
 
   
 }
@@ -430,7 +431,7 @@ filterData8() {
 .el-carousel__item:nth-child(2n+1) {
   border-radius: 10px;
   background-color: rgb(255, 255, 255);
- 
+  
 
 }
 .el-carousel__button:nth-child(2n+1) {
@@ -439,6 +440,7 @@ filterData8() {
   position: relative; /* Necessary for absolute positioning of the text */
   height: 25px;
   margin-left: 7px;
+  margin-bottom: -25%;
   border-bottom: 3px solid #464646;
 }
 
