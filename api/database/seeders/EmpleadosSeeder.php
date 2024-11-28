@@ -15,6 +15,14 @@ class EmpleadosSeeder extends Seeder
     public function run(): void
     {
         DB::table('empleados')->insert([
+            'nameEmpleado'=>'No aplica',
+            'lastnameEmpleado1'=>'No aplica',
+            'lastnameEmpleado2'=>'No aplica',
+            'ariasEmpleado'=>'No aplica',
+            'infodelete_Empleados'=>'Alta',
+            'id_departamento'=>'1',
+        ]);
+        DB::table('empleados')->insert([
             'nameEmpleado'=>'Jesus Liadeo',
             'lastnameEmpleado1'=>'Chavez',
             'lastnameEmpleado2'=>'Chavez',
@@ -29,14 +37,6 @@ class EmpleadosSeeder extends Seeder
             'ariasEmpleado'=>'LPM',
             'infodelete_Empleados'=>'Alta',
             'id_departamento'=>'2',
-        ]);
-        DB::table('empleados')->insert([
-            'nameEmpleado'=>'No aplica',
-            'lastnameEmpleado1'=>'No aplica',
-            'lastnameEmpleado2'=>'No aplica',
-            'ariasEmpleado'=>'No aplica',
-            'infodelete_Empleados'=>'Alta',
-            'id_departamento'=>'1',
         ]);
     }
 }

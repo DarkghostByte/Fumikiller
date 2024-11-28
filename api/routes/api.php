@@ -21,6 +21,7 @@ use App\Http\Controllers\PdfsController;
 use App\Http\Controllers\RemisionesController;
 use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\PdfsGastosController;
+use App\Http\Controllers\ordenComprasController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,7 @@ Route::resource('ingresos', IngresosController::class);
 Route::resource('egresos', EgresosController::class);
 Route::resource('remisiones', RemisionesController::class);
 Route::resource('facturas', FacturasController::class);
+Route::resource('ordenCompra', ordenComprasController::class);
 
 //RUTAS PARA PDF
 Route::get('/remision/{id}',[PdfsController::class,'generarPDFRem']);
@@ -66,7 +68,7 @@ Route::get('/pdfCaja',[PdfsController::class,'generarPDFCaja']);
 Route::get('/pdfIngreso',[PdfsGastosController::class,'generarPDFIngreso']);
 Route::get('/pdfEgreso',[PdfsGastosController::class,'generarPDFEgreso']);
 Route::get('/pdfSaldo',[PdfsGastosController::class,'generarPDFSaldo']);
-Route::get('/ordenDeCompra',[PdfsController::class,'generarOrdendecompra']);
+Route::get('/ordenDeCompra/{id}',[PdfsController::class,'generarOrdendecompra']);
 
 
 //VER OPCIONES

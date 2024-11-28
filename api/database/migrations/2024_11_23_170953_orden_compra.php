@@ -11,7 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('ordenCompra', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('fechaOrdenCompra');
+            $table->string('paraOrdenCompra');
+            $table->string('conceptoOrdenCompra');
+            $table->string('detalleOrdenCompra');
+            $table->string('empleadoOrdenCompra');
+            $table->string('importeOrdenCompra');
+            $table->string('autorizoOrdenCompra');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -19,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('ordenCompra');
     }
 };

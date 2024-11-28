@@ -146,13 +146,22 @@ filterDataAddress() {
   });
     }, 
 
+    parseDate(fecha) {
+      var f1 = fecha.split("-")[2]
+      f1 += "-" + fecha.split("-")[1]
+      f1 += "-" + fecha.split("-")[0]
+      return new Date(f1)
+    },
     filterDate10() {
       if (this.selectedDate && this.selectedDate1) {
+        // Convert dates to Date objects and handle null values
         const startDate = this.selectedDate;
         const endDate = this.selectedDate1;
+        var f1 = this.parseDate(startDate)
+        var f2 = this.parseDate(endDate)
 
         // Ensure startDate is less than or equal to endDate
-        if (startDate > endDate) {
+        if (f1 > f2) {
           ElNotification({
             title: 'Error',
             message: 'La fecha de inicio debe ser anterior a la fecha final.',
@@ -161,9 +170,9 @@ filterDataAddress() {
           return;
         }
 
-        this.filteredData = this.tableData.filter(completarOrden => {
-          const ingresoDate = completarOrden.date1;
-          return ingresoDate && isNaN(ingresoDate) && ingresoDate >= startDate && ingresoDate <= endDate;
+        this.filteredData = this.tableData.filter(orden => {
+          const ordenDate = this.parseDate(orden.date1);
+          return ordenDate >= f1 && ordenDate <= f2;
         });
 
         // Show notification based on filtered data count

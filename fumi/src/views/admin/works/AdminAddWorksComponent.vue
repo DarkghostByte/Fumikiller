@@ -193,7 +193,7 @@ export default {
     form: {
       name: '',
       id_plague1: '',
-      id_plague2: '',
+      id_plague2: 1,
       date1: '',
       date2: '',
       time1: '',

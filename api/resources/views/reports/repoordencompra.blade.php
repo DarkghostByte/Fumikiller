@@ -8,13 +8,14 @@
 
     <div class=delimitador>
         
-
+@foreach ($ordenCompra as $ordenCompra)
 <body>
     <br>
 <img  class="membre" src="{{ $base64 }}" alt=""/>
 <table class="tblDia" >
     <td class="txtDia">FOLIO</td>
-    <td class="txtDia1">000000</td>
+    <td class="txtDia1">{{ str_pad($ordenCompra->id, 5, 0, STR_PAD_LEFT) }}</td>
+    
 </table>
         
 
@@ -30,6 +31,7 @@
             <th class="clthpara" style="width: 0; "></th>
             <th class="renDivTh" style="text-align: left;">Fecha:
             <div class="renDiv" style="text-transform: uppercase"> 
+                {{ $ordenCompra->fechaOrdenCompra }}
             </div>
             </th>  
         </table>
@@ -38,6 +40,7 @@
             <th class="clthpara" style="width: 0;"></th>
             <th class="renDivTh" style="text-align: left;">Para:
             <div class="renDiv" style="text-transform: uppercase">
+                {{ $ordenCompra->paraOrdenCompra }}
             </div>
             </th> 
             
@@ -53,6 +56,7 @@
         <th class="clthpara" style="width: 0;"></th>
             <th class="renDivThCon" >"Concepto" 
             <div class="" style="text-transform: uppercase;">
+                {{ $ordenCompra->conceptoOrdenCompra }}
             </div>
             </th>  
         </table>
@@ -67,6 +71,7 @@
             <th class="clthpara" style="width: 0;"></th>
             <th class="renDivThCon" >"Detalle" 
             <div class="" style="text-transform: uppercase;">
+                {{ $ordenCompra->detalleOrdenCompra }}
             </div>
             </th>  
         </table>
@@ -74,10 +79,11 @@
             <th class="clthpara" style="width: 0;"></th>
             <th class="renDivThCon" >Empleado: 
             <div class="" style="text-transform: uppercase;">
+                {{ $ordenCompra->empleadoOrdenCompra }}
             </div>
             </th>  
             <th class="importe">IMPORTE</th>
-            <h5 class="importe1"> $</h5>
+            <h5 class="importe1"> $ {{ $ordenCompra->importeOrdenCompra }}</h5>
         </table>
 
 
@@ -87,6 +93,7 @@
         </table>
         <table>
             <td style="text-align: center; font-size:16px;">Nombre del empleado que autoriza</td>
+            <td style="text-align: center; font-size:16px;">{{ $ordenCompra->autorizoOrdenCompra }}</td>
         </table>
         
         <div class="footDiv"></div>
@@ -114,6 +121,7 @@
     
     
 </body>
+@endforeach
 
 <style>
     .importe{

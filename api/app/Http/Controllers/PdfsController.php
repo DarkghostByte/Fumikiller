@@ -10,6 +10,7 @@ use App\Models\Certificado;
 use App\Models\Ingresos;
 use App\Models\Egresos;
 use App\Models\Remisiones;
+use App\Models\ordenCompra;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 
@@ -817,75 +818,18 @@ class PdfsController extends Controller
         return $pdf->download('invoice.pdf');
     }
 
-    public function generarOrdendecompra() {
-        /*
-        // Realizar la consulta sin filtrar por 'id_cliente'
-        $data = CompletarOrden::select([
-            'completarordenes.*',
-            'problematica1.problematica as plague1',
-            'problematica2.problematica as plague2',
-            'orden.date1',
-            'orden.date2',
-            'orden.id_cliente',
-            'clientes.name',
-            'clientes.lastname1',
-            'clientes.lastname2',
-            'clientes.tradename',
-            'clientes.home',
-            'clientes.numAddress',
-            'clientes.id_colonia',
-            'clientes.id_city',
-            'colonias.colonia',
-            'colonias.codigoPostal',
-            'ciudades.ciudad',
-            'productosInternos1.productoInt as productoInt1',
-            'productosInternos2.productoInt as productoInt2',
-            'productosExternos1.productoExt as productoExt1',
-            'productosExternos2.productoExt as productoExt2',
-            'empleados1.nameEmpleado as nameEmpleado1',
-            'empleados2.nameEmpleado as nameEmpleado2',
+    public function generarOrdendecompra($id) {
+        $ordenCompra = ordenCompra::select([
+            'ordenCompra.*',
         ])
-        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
-        ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
-        ->join('productosInternos as productosInternos2', 'completarordenes.id_productosInternos2', '=', 'productosInternos2.id')
-        ->join('productosExternos as productosExternos1', 'completarordenes.id_productosExternos', '=', 'productosExternos1.id')
-        ->join('productosExternos as productosExternos2', 'completarordenes.id_productosExternos2', '=', 'productosExternos2.id')
-        ->join('empleados as empleados1', 'completarordenes.id_empleado', '=', 'empleados1.id')
-        ->join('empleados as empleados2', 'completarordenes.id_empleado2', '=', 'empleados2.id')
-        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-        ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
-        ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
-        ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
-        ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->whereBetween('orden.date1', [$f1, $f2])
-        ->where('completarordenes.requiere3','Credito')
-        ->where('orden.infoorden_facturacion', 'Si')
-        ->orderBy('completarordenes.id', 'DESC')
+        ->where('ordenCompra.id', $id)
         ->get();
+        //dd($ordenCompra);
+    
         // Verificar si la colección está vacía
-        if ($data->isEmpty()) {
+        if ($ordenCompra->isEmpty()) {
             return abort(404, 'No se encontraron datos.');
         }
-    /*
-        //Funcion para las fechas
-        foreach ($data as &$item) {
-            
-
-            setlocale(LC_ALL, 'es_MX.UTF-8','esp');
-            date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
-
-            $fecha1=((strftime("%d-%B-%Y", strtotime($item->date1))));
-            $fecha1 = Carbon::parse($item->date1);
-
-            $fecha2=(strtoupper(strftime("-%d-%B-%Y", strtotime($item->date2))));
-            $fecha2 = Carbon::parse($item->date2);
-
-
-            Carbon::setLocale('es');
-        }
-            */
-
-        // Sumar todos los pagos
     
         // Generación del PDF
         /* Imagen Del Logo */
@@ -895,10 +839,8 @@ class PdfsController extends Controller
         $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
     
         // Preparar los datos para la vista del PDF
-        $pdf_data = compact('base64'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoordencompra', $pdf_data)->setPaper('a4');
-        //$pdf = Pdf::loadView('reports.repoCreditosConFactura', $pdf_data)->save('myfile.pdf');
-    
+        $pdf_data = compact('ordenCompra','base64'); // Incluimos $totalPago
+        $pdf = Pdf::loadView('reports.repoordencompra', $pdf_data)->setPaper('a4');    
         // Mostrar el PDF al usuario
         return $pdf->stream();
     }

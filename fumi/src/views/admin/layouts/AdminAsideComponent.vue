@@ -47,6 +47,11 @@
               <span class="material-symbols-outlined">payments</span>
               <p id="HTxt" class="">Gastos</p>
             </router-link>
+            <router-link to="/admin/ordenCompra" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
+              <span class="sr-only">Orden compra</span>
+              <span class="material-symbols-outlined">docs</span>
+              <p id="HTxt" class="">Orden compra</p>
+            </router-link>
             <router-link to="/admin/admin" class="inline-flex items-center justify-center py-3 hover:text-gray-200 hover:bg-blue-700 focus:text-gray-400 focus:bg-blue-900 rounded-3xl">
               <span class="sr-only">Administracion</span>
               <span class="material-symbols-outlined">shield_person</span>
