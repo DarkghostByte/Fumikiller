@@ -189,6 +189,19 @@
 
           <p>Cliente {{ form1.name + ' ' + form1.lastname1 + ' ' + form1.lastname2 }}</p>
 
+          <p class="ordenDatos1">Dosis</p>
+          <div class="flex" style="width:100%;">
+            <el-form-item prop="nDosis" label="Otra dosis" class="px-2">
+              <el-radio-group v-model="form1.nDosis">
+                <el-radio label="1ra Dosis" value="1ra Dosis" border />
+                <el-radio label="2da Dosis" value="2da Dosis" border />
+                <el-radio label="3ra Dosis" value="3ra Dosis" border />
+                <el-radio label="4ta Dosis" value="4ta Dosis" border />
+                <el-input v-model="form1.nDosis" class="" placeholder="Ingresa el numero de dosis" style="width:250px;"/>
+              </el-radio-group>
+            </el-form-item>
+          </div>
+
           <p>Problematica</p>
           <div class="flex" style="width:100%;">
             <el-form-item prop="id_plague1" label="Problematica #1:" class="px-2" style="width: 300px;">
@@ -353,7 +366,8 @@ export default {
       infoorden_certificate: 'No',
       infoorden_remision: 'No',
       infoorden_facturacion: 'No',
-      infoorden_cell: 'No'
+      infoorden_cell: 'No',
+      nDosis: ''
     },
 
     rules: {
@@ -417,6 +431,9 @@ export default {
       infoorden_facturacion: [
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
+      nDosis: [
+        { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
+      ],
     },
   }),
   mounted() {
@@ -469,6 +486,7 @@ export default {
             this.form1.infoorden_certificate = datos.infoorden_certificate || '';
             this.form1.infoorden_remision = datos.infoorden_remision || '';
             this.form1.infoorden_facturacion = datos.infoorden_facturacion || '';
+            this.form1.nDosis = datos.nDosis || '';
           }
 
 

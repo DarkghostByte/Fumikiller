@@ -6,13 +6,6 @@
   <div>
     <div class="flex flex-col space-y-6 md:space-y-0 md:flex-row justify-start">
       <div class="flex flex-wrap items-start justify-end ">
-        <router-link to="/admin/works"
-          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-bookmark" aria-hidden="true"
-            style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
-          Consultar Ordenes
-        </router-link>
         <router-link to="/admin/clients/agregarParticular-clients"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
           style="color:black">
@@ -27,16 +20,14 @@
     </div>
     <!-- Campo de búsqueda -->
     <div class="flex justify-between items-center mb-4" style="width: 100%;">
-      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
-        @input="filterDataName" />
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterData" />
       <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-        @input="filterDataLastname" />
+        @input="filterData" />
       <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-        @input="filterDataAddress" />
-        <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
-        @input="filterDataPhone" />
+        @input="filterData" />
+      <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone" @input="filterData" />
     </div>
-    
+
 
     <!-- TABLE DATA -->
     <div class="flex">
@@ -67,15 +58,14 @@
 
         <!-- Agrega las demás columnas aquí -->
 
-        <el-table-column prop="name" label="Nombres" sortable width="120" />
-        <el-table-column label="Apellidos" sortable width="140">
+        <el-table-column label="Nombre" sortable width="240">
           <template #default="scope">
-            {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
         <el-table-column label="Dirección" sortable width="500">
           <template #default="scope">
-            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
+            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + '#' + scope.row.numAddress }}
           </template>
         </el-table-column>
         <el-table-column prop="cell_phone" label="Numero Celular" sortable width="150" />
@@ -150,21 +140,11 @@
             </p>
           </div>
         </div>
-        <div class="details">
-          <i class="fa fa-file-contract fa-2x iconDelete"></i>
-          <div>
-            <p>
-              <strong>Tipo de contratación:</strong>
-              <span v-for="item in selectedItem.recruitment_data"  v-bind:key="item">{{ item}},&nbsp;</span>
-            </p>
-          </div>
-        </div>
       </div>
       <template #footer>
         <div class="dialog-footer">
           <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-          <el-button type="danger"
-            @click="handleEstadoClick()">
+          <el-button type="danger" @click="handleEstadoClick()">
             Confirmar
           </el-button>
         </div>
@@ -173,7 +153,7 @@
     <!-- END MODAL 1 -->
 
     <!-- MODAL 2 -->
-    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500" >
+    <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500">
       <div class="clientInfo">
         <div class="details">
           <i class="fa fa-user fa-2x iconInfo"></i>
@@ -193,7 +173,8 @@
           <!-- END MODAL 2 <h2 class="client-details__title">Información del Cliente</h2>-->
           <div>
             <p>
-              <strong>Domicilio:</strong> {{ selectedItem1.street }} {{ selectedItem1.home }} #{{ selectedItem1.numAddress
+              <strong>Domicilio:</strong> {{ selectedItem1.street }} {{ selectedItem1.home }} #{{
+                selectedItem1.numAddress
               }},
               {{
                 selectedItem1.colonia
@@ -203,7 +184,7 @@
               <strong>Tipo de lugar:</strong> {{ selectedItem1.comercio }}
             </p>
           </div>
-          
+
         </div>
         <div class="details">
           <i class="fa fa-phone fa-2x iconInfo"></i>
@@ -231,8 +212,8 @@
           <i class="fa fa-file-contract fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Tipo de contratación:</strong> 
-              <span v-for="item in selectedItem1.recruitment_data"  v-bind:key="item">{{ item}},&nbsp;</span>
+              <strong>Tipo de contratación:</strong>
+              <span v-for="item in selectedItem1.recruitment_data" v-bind:key="item">{{ item }},&nbsp;</span>
             </p>
           </div>
         </div>
@@ -240,8 +221,8 @@
           <i class="fa fa-address-card fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Tipo de contratación:</strong> 
-              <span v-for="item in selectedItem1.requires"  v-bind:key="item">{{ item}},&nbsp;</span>
+              <strong>Tipo de contratación:</strong>
+              <span v-for="item in selectedItem1.requires" v-bind:key="item">{{ item }},&nbsp;</span>
             </p>
           </div>
         </div>
@@ -281,8 +262,6 @@ export default {
   }),
   mounted() {
     this.refresh();
-
-
   },
   methods: {
     refresh() {
@@ -290,7 +269,7 @@ export default {
         this.tableData = res.data.data.filter(row => row.infoclient_delete !== 'Baja');
         this.filteredData = this.tableData;
       });
-    },  
+    },
     handleEdit() { },
     handleDelete() {
       axios.delete('clientes/' + this.selectedItem.id).then(res => {
@@ -301,18 +280,22 @@ export default {
     eliminar(row) {
       console.log(row);
       this.selectedItem = row;
-      this.selectedItem.recruitment_data = JSON.parse(this.selectedItem.recruitment_data)
-      this.selectedItem.requires = JSON.parse(this.selectedItem.requires)
       this.dialogVisible = true;
-      this.refresh();
     },
     seleccionar(row) {
       console.log(row);
       this.selectedItem1 = row;
-      this.selectedItem1.recruitment_data = JSON.parse(this.selectedItem1.recruitment_data)
-      this.selectedItem1.requires = JSON.parse(this.selectedItem1.requires)
+
+      try {
+        this.selectedItem1.recruitment_data = JSON.parse(this.selectedItem1.recruitment_data);
+        this.selectedItem1.requires = JSON.parse(this.selectedItem1.requires);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
+        // Handle the error, e.g., display an error message to the user
+        //this.$message.error("Error parsing data. Please check the data source.");
+      }
+
       this.dialogVisibleView = true;
-      this.refresh();
     },
     historia(row) {
       if (row && row.id) {
@@ -323,63 +306,65 @@ export default {
       }
     },
 
-    filterDataName() {
+    filterData() {
       this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
-      });
-    },
+        const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+        const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
 
-    filterDataLastname() {
-  this.filteredData = this.tableData.filter((clientes) => {
-    const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-    return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
+
+    if (this.searchQueryName) {
+      shouldInclude = shouldInclude && clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
+    }
+
+    if (this.searchQueryLastname) {
+      shouldInclude = shouldInclude && combinedLastname.includes(this.searchQueryLastname.toLowerCase());
+    }
+
+    if (this.searchQueryAddress) {
+      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    }
+
+    if (this.searchQueryPhone) {
+      shouldInclude = shouldInclude && clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+    }
+
+    return shouldInclude;
   });
 },
-
-    filterDataAddress() {
-      this.filteredData = this.tableData.filter((clientes) => {
-    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-  });
-    },
-
-    filterDataPhone() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
-      });
-    },
 
     handleEstadoClick() {
-  const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
-  axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
-    .then(response => {
-      console.log('El cliente se dio de baja:', response.data);
-      this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
-      this.dialogVisible = false;
-      ElNotification({
-        title: 'Actualizacion de datos',
-        message: `Se actualizaron los datos.`,
-        type: 'success'
-      });
-    })
-    .catch(error => {
-  console.error('Error al dar de baja al cliente:', error.response.data);
-});
-},
+      const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
+      axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
+        .then(response => {
+          console.log('El cliente se dio de baja:', response.data);
+          this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
+          this.dialogVisible = false;
+          ElNotification({
+            title: 'Actualizacion de datos',
+            message: `Se actualizaron los datos.`,
+            type: 'success'
+          });
+        })
+        .catch(error => {
+          console.error('Error al dar de baja al cliente:', error.response.data);
+        });
+    },
 
-async fetchData() {
-  try {
-    const response = await axios.get(this.urlApi + 'clientes');
-    // Verifica si la respuesta tiene un atributo 'data' que sea un array
-    if (response.data && Array.isArray(response.data)) {
-      this.tableData = response.data.filter(row => row.infoclient_delete !== 'Baja');
-    } else {
-      console.error('La respuesta de la API no tiene el formato esperado:', response.data);
-    }
-  } catch (error) {
-    console.error('Error al obtener los datos:', error);
-  }
-},
+    async fetchData() {
+      try {
+        const response = await axios.get(this.urlApi + 'clientes');
+        // Verifica si la respuesta tiene un atributo 'data' que sea un array
+        if (response.data && Array.isArray(response.data)) {
+          this.tableData = response.data.filter(row => row.infoclient_delete !== 'Baja');
+        } else {
+          console.error('La respuesta de la API no tiene el formato esperado:', response.data);
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos:', error);
+      }
+    },
   }
 };
 </script>
@@ -394,7 +379,7 @@ async fetchData() {
 .details {
   padding: 20px;
   display: flex;
-  align-items:center;
+  align-items: center;
 }
 
 p {

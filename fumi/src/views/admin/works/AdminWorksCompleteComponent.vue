@@ -6,42 +6,25 @@
           <div class="flex flex-wrap items-start justify-end ">
 
             <!--RUTAS ENTRES VISTAS-->
-
-            <router-link to="/admin/clients" class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-            style="color:black">
-              <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>                
-              Ver Clientes
-            </router-link>
-
             <router-link to="/admin/works" class="inline-flex px-5 py-3 text-white bg-emerald-400 hover:bg-emerald-700 focus:bg-emerald-800 rounded-md ml-6 mb-3"
             style="color:black">
               <i class="fa fa-bookmark" aria-hidden="true" style="margin-top: 5px;
               margin-left: -5px; margin-right:10px;"></i>                
               Ver Ordenes
-            </router-link>
-
-            <router-link to="/admin/worksComplete"
-          class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-clipboard-check" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>
-          Ver ordenes completas
-        </router-link>
-        
+            </router-link>        
             <!--FIN DE RUTAS ENTRES VISTAS-->
 
           </div>
         </div>
-        <div class="flex flex-col items-center">
-          <h1 class="text-3xl font-bold mb-4 py-2">Ordenes completas</h1>
+        <div class="flex flex-col items-start">
+          <h1 class="text-4xl font-bold mb-4 py-2">Ordenes de trabajo completas</h1>
         </div>
 
         <!-- TABLE DATA -->
         <div class="flex" style="justify-content: center;">
             <el-table
                 :data="tableData"
-                :default-sort="{ prop: 'name', order: 'descending' }"
+                :default-sort="{ prop: 'id_orden', order: 'descending' }"
                 style="width: 100%"
                 stripe>
 
@@ -61,22 +44,26 @@
             <!--FIN DEL BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
 
             <!--VISUALIZACION DE LA TABLA-->
+            <el-table-column label="O. Trabajo" sortable width="115px">
+              <template #default="scope">
+                {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
+              </template>
+            </el-table-column>
             <el-table-column label="Nombre" sortable width="200">
               <template #default="scope">
                 {{ scope.row.name+' '+scope.row.lastname1+' '+scope.row.lastname2 }}
               </template>
             </el-table-column>
-            <el-table-column label="Direccion" sortable width="240">
+            <el-table-column label="Direccion" sortable width="280">
               <template #default="scope">
                 {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
               </template>
             </el-table-column>
             <el-table-column prop="cell_phone" label="Celular" sortable width="100" />
-            <el-table-column prop="date1" label="F. Orden" sortable width="105" />
             <el-table-column prop="date2" label="F. Fumigacion" sortable width="135" />
             <el-table-column prop="pago" label="Monto"  sortable width="100" />
             <el-table-column prop="requiere3" label="Datos" sortable width="90" />
-            <el-table-column prop="ariasEmpleado1" label="Responsable" sortable width="125"  />
+            <el-table-column prop="ariasEmpleado1" label="Fumigador" sortable width="130"  />
             <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
             <!--BOTON PARA EDITAR LA ORDEN DE TRABAJO-->
@@ -93,93 +80,9 @@
               </template>
             </el-table-column>
             <!--FIN DEL BOTON PARA EDITAR LA ORDEN DE TRABAJO-->
-
-            <!--BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
-            <el-table-column label="">
-              <template #default="scope">
-                  <el-button style="color:black"
-                    size="small"
-                    type="danger"
-                    @click="bajaOrden(scope.row)">
-                      <span class="material-symbols-outlined">disabled_by_default</span>
-                  </el-button>
-              </template>
-            </el-table-column>
-            <!--FIN DEL BOTON PARA DAR DE BAJA LA ORDEN DE TRABAJO-->
             </el-table>
         </div>
         <!-- END TABLE DATA -->
-
-        <!-- INICIO DEL DIALOGO PARA ELIMINAR -->
-        <el-dialog
-        v-model="dialogVisible"
-        title="Deseas dar de baja la siguente orden de trabajo"
-        width="1200">
-          <div class="h-72 overflow-scroll" style="font-size:22px; color:black;">
-            Datos la orden de trabajo
-            <br>
-            Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
-            <br>
-            Direccion: {{ selectedItem.city }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.home }} #{{ selectedItem.numAddress }}
-            <br>
-            Dia de la orden: {{ selectedItem.date1 }}
-            <br>
-            Dia de de asistencia: {{ selectedItem.date2 }}
-            <br>
-            De: {{ selectedItem.time1 }}
-            <br>
-            A: {{ selectedItem.time2 }}
-            <br><br>
-          </div>
-          <template #footer>
-            <div class="dialog-footer">
-            <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-            <el-button type="danger" @click="confimarBaja()">
-                Confirmar
-            </el-button>
-            </div>
-          </template>
-        </el-dialog>
-        <!-- FIN DEL DIALOGO PARA ELIMINAR -->
-
-        <!-- MODAL 2 -->
-
-        <el-dialog
-        v-model="dialogVisibleView"
-        title="Datos acerca del cliente"
-        width="800"
-        height="500">
-
-        <div class="h-72 overflow-scroll" style="font-size: 20px;">
-
-          <p style="font-size: 22px;">Datos del cliente</p>
-          Cliente: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
-          <br>
-          Nombre comercial: {{ selectedItem.tradename }}
-          <br><br>
-
-          <p style="font-size: 22px;">Datos del domicilio</p>
-          Domicilio: {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
-          <br><br>
-
-          Monto: ${{ selectedItem.pago }} 
-          <br>
-          Se pago?: {{ selectedItem.requiere3 }}
-          <br><br>
-
-        </div>
-        
-        <template #footer>
-            <div class="dialog-footer">
-              <el-button type="info" @click="handleEdit()">
-                Modificar
-            </el-button>
-            <el-button type="danger" @click="dialogVisibleView = false">Cancelar</el-button>
-            </div>
-        </template>
-        </el-dialog>
-
-        <!-- END MODAL 2 -->
         
     </div>
   </template>
@@ -231,6 +134,16 @@
             },
             handleEdit(){
             },
+            formatDate(id_orden, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id_orden);
+
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
+
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
           }
       }
   </script>

@@ -98,6 +98,7 @@ class OrdensController extends Controller
             'infoorden_facturacion' => 'required|min:1',
             'infoorden_cell' => 'required|min:1',
             'statusOrder' => 'required|min:1',
+            'nDosis' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -121,6 +122,7 @@ class OrdensController extends Controller
             $data->infoorden_facturacion = $request->infoorden_facturacion;
             $data->infoorden_cell = $request->infoorden_cell;
             $data->statusOrder = $request->statusOrder;
+            $data->nDosis = $request->nDosis;
             $data->save();
 
             return response()->json([
@@ -170,6 +172,7 @@ class OrdensController extends Controller
             'infoorden_remision' => 'required|min:1',
             'infoorden_facturacion' => 'required|min:1',
             'infoorden_cell' => 'required|min:1',
+            'nDosis' => 'required|min:1',
         ]);
         if (!$orden) {
             return response()->json([

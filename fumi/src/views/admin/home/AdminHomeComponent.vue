@@ -138,24 +138,32 @@
     <!-- END FILE -->
   </div>
 
+  <div class="flex justify-center items-center mt-4">
+    <el-button @click="dialogVisibleFilter = true" class="ml-2 el-button el-button--primary">
+      <i class="fa fa-magnifying-glass" aria-hidden="true" style="margin-top: 5px; margin-left: -5px; margin-right:10px;"></i>
+      Filtros
+    </el-button>
+  </div>
+  
+
   <div class="flex justify-center items-center mt-2">
-    <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData1"
+    <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData"
       style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData2"
+    <el-input class="px-2" placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData"
       style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQuery3" @input="filterData3"
+    <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQuery3" @input="filterData"
       style="width: 25%;" />
   </div>
   <div class="flex justify-center items-center mt-2">
     <el-input class="px-2" placeholder="Buscar si es que tiene facturacion" v-model="searchQuery4"
-      @input="filterData4" style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por facturacion" v-model="searchQuery5" @input="filterData5"
+      @input="filterData" style="width: 25%;" />
+    <el-input class="px-2" placeholder="Buscar por facturacion" v-model="searchQuery5" @input="filterData"
       style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por numero de folio" v-model="searchQuery6" @input="filterData6"
+    <el-input class="px-2" placeholder="Buscar por numero de folio" v-model="searchQuery6" @input="filterData"
       style="width: 25%;" />
     <el-input class="px-2" placeholder="Buscar por estado (Pagado o Credito)" v-model="searchQuery7"
-      @input="filterData7" style="width: 25%;" />
-    <el-date-picker class="px-2" v-model="selectedDate" @change="filterData8" type="date" format="YYYY-MM-DD"
+      @input="filterData" style="width: 25%;" />
+    <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="YYYY-MM-DD"
       value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
   </div>
 
@@ -185,7 +193,7 @@
 
       <el-table-column prop="infoorden_facturacion" label="Facturacion" width="125" sortable />
       <el-table-column prop="id" label="No. Factura" width="125" sortable />
-      <el-table-column prop="pago" label="Costo" sortable />
+      <el-table-column prop="pago" label="Monto" sortable />
       <el-table-column prop="requiere3" label="Estado">
         <template #default="{ row }">
           <span v-if="row.requiere3 === 'Credito'">{{ row.requiere3 }}</span>
@@ -194,8 +202,63 @@
       </el-table-column>
       <el-table-column prop="date1" label="Fecha de factura"></el-table-column>
     </el-table>
+    <!-- MODAL 1 -->
+    <el-dialog v-model="dialogVisibleFilter" title="Filtros" width="30%">
+      <el-form label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules" :label-position="'top'">
+        <el-collapse v-model="activeNames">
+          <el-collapse-item title="General Information">
+            <div class="row">
+              <div class="col-md-6">
+                <el-input placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData" />
+              </div>
+              <div class="col-md-6">
+                <el-input placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData" />
+              </div>
+              <div class="col-md-12">
+                <el-input placeholder="Buscar por dirección" v-model="searchQuery3" @input="filterData" />
+              </div>
+            </div>
+          </el-collapse-item>
+          <el-collapse-item title="Financial Information">
+            <div class="row">
+              <div class="col-md-6">
+                <el-input placeholder="Buscar si es que tiene facturación" v-model="searchQuery4" @input="filterData" />
+              </div>
+              <div class="col-md-6">
+                <el-input placeholder="Buscar por facturación" v-model="searchQuery5" @input="filterData" />
+              </div>
+              <div class="col-md-6">
+                <el-input placeholder="Buscar monto" v-model="searchQuery6" @input="filterData" />
+              </div>
+              <div class="col-md-6">
+                <el-select placeholder="Buscar por estado" v-model="searchQuery7" @change="filterData">
+                  <el-option label="Pagado" value="Pagado" />
+                  <el-option label="Crédito" value="Crédito" />
+                </el-select>
+              </div>
+            </div>
+          </el-collapse-item>
+          <el-collapse-item title="Fechas">
+            <div class="row">
+              <div class="col-md-12">
+                <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY" value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 100%;" />
+              </div>
+            </div>
+          </el-collapse-item>
+        </el-collapse>
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button type="primary" @click="dialogVisibleFilter = false">Buscar</el-button>
+          <el-button @click="resetFilters">Limpiar</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  <!-- END MODAL 1 -->
   </div>
+  
   <!-- END TABLE DATA -->
+   
 
 </template>
 
@@ -228,6 +291,8 @@ export default {
     searchQuery8: '',
     filteredData1: [],
     selectedDate: null,
+    dialogVisibleFilter: false,
+
   }),
   mounted() {
     this.fetchData();
@@ -321,79 +386,70 @@ export default {
       }
     },
 
-    filterData1() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        const combinedName = completarOrden.name.toLowerCase() + ' ' + completarOrden.lastname1.toLowerCase() + ' ' + completarOrden.lastname2.toLowerCase();
-        return combinedName.includes(this.searchQuery1.toLowerCase());
-      });
-    },
+    filterData() {
+  this.filteredData1 = this.tableData.filter((completarOrden) => {
+    const combinedName = completarOrden.name.toLowerCase() + ' ' + completarOrden.lastname1.toLowerCase() + ' ' + completarOrden.lastname2.toLowerCase();
+    const tradeName = completarOrden.tradename.toLowerCase();
+    const combinedAddress = completarOrden.ciudad.toLowerCase() + ' ' + completarOrden.colonia.toLowerCase() + ' ' + completarOrden.home.toLowerCase() + ' ' + completarOrden.codigoPostal.toLowerCase() + ' ' + completarOrden.numAddress.toLowerCase();
+    const idString = completarOrden.id.toString();
 
-    filterData2() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        return completarOrden.tradename.toLowerCase().includes(this.searchQuery2.toLowerCase());
-      });
-    },
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
 
-    filterData3() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        const combinedAddress = completarOrden.ciudad.toLowerCase() + ' ' + completarOrden.colonia.toLowerCase() + ' ' + completarOrden.home.toLowerCase() + ' ' + completarOrden.codigoPostal.toLowerCase() + ' ' + completarOrden.numAddress.toLowerCase();
-        return combinedAddress.includes(this.searchQuery3.toLowerCase());
-      });
-    },
+    if (this.searchQuery1) {
+      shouldInclude = shouldInclude && combinedName.includes(this.searchQuery1.toLowerCase());
+    }
 
-    filterData4() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        return completarOrden.infoorden_facturacion.toLowerCase().includes(this.searchQuery4.toLowerCase());
-      });
-    },
+    if (this.searchQuery2) {
+      shouldInclude = shouldInclude && tradeName.includes(this.searchQuery2.toLowerCase());
+    }
 
-    filterData5() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        const idString = completarOrden.id.toString();
-        return idString.toLowerCase().includes(this.searchQuery5.toLowerCase());
-      });
-    },
+    if (this.searchQuery3) {
+      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQuery3.toLowerCase());
+    }
 
-    filterData6() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        return completarOrden.pago.toLowerCase().includes(this.searchQuery6.toLowerCase());
-      });
-    },
+    if (this.searchQuery4) {
+      shouldInclude = shouldInclude && completarOrden.infoorden_facturacion.toLowerCase().includes(this.searchQuery4.toLowerCase());
+    }
 
-    filterData7() {
-      this.filteredData1 = this.tableData.filter((completarOrden) => {
-        return completarOrden.requiere3.toLowerCase().includes(this.searchQuery7.toLowerCase());
-      });
-    },
+    if (this.searchQuery5) {
+      shouldInclude = shouldInclude && idString.toLowerCase().includes(this.searchQuery5.toLowerCase());
+    }
 
-filterData8() {
-      if (this.selectedDate) {
-        // Filtra por la fecha seleccionada
-        this.filteredData1 = this.tableData.filter(completarOrden => completarOrden.date1 === this.selectedDate);
-        if (this.filteredData1.length === 0) {
-          ElNotification({
-            title: 'Aviso',
-            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
-            type: 'warning'
-          });
-        } else {
-          ElNotification({
-            title: 'Datos encontrados',
-            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
-            type: 'success',
-          });
-        }
-      } else {
-        // Si no se selecciona ninguna fecha, muestra todos los datos
-        this.filteredData1 = this.tableData;
-        ElNotification({
-          title: 'Mostrando todos los datos',
-          message: 'Se estan mostrando todos los datos de la agenda.',
-          type: 'info',
-        });
-      }
-    },
+    if (this.searchQuery6) {
+      shouldInclude = shouldInclude && completarOrden.pago.toLowerCase().includes(this.searchQuery6.toLowerCase());
+    }
 
+    if (this.searchQuery7) {
+      shouldInclude = shouldInclude && completarOrden.requiere3.toLowerCase().includes(this.searchQuery7.toLowerCase());
+    }
+    // Similar checks for other search queries...
+
+    if (this.selectedDate) {
+      shouldInclude = shouldInclude && completarOrden.date1 === this.selectedDate;
+    }
+
+    return shouldInclude;
+  });
+},
+
+resetFilters() {
+      // Limpiar campos de búsqueda
+      this.searchQuery1 = '';
+      this.searchQuery2 = '';
+      this.searchQuery3 = '';
+      this.searchQuery4 = '';
+      this.searchQuery5 = '';
+      this.searchQuery6 = '';
+      this.searchQuery7 = '';
+      // ... limpiar otros campos de búsqueda ...
+
+      // Restablecer valores predeterminados
+      this.selectedDate = null;
+
+      // Actualizar la lista filtrada
+      this.filteredData1 = this.tableData;
+    },
   }
 }
 </script>

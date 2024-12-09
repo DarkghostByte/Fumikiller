@@ -32,84 +32,83 @@
           :label-position="'top'">
   
           <!--  FILA DATOS DEL CLIENTE -->
-          <p class="px-5">Datos del cliente:</p>
-          <div class="flex">
-            <el-form-item prop="name" label="Nombres:" class="px-5" style="width: 240px;">
-              <el-input v-model="form.name" class="px-1" placeholder="Ingresa sus nombres" />
-            </el-form-item>
-            <el-form-item prop="lastname1" label="Apellidos Paterno:" class="px-5">
-              <el-input v-model="form.lastname1" class="px-1" placeholder="Ingresa su apellido paterno" />
-            </el-form-item>
-            <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-5">
-              <el-input v-model="form.lastname2" class="px-1" placeholder="Ingresa su apellido materno" />
-            </el-form-item>
-            <el-form-item prop="tradename" label="Nombre Comercial:" class="px-5">
-              <el-input v-model="form.tradename" class="" placeholder="Ingresa el nombre del comercio" />
-            </el-form-item>
-            <el-form-item prop="correo" label="Correo:" class="px-5">
-              <el-input v-model="form.correo" class="" placeholder="Ingresa el correo" />
-            </el-form-item>
-          </div>
-  
-          <!-- Segunda Fila -->
-          <p class="px-5">Domicilio:</p>
-          <div class="flex">
-            <el-form-item prop="id_vias" label="Tipo de via:" class="px-5" style="width: 350px;">
-              <el-select v-model="form.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad">
-                <el-option v-for="via in vias" :key="via.id" :label="via.tipoVia" :value="via.id" />
-              </el-select>
-            </el-form-item>
-  
-            <el-form-item prop="home" label="Domicilio:" class="px-5" style="width: 300px;">
-              <el-input v-model="form.home" class="px-1" placeholder="Ingresa el domicilio" />
-            </el-form-item>
-  
-            <el-form-item prop="numAddress" label="Numero de domicilio:" class=" px-5" style="width: 300px;">
-              <el-input v-model="form.numAddress" class="px-1" placeholder="Ingresa el numero de domicilio"
-                type="number" />
-            </el-form-item>
-  
-          </div>
-  
-          <!-- Tercera Fila -->
-          <div class="flex">
-            <el-form-item prop="id_city" label="Ciudad:" class="px-5" style="width: 350px;">
-              <el-select v-model="form.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity">
-                <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
-              </el-select>
-            </el-form-item>
-  
-            <el-form-item prop="id_colonia" label="Colonia:" class="px-5">
-              <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia" class=" px-1"
-                style="width: 260px;" @change="selectColonia">
-                <el-option v-for="colonia in colonias" :key="'colonia' + colonia.id"
-                  :label="colonia.colonia + ' #' + colonia.codigoPostal" :value="colonia.id">
-                  {{ colonia.colonia }} #{{ colonia.codigoPostal }}
-                </el-option>
-              </el-select>
-            </el-form-item>
-            <!--comercio-->
-  
-            <el-form-item prop="comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
-              <el-input v-model="form.comercio" class="px-1" placeholder="Ingresa el comercio" />
-            </el-form-item>
-          </div>
-  
-          <!-- Datos del domicilio Fila -->
-          <div>
-            <p class="px-5">Datos del domicilio:</p>
-            <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-5">
-              <el-input v-model="form.how_to_get" type="textarea" maxlength="100" show-word-limit
-                placeholder="Agrega como llegar al domicilio" />
-            </el-form-item>
-            <el-form-item prop="description" label="Descripcion:" class="pt-2 px-5">
-              <el-input v-model="form.description" type="textarea" maxlength="100" show-word-limit
-                placeholder="Agrega una descripcion" />
-            </el-form-item>
-          </div>
+        <p class="px-5 datosCliente2">Datos del cliente:</p>
+        <div class="flex">
+          <el-form-item prop="name" label="Nombres:" class="px-5" style="width: 240px;">
+            <el-input v-model="form.name" class="px-1" placeholder="Ingresa sus nombres" />
+          </el-form-item>
+          <el-form-item prop="lastname1" label="Apellidos Paterno:" class="px-5">
+            <el-input v-model="form.lastname1" class="px-1" placeholder="Ingresa su apellido paterno" />
+          </el-form-item>
+          <el-form-item prop="lastname2" label="Apellidos Materno:" class="px-5">
+            <el-input v-model="form.lastname2" class="px-1" placeholder="Ingresa su apellido materno" />
+          </el-form-item>
+          <el-form-item prop="correo" label="Correo:" class="px-5">
+            <el-input v-model="form.correo" class="" placeholder="Ingresa el correo" />
+          </el-form-item>
+        </div>
+
+        <!--  FILA DATOS DEL negocio -->
+        <p class="px-5 datosCliente2">Datos del negocio:</p>
+        <div class="flex">
+          <el-form-item prop="tradename" label="Nombre Comercial:" class="px-5">
+            <el-input v-model="form.tradename" class="" placeholder="Ingresa el nombre del comercio" />
+          </el-form-item>
+          <el-form-item prop="comercio" label="Tipo de comercio:" class="px-5" style="width: 300px;">
+            <el-input v-model="form.comercio" class="px-1" placeholder="Ingresa el comercio" />
+          </el-form-item>
+        </div>
+
+        <!-- Segunda Fila -->
+        <p class="px-5 datosCliente2">Domicilio:</p>
+        <div class="flex">
+          <el-form-item prop="id_vias" label="Tipo de via:" class="px-5">
+            <el-select v-model="form.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad" style="width: 150px;">
+              <el-option v-for="via in vias" :key="via.id" :label="via.tipoVia" :value="via.id" />
+            </el-select>
+          </el-form-item>
+
+          <el-form-item prop="home" label="Domicilio:" class="px-2" style="width: 300px;">
+            <el-input v-model="form.home" placeholder="Ingresa el domicilio" />
+          </el-form-item>
+
+          <el-form-item prop="numAddress" label="Numero de domicilio:" class=" px-2" >
+            <el-input v-model="form.numAddress" placeholder="N. de domicilio"
+              type="number" style="width: auto;"/>
+          </el-form-item>
+
+          <el-form-item prop="id_city" label="Ciudad:" class="px-2">
+            <el-select v-model="form.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity" style="width: 200px;">
+              <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
+            </el-select>
+          </el-form-item>
+
+          <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
+            <el-select v-model="form.id_colonia" placeholder="Selecciona la colonia"
+              style="width: 260px;" @change="selectColonia">
+              <el-option v-for="colonia in colonias" :key="'colonia' + colonia.id"
+                :label="colonia.colonia + ' #' + colonia.codigoPostal" :value="colonia.id">
+                {{ colonia.colonia }} #{{ colonia.codigoPostal }}
+              </el-option>
+            </el-select>
+          </el-form-item>
+        </div>
+
+        <!-- Datos del domicilio Fila -->
+        <p class="px-5 datosCliente">Datos del domicilio:</p>
+        <div class="flex" style="">
+          <el-form-item prop="how_to_get" label="Como llegar:" class="pt-2 px-5">
+            <el-input v-model="form.how_to_get" type="textarea" maxlength="100" show-word-limit
+              placeholder="Agrega como llegar al domicilio" style="width: 550px;"/>
+          </el-form-item>
+          <el-form-item prop="description" label="Descripcion:" class="pt-2 px-5">
+            <el-input v-model="form.description" type="textarea" maxlength="100" show-word-limit
+              placeholder="Agrega una descripcion" style="width: 550px;"/>
+          </el-form-item>
+        </div>
   
           <!-- Sexta Fila -->
-          <p class="px-5">Contacto:</p>
+          <p class="px-5" datosCliente2>Contacto:</p>
           <div class="flex">
             <el-form-item prop="cell_phone" label="Numero de celular:" class="px-5">
               <el-input v-model="form.cell_phone" placeholder="Celular" style="width: 220px;" />
@@ -130,7 +129,7 @@
           </div>
   
           <!-- Septima Fila -->
-          <p class="px-5">Contratacion:</p>
+          <p class="px-5 datosCliente2">Contratacion:</p>
           <div class="flex">
             <el-form-item prop="recruitment_data" label="Tipo de contratacion:" class="px-5">
               <el-checkbox-group v-model="form.recruitment_data">
@@ -143,7 +142,7 @@
             </el-form-item>
           </div>
   
-          <p class="px-5">Requiere de:</p>
+          <p class="px-5 datosCliente2">Requiere de:</p>
           <div class="flex">
             <el-form-item prop="requires" label="" class="px-5">
               <el-checkbox-group v-model="form.requires" label="Requiere de">
@@ -393,3 +392,10 @@ export default {
   }
 }
 </script>
+
+<style>
+.datosCliente2{
+  font-size: 20px;
+  font-weight: bold;  
+}
+</style>

@@ -66,7 +66,7 @@ class CompletarOrdenesController extends Controller
         $query->where('orden.id_cliente', $id_cliente);
     }
 
-    $data = $query->orderBy('completarordenes.id', 'DESC')->get();
+    $data = $query->orderBy('completarordenes.id_orden', 'DESC')->get();
 
     return response()->json([
         'status' => 'success',

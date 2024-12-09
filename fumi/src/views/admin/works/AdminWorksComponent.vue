@@ -8,21 +8,6 @@
       <div class="flex flex-wrap items-start justify-end ">
 
         <!--RUTAS ENTRES VISTAS-->
-        <router-link to="/admin/clients"
-          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-user" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>
-          Ver Clientes
-        </router-link>
-
-        <router-link to="/admin/works"
-          class="inline-flex px-5 py-3 text-white bg-emerald-400 hover:bg-emerald-700 focus:bg-emerald-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-bookmark" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>
-          Ver Ordenes
-        </router-link>
 
         <router-link to="/admin/worksComplete"
           class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-700 focus:bg-green-800 rounded-md ml-6 mb-3"
@@ -36,15 +21,15 @@
       </div>
     </div>
     <div class="">
-      <h1 class="py-5 px-5 text-4xl font-semibold mb-2">Ordenes de trabajo</h1>
+      <h1 class="py-5 px-5 text-4xl font-bold mb-2">Ordenes de trabajo</h1>
     </div>
     <div class="flex justify-between items-center mb-4" style="width: 100%;">
-      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterData" />
       <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-        @input="filterDataAddress" />
+        @input="filterData" />
       <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
         value-format="DD-MM-YYYY" placeholder="Seleccionar fecha de orden" style="width: 100%" />
-      <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
+      <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData" type="date" format="DD-MM-YYYY"
         value-format="DD-MM-YYYY" placeholder="Seleccionar fecha de fumigacion" style="width: 100%" />
     </div>
 
@@ -53,7 +38,7 @@
       <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
 
         <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
-        <el-table-column label="">
+        <el-table-column>
           <template #default="scope">
             <el-button style="color:black" size="small" type="success" @click="pdf(scope.row)">
               <a :href="url + 'api/ordenTrabajo/' + scope.row.id" target="_blank">
@@ -66,7 +51,7 @@
 
         <!--BOTON PARA TERMINAR LA ORDEN DE TRABAJO-->
 
-        <el-table-column label="">
+        <el-table-column>
           <template #default="scope">
             <el-button style="color:black" size="small" type="warning" @click="completarOrden(scope.row)"><span
                 class="material-symbols-outlined">priority</span></el-button>
@@ -76,19 +61,24 @@
 
 
         <!--VISUALIZACION DE LA TABLA-->
-        <el-table-column label="Nombre" sortable width="250px">
+        <el-table-column label="O. Trabajo" sortable width="115px">
+          <template #default="scope">
+            {{ 'No. ' + this.formatDate(scope.row.id) }}
+          </template>
+        </el-table-column>
+        <el-table-column label="Nombre" sortable width="220px">
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Direccion" sortable width="350px">
+        <el-table-column label="Direccion" sortable width="280px">
           <template #default="scope">
             {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
               ', ' + scope.row.ciudad }}
           </template>
         </el-table-column>
-        <el-table-column prop="date1" label="Fecha de orden" sortable width="150px" />
-        <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="180px" />
+        <el-table-column prop="date1" label="F. Orden" sortable width="110px" />
+        <el-table-column prop="date2" label="F. Fumigacion" sortable width="135px" />
         <el-table-column prop="time1" label="De" sortable width="90px" />
         <el-table-column prop="time2" label="A" sortable width="90px" />
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
@@ -105,65 +95,6 @@
       </el-table>
     </div>
     <!-- END TABLE DATA -->
-
-    <!-- INICIO DEL DIALOGO PARA ELIMINAR -->
-    <el-dialog v-model="dialogVisible" title="Deseas desactivar la siguiente orden?" width="600" height="500">
-      <div class="clientInfo">
-        <div class="details">
-          <i class="fa fa-user fa-2x iconDeleteOrden"></i>
-          <div>
-            <p>
-              <strong>Nombre completo:</strong> {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{
-                selectedItem.lastname2 }}
-            </p>
-            <p>
-              <strong>Nombre comercial:</strong> {{ selectedItem.tradename }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-city fa-2x iconDeleteOrden"></i>
-          <div>
-            <p>
-              <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
-              }},
-              {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.ciudad }}
-            </p>
-            <p>
-              <strong>Tipo de lugar:</strong> {{ selectedItem.comercio }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-phone fa-2x iconDeleteOrden"></i>
-          <div>
-            <p>
-              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-calendar-days fa-2x iconDeleteOrden"></i>
-          <div>
-            <p>
-              <strong>Fecha de orden:</strong> {{ selectedItem.date1 }}
-            </p>
-            <p>
-              <strong>Fecha de fumigacion:</strong> {{ selectedItem.date2 }}
-            </p>
-          </div>
-        </div>
-      </div>
-      <template #footer>
-        <div class="dialog-footer">
-          <el-button type="info" @click="dialogVisible = false">Cancelar</el-button>
-          <el-button type="danger" @click="handleEstadoClick()">
-            Confirmar
-          </el-button>
-        </div>
-      </template>
-    </el-dialog>
-    <!-- FIN DEL DIALOGO PARA ELIMINAR -->
 
   </div>
 </template>
@@ -232,75 +163,45 @@ export default {
         });
     },
 
-    filterDataName() {
-      this.filteredData = this.tableData.filter((orden) => {
-        const combinedName = orden.name.toLowerCase() + ' ' + orden.lastname1.toLowerCase() + ' ' + orden.lastname2.toLowerCase();
-        return combinedName.includes(this.searchQueryName.toLowerCase());
-      });
-    },
+    formatDate(id, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id);
 
-    filterDataAddress() {
-      this.filteredData = this.tableData.filter((orden) => {
-        const combinedAddress = orden.ciudad.toLowerCase() + ' ' + orden.colonia.toLowerCase() + ' ' + orden.home.toLowerCase() + ' ' + orden.codigoPostal.toLowerCase() + ' ' + orden.numAddress.toLowerCase();
-        return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-      });
-    },
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
 
-    filterData() {
-      if (this.selectedDate) {
-        // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(orden => orden.date1 === this.selectedDate);
-        if (this.filteredData.length === 0) {
-          ElNotification({
-            title: 'Aviso',
-            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
-            type: 'warning'
-          });
-        } else {
-          ElNotification({
-            title: 'Datos encontrados',
-            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate}).`,
-            type: 'success',
-          });
-        }
-      } else {
-        // Si no se selecciona ninguna fecha, muestra todos los datos
-        this.filteredData = this.tableData;
-        ElNotification({
-          title: 'Mostrando todos los datos',
-          message: 'Se estan mostrando todos los datos de la agenda.',
-          type: 'info',
-        });
-      }
-    },
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
 
-    filterData2() {
-      if (this.selectedDate2) {
-        // Filtra por la fecha seleccionada
-        this.filteredData = this.tableData.filter(orden => orden.date2 === this.selectedDate2);
-        if (this.filteredData.length === 0) {
-          ElNotification({
-            title: 'Aviso',
-            message: `No se encontraron datos para la fecha seleccionada (${this.selectedDate2}).`,
-            type: 'warning'
-          });
-        } else {
-          ElNotification({
-            title: 'Datos encontrados',
-            message: `Se encontraron datos para la fecha seleccionada (${this.selectedDate2}).`,
-            type: 'success',
-          });
-        }
-      } else {
-        // Si no se selecciona ninguna fecha, muestra todos los datos
-        this.filteredData = this.tableData;
-        ElNotification({
-          title: 'Mostrando todos los datos',
-          message: 'Se estan mostrando todos los datos de la agenda.',
-          type: 'info',
-        });
-      }
-    },
+
+filterData() {
+  this.filteredData = this.tableData.filter((orden) => {
+    const combinedName = orden.name.toLowerCase() + ' ' + orden.lastname1.toLowerCase() + ' ' + orden.lastname2.toLowerCase();
+    const combinedAddress = orden.ciudad.toLowerCase() + ' ' + orden.colonia.toLowerCase() + ' ' + orden.home.toLowerCase() + ' ' + orden.codigoPostal.toLowerCase() + ' ' + orden.numAddress.toLowerCase();
+    
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
+
+    if (this.searchQueryName) {
+      shouldInclude = shouldInclude && combinedName.includes(this.searchQueryName.toLowerCase());
+    }
+
+    if (this.searchQueryAddress) {
+      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    }
+
+    if (this.selectedDate) {
+      shouldInclude = shouldInclude && orden.date1 === this.selectedDate;
+    }
+
+    if (this.selectedDate2) {
+      shouldInclude = shouldInclude && orden.date2 === this.selectedDate2;
+    }
+
+    return shouldInclude;
+  });
+},
   }
 }
 </script>

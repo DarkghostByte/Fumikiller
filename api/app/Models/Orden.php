@@ -25,6 +25,7 @@ class Orden extends Model
         'infoorden_facturacion',
         'infoorden_cell',
         'statusOrder',
+        'nDosis',
     ];
 
     public function cliente()

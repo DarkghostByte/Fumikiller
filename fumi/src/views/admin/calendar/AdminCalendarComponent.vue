@@ -1,12 +1,5 @@
 <template>
   <div>
-    <router-link to="/admin/calendar"
-      class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-      style="color:black">
-      <i class="fa-solid fa-calendar-day" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>
-      Agenda por día
-    </router-link>
 
     <router-link to="/admin/calendar/complete"
       class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
@@ -23,15 +16,15 @@
 
 
     <div class="flex justify-center items-center mb-4">
+      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterData" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+        @input="filterData" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+        @input="filterData" style="width: 100%;"/>
       <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate" type="date" format="DD-MM-YYYY"
       value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
     <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate" type="date" format="DD-MM-YYYY"
       value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
-      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" style="width: 100%;"/>
-      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-        @input="filterDataAddress" style="width: 100%;"/>
-      <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
-        @input="filterDataPhone" style="width: 100%;"/>
     </div>
 
     <div class="table-container">
@@ -39,7 +32,7 @@
         <el-table-column label="PDF Orden" width="100px">
           <template #default="scope">
             <el-button style="color:black" type="success" @click="pdf(scope.row)">
-              <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
+              <a :href="url + 'api/ordenTrabajo/' + scope.row.id" target="_blank">
                 <span class="material-symbols-outlined">lab_profile</span>
               </a>
             </el-button>
@@ -104,25 +97,36 @@ searchQueryPhone:'',
         this.filteredData = this.tableData;
       })
     },
-    
-    filterDataName() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedName.includes(this.searchQueryName.toLowerCase());
-      });
-    },
-filterDataAddress() {
-      this.filteredData = this.tableData.filter((clientes) => {
-    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-  });
-    }, 
 
-    filterDataPhone() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
-      });
+    pdf(row) {
+      console.log(row)
+      this.selectedItem = row
+      this.selectedItem = null
     },
+
+    filterData() {
+  this.filteredData = this.tableData.filter((orden) => {
+    const combinedName = orden.name.toLowerCase() + ' ' + orden.lastname1.toLowerCase() + ' ' + orden.lastname2.toLowerCase();
+    const combinedAddress = orden.ciudad.toLowerCase() + ' ' + orden.colonia.toLowerCase() + ' ' + orden.home.toLowerCase() + ' ' + orden.codigoPostal.toLowerCase() + ' ' + orden.numAddress.toLowerCase();
+    
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
+
+    if (this.searchQueryName) {
+      shouldInclude = shouldInclude && combinedName.includes(this.searchQueryName.toLowerCase());
+    }
+
+    if (this.searchQueryAddress) {
+      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    }
+
+    if (this.searchQueryPhone) {
+      shouldInclude = shouldInclude && orden.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+    }
+
+    return shouldInclude;
+  });
+},
 
     parseDate(fecha) {
       var f1 = fecha.split("-")[2]
@@ -130,6 +134,7 @@ filterDataAddress() {
       f1 += "-" + fecha.split("-")[0]
       return new Date(f1)
     },
+    
     filterDate() {
       if (this.selectedDate && this.selectedDate1) {
         // Convert dates to Date objects and handle null values
