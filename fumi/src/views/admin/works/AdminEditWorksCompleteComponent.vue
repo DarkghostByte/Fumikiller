@@ -28,67 +28,87 @@
     <!-- TABLE INSERT -->
     <!-- TABLE DATA -->
     <div class="flex ml-5">
-      <el-form
-        :model="form"
-        label-width="auto"
-        style="max-width: 100%"
-        :label-position="'top'"
-        ref="formRef"
+      <el-form :model="form" label-width="auto" style="max-width: 100%" :label-position="'top'" ref="formRef"
         :rules="rules">
+        <!-- DATOS DE LA FILA DE CLIENTES -->
+        <p style="font-size: 20px; font-weight: bold;">Persona Fisica: {{ form.name +' '+form.lastname1+' '+form.lastname2}}</p>
+        <p style="font-size: 20px; font-weight: bold;">Persona Moral: {{ form.tradename }}</p>
+        
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
-        <p>Empleados</p>
+        <p style="font-size: 18px; font-weight: bold;">Fumigador</p>
         <div class="flex" style="width:100%;">
           <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:">
+            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:"
+              :disabled="!empleados.length">
               <el-option v-for="nameEmpleado in empleados" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
                 :value="nameEmpleado.id" />
             </el-select>
+            <div v-if="!empleados.length">Loading empleados...</div>
           </el-form-item>
           <el-form-item prop="id_empleado2" label="Ayudante:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_empleado2" placeholder="Selecciona el ayudante:">
+            <el-select v-model="form.id_empleado2" placeholder="Selecciona el ayudante:" :disabled="!empleados2.length">
               <el-option v-for="nameEmpleado in empleados2" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
                 :value="nameEmpleado.id" />
             </el-select>
+            <div v-if="!empleados2.length">Loading empleados...</div>
           </el-form-item>
+        </div>
+
+        <div class="flex" style="width:100%;">
+          <div class="row">
+            <p style="font-size: 18px; font-weight: bold;">Productos internos</p>
+            <div class="flex" style="width:100%;">
+              <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
+                style="width: 300px;">
+                <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:"
+                  :disabled="!productoInternos.length">
+                  <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
+                    :value="productoInt.id" />
+                </el-select>
+                <div v-if="!productoInternos.length">Loading productos internos...</div>
+              </el-form-item>
+              <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
+                style="width: 300px;">
+                <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:"
+                  :disabled="!productoInternos2.length">
+                  <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
+                    :value="productoInt.id" />
+                </el-select>
+                <div v-if="!productoInternos2.length">Loading productos internos...</div>
+              </el-form-item>
+            </div>
+          </div>
+          <div class="row">
+<!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
+<p class="px-2" style="font-size: 18px; font-weight: bold;">Productos externos</p>
+<div class="flex" style="width:100%;">
+  <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-4"
+    style="width: 300px;">
+    <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:"
+      :disabled="!productoExternos.length">
+      <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
+        :value="productoExt.id" />
+    </el-select>
+    <div v-if="!productoExternos.length">Loading productos internos...</div>
+  </el-form-item>
+  <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
+    style="width: 300px;">
+    <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:"
+      :disabled="!productoExternos2.length">
+      <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
+        :value="productoExt.id" />
+    </el-select>
+    <div v-if="!productoExternos2.length">Loading productos internos...</div>
+  </el-form-item>
+</div>
+          </div>
+          
+        
         </div>
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
-        <p>Productos internos</p>
-        <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:">
-              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
-                :value="productoInt.id" />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:">
-              <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
-                :value="productoInt.id" />
-            </el-select>
-          </el-form-item>
-        </div>
-        <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
-        <p>Productos externos</p>
-        <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:">
-              <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
-                :value="productoExt.id" />
-            </el-select>
-          </el-form-item>
-          <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:">
-              <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
-                :value="productoExt.id" />
-            </el-select>
-          </el-form-item>
-        </div>
+        
         <!-- FILA DE RECOMENDACIONES -->
-        <p>Recomendaciones</p>
+        <p style="font-size: 18px; font-weight: bold;">Recomendaciones</p>
         <div class="flex">
           <el-form-item prop="noTrapear" class="px-2" label="No trapear:">
             <el-input v-model="form.noTrapear" placeholder="A los cuantos dias" />
@@ -96,22 +116,51 @@
           <el-form-item prop="noIngresar" class="px-7" label="No ingresar:">
             <el-input v-model="form.noIngresar" placeholder="Cuantas horas" />
           </el-form-item>
-          <el-form-item prop="otraDosis" class="px-2" label="Otra dosis:">
-            <el-col :span="11" style="width: 220px">
-              <el-date-picker v-model="form.otraDosis" type="date" placeholder="Otra dosis:" format="DD/MM/YYYY"
-                value-format="DD-MM-YYYY" />
-            </el-col>
+
+          <el-form-item prop="otraDosis" label="Otra dosis" class="px-2">
+            <el-radio-group v-model="form.otraDosis">
+              <el-date-picker class="px-2" v-model="form.otraDosis" type="date" placeholder="Otra dosis:"
+                format="DD/MM/YYYY" value-format="DD-MM-YYYY" />
+              <el-radio label="No aplica" value="No aplica" border />
+            </el-radio-group>
+          </el-form-item>
+
+        </div>
+        <!-- FILA DE REQUIERE DE -->
+        <p style="font-size: 18px; font-weight: bold;">Requiere de:</p>
+        <div class="flex">
+          <el-form-item prop="requiere1" label="" class="px-10">
+            <el-checkbox-group v-model="form.requiere1">
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
+              <el-checkbox label="Factura" value="Factura"></el-checkbox>
+              <el-checkbox label="Certificado" value="Certificado"></el-checkbox>
+              <el-checkbox label="Remision" value="Remision"></el-checkbox>
+            </el-checkbox-group>
+          </el-form-item>
+        </div>
+        <!-- FILA DE DATO -->
+        <p style="font-size: 18px; font-weight: bold;">Datos:</p>
+        <div class="flex">
+          <el-form-item prop="requiere2" label="" class="px-10">
+            <el-checkbox-group v-model="form.requiere2" label="Requiere de">
+              <el-checkbox label="Bitacora" value="Bitacora"></el-checkbox>
+              <el-checkbox label="Agendar" value="Agendar"></el-checkbox>
+              <el-checkbox label="Cancelar" value="Cancelar"></el-checkbox>
+              <el-checkbox label="Ellos hablan" value="Ellos hablan"></el-checkbox>
+              <el-checkbox label="Nada" value="Nada"></el-checkbox>
+            </el-checkbox-group>
           </el-form-item>
         </div>
         <!-- FILA DE PAGO -->
-        <p>Pago:</p>
+        <p style="font-size: 18px; font-weight: bold;">Cobro:</p>
         <div class="flex">
-          <el-form-item prop="pago" label="Se cobro:" class="px-2" style="width: 240px;">
-            <el-input v-model="form.pago" class="px-1" placeholder="Ingresa el monto" type="number"/>
+          <el-form-item prop="pago" label="Monto:" class="px-2" style="width: 240px;">
+            <el-input v-model="form.pago" class="px-1" placeholder="Ingresa el monto" type="number" />
           </el-form-item>
           <el-form-item prop="requiere3" label="Se pago?" class="px-10">
             <el-radio-group v-model="form.requiere3">
-              <el-radio value="Pagado" size="large" border>Pagado</el-radio>
+              <el-radio value="Pagado/Efectivo" size="large" border>Pagado/Efectivo</el-radio>
+              <el-radio value="Pagado/Banco" size="large" border>Pagado/Banco</el-radio>
               <el-radio value="Credito" size="large" border>Credito</el-radio>
               <el-radio value="Cortesia" size="large" border>Cortesia</el-radio>
             </el-radio-group>
@@ -149,6 +198,10 @@ export default {
     empleados: [],
     empleados2: [],
     form: {
+      name: '',
+      lastname1: '',
+      lastname2: '',
+      tradename: '',
       id_empleado: '',
       id_empleado2: '',
       id_productosInternos: '',
@@ -305,6 +358,10 @@ export default {
       console.log(res);
       let datos = res.data.data;
       if (datos) {
+        this.form.name = datos.name || '';
+        this.form.lastname1 = datos.lastname1 || '';
+        this.form.lastname2 = datos.lastname2 || '';
+        this.form.tradename = datos.tradename || '';
         this.form.id_empleado = datos.id_empleado || '';
         this.form.id_empleado2 = datos.id_empleado2 || '';
         this.form.id_productosInternos = datos.id_productosInternos || '';
@@ -315,6 +372,8 @@ export default {
         this.form.noIngresar = datos.noIngresar || '';
         this.form.otraDosis = datos.otraDosis || '';
         this.form.pago = datos.pago || '';
+        this.form.requiere1 = JSON.parse(datos.requiere1) || '';
+        this.form.requiere2 = JSON.parse(datos.requiere2) || '';
         this.form.requiere3 = datos.requiere3 || '';
       }
     });

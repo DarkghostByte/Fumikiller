@@ -20,19 +20,18 @@
     <!-- Campo de búsqueda -->
     <div class="flex mb-4" style="justify-content: center;">
       <div class="flex mb-4" style="width: 80%;">
-        <el-input class="px-2" placeholder="Buscar por correo" v-model="searchQueryCorreo" @input="filterDatCorreo" />
-        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterDataTradeame" />
+        <el-input class="px-2" placeholder="Buscar por correo" v-model="searchQueryCorreo" @input="filterData" />
+        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterData" />
         <el-input class="px-2" placeholder="Buscar por persona fisica" v-model="searchQueryName"
-          @input="filterDataName" />
+          @input="filterData" />
         <el-input class="px-2" placeholder="Buscar por folio" v-model="searchQueryFolio"
-          @input="filterDataFolio" />
-        <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone" @input="filterDataPhone" />
+          @input="filterData" />
       </div>
     </div>
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 70%" stripe>
         <!-- Columnas de la tabla -->
 
         <el-table-column label="" width="100" >
@@ -43,19 +42,18 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="Folio" sortable>
+        <el-table-column label="Folio" sortable  width="120">
           <template #default="scope">
             {{ 'No. ' + scope.row.folioFactura }}
           </template>
         </el-table-column>
-        <el-table-column label="Persona fisica" sortable width="250">
+        <el-table-column label="Persona fisica" sortable width="180">
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column prop="tradename" label="Persona moral" sortable width="200" />
+        <el-table-column prop="tradename" label="Persona moral" sortable width="180" />
         <el-table-column prop="correo" label="Correo" sortable width="400" />
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable />
 
       </el-table>
     </div>
@@ -100,11 +98,8 @@
           
         </div>
         <div class="details">
-          <i class="fa fa-phone fa-2x iconInfo"></i>
+          <i class="fa fa-envelope fa-2x iconInfo"></i>
           <div>
-            <p>
-              <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
-            </p>
             <p>
               <strong>Correo:</strong> {{ selectedItem.correo }}
             </p>
@@ -113,7 +108,7 @@
       </div>
       <template #footer>
         <div class="dialog-footer">
-          <el-button type="primary" color="#ff7640" @click="dialogVisibleView = false">Listo</el-button>
+          <el-button type="success" color="rgb(64, 255, 89);" @click="dialogVisibleView = false">Listo</el-button>
         </div>
       </template>
     </el-dialog>
@@ -164,37 +159,35 @@ export default {
       this.selectedItem1 = row
       this.selectedItem1 = null
     },
+
+    filterData() {
+    this.filteredData = this.tableData.filter((facturas) => {
+    const combinedName = facturas.name.toLowerCase() + ' ' + facturas.lastname1.toLowerCase() + ' ' + facturas.lastname2.toLowerCase();
     
-    filterDataCorreo() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.correo.toLowerCase().includes(this.searchQueryCorreo.toLowerCase());
-      });
-    },
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
 
-    filterDataTradeame() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
-      });
-    },
+    if (this.searchQueryTradename) {
+      shouldInclude = shouldInclude && facturas.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
+    }
 
-    filterDataName() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedName.includes(this.searchQueryName.toLowerCase());
-      });
-    },
+    if (this.searchQueryName) {
+      shouldInclude = shouldInclude && combinedName.includes(this.searchQueryName.toLowerCase());
+    }
 
-    filterDataFolio() {
-      this.filteredData = this.tableData.filter((facturas) => {
-        return facturas.folioFactura.toLowerCase().includes(this.searchQueryFolio.toLowerCase());
-      });
-    },
+    if (this.searchQueryCorreo) {
+      shouldInclude = shouldInclude && facturas.correo.toLowerCase().includes(this.searchQueryCorreo.toLowerCase());
+    }
 
-    filterDataPhone() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
-      });
-    },
+    if (this.searchQueryFolio) {
+      shouldInclude = shouldInclude && facturas.folioFactura.toLowerCase().includes(this.searchQueryFolio.toLowerCase());
+    }
+
+
+
+    return shouldInclude;
+  });
+},
 
     async fetchData() {
       try {

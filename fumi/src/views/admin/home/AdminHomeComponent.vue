@@ -146,26 +146,7 @@
   </div>
   
 
-  <div class="flex justify-center items-center mt-2">
-    <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData"
-      style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por negocio" v-model="searchQuery2" @input="filterData"
-      style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQuery3" @input="filterData"
-      style="width: 25%;" />
-  </div>
-  <div class="flex justify-center items-center mt-2">
-    <el-input class="px-2" placeholder="Buscar si es que tiene facturacion" v-model="searchQuery4"
-      @input="filterData" style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por facturacion" v-model="searchQuery5" @input="filterData"
-      style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por numero de folio" v-model="searchQuery6" @input="filterData"
-      style="width: 25%;" />
-    <el-input class="px-2" placeholder="Buscar por estado (Pagado o Credito)" v-model="searchQuery7"
-      @input="filterData" style="width: 25%;" />
-    <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="YYYY-MM-DD"
-      value-format="DD-MM-YYYY" placeholder="Seleccionar el rango de fecha" style="width: 25%;" />
-  </div>
+  
 
   <!-- TABLE DATA -->
   <div class="flex">
@@ -206,7 +187,7 @@
     <el-dialog v-model="dialogVisibleFilter" title="Filtros" width="30%">
       <el-form label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules" :label-position="'top'">
         <el-collapse v-model="activeNames">
-          <el-collapse-item title="General Information">
+          <el-collapse-item title="Informacion General">
             <div class="row">
               <div class="col-md-6">
                 <el-input placeholder="Buscar por nombre" v-model="searchQuery1" @input="filterData" />
@@ -219,10 +200,13 @@
               </div>
             </div>
           </el-collapse-item>
-          <el-collapse-item title="Financial Information">
+          <el-collapse-item title="Informacion Financiera">
             <div class="row">
               <div class="col-md-6">
-                <el-input placeholder="Buscar si es que tiene facturación" v-model="searchQuery4" @input="filterData" />
+                <el-select placeholder="Buscar si tiene facturacion" v-model="searchQuery4" @change="filterData">
+                  <el-option label="Si" value="Si" />
+                  <el-option label="No" value="No" />
+                </el-select>
               </div>
               <div class="col-md-6">
                 <el-input placeholder="Buscar por facturación" v-model="searchQuery5" @input="filterData" />
@@ -232,8 +216,10 @@
               </div>
               <div class="col-md-6">
                 <el-select placeholder="Buscar por estado" v-model="searchQuery7" @change="filterData">
-                  <el-option label="Pagado" value="Pagado" />
-                  <el-option label="Crédito" value="Crédito" />
+                  <el-option label="Pagado/Efectivo" value="Pagado/Efectivo" />
+                  <el-option label="Pagado/Banco" value="Pagado/Banco" />
+                  <el-option label="Credito" value="Credito" />
+                  <el-option label="Cortesia" value="Cortesia" />
                 </el-select>
               </div>
             </div>

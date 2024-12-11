@@ -211,10 +211,9 @@ class CompletarOrdenesController extends Controller
             'noTrapear' => 'required|min:1',
             'noIngresar' => 'required|min:1',
             'otraDosis' => 'required|min:1',
-            'hora' => 'required|min:1',
             'pago' => 'required|numeric',
-            'requiere1' => 'array|min:1',
-            'requiere2' => 'array|min:1',
+            'requiere1' => 'required|min:1',
+            'requiere2' => 'required|min:1',
             'requiere3' => 'required|min:1',
         ]);
         if (!$completarOrden) {

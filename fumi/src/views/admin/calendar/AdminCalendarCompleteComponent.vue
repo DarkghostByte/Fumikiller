@@ -8,58 +8,58 @@
             margin-left: -5px; margin-right:10px;"></i>
       Agenda por día
     </router-link>
-
-    <router-link to="/admin/calendar/complete"
-      class="inline-flex px-5 py-3 text-white bg-green-400 hover:bg-green-600 focus:bg-green-700 rounded-md ml-6 mb-3"
-      style="color:black">
-      <i class="fa-solid fa-calendar-check" aria-hidden="true" style="margin-top: 5px;
-            margin-left: -5px; margin-right:10px;"></i>
-      Agenda realizadas
-    </router-link>
   </div>
 
   <div class="container mx-auto">
-    <h1 class="text-3xl font-bold mb-4">Agenda de trabajo Realizadas</h1>
+    <h1 class="text-3xl font-bold">Agenda de trabajo Realizadas</h1>
+  </div>
 
+  <div class="flex justify-center items-center" style="width: 100%;">
+    <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterData" style="width: 100%;"/>
+    <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
+      @input="filterData" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+      @input="filterData" style="width: 100%;"/>
+    <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate10" type="date" format="DD-MM-YYYY"
+      value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
+    <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate10" type="date" format="DD-MM-YYYY"
+      value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
+      <el-input class="px-2" placeholder="Buscar por fumigador" v-model="searchQueryFumi"
+      @input="filterData" style="width: 100%;"/>
+  </div>
 
-    <div class="flex justify-center items-center mb-4" style="width: 100%;">
-      <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate10" type="date" format="DD-MM-YYYY"
-        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
-      <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate10" type="date" format="DD-MM-YYYY"
-        value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
-      <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" style="width: 100%;"/>
-      <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-        @input="filterDataAddress" style="width: 100%;"/>
-    </div>
-
-    <div class="flex justify-center items-center">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" stripe style="width:100%;">
-        <el-table-column label="PDF Orden" width="100">
-          <template #default="scope">
-            <el-button style="color:black" type="success" @click="pdf(scope.row)">
-              <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
-                <span class="material-symbols-outlined">lab_profile</span>
-              </a>
-            </el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="Nombre" width="220" sortable>
-          <template #default="scope">
-            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Dirección" width="280" sortable>
-          <template #default="scope">
-            {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
-              ', ' + scope.row.ciudad }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Celular" prop="cell_phone" sortable width="120px"/>
-        <el-table-column label="F. orden" prop="date1" width="120" sortable />
-        <el-table-column label="F. fumigacion" prop="date2" width="150" sortable />
-        <el-table-column label="Fumigador" prop="ariasEmpleado1" width="145" sortable />
-      </el-table>
-    </div>
+  <div class="flex justify-center items-center">
+    <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" stripe style="width:100%;">
+      <el-table-column label="PDF Orden" width="100">
+        <template #default="scope">
+          <el-button style="color:black" type="success" @click="pdf(scope.row)">
+            <a :href="url + 'api/ordenTrabajoCompleta/' + scope.row.id" target="_blank">
+              <span class="material-symbols-outlined">lab_profile</span>
+            </a>
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="O. Trabajo" sortable  width="120">
+        <template #default="scope">
+          {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Nombre" width="220" sortable>
+        <template #default="scope">
+          {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Dirección" width="360" sortable>
+        <template #default="scope">
+          {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
+            ', ' + scope.row.ciudad }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Celular" prop="cell_phone" sortable width="120px"/>
+      <el-table-column label="F. orden" prop="date1" width="120" sortable />
+      <el-table-column label="F. fumigacion" prop="date2" width="150" sortable />
+      <el-table-column label="Fumigador" prop="ariasEmpleado1" width="145" sortable />
+    </el-table>
   </div>
 
   <!-- Importar Iconos-->
@@ -88,6 +88,8 @@ export default {
     searchQuery: '',
     searchQueryName: '',
     searchQueryAddress: '',
+    searchQueryPhone: '',
+    searchQueryFumi: '',
     today: new Date().toISOString().slice(0, 10),
   }),
   mounted() {
@@ -133,18 +135,78 @@ export default {
       }
     },
 
-    filterDataName() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedName.includes(this.searchQueryName.toLowerCase());
-      });
-    },
-filterDataAddress() {
-      this.filteredData = this.tableData.filter((clientes) => {
-    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    formatDate(id_orden, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id_orden);
+
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
+
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
+
+filterData() {
+  this.filteredData = this.tableData.filter((completarOrden) => {
+    const combinedName = completarOrden.name.toLowerCase() + ' ' + completarOrden.lastname1.toLowerCase() + ' ' + completarOrden.lastname2.toLowerCase();
+    const combinedAddress = completarOrden.ciudad.toLowerCase() + ' ' + completarOrden.colonia.toLowerCase() + ' ' + completarOrden.home.toLowerCase() + ' ' + completarOrden.codigoPostal.toLowerCase() + ' ' + completarOrden.numAddress.toLowerCase();
+    
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
+
+    if (this.searchQueryName) {
+      shouldInclude = shouldInclude && combinedName.includes(this.searchQueryName.toLowerCase());
+    }
+
+    if (this.searchQueryAddress) {
+      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    }
+
+    if (this.searchQueryPhone) {
+      shouldInclude = shouldInclude && completarOrden.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+    }
+
+    if (this.searchQueryFumi) {
+      shouldInclude = shouldInclude && completarOrden.ariasEmpleado1.toLowerCase().includes(this.searchQueryFumi.toLowerCase());
+    }
+
+    if (this.selectedDate && this.selectedDate1) {
+        // Convert dates to Date objects and handle null values
+        const startDate = this.selectedDate;
+        const endDate = this.selectedDate1;
+        var f1 = this.parseDate(startDate)
+        var f2 = this.parseDate(endDate)
+
+        // Ensure startDate is less than or equal to endDate
+        if (f1 > f2) {
+          ElNotification({
+            title: 'Error',
+            message: 'La fecha de inicio debe ser anterior a la fecha final.',
+            type: 'error'
+          });
+          return;
+        }
+
+        this.filteredData = this.tableData.filter(completarOrden => {
+          const ordenDate = this.parseDate(completarOrden.date2);
+          return ordenDate >= f1 && ordenDate <= f2;
+        });
+
+        // Show notification based on filtered data count
+        
+      } else {
+        // If no dates are selected or only one is selected, show all data
+        this.filteredData = this.tableData;
+        ElNotification({
+          title: 'Mostrando todos los datos',
+          message: 'Se están mostrando todos los datos de la agenda.',
+          type: 'info'
+        });
+      }
+
+    return shouldInclude;
   });
-    }, 
+},
 
     parseDate(fecha) {
       var f1 = fecha.split("-")[2]
@@ -170,8 +232,8 @@ filterDataAddress() {
           return;
         }
 
-        this.filteredData = this.tableData.filter(orden => {
-          const ordenDate = this.parseDate(orden.date1);
+        this.filteredData = this.tableData.filter(completarOrden => {
+          const ordenDate = this.parseDate(completarOrden.date2);
           return ordenDate >= f1 && ordenDate <= f2;
         });
 
@@ -224,9 +286,6 @@ filterDataAddress() {
 }
 
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
   align-items: center;
   justify-content: center
 }

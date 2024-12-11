@@ -18,7 +18,14 @@
       </div>
     </div>
 
+    <div class="mr-6">
+      <h1 class="text-4xl font-semibold mb-2">Modificar orden de trabajo</h1>
+    </div>
 
+    <!-- DATOS DE LA FILA DE CLIENTES -->
+    <h2 class="ordenCliente">Cliente: {{ form.name+' '+form.lastname1+' '+form.lastname2 }}</h2>
+    <h2 class="ordenCliente">Negocio: {{ form.tradename }}</h2>
+    <br>
     <!-- TABLE INSERT -->
     <!-- TABLE DATA -->
     <div class="flex ml-5">
@@ -29,15 +36,6 @@
         :label-position="'top'"
         ref="formRef"
         :rules="rules">
-
-        <div class="mr-6">
-          <h1 class="text-4xl font-semibold mb-2">Modificar orden de trabajo</h1>
-        </div>
-
-        <!-- DATOS DE LA FILA DE CLIENTES -->
-        <h2 class="ordenCliente">Cliente: {{ form.name+' '+form.lastname1+' '+form.lastname2 }}</h2>
-        <h2 class="ordenCliente">Negocio: {{ form.tradename }}</h2>
-        <br>
 
         <!-- FILA DE LAS DOSIS -->
         <p class="ordenDatos1">Dosis</p>

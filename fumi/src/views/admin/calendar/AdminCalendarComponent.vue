@@ -15,7 +15,7 @@
 
 
 
-    <div class="flex justify-center items-center mb-4">
+    <div class="flex justify-center items-center">
       <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterData" style="width: 100%;"/>
       <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
         @input="filterData" style="width: 100%;"/>
@@ -27,35 +27,42 @@
       value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
     </div>
 
-    <div class="table-container">
-      <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }" stripe >
-        <el-table-column label="PDF Orden" width="100px">
-          <template #default="scope">
-            <el-button style="color:black" type="success" @click="pdf(scope.row)">
-              <a :href="url + 'api/ordenTrabajo/' + scope.row.id" target="_blank">
-                <span class="material-symbols-outlined">lab_profile</span>
-              </a>
-            </el-button>
-          </template>
-        </el-table-column>
-        <el-table-column label="Nombre" width="200px" sortable>
-          <template #default="scope">
-            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Dirección" width="240px" sortable>
-          <template #default="scope">
-            {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
-              ', ' + scope.row.ciudad }}
-          </template>
-        </el-table-column>
-        <el-table-column label="Celular" prop="cell_phone" width="100px" sortable />
-        <el-table-column label="Fecha de orden" prop="date1" width="150px" sortable />
-        <el-table-column label="Fecha de fumigacion" prop="date2" width="180px" sortable />
-        <el-table-column label="De" prop="time1" sortable />
-        <el-table-column label="A" prop="time2" sortable />
-      </el-table>
-    </div>
+    
+  </div>
+
+  <div class="table-container">
+    <el-table :data="filteredData" :default-sort="{ prop: 'date2', order: 'descending' }" stripe width="100%">
+      <el-table-column label="PDF Orden" width="100px">
+        <template #default="scope">
+          <el-button style="color:black" type="success" @click="pdf(scope.row)">
+            <a :href="url + 'api/ordenTrabajo/' + scope.row.id" target="_blank">
+              <span class="material-symbols-outlined">lab_profile</span>
+            </a>
+          </el-button>
+        </template>
+      </el-table-column>
+      <el-table-column label="O. Trabajo" sortable width="120">
+        <template #default="scope">
+          {{ 'No. ' + this.formatDate(scope.row.id) }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Nombre" width="200" sortable>
+        <template #default="scope">
+          {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Dirección" width="300" sortable>
+        <template #default="scope">
+          {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
+            ', ' + scope.row.ciudad }}
+        </template>
+      </el-table-column>
+      <el-table-column label="Celular" prop="cell_phone" width="100px" sortable />
+      <el-table-column label="F. Orden" prop="date1" width="150px" sortable />
+      <el-table-column label="F. Fumigacion" prop="date2" width="180px" sortable />
+      <el-table-column label="De" prop="time1" sortable />
+      <el-table-column label="A" prop="time2" sortable />
+    </el-table>
   </div>
 
   <!-- Importar Iconos-->
@@ -104,6 +111,18 @@ searchQueryPhone:'',
       this.selectedItem = null
     },
 
+    parseDate(fecha) {
+      var f1 = fecha.split("-")[2]
+      f1 += "-" + fecha.split("-")[1]
+      f1 += "-" + fecha.split("-")[0]
+      return new Date(f1)
+    },parseDate(fecha) {
+      var f1 = fecha.split("-")[2]
+      f1 += "-" + fecha.split("-")[1]
+      f1 += "-" + fecha.split("-")[0]
+      return new Date(f1)
+    },
+
     filterData() {
   this.filteredData = this.tableData.filter((orden) => {
     const combinedName = orden.name.toLowerCase() + ' ' + orden.lastname1.toLowerCase() + ' ' + orden.lastname2.toLowerCase();
@@ -124,16 +143,45 @@ searchQueryPhone:'',
       shouldInclude = shouldInclude && orden.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
     }
 
+    if (this.selectedDate && this.selectedDate1) {
+        // Convert dates to Date objects and handle null values
+        const startDate = this.selectedDate;
+        const endDate = this.selectedDate1;
+        var f1 = this.parseDate(startDate)
+        var f2 = this.parseDate(endDate)
+
+        // Ensure startDate is less than or equal to endDate
+        if (f1 > f2) {
+          ElNotification({
+            title: 'Error',
+            message: 'La fecha de inicio debe ser anterior a la fecha final.',
+            type: 'error'
+          });
+          return;
+        }
+
+        this.filteredData = this.tableData.filter(orden => {
+          const ordenDate = this.parseDate(orden.date2);
+          return ordenDate >= f1 && ordenDate <= f2;
+        });
+
+        // Show notification based on filtered data count
+        
+      } else {
+        // If no dates are selected or only one is selected, show all data
+        this.filteredData = this.tableData;
+        ElNotification({
+          title: 'Mostrando todos los datos',
+          message: 'Se están mostrando todos los datos de la agenda.',
+          type: 'info'
+        });
+      }
+
     return shouldInclude;
   });
 },
 
-    parseDate(fecha) {
-      var f1 = fecha.split("-")[2]
-      f1 += "-" + fecha.split("-")[1]
-      f1 += "-" + fecha.split("-")[0]
-      return new Date(f1)
-    },
+    
     
     filterDate() {
       if (this.selectedDate && this.selectedDate1) {
@@ -154,7 +202,7 @@ searchQueryPhone:'',
         }
 
         this.filteredData = this.tableData.filter(orden => {
-          const ordenDate = this.parseDate(orden.date1);
+          const ordenDate = this.parseDate(orden.date2);
           return ordenDate >= f1 && ordenDate <= f2;
         });
 
@@ -182,6 +230,17 @@ searchQueryPhone:'',
         });
       }
     },
+
+    formatDate(id, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id);
+
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
+
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
   },
 }
 </script>

@@ -20,12 +20,12 @@
     <!-- Campo de búsqueda -->
     <div class="flex mb-4" style="justify-content: center;">
       <div class="flex mb-4" style="width: 80%;">
-        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterDataTradeame" />
+        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterData" />
         <el-input class="px-2" placeholder="Buscar por persona fisica" v-model="searchQueryName"
-          @input="filterDataName" />
+          @input="filterData" />
         <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-          @input="filterDataAddress" />
-        <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone" @input="filterDataPhone" />
+          @input="filterData" />
+        <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone" @input="filterData" />
       </div>
     </div>
 
@@ -42,20 +42,20 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="Folio" sortable>
+        <el-table-column label="Folio" sortable width="120">
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-        <el-table-column label="Persona fisica" sortable width="250">
+        <el-table-column label="Persona fisica" sortable width="220">
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
 
-        <el-table-column prop="tradename" label="Persona moral" sortable width="200" />
+        <el-table-column prop="tradename" label="Persona moral" sortable width="180" />
         
-        <el-table-column label="Dirección" sortable width="400">
+        <el-table-column label="Dirección" sortable width="420">
           <template #default="scope">
             {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + '#'
               + scope.row.numAddress }}
@@ -275,31 +275,33 @@ export default {
       });
     },
 
-    filterDataTradeame() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
-      });
-    },
+    filterData() {
+  this.filteredData = this.tableData.filter((clientes) => {
+    const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    
+    // Check each condition based on search queries
+    let shouldInclude = true; // Start with assuming inclusion
 
-    filterDataName() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedName.includes(this.searchQueryName.toLowerCase());
-      });
-    },
+    if (this.searchQueryTradename) {
+      shouldInclude = shouldInclude && clientes.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
+    }
 
-    filterDataAddress() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-        return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-      });
-    },
+    if (this.searchQueryName) {
+      shouldInclude = shouldInclude && combinedName.includes(this.searchQueryName.toLowerCase());
+    }
 
-    filterDataPhone() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
-      });
-    },
+    if (this.searchQueryAddress) {
+      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    }
+
+    if (this.searchQueryPhone) {
+      shouldInclude = shouldInclude && clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+    }
+
+    return shouldInclude;
+  });
+},
 
     handleEstadoClick() {
       const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value

@@ -41,13 +41,6 @@
           </template>
         </el-table-column>
 
-        <el-table-column label="" width="100">
-          <template #default="scope">
-            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
-                class="material-symbols-outlined">visibility</span></el-button>
-          </template>
-        </el-table-column>
-
         <!-- Agrega las demás columnas aquí -->
         <el-table-column label="O. Trabajo" sortable>
           <template #default="scope">
@@ -245,11 +238,6 @@ export default {
         this.tableData = res.data.data.filter(row => row.infoorden_remision !== 'No');
         this.filteredData = this.tableData;
       });
-    },
-    seleccionar(row) {
-      console.log(row);
-      this.selectedItem = row;
-      this.dialogVisibleView = true;
     },
     remision(row) {
       console.log(row);

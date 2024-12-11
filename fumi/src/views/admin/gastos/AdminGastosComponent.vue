@@ -171,15 +171,15 @@
       </div>
     </div>
     <!-- MODAL 1 -->
-    <el-dialog v-model="dialogVisibleCreate" title="Nuevo Ingreso" width="20%">
+    <el-dialog v-model="dialogVisibleCreate" title="Nuevo Ingreso" width="18%">
       <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
         :label-position="'top'">
         <div class="row">
-          <el-form-item prop="dataIngreso" label="Datos">
-            <el-radio-group v-model="form1.dataIngreso">
-              <el-radio value="Caja" size="large" border>Caja</el-radio>
-              <el-radio value="Banco" size="large" border>Banco</el-radio>
-            </el-radio-group>
+          <el-form-item prop="dataEgresos" label="Datos">
+            <el-radio-group v-model="form2.dataEgresos" size="large">
+              <el-radio-button label="Caja" value="Caja" />
+              <el-radio-button label="Banco" value="Banco" />
+            </el-radio-group> 
           </el-form-item>
           <el-form-item prop="dateIngreso" label="Fecha:">
             <el-col :span="11" style="width: 240px">
@@ -216,12 +216,12 @@
               <el-radio-button label="Banco" value="Banco" />
               <el-radio-button label="Deposito" value="Deposito" />
             </el-radio-group> 
-            <el-form-item prop="id_departamento1" label="Departamento:" class="px-2" style="width: 300px;">
+          </el-form-item>
+            <el-form-item prop="id_departamento1" label="Departamento:" class="px-2" style="width: auto;">
               <el-select v-model="form2.id_departamento1" placeholder="Selecciona el departamento:">
                 <el-option v-for="selectDepartamento in departamentos" :key="selectDepartamento.id"
                   :label="selectDepartamento.comercio" :value="selectDepartamento.id" />
               </el-select>
-            </el-form-item>
           </el-form-item>
           <el-form-item prop="dateEgresos" label="Fecha:">
             <el-col :span="11" style="width: 240px">
@@ -362,7 +362,7 @@ export default {
       axios.get('completarOrden')
         .then(res => {
           this.tableData3 = res.data.data;
-          this.tableData3 = res.data.data.filter(row => row.requiere3 == 'Pagado');
+          this.tableData3 = res.data.data.filter(row => row.requiere3 == 'Pagado/Efectivo' || row.requiere3 == 'Pagado/Banco');
           this.filteredData3 = this.tableData3;
         });
     },

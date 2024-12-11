@@ -119,9 +119,10 @@ class AdminController extends Controller
     public function totalCaja()
 {
     /*INGRESOS TOTALES*/ 
-    $totalPagos = CompletarOrden::where('requiere3', 'Pagado')->sum('pago');
+    $totalPagos = CompletarOrden::where('requiere3', 'Pagado/Efectivo')->sum('pago');
     $totalIngresosAdicionales = Ingresos::where('dataIngreso', 'Caja')->sum('montoIngreso');
-    $totalBancoIngreso= Ingresos::where('dataIngreso', 'Banco')->sum('montoIngreso');
+    $totalCompletarOrden = CompletarOrden::where('requiere3', 'Pagado/Banco')->sum('pago');
+    $totalBancoIngreso1= Ingresos::where('dataIngreso', 'Banco')->sum('montoIngreso');
     $totalCaja = $totalPagos + $totalIngresosAdicionales;
     
     /*EGRESOS*/
@@ -133,6 +134,8 @@ class AdminController extends Controller
     /*BANCO*/
     $totalCajaEgreso = $totalEgresos + $totalDepositoEgresos;
     
+    $totalBancoIngreso = $totalCompletarOrden + $totalBancoIngreso1;
+
     $totalCajaBanco = $totalBancoIngreso + $totalDepositoEgresos;
 
     $totalSaldoBanco = $totalCajaBanco - $totalBancosEgresos;

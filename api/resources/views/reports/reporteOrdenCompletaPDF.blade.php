@@ -111,6 +111,11 @@
                 <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
             </table> 
             @endif
+            <table>
+                <td style="margin-right: -50px;  width:25px; text-align:center; color:transparent;">( )</th>
+                <td style="margin-left: -50px; width:100px; color:red;" >{{ $ordenCompleta->nDosis }}</th>
+            </table> 
+
             
             
         </div>                
@@ -548,6 +553,10 @@
                 <td style="margin-left: -50px; width:100px;">ELLOS HABLAN</th>
             </table> 
             @endif
+            <table>
+                <td style="margin-right: -50px;  width:25px; text-align:center; color:transparent;">( )</th>
+                <td style="margin-left: -50px; width:100px; color:red;" >{{ $ordenCompleta->nDosis }}</th>
+            </table> 
             
             
         </div>                

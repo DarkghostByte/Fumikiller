@@ -76,7 +76,7 @@
           <i class="fa fa-file fa-2x iconInfo"></i>
           <div>
             <p>
-              <strong>Certificado a:</strong> {{ selectedItem.id }}
+              <strong>Folio:</strong> 0000{{ selectedItem.id }}
             </p>
           </div>
         </div>

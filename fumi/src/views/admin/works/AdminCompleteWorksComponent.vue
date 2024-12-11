@@ -27,23 +27,12 @@
       <el-form :model="form" label-width="auto" style="max-width: 100%" :label-position="'top'" ref="formRef"
         :rules="rules">
         <!-- DATOS DE LA FILA DE CLIENTES -->
-        <p>Cliente</p>
-        <div class="flex">
-          <el-form-item prop="name" label="Nombre del cliente:" class="px-2">
-            <el-input v-model="form.name" class="px-1" style="width: 220px;" disabled />
-          </el-form-item>
-          <el-form-item prop="lastname1" label="Apellido paterno:" class="px-2">
-            <el-input v-model="form.lastname1" class="px-1" style="width: 220px;" disabled />
-          </el-form-item>
-          <el-form-item prop="lastname2" label="Apellido materno:" class="px-2">
-            <el-input v-model="form.lastname2" class="px-1" style="width: 220px;" disabled />
-          </el-form-item>
-          <el-form-item prop="tradename" label="Nombre comercial:" class="px-2">
-            <el-input v-model="form.tradename" class="px-1" style="width: 220px;" disabled />
-          </el-form-item>
-        </div>
+        <!-- DATOS DE LA FILA DE CLIENTES -->
+        <p style="font-size: 20px; font-weight: bold;">Persona Fisica: {{ form.name +' '+form.lastname1+' '+form.lastname2}}</p>
+        <p style="font-size: 20px; font-weight: bold;">Persona Moral: {{ form.tradename }}</p>
+        
         <!-- FILA DE LOS EMPLEADOS (RESPONSABLE Y AYUDANTE) -->
-        <p>Fumigador</p>
+        <p style="font-size: 18px; font-weight: bold;">Fumigador</p>
         <div class="flex" style="width:100%;">
           <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
             <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:"
@@ -61,52 +50,61 @@
             <div v-if="!empleados2.length">Loading empleados...</div>
           </el-form-item>
         </div>
+
+        <div class="flex" style="width:100%;">
+          <div class="row">
+            <p style="font-size: 18px; font-weight: bold;">Productos internos</p>
+            <div class="flex" style="width:100%;">
+              <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
+                style="width: 300px;">
+                <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:"
+                  :disabled="!productoInternos.length">
+                  <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
+                    :value="productoInt.id" />
+                </el-select>
+                <div v-if="!productoInternos.length">Loading productos internos...</div>
+              </el-form-item>
+              <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
+                style="width: 300px;">
+                <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:"
+                  :disabled="!productoInternos2.length">
+                  <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
+                    :value="productoInt.id" />
+                </el-select>
+                <div v-if="!productoInternos2.length">Loading productos internos...</div>
+              </el-form-item>
+            </div>
+          </div>
+          <div class="row">
+<!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
+<p class="px-2" style="font-size: 18px; font-weight: bold;">Productos externos</p>
+<div class="flex" style="width:100%;">
+  <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-4"
+    style="width: 300px;">
+    <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:"
+      :disabled="!productoExternos.length">
+      <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
+        :value="productoExt.id" />
+    </el-select>
+    <div v-if="!productoExternos.length">Loading productos internos...</div>
+  </el-form-item>
+  <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
+    style="width: 300px;">
+    <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:"
+      :disabled="!productoExternos2.length">
+      <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
+        :value="productoExt.id" />
+    </el-select>
+    <div v-if="!productoExternos2.length">Loading productos internos...</div>
+  </el-form-item>
+</div>
+          </div>
+          
+        
+        </div>
         <!-- FILA DE LOS PRODUCTOS (INTERNOS) -->
-        <p>Productos internos</p>
-        <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:"
-              :disabled="!productoInternos.length">
-              <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
-                :value="productoInt.id" />
-            </el-select>
-            <div v-if="!productoInternos.length">Loading productos internos...</div>
-          </el-form-item>
-          <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:"
-              :disabled="!productoInternos2.length">
-              <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
-                :value="productoInt.id" />
-            </el-select>
-            <div v-if="!productoInternos2.length">Loading productos internos...</div>
-          </el-form-item>
-        </div>
-        <!-- FILA DE LOS PRODUCTOS (EXTERNOS) -->
-        <p>Productos externos</p>
-        <div class="flex" style="width:100%;">
-          <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:"
-              :disabled="!productoExternos.length">
-              <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
-                :value="productoExt.id" />
-            </el-select>
-            <div v-if="!productoExternos.length">Loading productos internos...</div>
-          </el-form-item>
-          <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
-            style="width: 300px;">
-            <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:"
-              :disabled="!productoExternos2.length">
-              <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
-                :value="productoExt.id" />
-            </el-select>
-            <div v-if="!productoExternos2.length">Loading productos internos...</div>
-          </el-form-item>
-        </div>
         <!-- FILA DE RECOMENDACIONES -->
-        <p>Recomendaciones</p>
+        <p style="font-size: 18px; font-weight: bold;">Recomendaciones</p>
         <div class="flex">
           <el-form-item prop="noTrapear" class="px-2" label="No trapear:">
             <el-input v-model="form.noTrapear" placeholder="A los cuantos dias" />
@@ -134,7 +132,7 @@
 
         </div>
         <!-- FILA DE REQUIERE DE -->
-        <p>Requiere de:</p>
+        <p style="font-size: 18px; font-weight: bold;">Requiere de:</p>
         <div class="flex">
           <el-form-item prop="requiere1" label="" class="px-10">
             <el-checkbox-group v-model="form.requiere1">
@@ -146,7 +144,7 @@
           </el-form-item>
         </div>
         <!-- FILA DE DATO -->
-        <p>Datos:</p>
+        <p style="font-size: 18px; font-weight: bold;">Datos:</p>
         <div class="flex">
           <el-form-item prop="requiere2" label="" class="px-10">
             <el-checkbox-group v-model="form.requiere2" label="Requiere de">
@@ -159,14 +157,15 @@
           </el-form-item>
         </div>
         <!-- FILA DE PAGO -->
-        <p>Pago:</p>
+        <p style="font-size: 18px; font-weight: bold;">Cobro:</p>
         <div class="flex">
           <el-form-item prop="pago" label="Monto:" class="px-2" style="width: 240px;">
             <el-input v-model="form.pago" class="px-1" placeholder="Ingresa el monto" type="number" />
           </el-form-item>
           <el-form-item prop="requiere3" label="Se pago?" class="px-10">
             <el-radio-group v-model="form.requiere3">
-              <el-radio value="Pagado" size="large" border>Pagado</el-radio>
+              <el-radio value="Pagado/Efectivo" size="large" border>Pagado/Efectivo</el-radio>
+              <el-radio value="Pagado/Banco" size="large" border>Pagado/Banco</el-radio>
               <el-radio value="Credito" size="large" border>Credito</el-radio>
               <el-radio value="Cortesia" size="large" border>Cortesia</el-radio>
             </el-radio-group>

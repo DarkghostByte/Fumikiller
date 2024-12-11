@@ -122,7 +122,7 @@ class PdfsController extends Controller
         $ordenCompleta = CompletarOrden::select(
             'completarordenes.*',
             'problematica1.problematica as plague1','problematica2.problematica as plague2',
-            'orden.date1','orden.date2','orden.time1','orden.time2','orden.id_cliente','clientes.requires','orden.hiring',
+            'orden.date1','orden.date2','orden.time1','orden.time2','orden.id_cliente','clientes.requires','orden.hiring','orden.nDosis',
             'clientes.name','clientes.lastname1','clientes.lastname2','clientes.tradename','clientes.home',
             'clientes.numAddress','clientes.id_colonia','clientes.id_city','clientes.cell_phone','clientes.how_to_get',
             'clientes.description','clientes.contact_form','clientes.comercio','clientes.recruitment_data','colonias.colonia','colonias.codigoPostal','ciudades.ciudad',

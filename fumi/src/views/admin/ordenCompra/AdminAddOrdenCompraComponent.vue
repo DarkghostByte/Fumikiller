@@ -33,9 +33,9 @@
         :label-position="'top'">
 
         <!--  FILA DATOS DEL CLIENTE -->
-        <p class="px-5">Datos del cliente:</p>
+        <p class="px-5">Datos de la orden de compra:</p>
         <div class="flex">
-          <el-form-item prop="fechaOrdenCompra" label="Fecha::" class="px-5" style="width: 240px;">
+          <el-form-item prop="fechaOrdenCompra" label="Fecha:" class="px-5" style="width: 240px;">
             <el-input v-model="form1.fechaOrdenCompra" class="px-1" placeholder="Ingresa la fecha" />
           </el-form-item>
           <el-form-item prop="paraOrdenCompra" label="Para:" class="px-5">
@@ -46,7 +46,6 @@
           </el-form-item>
         </div>
 
-        <p class="px-5">Datos del cliente:</p>
         <div class="flex">
           <el-form-item prop="detalleOrdenCompra" label="Detalles:" class="px-5">
             <el-input v-model="form1.detalleOrdenCompra" class="" placeholder="Ingresa el detalle" />
@@ -59,7 +58,6 @@
           </el-form-item>
         </div>
 
-        <p class="px-5">Datos del cliente:</p>
         <div class="flex">
           <el-form-item prop="autorizoOrdenCompra" label="Autorizo:" class="px-5">
             <el-input v-model="form1.autorizoOrdenCompra" class="" placeholder="Quien lo autorizo" />

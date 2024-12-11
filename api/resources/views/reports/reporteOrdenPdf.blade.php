@@ -31,7 +31,16 @@
         @else
         <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
         @endif
+
     </header>
+    <div>
+        <table style="position: absolute; margin-top:-80px; margin-left:70%; font-size:14px;">
+            <td style="margin-right: -50px;  width:25px; text-align:center; color:transparent;">( )</th>
+            <td style="margin-left: -50px; width:100px; color:red;" >{{ $orden->nDosis }}</th>
+        </table> 
+        
+        
+    </div>   
 
 
 
@@ -417,6 +426,14 @@
         <h2 style="position: absolute; margin-top:-25.2%; margin-left:35%; font-weight:bold;"></h2>
         @endif
     </header>
+    <div>
+        <table style="position: absolute; margin-top:-80px; margin-left:70%; font-size:14px;">
+            <td style="margin-right: -50px;  width:25px; text-align:center; color:transparent;">( )</th>
+            <td style="margin-left: -50px; width:100px; color:red;" >{{ $orden->nDosis }}</th>
+        </table> 
+        
+        
+    </div>   
 
 
 

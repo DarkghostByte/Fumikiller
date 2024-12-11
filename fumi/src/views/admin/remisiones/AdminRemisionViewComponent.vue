@@ -52,12 +52,16 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="Folio" sortable>
+        <el-table-column label="Folio" sortable width="120">
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-        <el-table-column prop="certificateName" label="Nombre" sortable width="250" />
+        <el-table-column label="Dirección" sortable width="220">
+          <template #default="scope">
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+          </template>
+        </el-table-column>
         <el-table-column label="Dirección" sortable width="550">
           <template #default="scope">
             {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
@@ -101,17 +105,6 @@
           <div>
             <p>
               <strong>Numero de celular:</strong> {{ selectedItem.cell_phone }}
-            </p>
-          </div>
-        </div>
-        <div class="details">
-          <i class="fa fa-bugs fa-2x iconInfo"></i>
-          <div>
-            <p>
-              <strong>Producto interno:</strong> {{ selectedItem.productoInt }}
-            </p>
-            <p>
-              <strong>Producto externo:</strong> {{ selectedItem.productoExt }}
             </p>
           </div>
         </div>
