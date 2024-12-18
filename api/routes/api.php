@@ -90,6 +90,7 @@ Route::get('/totalCaja', [AdminController::class, 'totalCaja']);
 
 //RUTA PARA LA MODIFICACION
 Route::put('actualizarEstado/{id}', [CompletarOrdenesController::class, 'actualizarEstado']);
+Route::put('datoNuevo/{id}', [CompletarOrdenesController::class, 'datoNuevo']);
 Route::put('desactivarCliente/{id}', [ClientesController::class, 'desactivarCliente']);
 Route::put('desactivarOrden/{id}', [OrdensController::class, 'desactivarOrden']);
 Route::put('verEstadoOrden/{id}', [OrdensController::class, 'verEstadoOrden']);

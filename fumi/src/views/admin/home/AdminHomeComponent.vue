@@ -155,7 +155,7 @@
       <el-table-column class="" label="">
         <template #default="{ row }">
           <button class="ml-5 px-5 my-5 h-3 w-3 rounded-full"
-            :style="{ backgroundColor: row.requiere3 === 'Credito' ? 'Red' : 'Green' }" @click="handleEstadoClick(row)">
+          :style="{ backgroundColor: row.requiere3 === 'Credito' ? 'Red' : 'Green'}">
           </button>
         </template>
       </el-table-column>
@@ -173,7 +173,7 @@
       </el-table-column>
 
       <el-table-column prop="infoorden_facturacion" label="Facturacion" width="125" sortable />
-      <el-table-column prop="id" label="No. Factura" width="125" sortable />
+      <el-table-column prop="facturaOrden" label="No. Factura" width="125" sortable />
       <el-table-column prop="pago" label="Monto" sortable />
       <el-table-column prop="requiere3" label="Estado">
         <template #default="{ row }">
@@ -265,8 +265,8 @@ export default {
     totalVentasConFactura: 0,
     totalCreditosSinFactura: 0,
     totalCreditosConFactura: 0,
-    f1: null,
-    f2: null,
+    f1: '01-01-2024',
+    f2: '30-12-2024',
     searchQuery1: '',
     searchQuery2: '',
     searchQuery3: '',
@@ -443,7 +443,6 @@ resetFilters() {
 <style>
 .el-carousel__item {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  transition: all 1.5s ease-in-out;
   border-radius: 10px;
   /* Added rounded corners */
   margin: 10px 0px;

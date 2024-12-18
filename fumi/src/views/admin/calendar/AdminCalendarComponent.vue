@@ -116,11 +116,6 @@ searchQueryPhone:'',
       f1 += "-" + fecha.split("-")[1]
       f1 += "-" + fecha.split("-")[0]
       return new Date(f1)
-    },parseDate(fecha) {
-      var f1 = fecha.split("-")[2]
-      f1 += "-" + fecha.split("-")[1]
-      f1 += "-" + fecha.split("-")[0]
-      return new Date(f1)
     },
 
     filterData() {

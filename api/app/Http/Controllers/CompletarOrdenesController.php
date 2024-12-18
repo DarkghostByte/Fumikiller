@@ -32,6 +32,7 @@ class CompletarOrdenesController extends Controller
         'clientes.lastname1',
         'clientes.lastname2',
         'clientes.tradename',
+        'clientes.correo',
         'clientes.home',
         'clientes.numAddress',
         'clientes.id_colonia',
@@ -47,7 +48,6 @@ class CompletarOrdenesController extends Controller
         'empleados1.nameEmpleado as nameEmpleado1',
         'empleados2.nameEmpleado as nameEmpleado2',
         'empleados1.ariasEmpleado as ariasEmpleado1',
-        
     ])
     ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
     ->join('productosInternos as productosInternos1', 'completarordenes.id_productosInternos', '=', 'productosInternos1.id')
@@ -61,6 +61,7 @@ class CompletarOrdenesController extends Controller
     ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
     ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
     ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id');
+    
 
     if ($id_cliente) {
         $query->where('orden.id_cliente', $id_cliente);
@@ -103,6 +104,7 @@ class CompletarOrdenesController extends Controller
             'requiere1' => 'array|min:1',
             'requiere2' => 'array|min:1',
             'requiere3' => 'required|min:1',
+            'facturaOrden' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
             return response()->json([
@@ -126,6 +128,7 @@ class CompletarOrdenesController extends Controller
             $data->requiere1 = json_encode($request->requiere1);
             $data->requiere2 = json_encode($request->requiere2);
             $data->requiere3 = $request->requiere3;
+            $data->facturaOrden = $request->facturaOrden;
             $data->save();
 
             return response()->json([
@@ -215,6 +218,7 @@ class CompletarOrdenesController extends Controller
             'requiere1' => 'required|min:1',
             'requiere2' => 'required|min:1',
             'requiere3' => 'required|min:1',
+            'facturaOrden' => 'required|min:1',
         ]);
         if (!$completarOrden) {
             return response()->json([
@@ -284,5 +288,40 @@ class CompletarOrdenesController extends Controller
                 'data' => $completarOrden
             ]);
         }
+
+        public function datoNuevo(Request $request, $id)
+        {
+            $completarOrden = CompletarOrden::find($id);
+
+            $validator = Validator::make($request->all(), [
+                'facturaOrden' => 'required|min:1', 
+            ]);
+
+            if (!$completarOrden) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Orden no encontrada'
+                ], 404);
+            }
+
+            if ($validator->fails()) {
+                return response()->json([
+                    'status' => 'failed',
+                    'message' => 'Error de validación',
+                    'errors' => $validator->errors()
+                ], 400);
+            }
+
+            // Actualizar el estado y el pago
+            $completarOrden->facturaOrden = $request->facturaOrden;
+            $completarOrden->save();
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Estado  actualizados correctamente',
+                'data' => $completarOrden
+            ]);
+        }
+
 
 }

@@ -31,8 +31,6 @@ class FacturasController extends Controller
             'colonias.codigoPostal',
             'ciudades.ciudad',
             'orden.date2',
-            //'orden.date2',
-            //'facturas.folioFactura',
         ])
         ->join('orden', 'facturas.id_ordenCompleta', '=', 'orden.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')

@@ -42,9 +42,14 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="Folio" sortable width="120">
+        <el-table-column label="o. TRabajo" sortable>
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
+          </template>
+        </el-table-column>
+        <el-table-column label="" sortable width="120">
+          <template #default="scope">
+            {{ scope.row.facturaOrden }}
           </template>
         </el-table-column>
         <el-table-column label="Persona fisica" sortable width="220">
@@ -54,14 +59,9 @@
         </el-table-column>
 
         <el-table-column prop="tradename" label="Persona moral" sortable width="180" />
-        
-        <el-table-column label="Dirección" sortable width="420">
-          <template #default="scope">
-            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + '#'
-              + scope.row.numAddress }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable />
+        <el-table-column prop="correo" label="Correo" sortable />
+        <el-table-column prop="date2" label="Monto" sortable />
+        <el-table-column prop="pago" label="Monto" sortable />
 
       </el-table>
     </div>
@@ -69,7 +69,7 @@
 
     <!-- MODAL 2 -->
     <el-dialog v-model="dialogVisibleFactura" title="Facturación" width="30%">
-      <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef3" :rules="rules3"
+      <el-form :model="form2" label-width="auto" style="max-width: 100%" ref="formRef3" :rules="rules"
         :label-position="'top'">
         <div class="clientInfo">
           <div class="details">
@@ -122,8 +122,8 @@
           <div class="details">
             <i class="fa fa-file-contract fa-2x iconInfo"></i>
             <div>
-              <el-form-item class="label-negro" prop="folioFactura" label="Folio de factura:" style="color: black; width: 300px;">
-                <el-input type="number" v-model="form2.folioFactura" class="px-1" placeholder="Ingresa el folio"/>
+              <el-form-item class="label-negro" prop="facturaOrden" label="Folio de factura:" style="color: black; width: 300px;">
+                <el-input type="number" v-model="form2.facturaOrden" class="px-1" placeholder="Ingresa el folio"/>
               </el-form-item>
             </div>
           </div>
@@ -164,25 +164,11 @@ export default {
     searchQueryAddress: '',
     searchQueryPhone: '',
     form2:{
-      id_ordenCompleta: '',
-      folioFactura:'',
-      statusFolio:'Alta',
+      facturaOrden: '',
     },
     rules: {
-      RemisionDate: [
+      facturaOrden: [
         { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      RemisionCertificado: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      RemisionMonto: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      RemisionObservaciones: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
         { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
       ],
     },
@@ -197,8 +183,8 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('orden').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoorden_facturacion !== 'No');
+      axios.get('completarOrden').then(res => {
+        this.tableData = res.data.data.filter(row => row.facturaOrden === 'Pendiente');
         this.filteredData = this.tableData;
         console.log('Datos', this.tableData)
       });
@@ -215,65 +201,54 @@ export default {
     },
 
     createFactura() {
-      this.$refs.formRef3.validate(async (valid) => {
-        if (valid) {
-          try {
-            const response = await axios.post('facturas', {
-              ...this.form2,
-              id_ordenCompleta: this.selectedItem.id,
-            });
-            console.log(response);
-            this.dialogVisibleFactura = false;
+  this.$refs.formRef3.validate(async (valid) => {
+    if (valid) {
+      try {
+        const updatedData = { facturaOrden: this.form2.facturaOrden };
+        await axios.put('datoNuevo/' + this.selectedItem.id, updatedData)
+          .then(response => {
+            console.log('Estado actualizado correctamente:', response.data);
             this.refresh();
-            this.$message.success('La factura se creo correctamente');
             ElNotification({
-              title: 'Alerta',
-              message: 'Registro insertado correctamente',
+              title: 'Actualización de datos',
+              message: `Se actualizaron los datos.`,
               type: 'success'
-            })
-            this.$refs.formRef3.resetFields();
-
-            const updatedData = {
-                infoorden_facturacion: this.form2.infoorden_facturacion === 'No' ? 'Si' : 'No'
-              };
-
-              axios.put('verEstadoFacturacion/' + this.selectedItem.id, updatedData)
-                .then(response => {
-                  console.log('Estado actualizado correctamente:', response.data);
-                  this.refresh();
-                  ElNotification({
-                    title: 'Actualización de datos',
-                    message: `Se actualizaron los datos.`,
-                    type: 'success'
-                  });
-                })
-                .catch(error => {
-                  console.error('Error al actualizar el estado:', error);
-                });
-
-          } catch (error) {
-            console.error('Error creating factura:', error.response.data);
-            this.$message.error('Error al crear el factura');
+            });
+          })
+          .catch(error => {
+            console.error('Error al actualizar el estado:', error);
+            this.$message.error('Error al actualizar el estado');
             ElNotification({
               title: 'Error',
-              message: 'Favor de llenar los campos',
+              message: 'Ocurrió un error al actualizar.',
               type: 'error'
-            })
-            console.error('Error creating factura:', error.response.data);
-            this.$message.error('Error al crear el factura');
-          }
-        } else {
-          console.log('Validation failed');
-          console.log('Validation failed');
-          ElNotification({
-            title: 'Error',
-            message: 'Favor de llenar los campos',
-            type: 'error'
+            });
           });
-          return false;
-        }
+        this.dialogVisibleFactura = false;
+        this.refresh();
+        this.$refs.formRef3.resetFields();
+        this.$message.success('La factura se creo correctamente');
+      } catch (error) {
+        console.error('Error creating factura:', error.response.data);
+        this.$message.error('Error al crear el factura');
+        ElNotification({
+          title: 'Error',
+          message: 'Favor de llenar los campos',
+          type: 'error'
+        });
+      }
+    } else {
+      console.log('Validation failed');
+      console.log('Validation failed');
+      ElNotification({
+        title: 'Error',
+        message: 'Favor de llenar los campos',
+        type: 'error'
       });
-    },
+      return false;
+    }
+  });
+},
 
     filterData() {
   this.filteredData = this.tableData.filter((clientes) => {

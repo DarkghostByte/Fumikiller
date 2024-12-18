@@ -134,14 +134,16 @@
           </div>
           <div class="flex">
             <el-table :data="filteredData3" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
-              style="width:100%;">
-              <el-table-column prop="date1" width="120" />
-              <el-table-column label="Parte de Fumigaciones" width="300">
-                <template #default>
-                  {{ 'Fumigacion' }}
+              style="width:100%; text-align:center;">
+              <el-table-column prop="date1" label="Fecha" width="" />
+              <el-table-column prop="id_orden" label="O. Trabajo" width="" />
+              <el-table-column prop="facturaOrden" label="Factura" width="" />
+              <el-table-column label="Datos" width="130">
+                <template #default="scope">
+                  {{ scope.row.requiere3 }}
                 </template>
               </el-table-column>
-              <el-table-column prop="pago" width="150" :formatter="(row) => formatNumber(row, 'pago')">
+              <el-table-column prop="pago" label="Monto" width="" :formatter="(row) => formatNumber(row, 'pago')">
               </el-table-column>
             </el-table>
           </div>
@@ -159,11 +161,11 @@
           <div class="flex">
             <el-table :data="filteredData2" :default-sort="{ prop: 'id', order: 'ascending' }" stripe
               style="width:100%;">
-              <el-table-column label="Fecha" prop="dateEgresos" width="120" sortable />
-              <el-table-column label="Descripcion" prop="descriptionEgresos" width="130" sortable />
-              <el-table-column label="Departamento" prop="comercio" width="145" sortable />
-              <el-table-column label="Caja/Banco/Deposito" prop="dataEgresos" width="200" sortable />
-              <el-table-column label="Monto" prop="montoEgresos" width="150" sortable
+              <el-table-column label="Fecha" prop="dateEgresos" width="" sortable />
+              <el-table-column label="Descripcion" prop="descriptionEgresos" width="" sortable />
+              <el-table-column label="Departamento" prop="comercio" width="" sortable />
+              <el-table-column label="Caja/Banco/Deposito" prop="dataEgresos" width="" sortable />
+              <el-table-column label="Monto" prop="montoEgresos" width="" sortable
                 :formatter="(row) => formatNumber(row, 'montoEgresos')"></el-table-column>
             </el-table>
           </div>
@@ -175,8 +177,8 @@
       <el-form :model="form1" label-width="auto" style="max-width: 100%" ref="formRef" :rules="rules"
         :label-position="'top'">
         <div class="row">
-          <el-form-item prop="dataEgresos" label="Datos">
-            <el-radio-group v-model="form2.dataEgresos" size="large">
+          <el-form-item prop="dataIngreso" label="Datos">
+            <el-radio-group v-model="form1.dataIngreso" size="large">
               <el-radio-button label="Caja" value="Caja" />
               <el-radio-button label="Banco" value="Banco" />
             </el-radio-group> 

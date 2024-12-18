@@ -131,6 +131,19 @@
           </el-form-item>
 
         </div>
+
+        <!-- FILA DE FACTURAS -->
+        <p style="font-size: 18px; font-weight: bold;">Factura</p>
+        <div class="flex">
+          <el-form-item prop="facturaOrden" label="Folio de la factura" class="px-2">
+            <el-radio-group v-model="form.facturaOrden">
+              <el-input class="px-2" v-model="form.facturaOrden" placeholder="Ingresa el numero de factura" style="width:250px;"/>
+              <el-radio label="Pendiente" value="Pendiente" border />
+              <el-radio label="No aplica" value="No aplica" border />
+            </el-radio-group>
+          </el-form-item>
+        </div>
+        
         <!-- FILA DE REQUIERE DE -->
         <p style="font-size: 18px; font-weight: bold;">Requiere de:</p>
         <div class="flex">
@@ -343,6 +356,7 @@ export default {
       requiere1: [],
       requiere2: [],
       requiere3: [],
+      facturaOrden: 'No aplica',
       name: '',
       lastname1: '',
       lastname2: '',
@@ -398,6 +412,10 @@ export default {
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
       ],
       pago: [
+        { required: true, message: 'El pago es requerido', trigger: 'blur' },
+        { min: 1, max: 10, message: 'Longitud debería ser 1 a 10', trigger: 'blur' }
+      ],
+      facturaOrden: [
         { required: true, message: 'El pago es requerido', trigger: 'blur' },
         { min: 1, max: 10, message: 'Longitud debería ser 1 a 10', trigger: 'blur' }
       ],

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Validator;
 use App\Models\Orden;
 use App\Models\CompletarOrden;
@@ -423,6 +424,8 @@ class PdfsController extends Controller
     }
 
     public function generarVentasTotales($f1,$f2) {
+        //$f1 = new Date ('01-01-2024');
+        //$f2 = new Date ('30-12-2024');
         //$f1 = Carbon::parse($f1)->format('d-m-Y');
         //$f2 = Carbon::parse($f2)->format('d-m-Y');
         // Realizar la consulta sin filtrar por 'id_cliente'
@@ -464,7 +467,6 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->orWhere('completarordenes.requiere3', 'like', '%')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 

@@ -157,7 +157,7 @@
           <div style="color:white; display:flex; justify-content: center; transition:10s;">
             <el-form-item>
               <el-button type="primary" @click="updateDatos">Guardar</el-button>
-              <el-button @click="resetForm">Reset</el-button>
+            
             </el-form-item>
           </div>
       </el-form>

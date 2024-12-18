@@ -32,15 +32,20 @@
               </el-button>
             </template>
           </el-table-column>
-          <el-table-column label="Direccion" sortable width="400">
+          <el-table-column label="O. Trabajo" sortable width="115">
+            <template #default="scope">
+              {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
+            </template>
+          </el-table-column>
+          <el-table-column label="Direccion" sortable width="320">
             <template #default="scope">
               {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
             </template>
           </el-table-column>
           <el-table-column prop="cell_phone" label="Celular" sortable width="100" />
-          <el-table-column prop="pago" label="Monto" sortable width="100" />
+          <el-table-column prop="pago" label="Monto" sortable width="95" />
           <el-table-column prop="requiere3" label="Datos" sortable width="90" />
-          <el-table-column prop="ariasEmpleado1" label="Responsable" sortable width="130" />
+          <el-table-column prop="ariasEmpleado1" label="Fumigador" sortable width="120" />
           <el-table-column prop="date1" label="F. Orden" sortable width="130" />
           <el-table-column prop="date2" label="F. Fumigacion" sortable width="140" />
           <el-table-column label="">
@@ -52,6 +57,7 @@
               </router-link>
             </template>
           </el-table-column>
+          <!--          
           <el-table-column label="">
             <template #default="scope">
               <el-button style="color:black" size="small" type="danger" @click="bajaOrden(scope.row)">
@@ -59,6 +65,8 @@
               </el-button>
             </template>
           </el-table-column>
+          -->
+
         </el-table>
       </div>
       
@@ -144,6 +152,16 @@ export default {
       }
     },
     handleEdit() {},
+    formatDate(id_orden, paddingLength = 5, paddingChar = '0') {
+  // Convert id to string in case it's a number
+  const idString = String(id_orden);
+
+  // Ensure paddingLength is a positive integer
+  paddingLength = Math.max(0, Math.floor(paddingLength));
+
+  // Pad the string with paddingChar
+  return idString.padStart(paddingLength, paddingChar);
+},
   }
 };
 </script>

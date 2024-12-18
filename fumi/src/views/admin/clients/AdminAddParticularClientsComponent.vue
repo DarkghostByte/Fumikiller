@@ -58,7 +58,7 @@
         </div>
 
         <!-- Segunda Fila -->
-        <p class="px-5 datosCliente1">Domicilio:</p>
+        <p class="px-5 datosCliente">Domicilio:</p>
         <div class="flex">
           <el-form-item prop="id_vias" label="Tipo de via:" class="px-5">
             <el-select v-model="form1.id_vias" placeholder="Selecciona el tipo de via" @change="fetchTypeRoad" style="width: 150px;">

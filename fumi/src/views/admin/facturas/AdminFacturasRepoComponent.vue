@@ -44,7 +44,7 @@
         <!-- Agrega las demás columnas aquí -->
         <el-table-column label="Folio" sortable  width="120">
           <template #default="scope">
-            {{ 'No. ' + scope.row.folioFactura }}
+            {{ 'No. ' + scope.row.facturaOrden }}
           </template>
         </el-table-column>
         <el-table-column label="Persona fisica" sortable width="180">
@@ -144,11 +144,12 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('facturas').then(res => {
-        this.tableData = res.data.data;
+      axios.get('completarOrden').then(res => {
+        this.tableData = res.data.data.filter(row => row.facturaOrden !== 'No aplica' && row.facturaOrden !== 'Pendiente');
         this.filteredData = this.tableData;
+        console.log('Datos', this.tableData)
       });
-    },  
+    },
     seleccionar(row) {
       console.log(row);
       this.selectedItem = row;
