@@ -10,15 +10,15 @@
     </head>
 <body >
 <table class="tblDia" >
-    <h5 class="txtDia">DIA</h5>
-    <h5 class="txtDia1">fecha asi</h5>
+    <h5 class="txtDia">FOLIO</h5>
+    <h5 class="txtDia1">00001</h5>
 </table>
 <img class="membre" src="{{ $base64 }}" alt="">
     
     <div class="meminfo">
         
-        <div style="margin-top: -30%; margin-left:70%; padding-bottom:-20px;">
-            <h2 class="letrasFlex%;" >Orden de Compra</h2>
+        <div style="margin-top:-35px; width:250px;">
+            <h2 class="letrasFlex;" >Orden de Compra</h2>
         </div>
     </div>
     <header>    
@@ -29,101 +29,64 @@
         <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clthrs">RAZON SOCIAL:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                puca
+            <th class="clthrs" style="width: 40px;">FECHA:</th>
+            <th class="renDivThDT">
+            <div class="renDiv1DT">
+                jueves, 14 de noviembre de 2024 
             </div>
             </th>  
         </table>
             
         <table>
-            <th class="clth">NOMBRE:</th>
+            <th class="clth">PARA:</th>
             <th class="renDivTh">
             <div class="renDiv1">
-                maye
+                
             </div>
             </th>  
         </table>
         <table>
-            <th>DOMICILIO:</th>
             <th class="renDivTh">
-            <div class="renDiv">
-                tengo
+            <div class="renDiv" style="text-align: left;">
+                FAVOR DE LLENAR EL TANQUE DE GASOLINA AL VEHICULO:
             </div>
             </th> 
-            <th> CIUDAD:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                bigote
-            </div>
-            </th> 
+            <th></th>
         </table>
         <table>
-            <th class="clthcelu"  >COLONIA:</th>
             <th class="renDivTh" >
-            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
-                ddd
-            </div>
-            </th> 
-            <th class="clthcelu">TELEFONO:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                ddd
+            <div class="renDiv1" style="height: 20px;" >
             </div>
             </th> 
             
         </table>
         <table>
-            <th class="clthcelu">CELULAR:</th>
             <th class="renDivTh">
-            <div class="renDiv1">
-                l
-            </div>
-            </th> 
-            <th class="clthtipo">TIPO DE LUGAR:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                i
+            <div class="renDiv1" style="text-align: left;">
+                RAM 700 2024
             </div>
             </th>  
         </table>
         <div >
-        <table class="btnCir">
-            
-            <th class="clth118">REQUIERE DE:</th>
-            <div class="btntxt"></div>
-            <th class="clth22" > Certificado</th>
-            <th class="btnrd"><button class="button button5"> </button>
-            <th class="clth114">NUMERO:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                a
-            </div>
-            </th> 
-            <th class="clth113">IMPORTE:</th>
+        <table>
+            <th>EMPLEADO:</th>
             <th class="renDivTh">
             <div class="renDiv13">
-                d
+              
             </div>
             </th>
-            
+            <th style="border: 1px solid black; width:80px;">IMPORTE</th>
+            <th style="border: 1px solid black; width:70px;"></th>   
         </table>
-
         </div>
+
         
-        <table class="">
-            <th>OBSERVACIONES:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                e
-            </div>
-            </th>            
+        <table style="text-align:center; width:30%; margin-left:30%;">
+            <th style="width: 5px;">AUTORIZO:</th>
+            <th style="width: 200px; border-bottom:1px solid black;"></th>
         </table>
-
-        <div class="ctr">
-            <h5 class="tipo">ORIGINAL CLIENTE</h5>
-        </div>
+        
+    
 
         <div class="footDiv"></div>
         <div class="footDiv1"></div>
@@ -140,139 +103,6 @@
 
 
         
-    </main>
-    </div>
-    <div class="separacion"></div>
-    
-</body>
-<body >
-    <table class="tblDia" >
-        <h5 class="txtDia">DIA</h5>
-        <h5 class="txtDia1">o</h5>
-    </table>
-    <img class="membre2" style="" src="{{ $base64 }}" alt="">
-        
-        <div class="meminfo">
-            
-            <div style="margin-top: -30%; margin-left:70%; padding-bottom:-20px;">
-                <h2 class="letrasFlex%;" >Orden de Compra</h2>
-            </div>
-        </div>
-    
-    
-    <header>    
-        
-    </header>
-
-    <main> 
-        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
-        <div class="fondLimitador"></div>
-        <table>
-            <th class="clth1">RAZON SOCIAL:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                m
-            </div>
-            </th>  
-        </table>
-            
-        <table>
-            <th class="clth">NOMBRE:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                i
-            </div>
-            </th>  
-        </table>
-        <table>
-            <th>DOMICILIO:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                a
-            </div>
-            </th> 
-            <th> CIUDAD:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                m
-            </div>
-            </th> 
-        </table>
-        <table>
-            <th class="clthcelu"  >COLONIA:</th>
-            <th class="renDivTh" >
-            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
-                o
-            </div>
-            </th> 
-            <th class="clthcelu">TELEFONO:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                r
-            </div>
-            </th> 
-            
-        </table>
-        <table>
-            <th class="clthcelu">CELULAR:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                l
-            </div>
-            </th> 
-            <th class="clthtipo">TIPO DE LUGAR:</th>
-            <th class="renDivTh">
-            <div class="renDiv1">
-                i
-            </div>
-            </th>  
-        </table>
-        <div >
-        <table class="btnCir">
-            
-            <th class="clth118">REQUIERE DE:</th>
-            <div class="btntxt"></div>
-            <th class="clth22" > Certificado</th>
-            <th class="btnrd"><button class="button button5"> </button>
-            <th class="clth114">NUMERO:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                z
-            </div>
-            </th> 
-            <th class="clth113">IMPORTE:</th>
-            <th class="renDivTh">
-            <div class="renDiv13">
-                moto
-            </div>
-            </th>
-            
-        </table>
-
-        </div>
-        
-        <table class="">
-            <th>OBSERVACIONES:</th>
-            <th class="renDivTh">
-            <div class="renDiv">
-                g
-            </div>
-            </th>            
-        </table>
-
-        <div class="ctr">
-            <h5 class="tipo">COPIA FUMI-KILLE'R</h5>
-        </div>
-
-        <div class="footDiv"></div>
-        <div class="footDiv1"></div>
-        <table class="footer">
-            <th class="footer">Calle del Abeto No.2201</th>
-            <th> Col. Alamedas </th>
-            <th> C.P. 31704</th>
-            <th> Nuevo Casas Grandes, Chihu. </th>
-            <th> Tel.636-694-65-15</th>
-        </table>
     </main>
     </div>
     
@@ -283,7 +113,7 @@
         justify-content: center;
         text-align: center;
         justify-content: center;
-        width: 38px;;
+        width: 50px;
         margin-top:-20px;
         margin-left:75%;
         border: 1px solid black;
@@ -295,7 +125,7 @@
         width: 100px;
         position:absolute;
         margin-top:-50px;
-        margin-left:80%;
+        margin-left:82%;
         border: 1px solid black;
     }
     .txtBDDia{
@@ -323,7 +153,7 @@
         border:1px solid black;
     }
     .clth118{
-        width:65.7%;
+        width:69%;
     }
     .clthrs{
         width:19.9%;
@@ -340,7 +170,7 @@
         
     }
     .clth113{
-        weight:30%;
+        width:5%;
     }
     .clth1{
         width: 21%;
@@ -348,6 +178,7 @@
     .letrasflex{
         margin-bottom: 40px;
         left: 20px;
+        width: 500px;
     }
     .meminfo{
         text-align: center;
@@ -359,13 +190,13 @@
     }
     .membre{
         margin-top:0px;
-        padding-left: 160px;
+        padding-left: 110px;
         height:15%;
         width: auto;
     }  
     .membre2{
         margin-top:0px;
-        padding-left: 160px;
+        padding-left: 140px;
         height:13.8%;
         width: auto;
     }    
@@ -378,6 +209,9 @@
     .renDivTh{
         width: 100%;
     }
+    .renDivThDT{
+        width: 100%;
+    }
     .renDiv{
         border-bottom: 1px solid black;
         height:15px;
@@ -386,7 +220,7 @@
     .renDiv13{
         border-bottom: 1px solid black;
         height:15px;
-        width:210%;        
+        width:100%;        
 
     }
     .renDiv1{
@@ -395,21 +229,28 @@
         height:15px;
         width:100%;
         margin-left:-5px;
-    }.clth11{
+    }
+    .renDiv1DT{
+        border-bottom: 1px solid transparent;
+        height:15px;
+        width:100%;
+        margin-left:-5px;
+    }
+    .clth11{
         width: 50%;
     }
     .clthcelu{
         width: 5%;
     }
     .clthtipo{
-        width: 42.7%;
+        width: 47%;
     }
     body{
         width: 100%;
         font-family: Arial, Helvetica, sans-serif;
     }
     h1{
-        text-alaing:center;
+        text-align:center;
     }
     img{
         margin-top:30px;
@@ -425,7 +266,7 @@
         margin:20px;
         background-color:#104e85 ;
         color:white;
-        text-aling:center;       
+        text-align:center;       
     }
     .tblAg{
         position:absolute;
