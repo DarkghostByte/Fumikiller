@@ -797,10 +797,7 @@
 </body>
 
 <style>
-    .mitad{
-        
-        
-    }
+
     .clth1112{
         width: 5%;
     }
