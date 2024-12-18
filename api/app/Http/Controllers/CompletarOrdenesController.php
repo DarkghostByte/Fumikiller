@@ -35,6 +35,7 @@ class CompletarOrdenesController extends Controller
         'clientes.correo',
         'clientes.home',
         'clientes.numAddress',
+        'clientes.comercio',
         'clientes.id_colonia',
         'clientes.id_city',
         'clientes.cell_phone',

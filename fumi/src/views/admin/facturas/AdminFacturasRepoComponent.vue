@@ -31,7 +31,7 @@
 
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 70%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
 
         <el-table-column label="" width="100" >
@@ -42,6 +42,11 @@
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
+        <el-table-column label="O. Trabajo" sortable width="115">
+          <template #default="scope">
+            {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
+          </template>
+        </el-table-column>
         <el-table-column label="Folio" sortable  width="120">
           <template #default="scope">
             {{ 'No. ' + scope.row.facturaOrden }}
@@ -53,7 +58,9 @@
           </template>
         </el-table-column>
         <el-table-column prop="tradename" label="Persona moral" sortable width="180" />
-        <el-table-column prop="correo" label="Correo" sortable width="400" />
+        <el-table-column prop="correo" label="Correo" sortable width="250" />
+        <el-table-column prop="date2" label="F. Fumigacion" sortable width="150" />
+        <el-table-column prop="pago" label="Monto" sortable width="auto" />
 
       </el-table>
     </div>
@@ -61,17 +68,20 @@
 
     <!-- MODAL 1 -->
     <el-dialog v-model="dialogVisibleView" title="Datos de la factura" width="700" height="500">
-      <div class="clientInfo">
+      <div class="FacturasInfo">
         <div class="details">
-          <i class="fa fa-file fa-2x iconInfo"></i>
+          <i class="fa fa-file fa-2x iconFacturasInfo"></i>
           <div>
             <p>
-              <strong>Num. Factura:</strong> {{ selectedItem.folioFactura }}
+              <strong>Num. Orden de Trabajo:</strong> {{ formatOrdenNumber(selectedItem.id_orden) }}
+            </p>
+            <p>
+              <strong>Num. Factura:</strong> {{ selectedItem.facturaOrden }}
             </p>
           </div>
         </div>
         <div class="details">
-          <i class="fa fa-user fa-2x iconInfo"></i>
+          <i class="fa fa-user fa-2x iconFacturasInfo"></i>
           <div>
             <p>
               <strong>Persona fisica:</strong> {{ selectedItem.name+' '+selectedItem.lastname1+' '+selectedItem.lastname2 }}
@@ -82,7 +92,7 @@
           </div>
         </div>
         <div class="details">
-          <i class="fa fa-city fa-2x iconInfo"></i>
+          <i class="fa fa-city fa-2x iconFacturasInfo"></i>
           <div>
             <p>
               <strong>Domicilio:</strong> {{ selectedItem.street }} {{ selectedItem.home }} #{{ selectedItem.numAddress
@@ -98,10 +108,24 @@
           
         </div>
         <div class="details">
-          <i class="fa fa-envelope fa-2x iconInfo"></i>
+          <i class="fa fa-envelope fa-2x iconFacturasInfo"></i>
           <div>
             <p>
               <strong>Correo:</strong> {{ selectedItem.correo }}
+            </p>
+            <p>
+              <strong>Celular:</strong> {{ selectedItem.cell_phone }}
+            </p>
+          </div>
+        </div>
+        <div class="details">
+          <i class="fa fa-money-bills fa-2x iconFacturasInfo"></i>
+          <div>
+            <p>
+              <strong>F. Fumigacion:</strong> {{ selectedItem.date2 }}
+            </p>
+            <p>
+              <strong>Monto:</strong> {{ '$ '+formatMoney(selectedItem.pago) }}
             </p>
           </div>
         </div>
@@ -121,7 +145,7 @@ import axios from 'axios';
 //import { ElNotification } from 'element-plus';
 
 export default {
-  name: 'AdminClientsComponent',
+  name: 'AdminFacturasRepoComponent',
   data: () => ({
     dialogVisible: false,
     dialogVisibleView: false,
@@ -199,9 +223,9 @@ export default {
       }
     },
     
-    formatDate(folioFactura, paddingLength = 5, paddingChar = '0') {
+    formatDate(id_orden, paddingLength = 5, paddingChar = '0') {
   // Convert id to string in case it's a number
-  const idString = String(folioFactura);
+  const idString = String(id_orden);
 
   // Ensure paddingLength is a positive integer
   paddingLength = Math.max(0, Math.floor(paddingLength));
@@ -209,12 +233,21 @@ export default {
   // Pad the string with paddingChar
   return idString.padStart(paddingLength, paddingChar);
 },
+
+formatOrdenNumber(id_orden) {
+      return 'No. ' + id_orden.toString().padStart(5, '0');
+    },
+
+    formatMoney(amount) {
+  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // O "," para usar comas
+}
+
   }
 };
 </script>
 
 <style>
-.clientInfo {
+.FacturasInfo {
   background-color: #f5f5f5;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 15px;
@@ -235,8 +268,8 @@ p {
   margin-bottom: 15px;
 }
 
-.iconInfo {
-  color: rgb(64, 255, 89);
+.iconFacturasInfo {
+  color: gold;
   margin-right: 10px;
 }
 

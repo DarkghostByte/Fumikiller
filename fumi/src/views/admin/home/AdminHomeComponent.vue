@@ -154,9 +154,15 @@
       style="width: 100%; margin: auto;" stripe>
       <el-table-column class="" label="">
         <template #default="{ row }">
-          <button class="ml-5 px-5 my-5 h-3 w-3 rounded-full"
-          :style="{ backgroundColor: row.requiere3 === 'Credito' ? 'Red' : 'Green'}">
-          </button>
+          <div class="ml-5 px-5 my-5 h-3 w-3 rounded-full"
+          :style="{ 
+            backgroundColor: 
+              row.requiere3 === 'Credito' ? 'red' :
+              row.requiere3 === 'Pagado/Efectivo' ? 'green' :
+              row.requiere3 === 'Pagado/Banco' ? 'blue' :
+              row.requiere3 === 'Cortesia' ? 'yellow' : 'white' 
+          }">
+          </div>
         </template>
       </el-table-column>
       <el-table-column label="Nombre" sortable width="200">

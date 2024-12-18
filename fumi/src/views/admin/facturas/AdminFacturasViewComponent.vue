@@ -35,19 +35,19 @@
         <!-- Columnas de la tabla -->
         <el-table-column label="" width="100">
           <template #default="scope">
-            <el-button @click="remision(scope.row)" class="ml-2 el-button el-button--primary" style="color:black">
+            <el-button @click="facturasRow(scope.row)" class="ml-2 el-button el-button--primary" style="color:black">
               <span class="material-symbols-outlined">Description</span>
             </el-button>
           </template>
         </el-table-column>
 
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="o. TRabajo" sortable>
+        <el-table-column label="O. Trabajo" sortable width="115">
           <template #default="scope">
-            {{ 'No. ' + this.formatDate(scope.row.id) }}
+            {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
           </template>
         </el-table-column>
-        <el-table-column label="" sortable width="120">
+        <el-table-column label="Estado" sortable width="100">
           <template #default="scope">
             {{ scope.row.facturaOrden }}
           </template>
@@ -59,9 +59,9 @@
         </el-table-column>
 
         <el-table-column prop="tradename" label="Persona moral" sortable width="180" />
-        <el-table-column prop="correo" label="Correo" sortable />
-        <el-table-column prop="date2" label="Monto" sortable />
-        <el-table-column prop="pago" label="Monto" sortable />
+        <el-table-column prop="correo" label="Correo" sortable width="250" />
+        <el-table-column prop="date2" label="F. Fumigacion" sortable width="140" />
+        <el-table-column prop="pago" label="Monto" sortable width="200" />
 
       </el-table>
     </div>
@@ -194,7 +194,7 @@ export default {
       this.selectedItem = row;
       this.dialogVisibleView = true;
     },
-    remision(row) {
+    facturasRow(row) {
       console.log(row);
       this.selectedItem = row;
       this.dialogVisibleFactura = true;
@@ -304,9 +304,9 @@ export default {
         console.error('Error al obtener los datos:', error);
       }
     },
-    formatDate(id, paddingLength = 5, paddingChar = '0') {
+    formatDate(id_orden, paddingLength = 5, paddingChar = '0') {
   // Convert id to string in case it's a number
-  const idString = String(id);
+  const idString = String(id_orden);
 
   // Ensure paddingLength is a positive integer
   paddingLength = Math.max(0, Math.floor(paddingLength));
@@ -326,7 +326,7 @@ export default {
 }
 
 .details {
-  padding: 20px;
+  padding: 15px;
   display: flex;
 }
 
