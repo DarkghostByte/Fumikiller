@@ -20,9 +20,9 @@
       @input="filterData" style="width: 100%;"/>
       <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
       @input="filterData" style="width: 100%;"/>
-    <el-date-picker class="mx-2" v-model="selectedDate" @change="filterDate10" type="date" format="DD-MM-YYYY"
+    <el-date-picker class="mx-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
       value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
-    <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterDate10" type="date" format="DD-MM-YYYY"
+    <el-date-picker class="mx-2" v-model="selectedDate1" @change="filterData" type="date" format="DD-MM-YYYY"
       value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%;"/>
       <el-input class="px-2" placeholder="Buscar por fumigador" v-model="searchQueryFumi"
       @input="filterData" style="width: 100%;"/>
@@ -146,6 +146,13 @@ export default {
   return idString.padStart(paddingLength, paddingChar);
 },
 
+parseDate(fecha) {
+      var f1 = fecha.split("-")[2]
+      f1 += "-" + fecha.split("-")[1]
+      f1 += "-" + fecha.split("-")[0]
+      return new Date(f1)
+    },
+
 filterData() {
   this.filteredData = this.tableData.filter((completarOrden) => {
     const combinedName = completarOrden.name.toLowerCase() + ' ' + completarOrden.lastname1.toLowerCase() + ' ' + completarOrden.lastname2.toLowerCase();
@@ -171,96 +178,33 @@ filterData() {
     }
 
     if (this.selectedDate && this.selectedDate1) {
-        // Convert dates to Date objects and handle null values
-        const startDate = this.selectedDate;
-        const endDate = this.selectedDate1;
-        var f1 = this.parseDate(startDate)
-        var f2 = this.parseDate(endDate)
+      const startDate = this.parseDate(this.selectedDate);
+      const endDate = this.parseDate(this.selectedDate1);
 
-        // Ensure startDate is less than or equal to endDate
-        if (f1 > f2) {
-          ElNotification({
-            title: 'Error',
-            message: 'La fecha de inicio debe ser anterior a la fecha final.',
-            type: 'error'
-          });
-          return;
-        }
-
-        this.filteredData = this.tableData.filter(completarOrden => {
-          const ordenDate = this.parseDate(completarOrden.date2);
-          return ordenDate >= f1 && ordenDate <= f2;
-        });
-
-        // Show notification based on filtered data count
-        
-      } else {
-        // If no dates are selected or only one is selected, show all data
-        this.filteredData = this.tableData;
+      // Ensure startDate is less than or equal to endDate with a single comparison
+      if (startDate > endDate) {
         ElNotification({
-          title: 'Mostrando todos los datos',
-          message: 'Se están mostrando todos los datos de la agenda.',
-          type: 'info'
+          title: 'Error',
+          message: 'La fecha de inicio debe ser anterior a la fecha final.',
+          type: 'error'
         });
-      }
+        return false; // Exclude the entire dataset if dates are invalid
+      } 
+
+      // Filter by date in a single loop
+      shouldInclude = shouldInclude && this.parseDate(completarOrden.date2) >= startDate && this.parseDate(completarOrden.date2) <= endDate;
+    }
 
     return shouldInclude;
   });
+  if (this.selectedDate && this.selectedDate1) { // Show notification only if dates are selected
+    ElNotification({
+      title: 'Datos encontrados',
+      message: `Se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
+      type: 'success'
+    });
+  }
 },
-
-    parseDate(fecha) {
-      var f1 = fecha.split("-")[2]
-      f1 += "-" + fecha.split("-")[1]
-      f1 += "-" + fecha.split("-")[0]
-      return new Date(f1)
-    },
-    filterDate10() {
-      if (this.selectedDate && this.selectedDate1) {
-        // Convert dates to Date objects and handle null values
-        const startDate = this.selectedDate;
-        const endDate = this.selectedDate1;
-        var f1 = this.parseDate(startDate)
-        var f2 = this.parseDate(endDate)
-
-        // Ensure startDate is less than or equal to endDate
-        if (f1 > f2) {
-          ElNotification({
-            title: 'Error',
-            message: 'La fecha de inicio debe ser anterior a la fecha final.',
-            type: 'error'
-          });
-          return;
-        }
-
-        this.filteredData = this.tableData.filter(completarOrden => {
-          const ordenDate = this.parseDate(completarOrden.date2);
-          return ordenDate >= f1 && ordenDate <= f2;
-        });
-
-        // Show notification based on filtered data count
-        if (this.filteredData.length === 0) {
-          ElNotification({
-            title: 'Aviso',
-            message: `No se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
-            type: 'warning'
-          });
-        } else {
-          ElNotification({
-            title: 'Datos encontrados',
-            message: `Se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
-            type: 'success'
-          });
-        }
-      } else {
-        // If no dates are selected or only one is selected, show all data
-        this.filteredData = this.tableData;
-        ElNotification({
-          title: 'Mostrando todos los datos',
-          message: 'Se están mostrando todos los datos de la agenda.',
-          type: 'info'
-        });
-      }
-    },
   },
 }
 </script>
