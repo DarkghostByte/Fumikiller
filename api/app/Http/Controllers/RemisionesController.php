@@ -32,16 +32,17 @@ class RemisionesController extends Controller
             'colonias.codigoPostal',
             'ciudades.ciudad'
         ])
-        ->join('clientes', 'remisiones.id_cliente', '=', 'clientes.id')
+        ->join('orden', 'remisiones.id_cliente', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->orderBy('remisiones.id', 'DESC')
         ->get();
 
-    return response()->json([
-        'status' => 'success',
-        'data' => $data
-    ]);
+        return response()->json([
+            'status' => 'success',
+            'data' => $data
+        ]);
 
     }
 

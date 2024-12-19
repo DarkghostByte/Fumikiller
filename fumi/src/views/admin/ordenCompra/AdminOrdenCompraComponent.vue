@@ -8,13 +8,12 @@
       <div class="flex flex-wrap items-start justify-end ">
 
         <!--RUTAS ENTRES VISTAS-->
-        <router-link to="/admin/ordenCompra/new"
-          class="inline-flex px-5 py-3 text-white bg-blue-400 hover:bg-blue-700 focus:bg-blue-800 rounded-md ml-6 mb-3"
-          style="color:black">
-          <i class="fa fa-file" aria-hidden="true" style="margin-top: 5px;
-              margin-left: -5px; margin-right:10px;"></i>
+        <el-button @click="dialogVisibleCreateOrdenCompra = true" class="ml-2 el-button el-button--primary rounded-md"
+          style="height:50px; width:auto; font-size:18px;">
+          <i class="fa fa-file-invoice-dollar" aria-hidden="true"
+            style="margin-top: 0px; margin-left: -5px; margin-right:10px;"></i>
           Nueva Orden De Compra
-        </router-link>
+        </el-button>
         <!--FIN DE RUTAS ENTRES VISTAS-->
 
       </div>
@@ -35,10 +34,10 @@
 -->
     <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 80%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 80%;" stripe>
 
         <!--BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
-        <el-table-column label="">
+        <el-table-column label="" style="text-align:center;" align="center">
           <template #default="scope">
             <el-button style="color:black" size="small" type="success" @click="pdf(scope.row)">
               <a :href="url + 'api/ordenDeCompra/' + scope.row.id" target="_blank">
@@ -50,24 +49,82 @@
         <!--FIN DEL BOTON PARA VISUALIZAR EL PDF DE LA ORDEN DE TRABAJO-->
 
         <!--VISUALIZACION DE LA TABLA-->
-        <el-table-column prop="fechaOrdenCompra" label="Fecha" sortable />
-        <el-table-column prop="conceptoOrdenCompra" label="Concepto" sortable />
-        <el-table-column prop="empleadoOrdenCompra" label="Empleado" sortable />
-        <el-table-column prop="importeOrdenCompra" label="Importe" sortable />
+        <el-table-column prop="fechaOrdenCompra" label="Fecha" sortable  align="center"/>
+        <el-table-column prop="conceptoOrdenCompra" label="Concepto" sortable align="center" />
+        <el-table-column prop="empleadoOrdenCompra" label="Empleado" sortable align="center"/>
+        <el-table-column prop="importeOrdenCompra" label="Importe" sortable align="center"/>
         <!--FIN DE LA VISUALIZACION DE LA TABLA-->
 
         <!-- Botones de acción -->
-        <el-table-column label="">
+        <el-table-column label="" style="text-align:center;">
           <template #default="scope">
-            <router-link :to="'/admin/ordenCompra/edit/' + scope.row.id">
-              <el-button style="color:black" size="small" type="warning" @click="handleEdit()"><span
+            <button>
+              <el-button style="color:black" size="small" type="warning" @click="handleEdit(scope.row)"><span
                   class="material-symbols-outlined">edit</span></el-button>
-            </router-link>
+            </button>
           </template>
         </el-table-column>
       </el-table>
     </div>
     <!-- END TABLE DATA -->
+
+    <!-- MODAL 1 -->
+    <el-dialog v-model="dialogVisibleCreateOrdenCompra" title="Crear Nueva Orden De Compra" width="35%">
+      <el-form :model="form1" label-width="auto" style="max-width: 100%; margin-left:2%;" ref="formRef" :rules="rules"
+        :label-position="'top'">
+        <!--  FILA DATOS DEL CLIENTE -->
+        <p class="px-5">Datos de la orden de compra:</p>
+        <div class="flex">
+          <el-form-item prop="fechaOrdenCompra" class="px-5" label="Fecha de orden:" style="width: 240px;">
+            <el-col :span="11">
+              <el-date-picker
+                class="px-1"
+                v-model="form1.fechaOrdenCompra"
+                type="date"
+                placeholder="Orden"
+                format="DD/MM/YYYY"
+                value-format="DD-MM-YYYY"
+              />
+            </el-col>
+          </el-form-item>
+          <el-form-item prop="paraOrdenCompra" label="Para:" class="px-5" style="width: 240px;">
+            <el-input v-model="form1.paraOrdenCompra" class="px-1" placeholder="Ingresa Para Quien" />
+          </el-form-item>
+        </div>
+
+        <div class="flex">
+          <el-form-item prop="conceptoOrdenCompra" label="Concepto:" class="px-5" style="width: 240px;">
+            <el-input v-model="form1.conceptoOrdenCompra" class="px-1" placeholder="Ingresa el Concepto" />
+          </el-form-item>
+          <el-form-item prop="detalleOrdenCompra" label="Detalles:" class="px-5" style="width: 240px;">
+            <el-input v-model="form1.detalleOrdenCompra" class="" placeholder="Ingresa el Detalle" />
+          </el-form-item>
+        </div>
+
+        <div class="flex">
+          <el-form-item prop="empleadoOrdenCompra" label="Empleado:" class="px-5" style="width: 240px;">
+            <el-input v-model="form1.empleadoOrdenCompra" class="" placeholder="Ingresa el Empleado" />
+          </el-form-item>
+          <el-form-item prop="importeOrdenCompra" label="Importe:" class="px-5" style="width: 240px;">
+            <el-input v-model="form1.importeOrdenCompra" class="" placeholder="Ingresa el Importe" />
+          </el-form-item>
+        </div>
+
+        <div class="flex" style="margin-left:23%;">
+          <el-form-item prop="autorizoOrdenCompra" label="Autorizo:" class="px-5" style="width: 240px;">
+            <el-input v-model="form1.autorizoOrdenCompra" class="" placeholder="Quien lo Autorizo" />
+          </el-form-item>
+        </div>
+
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisibleCreateOrdenCompra = false">Cancelar</el-button>
+          <el-button type="primary" @click="submitForm">Crear</el-button>
+        </span>
+      </template>
+    </el-dialog>
+    <!-- END MODAL 1 -->
 
     <!-- INICIO DEL DIALOGO PARA ELIMINAR -->
     <el-dialog v-model="dialogVisible" title="Deseas desactivar la siguiente orden?" width="600" height="500">
@@ -128,6 +185,53 @@
     </el-dialog>
     <!-- FIN DEL DIALOGO PARA ELIMINAR -->
 
+    <!-- MODAL 3 -->
+    <el-dialog v-model="dialogVisibleEditOrdenCompra" title="Editar Orden De Compra" width="35%">
+      <el-form :model="formEdit" label-width="auto" style="max-width: 100%" ref="formEditRef" :rules="rules" :label-position="'top'">
+        <p class="px-5">Datos de la orden de compra:</p>
+        <div class="flex">
+          <el-form-item prop="fechaOrdenCompra" label="Fecha:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.fechaOrdenCompra" class="px-1" placeholder="Ingresa la Fecha" />
+          </el-form-item>
+          <el-form-item prop="paraOrdenCompra" label="Para:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.paraOrdenCompra" class="px-1" placeholder="Ingresa Para Quien" />
+          </el-form-item>
+        </div>
+
+        <div class="flex">
+          <el-form-item prop="conceptoOrdenCompra" label="Concepto:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.conceptoOrdenCompra" class="px-1" placeholder="Ingresa el Concepto" />
+          </el-form-item>
+          <el-form-item prop="detalleOrdenCompra" label="Detalles:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.detalleOrdenCompra" class="" placeholder="Ingresa el Detalle" />
+          </el-form-item>
+        </div>
+
+        <div class="flex">
+          <el-form-item prop="empleadoOrdenCompra" label="Empleado:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.empleadoOrdenCompra" class="" placeholder="Ingresa el Empleado" />
+          </el-form-item>
+          <el-form-item prop="importeOrdenCompra" label="Importe:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.importeOrdenCompra" class="" placeholder="Ingresa el Importe" />
+          </el-form-item>
+        </div>
+
+        <div class="flex" style="margin-left:23%;">
+          <el-form-item prop="autorizoOrdenCompra" label="Autorizo:" class="px-5" style="width: 240px;">
+            <el-input v-model="formEdit.autorizoOrdenCompra" class="" placeholder="Quien lo Autorizo" />
+          </el-form-item>
+        </div>
+
+      </el-form>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="dialogVisibleEditOrdenCompra = false">Cancelar</el-button>
+          <el-button type="warning" @click="editOrdenCompra">Actualizar</el-button>
+        </span>
+      </template>
+    </el-dialog>
+  <!-- END MODAL 3 -->
+
   </div>
 </template>
 
@@ -148,25 +252,80 @@ export default {
     filteredData: [],
     selectedDate: null,
     selectedDate2: null,
+    dialogVisibleCreateOrdenCompra: false,
+    dialogVisibleEditOrdenCompra: false,
+    form1: {
+      fechaOrdenCompra: '',
+      paraOrdenCompra: '',
+      conceptoOrdenCompra: '',
+      detalleOrdenCompra: '',
+      empleadoOrdenCompra: '',
+      importeOrdenCompra: '',
+      autorizoOrdenCompra: '',
+    },
+    formEdit: {
+      fechaOrdenCompra: '',
+      paraOrdenCompra: '',
+      conceptoOrdenCompra: '',
+      detalleOrdenCompra: '',
+      empleadoOrdenCompra: '',
+      importeOrdenCompra: '',
+      autorizoOrdenCompra: '',
+    },
+    rules: {
+      fechaOrdenCompra: [
+        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      paraOrdenCompra: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      conceptoOrdenCompra: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      detalleOrdenCompra: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      empleadoOrdenCompra: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      importeOrdenCompra: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+      autorizoOrdenCompra: [
+        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
+        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
+      ],
+    }
   }),
   mounted() {
-    this.refresh()
+    this.refresh();
   },
   methods: {
     refresh() {
       this.tableData = []
       axios.get('ordenCompra').then(res => {
-        this.tableData = res.data.data;        
+        this.tableData = res.data.data;
         this.filteredData = this.tableData;
       })
-
     },
+
     pdf(row) {
       console.log(row)
       this.selectedItem = row
       this.selectedItem = null
     },
-    handleEdit() { },
+
+    handleEdit(row) {
+      console.log(row);
+      this.formEdit = row;
+      this.dialogVisibleEditOrdenCompra = true;
+    },
 
     completarOrden(row) {
       if (row && row.id) {
@@ -262,6 +421,80 @@ export default {
           type: 'info',
         });
       }
+    },
+
+    submitForm() {
+      this.$refs.formRef.validate((valid) => {
+        if (valid) {
+          axios.post('ordenCompra', this.form1)
+            .then(response => {
+              console.log('Form submitted successfully:', response.data);
+              this.$router.push('/admin/ordenCompra');
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro insertado correctamente',
+                type: 'success'
+              })
+              this.refresh();
+              this.dialogVisibleCreateOrdenCompra = false;
+              this.$refs.formRef.resetFields();
+            })
+            .catch(error => {
+              console.error('Error submitting form:', error);
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de llenar los campos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          });
+          return false;
+        }
+      });
+    },
+
+    editOrdenCompra() {
+      this.$refs.formEditRef.validate((valid) => {
+        if (valid) {
+          console.log('Form is valid, sending PUT request');
+          axios.put('ordenCompra/'+this.formEdit.id,this.formEdit)
+            .then(res => {
+              console.log(res);
+              this.refresh();
+              this.dialogVisibleEditOrdenCompra = false;
+              this.$message.success('Ciudad actualizada exitosamente');
+              this.$refs.formEditRef.resetFields();
+              ElNotification({
+                title: 'Alerta',
+                message: 'Registro actualizado correctamente',
+                type: 'success'
+              })
+            })
+            .catch(error => {
+              console.log(error);
+              this.$message.error('Error al actualizar la ciudad');
+              ElNotification({
+                title: 'Error',
+                message: 'Favor de verificar los datos',
+                type: 'error'
+              })
+            });
+        } else {
+          console.log('Validation failed, check form errors');
+          console.log('Validation failed');
+          ElNotification({
+            title: 'Error',
+            message: 'Favor de llenar los campos',
+            type: 'error'
+          })
+        }
+      });
     },
   }
 }

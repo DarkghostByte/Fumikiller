@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('remisiones', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('id_cliente')->unsigned();
-            $table->foreign("id_cliente")->references('id')->on('clientes');
+            $table->foreign("id_cliente")->references('id')->on('orden');
             $table->string('RemisionDate');
             $table->string('RemisionCertificado');
             $table->string('RemisionMonto');

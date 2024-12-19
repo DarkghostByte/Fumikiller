@@ -160,7 +160,7 @@
               row.requiere3 === 'Credito' ? 'red' :
               row.requiere3 === 'Pagado/Efectivo' ? 'green' :
               row.requiere3 === 'Pagado/Banco' ? 'blue' :
-              row.requiere3 === 'Cortesia' ? 'yellow' : 'white' 
+              row.requiere3 === 'Cortesia' ? 'orange' : 'white' 
           }">
           </div>
         </template>

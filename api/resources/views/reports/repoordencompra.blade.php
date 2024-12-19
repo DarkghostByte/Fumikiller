@@ -10,8 +10,8 @@
     </head>
 <body >
 <table class="tblDia" >
-    <h5 class="txtDia">FOLIO</h5>
-    <h5 class="txtDia1">00001</h5>
+    <h5 class="txtDia" style="width: 55px;">FOLIO</h5>
+    <h5 class="txtDia1" style="width: 80px;" >{{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}   </h5>
 </table>
 <img class="membre" src="{{ $base64 }}" alt="">
     
@@ -25,14 +25,14 @@
         
     </header>
 
-    <main style="margin-top: -60px;"> 
-        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.4; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
+    <main style="margin-top: -60px; text-transform: capitalize;"> 
+        <img src="{{ $base641 }}" alt="" style="z-index: -1; position: absolute; opacity:0.3; width:auto; height:300px; margin-left:36.5%; margin-top:-7%;">
         <div class="fondLimitador"></div>
         <table>
-            <th class="clthrs" style="width: 40px;">FECHA:</th>
+            <th class="clthrs" style="width: 40px; ">FECHA:</th>
             <th class="renDivThDT">
-            <div class="renDiv1DT">
-                jueves, 14 de noviembre de 2024 
+            <div class="renDiv1DT" >
+                {{ $fecha->dayName }}, {{ $fecha->day }}  de {{ $fecha->monthName }} de {{ $fecha->year }}
             </div>
             </th>  
         </table>
@@ -40,15 +40,15 @@
         <table>
             <th class="clth">PARA:</th>
             <th class="renDivTh">
-            <div class="renDiv1">
-                
+            <div class="renDiv1" style="text-align:left;">
+                {{ $data->paraOrdenCompra }}
             </div>
             </th>  
         </table>
         <table>
             <th class="renDivTh">
             <div class="renDiv" style="text-align: left;">
-                FAVOR DE LLENAR EL TANQUE DE GASOLINA AL VEHICULO:
+                {{ $data->conceptoOrdenCompra }}            
             </div>
             </th> 
             <th></th>
@@ -63,7 +63,7 @@
         <table>
             <th class="renDivTh">
             <div class="renDiv1" style="text-align: left;">
-                RAM 700 2024
+                {{ $data->detalleOrdenCompra }}
             </div>
             </th>  
         </table>
@@ -72,19 +72,24 @@
             <th>EMPLEADO:</th>
             <th class="renDivTh">
             <div class="renDiv13">
-              
+                {{ $data->empleadoOrdenCompra }}
             </div>
             </th>
             <th style="border: 1px solid black; width:80px;">IMPORTE</th>
-            <th style="border: 1px solid black; width:70px;"></th>   
+            <th style="border: 1px solid black; width:70px;">{{ $data->importeOrdenCompra }}</th>   
         </table>
         </div>
 
         
-        <table style="text-align:center; width:30%; margin-left:30%;">
+        <table style="text-align:center; width:30%; margin-left:24%; margin-top:30px;">
             <th style="width: 5px;">AUTORIZO:</th>
             <th style="width: 200px; border-bottom:1px solid black;"></th>
         </table>
+        <table style="text-align:center; width:34%; margin-left:31%; margin-top:0px;">
+            
+            <th style="width: 200px;">{{ $data->autorizoOrdenCompra }}</th>
+        </table>
+        
         
     
 
@@ -125,7 +130,7 @@
         width: 100px;
         position:absolute;
         margin-top:-50px;
-        margin-left:82%;
+        margin-left:82.1%;
         border: 1px solid black;
     }
     .txtBDDia{

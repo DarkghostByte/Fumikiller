@@ -824,19 +824,17 @@ class PdfsController extends Controller
     }
 
     public function generarOrdendecompra($id) {
-        $ordenCompra = ordenCompra::select([
+        $data = ordenCompra::select([
             'ordenCompra.*',
         ])
         ->where('ordenCompra.id', $id)
-        ->get();
-        //dd($ordenCompra);
+        ->first();
+    //Datos de la base de datos
+    if (!$data) {
+        return abort(404);
+    }
     
-        // Verificar si la colección está vacía
-        if ($ordenCompra->isEmpty()) {
-            return abort(404, 'No se encontraron datos.');
-        }
-    
-        // Generación del PDF
+
         /* Imagen Del Logo */
         $path = public_path('img/membretadoFumioOrden.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
@@ -847,11 +845,17 @@ class PdfsController extends Controller
         $type1 = pathinfo($path1, PATHINFO_EXTENSION);
         $data_img1 = file_get_contents($path1);
         $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
-        // Preparar los datos para la vista del PDF
-        $pdf_data = compact('ordenCompra','base64','base641'); // Incluimos $totalPago
-        $pdf = Pdf::loadView('reports.repoordencompra', $pdf_data)->setPaper('a4');    
-        // Mostrar el PDF al usuario
+        setlocale(LC_ALL, 'es_MX.UTF-8','esp');
+        date_default_timezone_set("America/Mexico_City"); // Establece el locale para español
+        $fecha=(strtoupper(strftime("%A,  %d de %B de %Y", strtotime($data->fechaOrdenCompra))));
+        str_replace('S?BADO','SÁBADO',$fecha);
+        $fecha = Carbon::parse($data->fechaOrdenCompra);
+        Carbon::setLocale('es');
+        $pdf_data = compact('base64','base641','data','fecha');
+        $pdf = Pdf::loadView('reports.repoordencompra',$pdf_data)->setPaper('letter');     
+        //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         return $pdf->stream();
+        return $pdf->download('invoice.pdf');
     }
 
 }

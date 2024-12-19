@@ -19,7 +19,7 @@
                     </div>
                     <div>
                         <h1 class="mt-24 text-center text-2xl font-bold text-blue-800" style="">EN CASA FUMIGADA, "NO ENTRAN BICHOS"</h1>
-                        <h1 class="mt-5 mr-4 text-end text-md font-bold text-neutral-950" style="">Liadeo Chávez & Luis Peña 2024 v8.3.175 </h1>
+                        <h1 class="mt-5 mr-4 text-end text-md font-bold text-neutral-950" style="">Liadeo Chávez & Luis Peña 2024 v9.2.175 </h1>
                     </div>
                 </div>
             </div>

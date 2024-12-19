@@ -148,6 +148,7 @@ export default {
       axios.get('remisiones').then(res => {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
+        console.log(this.filteredData);
       });
     },  
     seleccionar(row) {

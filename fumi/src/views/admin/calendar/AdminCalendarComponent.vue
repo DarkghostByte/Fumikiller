@@ -158,13 +158,6 @@ searchQueryPhone:'',
 
     return shouldInclude;
   });
-  if (this.selectedDate && this.selectedDate1) { // Show notification only if dates are selected
-    ElNotification({
-      title: 'Datos encontrados',
-      message: `Se encontraron datos para el rango de fechas seleccionado (${this.selectedDate} - ${this.selectedDate1}).`,
-      type: 'success'
-    });
-  }
 },
 
     formatDate(id, paddingLength = 5, paddingChar = '0') {

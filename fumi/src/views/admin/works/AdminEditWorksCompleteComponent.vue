@@ -132,6 +132,7 @@
           <el-form-item prop="facturaOrden" label="Folio de la factura" class="px-2">
             <el-radio-group v-model="form.facturaOrden">
               <el-input class="px-2" v-model="form.facturaOrden" placeholder="Ingresa el numero de factura" style="width:250px;"/>
+              <el-radio label="Pendiente" value="Pendiente" border />
               <el-radio label="No aplica" value="No aplica" border />
             </el-radio-group>
           </el-form-item>
