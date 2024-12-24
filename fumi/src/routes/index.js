@@ -32,6 +32,15 @@ const adminRoutes = [
     {path: 'admin/clientsView', component: () => import('@/views/admin/admin/AdminClientsViewComponent.vue')},
     {path: 'admin/ordercompleteView', component: () => import('@/views/admin/admin/AdminOrderCompleteViewComponent.vue')},
     {path: 'admin/orderView', component: () => import('@/views/admin/admin/AdminOrderViewComponent.vue')},
+    {path: 'admin/certificadosView', component: () => import('@/views/admin/admin/AdminCertificadosView.vue')},
+    {path: 'admin/formaContactoView', component: () => import('@/views/admin/admin/AdminFormaContactoView.vue')},
+    {path: 'admin/facturasView', component: () => import('@/views/admin/admin/AdminFacturasView.vue')},
+    {path: 'admin/remisionesView', component: () => import('@/views/admin/admin/AdminRemisionesView.vue')},
+    {path: 'admin/ordenesCompraView', component: () => import('@/views/admin/admin/AdminOrdenesCompraView.vue')},
+    
+    
+    
+    
 
     {path: 'certificate', component: () => import('@/views/admin/certificate/AdminCertificateViewComponent.vue')},
     {path: 'certificate/views/', component: () => import('@/views/admin/certificate/AdminViewComponent.vue')},

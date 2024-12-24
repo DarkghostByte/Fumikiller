@@ -12,6 +12,7 @@
 <table class="tblDia" >
     <h5 class="txtDia">DIA</h5>
     <h5 class="txtDia1">{{ $data->RemisionDate }}</h5>
+    <h5 style="color: red; margin-left:80%; border: 1px solid black; height:20px; width: 90px; text-align:center; ">No. {{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}</h5>
 </table>
 <img class="membre" src="{{ $base64 }}" alt="">
     
@@ -62,7 +63,7 @@
         <table>
             <th class="clthcelu"  >COLONIA:</th>
             <th class="renDivTh" >
-            <div class="renDiv1" style="height: 20px; background-dolor:red;" >
+            <div class="renDiv1" style="height: 20px;" >
                 {{ $data->colonia }} #{{ $data->codigoPostal }}
             </div>
             </th> 
@@ -149,6 +150,8 @@
     <table class="tblDia" >
         <h5 class="txtDia">DIA</h5>
         <h5 class="txtDia1">{{ $data->RemisionDate }}</h5>
+        <h5 style="color: red; margin-left:80%; border: 1px solid black; height:20px; width: 90px; text-align:center; ">No. {{ str_pad($data->id, 5, 0, STR_PAD_LEFT) }}</h5>
+
     </table>
     <img class="membre2" style="" src="{{ $base64 }}" alt="">
         

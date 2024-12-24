@@ -20,6 +20,14 @@
       <h2 class="text-xl font-semibold mb-8" v-if="tableData.length > 0">
         Nombre del Cliente: {{ clientName }}
       </h2>
+      <h2 class="text-xl font-semibold mb-8" style="margin-top: -20px;" v-if="tableData.length > 0">
+        Direccion: {{ clientAdress }}
+      </h2>
+      <h2 class="text-xl font-semibold mb-8" style="margin-top: -20px;" v-if="tableData.length > 0">
+        Celular: {{ clientPhone }}
+      </h2>
+      
+      
 
       <div class="flex" style="justify-content: center;">
         <el-table :data="tableData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
@@ -37,12 +45,11 @@
               {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
             </template>
           </el-table-column>
-          <el-table-column label="Direccion" sortable width="320">
-            <template #default="scope">
-              {{ scope.row.home+' #'+scope.row.numAddress+', '+scope.row.colonia+' #'+scope.row.codigoPostal+', '+scope.row.ciudad }}
-            </template>
+          <el-table-column prop="facturaOrden" label="N. Factura" sortable width="120"/>
+          <el-table-column  label="No. Certificado" sortable width="150" >
+            <!-- AGREGAR NUMERO DE CERIFICADO DE ESA ORDEN-->
           </el-table-column>
-          <el-table-column prop="cell_phone" label="Celular" sortable width="100" />
+          
           <el-table-column prop="pago" label="Monto" sortable width="95" />
           <el-table-column prop="requiere3" label="Datos" sortable width="90" />
           <el-table-column prop="ariasEmpleado1" label="Fumigador" sortable width="120" />
@@ -78,7 +85,7 @@
         <br>
         Nombre: {{ selectedItem.name }} {{ selectedItem.lastname1 }} {{ selectedItem.lastname2 }}
         <br>
-        Direccion: {{ selectedItem.city }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.home }} #{{ selectedItem.numAddress }}
+        Direccion: {{ selectedItem.city }}, {{ selectedItem.colonia }} #{{ selectedItem.codigoPostal }}, {{ selectedItem.home }} #{{ selectedItem.numAddress }} 
         <br>
         Dia de la orden: {{ selectedItem.date1 }}
         <br>
@@ -116,6 +123,8 @@ export default {
   
   mounted() {
     this.refresh();
+    this.refresh1();
+    this.refresh2();
     this.clientId = this.$route.params.id;
   },
   methods: {
@@ -126,6 +135,26 @@ export default {
           this.clientName = `${this.tableData[0].name} ${this.tableData[0].lastname1} ${this.tableData[0].lastname2}`;
         } else {
           this.clientName = 'No se encontraron clientes';
+        }
+      });
+    },
+    refresh1() {
+      this.tableData = [];
+      axios.get('completarOrden').then(res => {
+        this.tableData = res.data.data.filter(order => order.id_cliente == this.clientId);if (this.tableData.length > 0) {
+          this.clientAdress = `${this.tableData[0].home} #${this.tableData[0].numAddress}, Col. ${this.tableData[0].colonia} #${this.tableData[0].codigoPostal}, ${this.tableData[0].ciudad}`;        
+        } else {
+          this.clientAdress = 'No se encontraron clientes';
+        }
+      });
+    },
+    refresh2() {
+      this.tableData = [];
+      axios.get('completarOrden').then(res => {
+        this.tableData = res.data.data.filter(order => order.id_cliente == this.clientId);if (this.tableData.length > 0) {
+          this.clientPhone = `${this.tableData[0].cell_phone}`;       
+        } else {
+          this.clientPhone = 'No se encontraron clientes';
         }
       });
     },

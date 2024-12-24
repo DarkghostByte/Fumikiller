@@ -94,15 +94,15 @@
         <h2>O. Terminadas ({{ totalOrdenesCompletadas }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/"
+      <router-link to="/admin/admin/formaContactoView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-400 hover:bg-purple-800 focus:bg-purple-700 rounded-md ml-6 mb-5 shadow-lg"
         style="width:305px; height:100px; font-size:22px;">
         <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
             margin-left: -5px; margin-right:10px; "></i>
-        <h2>forma de contacto ()</h2>
+        <h2>forma de contacto ({{ totalFormadecontacto }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/"
+      <router-link to="/admin/admin/certificadosView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-blue-300 hover:bg-blue-700 focus:bg-blue-600 rounded-md ml-6 mb-5 shadow-lg"
         style="width:305px; height:100px; font-size:22px;">
         <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 
@@ -110,7 +110,7 @@
         <h2>Certificados ({{ totalCertificados }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/"
+      <router-link to="/admin/admin/facturasView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-green-300 hover:bg-green-700 focus:bg-green-600 rounded-md ml-6 mb-5 shadow-lg"
         style="width:305px; height:100px; font-size:22px;">
         <i class="fa-solid fa-folder" aria-hidden="true" style="margin-top: 10%; 
@@ -118,7 +118,7 @@
         <h2>Facturas ({{ totalFacturas }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/"
+      <router-link to="/admin/admin/remisionesView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-orange-300 hover:bg-orange-700 focus:bg-orange-600 rounded-md ml-6 mb-5 shadow-lg"
         style="width:305px; height:100px; font-size:22px;">
         <i class="fa-solid fa-folder-open" aria-hidden="true" style="margin-top: 10%; 
@@ -126,7 +126,7 @@
         <h2>Remisiones ({{ totalRemisiones }})</h2>
       </router-link>
 
-      <router-link to="/admin/admin/"
+      <router-link to="/admin/admin/ordenesCompraView"
         class="inline-flex px-5 py-3 text-black hover:text-gray-200 bg-purple-300 hover:bg-purple-700 focus:bg-purple-600 rounded-md ml-6 mb-5 shadow-lg"
         style="width:305px; height:100px; font-size:22px;">
         <i class="fa-solid fa-user" aria-hidden="true" style="margin-top: 10%; 

@@ -152,7 +152,7 @@
   <div class="flex">
     <el-table :data="filteredData1" :default-sort="{ prop: 'id', order: 'ascending' }"
       style="width: 100%; margin: auto;" stripe>
-      <el-table-column class="" label="">
+      <el-table-column class="" label="" sortable width="80">
         <template #default="{ row }">
           <div class="ml-5 px-5 my-5 h-3 w-3 rounded-full"
           :style="{ 
@@ -170,7 +170,7 @@
           {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
         </template>
       </el-table-column>
-      <el-table-column prop="tradename" label="Negocio" sortable />
+      <el-table-column prop="tradename" label="Negocio" sortable width="150" />
       <el-table-column label="Direccion" sortable width="300">
         <template #default="scope">
           {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal +
@@ -178,16 +178,16 @@
         </template>
       </el-table-column>
 
-      <el-table-column prop="infoorden_facturacion" label="Facturacion" width="125" sortable />
-      <el-table-column prop="facturaOrden" label="No. Factura" width="125" sortable />
-      <el-table-column prop="pago" label="Monto" sortable />
-      <el-table-column prop="requiere3" label="Estado">
+      <el-table-column prop="infoorden_facturacion" label="Facturacion"  sortable width="125"/>
+      <el-table-column prop="facturaOrden" label="No. Factura" sortable width="125" />
+      <el-table-column prop="pago" label="Monto" sortable width="125"/>
+      <el-table-column prop="requiere3" label="Estado" sortable width="125">
         <template #default="{ row }">
           <span v-if="row.requiere3 === 'Credito'">{{ row.requiere3 }}</span>
           <span v-else>{{ row.requiere3 }}</span>
         </template>
       </el-table-column>
-      <el-table-column prop="date1" label="Fecha de factura"></el-table-column>
+      <el-table-column prop="date1" label="Fecha de factura" sortable width="125"></el-table-column>
     </el-table>
     <!-- MODAL 1 -->
     <el-dialog v-model="dialogVisibleFilter" title="Filtros" width="30%">

@@ -13,8 +13,8 @@
     </div>
     <div class="mr-6">
       <h1 class="text-4xl font-semibold mb-2">Orden de trabajo</h1>
-      <h2 class="ordenCliente1">Cliente: {{ form.name+' '+form.lastname1+' '+form.lastname2 }}</h2>
-      <h2 class="ordenCliente1">Negocio: {{ form.tradename }}</h2>
+      <h2 style="font-size: 24px;"> Cliente: {{ form.name+' '+form.lastname1+' '+form.lastname2 }}</h2>
+      <h2 style="font-size: 24px;">Negocio: {{ form.tradename }}</h2>
     </div>
 
     <!-- DATOS DE LA FILA DE CLIENTES -->
