@@ -163,8 +163,8 @@ export default {
     },
     
     filterDataName() {
-      this.filteredData = this.tableData.filter((certificados) => {
-        return certificados.certificateName.toLowerCase().includes(this.searchQueryName.toLowerCase());
+      this.filteredData = this.tableData.filter((clientes) => {
+        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
       });
     },
 

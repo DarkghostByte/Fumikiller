@@ -19,23 +19,17 @@
         </div>
 
       </div>
-      <div class="flex justify-between items-center mb-4" style="width: 100%;">
-        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-          @input="filterDataLastname" />
-        <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
-          @input="filterDataAddress" />
-        <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
+      <!-- Campo de búsqueda -->
+    <div class="flex mb-4" style="justify-content: center;">
+      <div class="flex mb-4" style="width: 80%;">
+        <el-input class="px-2" placeholder="Buscar por correo" v-model="searchQueryCorreo" @input="filterData" />
+        <el-input class="px-2" placeholder="Buscar por persona moral" v-model="searchQueryTradename" @input="filterData" />
+        <el-input class="px-2" placeholder="Buscar por persona fisica" v-model="searchQueryName"
+          @input="filterData" />
+        <el-input class="px-2" placeholder="Buscar por folio" v-model="searchQueryFolio"
+          @input="filterData" />
       </div>
-      <div class="flex justify-between items-center mb-4" style="width: 100%;">
-        <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
-        <el-input class="px-2" placeholder="Buscar por estado de orden" v-model="searchQueryStatus"
-          @input="filterDataStatus" />
-        <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
-          @input="filterDataInfo" />
-      </div>
+    </div>
 
       <!-- END INICIO -->
 
@@ -43,11 +37,11 @@
     <div class="flex" style="justify-content: center;">
       <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
-        <el-table-column label="" width="100">
+
+        <el-table-column label="" width="100" >
           <template #default="scope">
-            <el-button @click="facturasRow(scope.row)" class="ml-2 el-button el-button--primary" style="color:black">
-              <span class="material-symbols-outlined">Description</span>
-            </el-button>
+            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
+                class="material-symbols-outlined">visibility</span></el-button>
           </template>
         </el-table-column>
 
@@ -57,21 +51,20 @@
             {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
           </template>
         </el-table-column>
-        <el-table-column label="Estado" sortable width="100">
+        <el-table-column label="Folio" sortable  width="120">
           <template #default="scope">
-            {{ scope.row.facturaOrden }}
+            {{ 'No. ' + scope.row.facturaOrden }}
           </template>
         </el-table-column>
-        <el-table-column label="Persona fisica" sortable width="220">
+        <el-table-column label="Persona fisica" sortable width="180">
           <template #default="scope">
             {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-
         <el-table-column prop="tradename" label="Persona moral" sortable width="180" />
-        <el-table-column prop="correo" label="Correo" sortable width="160" />
-        <el-table-column prop="date2" label="F. Fumigacion" sortable width="140" />
-        <el-table-column prop="pago" label="Monto" sortable width="150" />
+        <el-table-column prop="correo" label="Correo" sortable width="250" />
+        <el-table-column prop="date2" label="F. Fumigacion" sortable width="150" />
+        <el-table-column prop="pago" label="Monto" sortable width="auto" />
 
       </el-table>
     </div>
@@ -158,39 +151,26 @@
 
 <script>
 import axios from 'axios';
-import { ElNotification } from 'element-plus';
+//import { ElNotification } from 'element-plus';
 
 export default {
-  name: 'AdminRemisionesViewComponent',
+  name: 'AdminFacturasRepoComponent',
   data: () => ({
-    formRef3: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
-    dialogVisibleFactura: false,
+    dialogVisibleViewcertificado: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     tableData: [],
     filteredData: [],
     selectedItem: {},
+    selectedItem1: {},
     searchQuery: '',
+    searchQueryCorreo: '',
     searchQueryTradename: '',
     searchQueryName: '',
-    searchQueryAddress: '',
+    searchQueryFolio: '',
     searchQueryPhone: '',
-    form2:{
-      facturaOrden: '',
-    },
-    rules: {
-      facturaOrden: [
-        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-    },
-    rules3: {
-      folioFactura: [
-        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-      ],
-    }
   }),
   mounted() {
     this.refresh();
@@ -198,7 +178,7 @@ export default {
   methods: {
     refresh() {
       axios.get('completarOrden').then(res => {
-        this.tableData = res.data.data.filter(row => row.facturaOrden === 'Pendiente');
+        this.tableData = res.data.data.filter(row => row.facturaOrden !== 'No aplica' && row.facturaOrden !== 'Pendiente');
         this.filteredData = this.tableData;
         console.log('Datos', this.tableData)
       });
@@ -208,116 +188,51 @@ export default {
       this.selectedItem = row;
       this.dialogVisibleView = true;
     },
-    facturasRow(row) {
-      console.log(row);
-      this.selectedItem = row;
-      this.dialogVisibleFactura = true;
+    pdf(row) {
+      console.log(row)
+      this.selectedItem1 = row
+      this.selectedItem1 = null
     },
 
-    createFactura() {
-  this.$refs.formRef3.validate(async (valid) => {
-    if (valid) {
-      try {
-        const updatedData = { facturaOrden: this.form2.facturaOrden };
-        await axios.put('datoNuevo/' + this.selectedItem.id, updatedData)
-          .then(response => {
-            console.log('Estado actualizado correctamente:', response.data);
-            this.refresh();
-            ElNotification({
-              title: 'Actualización de datos',
-              message: `Se actualizaron los datos.`,
-              type: 'success'
-            });
-          })
-          .catch(error => {
-            console.error('Error al actualizar el estado:', error);
-            this.$message.error('Error al actualizar el estado');
-            ElNotification({
-              title: 'Error',
-              message: 'Ocurrió un error al actualizar.',
-              type: 'error'
-            });
-          });
-        this.dialogVisibleFactura = false;
-        this.refresh();
-        this.$refs.formRef3.resetFields();
-        this.$message.success('La factura se creo correctamente');
-      } catch (error) {
-        console.error('Error creating factura:', error.response.data);
-        this.$message.error('Error al crear el factura');
-        ElNotification({
-          title: 'Error',
-          message: 'Favor de llenar los campos',
-          type: 'error'
-        });
-      }
-    } else {
-      console.log('Validation failed');
-      console.log('Validation failed');
-      ElNotification({
-        title: 'Error',
-        message: 'Favor de llenar los campos',
-        type: 'error'
-      });
-      return false;
-    }
-  });
-},
-
     filterData() {
-  this.filteredData = this.tableData.filter((clientes) => {
-    const combinedName = clientes.name.toLowerCase() + ' ' + clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    this.filteredData = this.tableData.filter((facturas) => {
+    const combinedName = facturas.name.toLowerCase() + ' ' + facturas.lastname1.toLowerCase() + ' ' + facturas.lastname2.toLowerCase();
     
     // Check each condition based on search queries
     let shouldInclude = true; // Start with assuming inclusion
 
     if (this.searchQueryTradename) {
-      shouldInclude = shouldInclude && clientes.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
+      shouldInclude = shouldInclude && facturas.tradename.toLowerCase().includes(this.searchQueryTradename.toLowerCase());
     }
 
     if (this.searchQueryName) {
       shouldInclude = shouldInclude && combinedName.includes(this.searchQueryName.toLowerCase());
     }
 
-    if (this.searchQueryAddress) {
-      shouldInclude = shouldInclude && combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+    if (this.searchQueryCorreo) {
+      shouldInclude = shouldInclude && facturas.correo.toLowerCase().includes(this.searchQueryCorreo.toLowerCase());
     }
 
-    if (this.searchQueryPhone) {
-      shouldInclude = shouldInclude && clientes.cell_phone.toLowerCase().includes(this.searchQueryPhone.toLowerCase());
+    if (this.searchQueryFolio) {
+      shouldInclude = shouldInclude && facturas.folioFactura.toLowerCase().includes(this.searchQueryFolio.toLowerCase());
     }
+    
+
+
 
     return shouldInclude;
   });
 },
 
-    handleEstadoClick() {
-      const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
-      axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
-        .then(response => {
-          console.log('El cliente se dio de baja:', response.data);
-          this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
-          this.dialogVisible = false;
-          ElNotification({
-            title: 'Actualizacion de datos',
-            message: `Se actualizaron los datos.`,
-            type: 'success'
-          });
-        })
-        .catch(error => {
-          console.error('Error al dar de baja al cliente:', error.response.data);
-        });
-    },
-
     async fetchData() {
       try {
-        const responseOrdenes = await axios.get(this.urlApi + 'clientes');
-        this.tableData = responseOrdenes.data.data.filter(row => row.infoclient_remision !== 'No');
+        const responseOrdenes = await axios.get(this.urlApi + 'remisiones');
+        this.tableData = responseOrdenes.data.data;
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     },
+    
     formatDate(id_orden, paddingLength = 5, paddingChar = '0') {
   // Convert id to string in case it's a number
   const idString = String(id_orden);
@@ -328,6 +243,15 @@ export default {
   // Pad the string with paddingChar
   return idString.padStart(paddingLength, paddingChar);
 },
+
+formatOrdenNumber(id_orden) {
+      return 'No. ' + id_orden.toString().padStart(5, '0');
+    },
+
+    formatMoney(amount) {
+  return amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","); // O "," para usar comas
+}
+
   }
 };
 </script>

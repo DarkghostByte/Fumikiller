@@ -76,13 +76,13 @@
           </el-form-item>
 
           <el-form-item prop="id_city" label="Ciudad:" class="px-2">
-            <el-select v-model="form1.id_city" placeholder="Selecciona la ciudad" @change="fetchColoniasByCity" style="width: 200px;">
+            <el-select v-model="form1.id_city" filterable placeholder="Selecciona la ciudad" @change="fetchColoniasByCity" style="width: 200px;">
               <el-option v-for="ciudad in ciudades" :key="ciudad.id" :label="ciudad.ciudad" :value="ciudad.id" />
             </el-select>
           </el-form-item>
 
           <el-form-item prop="id_colonia" label="Colonia:" class="px-2">
-            <el-select v-model="form1.id_colonia" placeholder="Selecciona la colonia"
+            <el-select v-model="form1.id_colonia" filterable placeholder="Selecciona la colonia"
               style="width: 260px;" @change="selectColonia">
               <el-option v-for="colonia in filteredColonias" :key="'colonia' + colonia.id"
                 :label="colonia.colonia + ' #' + colonia.codigoPostal" :value="colonia.id">

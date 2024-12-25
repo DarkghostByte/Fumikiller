@@ -19,62 +19,63 @@
         </div>
 
       </div>
-      <div class="flex justify-between items-center mb-4" style="width: 100%;">
+      <!-- Campo de búsqueda -->
+    <div class="flex mb-4" style="justify-content: center;">
+      <div class="flex mb-4" style="width: 80%;">
         <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-          @input="filterDataLastname" />
         <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
           @input="filterDataAddress" />
-        <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
+          <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+          @input="filterDataPhone" />
       </div>
-      <div class="flex justify-between items-center mb-4" style="width: 100%;">
-        <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
-        <el-input class="px-2" placeholder="Buscar por estado de orden" v-model="searchQueryStatus"
-          @input="filterDataStatus" />
-        <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
-          @input="filterDataInfo" />
-      </div>
+    </div>
 
       <!-- END INICIO -->
 
       <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
-        <el-table-column label="" width="100">
+
+        <el-table-column label="" width="100" >
           <template #default="scope">
-            <el-button @click="remision(scope.row)" class="ml-2 el-button el-button--primary" style="color:black">
-              <span class="material-symbols-outlined">Description</span>
+            <el-button style="color:black" size="small" type="info" @click="pdf(scope.row)">
+              <a :href="url + 'api/remision/' + scope.row.id" target="_blank">
+                <span class="material-symbols-outlined">lab_profile</span>
+              </a>
             </el-button>
           </template>
         </el-table-column>
 
+        <el-table-column label="" width="100" >
+          <template #default="scope">
+            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
+                class="material-symbols-outlined">visibility</span></el-button>
+          </template>
+        </el-table-column>
+
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="O. Trabajo" sortable>
+        <el-table-column label="Folio" sortable width="120">
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-
-        <el-table-column prop="name" label="Nombres" sortable width="150" />
-        <el-table-column label="Apellidos" sortable width="150">
+        <el-table-column label="Dirección" sortable width="220">
           <template #default="scope">
-            {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+            {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" sortable width="500">
+        <el-table-column label="Dirección" sortable width="550">
           <template #default="scope">
-            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + '#'
-              + scope.row.numAddress }}
+            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
           </template>
         </el-table-column>
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable />
+        <el-table-column prop="cell_phone" label="Numero Celular" sortable  />
 
       </el-table>
     </div>
     <!-- END TABLE DATA -->
+
       <!-- MODAL 2 -->
       <el-dialog v-model="dialogVisibleView" title="Datos del cliente" width="600" height="500">
         <div class="clientInfo">
@@ -156,125 +157,58 @@
 
 <script>
 import axios from 'axios';
-import { ElNotification } from 'element-plus';
+//import { ElNotification } from 'element-plus';
 
 export default {
-  name: 'AdminRemisionesViewComponent',
+  name: 'AdminClientsComponent',
   data: () => ({
     dialogVisible: false,
     dialogVisibleView: false,
-    dialogVisibleViewRemisiones: false,
+    dialogVisibleViewcertificado: false,
     url: process.env.VUE_APP_ROOT_ASSETS,
     urlApi: process.env.VUE_APP_ROOT_API,
     tableData: [],
     filteredData: [],
     selectedItem: {},
+    selectedItem1: {},
     searchQuery: '',
     searchQueryName: '',
-    searchQueryLastname: '',
     searchQueryAddress: '',
     searchQueryPhone: '',
-    form1: {
-      RemisionDate: '',
-      RemisionCertificado: '',
-      RemisionMonto: '',
-      RemisionObservaciones: '',
-    },
-    rules: {
-      RemisionDate: [
-        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      RemisionCertificado: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      RemisionMonto: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      RemisionObservaciones: [
-        { required: true, message: 'La fecha es requerida', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-
-    }
   }),
   mounted() {
     this.refresh();
   },
   methods: {
     refresh() {
-      axios.get('orden').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoorden_remision !== 'No');
+      axios.get('remisiones').then(res => {
+        this.tableData = res.data.data;
         this.filteredData = this.tableData;
+        console.log(this.filteredData);
       });
-    },
-    remision(row) {
+    },  
+    seleccionar(row) {
       console.log(row);
       this.selectedItem = row;
-      this.dialogVisibleViewRemisiones = true;
+      this.dialogVisibleView = true;
     },
-
-    createRemision1() {
-      this.$refs.formRef.validate(async (valid) => {
-        if (valid) {
-          try {
-            const response = await axios.post('remisiones', {
-              ...this.form1,
-              id_cliente: this.selectedItem.id,
-            });
-            console.log(response);
-            this.dialogVisibleViewRemisiones = false;
-            this.refresh();
-            this.$message.success('La remisión se creo correctamente');
-            ElNotification({
-              title: 'Alerta',
-              message: 'Registro insertado correctamente',
-              type: 'success'
-            })
-          } catch (error) {
-            console.error('Error creating remisión:', error.response.data);
-            this.$message.error('Error al crear la remisión1');
-            ElNotification({
-              title: 'Error',
-              message: 'Favor de llenar los campos',
-              type: 'error'
-            })
-            console.error('Error creating remisión:', error.response.data);
-            this.$message.error('Error al crear la remisión');
-          }
-        } else {
-          console.log('Validation failed');
-          console.log('Validation failed');
-          ElNotification({
-            title: 'Error',
-            message: 'Favor de llenar los campos',
-            type: 'error'
-          });
-          return false;
-        }
-      });
+    pdf(row) {
+      console.log(row)
+      this.selectedItem1 = row
+      this.selectedItem1 = null
     },
-
+    
     filterDataName() {
       this.filteredData = this.tableData.filter((clientes) => {
         return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
       });
     },
 
-    filterDataLastname() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
-      });
-    },
-
     filterDataAddress() {
       this.filteredData = this.tableData.filter((clientes) => {
-        const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-        return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-      });
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+  });
     },
 
     filterDataPhone() {
@@ -283,32 +217,15 @@ export default {
       });
     },
 
-    handleEstadoClick() {
-      const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
-      axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
-        .then(response => {
-          console.log('El cliente se dio de baja:', response.data);
-          this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
-          this.dialogVisible = false;
-          ElNotification({
-            title: 'Actualizacion de datos',
-            message: `Se actualizaron los datos.`,
-            type: 'success'
-          });
-        })
-        .catch(error => {
-          console.error('Error al dar de baja al cliente:', error.response.data);
-        });
-    },
-
     async fetchData() {
       try {
-        const responseOrdenes = await axios.get(this.urlApi + 'clientes');
-        this.tableData = responseOrdenes.data.data.filter(row => row.infoclient_remision !== 'No');
+        const responseOrdenes = await axios.get(this.urlApi + 'remisiones');
+        this.tableData = responseOrdenes.data.data;
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     },
+    
     formatDate(id, paddingLength = 5, paddingChar = '0') {
   // Convert id to string in case it's a number
   const idString = String(id);
@@ -322,7 +239,6 @@ export default {
   }
 };
 </script>
-
 <style>
 .clientInfo {
   background-color: #f5f5f5;

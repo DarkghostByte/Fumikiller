@@ -19,57 +19,55 @@
         </div>
 
       </div>
-      <div class="flex justify-between items-center mb-4" style="width: 100%;">
-        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName" @input="filterDataName" />
-        <el-input class="px-2" placeholder="Buscar por apellido" v-model="searchQueryLastname"
-          @input="filterDataLastname" />
+       <!-- Campo de búsqueda -->
+    <div class="flex mb-4" style="justify-content: center;">
+      <div class="flex mb-4" style="width: 80%;">
+        <el-input class="px-2" placeholder="Buscar por nombre" v-model="searchQueryName"
+          @input="filterDataName" />
         <el-input class="px-2" placeholder="Buscar por direccion" v-model="searchQueryAddress"
           @input="filterDataAddress" />
-        <el-date-picker class="px-2" v-model="selectedDate" @change="filterData" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
+          <el-input class="px-2" placeholder="Buscar por celular" v-model="searchQueryPhone"
+          @input="filterDataPhone" />
       </div>
-      <div class="flex justify-between items-center mb-4" style="width: 100%;">
-        <el-date-picker class="px-2" v-model="selectedDate2" @change="filterData2" type="date" format="DD-MM-YYYY"
-          value-format="DD-MM-YYYY" placeholder="Seleccionar fecha" style="width: 100%" />
-        <el-input class="px-2" placeholder="Buscar por estado de orden" v-model="searchQueryStatus"
-          @input="filterDataStatus" />
-        <el-input class="px-2" placeholder="Buscar por estado de activacion" v-model="searchQueryInfo"
-          @input="filterDataInfo" />
-      </div>
+    </div>
 
       <!-- END INICIO -->
 
       <!-- TABLE DATA -->
     <div class="flex" style="justify-content: center;">
-      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'ascending' }" style="width: 100%" stripe>
+      <el-table :data="filteredData" :default-sort="{ prop: 'id', order: 'descending' }" style="width: 100%" stripe>
         <!-- Columnas de la tabla -->
-        <el-table-column label="" width="100">
+
+        <el-table-column label="" width="100" >
           <template #default="scope">
-            <el-button @click="certificado(scope.row)" class="ml-2 el-button el-button--primary" style="color:black">
-              <span class="material-symbols-outlined">Description</span>
+            <el-button style="color:black" size="small" type="info" @click="pdf(scope.row)">
+              <a :href="url + 'api/certificadoRealizado/' + scope.row.id" target="_blank">
+                <span class="material-symbols-outlined">lab_profile</span>
+              </a>
             </el-button>
           </template>
         </el-table-column>
 
+        <el-table-column label="" width="100" >
+          <template #default="scope">
+            <el-button style="color:black" size="small" type="success" @click="seleccionar(scope.row)"><span
+                class="material-symbols-outlined">visibility</span></el-button>
+          </template>
+        </el-table-column>
+
         <!-- Agrega las demás columnas aquí -->
-        <el-table-column label="O. Trabajo" sortable>
+        <el-table-column label="Folio" sortable>
           <template #default="scope">
             {{ 'No. ' + this.formatDate(scope.row.id) }}
           </template>
         </el-table-column>
-        <el-table-column prop="name" label="Nombres" sortable width="150" />
-        <el-table-column label="Apellidos" sortable width="150">
+        <el-table-column prop="certificateName" label="Nombre" sortable width="250" />
+        <el-table-column label="Dirección" sortable width="550">
           <template #default="scope">
-            {{ scope.row.lastname1 + ' ' + scope.row.lastname2 }}
+            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + ' #' + scope.row.numAddress }}
           </template>
         </el-table-column>
-        <el-table-column label="Dirección" sortable width="500">
-          <template #default="scope">
-            {{ scope.row.ciudad + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal + ', ' + scope.row.home + '#'
-              + scope.row.numAddress }}
-          </template>
-        </el-table-column>
-        <el-table-column prop="cell_phone" label="Numero Celular" sortable />
+        <el-table-column prop="cell_phone" label="Numero Celular" sortable  />
 
       </el-table>
     </div>
@@ -155,12 +153,11 @@
 
 <script>
 import axios from 'axios';
-import { ElNotification } from 'element-plus';
+//import { ElNotification } from 'element-plus';
 
 export default {
   name: 'AdminClientsComponent',
   data: () => ({
-    formRef: undefined,
     dialogVisible: false,
     dialogVisibleView: false,
     dialogVisibleViewcertificado: false,
@@ -169,129 +166,45 @@ export default {
     tableData: [],
     filteredData: [],
     selectedItem: {},
+    selectedItem1: {},
     searchQuery: '',
     searchQueryName: '',
-    searchQueryLastname: '',
     searchQueryAddress: '',
     searchQueryPhone: '',
-    productoInternos: [],
-    productoExternos: [],
-    form1: {
-      certificateName: '',
-      id_productoCertificadoInt1: '',
-      id_productoCertificadoExt1: '',
-    },
-    rules: {
-      certificateName: [
-        { required: true, message: 'Este campo es requerido', trigger: 'blur' },
-        { min: 1, max: 100, message: 'Longitud debería ser 1 a 100', trigger: 'blur' }
-      ],
-      id_productoCertificadoInt1: [
-        { required: true, message: 'La producto es requerido', trigger: 'blur' },
-      ],
-      id_productoCertificadoExt1: [
-        { required: true, message: 'La producto es requerido', trigger: 'blur' },
-      ],
-
-    }
   }),
   mounted() {
     this.refresh();
-    this.fetchProductosInternos();
-    this.fetchProductosExternos();
   },
   methods: {
     refresh() {
-      axios.get('orden').then(res => {
-        this.tableData = res.data.data.filter(row => row.infoorden_certificate !== 'No');
+      axios.get('certificados').then(res => {
+        this.tableData = res.data.data;
         this.filteredData = this.tableData;
+        console.log(this.tableData);
       });
-    },
-    certificado(row) {
+    },  
+    seleccionar(row) {
       console.log(row);
       this.selectedItem = row;
-      this.dialogVisibleViewcertificado = true;
+      this.dialogVisibleView = true;
     },
-
-    createCertificate1() {
-      this.$refs.formRef.validate(async (valid) => {
-        if (valid) {
-          try {
-            const response = await axios.post('certificados', {
-              ...this.form1,
-              id_orden: this.selectedItem.id,
-            });
-            console.log(response);
-            this.dialogVisibleViewcertificado = false;
-            this.refresh();
-            this.$message.success('El certificado se creo correctamente');
-            ElNotification({
-              title: 'Alerta',
-              message: 'Registro insertado correctamente',
-              type: 'success'
-            })
-            this.$refs.formRef.resetFields();
-
-            const updatedData = {
-                infoorden_certificate: this.form1.infoorden_certificate === 'No' ? 'Si' : 'No'
-              };
-
-              axios.put('verEstadoCertificado/' + this.selectedItem.id, updatedData)
-                .then(response => {
-                  console.log('Estado actualizado correctamente:', response.data);
-                  this.refresh();
-                  ElNotification({
-                    title: 'Actualización de datos',
-                    message: `Se actualizaron los datos.`,
-                    type: 'success'
-                  });
-                })
-                .catch(error => {
-                  console.error('Error al actualizar el estado:', error);
-                });
-
-          } catch (error) {
-            console.error('Error creating certificate:', error.response.data);
-            this.$message.error('Error al crear el certificado');
-            ElNotification({
-              title: 'Error',
-              message: 'Favor de llenar los campos',
-              type: 'error'
-            })
-            console.error('Error creating certificate:', error.response.data);
-            this.$message.error('Error al crear el certificado');
-          }
-        } else {
-          console.log('Validation failed');
-          console.log('Validation failed');
-          ElNotification({
-            title: 'Error',
-            message: 'Favor de llenar los campos',
-            type: 'error'
-          });
-          return false;
-        }
-      });
+    pdf(row) {
+      console.log(row)
+      this.selectedItem1 = row
+      this.selectedItem1 = null
     },
-
+    
     filterDataName() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        return clientes.name.toLowerCase().includes(this.searchQueryName.toLowerCase());
-      });
-    },
-
-    filterDataLastname() {
-      this.filteredData = this.tableData.filter((clientes) => {
-        const combinedLastname = clientes.lastname1.toLowerCase() + ' ' + clientes.lastname2.toLowerCase();
-        return combinedLastname.includes(this.searchQueryLastname.toLowerCase());
+      this.filteredData = this.tableData.filter((certificados) => {
+        return certificados.certificateName.toLowerCase().includes(this.searchQueryName.toLowerCase());
       });
     },
 
     filterDataAddress() {
       this.filteredData = this.tableData.filter((clientes) => {
-        const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
-        return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
-      });
+    const combinedAddress = clientes.ciudad.toLowerCase() + ' ' + clientes.colonia.toLowerCase() + ' ' + clientes.home.toLowerCase() + ' ' + clientes.codigoPostal.toLowerCase() + ' ' + clientes.numAddress.toLowerCase();
+    return combinedAddress.includes(this.searchQueryAddress.toLowerCase());
+  });
     },
 
     filterDataPhone() {
@@ -300,64 +213,15 @@ export default {
       });
     },
 
-    handleEstadoClick() {
-      const newStatus = this.selectedItem.infoclient_delete === 'Alta' ? 'Baja' : 'Alta'; // Toggle status based on current value
-      axios.put('desactivarCliente/' + this.selectedItem.id, { infoclient_delete: newStatus })
-        .then(response => {
-          console.log('El cliente se dio de baja:', response.data);
-          this.refresh(); // Consider removing this line if refresh() is triggered elsewhere
-          this.dialogVisible = false;
-          ElNotification({
-            title: 'Actualizacion de datos',
-            message: `Se actualizaron los datos.`,
-            type: 'success'
-          });
-        })
-        .catch(error => {
-          console.error('Error al dar de baja al cliente:', error.response.data);
-        });
-    },
-
     async fetchData() {
       try {
-        const responseOrdenes = await axios.get(this.urlApi + 'orden');
-        this.tableData = responseOrdenes.data.data.filter(row => row.infoorden_certificate !== 'No');
+        const responseOrdenes = await axios.get(this.urlApi + 'certificados');
+        this.tableData = responseOrdenes.data.data;
       } catch (error) {
         console.error('Error al obtener los datos:', error);
       }
     },
-    fetchProductosInternos() {
-      axios.get('verProductosInternos')
-        .then(response => {
-          console.log('Productos Internos:', response.data);
-          this.productoInternos = response.data;
-        })
-        .catch(error => {
-          console.error('Error fetching productos interno:', error);
-          ElNotification({
-            title: 'Error',
-            message: 'Error al recuperar productos internos',
-            type: 'error',
-          });
-        });
-    },
-
-    fetchProductosExternos() {
-      axios.get('verProductosExternos')
-        .then(response => {
-          console.log('Productos Externos:', response.data);
-          this.productoExternos = response.data; // Assuming the data structure is correct
-        })
-        .catch(error => {
-          console.error('Error fetching productos externos:', error);
-          ElNotification({
-            title: 'Error',
-            message: 'Error al recuperar productos externos',
-            type: 'error',
-          });
-        });
-    },
-
+    
     formatDate(id, paddingLength = 5, paddingChar = '0') {
   // Convert id to string in case it's a number
   const idString = String(id);
