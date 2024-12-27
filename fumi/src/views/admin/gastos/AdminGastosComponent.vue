@@ -101,7 +101,7 @@
           style="margin-left: 215px; position:absolute; color: rgba(0, 0, 0, 0.20); --fa-rotate-angle: -30deg;"></i>
       </Button>
 
-      <a :href="url + 'api/pdfCaja/'" target="_blank"
+      <a :href="url + 'api/pdfBanco/'" target="_blank"
           class="btnPdf inline-flex rounded-md ml-6 mb-5 justify-center items-center"
           style="width:80px; height:50px; text-align: center; ">
           <div class="flex">

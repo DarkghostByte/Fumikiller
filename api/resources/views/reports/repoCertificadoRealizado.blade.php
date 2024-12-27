@@ -123,11 +123,11 @@
             <th>FUMIGADOR:</th>
             <th class="renDivTh">
             <div class="renDiv">
-                NOMBRE DEL FUMIGADOR
-
+            {{ $nombreCompletoEmpleado}}
             </div>
             </th> 
         </table>
+        
         <table>
 
             <th class="renDivTh txtObser" style="text-align: left;">OBSERVACIONES:
@@ -271,12 +271,11 @@
                 </div>
                 </th> 
             </table>
-            <table class="">
+            <table style="color: black;" class="">
                 <th>FUMIGADOR:</th>
                 <th class="renDivTh">
                 <div class="renDiv">
-                    NOMBRE DEL FUMIGADOR
-    
+                {{ $nombreCompletoEmpleado}}
                 </div>
                 </th> 
             </table>

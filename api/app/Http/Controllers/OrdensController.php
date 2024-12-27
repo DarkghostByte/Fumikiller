@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Orden;
 use Validator;
+use App\Models\Certificado;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class OrdensController extends Controller
@@ -76,6 +77,10 @@ class OrdensController extends Controller
     public function create()
     {
         //
+    }
+    public function certificado()
+    {
+        return $this->hasOne(Certificado::class, 'id', 'id_orden'); // Ajusta los nombres de las columnas si son diferentes
     }
 
     /**

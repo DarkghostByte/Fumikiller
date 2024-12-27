@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\CompletarOrden;
 use Carbon\Carbon;
 use Validator;
+use App\Models\Orden;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 
@@ -75,6 +76,11 @@ class CompletarOrdenesController extends Controller
         'data' => $data
     ]);
 }
+public function completarOrden()
+{
+    $ordenes = Orden::with('certificado')->where('orden.id', 'orden.id')->get();
+    return response()->json(['data' => $ordenes]);
+}
 
 
     /**
@@ -84,6 +90,7 @@ class CompletarOrdenesController extends Controller
     {
         //
     }
+    
 
     /**
      * Store a newly created resource in storage.

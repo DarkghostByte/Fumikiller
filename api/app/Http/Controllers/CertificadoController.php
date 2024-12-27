@@ -9,6 +9,8 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 class CertificadoController extends Controller
 {
+        protected $table = 'certificados'; // Especifica el nombre de la tabla si es diferente al nombre del modelo en plural
+
     /**
      * Display a listing of the resource.
      */
@@ -41,6 +43,7 @@ class CertificadoController extends Controller
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->orderBy('certificados.id', 'DESC')
         ->get();
+        
 
     return response()->json([
         'status' => 'success',
@@ -56,7 +59,7 @@ class CertificadoController extends Controller
     {
         //
     }
-
+    
     /**
      * Store a newly created resource in storage.
      */

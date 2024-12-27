@@ -198,8 +198,12 @@ class PdfsController extends Controller
             'ciudades.ciudad',
             'ciudades.estado',
             'orden.date1',
+            'completarordenes.id_empleado',
             'productosInternos.productoInt',
             'productosExternos.productoExt',
+            'empleados.nameEmpleado as nombre_empleado',          // Corregido: nameEmpleado
+            'empleados.lastnameEmpleado1 as apellido_empleado1', // Corregido: lastnameEmpleado1
+            'empleados.lastnameEmpleado2 as apellido_empleado2',
         ])
         ->join('productosInternos', 'certificados.id_productoCertificadoInt1', '=', 'productosInternos.id')
         ->join('productosExternos', 'certificados.id_productoCertificadoExt1', '=', 'productosExternos.id')
@@ -207,6 +211,8 @@ class PdfsController extends Controller
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
+        ->join('completarordenes', 'orden.id', '=', 'completarordenes.id_orden')
+        ->join('empleados', 'completarordenes.id_empleado', '=', 'empleados.id')
         ->where('certificados.id', $id)
         ->first();
     //Datos de la base de datos
@@ -215,6 +221,7 @@ class PdfsController extends Controller
     }
     
         /* Imagen Del Logo */
+        
         $path = public_path('img/membretadoFumioOrden.png');
         $type = pathinfo($path, PATHINFO_EXTENSION);
         $data_img = file_get_contents($path);
@@ -224,6 +231,7 @@ class PdfsController extends Controller
         $type1 = pathinfo($path1, PATHINFO_EXTENSION);
         $data_img1 = file_get_contents($path1);
         $base641 = 'data:image/' . $type1 . ';base64,' . base64_encode($data_img1);
+        
         //dd($base64);
         //$pdf_data = compact('data','clientes','base64');
         setlocale(LC_ALL, 'es_MX.UTF-8','esp');
@@ -232,7 +240,13 @@ class PdfsController extends Controller
         str_replace('S?BADO','SÁBADO',$fecha);
         $fecha = Carbon::parse($data->date1);
         Carbon::setLocale('es');
+        
+        $nombreCompletoEmpleado = $data->nombre_empleado . ' ' . $data->apellido_empleado1 . ' ' . $data->apellido_empleado2;
         $pdf_data = compact('base64','base641','data','fecha');
+        $pdf_data = compact('base64', 'base641', 'data', 'fecha', 'nombreCompletoEmpleado');
+        
+        
+        $nombreCompletoEmpleado = $data->nombre_empleado . ' ' . $data->apellido_empleado;
         $pdf = Pdf::loadView('reports.repoCertificadoRealizado',$pdf_data)->setPaper('letter ', 'landscape');     
         //$pdf = Pdf::loadView('reports.repoCer',$pdf_data)->setPaper('a4', 'landscape');
         //$nombreArchivo = $data->name . '.pdf';
@@ -280,8 +294,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica1', 'orden.id_plague1', '=', 'problematica1.id')
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
-        ->whereBetween('orden.date1', [$f1, $f2])
-        ->orWhere('orden.infoorden_facturacion', 'No')
+        ->whereBetween("orden.date1", [$f1, $f2])
         ->where('orden.infoorden_facturacion','No')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -370,7 +383,6 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->orWhere('orden.infoorden_facturacion', 'Si')
         ->where('orden.infoorden_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -557,7 +569,6 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->orWhere('completarordenes.requiere3','=','Credito')
         ->where('completarordenes.requiere3','=','Credito')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -643,8 +654,6 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->orWhere('completarordenes.requiere3', 'Credito')
-        ->orWhere('orden.infoorden_facturacion', 'No')
         // Filtrar por órdenes no pagadas y clientes particulares
         ->where('completarordenes.requiere3', 'Credito')
         ->where('orden.infoorden_facturacion', 'No')
@@ -733,8 +742,6 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->orWhere('completarordenes.requiere3','Credito')
-        ->orWhere('orden.infoorden_facturacion', 'Si')
         ->where('completarordenes.requiere3','Credito')
         ->where('orden.infoorden_facturacion', 'Si')
         ->orderBy('completarordenes.id', 'DESC')
@@ -782,7 +789,7 @@ class PdfsController extends Controller
     }
 
     public function generarPDFCaja(){
-        $data = Ingresos ::all();
+        $data = Ingresos::where('dataIngreso', 'Caja')->get();
 
         $dataCO = CompletarOrden::select([
             'completarordenes.*',
@@ -793,19 +800,23 @@ class PdfsController extends Controller
         ])
         ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
         ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->where('completarordenes.requiere3', 'Pagado/Efectivo')
+
         ->get();
+        // 2. Obtener los Ingresos con dataIngreso = 'Caja'
+  
 
         // Obtener la suma total de 'pago' de CompletarOrden
-        $totalPagos = CompletarOrden::where('requiere3', 'Pagado')->sum('pago');
+        $totalPagos = CompletarOrden::where('requiere3', 'Pagado/Efectivo')->sum('pago');
 
         // Obtener la suma total de 'montoIngreso' de Ingresos
-        $totalIngresosAdicionales = Ingresos::sum('montoIngreso');
+        $totalIngresosAdicionales = Ingresos::where('dataIngreso', 'Caja')->sum('montoIngreso');
 
         $totalCaja = $totalPagos + $totalIngresosAdicionales;
 
-        $dataEg = Egresos ::all();
+        $dataEg = Egresos::where('dataEgresos', 'Caja')->get();
 
-        $totalEgresos = Egresos::sum('montoEgresos');
+        $totalEgresos = Egresos::where('dataEgresos', 'Caja')->sum('montoEgresos');
 
     $totalSaldo = $totalCaja - $totalEgresos;
     
@@ -822,6 +833,50 @@ class PdfsController extends Controller
         return $pdf->stream();
         return $pdf->download('invoice.pdf');
     }
+
+    public function generarPDFBanco(){
+        $data = Ingresos::where('dataIngreso', 'Banco')->get();
+
+        $dataCO = CompletarOrden::select([
+            'completarordenes.*',
+            'orden.date1',
+            'clientes.name',
+            'clientes.lastname1',
+            'clientes.lastname2',
+        ])
+        ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
+        ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
+        ->where('completarordenes.requiere3', 'Pagado/Banco')
+        ->get();
+
+        // Obtener la suma total de 'pago' de CompletarOrden
+        $totalPagos = CompletarOrden::where('requiere3', 'Pagado/Banco')->sum('pago');
+
+        // Obtener la suma total de 'montoIngreso' de Ingresos
+        $totalIngresosAdicionales = Ingresos::where('dataIngreso', 'Banco')->sum('montoIngreso');
+
+        $totalCaja = $totalPagos + $totalIngresosAdicionales;
+
+        $dataEg = Egresos::where('dataEgresos', 'Banco')->get();
+
+        $totalEgresos = Egresos::where('dataEgresos', 'Banco')->sum('montoEgresos');
+
+    $totalSaldo = $totalCaja - $totalEgresos;
+    
+        
+        /* Imagen Del Logo */
+        $path = public_path('img/membretadoFumi.png');
+        $type = pathinfo($path, PATHINFO_EXTENSION);
+        $data_img = file_get_contents($path);
+        $base64 = 'data:image/'.$type.';base64,'.base64_encode($data_img);
+        //dd($base64);
+        //$pdf_data = compact('data','clientes','base64');
+        $pdf_data = compact('base64','data','dataCO','totalCaja','dataEg','totalEgresos','totalSaldo');
+        $pdf = Pdf::loadView('reports.repoBanco',$pdf_data);
+        return $pdf->stream();
+        return $pdf->download('invoice.pdf');
+    }
+
 
     public function generarOrdendecompra($id) {
         $data = ordenCompra::select([

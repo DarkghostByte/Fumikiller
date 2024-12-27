@@ -46,9 +46,11 @@
             </template>
           </el-table-column>
           <el-table-column prop="facturaOrden" label="N. Factura" sortable width="120"/>
-          <el-table-column  label="No. Certificado" sortable width="150" >
-            <!-- AGREGAR NUMERO DE CERIFICADO DE ESA ORDEN-->
-          </el-table-column>
+          <el-table-column label="No. Certificado" sortable width="150">
+            <template #default="scope">
+                {{ scope.row.certificado ? scope.row.certificado.id : 'Sin certificado' }}
+            </template>
+        </el-table-column>
           
           <el-table-column prop="pago" label="Monto" sortable width="95" />
           <el-table-column prop="requiere3" label="Datos" sortable width="90" />
@@ -125,6 +127,7 @@ export default {
     this.refresh();
     this.refresh1();
     this.refresh2();
+    this.refresh3();
     this.clientId = this.$route.params.id;
   },
   methods: {
@@ -158,6 +161,12 @@ export default {
         }
       });
     },
+    refresh3() {
+    this.tableData = [];
+    axios.get('completarOrden').then(res => {
+        this.tableData = res.data.data.filter(order => order.id_cliente == this.clientId);
+    });
+},
     bajaOrden(row) {
       if (row) {
         this.selectedItem = row;
