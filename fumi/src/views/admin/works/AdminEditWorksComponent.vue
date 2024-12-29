@@ -57,7 +57,7 @@
         <div class="flex" style="width:100%;">
           <el-form-item prop="id_plague1" label="Problematica #1:" class="px-2"
             style="width: 300px;">
-            <el-select v-model="form.id_plague1" placeholder="Selecciona la problematica:">
+            <el-select v-model="form.id_plague1" filterable placeholder="Selecciona la problematica:">
               <el-option v-for="problematicaBug in problematicas1" :key="problematicaBug.id" :label="problematicaBug.problematica"
                 :value="problematicaBug.id" />
             </el-select>
@@ -65,7 +65,7 @@
 
           <el-form-item prop="id_plague2" label="Problematica #2:" class="px-2"
             style="width: 300px;">
-            <el-select v-model="form.id_plague2" placeholder="Selecciona la problematica:">
+            <el-select v-model="form.id_plague2" filterable placeholder="Selecciona la problematica:">
               <el-option v-for="problematicaBug2 in problematicas2" :key="problematicaBug2.id" :label="problematicaBug2.problematica"
                 :value="problematicaBug2.id" />
             </el-select>

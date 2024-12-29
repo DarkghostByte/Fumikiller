@@ -38,7 +38,7 @@
         <p style="font-size: 18px; font-weight: bold;">Fumigador</p>
         <div class="flex" style="width:100%;">
           <el-form-item prop="id_empleado" label="Responsable:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_empleado" placeholder="Selecciona el responsable:"
+            <el-select v-model="form.id_empleado" filterable placeholder="Selecciona el responsable:"
               :disabled="!empleados.length">
               <el-option v-for="nameEmpleado in empleados" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
                 :value="nameEmpleado.id" />
@@ -46,7 +46,7 @@
             <div v-if="!empleados.length">Loading empleados...</div>
           </el-form-item>
           <el-form-item prop="id_empleado2" label="Ayudante:" class="px-2" style="width: 300px;">
-            <el-select v-model="form.id_empleado2" placeholder="Selecciona el ayudante:" :disabled="!empleados2.length">
+            <el-select v-model="form.id_empleado2" filterable placeholder="Selecciona el ayudante:" :disabled="!empleados2.length">
               <el-option v-for="nameEmpleado in empleados2" :key="nameEmpleado.id" :label="nameEmpleado.nameEmpleado"
                 :value="nameEmpleado.id" />
             </el-select>
@@ -60,7 +60,7 @@
             <div class="flex" style="width:100%;">
               <el-form-item prop="id_productosInternos" label="Tipo de producto interno:" class="px-2"
                 style="width: 300px;">
-                <el-select v-model="form.id_productosInternos" placeholder="Selecciona el tipo de producto interno:"
+                <el-select v-model="form.id_productosInternos" filterable placeholder="Selecciona el tipo de producto interno:"
                   :disabled="!productoInternos.length">
                   <el-option v-for="productoInt in productoInternos" :key="productoInt.id" :label="productoInt.productoInt"
                     :value="productoInt.id" />
@@ -69,7 +69,7 @@
               </el-form-item>
               <el-form-item prop="id_productosInternos2" label="Tipo de producto interno:" class="px-2"
                 style="width: 300px;">
-                <el-select v-model="form.id_productosInternos2" placeholder="Selecciona el tipo de producto interno:"
+                <el-select v-model="form.id_productosInternos2" filterable placeholder="Selecciona el tipo de producto interno:"
                   :disabled="!productoInternos2.length">
                   <el-option v-for="productoInt in productoInternos2" :key="productoInt.id" :label="productoInt.productoInt"
                     :value="productoInt.id" />
@@ -84,7 +84,7 @@
 <div class="flex" style="width:100%;">
   <el-form-item prop="id_productosExternos" label="Tipo de producto externo:" class="px-4"
     style="width: 300px;">
-    <el-select v-model="form.id_productosExternos" placeholder="Selecciona el tipo de producto externo:"
+    <el-select v-model="form.id_productosExternos" filterable placeholder="Selecciona el tipo de producto externo:"
       :disabled="!productoExternos.length">
       <el-option v-for="productoExt in productoExternos" :key="productoExt.id" :label="productoExt.productoExt"
         :value="productoExt.id" />
@@ -93,7 +93,7 @@
   </el-form-item>
   <el-form-item prop="id_productosExternos2" label="Tipo de producto externo:" class="px-2"
     style="width: 300px;">
-    <el-select v-model="form.id_productosExternos2" placeholder="Selecciona el tipo de producto externo:"
+    <el-select v-model="form.id_productosExternos2" filterable placeholder="Selecciona el tipo de producto externo:"
       :disabled="!productoExternos2.length">
       <el-option v-for="productoExt in productoExternos2" :key="productoExt.id" :label="productoExt.productoExt"
         :value="productoExt.id" />
