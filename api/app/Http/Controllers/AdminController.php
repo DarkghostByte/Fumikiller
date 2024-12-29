@@ -72,7 +72,7 @@ class AdminController extends Controller
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('orden.infoorden_facturacion','=','No')
+            ->where('completarordenes.facturaOrden','==','No aplica')
             ->sum('pago');
         $totalCreditosSinFactura = CompletarOrden::
             select('completarordenes.*',
@@ -80,7 +80,7 @@ class AdminController extends Controller
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->where('completarordenes.requiere3', 'Credito')
-            ->where('orden.infoorden_facturacion','=', 'No')
+            ->where('completarordenes.facturaOrden','==','No aplica')
             ->sum('pago');
         $totalCreditosConFactura = CompletarOrden::
             select('completarordenes.*',
@@ -88,14 +88,14 @@ class AdminController extends Controller
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
             ->where('completarordenes.requiere3', 'Credito')
-            ->where('orden.infoorden_facturacion', '=' ,'Si')
+            ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])
             ->sum('pago');
         $totalVentasConFactura = CompletarOrden::
             select('completarordenes.*',
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('orden.infoorden_facturacion','=','Si')
+            ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])
             ->sum('pago');
 
         // Formatear los números como decimales

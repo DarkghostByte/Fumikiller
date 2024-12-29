@@ -35,7 +35,7 @@
                     <tr>
                         <td>{{ $item->name }} {{ $item->lastname1 }} {{ $item->lastname2 }}</td>
                         <td>{{ $item->tradename }}</td> 
-                        <td></td> 
+                        <td>{{ $item->facturaOrden }}</td> 
                         <td></td> 
                         <td style="text-transform: capitalize;">{{ strtoupper(strftime("%d", strtotime($item->date1)) . '-' . substr(strftime("%B", strtotime($item->date1)), 0, 3)). '-' .strftime("%y", strtotime($item->date1)) }}</td>
                         <td style="text-transform: capitalize;">{{ strtoupper(strftime("%d", strtotime($item->date2)) . '-' . substr(strftime("%B", strtotime($item->date2)), 0, 3)). '-' .strftime("%y", strtotime($item->date2)) }}</td>

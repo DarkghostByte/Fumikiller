@@ -295,7 +295,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween("orden.date1", [$f1, $f2])
-        ->where('orden.infoorden_facturacion','No')
+        ->where('completarordenes.facturaOrden','==','No aplica')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -383,7 +383,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->where('orden.infoorden_facturacion', 'Si')
+        ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])        
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
         //dd($data);
@@ -656,7 +656,7 @@ class PdfsController extends Controller
         ->whereBetween('orden.date1', [$f1, $f2])
         // Filtrar por órdenes no pagadas y clientes particulares
         ->where('completarordenes.requiere3', 'Credito')
-        ->where('orden.infoorden_facturacion', 'No')
+        ->where('completarordenes.facturaOrden','==','No aplica')
         // Ordenar por ID de forma descendente
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -743,7 +743,7 @@ class PdfsController extends Controller
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
         ->where('completarordenes.requiere3','Credito')
-        ->where('orden.infoorden_facturacion', 'Si')
+        ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
