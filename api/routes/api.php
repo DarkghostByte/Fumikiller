@@ -22,6 +22,7 @@ use App\Http\Controllers\RemisionesController;
 use App\Http\Controllers\FacturasController;
 use App\Http\Controllers\PdfsGastosController;
 use App\Http\Controllers\ordenComprasController;
+use App\Http\Controllers\FormaContactoController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +53,7 @@ Route::resource('egresos', EgresosController::class);
 Route::resource('remisiones', RemisionesController::class);
 Route::resource('facturas', FacturasController::class);
 Route::resource('ordenCompra', ordenComprasController::class);
+Route::resource('formaContacto', FormaContactoController::class);
 
 //RUTAS PARA PDF
 Route::get('/remision/{id}',[PdfsController::class,'generarPDFRem']);
@@ -82,6 +84,7 @@ Route::get('/verProductosExternos',[ProductosExtrenosController::class,'verProdu
 Route::get('/verEmpleados',[EmpleadosController::class,'verEmpleados']);
 Route::get('/verVias',[ViasController::class,'verVias']);
 Route::get('/verProblematicas',[ProblematicasController::class,'verProblematicas']);
+Route::get('/verFormaDeContacto',[FormaContactoController::class,'verFormaDeContacto']);
 
 
 //CONTEOS
@@ -103,6 +106,7 @@ Route::put('desactivarEmpleado/{id}', [EmpleadosController::class, 'desactivarEm
 Route::put('desactivarVia/{id}', [ViasController::class, 'desactivarVia']);
 Route::put('desactivarCiudad/{id}', [CiudadesController::class, 'desactivarCiudad']);
 Route::put('desactivarProblematica/{id}', [ProblematicasController::class, 'desactivarProblematica']);
+Route::put('desactivarFormaDeContacto/{id}', [FormaContactoController::class, 'desactivarFormaDeContacto']);
 
 //FILTRO DE FECHAS DE HOME
 Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);
