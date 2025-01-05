@@ -116,11 +116,9 @@
             <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-5">
               <el-input v-model="form.number_fixed_number" placeholder="Celular" style="width: 220px;" />
             </el-form-item>
-            <el-form-item prop="contact_form" label="Forma de contacto:" class="px-5">
-              <el-select v-model="form.contact_form" placeholder="Selecciona la  forma de contacto"
-                style="width: 220px;">
-                <el-option label="Facebook" value="facebook" />
-                <el-option label="Barda" value="barda" />
+            <el-form-item prop="id_formacontacto" label="Forma de contacto:" class="px-5">
+              <el-select v-model="form.id_formacontacto" placeholder="Selecciona la forma" @change="fetchFormaContacto" style="width: 150px;">
+                <el-option v-for="formadeContacto in formaContacto" :key="formadeContacto.id" :label="formadeContacto.formadeContacto" :value="formadeContacto.id" />
               </el-select>
             </el-form-item>
             <el-form-item prop="specify" label="Especificar:" class="px-5">
@@ -181,7 +179,7 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
-    //comercios: [],
+    formaContacto: [],
     vias: [],
     form: {
       name: '',
@@ -198,6 +196,7 @@ export default {
       description: '',
       how_to_get: '',
       cell_phone: '',
+      id_formacontacto: '',
       number_fixed_number: 'Ninguno',
       recruitment_data: [],
       requires: [],
@@ -253,6 +252,9 @@ export default {
       ],
       recruitment_data: [
         { required: true, message: 'Requiere de es requerido', trigger: 'blur' },
+      ],
+      id_formacontacto: [
+        { required: true, message: 'La forma de contacto es requerida', trigger: 'blur' },
       ],
       infoclient_certificate: [
         { required: true, message: 'Este campo es requeriado', trigger: 'blur' },
@@ -329,18 +331,17 @@ export default {
         });
     },
     
-/*
-    fetchComercios() {
-      axios.get('verComercio')
+    fetchFormaContacto() {
+      axios.get('verFormaDeContacto')
         .then(response => {
-          console.log('Comercio:', response.data);
-          this.comercios = response.data;
+          console.log('Forma de contacto:', response.data);
+          this.formaContacto = response.data;
         })
         .catch(error => {
-          console.error('Error fetching comercios:', error);
+          console.error('Error fetching vias:', error);
         });
     },
- */
+
     fetchColoniasByCity() {
       axios.get('verColonia')
         .then(response => {
@@ -361,7 +362,7 @@ export default {
     this.fetchCiudades();
     this.fetchTypeRoad();
     this.fetchColoniasByCity();
-    //this.fetchComercios();
+    this.fetchFormaContacto();
     const route = useRoute();
     this.id = route.params.id;
     axios.get(`clientes/${this.id}`).then(res => {
@@ -387,6 +388,7 @@ export default {
         this.form.recruitment_data = JSON.parse(datos.recruitment_data) || '';
         this.form.requires = JSON.parse(datos.requires) || '';
         this.form.correo = datos.correo || '';
+        this.form.id_formacontacto = datos.id_formacontacto || '';
       }
     });
   }

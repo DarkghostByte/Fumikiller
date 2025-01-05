@@ -23,7 +23,7 @@ class Cliente extends Model
         'how_to_get',
         'cell_phone',
         'number_fixed_number',
-        'contact_form',
+        'id_formacontacto',
         'specify',
         'recruitment_data',
         'infoclient_delete',

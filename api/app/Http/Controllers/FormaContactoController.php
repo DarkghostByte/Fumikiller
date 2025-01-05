@@ -120,8 +120,8 @@ class FormaContactoController extends Controller
 
     public function verFormaDeContacto()
     {
-        $ciudades = formaContacto::where('infodelete_Forma', '!=', 'Baja')->get();
-        return response()->json($ciudades);
+        $data = formaContacto::where('infodelete_Forma', '!=', 'Baja')->get();
+        return response()->json($data);
     }
 
     public function desactivarFormaDeContacto(Request $request, $id)

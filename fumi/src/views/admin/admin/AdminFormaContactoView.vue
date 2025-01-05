@@ -41,7 +41,7 @@
 
       <!-- TABLE -->
       <div class="flex" style="justify-content: center;">
-        <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 100%" stripe>
+        <el-table :data="filteredData" :default-sort="{ prop: 'name', order: 'descending' }" style="width: 40%" stripe>
 
           
 
@@ -60,25 +60,8 @@
           <!--FIN DEL BOTON PARA VISUALIZAR EL PDF DE CERTIFICADO-->
 
           <!--VISUALIZACION DE LA TABLA-->
-          <el-table-column label="No. Certificado" sortable width="150">
-            <template #default="scope">
-              {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
-            </template>
-          </el-table-column>
-          <el-table-column label="Nombre" sortable width="150">
-            <template #default="scope">
-              {{ scope.row.name + ' ' + scope.row.lastname1 + ' ' + scope.row.lastname2 }}
-            </template>
-          </el-table-column>
-          <el-table-column label="Direccion" sortable width="300">
-            <template #default="scope">
-              {{ scope.row.home + ' #' + scope.row.numAddress + ', ' + scope.row.colonia + ' #' + scope.row.codigoPostal
-                + ', ' + scope.row.ciudad }}
-            </template>
-          </el-table-column>
-          <el-table-column prop="statusOrder" label="Estado de orden" sortable width="160" />
-          <el-table-column prop="date1" label="Fecha de orden" sortable width="150" />
-          <el-table-column prop="date2" label="Fecha de fumigacion" sortable width="180" />
+          <el-table-column prop="formadeContacto" label="Forma de contacto" sortable width="auto" />
+          <el-table-column prop="infodelete_Forma" label="Estado" sortable width="auto" />
           <!--FIN DE LA VISUALIZACION DE LA TABLA-->
         </el-table>
       </div>
@@ -192,7 +175,7 @@ export default {
   },
   methods: {
     refresh() {
-      axios.get('orden').then(res => {
+      axios.get('formaContacto').then(res => {
         this.tableData = res.data.data;
         this.filteredData = this.tableData;
       });
