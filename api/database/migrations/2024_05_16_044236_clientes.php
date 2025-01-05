@@ -30,7 +30,8 @@ return new class extends Migration
             $table->string('how_to_get');
             $table->string('cell_phone');
             $table->string('number_fixed_number');
-            $table->string('contact_form');
+            $table->integer('id_formacontacto')->unsigned();
+            $table->foreign("id_formacontacto")->references('id')->on('formaContacto');
             $table->string('specify');
             $table->string('recruitment_data');
             $table->string('infoclient_delete');

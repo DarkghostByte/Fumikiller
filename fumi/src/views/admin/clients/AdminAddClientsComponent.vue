@@ -129,11 +129,9 @@
           <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-5">
             <el-input v-model="form1.number_fixed_number" placeholder="Celular" style="width: 220px;" />
           </el-form-item>
-          <el-form-item prop="contact_form" label="Forma de contacto:" class="px-5">
-            <el-select v-model="form1.contact_form" placeholder="Selecciona la  forma de contacto"
-              style="width: 220px;">
-              <el-option label="Facebook" value="facebook" />
-              <el-option label="Barda" value="barda" />
+          <el-form-item prop="id_formacontacto" label="Forma de contacto:" class="px-5">
+            <el-select v-model="form1.id_formacontacto" placeholder="Selecciona la forma" @change="fetchFormaContacto" style="width: 150px;">
+              <el-option v-for="formadeContacto in formaContacto" :key="formadeContacto.id" :label="formadeContacto.formadeContacto" :value="formadeContacto.id" />
             </el-select>
           </el-form-item>
           <el-form-item prop="specify" label="Especificar:" class="px-5">
@@ -193,7 +191,7 @@ export default {
     urlApi: process.env.VUE_APP_ROOT_API,
     ciudades: [],
     colonias: [],
-    //comercios: [],
+    formaContacto: [],
     vias: [],
     form1: {
       name: '',
@@ -211,7 +209,7 @@ export default {
       how_to_get: '',
       cell_phone: '',
       number_fixed_number: 'Ninguno',
-      contact_form: '',
+      id_formacontacto: '',
       specify: 'Ninguno',
       recruitment_data: [],
       infoclient_delete: 'Alta',
@@ -269,7 +267,7 @@ export default {
         { required: true, message: 'El número de celular es requerido', trigger: 'blur' },
         { min: 10, max: 13, message: 'Longitud debería ser 10 a 13', trigger: 'blur' }
       ],
-      contact_form: [
+      id_formacontacto: [
         { required: true, message: 'La forma de contacto es requerida', trigger: 'blur' },
       ],
       recruitment_data: [
@@ -285,7 +283,7 @@ export default {
     this.refresh();
     this.fetchCiudades();
     this.fetchTypeRoad();
-    //this.fetchComercios();
+    this.fetchFormaContacto();
     /*this.fetchColonias();*/
   },
   methods: {
@@ -350,6 +348,17 @@ export default {
         .then(response => {
           console.log('Via:', response.data);
           this.vias = response.data;
+        })
+        .catch(error => {
+          console.error('Error fetching vias:', error);
+        });
+    },
+
+    fetchFormaContacto() {
+      axios.get('verFormaDeContacto')
+        .then(response => {
+          console.log('Forma de contacto:', response.data);
+          this.formaContacto = response.data;
         })
         .catch(error => {
           console.error('Error fetching vias:', error);
