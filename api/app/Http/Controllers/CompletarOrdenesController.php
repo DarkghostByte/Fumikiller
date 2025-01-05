@@ -112,6 +112,7 @@ public function completarOrden()
             'requiere1' => 'array|min:1',
             'requiere2' => 'array|min:1',
             'requiere3' => 'required|min:1',
+            'requiere4' => 'required|min:1',
             'facturaOrden' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
@@ -136,6 +137,7 @@ public function completarOrden()
             $data->requiere1 = json_encode($request->requiere1);
             $data->requiere2 = json_encode($request->requiere2);
             $data->requiere3 = $request->requiere3;
+            $data->requiere4 = $request->requiere4;
             $data->facturaOrden = $request->facturaOrden;
             $data->save();
 
@@ -302,7 +304,7 @@ public function completarOrden()
             $completarOrden = CompletarOrden::find($id);
 
             $validator = Validator::make($request->all(), [
-                'facturaOrden' => 'required|min:1', 
+                'facturaOrden' => 'required|in:Pagado,Credito', 
             ]);
 
             if (!$completarOrden) {
@@ -331,5 +333,64 @@ public function completarOrden()
             ]);
         }
 
+        public function creditoPermanente(Request $request, $id)
+{
+    $completarOrden = CompletarOrden::find($id);
 
+    if (!$completarOrden) {
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Orden no encontrada'
+        ], 404);
+    }
+
+    // Lógica para establecer requiere4 si requiere3 es 'Credito'
+    if ($completarOrden->requiere3 == 'Credito') {
+        $completarOrden->requiere4 = true; // Asegúrate de que sea un string 'True' para que pase la validación
+        $completarOrden->save(); // Guarda inmediatamente para que la validación funcione correctamente
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Estado actualizados correctamente',
+            'data' => $completarOrden
+        ]);
+    }
+
+    $validator = Validator::make($request->all(), [
+        'requiere4' => 'required|in:true,false',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'status' => 'failed',
+            'message' => 'Error de validación',
+            'errors' => $validator->errors()
+        ], 400);
+    }
+
+    $completarOrden->requiere4 = $request->requiere4;
+    $completarOrden->save();
+
+    return response()->json([
+        'status' => 'success',
+        'message' => 'Estado actualizados correctamente',
+        'data' => $completarOrden
+    ]);
+}
+
+/* 
+public function show($id)
+{
+    $ordenCompleta = OrdenCompleta::find($id);
+
+    // Ensure creditomamalon becomes true if credito is true and cannot be changed back
+    if ($ordenCompleta->requiere3 == 'Credito') {
+        $ordenCompleta->creditomamalon = true;
+    }
+}
+
+
+if ($ordenCompleta->requiere3 == 'Credito') {
+            $ordenCompleta->requiere4 = true;
+        }
+*/
 }

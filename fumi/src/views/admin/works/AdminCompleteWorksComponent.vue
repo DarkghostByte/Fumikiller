@@ -356,6 +356,7 @@ export default {
       requiere1: [],
       requiere2: [],
       requiere3: [],
+      requiere4: false,
       facturaOrden: 'No aplica',
       name: '',
       lastname1: '',

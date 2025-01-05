@@ -27,6 +27,7 @@ class CompletarOrden extends Model
         'requiere1',
         'requiere2',
         'requiere3',
+        'requiere4',
         'facturaOrden',
     ];
 }
