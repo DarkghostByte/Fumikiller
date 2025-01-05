@@ -152,6 +152,7 @@ class PdfsController extends Controller
         if (!$ordenCompleta) {
             return abort(404);
         }
+        
         //PDF Orden de trabajo
         /* Imagen Del Logo */
         $path = public_path('img/membretadoFumi.png');
@@ -177,6 +178,9 @@ class PdfsController extends Controller
         $pdf_data = compact('base64','base641','ordenCompleta','fecha','fecha2');
         $pdf = Pdf::loadView('reports.reporteOrdenCompletaPDF',$pdf_data)->setPaper('letter');;
         $nombreArchivo = 'OrdenCompleta_No_'.str_pad($ordenCompleta->id, 5, '0', STR_PAD_LEFT) . '_' .$ordenCompleta->name . '_' . $ordenCompleta->lastname1 . '_' . $ordenCompleta->lastname2 . '.pdf';
+        if ($ordenCompleta->requiere3 == 'Credito') {
+            $ordenCompleta->requiere4 = true;
+        }
         return $pdf->stream($nombreArchivo);
     }
 

@@ -34,6 +34,7 @@ return new class extends Migration
             $table->string('requiere1');
             $table->string('requiere2');
             $table->string('requiere3');
+            $table->string('requiere4');
             $table->string('facturaOrden');
             $table->timestamps();
         });
