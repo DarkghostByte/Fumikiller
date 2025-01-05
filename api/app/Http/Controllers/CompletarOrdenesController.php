@@ -112,7 +112,7 @@ public function completarOrden()
             'requiere1' => 'array|min:1',
             'requiere2' => 'array|min:1',
             'requiere3' => 'required|min:1',
-            'requiere4' => 'required|min:1',
+            'requiere4' => 'required',
             'facturaOrden' => 'required|min:1',
         ]);
         if( $reglas -> fails()){
@@ -144,7 +144,6 @@ public function completarOrden()
             return response()->json([
                 'status'=>'success'
             ]);
-            
         }
     }
 

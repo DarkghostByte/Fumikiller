@@ -394,6 +394,7 @@ export default {
         this.form.requiere1 = JSON.parse(datos.requiere1) || '';
         this.form.requiere2 = JSON.parse(datos.requiere2) || '';
         this.form.requiere3 = datos.requiere3 || '';
+        this.form.requiere4 = datos.requiere4 || '';
         this.form.facturaOrden = datos.facturaOrden || '';
       }
     });

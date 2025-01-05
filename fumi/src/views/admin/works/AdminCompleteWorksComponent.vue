@@ -356,7 +356,7 @@ export default {
       requiere1: [],
       requiere2: [],
       requiere3: [],
-      requiere4: false,
+      requiere4: true,
       facturaOrden: 'No aplica',
       name: '',
       lastname1: '',
@@ -529,7 +529,15 @@ export default {
     }
 
   },
-
+  watch: {
+    'form.requiere3': function (newValue) {
+        if (newValue === 'Credito') {
+            this.form.requiere4 = true;
+        } else {
+            this.form.requiere4 = false;
+        }
+    }
+},
   methods: {
     refresh() {
       axios.get('orden').then(res => {
@@ -635,56 +643,55 @@ export default {
 
 
     submitForm() {
-      this.$refs.formRef.validate((valid) => {
-        if (valid) {
-          axios.post('completarOrden', this.form)
+  this.$refs.formRef.validate((valid) => {
+    if (valid) {
+      axios.post('completarOrden', this.form)
+        .then(response => {
+          console.log('Form submitted successfully:', response.data);
+          this.$router.push('/admin/worksComplete');
+          ElNotification({
+            title: 'Éxito',
+            message: 'Registro insertado correctamente',
+            type: 'success'
+          });
+
+          const updatedData = {
+            statusOrder: this.form.statusOrder === 'Terminada' ? 'Por realizar' : 'Terminada'
+          };
+
+          axios.put('verEstadoOrden/' + this.form.id_orden, updatedData)
             .then(response => {
-              console.log('Form submitted successfully:', response.data);
-              this.$router.push('/admin/worksComplete');
+              console.log('Estado actualizado correctamente:', response.data);
+              this.refresh();
               ElNotification({
-                title: 'Éxito',
-                message: 'Registro insertado correctamente',
+                title: 'Actualización de datos',
+                message: `Se actualizaron los datos.`,
                 type: 'success'
               });
-
-              const updatedData = {
-                statusOrder: this.form.statusOrder === 'Terminada' ? 'Por realizar' : 'Terminada'
-              };
-
-              axios.put('verEstadoOrden/' + this.form.id_orden, updatedData)
-                .then(response => {
-                  console.log('Estado actualizado correctamente:', response.data);
-                  this.refresh();
-                  ElNotification({
-                    title: 'Actualización de datos',
-                    message: `Se actualizaron los datos.`,
-                    type: 'success'
-                  });
-                })
-                .catch(error => {
-                  console.error('Error al actualizar el estado:', error);
-                });
             })
-
             .catch(error => {
-              console.error('Error submitting form:', error.response ? error.response.data : error.message);
-              ElNotification({
-                title: 'Error',
-                message: error.response && error.response.data ? error.response.data.message : 'Favor de llenar los campos correctamente',
-                type: 'error'
-              });
+              console.error('Error al actualizar el estado:', error);
             });
-        } else {
-          console.log('Validation failed');
+        })
+        .catch(error => {
+          console.error('Error submitting form:', error.response ? error.response.data : error.message);
           ElNotification({
             title: 'Error',
-            message: 'Favor de llenar los campos',
+            message: error.response && error.response.data ? error.response.data.message : 'Favor de llenar los campos correctamente',
             type: 'error'
           });
-          return false;
-        }
+        });
+    } else {
+      console.log('Validation failed');
+      ElNotification({
+        title: 'Error',
+        message: 'Favor de llenar los campos',
+        type: 'error'
       });
-    },
+      return false;
+    }
+  });
+},
 
     fetchProblematicaBug() {
       axios.get('verProblematicas')
