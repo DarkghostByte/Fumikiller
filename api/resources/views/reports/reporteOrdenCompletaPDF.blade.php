@@ -59,23 +59,17 @@
         @if($pagadobanco)
             <table >
                 <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
-                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+                <td style="margin-left: -50px; width:110px;">PAGADO BANCO</th>
             </table>
-            @else
-            <table >
-                <td style="margin-right: -50px;  width:25px; text-align:center; color:transparent; position:absolute;">( )</th>
-                <td style="margin-left: -50px; width:50px;color:transparent; position:absolute;">PAGADO</th>
-            </table>
-            @endif
-            @if($pagado)
+            @elseif($pagado)
             <table >
                 <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
-                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+                <td style="margin-left: -50px; width:125px;">PAGADO EFECTIVO</th>
             </table>
             @else
             <table >
-                <td style="margin-right: -50px;  width:25px; text-align:center;color:transparent; position:absolute;">( )</th>
-                <td style="margin-left: -50px; width:50px;color:transparent; position:absolute;">PAGADO</th>
+                <td style="margin-right: -50px;  width:25px; text-align:center;">( )</th>
+                <td style="margin-left: -50px; width:50px;">PAGADO</th>
             </table>
             @endif
             @if($requiere4)
@@ -488,31 +482,47 @@
     </div>
    
     <header id="tablaAdi"> 
-        @php 
-            $arregloRequiere = json_decode($ordenCompleta->requiere2 );
-            $bitacora=false;
-            $agendar=false;
-            $cancelar=false;
-            $elloshablan=false;
-            $nada=false;
-        
-            foreach($arregloRequiere as $item){
-                if($item == 'Bitacora'){ $bitacora=true; }
-                if($item == 'Agendar'){ $agendar=true; }
-                if($item == 'Cancelar'){ $cancelar=true; }
-                if($item == 'Ellos hablan'){ $elloshablan=true; }
-                if($item == 'Nada'){ $nada=true; }
-            }
+    @php 
+    $arregloRequiere = json_decode($ordenCompleta->requiere2 );
+    $bitacora = false;
+    $agendar = false;
+    $cancelar = false;
+    $elloshablan = false;
+    $nada = false;
 
-            $pagado = ($ordenCompleta->requiere3 == 'Pagado') ? true : false;
-            $credito = ($ordenCompleta->requiere3 == 'Credito') ? true : false;
+    // Use a persistent variable if available, otherwise initialize to false
+    $requiere4 = $ordenCompleta->requiere4 ?? false;
 
-        @endphp 
+    foreach($arregloRequiere as $item){
+        if($item == 'Bitacora'){ $bitacora = true; }
+        if($item == 'Agendar'){ $agendar = true; }
+        if($item == 'Cancelar'){ $cancelar = true; }
+        if($item == 'Ellos hablan'){ $elloshablan = true; }
+        if($item == 'Nada'){ $nada = true; }
+    }
+
+    $pagado = ($ordenCompleta->requiere3 == 'Pagado/Efectivo') ? true : false;
+    $pagadobanco = ($ordenCompleta->requiere3 == 'Pagado/Banco') ? true : false;
+    $credito = ($ordenCompleta->requiere3 == 'Credito') ? true : false;
+
+    // Ensure creditomamalon becomes true if credito is true and cannot be changed back
+    if ($credito) {
+        $requiere4 = true;
+    }
+
+    // Persist the value of creditomamalon in the ordenCompleta object
+    $ordenCompleta->requiere4 = $requiere4;
+    @endphp 
         <div>
-            @if($pagado)
+        @if($pagadobanco)
             <table >
                 <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
-                <td style="margin-left: -50px; width:50px;">PAGADO</th>
+                <td style="margin-left: -50px; width:110px;">PAGADO BANCO</th>
+            </table>
+            @elseif($pagado)
+            <table >
+                <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
+                <td style="margin-left: -50px; width:125px;">PAGADO EFECTIVO</th>
             </table>
             @else
             <table >
@@ -520,7 +530,7 @@
                 <td style="margin-left: -50px; width:50px;">PAGADO</th>
             </table>
             @endif
-            @if($credito)
+            @if($requiere4)
             <table >
                 <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
                 <td style="margin-left: -50px; width:50px;">CREDITO</th>
@@ -545,7 +555,7 @@
             @if($agendar)
             <table >
                 <td style="margin-right: -50px;  width:25px; text-align:center;">(X)</th>
-                <td style="margin-left: -50px; width:150px;">AGENDAR {{ $ordenCompleta->otraDosis }}</th>
+                <td style="margin-left: -50px; width:150px;">AGENDAR ({{ $ordenCompleta->otraDosis }})</th>
             </table>
             @else
             <table >
@@ -579,6 +589,7 @@
                 <td style="margin-right: -50px;  width:25px; text-align:center; color:transparent;">( )</th>
                 <td style="margin-left: -50px; width:100px; color:red;" >{{ $ordenCompleta->nDosis }}</th>
             </table> 
+
             
             
         </div>                
@@ -1136,7 +1147,7 @@ td {
 #tablaAdi{
     position: absolute;
     margin-top: -170px;
-    margin-left: 75%;
+    margin-left: 72%;
     font-size: 15px;
     width: 7%;
 }
