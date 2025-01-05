@@ -107,6 +107,7 @@ Route::put('desactivarVia/{id}', [ViasController::class, 'desactivarVia']);
 Route::put('desactivarCiudad/{id}', [CiudadesController::class, 'desactivarCiudad']);
 Route::put('desactivarProblematica/{id}', [ProblematicasController::class, 'desactivarProblematica']);
 Route::put('desactivarFormaDeContacto/{id}', [FormaContactoController::class, 'desactivarFormaDeContacto']);
+Route::put('creditoPermanente/{id}', [CompletarOrdenesController::class, 'creditoPermanente']);
 
 //FILTRO DE FECHAS DE HOME
 Route::get('/completarordenes/por-fecha', [CompletarOrdenesController::class, 'completarPorFecha']);
