@@ -23,7 +23,7 @@ class ClientesController extends Controller
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->join('colonias', 'clientes.id_colonia', '=', 'colonias.id')
         ->join('vias', 'clientes.id_vias', '=', 'vias.id')
-        ->join('formaContacto', 'clientes.id_formacontacto', '=', 'formaContacto.id')
+        ->join('formaContacto', 'clientes.contact_form', '=', 'formaContacto.id')
         ->orderBy('clientes.id', 'DESC')
         ->get();
 
@@ -61,7 +61,7 @@ class ClientesController extends Controller
             'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',
             'number_fixed_number' => 'min:1',
-            'id_formacontacto' => 'required|min:1',
+            'contact_form' => 'required|min:1',
             'specify' => 'min:1',
             'recruitment_data' => 'array|min:1',
             'infoclient_delete' => 'required|min:1',
@@ -92,7 +92,7 @@ class ClientesController extends Controller
             $data->how_to_get = $request->how_to_get;
             $data->cell_phone = $request->cell_phone;
             $data->number_fixed_number = $request->number_fixed_number;
-            $data->id_formacontacto = $request->id_formacontacto;
+            $data->contact_form = $request->contact_form;
             $data->specify = $request->specify;
             $data->recruitment_data = json_encode($request->recruitment_data);
             $data->infoclient_delete = $request->infoclient_delete;
@@ -152,7 +152,7 @@ class ClientesController extends Controller
             'how_to_get' => 'min:1|max:200',
             'cell_phone' => 'required|min:10|max:13',
             'number_fixed_number' => 'min:1',
-            'id_formacontacto' => 'required|min:1',
+            'contact_form' => 'required|min:1',
             'specify' => 'min:1',
             'recruitment_data' => 'array|min:1',
             'requires' => 'array|required|min:1',

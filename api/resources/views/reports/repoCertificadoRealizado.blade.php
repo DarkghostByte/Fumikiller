@@ -157,7 +157,7 @@
     
 </body>
 
-<div class="separacion"></div>
+
 
 <div class="delimitador" style="margin-left: 115%; margin-top:-163.4%;">
         

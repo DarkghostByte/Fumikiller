@@ -115,8 +115,8 @@
           <el-form-item prop="number_fixed_number" label="Numero fijo:" class="px-5">
             <el-input v-model="form1.number_fixed_number" placeholder="Celular" style="width: 220px;"/>
           </el-form-item>
-          <el-form-item prop="id_formacontacto" label="Forma de contacto:" class="px-5">
-            <el-select v-model="form1.id_formacontacto" placeholder="Selecciona la forma" @change="fetchFormaContacto" style="width: 150px;">
+          <el-form-item prop="contact_form" label="Forma de contacto:" class="px-5">
+            <el-select v-model="form1.contact_form" placeholder="Selecciona la forma" @change="fetchFormaContacto" style="width: 150px;">
               <el-option v-for="formadeContacto in formaContacto" :key="formadeContacto.id" :label="formadeContacto.formadeContacto" :value="formadeContacto.id" />
             </el-select>
           </el-form-item>
@@ -196,7 +196,7 @@ export default {
       how_to_get: '',
       cell_phone: '',
       number_fixed_number: 'Ninguno',
-      id_formacontacto: '',
+      contact_form: '',
       specify: 'Ninguno',
       recruitment_data: [],
       infoclient_delete: 'Alta',
@@ -247,7 +247,7 @@ export default {
         { required: true, message: 'El numero de celular es requerido', trigger: 'blur' },
         { min: 10, max: 13, message: 'Longitud debería ser 10 a 13', trigger: 'blur' }
       ],
-      id_formacontacto: [
+      contact_form: [
         { required: true, message: 'La forma de contacto es requerida', trigger: 'blur' },
       ],
       recruitment_data: [
