@@ -40,17 +40,22 @@
               </el-button>
             </template>
           </el-table-column>
+          <el-table-column label="Certificado">
+            <template #default="scope">
+              <el-button  style="color:black" size="small" type="success">
+                <a :href="url+'api/certificadoRealizado/'+scope.row.id_orden" target="_blank">
+                  <span class="material-symbols-outlined">lab_profile</span>
+                </a>
+              </el-button>
+            </template>
+          </el-table-column>
           <el-table-column label="O. Trabajo" sortable width="115">
             <template #default="scope">
               {{ 'No. ' + this.formatDate(scope.row.id_orden) }}
             </template>
           </el-table-column>
           <el-table-column prop="facturaOrden" label="N. Factura" sortable width="120"/>
-          <el-table-column label="No. Certificado" sortable width="150">
-            <template #default="scope">
-                {{ scope.row.certificado ? scope.row.certificado.id : 'Sin certificado' }}
-            </template>
-        </el-table-column>
+          
           
           <el-table-column prop="pago" label="Monto" sortable width="95" />
           <el-table-column prop="requiere3" label="Datos" sortable width="90" />

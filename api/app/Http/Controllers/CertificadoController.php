@@ -18,6 +18,7 @@ class CertificadoController extends Controller
     {
         $data = Certificado::select([
             'certificados.*',
+            'certificados.id as certificado_id',
             'clientes.name',
             'clientes.lastname1',
             'clientes.lastname2',

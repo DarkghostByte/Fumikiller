@@ -65,37 +65,37 @@ class AdminController extends Controller
     public function totalDinero()
     {
         $totalPagos = CompletarOrden::sum('pago');
-        $totalCreditos = CompletarOrden::where('requiere3', 'Credito')
+        $totalCreditos = CompletarOrden::where('completarordenes.requiere4','=','1')
             ->sum('pago');
         $totalVentasSinFactura = CompletarOrden::
             select('completarordenes.*',
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.facturaOrden','==','No aplica')
+            ->where('completarordenes.requiere4','=','0')
             ->sum('pago');
         $totalCreditosSinFactura = CompletarOrden::
             select('completarordenes.*',
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.requiere3', 'Credito')
-            ->where('completarordenes.facturaOrden','==','No aplica')
+            ->where('completarordenes.requiere4','=','1')
+            ->where('completarordenes.facturaOrden', ['No aplica'])
             ->sum('pago');
         $totalCreditosConFactura = CompletarOrden::
             select('completarordenes.*',
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->where('completarordenes.requiere3', 'Credito')
-            ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])
+            ->where('completarordenes.requiere4','=','1')
+            ->whereNotIn('completarordenes.facturaOrden', ['No aplica'])
             ->sum('pago');
         $totalVentasConFactura = CompletarOrden::
             select('completarordenes.*',
             'clientes.tradename')
             ->join('orden', 'completarordenes.id_orden', '=', 'orden.id')
             ->join('clientes', 'orden.id_cliente', '=', 'clientes.id')
-            ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])
+            ->whereNotIn('completarordenes.facturaOrden', ['No aplica'])
             ->sum('pago');
 
         // Formatear los números como decimales

@@ -296,7 +296,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween("orden.date1", [$f1, $f2])
-        ->where('completarordenes.facturaOrden','==','No aplica')
+        ->where('completarordenes.requiere4','=','0')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
 
@@ -321,6 +321,7 @@ class PdfsController extends Controller
     
         // Sumar todos los pagos
         $totalPago = $data->sum('pago');
+        $totalVentasSinFactura = $data->sum('pago');
     
         // Generación del PDF
         /* Imagen Del Logo */
@@ -384,7 +385,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])        
+        ->whereNotIn('completarordenes.facturaOrden', ['No aplica'])     
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
         //dd($data);
@@ -570,7 +571,7 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->where('completarordenes.requiere3','=','Credito')
+        ->where('completarordenes.requiere4','=','1')
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -656,8 +657,8 @@ class PdfsController extends Controller
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
         // Filtrar por órdenes no pagadas y clientes particulares
-        ->where('completarordenes.requiere3', 'Credito')
-        ->where('completarordenes.facturaOrden','==','No aplica')
+        ->where('completarordenes.requiere4','=','1')
+        ->where('completarordenes.facturaOrden','=','No aplica')
         // Ordenar por ID de forma descendente
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
@@ -743,8 +744,8 @@ class PdfsController extends Controller
         ->join('problematicas as problematica2', 'orden.id_plague2', '=', 'problematica2.id')    
         ->join('ciudades', 'clientes.id_city', '=', 'ciudades.id')
         ->whereBetween('orden.date1', [$f1, $f2])
-        ->where('completarordenes.requiere3','Credito')
-        ->whereNotIn('completarordenes.facturaOrden', ['No aplica', 'Pendiente'])
+        ->where('completarordenes.requiere4','=','1')
+        ->whereNotIn('completarordenes.facturaOrden', ['No aplica'])
         ->orderBy('completarordenes.id', 'DESC')
         ->get();
     
@@ -771,7 +772,8 @@ class PdfsController extends Controller
         }
 
         // Sumar todos los pagos
-        $totalPago = $data->sum('pago');
+        $totalPago = $data->where('requiere4', '1')->sum('pago');
+        
     
         // Generación del PDF
         /* Imagen Del Logo */
